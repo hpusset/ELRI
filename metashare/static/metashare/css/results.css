@@ -26,6 +26,7 @@ div.searchbox table{
 #searchbox img{
     width: 200px;
     margin-right: 20px;
+	margin-top:-45px;
 }
 
 div.filters{
