@@ -32,8 +32,3 @@ venv
 .idea/
 # temporary
 .travis.yml
-storage/*
-lock/*
-/test
-/test2b
-/metashare/test-tmp/
