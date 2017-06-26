@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xmlns="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.meta-share.org/META-SHARE_XMLSchema http://www.meta-share.org/META-SHARE_XMLSchema/v3.1/META-SHARE-Resource.xsd">
+<resourceInfo xmlns="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ELRC-SHARE-Resource.xsd">
 	<identificationInfo>
 		<resourceName lang="fr">Base de données Speecon thaï ippoopkp</resourceName>
 		<resourceName lang="en">Thai Speecon database</resourceName>
@@ -11,88 +11,14 @@
 	</identificationInfo>
 	<distributionInfo>
 		<availability>available</availability>
+		<PSI>true</PSI>
+		<allowsUsesBesidesDGT>true</allowsUsesBesidesDGT>
 		<licenceInfo>
-			<licence>ELRA_END_USER</licence>
-			<version>4.0</version>
+			<licence>BSD-3-Clause</licence>
 			<restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
 		</licenceInfo>
-		<licenceInfo>
-			<licence>ELRA_VAR</licence>
-			<version>4.0</version>
-			<restrictionsOfUse>commercialUse</restrictionsOfUse>
-		</licenceInfo>
-		<licenceInfo>
-			<licence>ELRA_END_USER</licence>
-			<version>4.0</version>
-			<restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
-		</licenceInfo>
-		<licenceInfo>
-			<licence>ELRA_VAR</licence>
-			<version>4.0</version>
-			<restrictionsOfUse>commercialUse</restrictionsOfUse>
-		</licenceInfo>
-		<licenceInfo>
-			<licence>ELRA_END_USER</licence>
-			<version>4.0</version>
-			<restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
-		</licenceInfo>
-		<licenceInfo>
-			<licence>ELRA_VAR</licence>
-			<version>4.0</version>
-			<restrictionsOfUse>commercialUse</restrictionsOfUse>
-		</licenceInfo>
-		<licenceInfo>
-			<licence>ELRA_END_USER</licence>
-			<version>4.0</version>
-			<restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
-		</licenceInfo>
-		<licenceInfo>
-			<licence>ELRA_VAR</licence>
-			<version>4.0</version>
-			<restrictionsOfUse>commercialUse</restrictionsOfUse>
-		</licenceInfo>
-		<fee>75000.00</fee>
-		<userNature>commercial</userNature>
-		<userNature>commercial</userNature>
-		<userNature>academic</userNature>
-		<userNature>academic</userNature>
-		<userNature>commercial</userNature>
-		<userNature>commercial</userNature>
-		<userNature>academic</userNature>
-		<userNature>academic</userNature>
-		<membershipInfo>
-			<member>false</member>
-			<membershipInstitution>ELRA</membershipInstitution>
-		</membershipInfo>
-		<membershipInfo>
-			<member>false</member>
-			<membershipInstitution>ELRA</membershipInstitution>
-		</membershipInfo>
-		<membershipInfo>
-			<member>false</member>
-			<membershipInstitution>ELRA</membershipInstitution>
-		</membershipInfo>
-		<membershipInfo>
-			<member>false</member>
-			<membershipInstitution>ELRA</membershipInstitution>
-		</membershipInfo>
-		<membershipInfo>
-			<member>true</member>
-			<membershipInstitution>ELRA</membershipInstitution>
-		</membershipInfo>
-		<membershipInfo>
-			<member>true</member>
-			<membershipInstitution>ELRA</membershipInstitution>
-		</membershipInfo>
-		<membershipInfo>
-			<member>true</member>
-			<membershipInstitution>ELRA</membershipInstitution>
-		</membershipInfo>
-		<membershipInfo>
-			<member>true</member>
-			<membershipInstitution>ELRA</membershipInstitution>
-		</membershipInfo>
-		<availabilityStartDate>2008-10-07</availabilityStartDate>
+		<personalDataIncluded>true</personalDataIncluded>
+		<sensitiveDataIncluded>true</sensitiveDataIncluded>
 	</distributionInfo>
 	<contactPerson>
 		<surname lang="en">kpoopokpokpok</surname>
@@ -113,7 +39,6 @@
 				<country>France</country>
 				<countryId>FR</countryId>
 				<telephoneNumber>+1 43 13 33 33</telephoneNumber>
-				<faxNumber>+1 43 14 33 30</faxNumber>
 			</communicationInfo>
 		</metadataCreator>
 		<metadataLastDateUpdated>2012-06-05</metadataLastDateUpdated>
@@ -122,13 +47,8 @@
 		<version>1.0</version>
 		<lastDateUpdated>2008-10-07</lastDateUpdated>
 	</versionInfo>
-	<usageInfo>
-		<actualUseInfo>
-			<actualUse>nlpApplications</actualUse>
-			<useNLPSpecific>speechRecognition</useNLPSpecific>
-		</actualUseInfo>
-	</usageInfo>
 	<resourceCreationInfo>
+		<createdUsingELRCServices>true</createdUsingELRCServices>
 		<fundingProject>
 			<projectName lang="und">Speecon</projectName>
 			<fundingType>euFunds</fundingType>
@@ -138,22 +58,23 @@
 		<corpusInfo>
 			<resourceType>corpus</resourceType>
 			<corpusMediaType>
-				<corpusAudioInfo>
-					<mediaType>audio</mediaType>
+				<corpusTextInfo>
+					<mediaType>text</mediaType>
 					<lingualityInfo>
 						<lingualityType>monolingual</lingualityType>
 					</lingualityInfo>
 					<languageInfo>
-						<languageId>tha</languageId>
-						<languageName>Thai</languageName>
+						<languageId>bg</languageId>
+						<languageName>Bulgarian</languageName>
 					</languageInfo>
-					<audioSizeInfo>
-						<sizeInfo>
-							<size>345</size>
-							<sizeUnit>mb</sizeUnit>
-						</sizeInfo>
-					</audioSizeInfo>
-				</corpusAudioInfo>
+					<sizeInfo>
+						<size>567</size>
+						<sizeUnit>terms</sizeUnit>
+					</sizeInfo>
+					<textFormatInfo>
+						<dataFormat>text/plain</dataFormat>
+					</textFormatInfo>
+				</corpusTextInfo>
 			</corpusMediaType>
 		</corpusInfo>
 	</resourceComponentType>
