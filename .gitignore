@@ -25,10 +25,5 @@ lighttpd/
 opt/
 ._*
 venv
-/storage/*
-/misc/tools/generateMeta/test/
-/misc/tools/generateMeta/out2b/
-/misc/tools/generateMeta/out1/
-.idea/
 # temporary
 .travis.yml
