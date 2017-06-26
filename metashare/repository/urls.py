@@ -22,7 +22,6 @@ sqs = SearchQuerySet() \
   .facet("dataFormatFilter") \
   .facet("bestPracticesFilter") \
   .facet("domainFilter") \
-  .facet("geographicCoverageFilter") \
   .facet("timeCoverageFilter") \
   .facet("subjectFilter") \
   .facet("corpusAnnotationTypeFilter") \
