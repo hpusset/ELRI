@@ -42,23 +42,8 @@ sqs = SearchQuerySet() \
   .facet("textTextGenreFilter") \
   .facet("textTextTypeFilter") \
   .facet("textRegisterFilter") \
-  .facet("audioAudioGenreFilter") \
-  .facet("audioSpeechGenreFilter") \
-  .facet("audioRegisterFilter") \
-  .facet("audioSpeechItemsFilter") \
-  .facet("audioNaturalityFilter") \
   .facet("audioConversationalTypeFilter") \
   .facet("audioScenarioTypeFilter") \
-  .facet("videoVideoGenreFilter") \
-  .facet("videoTypeOfVideoContentFilter") \
-  .facet("videoNaturalityFilter") \
-  .facet("videoConversationalTypeFilter") \
-  .facet("videoScenarioTypeFilter") \
-  .facet("imageImageGenreFilter") \
-  .facet("imageTypeOfImageContentFilter") \
-  .facet("textnumericalTypeOfTnContentFilter") \
-  .facet("textngramBaseItemFilter") \
-  .facet("textngramOrderFilter") \
   .facet("languageVarietyFilter")
 
 urlpatterns = patterns('metashare.repository.views',
