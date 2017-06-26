@@ -99,10 +99,7 @@ label.component{
 	color: #fff;
 	font-size: 16px;
 	padding:3px;
-	background: #FF6633;
-	background: -moz-linear-gradient(top, #FFCC00, #FF6633);
-	background: -webkit-gradient(linear, left top, left bottom, from(#FFCC00), to(#FF6633));
-	filter:progid:DXImageTransform.Microsoft.Gradient(endColorstr='#FFCC00', startColorstr='#FF6633', gradientType='0');
+	background: #0578a5;
 	position:relative;
 }
 
