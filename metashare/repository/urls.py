@@ -23,7 +23,6 @@ sqs = SearchQuerySet() \
   .facet("bestPracticesFilter") \
   .facet("domainFilter") \
   .facet("corpusAnnotationTypeFilter") \
-  .facet("corpusAnnotationFormatFilter") \
   .facet("languageDescriptionLDTypeFilter") \
   .facet("languageDescriptionEncodingLevelFilter") \
   .facet("languageDescriptionGrammaticalPhenomenaCoverageFilter") \
@@ -40,9 +39,6 @@ sqs = SearchQuerySet() \
   .facet("toolServiceEvaluatedFilter") \
   .facet("textTextGenreFilter") \
   .facet("textTextTypeFilter") \
-  .facet("textRegisterFilter") \
-  .facet("audioConversationalTypeFilter") \
-  .facet("audioScenarioTypeFilter") \
   .facet("languageVarietyFilter")
 
 urlpatterns = patterns('metashare.repository.views',
