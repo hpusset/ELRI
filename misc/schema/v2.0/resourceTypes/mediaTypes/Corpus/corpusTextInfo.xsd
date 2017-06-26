@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2011 sp1 (http://www.altova.com) by End User (free.org) -->
-<!-- edited by Kostas Perifanos, HARRIS PAPAGEORGIOU & Penny Labropoulou (Institute for Language and Speech Processing (ILSP)) -->
-<xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" xml:lang="en">
-	<xs:include schemaLocation="../../../META-SHARE-SimpleTypes.xsd"/>
-	<xs:include schemaLocation="../../../META-SHARE-BaseTypes.xsd"/>
+<!-- edited by ILSP/Athena R.C. -->
+<xs:schema xmlns:ms="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0" xml:lang="en">
+	<xs:include schemaLocation="../../../ELRC-SHARE-SimpleTypes.xsd"/>
+	<xs:include schemaLocation="../../../ELRC-SHARE-BaseTypes.xsd"/>
 	<xs:include schemaLocation="../TextSpecific.xsd"/>
 	<xs:complexType name="corpusTextInfoType">
 		<xs:annotation>
-			<xs:documentation>Groups together information on the text component of a resource</xs:documentation>
 			<xs:appinfo>
 				<render-short>text ({lingualityInfo} {languageInfo})</render-short>
 			</xs:appinfo>
@@ -17,7 +15,7 @@
 				<xs:annotation>
 					<xs:documentation>Specifies the media type of the resource and basically corresponds to the physical medium of the content representation. Each media type is described through a distinctive set of features. A resource may consist of parts attributed to different types of media. A tool/service may take as input/output more than one different media types.</xs:documentation>
 					<xs:appinfo>
-						<maxlen>10</maxlen>
+						<label>Media type</label>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -26,6 +24,7 @@
 					<xs:documentation>Groups information on the number of languages of the resource part and of the way they are combined to each other</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
+						<label>Linguality</label>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -34,16 +33,7 @@
 					<xs:documentation>Groups information on the languages represented in the resource</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-many</relation>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element ref="ms:modalityInfo" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Groups information on the modalities represented in the resource</xs:documentation>
-					<xs:appinfo>
-						<recommended>true</recommended>
-						<relation>one-to-many</relation>
-						<inline-type>tabular</inline-type>
+						<label>Language</label>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -53,16 +43,18 @@
 					<xs:appinfo>
 						<relation>one-to-many</relation>
 						<inline-type>tabular</inline-type>
+						<label>Size</label>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element ref="ms:textFormatInfo" minOccurs="0" maxOccurs="unbounded">
+			<xs:element ref="ms:textFormatInfo" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Groups information on the text format(s) of a resource</xs:documentation>
 					<xs:appinfo>
 						<recommended>true</recommended>
 						<relation>one-to-many</relation>
 						<inline-type>tabular</inline-type>
+						<label>Text format</label>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -73,6 +65,7 @@
 						<recommended>true</recommended>
 						<relation>one-to-many</relation>
 						<inline-type>tabular</inline-type>
+						<label>Character encoding</label>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -81,7 +74,8 @@
 					<xs:documentation>Groups information on the annotated part(s) of a resource</xs:documentation>
 					<xs:appinfo>
 						<recommended>true</recommended>
-						<relation>many-to-many</relation>
+						<relation>one-to-many</relation>
+						<label>Annotation</label>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -92,6 +86,7 @@
 						<recommended>true</recommended>
 						<relation>one-to-many</relation>
 						<inline-type>tabular</inline-type>
+						<label>Domain</label>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -101,26 +96,7 @@
 					<xs:appinfo>
 						<recommended>true</recommended>
 						<relation>one-to-many</relation>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element ref="ms:timeCoverageInfo" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Groups together information on time classification of the resource</xs:documentation>
-					<xs:appinfo>
-						<recommended>true</recommended>
-						<relation>one-to-many</relation>
-						<inline-type>tabular</inline-type>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element ref="ms:geographicCoverageInfo" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Groups information on geographic classification of the resource</xs:documentation>
-					<xs:appinfo>
-						<recommended>true</recommended>
-						<relation>one-to-many</relation>
-						<inline-type>tabular</inline-type>
+						<label>Text classification</label>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -130,14 +106,7 @@
 					<xs:appinfo>
 						<recommended>true</recommended>
 						<relation>one-to-one</relation>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element ref="ms:linkToOtherMediaInfo" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Groups information on the way different media of the resource interact with or link to each other. To be used for multimodal resources or for resources representing sensorimotor data</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-many</relation>
+						<label>Creation</label>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -147,6 +116,9 @@
 	<xs:element name="corpusTextInfo" type="ms:corpusTextInfoType">
 		<xs:annotation>
 			<xs:documentation>Groups together information on the text component of a resource</xs:documentation>
+			<xs:appinfo>
+				<label>Corpus text component</label>
+			</xs:appinfo>
 		</xs:annotation>
 	</xs:element>
 </xs:schema>

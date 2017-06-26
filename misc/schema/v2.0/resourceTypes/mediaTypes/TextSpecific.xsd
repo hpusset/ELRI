@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2011 sp1 (http://www.altova.com) by End User (free.org) -->
-<!-- edited by Kostas Perifanos, HARRIS PAPAGEORGIOU & Penny Labropoulou (Institute for Language and Speech Processing (ILSP)) -->
-<xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" xml:lang="en">
-	<xs:include schemaLocation="../../META-SHARE-SimpleTypes.xsd"/>
-	<xs:include schemaLocation="../../META-SHARE-BaseTypes.xsd"/>
+<!-- edited by ILSP/Athena R.C. -->
+<xs:schema xmlns:ms="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0" xml:lang="en">
+	<xs:include schemaLocation="../../ELRC-SHARE-SimpleTypes.xsd"/>
+	<xs:include schemaLocation="../../ELRC-SHARE-BaseTypes.xsd"/>
 	<xs:complexType name="textFormatInfoType">
-		<xs:annotation>
-			<xs:documentation>Groups information on the text format(s) of a resource</xs:documentation>
-		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="mimeType" type="xs:string">
+			<xs:element ref="ms:dataFormat">
 				<xs:annotation>
-					<xs:documentation>The mime-type of the resource which is a formalized specifier for the format included or a mime-type that the tool/service accepts; value to be taken from a subset of the official mime types of the Internet Assigned Numbers Authority (http://www.iana.org/)</xs:documentation>
+					<xs:documentation>The data format (usually corresponding to the mime-type) of the resource which is a formalized specifier for the format included or a data format (mime-type) that the tool/service accepts, preferrably in conformance with the values of the IANA (Internet Assigned Numbers Authority); you can select one of the pre-defined values or add a value, PREFERABLY FROM THE IANA MEDIA MIMETYPE RECOMMENDED VALUES (http://www.iana.org/assignments/media-types/media-types.xhtml)</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
-						<maxlen>50</maxlen>
+						<label>Data format</label>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -24,51 +20,36 @@
 					<xs:appinfo>
 						<relation>one-to-one</relation>
 						<inline-type>tabular</inline-type>
+						<label>Size per text format</label>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="textClassificationInfoType">
-		<xs:annotation>
-			<xs:documentation>Groups together information on text type/genre of the resource</xs:documentation>
-		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="textGenre" type="xs:string" minOccurs="0">
+			<xs:element ref="ms:textGenre" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Genre: The conventionalized discourse or text types of the content of the resource, based on extra-linguistic and internal linguistic criteria</xs:documentation>
 					<xs:appinfo>
-						<maxlen>50</maxlen>
+						<label>Text genre</label>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="textType" type="xs:string" minOccurs="0">
+			<xs:element ref="ms:textType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Specifies the type of the text according to a text type classification</xs:documentation>
 					<xs:appinfo>
-						<maxlen>50</maxlen>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="register" type="xs:string" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>For corpora that have already been using register classification</xs:documentation>
-					<xs:appinfo>
-						<maxlen>500</maxlen>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="subject_topic" type="xs:string" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>For corpora that have already been using subject classification</xs:documentation>
-					<xs:appinfo>
-						<maxlen>500</maxlen>
+						<label>Text type</label>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element ref="ms:conformanceToClassificationScheme" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Specifies the external classification schemes</xs:documentation>
+					<xs:appinfo>
+						<label>Conformance to classification scheme</label>
+					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="sizePerTextClassification" type="ms:sizeInfoType" minOccurs="0">
@@ -77,6 +58,7 @@
 					<xs:appinfo>
 						<relation>one-to-one</relation>
 						<inline-type>tabular</inline-type>
+						<label>Size per text classification</label>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
@@ -86,11 +68,261 @@
 	<xs:element name="textFormatInfo" type="ms:textFormatInfoType">
 		<xs:annotation>
 			<xs:documentation>Groups information on the text format(s) of a resource</xs:documentation>
+			<xs:appinfo>
+				<label>Text format</label>
+			</xs:appinfo>
 		</xs:annotation>
+	</xs:element>
+	<xs:element name="textGenre">
+		<xs:annotation>
+			<xs:documentation>Genre: The conventionalized discourse or text types of the content of the resource, based on extra-linguistic and internal linguistic criteria; please, select one of the predefined values as it increases the interoperability between resources and processing tools and services; if none fits the contents of your resource, you can add your own value</xs:documentation>
+			<xs:appinfo>
+				<label>Text genre</label>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="50"/>
+				<xs:enumeration value="advertising">
+					<xs:annotation>
+						<xs:documentation>For corpora that include advertising texts (value taken from the PAROLE genre classifcation schema)</xs:documentation>
+						<xs:appinfo>
+							<label>Advertising</label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="discussion">
+					<xs:annotation>
+						<xs:documentation>For corpora that include texts of discussion, debate and conversation, written as well as spoken, including interviews, parliamentary speeches, letters to the editor, etc. (value taken from the PAROLE genre classifcation schema)</xs:documentation>
+						<xs:appinfo>
+							<label>Discussion</label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="feature">
+					<xs:annotation>
+						<xs:documentation>For corpora that include feature texts such as articles in newspaper etc., which do not belong to the Information or another, more specific genre, rebiews, radio/TV magazines etc. (value taken from the PAROLE genre classifcation schema)</xs:documentation>
+						<xs:appinfo>
+							<label>Feature</label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="fiction">
+					<xs:annotation>
+						<xs:documentation>For corpora that include fiction texts, including faction and e.g. comic strips, entertainment, children and youth pages, jokes and games; drama, including film manuscripts and TV-series; poems and song lyrics (value taken from the PAROLE genre classifcation schema)</xs:documentation>
+						<xs:appinfo>
+							<label>Fiction</label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="information">
+					<xs:annotation>
+						<xs:documentation>For corpora that include texts of information, such as news articles in newspaper texts, as well as similar programs in radio and television, folders and leaflets from the authorities, posters, signs (value taken from the PAROLE genre classifcation schema)</xs:documentation>
+						<xs:appinfo>
+							<label>Information</label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="instruction">
+					<xs:annotation>
+						<xs:documentation>For corpora that include texts of instruction, including reference and text books, specialised articles in correspondence columns of newspapers or magazines (value taken from the PAROLE genre classifcation schema)</xs:documentation>
+						<xs:appinfo>
+							<label>Instruction</label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="nonFiction">
+					<xs:annotation>
+						<xs:documentation>For corpora that include non-fiction texts, such as biography, including obituaries and auto-biographies, sermons, school and student essays etc. (value taken from the PAROLE genre classifcation schema)</xs:documentation>
+						<xs:appinfo>
+							<label>Non-fiction</label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="official">
+					<xs:annotation>
+						<xs:documentation>For corpora that include official texts, including laws, government circulars, official announcements, business correspondence (value taken from the PAROLE genre classifcation schema)</xs:documentation>
+						<xs:appinfo>
+							<label>Official</label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="private">
+					<xs:annotation>
+						<xs:documentation>For corpora that include private texts, like diaries and private letters (value taken from the PAROLE genre classifcation schema)</xs:documentation>
+						<xs:appinfo>
+							<label>Private</label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="other"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="textType">
+		<xs:annotation>
+			<xs:documentation>Specifies the type of the text according to a text type classification; please, select one of the predefined values as it increases the interoperability between resources and processing tools and services; if none fits the contents of your resource, you can add your own value</xs:documentation>
+			<xs:appinfo>
+				<label>Text type</label>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="50"/>
+				<xs:enumeration value="academicTexts">
+					<xs:annotation>
+						<xs:documentation>For corpora that include essays, lectures, course materials, school texts, student exam papers...</xs:documentation>
+						<xs:appinfo>
+							<label>Academic Texts</label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="administrativeTexts">
+					<xs:annotation>
+						<xs:documentation>For corpora that include public and private administration documents, such as government circulars, laws, legislation, corporate texts and similar material</xs:documentation>
+						<xs:appinfo>
+							<label>Administrative Texts</label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="blogTexts">
+					<xs:annotation>
+						<xs:documentation>For corpora that include texts from blogs</xs:documentation>
+						<xs:appinfo>
+							<label>Blog Texts</label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="chatTexts">
+					<xs:annotation>
+						<xs:documentation>For corpora that include chat conversations</xs:documentation>
+						<xs:appinfo>
+							<label>Chat Texts</label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="faceToFaceConversationsDiscussions">
+					<xs:annotation>
+						<xs:documentation>For corpora that include transcripts from conversations and discussions (face-to-face), both formal and informal</xs:documentation>
+						<xs:appinfo>
+							<label>Face-to-face Conversations Discussions</label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="emails">
+					<xs:annotation>
+						<xs:documentation>For corpora that include email texts, both formal and informal</xs:documentation>
+						<xs:appinfo>
+							<label>Emails</label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="encyclopaedicTexts">
+					<xs:annotation>
+						<xs:documentation>For corpora that include articles in encyclopaedias, printed and digital (e.g. wikipedia)</xs:documentation>
+						<xs:appinfo>
+							<label>Encyclopaedic Texts</label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="interviews">
+					<xs:annotation>
+						<xs:documentation>For corpora that include interviews, either from printed media or transcripts from oral conversations</xs:documentation>
+						<xs:appinfo>
+							<label>Interviews</label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="journalisticTexts">
+					<xs:annotation>
+						<xs:documentation>For corpora that include articles, reportage, travel guides etc. in newspapers, magazines, printed or electronic</xs:documentation>
+						<xs:appinfo>
+							<label>Journalistic Texts</label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="letters">
+					<xs:annotation>
+						<xs:documentation>For corpora that include correspondence (private, business, formal ...); N.B. emails and other forms of digital communication are not to be included here</xs:documentation>
+						<xs:appinfo>
+							<label>Letters</label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="literaryTexts">
+					<xs:annotation>
+						<xs:documentation>For corpora that include novels, stories, fairy tales, biographies, poems etc.</xs:documentation>
+						<xs:appinfo>
+							<label>Literary Texts</label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="meetingProceedings">
+					<xs:annotation>
+						<xs:documentation>For corpora that include court, parliamentary, municipal, corporate meetings...</xs:documentation>
+						<xs:appinfo>
+							<label>Meeting Proceedings</label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="reviews">
+					<xs:annotation>
+						<xs:documentation>For corpora that include reviews of books, music, films, restaurants etc.</xs:documentation>
+						<xs:appinfo>
+							<label>Reviews</label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="scripts">
+					<xs:annotation>
+						<xs:documentation>For corpora that include movie scripts, advertisement scripts...</xs:documentation>
+						<xs:appinfo>
+							<label>Scripts</label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="subtitles">
+					<xs:annotation>
+						<xs:documentation>For corpora that include subtitles of movies, TV shows, documentaries...</xs:documentation>
+						<xs:appinfo>
+							<label>Subtitles</label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="technicalTexts">
+					<xs:annotation>
+						<xs:documentation>For corpora that include manuals and other technical documents</xs:documentation>
+						<xs:appinfo>
+							<label>Technical Texts</label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="telephoneConversations">
+					<xs:annotation>
+						<xs:documentation>For corpora that include transcripts of telephone conversations</xs:documentation>
+						<xs:appinfo>
+							<label>Telephone Conversations</label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="tweets">
+					<xs:annotation>
+						<xs:documentation>For corpora that include tweets, both formal and informal</xs:documentation>
+						<xs:appinfo>
+							<label>Tweets</label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="other"/>
+			</xs:restriction>
+		</xs:simpleType>
 	</xs:element>
 	<xs:element name="textClassificationInfo" type="ms:textClassificationInfoType">
 		<xs:annotation>
 			<xs:documentation>Groups together information on text type/genre of the resource</xs:documentation>
+			<xs:appinfo>
+				<label>Text classification</label>
+			</xs:appinfo>
 		</xs:annotation>
 	</xs:element>
 </xs:schema>
