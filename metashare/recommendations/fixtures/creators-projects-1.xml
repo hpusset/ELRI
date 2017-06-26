@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xmlns="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.meta-share.org/META-SHARE_XMLSchema http://www.meta-share.org/META-SHARE_XMLSchema/v3.1/META-SHARE-Resource.xsd">
+<resourceInfo xmlns="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ELRC-SHARE-Resource.xsd">
 	<identificationInfo>
 		<resourceName lang="en">Thai Speecon database</resourceName>
 		<resourceName lang="fr">Base de données Speecon thaï
@@ -17,9 +17,16 @@
 	</identificationInfo>
 	<distributionInfo>
 		<availability>available</availability>
+		<PSI>true</PSI>
+		<allowsUsesBesidesDGT>true</allowsUsesBesidesDGT>
 		<licenceInfo>
-			<licence>AGPL-3.0</licence>
+			<licence>CC-BY-4.0</licence>
 		</licenceInfo>
+		<distributionMedium>webExecutable</distributionMedium>
+		<attributionText>attribution text</attributionText>
+		<personalDataIncluded>true</personalDataIncluded>
+		<personalDataAdditionalInfo>String</personalDataAdditionalInfo>
+		<sensitiveDataIncluded>true</sensitiveDataIncluded>
 	</distributionInfo>
 	<contactPerson>
 		<surname>Test</surname>
@@ -41,7 +48,6 @@
 				<country>France</country>
 				<countryId>FR</countryId>
 				<telephoneNumber>+1 43 13 33 33</telephoneNumber>
-				<faxNumber>+1 43 14 33 30</faxNumber>
 			</communicationInfo>
 		</metadataCreator>
 	</metadataInfo>
@@ -49,13 +55,8 @@
 		<version>1.0</version>
 		<lastDateUpdated>2008-10-07</lastDateUpdated>
 	</versionInfo>
-	<usageInfo>
-		<actualUseInfo>
-			<actualUse>nlpApplications</actualUse>
-			<useNLPSpecific>speechRecognition</useNLPSpecific>
-		</actualUseInfo>
-	</usageInfo>
 	<resourceCreationInfo>
+		<createdUsingELRCServices>true</createdUsingELRCServices>
 		<resourceCreator>
 			<personInfo>
 				<surname lang="en">test-creator-person</surname>
@@ -78,8 +79,8 @@
 		<corpusInfo>
 			<resourceType>corpus</resourceType>
 			<corpusMediaType>
-				<corpusAudioInfo>
-					<mediaType>audio</mediaType>
+				<corpusTextInfo>
+					<mediaType>text</mediaType>
 					<lingualityInfo>
 						<lingualityType>monolingual</lingualityType>
 					</lingualityInfo>
@@ -87,13 +88,14 @@
 						<languageId>tha</languageId>
 						<languageName>Thai</languageName>
 					</languageInfo>
-					<audioSizeInfo>
-						<sizeInfo>
-							<size>123456</size>
-							<sizeUnit>entries</sizeUnit>
-						</sizeInfo>
-					</audioSizeInfo>
-				</corpusAudioInfo>
+					<sizeInfo>
+						<size>550</size>
+						<sizeUnit>terms</sizeUnit>
+					</sizeInfo>
+					<textFormatInfo>
+						<dataFormat>text/plain</dataFormat>
+					</textFormatInfo>
+				</corpusTextInfo>
 			</corpusMediaType>
 		</corpusInfo>
 	</resourceComponentType>
