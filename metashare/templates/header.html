@@ -1,0 +1,120 @@
+{% load static from staticfiles %}
+{% spaceless %}
+    <div id="header">
+        <a href="http://lr-coordination.eu/" title="Languages — the heart of Multilingual Europe | ELRC"
+           target="_blank"><img style="float:right; margin: 10px 20px 0 0"
+                                src="{{ STATIC_URL }}metashare/images/elrc_small.png"/></a>
+    <div class="jsddm">
+        {# drop-down menu created with http://javascript-array.com/scripts/jquery_simple_drop_down_menu/ #}
+        <ul id="jsddm">
+            <li title="Home"><a href="{% url 'frontpage' %}" %}>Home</a></li>
+            <li title="Browse the resources of the META-SHARE catalogue"><a
+                    href="{% url 'frontpage' %}repository/search/">Browse Resources</a></li>
+            {% if user.userprofile.has_editor_permission %}
+                <li title="Create/edit resource metadata or upload resource data"><a>Manage Resources</a>
+                    <ul>
+                        <li title="Create/edit your own resource metadata or upload resource data"><a
+                                href="{% url 'editor:repository_resourceinfotype_model_myresources' %}">Manage your
+                            own resources</a></li>
+                        <li title="Create/edit resource metadata or upload resource data"><a
+                                href="{% url 'editor:repository_resourceinfotype_model_changelist' %}">Manage all
+                            resources</a></li>
+                        <li title="Create/edit person object metadata"><a
+                                href="{% url 'editor:repository_personinfotype_model_changelist' %}">Manage person
+                            objects</a></li>
+                        <li title="Create/edit organization object metadata"><a
+                                href="{% url 'editor:repository_organizationinfotype_model_changelist' %}">Manage
+                            organization objects</a></li>
+                        <li title="Create/edit project object metadata"><a
+                                href="{% url 'editor:repository_projectinfotype_model_changelist' %}">Manage project
+                            objects</a></li>
+                        <li title="Create/edit document/paper object metadata"><a
+                                href="{% url 'editor:repository_documentinfotype_model_changelist' %}">Manage
+                            document objects</a></li>
+                        <li title="Upload XML resource descriptions"><a href="{% url 'editor:upload_xml' %}">Upload
+                            resource descriptions</a></li>
+                    </ul>
+                </li>
+            {% endif %}
+            {% if user.is_superuser or user.userprofile.has_organization_manager_permission or user.userprofile.has_manager_permission %}
+                <li title="Manage groups and users"><a>Administration</a>
+                    <ul>
+                        {% if user.is_superuser %}
+                            <li><a href="{% url 'admin:auth_user_changelist' %}">Users</a></li>
+                            <li><a href="{% url 'editor:accounts_editorgroup_changelist' %}">Editor groups</a></li>
+                            <li><a href="{% url 'editor:accounts_editorgroupmanagers_changelist' %}">Editor group
+                                managers</a></li>
+                            <li><a href="{% url 'editor:accounts_organization_changelist' %}">Organizations</a></li>
+                            <li><a href="{% url 'editor:accounts_organizationmanagers_changelist' %}">Organization
+                                managers</a></li>
+                        {% endif %}
+                        {% if user.userprofile.has_manager_permission %}
+                            <li><a href="{% url 'admin:accounts_editorgroupapplication_changelist' %}">Editor group
+                                applications</a></li>
+                        {% endif %}
+                        {% if user.is_superuser or user.userprofile.has_organization_manager_permission %}
+                            <li><a href="{% url 'admin:accounts_organizationapplication_changelist' %}">Organization
+                                applications</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+            {% endif %}
+            <li title="Mailing lists, wiki, and more"><a target="_blank"
+                                                         href="http://metashare.ilsp.gr/forum">Community</a>
+            </li>
+            <li title="View various statistics for this META-SHARE Node"><a
+                    href="{% url 'metashare.views.frontpage' %}stats/top/">Statistics</a></li>
+            <li title="Manage groups and users"><a>Help</a>
+                <ul>
+                    <li><a href="{% static "metashare/documentation.pdf" %}" title="User Manual (Old version)"
+                           target="_blank">User Manual (Old version)</a></li>
+                    <li><a href="http://www.meta-share.org" title="META-SHARE Portal" target="_blank">META-SHARE
+                        Portal</a></li>
+                </ul>
+            </li>
+
+            <li><a href="{% url 'info' %}">About</a>
+                <ul>
+                    <li><a href="{% url 'info' %}#META-SHARE_Members">META-SHARE Members</a></li>
+                    <li><a href="{% url 'info' %}#META-SHARE_Repositories">META-SHARE Repositories</a></li>
+                    <li><a href="{% url 'info' %}#META-SHARE_Managing_Nodes">META-SHARE Managing Nodes</a></li>
+                    <li><a href="{% url 'info' %}#LR_Sharing_within_the_META-SHARE_Network">LR Sharing</a></li>
+                    <li><a href="{% url 'info' %}#Licensing_LRs_through_META-SHARE">Licensing LRs</a></li>
+                    <li><a href="{% url 'info' %}#Notice_and_Take_Down_Policy">Notice and Takedown Policy</a></li>
+                    <li><a href="{% url 'info' %}#Privacy">Privacy</a></li>
+                    <li><a href="{% url 'info' %}#Data_Protection">Data Protection</a></li>
+                    <li><a href="{% url 'info' %}#Data_Protection_Statement">Data Protection Statement</a></li>
+                </ul>
+            </li>
+            {% if user.is_active %}
+                <li title="Profile settings and actions"><a href="{% url 'edit_profile' %}">Your Profile,
+                    {% load firstof from future %}{% filter force_escape %}
+                        {% firstof user.first_name user.username %}{% endfilter %}</a>
+                    <ul>
+                        {% if user.is_staff %}
+                            <li><a href="{% url 'editor:index' %}">View your recent actions</a></li>{% endif %}
+                        <li><a href="{% url 'edit_profile' %}" title='View or edit your personal details'>Edit your
+                            profile</a></li>
+                        <li><a href="{% url 'password_change' %}">Change your password</a></li>
+                        <li><a href="{% url 'editor_group_application' %}"
+                               title="Apply for membership in editor groups">Apply for editor group membership</a>
+                        </li>
+                        <li><a href="{% url 'update_default_editor_groups' %}"
+                               title='Set the editor groups to which all new resources you create shall belong'>Update
+                            default editor groups</a></li>
+                        <li><a href="{% url 'organization_application' %}"
+                               title="Apply for membership in organizations">Apply for organization membership</a>
+                        </li>
+                    </ul>
+                </li>
+            {% endif %}
+            {% if user.username %}
+                <li><a href="{% url 'logout' %}?next={{ request.path }}">Logout</a></li>
+            {% else %}
+                <li><a href="{% url 'create' %}">Register</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+            {% endif %}
+        </ul>
+    </div>
+    </div>
+{% endspaceless %}

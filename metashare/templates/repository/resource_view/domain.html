@@ -1,0 +1,25 @@
+{% spaceless %}
+
+    <label class='title'>Domains</label>
+    <div class="dataline">
+        {% for key, value in domains.items %}
+            {% if "Domain" in key %}
+                <label>
+                    {% for key1, value1 in value.items %}
+                        {% if key1 == "Domain" %}
+                            <strong>
+                                {{ value1 }} {% if "Size_per_domain" in value %}
+                                {% include "repository/resource_view/size.html" with size=value.Size_per_domain type="sub" %}{% endif %}
+                            </strong>
+                        {% endif %}
+                        {% if key1 == "Subdomain" %}
+                            : {{ value1 }} (Eurovoc {{ value.Subdomain_Identifier }})
+                        {% endif %}
+                    {% endfor %}
+                    <hr/>
+                </label>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+{% endspaceless %}

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% load static from staticfiles %}
+{% block back %}{% include "back.html" with page="frontpage" %}{% endblock %}
+{% block content %}
+    {% spaceless %}
+        <div style="margin-top: -80px">
+            <div class="span-24">
+                <div style="text-align:center;margin-top: 20px;margin-bottom: 20px;">
+                    <p style="text-align: center; color: #058dbe;font-weight: bold;">{{ resources|intcomma }} language
+                        resource{{ resources|pluralize }} at your disposal</p>
+                </div>
+                <form method="get" action="{% url 'frontpage' %}repository/search/" class="form_helper">
+                    <div id="search">
+                        <div id="search_input"><input class="big_input span-14" type="text" name="q"
+                                                      defaultText="Type in your keywords, please..."/></div>
+                        <div id="search_button">
+                            <button type="submit" class="big_button button">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="span-24" style="vertical-align: middle; margin-top:30px;">
+                <table>
+                    <tr>
+                        <td>
+      <span class="span-15 last" style="">
+        <h2>Welcome to the ELRC-SHARE repository!</h2>
+        <p>The ELRC-SHARE repository is used for documenting, storing, browsing and
+            accessing <a href="http://lr-coordination.eu/resources">Language Resources</a> that
+            are collected through the <a href="http://lr-coordination.eu">European Language
+                Resource Coordination</a> and considered useful for feeding the CEF Automated Translation
+            (<a href="http://lr-coordination.eu/discover#f3" target="_blank">CEF.AT</a>) platform.</p>
+		<p>If you want to contribute resources, all you have to do is
+            {% if not user.is_authenticated %}
+                <a href="/accounts/create/">register</a> (new user)
+                or <a href="/repository/simple_form">login</a> (returing user)
+            {% else %}
+                click <a href="/repository/simple_form">here</a>
+            {% endif %}
+            and go on to describe and upload your data with a simple form.
+        <br/>
+        <div>
+          <map name="registerMap">
+                <area shape="circle" coords="47,82,45" alt="Register" href="/accounts/create/">
+                <area shape="circle" coords="290,82,45" alt="Contribute data" href="/repository/simple_form">
+          </map>
+          <map name="contributeMap">
+                <area shape="circle" coords="290,82,45" alt="Contribute data" href="/repository/simple_form">
+          </map>
+          <img
+                  {% if not user.is_authenticated %}
+                      src="{{ STATIC_URL }}metashare/images/diagram.png" width="476"
+                      style="display:block; margin: 0 auto;" usemap="#registerMap"
+                  {% else %}
+                      src="{{ STATIC_URL }}metashare/images/diagram_deact.png" width="476"
+                      style="display:block; margin: 0 auto;" usemap="#contributeMap"
+                  {% endif %}
+          />
+        </div>
+        <p>All data resources gathered by this initiative will be provided to the European Commission for use in the CEF.AT platform.</p>
+      </span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock %}

@@ -1,0 +1,149 @@
+{% extends "admin/repository/change_form.html" %}
+
+
+{% block content %}
+    <div id="content-main">
+
+        <form {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post"
+              id="{{ opts.model_name }}_form">{% csrf_token %}{% block form_top %}{% endblock %}
+            <div>
+
+                <div>
+                    <label for="id_resourceType" class="required">Resource type:</label>
+
+                    <select name="resourceType" id="id_resourceType">
+                        <option value="" selected="selected">---------</option>
+                        <option value="corpus">Corpus</option>
+                        <option value="langdesc">Language description</option>
+                        <option value="lexicon">Lexical conceptual resource</option>
+                        <option value="toolservice">Tool / Service</option>
+                    </select>
+                </div>
+                <div id="id_corpusInfo" style="display: none;">
+                    <input type="hidden" name="showCorpusTextInfo" value="True" id="id_corpusTextInfo"
+                           checked="checked"/>
+                </div>
+
+                <div id="id_langdescInfo" style="display: none;">
+                    <input type="hidden" name="showLangdescTextInfo" value="True" id="id_langdescTextInfo"
+                           checked="checked"/>
+                </div>
+
+                <div id="id_lexiconInfo" style="display: none;">
+                    <input type="hidden" name="showLexiconTextInfo" value="True" id="id_lexiconTextInfo"
+                           checked="checked"/>
+                </div>
+
+
+                <input id="id_submit" type="submit" value="Proceed" style="display: none;"/>
+                <p>
+                <div class="resourceTypeExplanation">
+                    <span>Please, use one of the values:</span>
+                    <ul>
+                        <li>
+                            <span class="resourceTypeTitle">corpus:</span> for sets of documents in one or more
+                            languages, including, for instance,
+                            <ul>
+                                <li>sets of public administration official documents (e.g. ministerial decisions, legal
+                                    acts, Board decisions etc.),
+                                </li>
+                                <li>sets of journal, newspaper, bulletin, blog articles, etc.</li>
+                                <li>parallel corpora, i.e. sets of original document with its translations (without any
+                                    processing)
+                                </li>
+                                <li>translation memories, i.e. translated documents aligned with their originals.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="resourceTypeTitle">language description:</span> for resources such as:
+                            <ul>
+                                <li>grammars, i.e. sets of rules that formalize a language</li>
+                                <li>language and translation models, which contain statistical information that assigns
+                                    a probability to a piece of unseen text (based on some training data).
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="resourceTypeTitle">lexical/conceptual resource:</span> for resources such as:
+                            <ul>
+                                <li>terminological lexica, glossaries etc., i.e. including lists of terms, with or
+                                    without any other information (e.g. definition, examples, translation equivalents,
+                                    linguistic information etc.)
+                                </li>
+                                <li>lists of words, such as person names, names of places, names of products etc.</li>
+                                <li>lexica and dictionaries containing words with linguistic information (e.g. part of
+                                    speech, inflectional information, etc.).
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="resourceTypeTitle">Tool/Service</span>
+                            <div>TODO</div>
+                        </li>
+                    </ul>
+                </div>
+                </p>
+                <script type="text/javascript">
+                    (function ($) {
+
+                        resourceTypeClasses = ['corpusInfoType_model',
+                            'languageDescriptionInfoType_model',
+                            'lexicalConceptualResourceInfoType_model',
+                            'toolServiceInfoType_model'
+                        ]
+
+                        $(document).ready(function () {
+                            $('#id_resourceType').change(function () {
+                                var value = $('#id_resourceType option:selected').attr('value');
+                                switch (value) {
+                                    case 'corpus':
+                                        $('#id_corpusInfo').css('display', 'block');
+                                        $('#id_langdescInfo').css('display', 'none');
+                                        $('#id_lexiconInfo').css('display', 'none');
+                                        $('#id_submit').css('display', 'block');
+                                        break;
+                                    case 'langdesc':
+                                        $('#id_corpusInfo').css('display', 'none');
+                                        $('#id_langdescInfo').css('display', 'block');
+                                        $('#id_lexiconInfo').css('display', 'none');
+                                        $('#id_submit').css('display', 'block');
+                                        break;
+                                    case 'lexicon':
+                                        $('#id_corpusInfo').css('display', 'none');
+                                        $('#id_langdescInfo').css('display', 'none');
+                                        $('#id_lexiconInfo').css('display', 'block');
+                                        $('#id_submit').css('display', 'block');
+                                        break;
+                                    case 'toolservice':
+                                        $('#id_corpusInfo').css('display', 'none');
+                                        $('#id_lexiconInfo').css('display', 'none');
+                                        $('#id_langdescInfo').css('display', 'none');
+                                        $('#id_submit').css('display', 'block');
+                                        break;
+                                    default:
+                                        $('#id_corpusInfo').css('display', 'none');
+                                        $('#id_submit').css('display', 'none');
+                                }
+                                ;
+                            });
+
+
+                            $('#id_langdescTextInfo').change(function () {
+                                if (!$(this).attr('checked')) {
+                                    alert("Language descriptions must have text media.");
+                                    $(this).attr('checked', 'checked');
+                                }
+                            });
+                            $('#id_lexiconTextInfo').change(function () {
+                                if (!$(this).attr('checked')) {
+                                    alert("Lexical conceptual resources must have text media.");
+                                    $(this).attr('checked', 'checked');
+                                }
+                            });
+                        });
+                    })(django.jQuery);
+                </script>
+            </div>
+        </form>
+    </div>
+{% endblock %}
