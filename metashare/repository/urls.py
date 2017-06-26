@@ -14,7 +14,6 @@ sqs = SearchQuerySet() \
   .facet("licenceFilter") \
   .facet("restrictionsOfUseFilter") \
   .facet("validatedFilter") \
-  .facet("foreseenUseFilter") \
   .facet("useNlpSpecificFilter") \
   .facet("lingualityTypeFilter") \
   .facet("multilingualityTypeFilter") \
