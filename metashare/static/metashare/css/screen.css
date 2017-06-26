@@ -351,8 +351,9 @@ form.form_helper label {
 
 /* cfedermann patches end */
 
-form.form_helper tr.required th label {
-    background-color: #666666;
+form.form_helper tr.required th label::before {
+    content: "*";
+    color: red;
 }
 
 form.form_helper tr.error th label {
