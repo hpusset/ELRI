@@ -315,7 +315,7 @@ class MetadataSyncTest(TestCase):
           url=proxied_nodes['proxied_node_1']['URL'],
           source_node='proxied_node_1')
         res3 = MetadataSyncTest.import_test_resource(
-          'downloadable_ms_commons_license.xml', PUBLISHED, copy_status=PROXY,
+          'downloadable_cc_by_nc_license.xml', PUBLISHED, copy_status=PROXY,
           url=proxied_nodes['proxied_node_2']['URL'],
           source_node='proxied_node_2')
         res1_folder = os.path.join(settings.STORAGE_PATH, res1.storage_object.identifier)

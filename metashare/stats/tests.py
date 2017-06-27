@@ -45,7 +45,7 @@ class StatsTest(TestCase):
         _result.editor_groups.add(_test_editor_group)
         _result.owners.add(owner)
         # load second resource
-        _fixture = '{0}/repository/test_fixtures/ingested-corpus-AudioVideo-French.xml'.format(ROOT_PATH)
+        _fixture = '{0}/repository/test_fixtures/ingested-corpus-text-French.xml'.format(ROOT_PATH)
         _result = test_utils.import_xml(_fixture)
         _result.editor_groups.add(_test_editor_group)
         _result.owners.add(owner)

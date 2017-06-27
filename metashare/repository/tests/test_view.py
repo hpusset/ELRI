@@ -310,7 +310,7 @@ class DownloadViewTest(TestCase):
         self.downloadable_resource_3 = \
             _import_resource('downloadable_3_licenses.xml')
         self.ms_commons_resource = \
-            _import_resource('downloadable_ms_commons_license.xml')
+            _import_resource('downloadable_cc_by_nc_license.xml')
         self.local_download_resource = \
             _import_resource('local_download.xml')
         # assign and copy downloadable resource
@@ -760,16 +760,6 @@ class FullViewTest(TestCase):
         test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
                 "full-corpus-text.xml".format(ROOT_PATH))
         test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
-                "full-corpus-image.xml".format(ROOT_PATH))
-        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
-                "full-corpus-audio.xml".format(ROOT_PATH))
-        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
-                "full-corpus-video.xml".format(ROOT_PATH))
-        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
-                "full-corpus-textngram.xml".format(ROOT_PATH))
-        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
-                "full-corpus-textnumerical.xml".format(ROOT_PATH))
-        test_utils.import_xml_or_zip("{}/repository/fixtures/full-resources/"
                 "full-tool-service.xml".format(ROOT_PATH))
 
         # enable indexing
@@ -936,7 +926,7 @@ def check_resource_view(queryset, test_case):
                 # try with beautified string
                 beauty_real_count = response.content.count(
                   prettify_camel_case_string(text))
-            if beauty_real_count == 0 and _ele.tag == u"mimeType":
+            if beauty_real_count == 0 and _ele.tag == u"dataFormat":
                 # text may be a mime type, so try to get the label e.g. text/xml -> XML
                 mime_label_real_count = response.content.count(mimetype_label.mimetype_label(text))
             if real_count == 0 and beauty_real_count == 0 and mime_label_real_count == 0:

@@ -243,7 +243,7 @@ class SearchTest(test_utils.IndexAwareTestCase):
         client.post(
             reverse(views.download, args=(test_res.storage_object.identifier,)),
             { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
-              'licence': 'CC-BY-NC-SA' })
+              'licence': 'CC-BY-NC-SA-4.0' })
         response = client.get(_SEARCH_PAGE_PATH)
         self.assertContains(response, 'title="Number of downloads" />&nbsp;1')
         self.assertContains(response, 'title="Number of views" />&nbsp;1')
@@ -326,7 +326,7 @@ class SearchTest(test_utils.IndexAwareTestCase):
 
     def test_ingested_LRs_are_not_indexed(self):
         test_res = test_utils.import_xml('{}/repository/test_fixtures/ingested/'
-            'ingested-corpus-AudioVideo-French.xml'.format(ROOT_PATH))
+            'ingested-corpus-text-French.xml'.format(ROOT_PATH))
         test_res.storage_object.publication_status = INGESTED
         test_res.storage_object.save()
         response = Client().get(_SEARCH_PAGE_PATH, data={'q': 'INGESTED'})
@@ -341,7 +341,7 @@ class SearchTestPublishedResources(TestCase):
     @classmethod
     def importPublishedFixtures(cls):
         _path = '{}/repository/test_fixtures/pub/'.format(ROOT_PATH)
-        files = os.listdir(_path)   
+        files = os.listdir(_path)
         for filename in files:
             fullpath = os.path.join(_path, filename)  
             test_utils.import_xml_or_zip(fullpath)
@@ -390,7 +390,7 @@ class SearchTestPublishedResources(TestCase):
     def testMediaTypeFacet(self):   
         client = Client()
         response = client.get(_SEARCH_PAGE_PATH,
-            data={'selected_facets':'mediaTypeFilter_exact:audio'})
+            data={'selected_facets':'mediaTypeFilter_exact:text'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "2 Language Resources", status_code=200)
      
@@ -405,16 +405,10 @@ class SearchTestPublishedResources(TestCase):
     def testLicenceFacet(self):   
         client = Client()
         response = client.get(_SEARCH_PAGE_PATH,
-            data={'selected_facets':'licenceFilter_exact:ELRA END USER'})
+            data={'selected_facets':'licenceFilter_exact:PDDL-1.0'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "2 Language Resources", status_code=200)
-    
-#     def testLicenceFacetForTwoLicences(self):   
-#         client = Client()
-#         response = client.get(_SEARCH_PAGE_PATH, follow=True, 
-#           data={'selected_facets':'licenceFilter_exact:ELRA_END_USER', 'selected_facets':'licenceFilter_exact:ELRA_VAR'})
-#         self.assertEqual('repository/search.html', response.templates[0].name)
-#         self.assertContains(response, "1 Language Resource", status_code=200)
+
     
     def testRestrictionsOfUseFacet(self):   
         client = Client()
@@ -430,21 +424,7 @@ class SearchTestPublishedResources(TestCase):
           data={'selected_facets':'validatedFilter_exact:true'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "2 Language Resources", status_code=200)
-        
-    def testForeseenUseFacet(self):   
-        client = Client()
-        response = client.get(_SEARCH_PAGE_PATH, follow=True, 
-          data={'selected_facets':'foreseenUseFilter_exact:Nlp Applications'})
-        self.assertEqual('repository/search.html', response.templates[0].name)
-        self.assertContains(response, "2 Language Resources", status_code=200)
-     
-    def testUseNlpSpecificFacet(self):   
-        client = Client()
-        response = client.get(_SEARCH_PAGE_PATH, follow=True, 
-          data={'selected_facets':
-                'useNlpSpecificFilter_exact:Speech Recognition'})
-        self.assertEqual('repository/search.html', response.templates[0].name)
-        self.assertContains(response, "1 Language Resource", status_code=200)
+
       
     def testLingualityTypeFacet(self):   
         client = Client()
@@ -460,37 +440,23 @@ class SearchTestPublishedResources(TestCase):
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
         
-    def testModalityTypeFacet(self):   
+    def testDataFormatFacet(self):
         client = Client()
         response = client.get(_SEARCH_PAGE_PATH, follow=True, 
-          data={'selected_facets':'modalityTypeFilter_exact:Other'})
-        self.assertEqual('repository/search.html', response.templates[0].name)
-        self.assertContains(response, "1 Language Resource", status_code=200)
-        
-    def testMimeTypeFacet(self):   
-        client = Client()
-        response = client.get(_SEARCH_PAGE_PATH, follow=True, 
-          data={'selected_facets':'mimeTypeFilter_exact:audio/mpeg'})
+          data={'selected_facets':'dataFormatFilter_exact:text/plain'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
     
     def testDomainFacet(self):   
         client = Client()
         response = client.get(_SEARCH_PAGE_PATH, follow=True, 
-          data={'selected_facets':'domainFilter_exact:science'})
+          data={'selected_facets':'domainFilter_exact:SCIENCE'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "2 Language Resources", status_code=200)
-      
-    def testGeographicCoverageFacet(self):   
-        client = Client()
-        response = client.get(_SEARCH_PAGE_PATH, follow=True, 
-          data={'selected_facets':'geographicCoverageFilter_exact:European Union'})
-        self.assertEqual('repository/search.html', response.templates[0].name)
-        self.assertContains(response, "1 Language Resource", status_code=200)
          
     def testCombinedSearchAndFacet(self):   
         client = Client()
         response = client.get(_SEARCH_PAGE_PATH, follow=True, 
-          data={'q':'recordingFree', 'selected_facets':'languageNameFilter_exact:Chinese'})
+          data={'q':'grammatical labels', 'selected_facets':'languageNameFilter_exact:Chinese'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)  

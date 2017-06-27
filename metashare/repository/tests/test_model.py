@@ -91,7 +91,7 @@ class ModelTest(TestCase):
     #    _out.write(_export_xml.encode('utf-8'))
         diff = '\n'.join(unified_diff(_import_xml.split('\n'), _export_xml.split('\n')))
         self.assertEqual(_import_xml, _export_xml,
-             msg='For file {0}, export differs from import:\n{1}'.format(_roundtrip, diff))
+             msg='For file {0}, export differs from import:\n{1}'.format(_roundtrip, diff.encode('utf-8')))
 
     def testImportExportRoundtrip(self):
         """
@@ -118,7 +118,7 @@ class ModelTest(TestCase):
         """
         Checks that there is no data lost when exporting an imported XML.
         """
-        _roundtrip = '{0}/repository/test_fixtures/ingested-corpus-AudioVideo-French.xml'.format(ROOT_PATH)
+        _roundtrip = '{0}/repository/test_fixtures/ingested-corpus-text-French.xml'.format(ROOT_PATH)
         self.assert_import_equals_export(_roundtrip)
 
     def testImportExportRoundtrip2(self):
@@ -132,14 +132,14 @@ class ModelTest(TestCase):
         """
         Checks that there is no data lost when exporting an imported XML.
         """
-        _roundtrip = '{0}/repository/test_fixtures/published-corpus-AudioVideo-English.xml'.format(ROOT_PATH)
+        _roundtrip = '{0}/repository/test_fixtures/published-corpus-text-English.xml'.format(ROOT_PATH)
         self.assert_import_equals_export(_roundtrip)
 
     def testImportExportRoundtrip4(self):
         """
         Checks that there is no data lost when exporting an imported XML.
         """
-        _roundtrip = '{0}/repository/test_fixtures/published-lexConcept-Audio-EnglishGerman.xml'.format(ROOT_PATH)
+        _roundtrip = '{0}/repository/test_fixtures/published-lexConcept-text-EnglishGerman.xml'.format(ROOT_PATH)
         self.assert_import_equals_export(_roundtrip)
 
 

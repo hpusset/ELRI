@@ -413,34 +413,6 @@ class EditorTest(TestCase):
         response = client.get('{}repository/resourceinfotype_model/{}/'.format(ADMINROOT, EditorTest.testfixture.id))
         # Resource name is a field of identification, so if this is present, identification is shown inline:
         self.assertContains(response, "Resource name:", msg_prefix='Identification is not shown inline')
-        
-    def test_one2one_usage_is_hidden(self):
-        """
-        Asserts that a recommended OneToOneField referring to models that
-        "contain" one2many fields is hidden, i.e., the model is edited in a
-        popup/overlay.
-        """
-        client = test_utils.get_client_with_user_logged_in(EditorTest.editor_login)
-        response = client.get('{}repository/resourceinfotype_model/{}/' \
-                              .format(ADMINROOT, EditorTest.testfixture.id))
-        self.assertContains(response, 'id="id_usageInfo" name="usageInfo" type="hidden"',
-                            msg_prefix='Recommended One-to-one field ' \
-                                '"usageInfo" should have been hidden.')
-
-
-    def test_one2one_sizepervalidation_is_hidden(self):
-        client = test_utils.get_client_with_user_logged_in(EditorTest.editor_login)
-        response = client.get('{}repository/resourceinfotype_model/{}/'.format(ADMINROOT, EditorTest.testfixture.id))
-        self.assertContains(response, 'id="id_validationinfotype_model_set-0-sizePerValidation" name="validationinfotype_model_set-0-sizePerValidation" type="hidden"',
-                             msg_prefix='One-to-one field "sizePerValidation" should have been hidden')
-
-    def test_one2one_sizepervalidation_uses_related_widget(self):
-        client = test_utils.get_client_with_user_logged_in(EditorTest.editor_login)
-        response = client.get('{}repository/resourceinfotype_model/{}/'.format(ADMINROOT, EditorTest.testfixture.id))
-        self.assertContains(response, 'related-widget-wrapper-change-link" id="edit_id_validationinfotype_model_set-0-sizePerValidation"',
-                            msg_prefix='One-to-one field "sizePerValidation" not rendered using related widget')
-        self.assertContains(response, 'id="id_validationinfotype_model_set-0-sizePerValidation"',
-                            msg_prefix='One2one field in inline has unexpected "id" field -- popup save action probably cannot update field as expected')
 
     def test_backref_is_hidden(self):
         client = test_utils.get_client_with_user_logged_in(EditorTest.editor_login)
