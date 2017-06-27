@@ -15,6 +15,9 @@
                         {% if key1 == "Subdomain" %}
                             : {{ value1 }} (Eurovoc {{ value.Subdomain_Identifier }})
                         {% endif %}
+                        {% if key1 == "Conformance_to_classification_scheme" %}
+                            <span style="display: none">{{ value1 }}</span>
+                        {% endif %}
                     {% endfor %}
                     <hr/>
                 </label>
