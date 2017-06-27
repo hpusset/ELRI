@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceInfo xmlns="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ELRC-SHARE-Resource.xsd">
+	<identificationInfo>
+		<resourceName lang="en-us">MS Members Test Resource</resourceName>
+		<description lang="en-us">another resource for testing</description>
+		<metaShareId>String</metaShareId>
+		<identifier>S0148000</identifier>
+	</identificationInfo>
+	<distributionInfo>
+		<availability>available</availability>
+		<PSI>true</PSI>
+		<allowsUsesBesidesDGT>true</allowsUsesBesidesDGT>
+		<licenceInfo>
+      <licence>CC-BY-NC-4.0</licence>
+			<restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+			<restrictionsOfUse>shareAlike</restrictionsOfUse>
+			<restrictionsOfUse>attribution</restrictionsOfUse>
+      <restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+		</licenceInfo>
+		<distributionMedium>dataDownloadable</distributionMedium>
+		<downloadLocation>http://www.example.org</downloadLocation>
+		<personalDataIncluded>true</personalDataIncluded>
+		<sensitiveDataIncluded>true</sensitiveDataIncluded>
+	</distributionInfo>
+	<contactPerson>
+		<surname>Doe</surname>
+		<communicationInfo>
+			<email>ctc@example.org</email>
+			<address>Planet Mars, Cosmos</address>
+			<zipCode>12345</zipCode>
+			<city>Marstown</city>
+			<region>Space</region>
+			<country>France</country>
+			<countryId>FR</countryId>
+		</communicationInfo>
+		<position>Chief Testing Clown</position>
+	</contactPerson>
+	<metadataInfo>
+		<metadataCreationDate>2005-05-12</metadataCreationDate>
+	</metadataInfo>
+	<versionInfo>
+		<version>1.0</version>
+		<lastDateUpdated>2005-05-12</lastDateUpdated>
+	</versionInfo>
+	<resourceComponentType>
+		<toolServiceInfo>
+			<resourceType>toolService</resourceType>
+			<toolServiceType>other</toolServiceType>
+			<function>alignment</function>
+			<languageDependent>false</languageDependent>
+		</toolServiceInfo>
+	</resourceComponentType>
+</resourceInfo>

@@ -27,6 +27,7 @@
 			<restrictionsOfUse>research</restrictionsOfUse>
 			<restrictionsOfUse>shareAlike</restrictionsOfUse>
 		</licenceInfo>
+		<distributionMedium>webExecutable</distributionMedium>
 		<distributionMedium>dataDownloadable</distributionMedium>
 		<downloadLocation>http://example.org/testurl03
 </downloadLocation>

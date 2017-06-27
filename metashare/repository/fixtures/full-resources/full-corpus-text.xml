@@ -27,6 +27,7 @@
 			<restrictionsOfUse>research</restrictionsOfUse>
 			<restrictionsOfUse>shareAlike</restrictionsOfUse>
 		</licenceInfo>
+		<distributionMedium>dataDownloadable</distributionMedium>
 		<downloadLocation>http://002-url.test.de</downloadLocation>
 		<downloadLocation>http://003-url.test.de</downloadLocation>
 		<downloadLocation>http://006-url.test.de</downloadLocation>
@@ -429,7 +430,7 @@
 					<textFormatInfo>
 						<dataFormat>text/plain</dataFormat>
 						<sizePerTextFormat>
-							<size>888</size>
+							<size>456</size>
 							<sizeUnit>expressions</sizeUnit>
 						</sizePerTextFormat>
 					</textFormatInfo>
