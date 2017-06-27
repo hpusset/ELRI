@@ -894,7 +894,7 @@ DOMAININFOTYPE_DOMAIN_CHOICES = _make_choices_from_list([
 ])
 
 DOMAININFOTYPE_DOMAINID_CHOICES = _make_choices_from_list([
-  u'04', u'06', u'10', u'12', u'16', u'20', u'24', u'28', u'32', u'36',
+  u'04', u'08', u'10', u'12', u'16', u'20', u'24', u'28', u'32', u'36',
   u'40',u'44', u'48', u'52', u'56', u'60', u'64', u'66', u'68', u'72',
   u'76',
 ])
