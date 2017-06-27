@@ -1674,7 +1674,7 @@ LICENCEINFOTYPE_LICENCE_CHOICES = _make_choices_from_list([
 
 LICENCEINFOTYPE_RESTRICTIONSOFUSE_CHOICES = _make_choices_from_list([
   u'nonCommercialUse', u'commercialUse', u'attribution', u'shareAlike',
-  u'noDerivatives',u'research', u'education', u'compensate', u'other',
+  u'noDerivatives', u'research', u'education', u'compensate', u'other',
 ])
 
 # pylint: disable-msg=C0103
