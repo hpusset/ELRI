@@ -1,17 +1,16 @@
 {% spaceless %}
 
-<div class="dataline">	
-	
+<div class="dataline">
 	{% if level == "sub" %}
 		<div class='dataline indented'>
 			<label>
-				<strong><i>{{ project.Project_name }} </i></strong>{% if project.Project_short_name %}({{ project.Project_short_name }}{% if project.Project_identifier %} - {{ project.Project_identifier }}{% endif %}){% endif %}
+				<strong><i>{{ project.Project_name }} </i></strong>{% if project.Project_short_name %}({{ project.Project_short_name }}{% if project.Project_id %} - {{ project.Project_id }}{% endif %}){% endif %}
 			</label>
 		</div>
 	{% else %}
 	<div class="subtitle">
 		<label>
-			<strong>{{ project.Project_name }} </strong>{% if project.Project_short_name %}({{ project.Project_short_name }}{% if project.Project_identifier %} - {{ project.Project_identifier }}{% endif %}){% endif %}
+			<strong>{{ project.Project_name }} </strong>{% if project.Project_short_name %}({{ project.Project_short_name }}{% if project.Project_id %} - {{ project.Project_id }}{% endif %}){% endif %}
 		</label>
 	</div>
 	
