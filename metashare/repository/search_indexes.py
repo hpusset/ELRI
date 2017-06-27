@@ -609,16 +609,6 @@ class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
                 .get_encodingLevel_display_list()
         return []
 
-    def prepare_languageDescriptionGrammaticalPhenomenaCoverageFilter(self, obj):
-        """
-        Collect the data to filter the resources on Resource Type children
-        """
-        corpus_media = obj.resourceComponentType.as_subclass()
-        if isinstance(corpus_media, languageDescriptionInfoType_model) \
-                and corpus_media.languageDescriptionEncodingInfo:
-            return corpus_media.languageDescriptionEncodingInfo \
-                .get_grammaticalPhenomenaCoverage_display_list()
-        return []
 
     def prepare_lexicalConceptualResourceLRTypeFilter(self, obj):
         """
