@@ -1,7 +1,9 @@
 {% spaceless %}
 
-	<label class='component'>{{ tool_service.Tool___Service_type }} {{ tool_service.Subtype_of_tool___service }}</label>
-	{% if tool_service.Language_dependent %}			
+	<label class='component'>{{ tool_service.Tool___Service_type }}
+        {% if tool_service.Function %}({{ tool_service.Function }}){% endif %}
+    </label>
+    {% if tool_service.Language_dependent %}
 		 <div class="dataline">
 			<label>
 				<strong><i>
