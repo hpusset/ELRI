@@ -43,7 +43,7 @@ TESTFIXTURE4_XML = '{}/repository/test_fixtures/META-SHARE/FBK16.xml'.format(ROO
 BROKENFIXTURE_XML = '{}/repository/fixtures/broken.xml'.format(ROOT_PATH)
 TESTFIXTURES_ZIP = '{}/repository/fixtures/tworesources.zip'.format(ROOT_PATH)
 BROKENFIXTURES_ZIP = '{}/repository/fixtures/onegood_onebroken.zip'.format(ROOT_PATH)
-LEX_CONC_RES_XML = '{}/repository/test_fixtures/published-lexConcept-Audio-EnglishGerman.xml'.format(ROOT_PATH)
+LEX_CONC_RES_XML = '{}/repository/test_fixtures/published-lexConcept-text-EnglishGerman.xml'.format(ROOT_PATH)
 DATA_UPLOAD_ZIP = '{}/repository/fixtures/data_upload_test.zip'.format(ROOT_PATH)
 DATA_UPLOAD_ZIP_2 = '{}/repository/fixtures/data_upload_test_2.zip'.format(ROOT_PATH)
 COMPLETION_XML = '{}/repository/fixtures/completiontestfixture.xml'.format(ROOT_PATH)
@@ -427,19 +427,6 @@ class EditorTest(TestCase):
                             msg_prefix='Recommended One-to-one field ' \
                                 '"usageInfo" should have been hidden.')
 
-    def test_one2one_usage_uses_related_widget(self):
-        """
-        Asserts that a recommended OneToOneField referring to models that
-        "contain" one2many fields is edited in a popup/overlay.
-        """
-        client = test_utils.get_client_with_user_logged_in(EditorTest.editor_login)
-        response = client.get('{}repository/resourceinfotype_model/{}/' \
-                              .format(ADMINROOT, EditorTest.testfixture.id))
-        self.assertContains(response, 'related-widget-wrapper-change-link" ' \
-                                'id="edit_id_usageInfo"',
-                msg_prefix='Recommended One-to-one field "usageInfo" not ' \
-                    'rendered using related widget, although it contains ' \
-                    'a One-to-Many field.')
 
     def test_one2one_sizepervalidation_is_hidden(self):
         client = test_utils.get_client_with_user_logged_in(EditorTest.editor_login)
