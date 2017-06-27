@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xmlns="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.meta-share.org/META-SHARE_XMLSchema http://www.meta-share.org/META-SHARE_XMLSchema/v3.1/META-SHARE-Resource.xsd">
+<resourceInfo xmlns="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ELRC-SHARE-Resource.xsd">
 	<identificationInfo>
 		<resourceName>Polish Sejm Corpus</resourceName>
 		<description>The Polish Sejm Corpus contains annotated utterances of Polish Sejm members from terms of office 1-6 (years 1991-2011). Corpus files contain information about text segmentation (paragraphs, sentences, tokens), disambiguated morphosyntactic description (lemma, POS tag, MSD tag), syntactic description (syntactic words and groups) and named entities (person names, locations, organization).
@@ -14,30 +14,17 @@ The data is a valuable source of linguistic information, being a large (100 M se
 	</identificationInfo>
 	<distributionInfo>
 		<availability>available</availability>
+		<PSI>true</PSI>
+		<allowsUsesBesidesDGT>true</allowsUsesBesidesDGT>
 		<licenceInfo>
-			<licence>BSD_3-clause</licence>
-			<version>4.0</version>
+			<licence>BSD-3-Clause</licence>
 			<restrictionsOfUse>attribution</restrictionsOfUse>
 		</licenceInfo>
-		<distributionAccessMedium>downloadable</distributionAccessMedium>
+		<distributionMedium>dataDownloadable</distributionMedium>
 		<downloadLocation>http://clip.ipipan.waw.pl/PSC</downloadLocation>
+		<personalDataIncluded>true</personalDataIncluded>
+		<sensitiveDataIncluded>true</sensitiveDataIncluded>
 		<fee>free of charge</fee>
-		<distributionRightsHolder>
-			<organizationInfo>
-				<organizationName>Institute of Computer Science, Polish Academy of Sciences</organizationName>
-				<organizationShortName>IPI PAN</organizationShortName>
-				<departmentName>Linguistic Engineering Group</departmentName>
-				<communicationInfo>
-					<email>ipi@ipipan.waw.pl</email>
-					<url>http://www.ipipan.eu</url>
-					<address>Jana Kazimierza 5</address>
-					<zipCode>01-237</zipCode>
-					<city>Warsaw</city>
-					<telephoneNumber>+48 22 38 00 500</telephoneNumber>
-					<faxNumber>+48 22 38 00 510</faxNumber>
-				</communicationInfo>
-			</organizationInfo>
-		</distributionRightsHolder>
 	</distributionInfo>
 	<contactPerson>
 		<surname>Ogrodniczuk</surname>
@@ -49,7 +36,6 @@ The data is a valuable source of linguistic information, being a large (100 M se
 			<zipCode>01-237</zipCode>
 			<city>Warsaw</city>
 			<telephoneNumber>+48 22 38 00 563</telephoneNumber>
-			<faxNumber>+48 22 38 00 510</faxNumber>
 		</communicationInfo>
 		<position>Assistant Professor</position>
 		<affiliation>
@@ -63,7 +49,6 @@ The data is a valuable source of linguistic information, being a large (100 M se
 				<zipCode>01-237</zipCode>
 				<city>Warsaw</city>
 				<telephoneNumber>+48 22 38 00 500</telephoneNumber>
-				<faxNumber>+48 22 38 00 510</faxNumber>
 			</communicationInfo>
 		</affiliation>
 	</contactPerson>
@@ -79,7 +64,6 @@ The data is a valuable source of linguistic information, being a large (100 M se
 				<zipCode>01-237</zipCode>
 				<city>Warsaw</city>
 				<telephoneNumber>+48 22 38 00 563</telephoneNumber>
-				<faxNumber>+48 22 38 00 510</faxNumber>
 			</communicationInfo>
 			<position>Assistant Professor</position>
 			<affiliation>
@@ -93,11 +77,9 @@ The data is a valuable source of linguistic information, being a large (100 M se
 					<zipCode>01-237</zipCode>
 					<city>Warsaw</city>
 					<telephoneNumber>+48 22 38 00 500</telephoneNumber>
-					<faxNumber>+48 22 38 00 510</faxNumber>
 				</communicationInfo>
 			</affiliation>
 		</metadataCreator>
-		<source>CESAR</source>
 		<metadataLanguageId>en</metadataLanguageId>
 		<metadataLastDateUpdated>2011-11-26</metadataLastDateUpdated>
 	</metadataInfo>
@@ -106,6 +88,7 @@ The data is a valuable source of linguistic information, being a large (100 M se
 		<lastDateUpdated>2011-11-12</lastDateUpdated>
 	</versionInfo>
 	<resourceCreationInfo>
+		<createdUsingELRCServices>true</createdUsingELRCServices>
 		<fundingProject>
 			<projectName>Central and South-East European Resources</projectName>
 			<projectShortName>CESAR</projectShortName>
@@ -138,166 +121,55 @@ The data is a valuable source of linguistic information, being a large (100 M se
 						<size>114000000</size>
 						<sizeUnit>tokens</sizeUnit>
 					</sizeInfo>
+					<textFormatInfo>
+						<dataFormat>text/plain</dataFormat>
+					</textFormatInfo>
 					<annotationInfo>
 						<annotationType>other</annotationType>
 						<annotationStandoff>false</annotationStandoff>
-						<segmentationLevel>paragraph</segmentationLevel>
-						<annotationFormat>text/xml</annotationFormat>
-						<conformanceToStandardsBestPractices>TEI</conformanceToStandardsBestPractices>
-						<annotationMode>automatic</annotationMode>
-						<annotationModeDetails>transcripts of one session day represented as a set of files: header.xml – header information about the individual session days, text_structure.xml – session structure and individual utterances, ann_segmentation.xml.gz – compressed sentence-level and token-level segmentation, ann_morphosyntax.xml.gz –  disambiguated morphosyntactic description (lemma, POS tag and MSD tag), ann_words.xml.gz – syntactic words, ann_groups.xml.gz – syntactic groups, ann_named.xml.gz – named entities</annotationModeDetails>
-						<annotationTool>
-							<targetResourceNameURI>scripts developed internally</targetResourceNameURI>
-						</annotationTool>
-						<annotationStartDate>2011-03-01</annotationStartDate>
-						<annotationEndDate>2011-11-26</annotationEndDate>
 					</annotationInfo>
 					<annotationInfo>
 						<annotationType>other</annotationType>
 						<annotationStandoff>false</annotationStandoff>
-						<segmentationLevel>paragraph</segmentationLevel>
-						<annotationFormat>text/xml</annotationFormat>
-						<conformanceToStandardsBestPractices>TEI</conformanceToStandardsBestPractices>
-						<annotationMode>automatic</annotationMode>
-						<annotationModeDetails>representation of the session structure (taken over from the transcripts) in &lt;div&gt; elements</annotationModeDetails>
-						<annotationTool>
-							<targetResourceNameURI>scripts developed internally</targetResourceNameURI>
-						</annotationTool>
-						<annotationStartDate>2011-03-01</annotationStartDate>
-						<annotationEndDate>2011-11-26</annotationEndDate>
 					</annotationInfo>
 					<annotationInfo>
 						<annotationType>segmentation</annotationType>
 						<annotationStandoff>false</annotationStandoff>
-						<segmentationLevel>utterance</segmentationLevel>
-						<annotationFormat>text/xml</annotationFormat>
-						<conformanceToStandardsBestPractices>TEI</conformanceToStandardsBestPractices>
-						<annotationMode>automatic</annotationMode>
-						<annotationModeDetails>segmentation into utterances taken over from the transcripts; each utterance is marked with the speaker identifier (resolved in the transcript header)</annotationModeDetails>
-						<annotationTool>
-							<targetResourceNameURI>scripts developed internally</targetResourceNameURI>
-						</annotationTool>
-						<annotationStartDate>2011-03-01</annotationStartDate>
-						<annotationEndDate>2011-11-26</annotationEndDate>
 					</annotationInfo>
 					<annotationInfo>
 						<annotationType>segmentation</annotationType>
 						<annotationStandoff>true</annotationStandoff>
-						<segmentationLevel>sentence</segmentationLevel>
-						<annotationFormat>text/xml</annotationFormat>
-						<conformanceToStandardsBestPractices>TEI</conformanceToStandardsBestPractices>
-						<annotationMode>automatic</annotationMode>
-						<annotationModeDetails>individual utterances split into sentences</annotationModeDetails>
-						<annotationTool>
-							<targetResourceNameURI>Pantera</targetResourceNameURI>
-						</annotationTool>
-						<annotationStartDate>2011-03-01</annotationStartDate>
-						<annotationEndDate>2011-11-26</annotationEndDate>
 					</annotationInfo>
 					<annotationInfo>
 						<annotationType>segmentation</annotationType>
 						<annotationStandoff>true</annotationStandoff>
-						<segmentationLevel>word</segmentationLevel>
-						<annotationFormat>text/xml</annotationFormat>
-						<tagset>NKJP tagset</tagset>
-						<conformanceToStandardsBestPractices>TEI</conformanceToStandardsBestPractices>
-						<annotationMode>automatic</annotationMode>
-						<annotationModeDetails>individual sentences split into tokens (word-like segments – see documentation of Morfeusz SGJP for details)</annotationModeDetails>
-						<annotationTool>
-							<targetResourceNameURI>Morfeusz SGJP</targetResourceNameURI>
-						</annotationTool>
-						<annotationStartDate>2011-03-01</annotationStartDate>
-						<annotationEndDate>2011-11-26</annotationEndDate>
 					</annotationInfo>
 					<annotationInfo>
 						<annotationType>lemmatization</annotationType>
 						<annotationStandoff>true</annotationStandoff>
-						<segmentationLevel>word</segmentationLevel>
-						<annotationFormat>text/xml</annotationFormat>
-						<conformanceToStandardsBestPractices>TEI</conformanceToStandardsBestPractices>
-						<annotationMode>automatic</annotationMode>
-						<annotationModeDetails>lemma variants (all available interpretations) output by Morfeusz, then disambiguated by Pantera tagger</annotationModeDetails>
-						<annotationTool>
-							<targetResourceNameURI>Morfeusz SGJP</targetResourceNameURI>
-						</annotationTool>
-						<annotationStartDate>2011-03-01</annotationStartDate>
-						<annotationEndDate>2011-11-26</annotationEndDate>
 					</annotationInfo>
 					<annotationInfo>
 						<annotationType>morphosyntacticAnnotation-bPosTagging</annotationType>
 						<annotationStandoff>true</annotationStandoff>
-						<segmentationLevel>word</segmentationLevel>
-						<annotationFormat>text/xml</annotationFormat>
-						<tagset>NKJP tagset</tagset>
-						<conformanceToStandardsBestPractices>TEI</conformanceToStandardsBestPractices>
-						<annotationMode>automatic</annotationMode>
-						<annotationModeDetails>MSD tag variants (all available morphosyntactic interpretations) output by Morfeusz, then disambiguated by Pantera tagger</annotationModeDetails>
-						<annotationTool>
-							<targetResourceNameURI>Morfeusz SGJP</targetResourceNameURI>
-						</annotationTool>
-						<annotationStartDate>2011-03-01</annotationStartDate>
-						<annotationEndDate>2011-11-26</annotationEndDate>
 					</annotationInfo>
 					<annotationInfo>
 						<annotationType>morphosyntacticAnnotation-posTagging</annotationType>
 						<annotationStandoff>true</annotationStandoff>
-						<segmentationLevel>word</segmentationLevel>
-						<annotationFormat>text/xml</annotationFormat>
-						<tagset>NKJP tagset</tagset>
-						<conformanceToStandardsBestPractices>TEI</conformanceToStandardsBestPractices>
-						<annotationMode>automatic</annotationMode>
-						<annotationModeDetails>POS tag (CTAG) variants (all available interpretations) output by Morfeusz, then disambiguated by Pantera tagger</annotationModeDetails>
-						<annotationTool>
-							<targetResourceNameURI>Pantera</targetResourceNameURI>
-						</annotationTool>
-						<annotationStartDate>2011-03-01</annotationStartDate>
-						<annotationEndDate>2011-11-26</annotationEndDate>
 					</annotationInfo>
 					<annotationInfo>
 						<annotationType>structuralAnnotation</annotationType>
 						<annotationStandoff>true</annotationStandoff>
-						<segmentationLevel>word</segmentationLevel>
-						<annotationFormat>text/xml</annotationFormat>
-						<conformanceToStandardsBestPractices>TEI</conformanceToStandardsBestPractices>
-						<annotationMode>automatic</annotationMode>
-						<annotationModeDetails>syntactic words (word-like compounds) detected by Spejd with NKJP shallow parsing grammar; see NKJP documentation for details</annotationModeDetails>
-						<annotationTool>
-							<targetResourceNameURI>Spejd</targetResourceNameURI>
-						</annotationTool>
-						<annotationStartDate>2011-03-01</annotationStartDate>
-						<annotationEndDate>2011-11-26</annotationEndDate>
 					</annotationInfo>
 					<annotationInfo>
-						<annotationType>semanticAnnotation-textualEntailment</annotationType>
+						<annotationType>semanticAnnotation-wordSenses</annotationType>
 						<annotationStandoff>true</annotationStandoff>
-						<segmentationLevel>wordGroup</segmentationLevel>
-						<annotationFormat>text/xml</annotationFormat>
-						<conformanceToStandardsBestPractices>TEI</conformanceToStandardsBestPractices>
-						<annotationMode>automatic</annotationMode>
-						<annotationModeDetails>syntactic groups (phrase-like constructs) detected by Spejd with NKJP shallow parsing grammar; see NKJP documentation for details</annotationModeDetails>
-						<annotationTool>
-							<targetResourceNameURI>Spejd</targetResourceNameURI>
-						</annotationTool>
-						<annotationStartDate>2011-03-01</annotationStartDate>
-						<annotationEndDate>2011-11-26</annotationEndDate>
 					</annotationInfo>
 					<annotationInfo>
 						<annotationType>semanticAnnotation-namedEntities</annotationType>
 						<annotationStandoff>true</annotationStandoff>
-						<segmentationLevel>wordGroup</segmentationLevel>
-						<annotationFormat>text/xml</annotationFormat>
-						<conformanceToStandardsBestPractices>TEI</conformanceToStandardsBestPractices>
-						<annotationMode>automatic</annotationMode>
-						<annotationModeDetails>named entities (person names, organizations, locations compatible with NKJP hierarchy) detected by Nerf</annotationModeDetails>
-						<annotationTool>
-							<targetResourceNameURI>Nerf</targetResourceNameURI>
-						</annotationTool>
-						<annotationStartDate>2011-03-01</annotationStartDate>
-						<annotationEndDate>2011-11-26</annotationEndDate>
 					</annotationInfo>
 					<textClassificationInfo>
-						<textType>quasi-spoken</textType>
-						<register>formal</register>
+						<textType>subtitles</textType>
 					</textClassificationInfo>
 					<creationInfo>
 						<originalSource>

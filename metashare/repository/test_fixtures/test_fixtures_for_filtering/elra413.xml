@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xmlns="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.meta-share.org/META-SHARE_XMLSchema http://www.meta-share.org/META-SHARE_XMLSchema/v3.1/META-SHARE-Resource.xsd">
+<resourceInfo xmlns="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ELRC-SHARE-Resource.xsd">
 	<identificationInfo>
 		<resourceName lang="en">VERBA Polytechnic and Plurilingual Terminological Database - G-NF Cables and Conductors</resourceName>
 		<resourceName lang="fr">Base de données terminologique polytechnique et plurilingue VERBA - G-NF Cables et Conducteurs</resourceName>
@@ -12,28 +12,19 @@
 	</identificationInfo>
 	<distributionInfo>
 		<availability>available</availability>
+		<PSI>true</PSI>
+		<allowsUsesBesidesDGT>true</allowsUsesBesidesDGT>
 		<licenceInfo>
-			<licence>ELRA_VAR</licence>
-			<version>4.0</version>
+			<licence>ODbL-1.0</licence>
 			<restrictionsOfUse>commercialUse</restrictionsOfUse>
 		</licenceInfo>
 		<licenceInfo>
-			<licence>ELRA_VAR</licence>
-			<version>4.0</version>
+			<licence>CC-BY-NC-SA-4.0</licence>
 			<restrictionsOfUse>commercialUse</restrictionsOfUse>
 		</licenceInfo>
+		<personalDataIncluded>true</personalDataIncluded>
+		<sensitiveDataIncluded>true</sensitiveDataIncluded>
 		<fee>0.70</fee>
-		<userNature>commercial</userNature>
-		<userNature>commercial</userNature>
-		<membershipInfo>
-			<member>true</member>
-			<membershipInstitution>ELRA</membershipInstitution>
-		</membershipInfo>
-		<membershipInfo>
-			<member>false</member>
-			<membershipInstitution>ELRA</membershipInstitution>
-		</membershipInfo>
-		<availabilityStartDate>1997-04-11</availabilityStartDate>
 	</distributionInfo>
 	<contactPerson>
 		<surname lang="en-us">Valérie</surname>
@@ -47,7 +38,6 @@
 			<country>France</country>
 			<countryId>FR</countryId>
 			<telephoneNumber>+1 43 13 33 33</telephoneNumber>
-			<faxNumber>+1 43 14 33 30</faxNumber>
 		</communicationInfo>
 	</contactPerson>
 	<metadataInfo>
@@ -64,7 +54,6 @@
 				<country>France</country>
 				<countryId>FR</countryId>
 				<telephoneNumber>+1 43 13 33 33</telephoneNumber>
-				<faxNumber>+1 43 14 33 30</faxNumber>
 			</communicationInfo>
 		</metadataCreator>
 	</metadataInfo>

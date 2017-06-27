@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xmlns="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.meta-share.org/META-SHARE_XMLSchema http://www.meta-share.org/META-SHARE_XMLSchema/v3.1/META-SHARE-Resource.xsd">
+<resourceInfo xmlns="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ELRC-SHARE-Resource.xsd">
 	<identificationInfo>
 		<resourceName lang="en">ngram3</resourceName>
 		<description lang="en">dd</description>
 		<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
 	</identificationInfo>
 	<distributionInfo>
-		<availability>available</availability><licenceInfo>
-			<licence>CLARIN_ACA</licence>
+		<availability>available</availability>
+		<PSI>true</PSI>
+		<allowsUsesBesidesDGT>true</allowsUsesBesidesDGT>
+		<licenceInfo>
+			<licence>CC-BY-4.0</licence>
 		</licenceInfo>
+		<personalDataIncluded>true</personalDataIncluded>
+		<sensitiveDataIncluded>true</sensitiveDataIncluded>
 	</distributionInfo>
 	<contactPerson>
 		<surname lang="en">Contact Test</surname>
@@ -24,24 +29,23 @@
 		<corpusInfo>
 			<resourceType>corpus</resourceType>
 			<corpusMediaType>
-				<corpusTextNgramInfo>
-					<mediaType>textNgram</mediaType>
-					<ngramInfo>
-						<baseItem>word</baseItem>
-						<order>1</order>
-					</ngramInfo>
+				<corpusTextInfo>
+					<mediaType>text</mediaType>
 					<lingualityInfo>
 						<lingualityType>monolingual</lingualityType>
 					</lingualityInfo>
 					<languageInfo>
-						<languageId>eu</languageId>
-						<languageName>Basque</languageName>
+						<languageId>bg</languageId>
+						<languageName>Bulgarian</languageName>
 					</languageInfo>
 					<sizeInfo>
-						<size>9</size>
-						<sizeUnit>items</sizeUnit>
+						<size>456</size>
+						<sizeUnit>terms</sizeUnit>
 					</sizeInfo>
-				</corpusTextNgramInfo>
+					<textFormatInfo>
+						<dataFormat>text/plain</dataFormat>
+					</textFormatInfo>
+				</corpusTextInfo>
 			</corpusMediaType>
 		</corpusInfo>
 	</resourceComponentType>

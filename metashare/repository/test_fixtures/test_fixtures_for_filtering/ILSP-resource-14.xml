@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xmlns="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.meta-share.org/META-SHARE_XMLSchema http://www.meta-share.org/META-SHARE_XMLSchema/v3.1/META-SHARE-Resource.xsd">
+<resourceInfo xmlns="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ELRC-SHARE-Resource.xsd">
 	<identificationInfo>
 		<resourceName lang="el">Ελληνικός Θησαυρός Ελληνικής Γλώσσας</resourceName>
 		<resourceName lang="en">Hellenic National Corpus</resourceName>
@@ -13,60 +13,16 @@
 	</identificationInfo>
 	<distributionInfo>
 		<availability>available</availability>
+		<PSI>true</PSI>
+		<allowsUsesBesidesDGT>true</allowsUsesBesidesDGT>
 		<licenceInfo>
-			<licence>proprietary</licence>
-			<version>4.0</version>
+			<licence>IODL-1.0</licence>
 			<restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
 		</licenceInfo>
-		<distributionAccessMedium>accessibleThroughInterface</distributionAccessMedium>
+		<distributionMedium>dataDownloadable</distributionMedium>
 		<executionLocation>http://hnc.ilsp.gr/</executionLocation>
-		<licensor>
-			<personInfo>
-				<surname lang="und">Ioannidis</surname>
-				<givenName lang="und">Yannis</givenName>
-				<sex>male</sex>
-				<communicationInfo>
-					<email>yannis@athena-innovation.gr</email>
-					<url>http://www.madgik.di.uoa.gr/content/yannis</url>
-					<telephoneNumber>+302106875301</telephoneNumber>
-					<faxNumber>+302106854270</faxNumber>
-				</communicationInfo>
-				<position>President / General Director</position>
-				<affiliation>
-					<organizationName lang="en">Athena - Research and Innovation Center in Information, Communication and Knowledge Technologies</organizationName>
-					<organizationShortName lang="en">Athena R.C.</organizationShortName>
-					<communicationInfo>
-						<email>www@ilsp.athena-innovation.gr</email>
-						<url>http://www.athena-innovation.gr/</url>
-						<address>Artemidos 6 &amp; Epidavrou</address>
-						<zipCode>GR-15125</zipCode>
-						<city>Maroussi</city>
-						<country>Greece</country>
-						<countryId>GR</countryId>
-						<telephoneNumber>+302106875300</telephoneNumber>
-						<faxNumber>+302106854270</faxNumber>
-					</communicationInfo>
-				</affiliation>
-			</personInfo>
-		</licensor>
-		<distributionRightsHolder>
-			<organizationInfo>
-				<organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
-				<organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
-				<communicationInfo>
-					<email>www@ilsp.athena-innovation.gr</email>
-					<url>http://www.ilsp.gr/</url>
-					<address>Artemidos 6 &amp; Epidavrou</address>
-					<zipCode>GR-15125</zipCode>
-					<city>Maroussi</city>
-					<country>Greece</country>
-					<countryId>GR</countryId>
-					<telephoneNumber>+302106875300</telephoneNumber>
-					<faxNumber>+302106854270</faxNumber>
-					<faxNumber>+302106856794</faxNumber>
-				</communicationInfo>
-			</organizationInfo>
-		</distributionRightsHolder>
+		<personalDataIncluded>true</personalDataIncluded>
+		<sensitiveDataIncluded>true</sensitiveDataIncluded>
 	</distributionInfo>
 	<contactPerson>
 		<surname lang="en">Gavrilidou</surname>
@@ -81,7 +37,6 @@
 			<country>Greece</country>
 			<countryId>GR</countryId>
 			<telephoneNumber>+302106875441</telephoneNumber>
-			<faxNumber>+302106854270</faxNumber>
 		</communicationInfo>
 		<position>Senior Research Fellow</position>
 		<affiliation>
@@ -96,8 +51,6 @@
 				<country>Greece</country>
 				<countryId>GR</countryId>
 				<telephoneNumber>+302106875300</telephoneNumber>
-				<faxNumber>+302106854270</faxNumber>
-				<faxNumber>+302106856794</faxNumber>
 			</communicationInfo>
 		</affiliation>
 	</contactPerson>
@@ -109,7 +62,6 @@
 			<email>nglaros@ilsp.athena-innovation.gr</email>
 			<url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=21&amp;Itemid=156</url>
 			<telephoneNumber>+302106875451</telephoneNumber>
-			<faxNumber>+302106854270</faxNumber>
 		</communicationInfo>
 		<position>Senior Research Fellow</position>
 		<affiliation>
@@ -124,8 +76,6 @@
 				<country>Greece</country>
 				<countryId>GR</countryId>
 				<telephoneNumber>+302106875300</telephoneNumber>
-				<faxNumber>+302106854270</faxNumber>
-				<faxNumber>+302106856794</faxNumber>
 			</communicationInfo>
 		</affiliation>
 	</contactPerson>
@@ -139,7 +89,6 @@
 				<email>penny@ilsp.athena-innovation.gr</email>
 				<url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=37&amp;Itemid=156</url>
 				<telephoneNumber>+302106875445</telephoneNumber>
-				<faxNumber>+302106854270</faxNumber>
 			</communicationInfo>
 			<position>Senior Research Fellow</position>
 			<affiliation>
@@ -154,12 +103,9 @@
 					<country>Greece</country>
 					<countryId>GR</countryId>
 					<telephoneNumber>+302106875300</telephoneNumber>
-					<faxNumber>+302106854270</faxNumber>
-					<faxNumber>+302106856794</faxNumber>
 				</communicationInfo>
 			</affiliation>
 		</metadataCreator>
-		<source>META-SHARE/ILSP</source>
 		<metadataLanguageId>en</metadataLanguageId>
 		<metadataLastDateUpdated>2012-05-14</metadataLastDateUpdated>
 	</metadataInfo>
@@ -168,82 +114,7 @@
 	</versionInfo>
 	<validationInfo>
 		<validated>true</validated>
-		<validationType>content</validationType>
-		<validationMode>manual</validationMode>
-		<validationModeDetails>The classification of the documents has been manually validated</validationModeDetails>
-		<validationExtent>full</validationExtent>
 	</validationInfo>
-	<usageInfo>
-		<foreseenUseInfo>
-			<foreseenUse>nlpApplications</foreseenUse>
-			<useNLPSpecific>contradictionDetection</useNLPSpecific>
-		</foreseenUseInfo>
-		<foreseenUseInfo>
-			<foreseenUse>humanUse</foreseenUse>
-		</foreseenUseInfo>
-		<actualUseInfo>
-			<actualUse>nlpApplications</actualUse>
-		</actualUseInfo>
-		<actualUseInfo>
-			<actualUse>humanUse</actualUse>
-			<actualUseDetails>Used as educational material for the teaching of Greek language</actualUseDetails>
-		</actualUseInfo>
-	</usageInfo>
-	<resourceDocumentationInfo>
-		<documentation>
-			<documentInfo>
-				<documentType>inProceedings</documentType>
-				<title lang="en">Design and implementation of the online ILSP Greek Corpus</title>
-				<author>Nick Hatzigeorgiou and Maria Gavrilidou and Stelios Piperidis and George Carayannis et al</author>
-				<year>2000</year>
-				<bookTitle>Proceedings of the 2nd International Conference on Language Resources and Evaluation (LREC-2000)</bookTitle>
-				<conference>2nd International Conference on Language Resources and Evaluation (LREC-2000)</conference>
-				<url>http://www.lrec-conf.org/proceedings/lrec2000/pdf/336.pdf</url>
-			</documentInfo>
-		</documentation>
-		<documentation>
-			<documentInfo>
-				<documentType>article</documentType>
-				<title lang="en">The Hellenic National Corpus on-line</title>
-				<author>Maria Gavrilidou</author>
-				<year>2002</year>
-				<publisher>Société pour le progrès des études philologiques et historiques</publisher>
-				<journal>Belge de Philologie et d' Histoire</journal>
-				<volume>80</volume>
-				<pages>1003-1015</pages>
-			</documentInfo>
-		</documentation>
-	</resourceDocumentationInfo>
-	<resourceCreationInfo>
-		<resourceCreator>
-			<organizationInfo>
-				<organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
-				<organizationShortName lang="en">ILSP / Athena R.C.</organizationShortName>
-				<communicationInfo>
-					<email>www@ilsp.athena-innovation.gr</email>
-					<url>http://www.ilsp.gr/</url>
-					<address>Artemidos 6 &amp; Epidavrou</address>
-					<zipCode>GR-15125</zipCode>
-					<city>Maroussi</city>
-					<country>Greece</country>
-					<countryId>GR</countryId>
-					<telephoneNumber>+302106875300</telephoneNumber>
-					<faxNumber>+302106854270</faxNumber>
-					<faxNumber>+302106856794</faxNumber>
-				</communicationInfo>
-			</organizationInfo>
-		</resourceCreator>
-		<fundingProject>
-			<projectName lang="en">DIALOGOS</projectName>
-			<url>http://www.ilsp.gr/en/infoprojects/meta?view=project&amp;task=show&amp;id=50</url>
-			<fundingType>nationalFunds</fundingType>
-			<funder>EPET II</funder>
-			<fundingCountry>Greece</fundingCountry>
-			<projectStartDate>1995-01-01</projectStartDate>
-			<projectEndDate>1998-06-30</projectEndDate>
-		</fundingProject>
-		<creationStartDate>1999-01-01</creationStartDate>
-	</resourceCreationInfo>
 	<resourceComponentType>
 		<corpusInfo>
 			<resourceType>corpus</resourceType>
@@ -257,19 +128,15 @@
 						<languageId>el</languageId>
 						<languageName>Modern Greek (1453-)</languageName>
 					</languageInfo>
-					<modalityInfo>
-						<modalityType>writtenLanguage</modalityType>
-					</modalityInfo>
 					<sizeInfo>
 						<size>47000000</size>
 						<sizeUnit>words</sizeUnit>
 					</sizeInfo>
 					<textFormatInfo>
-						<mimeType>text/plain</mimeType>
+					 <dataFormat>text/plain</dataFormat>
 					</textFormatInfo>
 					<annotationInfo>
 						<annotationType>segmentation</annotationType>
-						<segmentationLevel>sentence</segmentationLevel>
 						<annotationMode>automatic</annotationMode>
 					</annotationInfo>
 					<annotationInfo>
@@ -279,75 +146,17 @@
 					</annotationInfo>
 					<annotationInfo>
 						<annotationType>morphosyntacticAnnotation-posTagging</annotationType>
-						<tagset>ILSP-PAROLE</tagset>
 						<annotationMode>automatic</annotationMode>
 					</annotationInfo>
 					<domainInfo>
-						<domain>leisure</domain>
-						<conformanceToClassificationScheme>PAROLE_topicClassification</conformanceToClassificationScheme>
+						<domain>ENVIRONMENT</domain>
+						<domainId>04</domainId>
+						<conformanceToClassificationScheme>EUROVOC</conformanceToClassificationScheme>
 					</domainInfo>
-					<domainInfo>
-						<domain>geography</domain>
-						<conformanceToClassificationScheme>PAROLE_topicClassification</conformanceToClassificationScheme>
-					</domainInfo>
-					<domainInfo>
-						<domain>science</domain>
-						<conformanceToClassificationScheme>PAROLE_topicClassification</conformanceToClassificationScheme>
-					</domainInfo>
-					<domainInfo>
-						<domain>business</domain>
-						<conformanceToClassificationScheme>PAROLE_topicClassification</conformanceToClassificationScheme>
-					</domainInfo>
-					<domainInfo>
-						<domain>history</domain>
-						<conformanceToClassificationScheme>PAROLE_topicClassification</conformanceToClassificationScheme>
-					</domainInfo>
-					<domainInfo>
-						<domain>society</domain>
-						<conformanceToClassificationScheme>PAROLE_topicClassification</conformanceToClassificationScheme>
-					</domainInfo>
-					<domainInfo>
-						<domain>humanities</domain>
-						<conformanceToClassificationScheme>PAROLE_topicClassification</conformanceToClassificationScheme>
-					</domainInfo>
-					<domainInfo>
-						<domain>health</domain>
-						<conformanceToClassificationScheme>PAROLE_topicClassification</conformanceToClassificationScheme>
-					</domainInfo>
-					<textClassificationInfo>
-						<textGenre>non-fiction</textGenre>
-					</textClassificationInfo>
-					<textClassificationInfo>
-						<textGenre>feature</textGenre>
-						<conformanceToClassificationScheme>PAROLE_genreClassification</conformanceToClassificationScheme>
-					</textClassificationInfo>
-					<textClassificationInfo>
-						<textGenre>advertising</textGenre>
-						<conformanceToClassificationScheme>PAROLE_genreClassification</conformanceToClassificationScheme>
-					</textClassificationInfo>
-					<textClassificationInfo>
-						<textGenre>official</textGenre>
-						<conformanceToClassificationScheme>PAROLE_genreClassification</conformanceToClassificationScheme>
-					</textClassificationInfo>
-					<textClassificationInfo>
-						<textGenre>private</textGenre>
-						<conformanceToClassificationScheme>PAROLE_genreClassification</conformanceToClassificationScheme>
-					</textClassificationInfo>
-					<textClassificationInfo>
-						<textGenre>fiction</textGenre>
-						<conformanceToClassificationScheme>PAROLE_genreClassification</conformanceToClassificationScheme>
-					</textClassificationInfo>
-					<textClassificationInfo>
-						<textGenre>information</textGenre>
-						<conformanceToClassificationScheme>PAROLE_genreClassification</conformanceToClassificationScheme>
-					</textClassificationInfo>
 					<textClassificationInfo>
 						<textGenre>discussion</textGenre>
-						<conformanceToClassificationScheme>PAROLE_genreClassification</conformanceToClassificationScheme>
+						<conformanceToClassificationScheme>EUROVOC</conformanceToClassificationScheme>
 					</textClassificationInfo>
-					<timeCoverageInfo>
-						<timeCoverage>after 1990</timeCoverage>
-					</timeCoverageInfo>
 					<creationInfo>
 						<creationMode>mixed</creationMode>
 						<creationModeDetails>Various methods have been used depending on the source: scanning &amp; OCRing of various texts, conversion from typesetting material, web crawling etc.</creationModeDetails>

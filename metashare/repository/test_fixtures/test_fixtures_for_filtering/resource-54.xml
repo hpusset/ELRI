@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xmlns="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.meta-share.org/META-SHARE_XMLSchema http://www.meta-share.org/META-SHARE_XMLSchema/v3.1/META-SHARE-Resource.xsd">
+<resourceInfo xmlns="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ELRC-SHARE-Resource.xsd">
 	<identificationInfo>
 		<resourceName lang="en">testGrammar2</resourceName>
 		<description lang="en">testGrammar2</description>
@@ -7,11 +7,13 @@
 	</identificationInfo>
 	<distributionInfo>
 		<availability>available</availability>
+		<PSI>true</PSI>
+		<allowsUsesBesidesDGT>true</allowsUsesBesidesDGT>
 		<licenceInfo>
-			<licence>CC-BY-NC-ND</licence>
-			<version>4.0</version>
+			<licence>CC-BY-4.0</licence>
 		</licenceInfo>
-		<distributionAccessMedium>CD-ROM</distributionAccessMedium>
+		<personalDataIncluded>true</personalDataIncluded>
+		<sensitiveDataIncluded>true</sensitiveDataIncluded>
 	</distributionInfo>
 	<contactPerson>
 		<surname lang="en">Contact Test</surname>
@@ -27,7 +29,6 @@
 			<email>xaris@ilsp.athena-innovation.gr</email>
 			<url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=49&amp;Itemid=156</url>
 			<telephoneNumber>+302106875426</telephoneNumber>
-			<faxNumber>+302106854270</faxNumber>
 		</communicationInfo>
 		<position>Principal Researcher</position>
 		<affiliation>
@@ -42,8 +43,6 @@
 				<country>Greece</country>
 				<countryId>GR</countryId>
 				<telephoneNumber>+302106875300</telephoneNumber>
-				<faxNumber>+302106854270</faxNumber>
-				<faxNumber>+302106856794</faxNumber>
 			</communicationInfo>
 		</affiliation>
 	</contactPerson>
@@ -57,7 +56,6 @@
 				<email>xaris@ilsp.athena-innovation.gr</email>
 				<url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=49&amp;Itemid=156</url>
 				<telephoneNumber>+302106875426</telephoneNumber>
-				<faxNumber>+302106854270</faxNumber>
 			</communicationInfo>
 			<position>Principal Researcher</position>
 			<affiliation>
@@ -72,8 +70,6 @@
 					<country>Greece</country>
 					<countryId>GR</countryId>
 					<telephoneNumber>+302106875300</telephoneNumber>
-					<faxNumber>+302106854270</faxNumber>
-					<faxNumber>+302106856794</faxNumber>
 				</communicationInfo>
 			</affiliation>
 		</metadataCreator>
@@ -91,9 +87,6 @@
 				<conformanceToStandardsBestPractices>EAGLES</conformanceToStandardsBestPractices>
 				<task>anaphoraResolution</task>
 				<task>definitionsParsing</task>
-				<grammaticalPhenomenaCoverage>anaphora</grammaticalPhenomenaCoverage>
-				<grammaticalPhenomenaCoverage>clauseStructure</grammaticalPhenomenaCoverage>
-				<grammaticalPhenomenaCoverage>coordination</grammaticalPhenomenaCoverage>
 			</languageDescriptionEncodingInfo>
 			<languageDescriptionMediaType>
 				<languageDescriptionTextInfo>
@@ -106,20 +99,6 @@
 						<languageName>English</languageName>
 					</languageInfo>
 				</languageDescriptionTextInfo>
-				<languageDescriptionImageInfo>
-					<mediaType>image</mediaType>
-					<linkToOtherMediaInfo>
-						<otherMedia>text</otherMedia>
-					</linkToOtherMediaInfo>
-					<modalityInfo>
-						<modalityType>combinationOfModalities</modalityType>
-					</modalityInfo>
-					<imageContentInfo>
-						<typeOfImageContent>face</typeOfImageContent>
-						<typeOfImageContent>cartoons</typeOfImageContent>
-						<typeOfImageContent>nature</typeOfImageContent>
-					</imageContentInfo>
-				</languageDescriptionImageInfo>
 			</languageDescriptionMediaType>
 		</languageDescriptionInfo>
 	</resourceComponentType>

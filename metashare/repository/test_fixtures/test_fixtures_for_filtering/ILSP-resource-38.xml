@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xmlns="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.meta-share.org/META-SHARE_XMLSchema http://www.meta-share.org/META-SHARE_XMLSchema/v3.1/META-SHARE-Resource.xsd">
+<resourceInfo xmlns="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ELRC-SHARE-Resource.xsd">
 	<identificationInfo>
 		<resourceName lang="und">COSMOROE Caricature Corpus</resourceName>
 		<description lang="und">Corpus of 50 caricatures by Yannis Ioannou covering the domains of politics and environment. They pertain to various types of visual-linguistic information. They have been annotated in different annotation levels in order to be used for the detection of the semantic relations between image and language</description>
@@ -9,11 +9,13 @@
 	</identificationInfo>
 	<distributionInfo>
 		<availability>available</availability>
+		<PSI>true</PSI>
+		<allowsUsesBesidesDGT>true</allowsUsesBesidesDGT>
 		<licenceInfo>
-			<licence>proprietary</licence>
-			<version>4.0</version>
-			<restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+			<licence>CC-BY-4.0</licence>
 		</licenceInfo>
+		<personalDataIncluded>true</personalDataIncluded>
+		<sensitiveDataIncluded>true</sensitiveDataIncluded>
 	</distributionInfo>
 	<contactPerson>
 		<surname lang="und">Pastra</surname>
@@ -34,23 +36,12 @@
 				<country>Greece</country>
 				<countryId>GR</countryId>
 				<telephoneNumber>+302106875300</telephoneNumber>
-				<faxNumber>+302106854270</faxNumber>
-				<faxNumber>+302106856794</faxNumber>
 			</communicationInfo>
 		</affiliation>
 	</contactPerson>
 	<metadataInfo>
 		<metadataCreationDate>2012-02-02</metadataCreationDate>
-		<source>META</source>
 	</metadataInfo>
-	<usageInfo>
-		<foreseenUseInfo>
-			<foreseenUse>nlpApplications</foreseenUse>
-		</foreseenUseInfo>
-		<actualUseInfo>
-			<actualUse>nlpApplications</actualUse>
-		</actualUseInfo>
-	</usageInfo>
 	<resourceComponentType>
 		<corpusInfo>
 			<resourceType>corpus</resourceType>
@@ -61,46 +52,26 @@
 						<lingualityType>monolingual</lingualityType>
 					</lingualityInfo>
 					<languageInfo>
-						<languageId>ell</languageId>
+						<languageId>el</languageId>
 						<languageName>Modern Greek (1453-)</languageName>
 					</languageInfo>
 					<sizeInfo>
 						<size>50</size>
-						<sizeUnit>images</sizeUnit>
+						<sizeUnit>items</sizeUnit>
 					</sizeInfo>
+					<textFormatInfo>
+						<dataFormat>text/plain</dataFormat>
+					</textFormatInfo>
 					<annotationInfo>
-						<annotationType>speechAnnotation</annotationType>
+						<annotationType>semanticAnnotation</annotationType>
 					</annotationInfo>
 					<annotationInfo>
-						<annotationType>modalityAnnotation-bodyMovements</annotationType>
+						<annotationType>semanticAnnotation-wordSenses</annotationType>
 					</annotationInfo>
 					<annotationInfo>
-						<annotationType>modalityAnnotation-handArmGestures</annotationType>
+						<annotationType>semanticAnnotation-emotions</annotationType>
 					</annotationInfo>
 				</corpusTextInfo>
-				<corpusImageInfo>
-					<mediaType>image</mediaType>
-					<lingualityInfo>
-						<lingualityType>monolingual</lingualityType>
-					</lingualityInfo>
-					<languageInfo>
-						<languageId>ell</languageId>
-						<languageName>Modern Greek (1453-)</languageName>
-					</languageInfo>
-					<sizeInfo>
-						<size>50</size>
-						<sizeUnit>images</sizeUnit>
-					</sizeInfo>
-					<annotationInfo>
-						<annotationType>speechAnnotation</annotationType>
-					</annotationInfo>
-					<annotationInfo>
-						<annotationType>modalityAnnotation-bodyMovements</annotationType>
-					</annotationInfo>
-					<annotationInfo>
-						<annotationType>modalityAnnotation-handArmGestures</annotationType>
-					</annotationInfo>
-				</corpusImageInfo>
 			</corpusMediaType>
 		</corpusInfo>
 	</resourceComponentType>

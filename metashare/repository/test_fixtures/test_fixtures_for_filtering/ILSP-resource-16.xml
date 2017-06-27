@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xmlns="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.meta-share.org/META-SHARE_XMLSchema http://www.meta-share.org/META-SHARE_XMLSchema/v3.1/META-SHARE-Resource.xsd">
+<resourceInfo xmlns="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ELRC-SHARE-Resource.xsd">
 	<identificationInfo>
 		<resourceName lang="en">Database of Bulgarian sentences</resourceName>
 		<description lang="en">A set of Bulgarian sentences from news web portals, grammatically checked and corrected.</description>
@@ -7,11 +7,14 @@
 	</identificationInfo>
 	<distributionInfo>
 		<availability>available</availability>
+		<PSI>true</PSI>
+		<allowsUsesBesidesDGT>true</allowsUsesBesidesDGT>
 		<licenceInfo>
-			<licence>proprietary</licence>
-			<version>4.0</version>
+			<licence>underReview</licence>
 		</licenceInfo>
 		<downloadLocation>http://lrt.ilsp.gr:8081/data/BulgarianCorpusSentencesDatabase.rar</downloadLocation>
+		<personalDataIncluded>true</personalDataIncluded>
+		<sensitiveDataIncluded>true</sensitiveDataIncluded>
 	</distributionInfo>
 	<contactPerson>
 		<surname lang="en">Raptis</surname>
@@ -21,7 +24,6 @@
 			<email>spy@ilsp.athena-innovation.gr</email>
 			<url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=53&amp;Itemid=156</url>
 			<telephoneNumber>+302106875407</telephoneNumber>
-			<faxNumber>+302106854270</faxNumber>
 		</communicationInfo>
 		<position>Principal Researcher</position>
 		<affiliation>
@@ -36,8 +38,6 @@
 				<country>Greece</country>
 				<countryId>GR</countryId>
 				<telephoneNumber>+302106875300</telephoneNumber>
-				<faxNumber>+302106854270</faxNumber>
-				<faxNumber>+302106856794</faxNumber>
 			</communicationInfo>
 		</affiliation>
 	</contactPerson>
@@ -49,7 +49,6 @@
 			<email>achalam@ilsp.athena-innovation.gr</email>
 			<url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=69&amp;Itemid=156</url>
 			<telephoneNumber>+302106875406</telephoneNumber>
-			<faxNumber>+302106854270</faxNumber>
 		</communicationInfo>
 		<position>Scientific Associate</position>
 		<affiliation>
@@ -64,8 +63,6 @@
 				<country>Greece</country>
 				<countryId>GR</countryId>
 				<telephoneNumber>+302106875300</telephoneNumber>
-				<faxNumber>+302106854270</faxNumber>
-				<faxNumber>+302106856794</faxNumber>
 			</communicationInfo>
 		</affiliation>
 	</contactPerson>
@@ -79,8 +76,6 @@
 				<email>elina@ilsp.athena-innovation.gr</email>
 				<url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=23&amp;Itemid=156</url>
 				<telephoneNumber>+302106875442</telephoneNumber>
-				<faxNumber>+302106854270</faxNumber>
-				<faxNumber>+302106856794</faxNumber>
 			</communicationInfo>
 			<position>Scientific Associate</position>
 			<affiliation>
@@ -95,12 +90,9 @@
 					<country>Greece</country>
 					<countryId>GR</countryId>
 					<telephoneNumber>+302106875300</telephoneNumber>
-					<faxNumber>+302106854270</faxNumber>
-					<faxNumber>+302106856794</faxNumber>
 				</communicationInfo>
 			</affiliation>
 		</metadataCreator>
-		<source>META-SHARE/ILSP</source>
 		<metadataLastDateUpdated>2012-05-14</metadataLastDateUpdated>
 	</metadataInfo>
 	<versionInfo>
@@ -108,9 +100,6 @@
 	</versionInfo>
 	<validationInfo>
 		<validated>true</validated>
-		<validationType>content</validationType>
-		<validationMode>mixed</validationMode>
-		<validationExtent>full</validationExtent>
 		<validator>
 			<organizationInfo>
 				<organizationName lang="en">Institute for Language and Speech Processing / Athena R.C.</organizationName>
@@ -124,44 +113,10 @@
 					<country>Greece</country>
 					<countryId>GR</countryId>
 					<telephoneNumber>+302106875300</telephoneNumber>
-					<faxNumber>+302106854270</faxNumber>
-					<faxNumber>+302106856794</faxNumber>
 				</communicationInfo>
 			</organizationInfo>
 		</validator>
 	</validationInfo>
-	<usageInfo>
-		<foreseenUseInfo>
-			<foreseenUse>nlpApplications</foreseenUse>
-			<useNLPSpecific>speechSynthesis</useNLPSpecific>
-		</foreseenUseInfo>
-		<actualUseInfo>
-			<actualUse>nlpApplications</actualUse>
-			<useNLPSpecific>speechSynthesis</useNLPSpecific>
-		</actualUseInfo>
-	</usageInfo>
-	<resourceDocumentationInfo>
-		<documentation>
-			<documentInfo>
-				<documentType>inProceedings</documentType>
-				<title lang="und">Design of an Efficient Corpus for High-Quality Unit Selection TTS for Bulgarian</title>
-				<author>Χαλαμανδάρης, Α., Τσιάκουλης, Π., Ράπτης, Σ. &amp; Καραμπέτσος, Σ.</author>
-				<year>2009</year>
-				<bookTitle>Proc. 4th Language &amp; Technology Conference: Human Language Technologies as a Challenge for Computer Science and Linguistics</bookTitle>
-				<conference>TSD 2009</conference>
-			</documentInfo>
-		</documentation>
-	</resourceDocumentationInfo>
-	<resourceCreationInfo>
-		<fundingProject>
-			<projectName lang="und">Transfer and Adaptation of Text-to-Speech Technology to the Bulgarian Language and its Application in Cultural Tools with Emphasis on Accessibility</projectName>
-			<fundingType>euFunds</fundingType>
-			<funder>	INTERREG IIIA / PHARE CBC GREECE – BULGARIA </funder>
-			<fundingCountry>Greece</fundingCountry>
-			<projectStartDate>2005-10-01</projectStartDate>
-			<projectEndDate>2007-09-30</projectEndDate>
-		</fundingProject>
-	</resourceCreationInfo>
 	<resourceComponentType>
 		<corpusInfo>
 			<resourceType>corpus</resourceType>
@@ -175,25 +130,20 @@
 						<languageId>bg</languageId>
 						<languageName>Bulgarian</languageName>
 					</languageInfo>
-					<modalityInfo>
-						<modalityType>writtenLanguage</modalityType>
-					</modalityInfo>
 					<sizeInfo>
 						<size>2577</size>
 						<sizeUnit>entries</sizeUnit>
 					</sizeInfo>
 					<textFormatInfo>
-						<mimeType>text/plain</mimeType>
+						<dataFormat>text/plain</dataFormat>
 					</textFormatInfo>
 					<characterEncodingInfo>
 						<characterEncoding>UTF-8</characterEncoding>
 					</characterEncodingInfo>
 					<domainInfo>
-						<domain>general</domain>
+						<domain>SCIENCE</domain>
+						<domainId>04</domainId>
 					</domainInfo>
-					<textClassificationInfo>
-						<subject_topic>news</subject_topic>
-					</textClassificationInfo>
 					<creationInfo>
 						<originalSource>
 							<targetResourceNameURI>web news</targetResourceNameURI>

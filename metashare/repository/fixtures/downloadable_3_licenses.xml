@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xmlns="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.meta-share.org/META-SHARE_XMLSchema http://www.meta-share.org/META-SHARE_XMLSchema/v3.1/META-SHARE-Resource.xsd">
+<resourceInfo xmlns="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ELRC-SHARE-Resource.xsd">
 	<identificationInfo>
 		<resourceName lang="en-us">Test Resource 2</resourceName>
 		<description lang="en-us">another resource for testing</description>
@@ -8,33 +8,30 @@
 	</identificationInfo>
 	<distributionInfo>
 		<availability>available</availability>
+		<PSI>true</PSI>
+		<allowsUsesBesidesDGT>true</allowsUsesBesidesDGT>
 		<licenceInfo>
-			<licence>CC-BY-NC-SA</licence>
-			<version>4.0</version>
+			<licence>CC-BY-NC-SA-4.0</licence>
 			<restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
 			<restrictionsOfUse>shareAlike</restrictionsOfUse>
 			<restrictionsOfUse>attribution</restrictionsOfUse>
 		</licenceInfo>
 		<licenceInfo>
-			<licence>GPL</licence>
-			<version>4.0</version>
+			<licence>GPL-3.0</licence>
 			<restrictionsOfUse>attribution</restrictionsOfUse>
 			<restrictionsOfUse>shareAlike</restrictionsOfUse>
 		</licenceInfo>
 		<licenceInfo>
-			<licence>CC-BY-SA</licence>
-			<version>4.0</version>
+			<licence>CC-BY-SA-4.0</licence>
 			<restrictionsOfUse>attribution</restrictionsOfUse>
 			<restrictionsOfUse>shareAlike</restrictionsOfUse>
 		</licenceInfo>
-		<distributionAccessMedium>DVD-R</distributionAccessMedium>
-		<distributionAccessMedium>CD-ROM</distributionAccessMedium>
-		<distributionAccessMedium>downloadable</distributionAccessMedium>
-		<distributionAccessMedium>downloadable</distributionAccessMedium>
-		<distributionAccessMedium>downloadable</distributionAccessMedium>
+		<distributionMedium>dataDownloadable</distributionMedium>
 		<downloadLocation>http://www.example.org</downloadLocation>
 		<downloadLocation>http://www.example.org</downloadLocation>
 		<downloadLocation>http://www.example.org</downloadLocation>
+		<personalDataIncluded>true</personalDataIncluded>
+		<sensitiveDataIncluded>true</sensitiveDataIncluded>
 	</distributionInfo>
 	<contactPerson>
 		<surname>Doe</surname>
@@ -60,6 +57,7 @@
 		<toolServiceInfo>
 			<resourceType>toolService</resourceType>
 			<toolServiceType>other</toolServiceType>
+			<function>alignment</function>
 			<languageDependent>false</languageDependent>
 		</toolServiceInfo>
 	</resourceComponentType>

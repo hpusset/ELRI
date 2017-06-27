@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xmlns="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.meta-share.org/META-SHARE_XMLSchema http://www.meta-share.org/META-SHARE_XMLSchema/v3.1/META-SHARE-Resource.xsd">
+<resourceInfo xmlns="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ELRC-SHARE-Resource.xsd">
 	<identificationInfo>
 		<resourceName>Mary TTS</resourceName>
 		<description>MARY is an open-source, multilingual Text-to-Speech Synthesis platform written in Java. It was originally developed as a collaborative project of DFKI's Language Technology lab and the Institute of Phonetics at Saarland University and is now being maintained by DFKI. As of version 4.3.1, MARY TTS supports German, British and American English, Telugu, Turkish, Italian, and Russian; more languages are in preparation. MARY TTS comes with toolkits for quickly adding support for new languages and for building unit selection and HMM-based synthesis voices.</description>
@@ -10,13 +10,16 @@
 	</identificationInfo>
 	<distributionInfo>
 		<availability>available</availability>
+		<PSI>true</PSI>
+		<allowsUsesBesidesDGT>true</allowsUsesBesidesDGT>
 		<licenceInfo>
-			<licence>LGPL</licence>
-			<version>4.0</version>
+			<licence>LGPL-3.0</licence>
 		</licenceInfo>
-		<distributionAccessMedium>downloadable</distributionAccessMedium>
+		<distributionMedium>webExecutable</distributionMedium>
 		<downloadLocation>http://mary.dfki.de/download</downloadLocation>
 		<executionLocation>http://mary.dfki.de:59125</executionLocation>
+		<personalDataIncluded>true</personalDataIncluded>
+		<sensitiveDataIncluded>true</sensitiveDataIncluded>
 	</distributionInfo>
 	<contactPerson>
 		<surname>Schröder</surname>
@@ -38,7 +41,6 @@
 				<country>Germany</country>
 				<countryId>DE</countryId>
 				<telephoneNumber>+49_681_857755282</telephoneNumber>
-				<faxNumber>+49_681_857755338</faxNumber>
 			</communicationInfo>
 		</affiliation>
 	</contactPerson>
@@ -62,7 +64,6 @@
 				<country>Germany</country>
 				<countryId>DE</countryId>
 				<telephoneNumber>+49_681_857755282</telephoneNumber>
-				<faxNumber>+49_681_857755338</faxNumber>
 			</communicationInfo>
 		</affiliation>
 	</contactPerson>
@@ -75,13 +76,12 @@
 	</versionInfo>
 	<resourceDocumentationInfo>
 		<samplesLocation>http://mary.dfki.de:59125</samplesLocation>
-		<toolDocumentationType>online</toolDocumentationType>
 	</resourceDocumentationInfo>
 	<resourceComponentType>
 		<toolServiceInfo>
 			<resourceType>toolService</resourceType>
-			<toolServiceType>platform</toolServiceType>
-			<toolServiceSubtype>textToSpeechSynthesis</toolServiceSubtype>
+			<toolServiceType>service</toolServiceType>
+			<function>alignment</function>
 			<languageDependent>false</languageDependent>
 			<inputInfo>
 				<mediaType>text</mediaType>
@@ -90,8 +90,6 @@
 			</inputInfo>
 			<outputInfo>
 				<mediaType>audio</mediaType>
-				<modalityType>spokenLanguage</modalityType>
-				<modalityType>voice</modalityType>
 			</outputInfo>
 			<toolServiceOperationInfo>
 				<operatingSystem>os-independent</operatingSystem>

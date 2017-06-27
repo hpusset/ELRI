@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xmlns="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.meta-share.org/META-SHARE_XMLSchema http://www.meta-share.org/META-SHARE_XMLSchema/v3.1/META-SHARE-Resource.xsd">
+<resourceInfo xmlns="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ELRC-SHARE-Resource.xsd">
 	<identificationInfo>
 		<resourceName>PELCRA Polish-English parallel corpora (CC-BY)</resourceName>
 		<description>A subset of the PELCRA Polish parallel corpora licensed under the CC-BY license. This resource contains 10268 texts from the CORDIS website, 23319 texts from the JRC-Acquis and 4740 texts from the RAPID site. Individual headers may override the licensing information.</description>
@@ -12,62 +12,16 @@
 	</identificationInfo>
 	<distributionInfo>
 		<availability>available</availability>
+		<PSI>true</PSI>
+		<allowsUsesBesidesDGT>true</allowsUsesBesidesDGT>
 		<licenceInfo>
-			<licence>CC-BY</licence>
-			<version>4.0</version>
+			<licence>CC-BY-4.0</licence>
 			<restrictionsOfUse>attribution</restrictionsOfUse>
 		</licenceInfo>
-		<distributionAccessMedium>downloadable</distributionAccessMedium>
+		<distributionMedium>dataDownloadable</distributionMedium>
 		<downloadLocation>http://pelcra.pl/resources/parallel/pelcra_par_1.tgz</downloadLocation>
-		<licensor>
-			<personInfo>
-				<surname>Pęzik</surname>
-				<givenName>Piotr</givenName>
-				<communicationInfo>
-					<email>contact@pelcra.pl</email>
-					<url>http://pelcra.pl</url>
-					<address>Kościuszki 65</address>
-					<zipCode>90-514</zipCode>
-					<city>Łódź</city>
-					<country>Poland</country>
-					<countryId>PL</countryId>
-					<telephoneNumber>+48 426655218</telephoneNumber>
-				</communicationInfo>
-				<position>assistant professor</position>
-				<affiliation>
-					<organizationName>University of Łódź</organizationName>
-					<organizationShortName>ULodz</organizationShortName>
-					<departmentName>PELCRA group, Chair of English Language and Applied Linguistics</departmentName>
-					<communicationInfo>
-						<email>contact@pelcra.pl</email>
-						<url>http://pelcra.pl</url>
-						<address>Kościuszki 65</address>
-						<zipCode>90-514</zipCode>
-						<city>Łódź</city>
-						<country>Poland</country>
-						<countryId>PL</countryId>
-						<telephoneNumber>+48 426655218</telephoneNumber>
-					</communicationInfo>
-				</affiliation>
-			</personInfo>
-		</licensor>
-		<distributionRightsHolder>
-			<organizationInfo>
-				<organizationName>University of Łódź</organizationName>
-				<organizationShortName>ULodz</organizationShortName>
-				<departmentName>PELCRA group, Chair of English Language and Applied Linguistics</departmentName>
-				<communicationInfo>
-					<email>contact@pelcra.pl</email>
-					<url>http://pelcra.pl</url>
-					<address>Kościuszki 65</address>
-					<zipCode>90-514</zipCode>
-					<city>Łódź</city>
-					<country>Poland</country>
-					<countryId>PL</countryId>
-					<telephoneNumber>+48 426655218</telephoneNumber>
-				</communicationInfo>
-			</organizationInfo>
-		</distributionRightsHolder>
+		<personalDataIncluded>true</personalDataIncluded>
+		<sensitiveDataIncluded>true</sensitiveDataIncluded>
 		<iprHolder>
 			<organizationInfo>
 				<organizationName>University of Łódź</organizationName>
@@ -85,7 +39,6 @@
 				</communicationInfo>
 			</organizationInfo>
 		</iprHolder>
-		<availabilityStartDate>2011-11-30</availabilityStartDate>
 	</distributionInfo>
 	<contactPerson>
 		<surname>Pęzik</surname>
@@ -213,99 +166,13 @@
 				</communicationInfo>
 			</affiliation>
 		</metadataCreator>
-		<source>CESAR</source>
 		<metadataLanguageId>en</metadataLanguageId>
 	</metadataInfo>
 	<versionInfo>
 		<version>1.0</version>
-		<revision>compilation of the corpus</revision>
-		<lastDateUpdated>2011-09-30</lastDateUpdated>
-		<updateFrequency/>
 	</versionInfo>
-	<validationInfo>
-		<validated>true</validated>
-		<validationType>formal</validationType>
-		<validationMode>automatic</validationMode>
-		<validationModeDetails>Validation of the XML structure in accordance with the TEI P5 and XLIFF schemas with custom PELCRA extensions.</validationModeDetails>
-		<validationExtent>full</validationExtent>
-		<sizePerValidation>
-			<size>75700000</size>
-			<sizeUnit>tokens</sizeUnit>
-		</sizePerValidation>
-		<validationTool>
-			<targetResourceNameURI>xmllint</targetResourceNameURI>
-		</validationTool>
-		<validator>
-			<personInfo>
-				<surname>Dróżdż</surname>
-				<givenName>Łukasz</givenName>
-				<communicationInfo>
-					<email>contact@pelcra.pl</email>
-					<url>http://pelcra.pl</url>
-					<address>Kościuszki 65</address>
-					<zipCode>90-514</zipCode>
-					<city>Łódź</city>
-					<country>Poland</country>
-					<countryId>PL</countryId>
-					<telephoneNumber>+48 426655218</telephoneNumber>
-				</communicationInfo>
-				<position>IT specialist</position>
-				<affiliation>
-					<organizationName>University of Łódź</organizationName>
-					<organizationShortName>ULodz</organizationShortName>
-					<departmentName>PELCRA group, Chair of English Language and Applied Linguistics</departmentName>
-					<communicationInfo>
-						<email>contact@pelcra.pl</email>
-						<url>http://pelcra.pl</url>
-						<address>Kościuszki 65</address>
-						<zipCode>90-514</zipCode>
-						<city>Łódź</city>
-						<country>Poland</country>
-						<countryId>PL</countryId>
-						<telephoneNumber>+48 426655218</telephoneNumber>
-					</communicationInfo>
-				</affiliation>
-			</personInfo>
-		</validator>
-		<validator>
-			<personInfo>
-				<surname>Pęzik</surname>
-				<givenName>Piotr</givenName>
-				<communicationInfo>
-					<email>contact@pelcra.pl</email>
-					<url>http://pelcra.pl</url>
-					<address>Kościuszki 65</address>
-					<zipCode>90-514</zipCode>
-					<city>Łódź</city>
-					<country>Poland</country>
-					<countryId>PL</countryId>
-					<telephoneNumber>+48 426655218</telephoneNumber>
-				</communicationInfo>
-				<position>assistant professor</position>
-				<affiliation>
-					<organizationName>University of Łódź</organizationName>
-					<organizationShortName>ULodz</organizationShortName>
-					<departmentName>PELCRA group, Chair of English Language and Applied Linguistics</departmentName>
-					<communicationInfo>
-						<email>contact@pelcra.pl</email>
-						<url>http://pelcra.pl</url>
-						<address>Kościuszki 65</address>
-						<zipCode>90-514</zipCode>
-						<city>Łódź</city>
-						<country>Poland</country>
-						<countryId>PL</countryId>
-						<telephoneNumber>+48 426655218</telephoneNumber>
-					</communicationInfo>
-				</affiliation>
-			</personInfo>
-		</validator>
-	</validationInfo>
-	<resourceDocumentationInfo>
-		<documentation>
-			<documentUnstructured>http://pelcra.pl/projects/documentation/</documentUnstructured>
-		</documentation>
-	</resourceDocumentationInfo>
 	<resourceCreationInfo>
+		<createdUsingELRCServices>true</createdUsingELRCServices>
 		<resourceCreator>
 			<personInfo>
 				<surname>Pęzik</surname>
@@ -384,6 +251,78 @@
 		<creationStartDate>2011-08-01</creationStartDate>
 		<creationEndDate>2011-09-30</creationEndDate>
 	</resourceCreationInfo>
+	<resourceDocumentationInfo>
+		<documentation>
+			<documentUnstructured>http://pelcra.pl/projects/documentation/</documentUnstructured>
+		</documentation>
+	</resourceDocumentationInfo>
+	<validationInfo>
+		<validated>true</validated>
+		<validator>
+			<personInfo>
+				<surname>Dróżdż</surname>
+				<givenName>Łukasz</givenName>
+				<communicationInfo>
+					<email>contact@pelcra.pl</email>
+					<url>http://pelcra.pl</url>
+					<address>Kościuszki 65</address>
+					<zipCode>90-514</zipCode>
+					<city>Łódź</city>
+					<country>Poland</country>
+					<countryId>PL</countryId>
+					<telephoneNumber>+48 426655218</telephoneNumber>
+				</communicationInfo>
+				<position>IT specialist</position>
+				<affiliation>
+					<organizationName>University of Łódź</organizationName>
+					<organizationShortName>ULodz</organizationShortName>
+					<departmentName>PELCRA group, Chair of English Language and Applied Linguistics</departmentName>
+					<communicationInfo>
+						<email>contact@pelcra.pl</email>
+						<url>http://pelcra.pl</url>
+						<address>Kościuszki 65</address>
+						<zipCode>90-514</zipCode>
+						<city>Łódź</city>
+						<country>Poland</country>
+						<countryId>PL</countryId>
+						<telephoneNumber>+48 426655218</telephoneNumber>
+					</communicationInfo>
+				</affiliation>
+			</personInfo>
+		</validator>
+		<validator>
+			<personInfo>
+				<surname>Pęzik</surname>
+				<givenName>Piotr</givenName>
+				<communicationInfo>
+					<email>contact@pelcra.pl</email>
+					<url>http://pelcra.pl</url>
+					<address>Kościuszki 65</address>
+					<zipCode>90-514</zipCode>
+					<city>Łódź</city>
+					<country>Poland</country>
+					<countryId>PL</countryId>
+					<telephoneNumber>+48 426655218</telephoneNumber>
+				</communicationInfo>
+				<position>assistant professor</position>
+				<affiliation>
+					<organizationName>University of Łódź</organizationName>
+					<organizationShortName>ULodz</organizationShortName>
+					<departmentName>PELCRA group, Chair of English Language and Applied Linguistics</departmentName>
+					<communicationInfo>
+						<email>contact@pelcra.pl</email>
+						<url>http://pelcra.pl</url>
+						<address>Kościuszki 65</address>
+						<zipCode>90-514</zipCode>
+						<city>Łódź</city>
+						<country>Poland</country>
+						<countryId>PL</countryId>
+						<telephoneNumber>+48 426655218</telephoneNumber>
+					</communicationInfo>
+				</affiliation>
+			</personInfo>
+		</validator>
+	</validationInfo>
 	<resourceComponentType>
 		<corpusInfo>
 			<resourceType>corpus</resourceType>
@@ -411,15 +350,12 @@
 							<sizeUnit>tokens</sizeUnit>
 						</sizePerLanguage>
 					</languageInfo>
-					<modalityInfo>
-						<modalityType>other</modalityType>
-					</modalityInfo>
 					<sizeInfo>
 						<size>6700000</size>
 						<sizeUnit>tokens</sizeUnit>
 					</sizeInfo>
 					<textFormatInfo>
-						<mimeType>text/xml</mimeType>
+						<dataFormat>text/plain</dataFormat>
 						<sizePerTextFormat>
 							<size>6700000</size>
 							<sizeUnit>tokens</sizeUnit>
@@ -434,185 +370,23 @@
 					</characterEncodingInfo>
 					<annotationInfo>
 						<annotationType>segmentation</annotationType>
-						<segmentationLevel>sentence</segmentationLevel>
-						<annotationFormat>text/xml</annotationFormat>
-						<conformanceToStandardsBestPractices>TEI</conformanceToStandardsBestPractices>
-						<annotationMode>mixed</annotationMode>
-						<annotationTool>
-							<targetResourceNameURI>in-house software</targetResourceNameURI>
-						</annotationTool>
-						<annotationStartDate>2011-08-01</annotationStartDate>
-						<annotationEndDate>2011-09-30</annotationEndDate>
-						<sizePerAnnotation>
-							<size>6700000</size>
-							<sizeUnit>tokens</sizeUnit>
-						</sizePerAnnotation>
-						<annotator>
-							<personInfo>
-								<surname>Pęzik</surname>
-								<givenName>Piotr</givenName>
-								<communicationInfo>
-									<email>contact@pelcra.pl</email>
-									<url>http://pelcra.pl</url>
-									<address>Kościuszki 65</address>
-									<zipCode>90-514</zipCode>
-									<city>Łódź</city>
-									<country>Poland</country>
-									<countryId>PL</countryId>
-									<telephoneNumber>+48 426655218</telephoneNumber>
-								</communicationInfo>
-								<position>assistant professor</position>
-								<affiliation>
-									<organizationName>University of Łódź</organizationName>
-									<organizationShortName>ULodz</organizationShortName>
-									<departmentName>PELCRA group, Chair of English Language and Applied Linguistics</departmentName>
-									<communicationInfo>
-										<email>contact@pelcra.pl</email>
-										<url>http://pelcra.pl</url>
-										<address>Kościuszki 65</address>
-										<zipCode>90-514</zipCode>
-										<city>Łódź</city>
-										<country>Poland</country>
-										<countryId>PL</countryId>
-										<telephoneNumber>+48 426655218</telephoneNumber>
-									</communicationInfo>
-								</affiliation>
-							</personInfo>
-						</annotator>
-						<annotator>
-							<personInfo>
-								<surname>Łukasz</surname>
-								<givenName>Dróżdż</givenName>
-								<communicationInfo>
-									<email>contact@pelcra.pl</email>
-									<url>http://pelcra.pl</url>
-									<address>Kościuszki 65</address>
-									<zipCode>90-514</zipCode>
-									<city>Łódź</city>
-									<country>Poland</country>
-									<countryId>PL</countryId>
-									<telephoneNumber>+48 426655218</telephoneNumber>
-								</communicationInfo>
-								<position>IT specialist</position>
-								<affiliation>
-									<organizationName>University of Łódź</organizationName>
-									<organizationShortName>ULodz</organizationShortName>
-									<departmentName>PELCRA group, Chair of English Language and Applied Linguistics</departmentName>
-									<communicationInfo>
-										<email>contact@pelcra.pl</email>
-										<url>http://pelcra.pl</url>
-										<address>Kościuszki 65</address>
-										<zipCode>90-514</zipCode>
-										<city>Łódź</city>
-										<country>Poland</country>
-										<countryId>PL</countryId>
-										<telephoneNumber>+48 426655218</telephoneNumber>
-									</communicationInfo>
-								</affiliation>
-							</personInfo>
-						</annotator>
 					</annotationInfo>
 					<annotationInfo>
 						<annotationType>alignment</annotationType>
-						<segmentationLevel>sentence</segmentationLevel>
-						<annotationFormat>text/xml</annotationFormat>
 						<conformanceToStandardsBestPractices>TEI</conformanceToStandardsBestPractices>
 						<annotationMode>automatic</annotationMode>
 						<annotationTool>
 							<targetResourceNameURI>Maligna</targetResourceNameURI>
 						</annotationTool>
-						<annotationStartDate>2011-08-01</annotationStartDate>
-						<annotationEndDate>2011-09-30</annotationEndDate>
-						<sizePerAnnotation>
-							<size>6700000</size>
-							<sizeUnit>tokens</sizeUnit>
-						</sizePerAnnotation>
-						<annotator>
-							<personInfo>
-								<surname>Pęzik</surname>
-								<givenName>Piotr</givenName>
-								<communicationInfo>
-									<email>contact@pelcra.pl</email>
-									<url>http://pelcra.pl</url>
-									<address>Kościuszki 65</address>
-									<zipCode>90-514</zipCode>
-									<city>Łódź</city>
-									<country>Poland</country>
-									<countryId>PL</countryId>
-									<telephoneNumber>+48 426655218</telephoneNumber>
-								</communicationInfo>
-								<position>assistant professor</position>
-								<affiliation>
-									<organizationName>University of Łódź</organizationName>
-									<organizationShortName>ULodz</organizationShortName>
-									<departmentName>PELCRA group, Chair of English Language and Applied Linguistics</departmentName>
-									<communicationInfo>
-										<email>contact@pelcra.pl</email>
-										<url>http://pelcra.pl</url>
-										<address>Kościuszki 65</address>
-										<zipCode>90-514</zipCode>
-										<city>Łódź</city>
-										<country>Poland</country>
-										<countryId>PL</countryId>
-										<telephoneNumber>+48 426655218</telephoneNumber>
-									</communicationInfo>
-								</affiliation>
-							</personInfo>
-						</annotator>
-						<annotator>
-							<personInfo>
-								<surname>Łukasz</surname>
-								<givenName>Dróżdż</givenName>
-								<communicationInfo>
-									<email>contact@pelcra.pl</email>
-									<url>http://pelcra.pl</url>
-									<address>Kościuszki 65</address>
-									<zipCode>90-514</zipCode>
-									<city>Łódź</city>
-									<country>Poland</country>
-									<countryId>PL</countryId>
-									<telephoneNumber>+48 426655218</telephoneNumber>
-								</communicationInfo>
-								<position>IT specialist</position>
-								<affiliation>
-									<organizationName>University of Łódź</organizationName>
-									<organizationShortName>ULodz</organizationShortName>
-									<departmentName>PELCRA group, Chair of English Language and Applied Linguistics</departmentName>
-									<communicationInfo>
-										<email>contact@pelcra.pl</email>
-										<url>http://pelcra.pl</url>
-										<address>Kościuszki 65</address>
-										<zipCode>90-514</zipCode>
-										<city>Łódź</city>
-										<country>Poland</country>
-										<countryId>PL</countryId>
-										<telephoneNumber>+48 426655218</telephoneNumber>
-									</communicationInfo>
-								</affiliation>
-							</personInfo>
-						</annotator>
 					</annotationInfo>
 					<domainInfo>
-						<domain>science</domain>
+						<domain>SCIENCE</domain>
+						<domainId>04</domainId>
 						<sizePerDomain>
 							<size>6700000</size>
 							<sizeUnit>tokens</sizeUnit>
 						</sizePerDomain>
 					</domainInfo>
-					<timeCoverageInfo>
-						<timeCoverage>2003-2011</timeCoverage>
-						<sizePerTimeCoverage>
-							<size>6700000</size>
-							<sizeUnit>tokens</sizeUnit>
-						</sizePerTimeCoverage>
-					</timeCoverageInfo>
-					<geographicCoverageInfo>
-						<geographicCoverage>European Union</geographicCoverage>
-						<sizePerGeographicCoverage>
-							<size>6700000</size>
-							<sizeUnit>tokens</sizeUnit>
-						</sizePerGeographicCoverage>
-					</geographicCoverageInfo>
 					<creationInfo>
 						<originalSource>
 							<targetResourceNameURI>http://cordis.europa.eu/news/</targetResourceNameURI>
@@ -647,15 +421,12 @@
 							<sizeUnit>tokens</sizeUnit>
 						</sizePerLanguage>
 					</languageInfo>
-					<modalityInfo>
-						<modalityType>other</modalityType>
-					</modalityInfo>
 					<sizeInfo>
 						<size>61000000</size>
 						<sizeUnit>tokens</sizeUnit>
 					</sizeInfo>
 					<textFormatInfo>
-						<mimeType>text/xml</mimeType>
+						<dataFormat>text/plain</dataFormat>
 						<sizePerTextFormat>
 							<size>61000000</size>
 							<sizeUnit>tokens</sizeUnit>
@@ -670,121 +441,23 @@
 					</characterEncodingInfo>
 					<annotationInfo>
 						<annotationType>segmentation</annotationType>
-						<segmentationLevel>sentence</segmentationLevel>
-						<annotationFormat>text/xml</annotationFormat>
-						<conformanceToStandardsBestPractices>TEI</conformanceToStandardsBestPractices>
-						<annotationMode>mixed</annotationMode>
-						<annotationTool>
-							<targetResourceNameURI>unknown</targetResourceNameURI>
-						</annotationTool>
-						<annotationStartDate>2008-05-29</annotationStartDate>
-						<annotationEndDate>2008-05-29</annotationEndDate>
-						<sizePerAnnotation>
-							<size>61000000</size>
-							<sizeUnit>tokens</sizeUnit>
-						</sizePerAnnotation>
-						<annotator>
-							<personInfo>
-								<surname>Steinberger</surname>
-								<givenName>Ralf</givenName>
-								<communicationInfo>
-									<email>ralf.steinberger@jrc.ec.europa.eu</email>
-									<url>http://langtech.jrc.ec.europa.eu</url>
-									<address>Via E. Fermi 2749</address>
-									<zipCode>21027</zipCode>
-									<city>Ispra</city>
-									<country>Italy</country>
-									<countryId>IT</countryId>
-									<telephoneNumber>+39 0332 78 5154</telephoneNumber>
-								</communicationInfo>
-								<position>Language Technology Project Manager</position>
-								<affiliation>
-									<organizationName>European Commission</organizationName>
-									<organizationShortName>JRC</organizationShortName>
-									<departmentName>Joint Research Centre</departmentName>
-									<communicationInfo>
-										<email>ralf.steinberger@jrc.ec.europa.eu</email>
-										<url>http://langtech.jrc.ec.europa.eu</url>
-										<address>Via E. Fermi 2749</address>
-										<zipCode>21027</zipCode>
-										<city>Ispra</city>
-										<country>Italy</country>
-										<countryId>IT</countryId>
-										<telephoneNumber>+39 0332 78 5154</telephoneNumber>
-									</communicationInfo>
-								</affiliation>
-							</personInfo>
-						</annotator>
 					</annotationInfo>
 					<annotationInfo>
 						<annotationType>alignment</annotationType>
-						<segmentationLevel>sentence</segmentationLevel>
-						<annotationFormat>text/xml</annotationFormat>
 						<conformanceToStandardsBestPractices>TEI</conformanceToStandardsBestPractices>
 						<annotationMode>automatic</annotationMode>
 						<annotationTool>
 							<targetResourceNameURI>hunAlign</targetResourceNameURI>
 						</annotationTool>
-						<annotationStartDate>2008-05-29</annotationStartDate>
-						<annotationEndDate>2008-05-29</annotationEndDate>
-						<sizePerAnnotation>
-							<size>61000000</size>
-							<sizeUnit>tokens</sizeUnit>
-						</sizePerAnnotation>
-						<annotator>
-							<personInfo>
-								<surname>Steinberger</surname>
-								<givenName>Ralf</givenName>
-								<communicationInfo>
-									<email>ralf.steinberger@jrc.ec.europa.eu</email>
-									<url>http://langtech.jrc.ec.europa.eu</url>
-									<address>Via E. Fermi 2749</address>
-									<zipCode>21027</zipCode>
-									<city>Ispra</city>
-									<country>Italy</country>
-									<countryId>IT</countryId>
-									<telephoneNumber>+39 0332 78 5154</telephoneNumber>
-								</communicationInfo>
-								<position>Language Technology Project Manager</position>
-								<affiliation>
-									<organizationName>European Commission</organizationName>
-									<organizationShortName>JRC</organizationShortName>
-									<departmentName>Joint Research Centre</departmentName>
-									<communicationInfo>
-										<email>ralf.steinberger@jrc.ec.europa.eu</email>
-										<url>http://langtech.jrc.ec.europa.eu</url>
-										<address>Via E. Fermi 2749</address>
-										<zipCode>21027</zipCode>
-										<city>Ispra</city>
-										<country>Italy</country>
-										<countryId>IT</countryId>
-										<telephoneNumber>+39 0332 78 5154</telephoneNumber>
-									</communicationInfo>
-								</affiliation>
-							</personInfo>
-						</annotator>
 					</annotationInfo>
 					<domainInfo>
-						<domain>law_politics</domain>
+						<domain>POLITICS</domain>
+						<domainId>04</domainId>
 						<sizePerDomain>
 							<size>61000000</size>
 							<sizeUnit>tokens</sizeUnit>
 						</sizePerDomain>
 					</domainInfo>
-					<timeCoverageInfo>
-						<timeCoverage>1958-2006</timeCoverage>
-						<sizePerTimeCoverage>
-							<size>61000000</size>
-							<sizeUnit>tokens</sizeUnit>
-						</sizePerTimeCoverage>
-					</timeCoverageInfo>
-					<geographicCoverageInfo>
-						<geographicCoverage>European Union</geographicCoverage>
-						<sizePerGeographicCoverage>
-							<size>61000000</size>
-							<sizeUnit>tokens</sizeUnit>
-						</sizePerGeographicCoverage>
-					</geographicCoverageInfo>
 					<creationInfo>
 						<originalSource>
 							<targetResourceNameURI>http://optima.jrc.it/Acquis/</targetResourceNameURI>
@@ -819,15 +492,12 @@
 							<sizeUnit>tokens</sizeUnit>
 						</sizePerLanguage>
 					</languageInfo>
-					<modalityInfo>
-						<modalityType>other</modalityType>
-					</modalityInfo>
 					<sizeInfo>
 						<size>8000000</size>
 						<sizeUnit>tokens</sizeUnit>
 					</sizeInfo>
 					<textFormatInfo>
-						<mimeType>text/xml</mimeType>
+						<dataFormat>text/plain</dataFormat>
 						<sizePerTextFormat>
 							<size>8000000</size>
 							<sizeUnit>tokens</sizeUnit>
@@ -842,185 +512,18 @@
 					</characterEncodingInfo>
 					<annotationInfo>
 						<annotationType>segmentation</annotationType>
-						<segmentationLevel>sentence</segmentationLevel>
-						<annotationFormat>text/xml</annotationFormat>
-						<conformanceToStandardsBestPractices>TEI</conformanceToStandardsBestPractices>
-						<annotationMode>mixed</annotationMode>
-						<annotationTool>
-							<targetResourceNameURI>in-house software</targetResourceNameURI>
-						</annotationTool>
-						<annotationStartDate>2011-08-01</annotationStartDate>
-						<annotationEndDate>2011-09-30</annotationEndDate>
-						<sizePerAnnotation>
-							<size>8000000</size>
-							<sizeUnit>tokens</sizeUnit>
-						</sizePerAnnotation>
-						<annotator>
-							<personInfo>
-								<surname>Pęzik</surname>
-								<givenName>Piotr</givenName>
-								<communicationInfo>
-									<email>contact@pelcra.pl</email>
-									<url>http://pelcra.pl</url>
-									<address>Kościuszki 65</address>
-									<zipCode>90-514</zipCode>
-									<city>Łódź</city>
-									<country>Poland</country>
-									<countryId>PL</countryId>
-									<telephoneNumber>+48 426655218</telephoneNumber>
-								</communicationInfo>
-								<position>assistant professor</position>
-								<affiliation>
-									<organizationName>University of Łódź</organizationName>
-									<organizationShortName>ULodz</organizationShortName>
-									<departmentName>PELCRA group, Chair of English Language and Applied Linguistics</departmentName>
-									<communicationInfo>
-										<email>contact@pelcra.pl</email>
-										<url>http://pelcra.pl</url>
-										<address>Kościuszki 65</address>
-										<zipCode>90-514</zipCode>
-										<city>Łódź</city>
-										<country>Poland</country>
-										<countryId>PL</countryId>
-										<telephoneNumber>+48 426655218</telephoneNumber>
-									</communicationInfo>
-								</affiliation>
-							</personInfo>
-						</annotator>
-						<annotator>
-							<personInfo>
-								<surname>Łukasz</surname>
-								<givenName>Dróżdż</givenName>
-								<communicationInfo>
-									<email>contact@pelcra.pl</email>
-									<url>http://pelcra.pl</url>
-									<address>Kościuszki 65</address>
-									<zipCode>90-514</zipCode>
-									<city>Łódź</city>
-									<country>Poland</country>
-									<countryId>PL</countryId>
-									<telephoneNumber>+48 426655218</telephoneNumber>
-								</communicationInfo>
-								<position>IT specialist</position>
-								<affiliation>
-									<organizationName>University of Łódź</organizationName>
-									<organizationShortName>ULodz</organizationShortName>
-									<departmentName>PELCRA group, Chair of English Language and Applied Linguistics</departmentName>
-									<communicationInfo>
-										<email>contact@pelcra.pl</email>
-										<url>http://pelcra.pl</url>
-										<address>Kościuszki 65</address>
-										<zipCode>90-514</zipCode>
-										<city>Łódź</city>
-										<country>Poland</country>
-										<countryId>PL</countryId>
-										<telephoneNumber>+48 426655218</telephoneNumber>
-									</communicationInfo>
-								</affiliation>
-							</personInfo>
-						</annotator>
 					</annotationInfo>
 					<annotationInfo>
 						<annotationType>alignment</annotationType>
-						<segmentationLevel>sentence</segmentationLevel>
-						<annotationFormat>text/xml</annotationFormat>
-						<conformanceToStandardsBestPractices>TEI</conformanceToStandardsBestPractices>
-						<annotationMode>automatic</annotationMode>
-						<annotationTool>
-							<targetResourceNameURI>Maligna</targetResourceNameURI>
-						</annotationTool>
-						<annotationStartDate>2011-08-01</annotationStartDate>
-						<annotationEndDate>2011-09-30</annotationEndDate>
-						<sizePerAnnotation>
-							<size>8000000</size>
-							<sizeUnit>tokens</sizeUnit>
-						</sizePerAnnotation>
-						<annotator>
-							<personInfo>
-								<surname>Pęzik</surname>
-								<givenName>Piotr</givenName>
-								<communicationInfo>
-									<email>contact@pelcra.pl</email>
-									<url>http://pelcra.pl</url>
-									<address>Kościuszki 65</address>
-									<zipCode>90-514</zipCode>
-									<city>Łódź</city>
-									<country>Poland</country>
-									<countryId>PL</countryId>
-									<telephoneNumber>+48 426655218</telephoneNumber>
-								</communicationInfo>
-								<position>assistant professor</position>
-								<affiliation>
-									<organizationName>University of Łódź</organizationName>
-									<organizationShortName>ULodz</organizationShortName>
-									<departmentName>PELCRA group, Chair of English Language and Applied Linguistics</departmentName>
-									<communicationInfo>
-										<email>contact@pelcra.pl</email>
-										<url>http://pelcra.pl</url>
-										<address>Kościuszki 65</address>
-										<zipCode>90-514</zipCode>
-										<city>Łódź</city>
-										<country>Poland</country>
-										<countryId>PL</countryId>
-										<telephoneNumber>+48 426655218</telephoneNumber>
-									</communicationInfo>
-								</affiliation>
-							</personInfo>
-						</annotator>
-						<annotator>
-							<personInfo>
-								<surname>Łukasz</surname>
-								<givenName>Dróżdż</givenName>
-								<communicationInfo>
-									<email>contact@pelcra.pl</email>
-									<url>http://pelcra.pl</url>
-									<address>Kościuszki 65</address>
-									<zipCode>90-514</zipCode>
-									<city>Łódź</city>
-									<country>Poland</country>
-									<countryId>PL</countryId>
-									<telephoneNumber>+48 426655218</telephoneNumber>
-								</communicationInfo>
-								<position>IT specialist</position>
-								<affiliation>
-									<organizationName>University of Łódź</organizationName>
-									<organizationShortName>ULodz</organizationShortName>
-									<departmentName>PELCRA group, Chair of English Language and Applied Linguistics</departmentName>
-									<communicationInfo>
-										<email>contact@pelcra.pl</email>
-										<url>http://pelcra.pl</url>
-										<address>Kościuszki 65</address>
-										<zipCode>90-514</zipCode>
-										<city>Łódź</city>
-										<country>Poland</country>
-										<countryId>PL</countryId>
-										<telephoneNumber>+48 426655218</telephoneNumber>
-									</communicationInfo>
-								</affiliation>
-							</personInfo>
-						</annotator>
 					</annotationInfo>
 					<domainInfo>
-						<domain>law_politics</domain>
+						<domain>POLITICS</domain>
+						<domainId>04</domainId>
 						<sizePerDomain>
 							<size>8000000</size>
 							<sizeUnit>tokens</sizeUnit>
 						</sizePerDomain>
 					</domainInfo>
-					<timeCoverageInfo>
-						<timeCoverage>2004-2011</timeCoverage>
-						<sizePerTimeCoverage>
-							<size>8000000</size>
-							<sizeUnit>tokens</sizeUnit>
-						</sizePerTimeCoverage>
-					</timeCoverageInfo>
-					<geographicCoverageInfo>
-						<geographicCoverage>European Union</geographicCoverage>
-						<sizePerGeographicCoverage>
-							<size>8000000</size>
-							<sizeUnit>tokens</sizeUnit>
-						</sizePerGeographicCoverage>
-					</geographicCoverageInfo>
 					<creationInfo>
 						<originalSource>
 							<targetResourceNameURI>http://europa.eu/rapid/</targetResourceNameURI>

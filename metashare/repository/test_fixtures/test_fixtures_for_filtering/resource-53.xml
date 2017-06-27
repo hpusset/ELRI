@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xmlns="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.meta-share.org/META-SHARE_XMLSchema http://www.meta-share.org/META-SHARE_XMLSchema/v3.1/META-SHARE-Resource.xsd">
+<resourceInfo xmlns="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ELRC-SHARE-Resource.xsd">
 	<identificationInfo>
 		<resourceName lang="en">testGrammar</resourceName>
 		<description lang="en">description of textGrammar</description>
@@ -7,11 +7,13 @@
 	</identificationInfo>
 	<distributionInfo>
 		<availability>available</availability>
+		<PSI>true</PSI>
+		<allowsUsesBesidesDGT>true</allowsUsesBesidesDGT>
 		<licenceInfo>
-			<licence>CC-BY-NC-SA</licence>
-			<version>4.0</version>
-			<restrictionsOfUse>nonCommercialUse</restrictionsOfUse>
+			<licence>CC-BY-4.0</licence>
 		</licenceInfo>
+		<personalDataIncluded>true</personalDataIncluded>
+		<sensitiveDataIncluded>true</sensitiveDataIncluded>
 	</distributionInfo>
 	<contactPerson>
 		<surname lang="en">Labropoulou</surname>
@@ -21,7 +23,6 @@
 			<email>penny@ilsp.athena-innovation.gr</email>
 			<url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=37&amp;Itemid=171</url>
 			<telephoneNumber>+302106875445</telephoneNumber>
-			<faxNumber>+302106854270</faxNumber>
 		</communicationInfo>
 		<position>Senior Research Fellow</position>
 		<affiliation>
@@ -36,8 +37,6 @@
 				<country>Greece</country>
 				<countryId>GR</countryId>
 				<telephoneNumber>+302106875300</telephoneNumber>
-				<faxNumber>+302106854270</faxNumber>
-				<faxNumber>+302106856794</faxNumber>
 			</communicationInfo>
 		</affiliation>
 	</contactPerson>
@@ -51,7 +50,6 @@
 				<email>penny@ilsp.athena-innovation.gr</email>
 				<url>http://www.ilsp.gr/index.php?option=com_jresearch&amp;view=member&amp;task=show&amp;id=37&amp;Itemid=171</url>
 				<telephoneNumber>+302106875445</telephoneNumber>
-				<faxNumber>+302106854270</faxNumber>
 			</communicationInfo>
 			<position>Senior Research Fellow</position>
 			<affiliation>
@@ -66,8 +64,6 @@
 					<country>Greece</country>
 					<countryId>GR</countryId>
 					<telephoneNumber>+302106875300</telephoneNumber>
-					<faxNumber>+302106854270</faxNumber>
-					<faxNumber>+302106856794</faxNumber>
 				</communicationInfo>
 			</affiliation>
 		</metadataCreator>
@@ -83,23 +79,7 @@
 				<encodingLevel>morphology</encodingLevel>
 				<encodingLevel>phonetics</encodingLevel>
 				<task>anaphoraResolution</task>
-				<grammaticalPhenomenaCoverage>clauseStructure</grammaticalPhenomenaCoverage>
-				<grammaticalPhenomenaCoverage>coordination</grammaticalPhenomenaCoverage>
 			</languageDescriptionEncodingInfo>
-			<languageDescriptionOperationInfo>
-				<runningEnvironmentInfo>
-					<requiredHardware>ocrSystem</requiredHardware>
-				</runningEnvironmentInfo>
-				<relatedLexiconInfo>
-					<relatedLexiconType>attached</relatedLexiconType>
-					<compatibleLexiconType>morphologicalLexicon</compatibleLexiconType>
-				</relatedLexiconInfo>
-			</languageDescriptionOperationInfo>
-			<creationInfo>
-				<creationTool>
-					<targetResourceNameURI>test corpus</targetResourceNameURI>
-				</creationTool>
-			</creationInfo>
 			<languageDescriptionMediaType>
 				<languageDescriptionTextInfo>
 					<mediaType>text</mediaType>
@@ -110,27 +90,7 @@
 						<languageId>el</languageId>
 						<languageName>Modern Greek (1453-)</languageName>
 					</languageInfo>
-					<modalityInfo>
-						<modalityType>facialExpression</modalityType>
-						<modalityType>writtenLanguage</modalityType>
-					</modalityInfo>
 				</languageDescriptionTextInfo>
-				<languageDescriptionVideoInfo>
-					<mediaType>video</mediaType>
-					<linkToOtherMediaInfo>
-						<otherMedia>text</otherMedia>
-						<synchronizedWithText>true</synchronizedWithText>
-						<synchronizedWithTextNumerical>true</synchronizedWithTextNumerical>
-					</linkToOtherMediaInfo>
-				</languageDescriptionVideoInfo>
-				<languageDescriptionImageInfo>
-					<mediaType>image</mediaType>
-					<linkToOtherMediaInfo>
-						<otherMedia>text</otherMedia>
-						<mediaTypeDetails>ga</mediaTypeDetails>
-						<synchronizedWithImage>true</synchronizedWithImage>
-					</linkToOtherMediaInfo>
-				</languageDescriptionImageInfo>
 			</languageDescriptionMediaType>
 		</languageDescriptionInfo>
 	</resourceComponentType>

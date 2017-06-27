@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xmlns="http://www.meta-share.org/META-SHARE_XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.meta-share.org/META-SHARE_XMLSchema http://www.meta-share.org/META-SHARE_XMLSchema/v3.1/META-SHARE-Resource.xsd">
+<resourceInfo xmlns="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ELRC-SHARE-Resource.xsd">
 	<identificationInfo>
 		<resourceName lang="en">textnum1</resourceName>
 		<description lang="en">jhjhbjh</description>
@@ -7,9 +7,13 @@
 	</identificationInfo>
 	<distributionInfo>
 		<availability>available</availability>
+		<PSI>true</PSI>
+		<allowsUsesBesidesDGT>true</allowsUsesBesidesDGT>
 		<licenceInfo>
-			<licence>CC-BY</licence>
+			<licence>CC-BY-4.0</licence>
 		</licenceInfo>
+		<personalDataIncluded>true</personalDataIncluded>
+		<sensitiveDataIncluded>true</sensitiveDataIncluded>
 	</distributionInfo>
 	<contactPerson>
 		<surname lang="en">test</surname>
@@ -29,8 +33,6 @@
 				<country>Greece</country>
 				<countryId>GR</countryId>
 				<telephoneNumber>+302106875300</telephoneNumber>
-				<faxNumber>+302106854270</faxNumber>
-				<faxNumber>+302106856794</faxNumber>
 			</communicationInfo>
 		</affiliation>
 	</contactPerson>
@@ -51,24 +53,14 @@
 						<languageId>en</languageId>
 						<languageName>English</languageName>
 					</languageInfo>
-					<modalityInfo>
-						<modalityType>combinationOfModalities</modalityType>
-					</modalityInfo>
 					<sizeInfo>
 						<size>100</size>
-						<sizeUnit>elements</sizeUnit>
+						<sizeUnit>items</sizeUnit>
 					</sizeInfo>
+					<textFormatInfo>
+						<dataFormat>text/plain</dataFormat>
+					</textFormatInfo>
 				</corpusTextInfo>
-				<corpusTextNumericalInfo>
-					<mediaType>textNumerical</mediaType>
-					<modalityInfo>
-						<modalityType>combinationOfModalities</modalityType>
-						<modalityType>facialExpression</modalityType>
-					</modalityInfo>
-					<textNumericalContentInfo>
-						<typeOfTextNumericalContent>coordinates</typeOfTextNumericalContent>
-					</textNumericalContentInfo>
-				</corpusTextNumericalInfo>
 			</corpusMediaType>
 		</corpusInfo>
 	</resourceComponentType>
