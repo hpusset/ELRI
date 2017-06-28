@@ -62,14 +62,14 @@
             <li title="View various statistics for this META-SHARE Node"><a
                     href="{% url 'metashare.views.frontpage' %}stats/top/">Statistics</a></li>
             <li title="Help"><a href="{% url 'help' %}">Help</a></li>
-            <li><a href="{% url info %}">About</a>
+            <li><a href="{% url 'info' %}">About</a>
                 <ul>
-                    <li><a href="{% url info %}#LR_Provision">LR Provision</a></li>
-                    <li><a href="{% url info %}#Licensing_LRs">Licensing LRs for the ELRC action</a></li>
-                    <li><a href="{% url info %}#Notice_and_Take_Down_Policy">Notice and Takedown Policy</a></li>
-                    <li><a href="{% url info %}#Privacy">Privacy</a></li>
-                    <li><a href="{% url info %}#Data_Protection">Data Protection</a></li>
-                    <li><a href="{% url info %}#Data_Protection_Statement">Data Protection Statement</a></li>
+                    <li><a href="{% url 'info' %}#LR_Provision">LR Provision</a></li>
+                    <li><a href="{% url 'info' %}#Licensing_LRs">Licensing LRs for the ELRC action</a></li>
+                    <li><a href="{% url 'info' %}#Notice_and_Take_Down_Policy">Notice and Takedown Policy</a></li>
+                    <li><a href="{% url 'info' %}#Privacy">Privacy</a></li>
+                    <li><a href="{% url 'info' %}#Data_Protection">Data Protection</a></li>
+                    <li><a href="{% url 'info' %}#Data_Protection_Statement">Data Protection Statement</a></li>
                 </ul>
             </li>
             {% if user.is_active %}
