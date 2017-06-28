@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load email_protection %}
+{% load static %}
+{% block content %}
+    <h2>Help</h2>
+    <div class="content_box">
+        <h2>Documentation on the ELRC-SHARE editor</h2>
+
+        <p>The following guidelines provide detailed information on how to use the editing facility for documenting and
+            uploading LRs:
+        <ul>
+            <li><a href="{{ STATIC_URL }}Walkthrough_for_Contributors.pdf" target="_blank">Walkthrough for contributors</a></li>
+            <li><a href="{{ STATIC_URL }}Walkthrough_for_Editors.pdf" target="_blank">Walkthrough for editors</a> </li>
+        </ul>
+
+        <h2>ELRC-SHARE schema</h2>
+        <ul>
+            <li><a href="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" target="_blank">ELRC-SHARE schema XSD</a>
+            (based on the META-SHARE Schema)</li>
+            <li><a href="/documentation/ELRC-SHARE_schema.html" target="_blank">Documentation about the schema</a></li>
+        </ul>
+        </p>
+        <h2>Contact details</h2>
+        <ul>
+            <li><a href="http://www.lr-coordination.eu/helpdesk" target="_blank">Helpdesk</a></li>
+            <li>Only for technical help about the ELRC-SHARE repository, you can contact us
+            at {% encrypt_email 'elrc-share@ilsp.gr' %}.</li>
+        </ul>
+    </div>
+{% endblock %}
