@@ -1,33 +1,31 @@
 {% load replace %}
-
+{% load humanize %}
 {% spaceless %}
 
-<label class='title'>Classification</label>
-<div class="dataline">
-{% for key, value in classifications.items %}
-	{% if "classification" in key %}
-		<label class="subtitle"> {{ value.Subject___Topic }}
-			{% for key1, value1 in value.items %}		
-				{% if "Size_per" in key1 %}
-					 {% include "repository/resource_view/size.html" with size=value1 type="sub" %}
-				{% endif %}
-			{% endfor %}
-		</label>
-		{% for key1, value1 in value.items %}
-			{% if "Size_per" in key1 %}
-			{% else %}
-				{% if key1 != "Subject___Topic" %}
-					<div class="indented">
-						<label>
-							<strong>{{ key1|rep }}:</strong> {{ value1 }}
-						</label>
-					</div>
-				{% endif %}
-			{% endif %}
+    <label class='title'>Eurovoc Classification</label>
+    <div class="dataline">
+        {% for key, value in classifications.items %}
+            {% if "classification" in key %}
+                {% for key1, value1 in value.items %}
+                    {% if "Size_per" in key1 %}
+                        <div class="indented">
+                            <label>
+                                <strong>Size: </strong>{{ value1.Size|intcomma }} {{ value1.Size_unit }}
+                            </label>
+                        </div>
+                    {% else %}
+                        {% if key1 != "Subject___Topic" and key1 != "Conformance_to_classification_scheme"%}
+                        <div class="indented">
+                            <label>
+                                <strong>{{ key1|rep }}:</strong> {{ value1 }}
+                            </label>
+                        </div>
+                        {% endif %}
+                    {% endif %}
 
-		{% endfor %}
-	{% endif %}
-{% endfor %}
-</div>
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    </div>
 
 {% endspaceless %}
