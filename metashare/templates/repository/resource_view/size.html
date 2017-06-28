@@ -19,7 +19,7 @@
 		{% for key, value in size.items %}
 			{% for key1, value1 in value.items %}
 				{% if key1 == "Size_unit" %}
-					<label class='dataline indented'">
+					<label class="dataline indented">
 						{% if value.Size != "0" %}
 							{{ value.Size|intcomma }} {% if value.Size != "not available" and value.Size_unit != "Other" %}{{ value.Size_unit }}{% endif %}
 						{% endif %}
