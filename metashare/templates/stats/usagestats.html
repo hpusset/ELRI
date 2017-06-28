@@ -121,7 +121,7 @@ function addStatus(filter){
 
 <div class='tab-container'>
  <ul class='etabs'>
-   <li class='tab'><a href="{% url 'frontpage' %}stats/top/">META-SHARE node visits statistics</a></li>
+   <li class='tab'><a href="{% url 'frontpage' %}stats/top/">ELRC-SHARE visits statistics</a></li>
    <li class='tab tab-nobr'>Statistics on resource metadata</li>
    {% if user.username and myres %}
         <li class='tab'><a href="{% url 'frontpage' %}stats/mystats/">My resources</a></li>
@@ -141,8 +141,8 @@ function addStatus(filter){
             <h4>Filter by: <img src="{% static "metashare/css/sexybuttons/images/icons/silk/help.png" %}" class=pointer onclick="showdiv('filtershelp')"></h4>
           </div>  
           <div id="filtershelp" class="warning" style="visibility: hidden; display: none">
-                This panel shows which metadata have been used to describe the META-SHARE linguistic resources.
-                Each metadata defined in the <a href="http://www.meta-share.org/knowledgebase/DetailedPresentationOfTheModel" target="metamodel">META-SHARE model</a> can be either "required", "recommended" or "optional".
+                This panel shows which metadata have been used to describe the ELRC-SHARE linguistic resources.
+                Each metadata defined in the <a href="http://www.meta-share.org/knowledgebase/DetailedPresentationOfTheModel" target="metamodel">ELRC-SHARE model</a> can be either "required", "recommended" or "optional".
                 The metadata usage statistics reports two counters. The first counter says how many times a metadata has been 
                 filled in with a certain value, while the second counter says the number of resources for which the metadata has been used.
                 For instance <div class="coverage required"> 28/12 </div> means that the corresponding required metadata has been filled in 28 times (possibly with 
@@ -187,7 +187,7 @@ function addStatus(filter){
        </ul>
       {% endif %}
 
-      (the following lines are the metadata components and elements included in the <a href="http://www.meta-share.org/portal/knowledgebase/DetailedPresentationOfTheModel" target="metamodel">META-SHARE model</a> grouped by different roles and alphabetically sorted)       
+      (the following lines are the metadata components and elements included in the <a href="http://www.meta-share.org/portal/knowledgebase/DetailedPresentationOfTheModel" target="metamodel">ELRC-SHARE model</a> grouped by different roles and alphabetically sorted)
          
 <div style="float: right; padding: 5px; margin: 0px">[ <a href="javascript:expandAll();">Expand all</a>
             | <a href="javascript:collapseAll();">Collapse all</a> ]</div>
