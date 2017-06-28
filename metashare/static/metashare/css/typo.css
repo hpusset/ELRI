@@ -110,7 +110,7 @@ input.middle_input:focus {
 }
 
 div#content p, span {
-    font-family: 'TitilliumText', "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
     color: #666666;
     line-height: 1.7;
     font-size: 16px;
