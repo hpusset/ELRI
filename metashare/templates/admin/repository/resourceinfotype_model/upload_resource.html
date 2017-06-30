@@ -1,6 +1,7 @@
 {% extends "admin/base_site.html" %}
 {% load i18n admin_modify %}
 {% load static from staticfiles %}
+{% load progress_bar %}
 
 {% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />{% endblock %}
 
@@ -16,6 +17,7 @@
 {% block coltype %}colMS{% endblock %}
 
 {% block content %}<div id="content-main">
+{% progress_bar_media %}
 <form enctype="multipart/form-data" action="{{ form_url }}" method="post" id="{{ opts.model_name }}_form">{% csrf_token %}{% block form_top %}{% endblock %}
 <div>
 
@@ -37,6 +39,7 @@
 
 <table>
 {{form.as_table}}
+{% progress_bar %}
 </table>
 </div>
 </fieldset>

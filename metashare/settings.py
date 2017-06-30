@@ -65,7 +65,7 @@ LOGGING = {
 # The default is a cautious value in order to protect the server
 # against resource starvation; if you think your server can handle
 # bigger files, feel free to try and increase this value.
-MAXIMUM_UPLOAD_SIZE = 10 * 1024 * 1024
+MAXIMUM_UPLOAD_SIZE = 400 * 1024 * 1024
 
 # Synchronization info:
 SYNC_NEEDS_AUTHENTICATION = True
@@ -184,6 +184,13 @@ INSTALLED_APPS = (
     'metashare.recommendations',
     'metashare.repository',
     'metashare.bcp47',
+    'progressbarupload',
+)
+
+FILE_UPLOAD_HANDLERS = (
+    "progressbarupload.uploadhandler.ProgressBarUploadHandler",
+    "django.core.files.uploadhandler.MemoryFileUploadHandler",
+    "django.core.files.uploadhandler.TemporaryFileUploadHandler",
 )
 
 # add Kronos to installed apps if not running on Windows

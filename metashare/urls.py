@@ -56,6 +56,10 @@ urlpatterns += patterns('',
   (r'^{}sitemap\.xml$'.format(DJANGO_BASE), 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
 )
 
+urlpatterns += patterns('',
+  url(r'^{0}progressbarupload/'.format(DJANGO_BASE), include('progressbarupload.urls')),
+)
+
 class RobotView(TemplateView):
     
     def get_context_data(self, **kwargs):
