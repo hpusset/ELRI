@@ -282,7 +282,7 @@ class EditorGroupApplicationAdmin(admin.ModelAdmin):
                     # Send out notification email to the user
                     send_mail('Application accepted',
                       render_to_string('accounts/notification_editor_group_application_accepted.email', data),
-                      'no-reply@elrc-share.ilsp.gr', (req.user.email,),
+                      'no-reply@elrc-share.eu', (req.user.email,),
                       fail_silently=False)
                 except: #SMTPException:
                     # If the email could not be sent successfully, tell the user
@@ -341,7 +341,7 @@ class EditorGroupApplicationAdmin(admin.ModelAdmin):
             # Send out notification email to the user
             send_mail('Application turned down', render_to_string('accounts/'
                             'notification_editor_group_application_turned_down.email', data),
-                'no-reply@elrc-share.ilsp.gr', (obj.user.email,),
+                'no-reply@elrc-share.eu', (obj.user.email,),
                 fail_silently=False)
         except: #SMTPException:
             # If the email could not be sent successfully, tell the user
@@ -742,7 +742,7 @@ class OrganizationApplicationAdmin(admin.ModelAdmin):
                     # Send out notification email to the user
                     send_mail('Application accepted',
                       render_to_string('accounts/notification_organization_application_accepted.email', data),
-                      'no-reply@elrc-share.ilsp.gr', (req.user.email,),
+                      'no-reply@elrc-share.eu', (req.user.email,),
                       fail_silently=False)
                 except: #SMTPException:
                     # If the email could not be sent successfully, tell the user
@@ -793,7 +793,7 @@ class OrganizationApplicationAdmin(admin.ModelAdmin):
             # Send out notification email to the user
             send_mail('Application turned down', render_to_string('accounts/'
                             'notification_organization_application_turned_down.email', data),
-                'no-reply@elrc-share.ilsp.gr', (obj.user.email,),
+                'no-reply@elrc-share.eu', (obj.user.email,),
                 fail_silently=False)
         except: #SMTPException:
             # If the email could not be sent successfully, tell the user

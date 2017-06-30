@@ -54,7 +54,7 @@ def confirm(request, uuid):
     try:
         # Send an activation email.
         send_mail(_('Your ELRC-SHARE user account has been activated'),
-        email, 'no-reply@elrc-share.ilsp.gr', [user.email], fail_silently=False)
+        email, 'no-reply@elrc-share.eu', [user.email], fail_silently=False)
     except: # SMTPException:
         # there was a problem sending the activation e-mail -- not too bad
         pass
@@ -89,7 +89,7 @@ def contact(request):
             try:
                 send_mail(_('[ELRC-SHARE] Contact Form Request: %s')
                         % (data['subject'],), email_msg,
-                    'no-reply@elrc-share.ilsp.gr', superuser_emails,
+                    'no-reply@elrc-share.eu', superuser_emails,
                     fail_silently=False)
             except:
                 # if the email could not be sent successfully, tell the user
@@ -147,7 +147,7 @@ def create(request):
             try:
                 # Send out confirmation email to the given email address.
                 send_mail(_('Please confirm your ELRC-SHARE user account'),
-                email, 'no-reply@elrc-share.ilsp.gr', [_user.email],
+                email, 'no-reply@elrc-share.eu', [_user.email],
                 fail_silently=False)
             except: #SMTPException:
                 # If the email could not be sent successfully, tell the user
@@ -297,7 +297,7 @@ def editor_group_application(request):
                     # Send out notification email to the managers and superusers
                     send_mail('New editor membership request',
                         render_to_string('accounts/notification_editor_group_managers_application.email', data),
-                        'no-reply@elrc-share.ilsp.gr', emails, fail_silently=False)
+                        'no-reply@elrc-share.eu', emails, fail_silently=False)
                 except: #SMTPException:
                     # If the email could not be sent successfully, tell the user
                     # about it.
@@ -451,7 +451,7 @@ def organization_application(request):
                     # Send out notification email to the organization managers and superusers
                     send_mail('New organization membership request',
                         render_to_string('accounts/notification_organization_managers_application.email', data),
-                        'no-reply@elrc-share.ilsp.gr', emails, fail_silently=False)
+                        'no-reply@elrc-share.eu', emails, fail_silently=False)
                 except: #SMTPException:
                     # If the email could not be sent successfully, tell the user
                     # about it.
@@ -513,7 +513,7 @@ def reset(request, uuid=None):
                 try:
                     # Send out reset email to the given email address.
                     send_mail(_('Please confirm your ELRC-SHARE reset request'),
-                    email, 'no-reply@elrc-share.ilsp.gr', [user.email],
+                    email, 'no-reply@elrc-share.eu', [user.email],
                     fail_silently=False)
                 
                 except SMTPException:
@@ -560,7 +560,7 @@ def reset(request, uuid=None):
     try:
         # Send out re-activation email to the given email address.
         send_mail(_('Your ELRC-SHARE user account has been re-activated'),
-        email, 'no-reply@elrc-share.ilsp.gr', [user.email], fail_silently=False)
+        email, 'no-reply@elrc-share.eu', [user.email], fail_silently=False)
     
     except SMTPException:
         # If the email could not be sent successfully, tell the user about it.
