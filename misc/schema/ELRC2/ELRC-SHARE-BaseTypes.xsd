@@ -2267,7 +2267,7 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="06">
+				<xs:enumeration value="08">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>INTERNATIONAL RELATIONS</xs:label>
