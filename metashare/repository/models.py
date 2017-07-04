@@ -478,6 +478,7 @@ class resourceCreationInfoType_model(SchemaModel):
     __schema_name__ = 'resourceCreationInfoType'
     __schema_fields__ = (
       ( u'createdUsingELRCServices', u'createdUsingELRCServices', REQUIRED ),
+      (u'anonymized', u'anonymized', REQUIRED),
       ( 'resourceCreator/personInfo', 'resourceCreator', RECOMMENDED ),
       ( 'resourceCreator/organizationInfo', 'resourceCreator', RECOMMENDED ),
       ( u'fundingProject', u'fundingProject', OPTIONAL ),
@@ -496,6 +497,12 @@ class resourceCreationInfoType_model(SchemaModel):
       'the creation process of the resource; if so, please specify the s' \
       'ervices used in the description field of the metadata record',
       default=False,
+    )
+
+    anonymized = MetaBooleanField (
+        verbose_name= 'Anonymized',
+        help_text='Declares whether the resource has been anonymized',
+        default=False
     )
 
     resourceCreator = models.ManyToManyField("actorInfoType_model",

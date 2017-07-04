@@ -353,6 +353,22 @@
 					<xs:documentation>Specifies whether ELRC services have been exploited in the creation process of the resource; if so, please specify the services used in the description field of the metadata record</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="anonymized" type="xs:boolean" default="false">
+				<xs:annotation>
+					<xs:documentation>Declares whether the resource has been anonymized</xs:documentation>
+					<xs:appinfo>
+						<label>Anonymized</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="anonymizationDetails" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If the resource has been anonymized, this field can be used for entering more information, e.g. tool or method used for the anonymization, by whom it has been performed, whether there was any check of the results etc.</xs:documentation>
+					<xs:appinfo>
+						<label>Anonymization details</label>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="resourceCreator" type="ms:actorInfoType" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Groups information on the person or the organization that has created the resource</xs:documentation>
@@ -2251,7 +2267,7 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="08">
+				<xs:enumeration value="06">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>INTERNATIONAL RELATIONS</xs:label>
