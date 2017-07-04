@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited by ILSP/Athena R.C. -->
-<xs:schema xmlns:ms="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" xml:lang="en">
+<xs:schema xmlns:ms="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" xml:lang="en">
 	<!-- definition of global types -->
 	<xs:simpleType name="httpURI">
 		<xs:restriction base="xs:anyURI">
@@ -523,6 +523,13 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
+				<xs:enumeration value="application/json">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>JSON</xs:label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
 				<xs:enumeration value="application/x-tmx+xml">
 					<xs:annotation>
 						<xs:appinfo>
@@ -618,6 +625,34 @@
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>MS-Access database</xs:label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>			
+				<xs:enumeration value="application/vnd.ms-excel">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>MS-Excel xls</xs:label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>		
+				<xs:enumeration value="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>MS-Excel xlsx</xs:label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>			
+				<xs:enumeration value="application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>MS-Word docx</xs:label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>			
+				<xs:enumeration value="application/msword">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>MS-Word doc</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
