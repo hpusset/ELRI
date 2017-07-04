@@ -654,7 +654,7 @@
 				<xs:complexType>
 					<xs:simpleContent>
 						<xs:restriction base="ms:myString">
-							<xs:maxLength value="1000"/>
+							<xs:maxLength value="1500"/>
 						</xs:restriction>
 					</xs:simpleContent>
 				</xs:complexType>

@@ -1709,7 +1709,7 @@ class licenceInfoType_model(SchemaModel):
       help_text='The name with which a licence is known; to be used for ' \
       'licences not included in the pre-defined list of recommended lice' \
       'nces',
-      blank=True, max_length=1000, )
+      blank=True, max_length=1500, )
 
     otherLicence_TermsText = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever,
