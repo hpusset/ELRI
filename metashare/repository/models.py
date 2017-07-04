@@ -1387,7 +1387,7 @@ class organizationInfoType_model(actorInfoType_model):
     organizationName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever,
       verbose_name='Organization name',
-      max_val_length=100,
+      max_val_length=150,
       help_text='The full name of an organization',
       )
 
