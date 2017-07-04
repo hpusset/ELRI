@@ -2317,7 +2317,7 @@ class textFormatInfoType_model(SchemaModel):
       'YPE RECOMMENDED VALUES (http://www.iana.org/assignments/media-typ' \
       'es/media-types.xhtml)',
 
-      max_length=50,
+      max_length=100,
       choices=sorted(TEXTFORMATINFOTYPE_DATAFORMAT_CHOICES['choices'],
                      key=lambda choice: choice[1].lower()),
       )
