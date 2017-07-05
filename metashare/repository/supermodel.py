@@ -90,6 +90,27 @@ def _make_choices_from_list(source_list):
         _max_len = max(_max_len, len(value))
     return {'max_length': _max_len, 'choices': tuple(_choices)}
 
+
+def _make_choices_from_list_alt(source_list,dic):
+    """
+    Converts a given list of Strings to tuple choices.
+
+    The Dictionary argument "dic" is used for mapping & displaying a desired label
+    for every value in the source_list that should be stored in the db. The label
+    is prettified when displayed.
+
+    Returns a dictionary containing two keys:
+    - max_length: the maximum char length for this source list,
+    - choices: the list of (value, pretty_print_value) tuple choices.
+    """
+    _choices = []
+    _max_len = 1
+    for key in source_list:
+        _choices.append((key ,prettify_camel_case_string(dic[key])))
+        _max_len = max(_max_len, len(dic[key]))
+    return {'max_length': _max_len, 'choices': tuple(_choices)}
+
+
 def _make_choices_from_int_list(source_list):
     """
     Converts a given list of Integers to tuple choices.
