@@ -2289,12 +2289,15 @@ class corpusTextInfoType_model(SchemaModel):
 
 TEXTFORMATINFOTYPE_DATAFORMAT_CHOICES = _make_choices_from_list([
   u'text/plain', u'application/vnd.xmi+xml', u'application/xml',
-  u'application/x-tmx+xml',u'application/x-xces+xml',
+  u'application/json', u'application/x-tmx+xml',u'application/x-xces+xml',
   u'application/tei+xml',u'application/rdf+xml', u'application/xhtml+xml',
-  u'text/sgml',u'text/html', u'application/x-tex', u'application/rtf',
+  u'text/sgml', u'text/html', u'application/x-tex', u'application/rtf',
   u'application/x-latex',u'text/csv', u'text/tab-separated-values',
-  u'application/pdf',u'application/x-msaccess', u'application/x-SDL-TM',
-  u'other',
+  u'application/pdf',u'application/x-msaccess', u'application/vnd.ms-excel',
+  u'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  u'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  u'application/msword',
+  u'application/x-SDL-TM',  u'other',
 ])
 
 # pylint: disable-msg=C0103
