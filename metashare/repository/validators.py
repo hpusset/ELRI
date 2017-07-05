@@ -85,3 +85,13 @@ def validate_dict_values(dict_value):
             # pylint: disable-msg=E1102
             raise ValidationError(_(u'This field is required.'))
         validate_matches_xml_char_production(value)
+
+
+def validate_size_is_integer(value):
+    if not value.isdigit():
+        raise ValidationError(_(u'This field accepts only number values (without commas)'))
+
+
+def validate_attribution_text(value):
+    if u'[' in value['en'] and u']' in value['en']:
+        raise ValidationError(_(u'Please edit the attribution text template'))
