@@ -19,13 +19,15 @@ from metashare.repository.fields import MultiTextField, MetaBooleanField, \
   MultiSelectField, DictField, XmlCharField, best_lang_value_retriever
 from metashare.repository.validators import validate_lang_code_keys, \
   validate_dict_values, validate_xml_schema_year, \
-  validate_matches_xml_char_production
+  validate_matches_xml_char_production, validate_size_is_integer, validate_attribution_text
 from metashare.settings import DJANGO_BASE, LOG_HANDLER, DJANGO_URL
 from metashare.stats.model_utils import saveLRStats, DELETE_STAT, UPDATE_STAT
 from metashare.storage.models import StorageObject, MASTER, COPY_CHOICES
 from metashare.recommendations.models import ResourceCountPair, \
     ResourceCountDict
-
+# from metashare.repository.language_choices import LANGUAGENAME_CHOICES
+from metashare.repository.dataformat_choices import TEXTFORMATINFOTYPE_DATAFORMAT_CHOICES
+# MIMETYPELABEL_TO_MIMETYPEVALUE
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -48,23 +50,28 @@ HTTPURI_VALIDATOR = RegexValidator(r"^(?i)((http|ftp)s?):\/\/"
         " see also RFC 2396).", ValidationError)
 
 # namespace of the META-SHARE metadata XML Schema
-SCHEMA_NAMESPACE = 'http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/'
+SCHEMA_NAMESPACE = 'http://elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/'
 # version of the META-SHARE metadata XML Schema
 SCHEMA_VERSION = '2.0'
 
-def languagename_optgroup_choices():
-    '''
+
+def country_optgroup_choices():
+    """
     Group the choices in groups. The first group the EU languages
     and the second group contains the rest.
-    '''
-    most_used_choices = ('', _make_choices_from_list(iana.get_most_used_languages())['choices'])
-    more_choices = ('More', _make_choices_from_list(sorted(iana.get_rest_of_languages()))['choices'])
-    optgroup = [most_used_choices, more_choices]
+    """
+    eu_choices = ('EU', _make_choices_from_list(iana.get_eu_regions())['choices'])
+    more_choices = ('More', _make_choices_from_list(sorted(iana.get_rest_of_regions()))['choices'])
+    optgroup = [eu_choices, more_choices]
     return optgroup
 
 
 # pylint: disable-msg=C0103
 class resourceInfoType_model(SchemaModel):
+    """
+    Groups together all information required for the description of
+    language resources
+    """
 
     class Meta:
         verbose_name = "Resource"
@@ -181,7 +188,7 @@ class resourceInfoType_model(SchemaModel):
         self.storage_object.save()
         # REMINDER: the SOLR indexer in search_indexes.py relies on us
         # calling storage_object.save() from resourceInfoType_model.save().
-        # Should we ever change that, we must modify 
+        # Should we ever change that, we must modify
         # resourceInfoType_modelIndex._setup_save() accordingly!
 
         #get the resource description languages
@@ -189,6 +196,9 @@ class resourceInfoType_model(SchemaModel):
 
         # Call save() method from super class with all arguments.
         super(resourceInfoType_model, self).save(*args, **kwargs)
+
+        # get the metadataInfo and update the languages to match the description
+        # languages
         self.metadataInfo.save(langs = resource_lang)
 
         # update statistics
@@ -217,12 +227,12 @@ class resourceInfoType_model(SchemaModel):
         """
         Returns part of the complete URL which resembles the single resource
         view for this resource.
-        
+
         The returned part prepended with a '/' can be appended to `DJANGO_URL`
         in order to get the complete URL.
         """
         return 'repository/browse/{}/{}/'.format(slugify(self.__unicode__()),
-                                                 self.storage_object.identifier)
+            self.storage_object.identifier)
 
     def publication_status(self):
         """
@@ -273,7 +283,7 @@ class sizeInfoType_model(SchemaModel):
       verbose_name='Size',
       help_text='Specifies the size of the resource with regard to the S' \
       'izeUnit measurement in form of a number',
-      max_length=100, )
+      max_length=100, validators=[validate_size_is_integer])
 
     sizeUnit = models.CharField(
       verbose_name='Size unit',
@@ -306,6 +316,9 @@ IDENTIFICATIONINFOTYPE_APPROPRIATENESSFORDSI_CHOICES = _make_choices_from_list([
 
 # pylint: disable-msg=C0103
 class identificationInfoType_model(SchemaModel):
+    """
+    Groups together information needed to identify the resource
+    """
 
     class Meta:
         verbose_name = "Identification"
@@ -351,7 +364,7 @@ class identificationInfoType_model(SchemaModel):
       'uage.',
       blank=True)
 
-    url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=0, max_length=1000),
+    url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=0, attrs={'size': '250'}),
       verbose_name='Landing page (URL)', validators=[HTTPURI_VALIDATOR],
       help_text='A Web page that can be navigated to in a Web browser to' \
       ' gain access to the resource, its distributions and/or additional' \
@@ -370,7 +383,7 @@ class identificationInfoType_model(SchemaModel):
       help_text='Reference to the unique ISLRN number of the resource; i' \
       'f the resource has not been assigned an ISLRN yet, you may reques' \
       't for one at: http://www.islrn.org/',
-      blank=True, max_length=17, )
+      blank=True, max_length=17, validators=[validate_matches_xml_char_production],)
 
     identifier = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=1, max_length=100),
       verbose_name='Identifier',
@@ -470,6 +483,9 @@ class validationInfoType_model(SchemaModel):
 
 # pylint: disable-msg=C0103
 class resourceCreationInfoType_model(SchemaModel):
+    """
+    Groups information on the creation procedure of a resource
+    """
 
     class Meta:
         verbose_name = "Resource creation"
@@ -539,6 +555,12 @@ CREATIONINFOTYPE_CREATIONMODE_CHOICES = _make_choices_from_list([
 
 # pylint: disable-msg=C0103
 class creationInfoType_model(SchemaModel):
+    """
+    Groups together information on the resource creation (e.g. for
+    corpora, selection of texts/audio files/ video files etc. and
+    structural encoding thereof; for lexica, construction of lemma
+    list etc.)
+    """
 
     class Meta:
         verbose_name = "Creation"
@@ -591,6 +613,9 @@ class creationInfoType_model(SchemaModel):
 
 # pylint: disable-msg=C0103
 class metadataInfoType_model(SchemaModel):
+    """
+    Groups information on the metadata record itself
+    """
 
     class Meta:
         verbose_name = "Metadata"
@@ -620,13 +645,13 @@ class metadataInfoType_model(SchemaModel):
       'etadata record',
       blank=True, null=True, related_name="metadataCreator_%(class)s_related", )
 
-    metadataLanguageName = MultiTextField(max_length=1000, widget=MultiChoiceWidget(widget_id=2, choices= languagename_optgroup_choices()),
+    metadataLanguageName = MultiTextField(max_length=100, widget=MultiChoiceWidget(widget_id=2, choices=_make_choices_from_list(sorted(iana.get_most_used_languages()))['choices']),
       verbose_name='Metadata language',
       help_text='The name of the language in which the metadata descript' \
       'ion is written, according to IETF BCP47',
       editable=False, blank=True, validators=[validate_matches_xml_char_production], )
 
-    metadataLanguageId = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=3, max_length=1000),
+    metadataLanguageId = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=3, max_length=1000),
       verbose_name='Metadata language identifier',
       help_text='The identifier of the language in which the metadata de' \
       'scription is written according to IETF BCP47',
@@ -660,6 +685,11 @@ class metadataInfoType_model(SchemaModel):
 
 # pylint: disable-msg=C0103
 class documentationInfoType_model(SubclassableModel):
+    """
+    Used to bring together information on documents (as a structured
+    bibliographic record or in an unstructured format) and free text
+    descriptions
+    """
 
     __schema_name__ = 'SUBCLASSABLE'
 
@@ -675,6 +705,13 @@ DOCUMENTINFOTYPE_DOCUMENTTYPE_CHOICES = _make_choices_from_list([
 
 # pylint: disable-msg=C0103
 class documentInfoType_model(documentationInfoType_model):
+    """
+    Groups information on all the documents resporting on various
+    aspects of the resource (creation, usage etc.), published or
+    unpublished; it is used in various places of the metadata schema
+    depending on its role (e.g. usage report, validation report,
+    annotation manual etc.)
+    """
 
     class Meta:
         verbose_name = "Document"
@@ -817,13 +854,13 @@ class documentInfoType_model(documentationInfoType_model):
       verbose_name='Document language',
       help_text='The language the document is written in (according to t' \
       'he IETF BCP47 guidelines)',
-      blank=True, choices=languagename_optgroup_choices(), max_length=1000, )
+      blank=True, choices=_make_choices_from_list(sorted(iana.get_most_used_languages()))['choices'], max_length=150, )
 
     documentLanguageId = XmlCharField(
       verbose_name='Document language identifier',
       help_text='The id of the language the document is written in (acco' \
       'rding to the IETF BCP47 guidelines)',
-      editable=False, blank=True, max_length=1000, )
+      editable=False, blank=True, max_length=20, )
 
 
     source_url = models.URLField(default=DJANGO_URL,
@@ -850,6 +887,9 @@ class documentInfoType_model(documentationInfoType_model):
 
 # pylint: disable-msg=C0103
 class resourceDocumentationInfoType_model(SchemaModel):
+    """
+    Groups together information on any document describing the resource
+    """
 
     class Meta:
         verbose_name = "Resource documentation"
@@ -878,7 +918,7 @@ class resourceDocumentationInfoType_model(SchemaModel):
       help_text='URL link to an online manual or help pages',
       blank=True, max_length=1000, )
 
-    samplesLocation = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=8, max_length=1000),
+    samplesLocation = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=8, attrs={'size': '250'}),
       verbose_name='Samples location', validators=[HTTPURI_VALIDATOR],
       help_text='A url with samples of the resource or, in the case of t' \
       'ools, of samples of the output',
@@ -890,24 +930,13 @@ class resourceDocumentationInfoType_model(SchemaModel):
         formatstring = u'{}'
         return self.unicode_(formatstring, formatargs)
 
-DOMAININFOTYPE_DOMAIN_CHOICES = _make_choices_from_list([
-  u'POLITICS', u'INTERNATIONAL RELATIONS', u'EUROPEAN UNION', u'LAW',
-  u'ECONOMICS',u'TRADE', u'FINANCE', u'SOCIAL QUESTIONS',
-  u'EDUCATION AND COMMUNICATIONS',u'SCIENCE', u'BUSINESS AND COMPETITION',
-  u'EMPLOYMENT AND WORKING CONDITIONS',u'TRANSPORT', u'ENVIRONMENT',
-  u'AGRICULTURE, FORESTRY AND FISHERIES',u'AGRI-FOODSTUFFS',
-  u'PRODUCTION, TECHNOLOGY AND RESEARCH',u'ENERGY', u'INDUSTRY',
-  u'GEOGRAPHY',u'INTERNATIONAL ORGANISATIONS',
-])
-
-DOMAININFOTYPE_DOMAINID_CHOICES = _make_choices_from_list([
-  u'04', u'08', u'10', u'12', u'16', u'20', u'24', u'28', u'32', u'36',
-  u'40',u'44', u'48', u'52', u'56', u'60', u'64', u'66', u'68', u'72',
-  u'76',
-])
 
 # pylint: disable-msg=C0103
 class domainInfoType_model(SchemaModel):
+    """
+    Groups together information on domains represented in the resource;
+    can be repeated for parts of the resource with distinct domain
+    """
 
     class Meta:
         verbose_name = "Domain"
@@ -941,7 +970,6 @@ class domainInfoType_model(SchemaModel):
                   'resource or the tool/service, taken from the '
                   'EUROVOC domains: '
                   'http://eurovoc.europa.eu/drupal',
-
         editable=False,
         max_length=3,
         null=True,
@@ -996,6 +1024,8 @@ class domainInfoType_model(SchemaModel):
         return _unicode
 
     def save(self, *args, **kwargs):
+        # automatically save the EUROVOC domain id
+
         if self.domain:
             try:
                 self.domainId = eurovoc.get_domain_id(self.domain)
@@ -1039,8 +1069,15 @@ ANNOTATIONINFOTYPE_ANNOTATIONMODE_CHOICES = _make_choices_from_list([
   u'automatic', u'manual', u'mixed', u'interactive',
 ])
 
+ANNOTATIONINFOTYPE_SEGMENTATIONLEVEL_CHOICES = _make_choices_from_list([
+    u'paragraph', u'sentence', u'clause', u'word', u'token', u'wordGroup', u'utterance', u'phrase', u'other',
+])
+
 # pylint: disable-msg=C0103
 class annotationInfoType_model(SchemaModel):
+    """
+    Groups information on the annotated part(s) of a resource
+    """
 
     class Meta:
         verbose_name = "Annotation"
@@ -1050,6 +1087,7 @@ class annotationInfoType_model(SchemaModel):
     __schema_fields__ = (
       ( u'annotationType', u'annotationType', REQUIRED ),
       ( u'annotationStandoff', u'annotationStandoff', OPTIONAL ),
+      (u'segmentationLevel', u'segmentationLevel', OPTIONAL),
       ( u'typesystem', u'typesystem', RECOMMENDED ),
       ( u'annotationSchema', u'annotationSchema', RECOMMENDED ),
       ( u'annotationResource', u'annotationResource', RECOMMENDED ),
@@ -1103,6 +1141,16 @@ class annotationInfoType_model(SchemaModel):
       ' ontology, term lexicon etc.) used in the annotation of the resou' \
       'rce or used by the tool/service',
       blank=True, max_length=500, )
+
+    segmentationLevel = MultiSelectField(
+      verbose_name='Segmentation level',
+      help_text='Specifies the segmentation unit in terms of which the r' \
+                  'esource has been segmented or the level of segmentation a tool/se' \
+                  'rvice requires/outputs',
+      blank=True,
+      max_length=1 + len(ANNOTATIONINFOTYPE_SEGMENTATIONLEVEL_CHOICES['choices']) / 4,
+      choices=ANNOTATIONINFOTYPE_SEGMENTATIONLEVEL_CHOICES['choices'],
+    )
 
     conformanceToStandardsBestPractices = MultiSelectField(
       verbose_name='Conformance to standards / best practices',
@@ -1162,6 +1210,10 @@ class annotationInfoType_model(SchemaModel):
 
 # pylint: disable-msg=C0103
 class targetResourceInfoType_model(SchemaModel):
+    """
+    Groups information on the resource related to the one being
+    described; can be an identifier, a resource name or a URL
+    """
 
     class Meta:
         verbose_name = "Target resource"
@@ -1269,6 +1321,10 @@ class dependenciesInfoType_model(SchemaModel):
 
 # pylint: disable-msg=C0103
 class communicationInfoType_model(SchemaModel):
+    """
+    Groups information on communication details of a person or an
+    organization
+    """
 
     class Meta:
         verbose_name = "Communication"
@@ -1292,7 +1348,7 @@ class communicationInfoType_model(SchemaModel):
       help_text='The email address of a person or an organization',
       )
 
-    url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=12, max_length=1000),
+    url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=12, max_length=150),
       verbose_name='URL (Landing page)', validators=[HTTPURI_VALIDATOR],
       help_text='A URL used as homepage of an entity (e.g. of a person, ' \
       'organization, resource etc.); it provides general information (fo' \
@@ -1325,12 +1381,12 @@ class communicationInfoType_model(SchemaModel):
       'ed in the postal address of a person or organization',
       blank=True, max_length=100, )
 
-    country = XmlCharField(
+    country = models.CharField(
       verbose_name='Country',
       help_text='The name of the country mentioned in the postal address' \
       ' of a person or organization as defined in the list of values of ' \
       'ISO 3166',
-      blank=True, choices =_make_choices_from_list(sorted(iana.get_all_regions()))['choices'], max_length=100, )
+      blank=True, max_length=100, choices=country_optgroup_choices())
 
     countryId = XmlCharField(
       verbose_name='Country identifier',
@@ -1359,6 +1415,11 @@ class communicationInfoType_model(SchemaModel):
 
 # pylint: disable-msg=C0103
 class actorInfoType_model(SubclassableModel):
+    """
+    Used to bring persons and organizations (in whatever role they may
+    have with regard to the resource, e.g., resource creator, IPR
+    holder, etc.)
+    """
 
     __schema_name__ = 'SUBCLASSABLE'
 
@@ -1368,6 +1429,9 @@ class actorInfoType_model(SubclassableModel):
 
 # pylint: disable-msg=C0103
 class organizationInfoType_model(actorInfoType_model):
+    """
+    Groups information on organizations related to the resource
+    """
 
     class Meta:
         verbose_name = "Organization"
@@ -1433,6 +1497,12 @@ PERSONINFOTYPE_SEX_CHOICES = _make_choices_from_list([
 
 # pylint: disable-msg=C0103
 class personInfoType_model(actorInfoType_model):
+    """
+    Groups information relevant to persons related to the resource; to
+    be used mainly for contact persons, resource creators,
+    validators, annotators etc. for whom personal data can be
+    provided
+    """
 
     class Meta:
         verbose_name = "Person"
@@ -1520,6 +1590,9 @@ DISTRIBUTIONINFOTYPE_DISTRIBUTIONMEDIUM_CHOICES = _make_choices_from_list([
 
 # pylint: disable-msg=C0103
 class distributionInfoType_model(SchemaModel):
+    """
+    Groups information on the distribution of the resource
+    """
 
     class Meta:
         verbose_name = "Distribution"
@@ -1554,7 +1627,7 @@ class distributionInfoType_model(SchemaModel):
       help_text='Specifies the availability status of the resource; rest' \
       'rictionsOfUse can be further used to indicate the specific terms ' \
       'of availability',
-
+      editable=False,
       max_length=40,
       choices=sorted(DISTRIBUTIONINFOTYPE_AVAILABILITY_CHOICES['choices'],
                      key=lambda choice: choice[1].lower()),
@@ -1570,6 +1643,7 @@ class distributionInfoType_model(SchemaModel):
       verbose_name='Allows uses besides DGT',
       help_text='Whether the resource can be used for purposes other tha' \
       'n those of the DGT',
+      default=True
       )
 
     licenceInfo = models.ManyToManyField("licenceInfoType_model",
@@ -1667,6 +1741,53 @@ class distributionInfoType_model(SchemaModel):
         formatstring = u'{}, licenses: {}'
         return self.unicode_(formatstring, formatargs)
 
+    def has_personal_data(self):
+        return self.personalDataIncluded
+
+    def has_sensitive_data(self):
+        return self.sensitiveDataIncluded
+
+    # def check_attribution_text(self):
+    #     from templatetags.replace import pretty_camel
+    #     if u'attribution' in self.restrictionsOfUse and \
+    #             (not self.attributionText or self.attributionText['en'] == ""):
+    #         try:
+    #             self.attributionText['en'] = "[Resource A] was created for the European Language " \
+    #                                          "Resources Coordination Action (ELRC) (http://lr-coordination.eu/) " \
+    #                                          "by [Person X], [Institute of X] " \
+    #                                          "with primary data copyrighted by [Z] " \
+    #                                          "and is licensed under \"{} {}\" ({})." \
+    #                 .format(pretty_camel(self.licence),
+    #                         LICENCES_DETAILS[self.licence]["version"],
+    #                         LICENCES_DETAILS[self.licence]["url"])
+    #         except KeyError:
+    #             pass
+
+    # def save(self, *args, **kwargs):
+    #     licences = []
+    #     for licenceInfo in self.licenceinfotype_model_set.all():
+    #         licences.append(licenceInfo.licence)
+    #
+    #     # for l in licences:
+    #     #     if not self.allowsUsesBesidesDGT:
+    #     #         if l == u'underNegotiation':
+    #     #             self.allowsUsesBesidesDGT = False
+    #     #
+    #     #         else:
+    #     #             self.allowsUsesBesidesDGT = True
+    #         # if l.startswith(u"CC") or l == u"non-standard/Other_Licence/Terms":
+    #         #     self.allowsUsesBesidesDGT = True
+    #
+    #     if u'underReview' in licences:
+    #         self.availability = u'underReview'
+    #     else:
+    #         self.availability = u'available'
+    #
+    #     # Call save() method from super class with all arguments.
+    #     super(distributionInfoType_model, self).save(*args, **kwargs)
+
+
+
 LICENCEINFOTYPE_LICENCE_CHOICES = _make_choices_from_list([
   u'CC-BY-4.0', u'CC-BY-NC-4.0', u'CC-BY-NC-ND-4.0', u'CC-BY-NC-SA-4.0',
   u'CC-BY-ND-4.0',u'CC-BY-SA-4.0', u'CC0-1.0', u'CC-BY-3.0',
@@ -1679,13 +1800,97 @@ LICENCEINFOTYPE_LICENCE_CHOICES = _make_choices_from_list([
   u'openUnder-PSI',
 ])
 
-LICENCEINFOTYPE_RESTRICTIONSOFUSE_CHOICES = _make_choices_from_list([
+
+LICENCES_DETAILS = {
+    u'ODC-BY-1.0': {"url": "http://opendatacommons.org/licenses/by/", "version": "1.0"},
+    u'ODbL-1.0': {"url": "http://opendatacommons.org/licenses/odbl/", "version": "1.0"},
+
+    u'CC-BY-4.0': {"url": "https://creativecommons.org/licenses/by/4.0/", "version": "4.0"},
+    u'CC-BY-NC-4.0': {"url": "https://creativecommons.org/licenses/by-nc/4.0/", "version": "4.0"},
+    u'CC-BY-NC-ND-4.0': {"url": "https://creativecommons.org/licenses/by-nc-nd/4.0/", "version": "4.0"},
+    u'CC-BY-NC-SA-4.0': {"url": "https://creativecommons.org/licenses/by-nc-sa/4.0/", "version": "4.0"},
+    u'CC-BY-ND-4.0': {"url": "https://creativecommons.org/licenses/by-nd/4.0/", "version": "4.0"},
+    u'CC-BY-SA-4.0': {"url": "https://creativecommons.org/licenses/by-sa/4.0/", "version": "4.0"},
+
+    u'CC-BY-3.0': {"url": "https://creativecommons.org/licenses/by/3.0/", "version": "3.0"},
+    u'CC-BY-NC-3.0': {"url": "https://creativecommons.org/licenses/by-nc/3.0/", "version": "3.0"},
+    u'CC-BY-NC-ND-3.0': {"url": "https://creativecommons.org/licenses/by-nc-nd/3.0/", "version": "3.0"},
+    u'CC-BY-NC-SA-3.0': {"url": "https://creativecommons.org/licenses/by-nc-sa/3.0/", "version": "3.0"},
+    u'CC-BY-ND-3.0': {"url": "https://creativecommons.org/licenses/by-nd/3.0/", "version": "3.0"},
+    u'CC-BY-SA-3.0': {"url": "https://creativecommons.org/licenses/by-sa/3.0/", "version": "3.0"},
+
+    u'CC0-1.0': {"url": "https://creativecommons.org/publicdomain/zero/1.0/", "version": "1.0"},
+    u'dl-de/by-2-0': {"url": "https://www.govdata.de/dl-de/by-2-0", "version": "2.0"},
+    u'dl-de/zero-2-0': {"url": "https://www.govdata.de/dl-de/zero-2-0", "version": "2.0"},
+    u'IODL-1.0': {"url": "http://www.formez.it/iodl/", "version": "1.0"},
+    u'NLOD-1.0': {"url": "http://data.norge.no/nlod/en/1.0", "version": "1.0"},
+    u'OGL-3.0': {"url": "http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/", "version": "3.0"},
+    u'NCGL-1.0': {
+        "url": "http://www.nationalarchives.gov.uk/doc/"
+               "non-commercial-government-licence/non-commercial-government-licence.htm",
+        "version": "1.0"},
+    u'PDDL-1.0': {"url": "http://opendatacommons.org/licenses/pddl/", "version": "1.0"},
+    u'AGPL-3.0': {"url": "https://opensource.org/licenses/AGPL-3.0", "version": "3.0"},
+    u'Apache-2.0': {"url": "http://www.apache.org/licenses/LICENSE-2.0", "version": "2.0"},
+    u'BSD-4-Clause': {"url": "https://directory.fsf.org/wiki/License:BSD_4Clause", "version": ""},
+    u'BSD-3-Clause': {"url": "http://www.opensource.org/licenses/BSD-3-Clause", "version": ""},
+    u'BSD-2-Clause': {"url": "http://www.opensource.org/licenses/BSD-2-Clause", "version": ""},
+    u'GFDL-1.3': {"url": "http://www.gnu.org/licenses/fdl-1.3.txt", "version": "1.3"},
+    u'GPL-3.0': {"url": "http://www.gnu.org/licenses/gpl-3.0-standalone.html", "version": "3.0"},
+    u'LGPL-3.0': {"url": "http://www.gnu.org/licenses/lgpl-3.0-standalone.html"},
+    u'MIT': {"url": "http://www.opensource.org/licenses/MIT", "version": ""},
+    u'EPL-1.0': {"url": "http://www.eclipse.org/legal/epl-v10.html", "version": "1.0"},
+    u'LO-OL-v2': {"url": "https://wiki.data.gouv.fr/images/9/9d/Licence_Ouverte.pdf", "version": "1.0"},
+}
+
+
+LICENCEINFOTYPE_CONDITIONSOFUSE_CHOICES = _make_choices_from_list([
   u'nonCommercialUse', u'commercialUse', u'attribution', u'shareAlike',
   u'noDerivatives', u'research', u'education', u'compensate', u'other',
 ])
 
+#TODO: Add MORE
+LICENCES_TO_CONDITIONS = {
+    u'ODC-BY-1.0': [u'attribution'],
+    u'ODbL-1.0': [u'attribution', u'shareAlike'],
+
+    u'CC-BY-4.0': [u'attribution'],
+    u'CC-BY-NC-4.0': [u'attribution', u'nonCommercialUse'],
+    u'CC-BY-NC-ND-4.0': [u'attribution', u'nonCommercialUse', u'noDerivatives'],
+    u'CC-BY-NC-SA-4.0': [u'attribution', u'nonCommercialUse', u'shareAlike'],
+    u'CC-BY-ND-4.0': [u'attribution', u'noDerivatives'],
+    u'CC-BY-SA-4.0': [u'attribution', u'shareAlike'],
+
+    u'CC-BY-3.0': [u'attribution'],
+    u'CC-BY-NC-3.0': [u'attribution', u'nonCommercialUse'],
+    u'CC-BY-NC-ND-3.0': [u'attribution', u'nonCommercialUse', u'noDerivatives'],
+    u'CC-BY-NC-SA-3.0': [u'attribution', u'nonCommercialUse', u'shareAlike'],
+    u'CC-BY-ND-3.0': [u'attribution', u'noDerivatives'],
+    u'CC-BY-SA-3.0': [u'attribution', u'shareAlike'],
+
+    u'dl-de/by-2-0': [u'attribution'],
+    u'IODL-1.0': [u'attribution'],
+    u'NLOD-1.0': [u'attribution'],
+    u'OGL-3.0': [u'attribution'],
+    u'NCGL-1.0': [u'attribution', u'nonCommercialUse'],
+}
+
+
+
+LICENCES_NO_CONDITIONS = [
+    u'PDDL-1.0', u'CC0-1.0', u'dl-de/zero-2-0'
+]
+
+
 # pylint: disable-msg=C0103
 class licenceInfoType_model(SchemaModel):
+    """
+    Groups information on different forms of distribution of the resource
+    and the corresponding licences under which they are distributed;
+    can be repeated to allow for different modes of access and conditions
+    of use (e.g. free for academic use, on-a-fee basis for commercial use,
+    download of a sample for free use etc.)
+    """
 
     class Meta:
         verbose_name = "Licence"
@@ -1703,7 +1908,7 @@ class licenceInfoType_model(SchemaModel):
     licence = models.CharField(
       verbose_name='Licence',
       help_text='The licence of use for the resource; for an overview of' \
-      ' licences, please visit: https://elrc-share.ilsp.gr/info/#Licensi' \
+      ' licences, please visit: https://elrc-share.eu/info/#Licensi' \
       'ng_LRs',
 
       max_length=100,
@@ -1712,23 +1917,23 @@ class licenceInfoType_model(SchemaModel):
       )
 
     otherLicenceName = XmlCharField(
-      verbose_name='Other licence name',
+      verbose_name='Other Licence Name',
       help_text='The name with which a licence is known; to be used for ' \
       'licences not included in the pre-defined list of recommended lice' \
       'nces',
-      blank=True, max_length=1500, )
+      blank=True, null=True, max_length=1500, )
 
     otherLicence_TermsText = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever,
       verbose_name='Other licence terms text',
-      max_val_length=1000,
+      max_val_length=10000,
       help_text='Used for inputting the text of licences that are not in' \
       'cluded in the pre-defined list or terms of use statements associa' \
       'ted with a resource',
       blank=True)
 
-    otherLicence_TermsURL = XmlCharField(
-      verbose_name='Other licence terms url', validators=[HTTPURI_VALIDATOR],
+    otherLicence_TermsURL = models.URLField(
+      verbose_name='Other licence terms URL',
       help_text='Used to provide a hyperlink to a url containing the tex' \
       't of a licence not included in the predefined list or describing ' \
       'the terms of use for a language resource',
@@ -1739,13 +1944,10 @@ class licenceInfoType_model(SchemaModel):
       help_text='Specifies terms and conditions of use (e.g. attribution' \
       ', payment etc.) imposed by the licence',
       blank=True,
-      max_length=1 + len(LICENCEINFOTYPE_RESTRICTIONSOFUSE_CHOICES['choices']) / 4,
-      choices=LICENCEINFOTYPE_RESTRICTIONSOFUSE_CHOICES['choices'],
+      max_length=1 + len(LICENCEINFOTYPE_CONDITIONSOFUSE_CHOICES['choices']) / 4,
+      choices=LICENCEINFOTYPE_CONDITIONSOFUSE_CHOICES['choices'],
       )
 
-    def save(self, *args, **kwargs):
-        # Call save() method from super class with all arguments.
-        super(licenceInfoType_model, self).save(*args, **kwargs)
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
@@ -1753,34 +1955,59 @@ class licenceInfoType_model(SchemaModel):
         formatstring = u'{}'
         return self.unicode_(formatstring, formatargs)
 
+
+    def save(self, *args, **kwargs):
+
+        if self.licence in LICENCES_TO_CONDITIONS:
+            self.restrictionsOfUse = LICENCES_TO_CONDITIONS[self.licence]
+        elif self.licence in LICENCES_NO_CONDITIONS:
+            self.restrictionsOfUse = None
+        # Call save() method from super class with all arguments.
+        super(licenceInfoType_model, self).save(*args, **kwargs)
+
+
 CHARACTERENCODINGINFOTYPE_CHARACTERENCODING_CHOICES = _make_choices_from_list([
-  u'US-ASCII', u'windows-1250', u'windows-1251', u'windows-1252',
-  u'windows-1253',u'windows-1254', u'windows-1257', u'ISO-8859-1',
-  u'ISO-8859-2',u'ISO-8859-4', u'ISO-8859-5', u'ISO-8859-7', u'ISO-8859-9',
-  u'ISO-8859-13',u'ISO-8859-15', u'KOI8-R', u'UTF-8', u'UTF-16',
-  u'UTF-16BE',u'UTF-16LE', u'windows-1255', u'windows-1256',
-  u'windows-1258',u'ISO-8859-3', u'ISO-8859-6', u'ISO-8859-8',
-  u'windows-31j',u'EUC-JP', u'x-EUC-JP-LINUX', u'Shift_JIS', u'ISO-2022-JP',
-  u'x-mswin-936',u'GB18030', u'x-EUC-CN', u'GBK', u'ISCII91',
-  u'x-windows-949',u'EUC-KR', u'ISO-2022-KR', u'x-windows-950',
-  u'x-MS950-HKSCS',u'x-EUC-TW', u'Big5', u'Big5-HKSCS', u'TIS-620',
-  u'Big5_Solaris',u'Cp037', u'Cp273', u'Cp277', u'Cp278', u'Cp280',
-  u'Cp284',u'Cp285', u'Cp297', u'Cp420', u'Cp424', u'Cp437', u'Cp500',
-  u'Cp737',u'Cp775', u'Cp838', u'Cp850', u'Cp852', u'Cp855', u'Cp856',
-  u'Cp857',u'Cp858', u'Cp860', u'Cp861', u'Cp862', u'Cp863', u'Cp864',
-  u'Cp865',u'Cp866', u'Cp868', u'Cp869', u'Cp870', u'Cp871', u'Cp874',
-  u'Cp875',u'Cp918', u'Cp921', u'Cp922', u'Cp930', u'Cp933', u'Cp935',
-  u'Cp937',u'Cp939', u'Cp942', u'Cp942C', u'Cp943', u'Cp943C', u'Cp948',
-  u'Cp949',u'Cp949C', u'Cp950', u'Cp964', u'Cp970', u'Cp1006', u'Cp1025',
-  u'Cp1026',u'Cp1046', u'Cp1047', u'Cp1097', u'Cp1098', u'Cp1112',
-  u'Cp1122',u'Cp1123', u'Cp1124', u'Cp1140', u'Cp1141', u'Cp1142',
-  u'Cp1143',u'Cp1144', u'Cp1145', u'Cp1146', u'Cp1147', u'Cp1148',
-  u'Cp1149',u'Cp1381', u'Cp1383', u'Cp33722', u'ISO2022_CN_CNS',
-  u'ISO2022_CN_GB',u'JISAutoDetect', u'MS874', u'MacArabic',
-  u'MacCentralEurope',u'MacCroatian', u'MacCyrillic', u'MacDingbat',
-  u'MacGreek',u'MacHebrew', u'MacIceland', u'MacRoman', u'MacRomania',
-  u'MacSymbol',u'MacThai', u'MacTurkish', u'MacUkraine',
+    u'UTF-8', u'MacGreek',
+    u'US-ASCII', u'Big5', u'Big5-HKSCS', u'Big5_Solaris',
+    u'ISO-8859-1', u'ISO-8859-2', u'ISO-8859-3',
+    u'ISO-8859-4', u'ISO-8859-5', u'ISO-8859-6',
+    u'ISO-8859-7', u'ISO-8859-8', u'ISO-8859-9',
+    u'ISO-8859-13', u'ISO-8859-15',
+    u'windows-1250', u'windows-1251', u'windows-1252', u'windows-1253',
+
+    u'Cp037', u'Cp1006', u'Cp1025', u'Cp1026', u'Cp1046', u'Cp1047',
+    u'Cp1097', u'Cp1098', u'Cp1112', u'Cp1122', u'Cp1123', u'Cp1124',
+    u'Cp1140', u'Cp1141', u'Cp1142', u'Cp1143', u'Cp1144', u'Cp1145', u'Cp1146',
+    u'Cp1147', u'Cp1148', u'Cp1149', u'Cp1381', u'Cp1383', u'Cp273', u'Cp277',
+    u'Cp278', u'Cp280', u'Cp284', u'Cp285', u'Cp297', u'Cp33722', u'Cp420', u'Cp424',
+    u'Cp437', u'Cp500', u'Cp737', u'Cp775', u'Cp838', u'Cp850', u'Cp852', u'Cp855',
+    u'Cp856', u'Cp857', u'Cp858', u'Cp860', u'Cp861', u'Cp862', u'Cp863', u'Cp864',
+    u'Cp865', u'Cp866', u'Cp868', u'Cp869', u'Cp870', u'Cp871', u'Cp874', u'Cp875',
+    u'Cp918', u'Cp921', u'Cp922', u'Cp930', u'Cp933', u'Cp935', u'Cp937', u'Cp939',
+    u'Cp942', u'Cp942C', u'Cp943', u'Cp943C', u'Cp948', u'Cp949', u'Cp949C',
+    u'Cp950', u'Cp964', u'Cp970', u'EUC-JP', u'EUC-KR', u'GB18030', u'GBK',
+    u'ISCII91', u'ISO-2022-JP', u'ISO-2022-KR', u'ISO2022_CN_CNS', u'ISO2022_CN_GB', u'JISAutoDetect',
+    u'KOI8-R', u'MS874', u'MacArabic', u'MacCentralEurope', u'MacCroatian',
+    u'MacCyrillic', u'MacDingbat', u'MacHebrew', u'MacIceland',
+    u'MacRoman', u'MacRomania', u'MacSymbol', u'MacThai', u'MacTurkish',
+    u'MacUkraine', u'Shift_JIS', u'TIS-620', u'UTF-16',
+    u'UTF-16BE', u'UTF-16LE', u'windows-1254', u'windows-1255',
+    u'windows-1256', u'windows-1257', u'windows-1258', u'windows-31j',
+    u'x-EUC-CN', u'x-EUC-JP-LINUX', u'x-EUC-TW', u'x-MS950-HKSCS',
+    u'x-mswin-936', u'x-windows-949', u'x-windows-950'
 ])
+
+
+def characterencodinginfotype_characterencoding_optgroup_choices():
+    """
+    Group the choices in groups. The first group is the most used choices
+    and the second group is the rest.
+    """
+    most_used_choices = ('', CHARACTERENCODINGINFOTYPE_CHARACTERENCODING_CHOICES['choices'][:21])
+    more_choices = ('More', CHARACTERENCODINGINFOTYPE_CHARACTERENCODING_CHOICES['choices'][21:])
+    optgroup = [most_used_choices, more_choices]
+    return optgroup
+
 
 # pylint: disable-msg=C0103
 class characterEncodingInfoType_model(SchemaModel):
@@ -1805,10 +2032,8 @@ class characterEncodingInfoType_model(SchemaModel):
       verbose_name='Character encoding',
       help_text='The name of the character encoding used in the resource' \
       ' or accepted by the tool/service',
-
       max_length=100,
-      choices=sorted(CHARACTERENCODINGINFOTYPE_CHARACTERENCODING_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
+      choices=characterencodinginfotype_characterencoding_optgroup_choices(),
       )
 
     sizePerCharacterEncoding = models.OneToOneField("sizeInfoType_model",
@@ -1837,6 +2062,10 @@ LINGUALITYINFOTYPE_MULTILINGUALITYTYPE_CHOICES = _make_choices_from_list([
 
 # pylint: disable-msg=C0103
 class lingualityInfoType_model(SchemaModel):
+    """
+    Groups information on the number of languages of the resource part
+    and of the way they are combined to each other
+    """
 
     class Meta:
         verbose_name = "Linguality"
@@ -1875,6 +2104,14 @@ class lingualityInfoType_model(SchemaModel):
       'source in free text',
       blank=True, max_length=512, )
 
+    def save(self, *args, **kwargs):
+        if self.lingualityType == u'monolingual':
+            self.multilingualityType = ""
+            self.multilingualityTypeDetails = ""
+
+        # Call save() method from super class with all arguments.
+        super(lingualityInfoType_model, self).save(*args, **kwargs)
+
     def real_unicode_(self):
         # pylint: disable-msg=C0301
         formatargs = ['lingualityType', ]
@@ -1887,6 +2124,10 @@ LANGUAGEVARIETYINFOTYPE_LANGUAGEVARIETYTYPE_CHOICES = _make_choices_from_list([
 
 # pylint: disable-msg=C0103
 class languageVarietyInfoType_model(SchemaModel):
+    """
+    Groups information on language varieties occurred in the resource
+    (e.g. dialects)
+    """
 
     class Meta:
         verbose_name = "Language variety"
@@ -1930,8 +2171,23 @@ class languageVarietyInfoType_model(SchemaModel):
         formatstring = u'{} ({})'
         return self.unicode_(formatstring, formatargs)
 
+
+def languageinfotype_languagename_optgroup_choices():
+    """
+    Group the choices in groups. The first group the EU languages
+    and the second group contains the rest.
+    """
+    most_used_choices = ('', _make_choices_from_list(iana.get_most_used_languages())['choices'])
+    more_choices = ('More', _make_choices_from_list(sorted(iana.get_rest_of_languages()))['choices'])
+    optgroup = [most_used_choices, more_choices]
+    return optgroup
+
+
 # pylint: disable-msg=C0103
 class languageInfoType_model(SchemaModel):
+    """
+    Groups information on the languages represented in the resource
+    """
 
     class Meta:
         verbose_name = "Language"
@@ -1964,33 +2220,34 @@ class languageInfoType_model(SchemaModel):
       help_text='A human understandable name of the language that is use' \
       'd in the resource; the name is selected according to the IETF BCP' \
       '47 specifications',
-      choices=languagename_optgroup_choices(), max_length=1000, )
+      choices=languageinfotype_languagename_optgroup_choices(), max_length=100, )
 
-    languageScript = XmlCharField(
+    languageScript = models.CharField(
       verbose_name='Language script',
       help_text='A human understandable name of the script used for the ' \
       'resource, according to the IETF BCP47 specifications; the element' \
       ' is optional and should only be used for extraordinary cases (e.g' \
       '. transcribed text in IPA etc.)',
-      blank=True, choices =_make_choices_from_list(sorted(iana.get_all_scripts()))['choices'], max_length=100, )
+      blank=True, null=True, choices =_make_choices_from_list(sorted(iana.get_all_scripts()))['choices'], max_length=100, )
 
     region = XmlCharField(
       verbose_name='Region',
       help_text='Name of the region where the language of the resource i' \
       's spoken (e.g. for English as spoken in the US or the UK etc.)',
-      blank=True, choices =_make_choices_from_list(sorted(iana.get_all_regions()))['choices'], max_length=100, )
+      blank=True, null=True, choices =_make_choices_from_list(sorted(iana.get_all_regions()))['choices'], max_length=100, )
 
     variant = MultiTextField(max_length=1000, widget=MultiChoiceWidget(widget_id=16, choices=
     _make_choices_from_list(sorted(iana.get_all_variants()))['choices']),
                              verbose_name='Variants',
                              help_text='Name of the variant of the language of the resource is ' \
                                        'spoken (according to IETF BCP47)',
-                             blank=True, validators=[validate_matches_xml_char_production], )
+                             blank=True,
+                             null=True,
+                             validators=[validate_matches_xml_char_production], )
 
     sizePerLanguage = models.ManyToManyField("sizeInfoType_model",
       verbose_name='Size per language',
-      help_text='Provides information on the size per language component' \
-      '',
+      help_text='Provides information on the size per language component',
       blank=True, null=True, related_name="sizePerLanguage_%(class)s_related", )
 
     languageVarietyInfo = models.ManyToManyField("languageVarietyInfoType_model",
@@ -2017,8 +2274,8 @@ class languageInfoType_model(SchemaModel):
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
-        formatargs = ['languageName', 'languageVarietyInfo', ]
-        formatstring = u'{} {}'
+        formatargs = ['languageName', 'languageId']
+        formatstring = u'{} ({})'
         return self.unicode_(formatstring, formatargs)
 
 # pylint: disable-msg=C0103
@@ -2103,6 +2360,11 @@ PROJECTINFOTYPE_FUNDINGTYPE_CHOICES = _make_choices_from_list([
 
 # pylint: disable-msg=C0103
 class projectInfoType_model(SchemaModel):
+    """
+    Groups information on a project related to the resource(e.g. a
+    project the resource has been used in; a funded project that led
+    to the resource creation etc.)
+    """
 
     class Meta:
         verbose_name = "Project"
@@ -2143,7 +2405,7 @@ class projectInfoType_model(SchemaModel):
       'ource',
       blank=True, max_length=100, )
 
-    url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=18, max_length=1000),
+    url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=18, attrs={'size': '250'}),
       verbose_name='URL (Landing page)', validators=[HTTPURI_VALIDATOR],
       help_text='A URL used as homepage of an entity (e.g. of a person, ' \
       'organization, resource etc.) and/or where an entity (e.g.LR, docu' \
@@ -2163,7 +2425,7 @@ class projectInfoType_model(SchemaModel):
       help_text='The full name of the funder of the project',
       blank=True, validators=[validate_matches_xml_char_production], )
 
-    fundingCountry = MultiTextField(max_length=100, widget=MultiChoiceWidget(widget_id=20, choices = _make_choices_from_list(sorted(iana.get_all_regions()))['choices']),
+    fundingCountry = MultiTextField(max_length=100, widget=MultiChoiceWidget(widget_id=20, choices =country_optgroup_choices()),
       verbose_name='Funding country',
       help_text='The name of the funding country, in case of national fu' \
       'nding as mentioned in ISO3166',
@@ -2211,6 +2473,9 @@ class projectInfoType_model(SchemaModel):
 
 # pylint: disable-msg=C0103
 class corpusTextInfoType_model(SchemaModel):
+    """
+    Groups together information on the text component of a resource
+    """
 
     class Meta:
         verbose_name = "Corpus text"
@@ -2255,7 +2520,7 @@ class corpusTextInfoType_model(SchemaModel):
       verbose_name='Linguality',
       help_text='Groups information on the number of languages of the re' \
       'source part and of the way they are combined to each other',
-      )
+      null=True, blank=True)
 
     # OneToMany field: languageInfo
 
@@ -2287,21 +2552,12 @@ class corpusTextInfoType_model(SchemaModel):
         formatstring = u'text ({} {})'
         return self.unicode_(formatstring, formatargs)
 
-TEXTFORMATINFOTYPE_DATAFORMAT_CHOICES = _make_choices_from_list([
-  u'text/plain', u'application/vnd.xmi+xml', u'application/xml',
-  u'application/json', u'application/x-tmx+xml',u'application/x-xces+xml',
-  u'application/tei+xml',u'application/rdf+xml', u'application/xhtml+xml',
-  u'text/sgml', u'text/html', u'application/x-tex', u'application/rtf',
-  u'application/x-latex',u'text/csv', u'text/tab-separated-values',
-  u'application/pdf',u'application/x-msaccess', u'application/vnd.ms-excel',
-  u'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-  u'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-  u'application/msword',
-  u'application/x-SDL-TM',  u'other',
-])
 
 # pylint: disable-msg=C0103
 class textFormatInfoType_model(SchemaModel):
+    """
+    Groups information on the text format(s) of a resource
+    """
 
     class Meta:
         verbose_name = "Text format"
@@ -2361,8 +2617,20 @@ TEXTCLASSIFICATIONINFOTYPE_TEXTTYPE_CHOICES = _make_choices_from_list([
   u'technicalTexts',u'telephoneConversations', u'tweets', u'other',
 ])
 
+TEXTCLASSIFICATIONINFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES = _make_choices_from_list([
+    u'ANC_domainClassification', u'ANC_genreClassification',
+    u'BNC_domainClassification', u'BNC_textTypeClassification',
+    u'DDC_classification', u'libraryOfCongress_domainClassification',
+    u'libraryofCongressSubjectHeadings_classification', u'MeSH_classification',
+    u'NLK_classification', u'PAROLE_topicClassification',
+    u'PAROLE_genreClassification', u'UDC_classification', u'other',
+])
+
 # pylint: disable-msg=C0103
 class textClassificationInfoType_model(SchemaModel):
+    """
+    Groups together information on text type/genre of the resource
+    """
 
     class Meta:
         verbose_name = "Text classification"
@@ -2400,10 +2668,14 @@ class textClassificationInfoType_model(SchemaModel):
                      key=lambda choice: choice[1].lower()),
       )
 
-    conformanceToClassificationScheme = XmlCharField(
-      verbose_name='Conformance to classification scheme',
-      help_text='Specifies the external classification schemes',
-      blank=True, max_length=1000, )
+    conformanceToClassificationScheme = models.CharField(
+        verbose_name='Conformance to classification scheme',
+        help_text='Specifies the external classification schemes',
+        blank=True,
+        max_length=100,
+        choices=sorted(TEXTCLASSIFICATIONINFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES['choices'],
+                       key=lambda choice: choice[1].lower()),
+    )
 
     sizePerTextClassification = models.OneToOneField("sizeInfoType_model",
       verbose_name='Size per text classification',
@@ -2441,6 +2713,10 @@ LANGUAGEDESCRIPTIONENCODINGINFOTYPE_TASK_CHOICES = _make_choices_from_list([
 
 # pylint: disable-msg=C0103
 class languageDescriptionEncodingInfoType_model(SchemaModel):
+    """
+    Groups together information on the contents of the
+    LanguageDescriptions
+    """
 
     class Meta:
         verbose_name = "Language description encoding"
@@ -2502,6 +2778,11 @@ class languageDescriptionEncodingInfoType_model(SchemaModel):
 
 # pylint: disable-msg=C0103
 class languageDescriptionTextInfoType_model(SchemaModel):
+    """
+    Groups together all information relevant to the text module of a
+    language description (e.g. format, languages, size etc.); it is
+    obligatory for all language descriptions
+    """
 
     class Meta:
         verbose_name = "Language description text"
@@ -2542,7 +2823,7 @@ class languageDescriptionTextInfoType_model(SchemaModel):
       verbose_name='Linguality',
       help_text='Groups information on the number of languages of the re' \
       'source part and of the way they are combined to each other',
-      )
+      null=True, blank=True)
 
     # OneToMany field: languageInfo
 
@@ -2605,6 +2886,10 @@ LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_EXTRATEXTUALINFORMATIONUNIT_CHOICES = 
 
 # pylint: disable-msg=C0103
 class lexicalConceptualResourceEncodingInfoType_model(SchemaModel):
+    """
+    Groups all information regarding the contents of lexical/conceptual
+    resources
+    """
 
     class Meta:
         verbose_name = "Lexical conceptual resource encoding"
@@ -2688,6 +2973,10 @@ class lexicalConceptualResourceEncodingInfoType_model(SchemaModel):
 
 # pylint: disable-msg=C0103
 class lexicalConceptualResourceTextInfoType_model(SchemaModel):
+    """
+    Groups information on the textual part of the lexical/conceptual
+    resource
+    """
 
     class Meta:
         verbose_name = "Lexical conceptual resource text"
@@ -2726,7 +3015,7 @@ class lexicalConceptualResourceTextInfoType_model(SchemaModel):
       verbose_name='Linguality',
       help_text='Groups information on the number of languages of the re' \
       'source part and of the way they are combined to each other',
-      )
+      null=True, blank=True)
 
     # OneToMany field: languageInfo
 
@@ -3348,6 +3637,9 @@ LEXICALCONCEPTUALRESOURCEINFOTYPE_LEXICALCONCEPTUALRESOURCETYPE_CHOICES = _make_
 
 # pylint: disable-msg=C0103
 class lexicalConceptualResourceInfoType_model(resourceComponentTypeType_model):
+    """
+    Groups together information specific to lexical/conceptual resources
+    """
 
     class Meta:
         verbose_name = "Lexical conceptual resource"
@@ -3402,6 +3694,9 @@ LANGUAGEDESCRIPTIONINFOTYPE_LANGUAGEDESCRIPTIONTYPE_CHOICES = _make_choices_from
 
 # pylint: disable-msg=C0103
 class languageDescriptionInfoType_model(resourceComponentTypeType_model):
+    """
+    Groups together information on language descriptions (grammars)
+    """
 
     class Meta:
         verbose_name = "Language description"
@@ -3427,7 +3722,6 @@ class languageDescriptionInfoType_model(resourceComponentTypeType_model):
     languageDescriptionType = models.CharField(
       verbose_name='Language description type',
       help_text='The type of the language description',
-
       max_length=30,
       choices=sorted(LANGUAGEDESCRIPTIONINFOTYPE_LANGUAGEDESCRIPTIONTYPE_CHOICES['choices'],
                      key=lambda choice: choice[1].lower()),
@@ -3570,6 +3864,9 @@ class toolServiceInfoType_model(resourceComponentTypeType_model):
 
 # pylint: disable-msg=C0103
 class corpusInfoType_model(resourceComponentTypeType_model):
+    """
+    Groups together information on corpora of all media types
+    """
 
     class Meta:
         verbose_name = "Corpus"
@@ -3598,7 +3895,7 @@ class corpusInfoType_model(resourceComponentTypeType_model):
     def real_unicode_(self):
         # pylint: disable-msg=C0301
         formatargs = ['corpusMediaType/corpusTextInfo',]
-        formatstring = u'corpus ({} {} {} {} {} {})'
+        formatstring = u'corpus ({})'
         return self.unicode_(formatstring, formatargs)
 
 # pylint: disable-msg=C0103
@@ -3754,7 +4051,7 @@ class documentUnstructuredString_model(documentationInfoType_model):
     """
     __schema_name__ = 'STRINGMODEL'
 
-    value = models.TextField()
+    value = models.TextField(null=True)
 
     def __unicode__(self):
         return self.value if self.value else u''

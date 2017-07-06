@@ -145,7 +145,9 @@ class StorageObject(models.Model):
                                          default=settings.METASHARE_VERSION,
                                          help_text="(Read-only) META-SHARE version used with the storage object instance.")
 
-    legacy_resource = models.BooleanField(default=False)
+    legacy_resource = models.BooleanField(
+        help_text='Specifies whether the resource is collected by ELRC 1',
+        default=None)
 
     def _get_master_copy(self):
         return self.copy_status == MASTER

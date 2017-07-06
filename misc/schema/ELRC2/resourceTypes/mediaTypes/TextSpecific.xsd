@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited by ILSP/Athena R.C. -->
-<xs:schema xmlns:ms="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0" xml:lang="en">
+<xs:schema xmlns:ms="http://elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0" xml:lang="en">
 	<xs:include schemaLocation="../../ELRC-SHARE-SimpleTypes.xsd"/>
 	<xs:include schemaLocation="../../ELRC-SHARE-BaseTypes.xsd"/>
 	<xs:complexType name="textFormatInfoType">
