@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSpy v2013 sp1 (http://www.altova.com) by ﻿Lemmy (Unicorn) -->
 <!-- edited by ILSP/Athena R.C. -->
-<xs:schema xmlns:ms="http://elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0" xml:lang="en">
+<xs:schema xmlns:ms="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0" xml:lang="en">
 	<xs:include schemaLocation="./ELRC-SHARE-SimpleTypes.xsd"/>
 	<xs:include schemaLocation="./ELRC-SHARE-RoleTypes.xsd"/>
 	<!-- definition of complex types -->
@@ -227,7 +227,7 @@
 		<xs:sequence>
 			<xs:element name="licence">
 				<xs:annotation>
-					<xs:documentation>The licence of use for the resource; for an overview of licences, please visit: http://elrc-share.eu/info/#Licensing_LRs</xs:documentation>
+					<xs:documentation>The licence of use for the resource; for an overview of licences, please visit: http://www.elrc-share.eu/info/#Licensing_LRs</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-many</relation>
 					</xs:appinfo>
