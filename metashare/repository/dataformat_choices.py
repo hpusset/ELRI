@@ -19,6 +19,7 @@ MIMETYPELABEL_TO_MIMETYPEVALUE[u'XML'] = u"application/xml"
 MIMETYPELABEL_TO_MIMETYPEVALUE[u'JSON'] = u"application/json"
 MIMETYPELABEL_TO_MIMETYPEVALUE[u'SGML'] = u"text/sgml"
 MIMETYPELABEL_TO_MIMETYPEVALUE[u'MS-Access database'] = u"application/x-msaccess"
+MIMETYPELABEL_TO_MIMETYPEVALUE[u'TM format of the SDL alignment tool'] = u'application/x-SDL-TM'
 MIMETYPELABEL_TO_MIMETYPEVALUE[u'RDF'] = u"application/rdf+xml"
 MIMETYPELABEL_TO_MIMETYPEVALUE[u'XHTML'] = u"application/xhtml+xml"
 MIMETYPELABEL_TO_MIMETYPEVALUE[u'RTF'] = u"application/rtf"
@@ -40,6 +41,7 @@ MIMETYPEVALUE_TO_MIMETYPELABEL[u'application/x-tex'] = u"TEX"
 MIMETYPEVALUE_TO_MIMETYPELABEL[u'other'] = u"other"
 MIMETYPEVALUE_TO_MIMETYPELABEL[u'text/plain'] = u"Plain text"
 MIMETYPEVALUE_TO_MIMETYPELABEL[u'application/x-msaccess'] = u"MS-Access database"
+MIMETYPEVALUE_TO_MIMETYPELABEL[u'application/x-SDL-TM'] = u'TM format of the SDL alignment tool'
 MIMETYPEVALUE_TO_MIMETYPELABEL[u'application/pdf'] = u"PDF"
 MIMETYPEVALUE_TO_MIMETYPELABEL[u'application/xhtml+xml'] = u"XHTML"
 MIMETYPEVALUE_TO_MIMETYPELABEL[u'text/csv'] = u"CSV"
@@ -61,5 +63,6 @@ u'application/rtf', u'application/x-latex',
 u'text/csv',u'text/tab-separated-values',
 u'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
 u'application/msword',
-u'application/pdf',u'application/x-msaccess',
-u'application/vnd.ms-excel', u'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'],MIMETYPEVALUE_TO_MIMETYPELABEL)
+u'application/pdf',u'application/x-msaccess', u'application/x-SDL-TM',
+u'application/vnd.ms-excel',
+u'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', u'other'],MIMETYPEVALUE_TO_MIMETYPELABEL)

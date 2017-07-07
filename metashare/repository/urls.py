@@ -38,7 +38,9 @@ sqs = SearchQuerySet() \
   .facet("toolServiceEvaluatedFilter") \
   .facet("textTextGenreFilter") \
   .facet("textTextTypeFilter") \
-  .facet("languageVarietyFilter")
+  .facet("languageVarietyFilter") \
+  .facet("appropriatenessForDSIFilter") \
+  .facet("publicationStatusFilter")
 
 urlpatterns = patterns('metashare.repository.views',
   url(r'^browse/(?P<resource_name>[\w\-]*)/(?P<object_id>\w+)/$',

@@ -11,11 +11,12 @@ from django.db.models import signals
 from django.utils.translation import ugettext as _
 
 from metashare.repository import model_utils
+from metashare.repository.dataformat_choices import MIMETYPEVALUE_TO_MIMETYPELABEL
 from metashare.repository.models import resourceInfoType_model, \
     corpusInfoType_model, \
     toolServiceInfoType_model, lexicalConceptualResourceInfoType_model, \
     languageDescriptionInfoType_model
-from metashare.repository.search_fields import LabeledMultiValueField
+from metashare.repository.search_fields import LabeledMultiValueField, LabeledCharField
 from metashare.settings import LOG_HANDLER
 from metashare.storage.models import StorageObject, INGESTED, PUBLISHED, INTERNAL
 from metashare.stats.model_utils import DOWNLOAD_STAT, VIEW_STAT
@@ -82,106 +83,111 @@ class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
     #
     # the creation of the filter structure is made in the _create_filters_structure function of views.py
     languageNameFilter = LabeledMultiValueField(
-                                label=_('Language'), facet_id=1, parent_id=0,
-                                faceted=True)
+        label=_('Language'), facet_id=1, parent_id=0,
+        faceted=True)
     resourceTypeFilter = LabeledMultiValueField(
-                                label=_('Resource Type'), facet_id=2, parent_id=0,
-                                faceted=True)
+        label=_('Resource Type'), facet_id=2, parent_id=0,
+        faceted=True)
     mediaTypeFilter = LabeledMultiValueField(
-                                label=_('Media Type'), facet_id=3, parent_id=0,
-                                faceted=True)
+        label=_('Media Type'), facet_id=3, parent_id=0,
+        faceted=True)
     availabilityFilter = LabeledMultiValueField(
-                                label=_('Availability'), facet_id=4, parent_id=0,
-                                faceted=True)
+        label=_('Availability'), facet_id=4, parent_id=0,
+        faceted=True)
     licenceFilter = LabeledMultiValueField(
-                                label=_('Licence'), facet_id=5, parent_id=0,
-                                faceted=True)
+        label=_('Licence'), facet_id=5, parent_id=0,
+        faceted=True)
     restrictionsOfUseFilter = LabeledMultiValueField(
-                                label=_('Restrictions of Use'), facet_id=6, parent_id=0,
-                                faceted=True)
+        label=_('Conditions of Use'), facet_id=6, parent_id=0,
+        faceted=True)
     validatedFilter = LabeledMultiValueField(
-                                label=_('Validated'), facet_id=7, parent_id=0,
-                                faceted=True)
+        label=_('Validated'), facet_id=7, parent_id=0,
+        faceted=True)
     useNlpSpecificFilter = LabeledMultiValueField(
-                                label=_('Use Is NLP Specific'), facet_id=9, parent_id=0,
-                                faceted=True)
+        label=_('Use Is NLP Specific'), facet_id=9, parent_id=0,
+        faceted=True)
     lingualityTypeFilter = LabeledMultiValueField(
-                                label=_('Linguality Type'), facet_id=10, parent_id=0,
-                                faceted=True)
+        label=_('Linguality Type'), facet_id=10, parent_id=0,
+        faceted=True)
     multilingualityTypeFilter = LabeledMultiValueField(
-                                label=_('Multilinguality Type'), facet_id=11, parent_id=0,
-                                faceted=True)
+        label=_('Multilinguality Type'), facet_id=11, parent_id=0,
+        faceted=True)
     modalityTypeFilter = LabeledMultiValueField(
-                                label=_('Modality Type'), facet_id=12, parent_id=0,
-                                faceted=True)
+        label=_('Modality Type'), facet_id=12, parent_id=0,
+        faceted=True)
     dataFormatFilter = LabeledMultiValueField(
-                                label=_('Data Format'), facet_id=13, parent_id=0,
-                                faceted=True)
+        label=_('Data Format'), facet_id=13, parent_id=0,
+        faceted=True)
     bestPracticesFilter = LabeledMultiValueField(
-                                label=_('Conformance to Standards/Best Practices'), facet_id=14, parent_id=0,
-                                faceted=True)
+        label=_('Conformance to Standards/Best Practices'), facet_id=14, parent_id=0,
+        faceted=True)
     domainFilter = LabeledMultiValueField(
-                                label=_('Domain'), facet_id=15, parent_id=0,
-                                faceted=True)
+        label=_('Domain'), facet_id=15, parent_id=0,
+        faceted=True)
     corpusAnnotationTypeFilter = LabeledMultiValueField(
-                                label=_('Annotation Type'), facet_id=19, parent_id=2,
-                                faceted=True)
+        label=_('Annotation Type'), facet_id=19, parent_id=2,
+        faceted=True)
     languageDescriptionLDTypeFilter = LabeledMultiValueField(
-                                label=_('Language Description Type'), facet_id=21, parent_id=2,
-                                faceted=True)
+        label=_('Language Description Type'), facet_id=21, parent_id=2,
+        faceted=True)
     languageDescriptionEncodingLevelFilter = LabeledMultiValueField(
-                                label=_('Encoding Level'), facet_id=22, parent_id=2,
-                                faceted=True)
+        label=_('Encoding Level'), facet_id=22, parent_id=2,
+        faceted=True)
     languageDescriptionGrammaticalPhenomenaCoverageFilter = LabeledMultiValueField(
-                                label=_('Grammatical Phenomena Coverage'), facet_id=23, parent_id=2,
-                                faceted=True)
+        label=_('Grammatical Phenomena Coverage'), facet_id=23, parent_id=2,
+        faceted=True)
     lexicalConceptualResourceLRTypeFilter = LabeledMultiValueField(
-                                label=_('Lexical/Conceptual Resource Type'), facet_id=24, parent_id=2,
-                                faceted=True)
+        label=_('Lexical/Conceptual Resource Type'), facet_id=24, parent_id=2,
+        faceted=True)
     lexicalConceptualResourceEncodingLevelFilter = LabeledMultiValueField(
-                                label=_('Encoding Level'), facet_id=25, parent_id=2,
-                                faceted=True)
+        label=_('Encoding Level'), facet_id=25, parent_id=2,
+        faceted=True)
     lexicalConceptualResourceLinguisticInformationFilter = LabeledMultiValueField(
-                                label=_('Linguistic Information'), facet_id=26, parent_id=2,
-                                faceted=True)
+        label=_('Linguistic Information'), facet_id=26, parent_id=2,
+        faceted=True)
 
     toolServiceToolServiceTypeFilter = LabeledMultiValueField(
-                                label=_('Tool/Service Type'), facet_id=27, parent_id=2,
-                                faceted=True)
+        label=_('Tool/Service Type'), facet_id=27, parent_id=2,
+        faceted=True)
     toolServiceToolServiceSubTypeFilter = LabeledMultiValueField(
-                                label=_('Tool/Service Subtype'), facet_id=28, parent_id=2,
-                                faceted=True)
+        label=_('Tool/Service Subtype'), facet_id=28, parent_id=2,
+        faceted=True)
     toolServiceLanguageDependentTypeFilter = LabeledMultiValueField(
-                                label=_('Language Dependent'), facet_id=29, parent_id=2,
-                                faceted=True)
+        label=_('Language Dependent'), facet_id=29, parent_id=2,
+        faceted=True)
     toolServiceInputOutputResourceTypeFilter = LabeledMultiValueField(
-                                label=_('InputInfo/OutputInfo Resource Type'), facet_id=30, parent_id=2,
-                                faceted=True)
+        label=_('InputInfo/OutputInfo Resource Type'), facet_id=30, parent_id=2,
+        faceted=True)
     toolServiceInputOutputMediaTypeFilter = LabeledMultiValueField(
-                                label=_('InputInfo/OutputInfo Media Type'), facet_id=31, parent_id=2,
-                                faceted=True)
+        label=_('InputInfo/OutputInfo Media Type'), facet_id=31, parent_id=2,
+        faceted=True)
     toolServiceAnnotationTypeFilter = LabeledMultiValueField(
-                                label=_('Annotation Type'), facet_id=32, parent_id=2,
-                                faceted=True)
+        label=_('Annotation Type'), facet_id=32, parent_id=2,
+        faceted=True)
     toolServiceAnnotationFormatFilter = LabeledMultiValueField(
-                                label=_('Annotation Format'), facet_id=33, parent_id=2,
-                                faceted=True)
+        label=_('Annotation Format'), facet_id=33, parent_id=2,
+        faceted=True)
     toolServiceEvaluatedFilter = LabeledMultiValueField(
-                                label=_('Evaluated'), facet_id=34, parent_id=2,
-                                faceted=True)
-    #Start sub filters
+        label=_('Evaluated'), facet_id=34, parent_id=2,
+        faceted=True)
+    appropriatenessForDSIFilter = LabeledMultiValueField(
+        label=_('Appropriateness For DSI'), facet_id=56, parent_id=0,
+        faceted=True)
+
+    publicationStatusFilter = LabeledCharField(
+        label=_('Publication Status'), facet_id=57, parent_id=0,
+        faceted=True)
+
+    # Start sub filters
     textTextGenreFilter = LabeledMultiValueField(
-                                label=_('Text Genre'), facet_id=35, parent_id=3,
-                                faceted=True)
+        label=_('Text Genre'), facet_id=35, parent_id=3,
+        faceted=True)
     textTextTypeFilter = LabeledMultiValueField(
-                                label=_('Text Type'), facet_id=36, parent_id=3,
-                                faceted=True)
-    # textRegisterFilter = LabeledMultiValueField(
-    #                             label=_('Register'), facet_id=37, parent_id=3,
-    #                             faceted=True)
+        label=_('Text Type'), facet_id=36, parent_id=3,
+        faceted=True)
     languageVarietyFilter = LabeledMultiValueField(
-                                label=_('Language Variety'), facet_id=55, parent_id=0,
-                                faceted=True)
+        label=_('Language Variety'), facet_id=55, parent_id=0,
+        faceted=True)
 
     # we create all items that may appear in the search results list already at
     # index time
@@ -210,7 +216,7 @@ class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
         have not been deleted, yet.
         """
         return self.get_model().objects.filter(storage_object__deleted=False,
-            storage_object__publication_status=PUBLISHED)
+                                               storage_object__publication_status=PUBLISHED)
 
     def should_update(self, instance, **kwargs):
         '''
@@ -374,13 +380,13 @@ class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
             lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
             if lcr_media_type.lexicalConceptualResourceTextInfo:
                 result.extend([lang.languageName for lang in lcr_media_type \
-                        .lexicalConceptualResourceTextInfo.languageinfotype_model_set.all()])
+                              .lexicalConceptualResourceTextInfo.languageinfotype_model_set.all()])
 
         elif isinstance(corpus_media, languageDescriptionInfoType_model):
             ld_media_type = corpus_media.languageDescriptionMediaType
             if ld_media_type.languageDescriptionTextInfo:
                 result.extend([lang.languageName for lang in ld_media_type \
-                            .languageDescriptionTextInfo.languageinfotype_model_set.all()])
+                              .languageDescriptionTextInfo.languageinfotype_model_set.all()])
 
         elif isinstance(corpus_media, toolServiceInfoType_model):
             if corpus_media.inputInfo:
@@ -453,7 +459,7 @@ class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
             media_type = corpus_media.corpusMediaType
             for corpus_info in media_type.corpustextinfotype_model_set.all():
                 mtf = corpus_info.lingualityInfo \
-                  .get_multilingualityType_display()
+                    .get_multilingualityType_display()
                 if mtf != '':
                     result.append(mtf)
 
@@ -461,7 +467,7 @@ class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
             lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
             if lcr_media_type.lexicalConceptualResourceTextInfo:
                 mtf = lcr_media_type.lexicalConceptualResourceTextInfo \
-                  .lingualityInfo.get_multilingualityType_display()
+                    .lingualityInfo.get_multilingualityType_display()
                 if mtf != '':
                     result.append(mtf)
 
@@ -469,7 +475,7 @@ class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
             ld_media_type = corpus_media.languageDescriptionMediaType
             if ld_media_type.languageDescriptionTextInfo:
                 mtf = ld_media_type.languageDescriptionTextInfo \
-                  .lingualityInfo.get_multilingualityType_display()
+                    .lingualityInfo.get_multilingualityType_display()
                 if mtf != '':
                     result.append(mtf)
 
@@ -485,22 +491,28 @@ class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
         if isinstance(corpus_media, corpusInfoType_model):
             media_type = corpus_media.corpusMediaType
             for corpus_info in media_type.corpustextinfotype_model_set.all():
-                dataFormat_list.extend([dataFormat.dataFormat for dataFormat in
-                                      corpus_info.textformatinfotype_model_set.all()])
+                dataFormat_list.extend([MIMETYPEVALUE_TO_MIMETYPELABEL[dataFormat.dataFormat]
+                                        if dataFormat.dataFormat in MIMETYPEVALUE_TO_MIMETYPELABEL
+                                        else dataFormat.dataFormat for dataFormat in
+                                        corpus_info.textformatinfotype_model_set.all()])
 
         elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
             lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
             if lcr_media_type.lexicalConceptualResourceTextInfo:
-                dataFormat_list.extend([dataFormat.dataFormat for dataFormat in
-                        lcr_media_type.lexicalConceptualResourceTextInfo \
-                            .textformatinfotype_model_set.all()])
+                dataFormat_list.extend([MIMETYPEVALUE_TO_MIMETYPELABEL[dataFormat.dataFormat]
+                                        if dataFormat.dataFormat in MIMETYPEVALUE_TO_MIMETYPELABEL
+                                        else dataFormat.dataFormat for dataFormat in
+                                        lcr_media_type.lexicalConceptualResourceTextInfo \
+                                       .textformatinfotype_model_set.all()])
 
         elif isinstance(corpus_media, languageDescriptionInfoType_model):
             ld_media_type = corpus_media.languageDescriptionMediaType
             if ld_media_type.languageDescriptionTextInfo:
-                dataFormat_list.extend([dataFormat.dataFormat for dataFormat in
-                        ld_media_type.languageDescriptionTextInfo \
-                            .textformatinfotype_model_set.all()])
+                dataFormat_list.extend([MIMETYPEVALUE_TO_MIMETYPELABEL[dataFormat.dataFormat]
+                                        if dataFormat.dataFormat in MIMETYPEVALUE_TO_MIMETYPELABEL
+                                        else dataFormat.dataFormat for dataFormat in
+                                        ld_media_type.languageDescriptionTextInfo \
+                                       .textformatinfotype_model_set.all()])
 
         elif isinstance(corpus_media, toolServiceInfoType_model):
             if corpus_media.inputInfo:
@@ -526,20 +538,20 @@ class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
         elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
             if corpus_media.lexicalConceptualResourceEncodingInfo:
                 result.extend(corpus_media.lexicalConceptualResourceEncodingInfo \
-                  .get_conformanceToStandardsBestPractices_display_list())
+                              .get_conformanceToStandardsBestPractices_display_list())
 
         elif isinstance(corpus_media, languageDescriptionInfoType_model):
             if corpus_media.languageDescriptionEncodingInfo:
                 result.extend(corpus_media.languageDescriptionEncodingInfo \
-                  .get_conformanceToStandardsBestPractices_display_list())
+                              .get_conformanceToStandardsBestPractices_display_list())
 
         elif isinstance(corpus_media, toolServiceInfoType_model):
             if corpus_media.inputInfo:
                 result.extend(corpus_media.inputInfo \
-                  .get_conformanceToStandardsBestPractices_display_list())
+                              .get_conformanceToStandardsBestPractices_display_list())
             if corpus_media.outputInfo:
                 result.extend(corpus_media.outputInfo \
-                  .get_conformanceToStandardsBestPractices_display_list())
+                              .get_conformanceToStandardsBestPractices_display_list())
 
         return result
 
@@ -560,15 +572,15 @@ class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
             lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
             if lcr_media_type.lexicalConceptualResourceTextInfo:
                 result.extend([domain_info.domain for domain_info in
-                        lcr_media_type.lexicalConceptualResourceTextInfo \
-                                .domaininfotype_model_set.all()])
+                               lcr_media_type.lexicalConceptualResourceTextInfo \
+                              .domaininfotype_model_set.all()])
 
         elif isinstance(corpus_media, languageDescriptionInfoType_model):
             ld_media_type = corpus_media.languageDescriptionMediaType
             if ld_media_type.languageDescriptionTextInfo:
                 result.extend([domain_info.domain for domain_info in
                                ld_media_type.languageDescriptionTextInfo \
-                                    .domaininfotype_model_set.all()])
+                              .domaininfotype_model_set.all()])
 
         return result
 
@@ -609,7 +621,6 @@ class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
                 .get_encodingLevel_display_list()
         return []
 
-
     def prepare_lexicalConceptualResourceLRTypeFilter(self, obj):
         """
         Collect the data to filter the resources on Resource Type children
@@ -623,7 +634,7 @@ class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
             result.append(corpus_media.get_lexicalConceptualResourceType_display())
 
         return result
-    
+
     def prepare_lexicalConceptualResourceEncodingLevelFilter(self, obj):
         """
         Collect the data to filter the resources on Resource Type children
@@ -636,10 +647,10 @@ class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
         if isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
             if corpus_media.lexicalConceptualResourceEncodingInfo:
                 result.extend(corpus_media.lexicalConceptualResourceEncodingInfo. \
-                  get_encodingLevel_display_list())
+                              get_encodingLevel_display_list())
 
         return result
-    
+
     def prepare_lexicalConceptualResourceLinguisticInformationFilter(self, obj):
         """
         Collect the data to filter the resources on Resource Type children
@@ -652,10 +663,9 @@ class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
         if isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
             if corpus_media.lexicalConceptualResourceEncodingInfo:
                 result.extend(corpus_media.lexicalConceptualResourceEncodingInfo. \
-                  get_linguisticInformation_display_list())
+                              get_linguisticInformation_display_list())
 
         return result
-    
 
     def prepare_toolServiceToolServiceTypeFilter(self, obj):
         """
@@ -699,7 +709,7 @@ class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
             result.append(corpus_media.get_languageDependent_display())
 
         return result
-    
+
     def prepare_toolServiceInputOutputResourceTypeFilter(self, obj):
         """
         Collect the data to filter the resources on Resource Type children
@@ -718,7 +728,7 @@ class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
                     corpus_media.outputInfo.get_resourceType_display_list())
 
         return result
-    
+
     def prepare_toolServiceInputOutputMediaTypeFilter(self, obj):
         """
         Collect the data to filter the resources on Resource Type children
@@ -735,7 +745,7 @@ class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
                 result.append(corpus_media.outputInfo.get_mediaType_display())
 
         return result
-    
+
     def prepare_toolServiceAnnotationTypeFilter(self, obj):
         """
         Collect the data to filter the resources on Resource Type children
@@ -751,7 +761,6 @@ class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
                 result.extend(corpus_media.outputInfo.get_annotationType_display_list())
 
         return result
-    
 
     def prepare_toolServiceEvaluatedFilter(self, obj):
         """
@@ -781,7 +790,7 @@ class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
             media_type = corpus_media.corpusMediaType
             for corpus_info in media_type.corpustextinfotype_model_set.all():
                 result.extend([text_classification_info.textGenre \
-                  for text_classification_info in corpus_info.textclassificationinfotype_model_set.all()])
+                               for text_classification_info in corpus_info.textclassificationinfotype_model_set.all()])
 
         return result
 
@@ -798,27 +807,9 @@ class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
             media_type = corpus_media.corpusMediaType
             for corpus_info in media_type.corpustextinfotype_model_set.all():
                 result.extend([text_classification_info.textType \
-                  for text_classification_info in corpus_info.textclassificationinfotype_model_set.all()])
+                               for text_classification_info in corpus_info.textclassificationinfotype_model_set.all()])
 
         return result
-    
-    # def prepare_textRegisterFilter(self, obj):
-    #     """
-    #     Collect the data to filter the resources on Media Type children
-    #     """
-    #     result = []
-    #
-    #     corpus_media = obj.resourceComponentType.as_subclass()
-    #
-    #     # Filter for corpus
-    #     if isinstance(corpus_media, corpusInfoType_model):
-    #         media_type = corpus_media.corpusMediaType
-    #         for corpus_info in media_type.corpustextinfotype_model_set.all():
-    #             result.extend([text_classification_info.register \
-    #               for text_classification_info in corpus_info.textclassificationinfotype_model_set.all()])
-    #
-    #     return result
-
 
     def prepare_languageVarietyFilter(self, obj):
         """
@@ -832,23 +823,23 @@ class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
             for corpus_info in media_type.corpustextinfotype_model_set.all():
                 for lang in corpus_info.languageinfotype_model_set.all():
                     result.extend([variety.languageVarietyName for variety in
-                               lang.languageVarietyInfo.all()])
+                                   lang.languageVarietyInfo.all()])
 
         elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
             lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
             if lcr_media_type.lexicalConceptualResourceTextInfo:
                 for lang in lcr_media_type.lexicalConceptualResourceTextInfo. \
-                  languageinfotype_model_set.all():
+                        languageinfotype_model_set.all():
                     result.extend([variety.languageVarietyName for variety in
-                               lang.languageVarietyInfo.all()])
+                                   lang.languageVarietyInfo.all()])
 
         elif isinstance(corpus_media, languageDescriptionInfoType_model):
             ld_media_type = corpus_media.languageDescriptionMediaType
             if ld_media_type.languageDescriptionTextInfo:
                 for lang in ld_media_type.languageDescriptionTextInfo. \
-                  languageinfotype_model_set.all():
+                        languageinfotype_model_set.all():
                     result.extend([variety.languageVarietyName for variety in
-                               lang.languageVarietyInfo.all()])
+                                   lang.languageVarietyInfo.all()])
 
         elif isinstance(corpus_media, toolServiceInfoType_model):
             if corpus_media.inputInfo:
@@ -858,3 +849,14 @@ class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
 
         return result
 
+    def prepare_appropriatenessForDSIFilter(self, obj):
+        """
+        Collect the data to filter the resources on appropriatenessForDSIFilter
+        """
+        return obj.identificationInfo.get_appropriatenessForDSI_display_list()
+
+    def prepare_publicationStatusFilter(self, obj):
+        """
+        Collect the data to filter the resources on publication status
+        """
+        return obj.publication_status()

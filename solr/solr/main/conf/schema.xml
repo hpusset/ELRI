@@ -225,6 +225,18 @@
     
     <field name="availabilityFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
+
+    <field name="appropriatenessForDSIFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+
+    <field name="appropriatenessForDSIFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+
+    <field name="publicationStatusFilter" type="text_en" indexed="true"
+      stored="true" multiValued="false" />
+
+    <field name="publicationStatusFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="false" />
     
     <field name="audioConversationalTypeFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
