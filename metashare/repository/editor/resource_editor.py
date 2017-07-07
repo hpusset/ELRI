@@ -22,7 +22,7 @@ from django.views.decorators.csrf import csrf_protect
 from metashare import settings
 from metashare.accounts.models import EditorGroup, EditorGroupManagers
 from metashare.repository.editor.editorutils import FilteredChangeList, AllChangeList
-from metashare.repository.editor.forms import StorageObjectUploadForm, ValidationUploadForm
+from metashare.repository.editor.forms import StorageObjectUploadForm, ValidationUploadForm, LegalDocumetationUploadForm
 from metashare.repository.editor.inlines import ReverseInlineFormSet, \
     ReverseInlineModelAdmin
 from metashare.repository.editor.schemamodel_mixin import encode_as_inline
@@ -37,7 +37,7 @@ from metashare.repository.models import resourceComponentTypeType_model, \
 from metashare.repository.supermodel import SchemaModel
 from metashare.stats.model_utils import saveLRStats, UPDATE_STAT, INGEST_STAT, DELETE_STAT
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
-    ALLOWED_ARCHIVE_EXTENSIONS, ALLOWED_VALIDATION_EXTENSIONS
+    ALLOWED_ARCHIVE_EXTENSIONS, ALLOWED_VALIDATION_EXTENSIONS, ALLOWED_LEGAL_DOCUMENTATION_EXTENSIONS
 from metashare.utils import verify_subclass, create_breadcrumb_template_params
 
 from os.path import split, getsize
@@ -695,6 +695,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 name='%s_%s_uploaddata' % info),
             url(r'^(.+)/datadl/$',
                 wrap(self.datadl),
+            # VALIDATION REPORT
                 name='%s_%s_datadl' % info),
             url(r'^(.+)/upload-report/$',
                 wrap(self.uploadreport_view),
@@ -702,6 +703,13 @@ class ResourceModelAdmin(SchemaModelAdmin):
             url(r'^(.+)/reportdl/$',
                 wrap(self.reportdl),
                 name='%s_%s_reportdl' % info),
+            # LEGAL DOCUMENTATION
+            url(r'^(.+)/upload-legal/$',
+                wrap(self.uploadlegal_view),
+                name='%s_%s_uploadlegal' % info),
+            url(r'^(.+)/legaldl/$',
+                wrap(self.legaldl),
+                name='%s_%s_legaldl' % info),
             url(r'^my/$',
                 wrap(self.changelist_view_filtered),
                 name='%s_%s_myresources' % info),
@@ -966,6 +974,142 @@ class ResourceModelAdmin(SchemaModelAdmin):
 
         # no download could be provided
         return render_to_response('repository/report_not_downloadable.html',
+                                  {'resource': obj, 'reason': 'internal'},
+                                  context_instance=RequestContext(request))
+
+    ## LEGAL DOCUMENTATION
+    @csrf_protect_m
+    def uploadlegal_view(self, request, object_id, extra_context=None):
+        """
+        The 'upload data' admin view for resourceInfoType_model instances.
+        """
+        model = self.model
+        opts = model._meta
+
+        obj = self.get_object(request, unquote(object_id))
+
+        if not self.has_change_permission(request, obj):
+            raise PermissionDenied
+
+        if obj is None:
+            raise Http404(_('%(name)s object with primary key %(key)s does not exist.') \
+                          % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
+
+        storage_object = obj.storage_object
+        if storage_object is None:
+            raise Http404(_('%(name)s object with primary key %(key)s does not have a StorageObject attached.') \
+                          % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
+
+        if not storage_object.master_copy:
+            raise Http404(_('%(name)s object with primary key %(key)s is not a master-copy.') \
+                          % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
+
+        existing_legal = storage_object.get_legal_documentation()
+        storage_folder = storage_object._storage_folder()
+
+        if request.method == 'POST':
+            form = LegalDocumetationUploadForm(request.POST, request.FILES)
+            form_validated = form.is_valid()
+
+            if form_validated:
+                # Check if a new file has been uploaded to resource.
+                legal_documentation = request.FILES['legalDocumentation']
+                _extension = None
+                for _allowed_extension in ALLOWED_LEGAL_DOCUMENTATION_EXTENSIONS:
+                    if legal_documentation.name.endswith(_allowed_extension):
+                        _extension = _allowed_extension
+                        break
+
+                # We can assert that an extension has been found as the form
+                # validation would have raise a ValidationError otherwise;
+                # still, we raise an AssertionError if anything goes wrong!
+                assert (_extension in ALLOWED_LEGAL_DOCUMENTATION_EXTENSIONS)
+
+                if _extension:
+                    _storage_folder = storage_object._storage_folder()
+                    _out_filename = '{}/legal_documentation.{}'.format(_storage_folder,
+                                                                       _extension)
+
+                    # Copy uploaded file to storage folder for this object.
+                    with open(_out_filename, 'wb') as _out_file:
+                        # pylint: disable-msg=E1101
+                        for _chunk in legal_documentation.chunks():
+                            _out_file.write(_chunk)
+
+                    # Update the corresponding StorageObject to update its
+                    # download data checksum.
+                    # obj.storage_object.compute_checksum()
+                    # obj.storage_object.save()
+
+                    # TODO: resource.name may contain unicode characters which throw UnicodeEncodeError
+                    change_message = 'Uploaded "{}" to "{}" in {}.'.format(
+                        legal_documentation.name, storage_object._storage_folder(),
+                        storage_object)
+
+                    self.log_change(request, obj, change_message)
+
+                return self.response_change(request, obj)
+
+        else:
+            form = LegalDocumetationUploadForm()
+
+        context = {
+            'title': _('Upload legal documentation: "%s"') % force_unicode(obj),
+            'form': form,
+            'storage_folder': storage_folder,
+            'existing_legal': existing_legal,
+            'object_id': object_id,
+            'original': obj,
+            'root_path': self.admin_site.root_path,
+            'app_label': opts.app_label,
+        }
+        context.update(extra_context or {})
+        context_instance = RequestContext(request,
+                                          current_app=self.admin_site.name)
+        return render_to_response(
+            ['admin/repository/resourceinfotype_model/upload_legal.html'], context,
+            context_instance)
+
+    ## LEGAL DOCUMENTATION
+    @csrf_protect_m
+    def legaldl(self, request, object_id, extra_context=None):
+
+        # return HttpResponse("OK")
+        """
+        Returns an HTTP response with a download of the given legal documentation.
+        """
+
+        model = self.model
+        opts = model._meta
+
+        obj = self.get_object(request, unquote(object_id))
+        storage_object = obj.storage_object
+        dl_path = storage_object.get_legal_documentation()
+        if dl_path:
+            try:
+                def dl_stream_generator():
+                    with open(dl_path, 'rb') as _local_data:
+                        _chunk = _local_data.read(4096)
+                        while _chunk:
+                            yield _chunk
+                            _chunk = _local_data.read(4096)
+
+                # build HTTP response with a guessed mime type; the response
+                # content is a stream of the download file
+                filemimetype = guess_type(dl_path)[0] or "application/octet-stream"
+                response = HttpResponse(dl_stream_generator(),
+                                        mimetype=filemimetype)
+                response['Content-Length'] = getsize(dl_path)
+                response['Content-Disposition'] = 'attachment; filename={0}' \
+                    .format(split(dl_path)[1])
+                # LOGGER.info("Offering a local editor download of resource #{0}." \
+                #             .format(object_id))
+                return response
+            except:
+                pass
+
+        # no download could be provided
+        return render_to_response('repository/legal_not_downloadable.html',
                                   {'resource': obj, 'reason': 'internal'},
                                   context_instance=RequestContext(request))
 

@@ -27,6 +27,7 @@ LOGGER.addHandler(LOG_HANDLER)
 
 ALLOWED_ARCHIVE_EXTENSIONS = ('zip',)
 ALLOWED_VALIDATION_EXTENSIONS = ('pdf',)
+ALLOWED_LEGAL_DOCUMENTATION_EXTENSIONS = ('zip',)
 MAXIMUM_MD5_BLOCK_SIZE = 1024
 XML_DECL = re.compile(r'\s*<\?xml version=".+" encoding=".+"\?>\s*\n?',
                       re.I | re.S | re.U)

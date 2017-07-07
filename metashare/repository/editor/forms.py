@@ -7,7 +7,8 @@ from django import forms
 from django.core.exceptions import ValidationError
 
 from metashare.settings import LOG_HANDLER, MAXIMUM_UPLOAD_SIZE
-from metashare.storage.models import ALLOWED_ARCHIVE_EXTENSIONS
+from metashare.storage.models import ALLOWED_ARCHIVE_EXTENSIONS, ALLOWED_VALIDATION_EXTENSIONS, \
+    ALLOWED_LEGAL_DOCUMENTATION_EXTENSIONS
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -50,6 +51,23 @@ def _validate_validation_report(value):
     if not _valid_extension:
         raise ValidationError('Invalid upload file type. Valid file types ' \
           'are: {}'.format(ALLOWED_VALIDATION_EXTENSIONS))
+
+    return value
+
+## LEGAL DOCUMENTATION
+def _validate_legal_documentation(value):
+    """
+    Validates that the uploaded resource data is valid.
+    """
+    _valid_extension = False
+    for _allowed_extension in ALLOWED_LEGAL_DOCUMENTATION_EXTENSIONS:
+        if value.name.lower().endswith(_allowed_extension):
+            _valid_extension = True
+            break
+
+    if not _valid_extension:
+        raise ValidationError('Invalid upload file type. Valid file types ' \
+          'are: {}'.format(ALLOWED_LEGAL_DOCUMENTATION_EXTENSIONS))
 
     return value
 
@@ -125,4 +143,15 @@ class ValidationUploadForm(forms.Form):
       help_text="You can upload your validation report in" \
       " '.pdf' format using this widget. Note that this will overwrite the current report if it exists!",
       validators=[_validate_validation_report])
+
+# LEGAL DOCUMENTATION
+class LegalDocumetationUploadForm(forms.Form):
+    """
+    Form to upload resource data into a StorageObject instance.
+    """
+    legalDocumentation = forms.FileField(label="Legal Documentation",
+      help_text="You can upload a .zip file containing any additional legal documentation"
+      " using this widget. Note that this will overwrite the current legal "
+                "documentation zip file, if it exists!",
+      validators=[_validate_legal_documentation])
 
