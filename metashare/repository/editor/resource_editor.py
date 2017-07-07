@@ -1060,7 +1060,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
             'existing_legal': existing_legal,
             'object_id': object_id,
             'original': obj,
-            'root_path': self.admin_site.root_path,
             'app_label': opts.app_label,
         }
         context.update(extra_context or {})
