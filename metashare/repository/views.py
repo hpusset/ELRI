@@ -6,7 +6,7 @@ from os.path import split, getsize
 from mimetypes import guess_type
 
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404, redirect
@@ -184,7 +184,7 @@ def _get_licences(resource, user_membership):
             result[name] = (l_info, access_links, False)
     return result
 
-
+@user_passes_test(lambda u: u.is_superuser or u.groups.filter(name="ecmembers").exists())
 def download(request, object_id):
     """
     Renders the resource download/purchase view including license selection,
