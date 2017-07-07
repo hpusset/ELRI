@@ -27,7 +27,7 @@
 <ul class= "licencing">
     {% for licence in object.distributioninfotype_model_set.all|licence_set %}
             <li class="licence">
-                {{ licence|licence_icon|safe }}
+                {{ licence|licence_human|safe }}
             </li>
     {% endfor %}
 </ul>

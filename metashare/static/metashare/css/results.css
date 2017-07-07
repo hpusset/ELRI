@@ -137,11 +137,14 @@ div.resourceName ul.licencing {
 }
 
 div.resourceName ul li.licence {
-    /*display:block;*/
-    /*padding: 2px;*/
-    list-style-type: none;
-    text-align: right;
-    /*float: right;*/
+	/* display: block; */
+	/* padding: 2px; */
+	list-style-type: none;
+	text-align: right;
+	/* float: right; */
+	font-size: 0.9em;
+	color: #5c5c5c;
+	font-style: italic;
 }
 
 div.results {

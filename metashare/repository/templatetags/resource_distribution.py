@@ -14,6 +14,12 @@ def licence_icon(licence):
 register.tag('licence_icon', licence_icon)
 
 
+@register.filter("licence_human")
+def licence_human(licence):
+    return pretty_camel(licence)
+
+register.tag('licence_human', licence_human)
+
 @register.filter("licence_set")
 def licence_set(dist_list):
     dl_info = []
