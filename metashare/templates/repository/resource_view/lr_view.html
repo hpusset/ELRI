@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load get_icon %}
 {% load static from staticfiles %}
+{% load is_member %}
 
 {% block title %}
   {{ resourceName }} &ndash; ELRC-SHARE
@@ -221,13 +222,16 @@
 		
 		<div style="clear: both;">
 			<a href="javascript:history.back();"><button class="span-12 button middle_button">&laquo; Back</button></a>
-		    <a href="{% url 'download' resource.storage_object.identifier %}">
-		       	<button class="span-4 button middle_button">Download</button>
+            {% if user.is_superuser or user|is_member:"ecmembers" and resource.storage_object.publication_status == 'p' %}
+                <a href="{% url 'download' resource.storage_object.identifier %}">
+                    <button class="span-4 button middle_button">Download</button>
+                </a>
+            {% endif %}
+            {% if LR_EDIT %}
+		  	<a href="{{ LR_EDIT }}">
+		       	<button class="span-4 button middle_button">Edit Resource</button>
 		    </a>
-		  	<a {% if LR_EDIT %} href="{{ LR_EDIT }}" {% else %} href="#" class="tip" {% endif %}>
-				<span class="edit">You don&rsquo;t have the permission to edit this resource.</span>
-		       	<button class="span-4 button {% if LR_EDIT %}middle_button{% else %}middle_gray_button{% endif %}">Edit Resource</button>
-		    </a>
+            {% endif %}
 			<div style="clear: both;"></div>
 		</div>
 	</div>
