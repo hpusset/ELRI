@@ -273,6 +273,20 @@ class StorageObject(models.Model):
                 break
         return None
 
+    # LEGAL DOCUMENTATION
+    def get_legal_documentation(self):
+        """
+        Returns the local path to the downloadable legal documentation or None if there is no
+        download data.
+        """
+        _path = '{0}/legal_documentation'.format(self._storage_folder())
+        for _ext in ALLOWED_LEGAL_DOCUMENTATION_EXTENSIONS:
+            _binary_data = '{0}.{1}'.format(_path, _ext)
+            if exists(_binary_data):
+                return _binary_data
+
+        return None
+
     def save(self, *args, **kwargs):
         """
         Overwrites the predefined save() method to ensure that STORAGE_PATH
