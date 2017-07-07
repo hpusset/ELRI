@@ -25,7 +25,8 @@ from metashare import settings
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
-ALLOWED_ARCHIVE_EXTENSIONS = ('zip', 'tar.gz', 'gz', 'tgz', 'tar', 'bzip2')
+ALLOWED_ARCHIVE_EXTENSIONS = ('zip',)
+ALLOWED_VALIDATION_EXTENSIONS = ('pdf',)
 MAXIMUM_MD5_BLOCK_SIZE = 1024
 XML_DECL = re.compile(r'\s*<\?xml version=".+" encoding=".+"\?>\s*\n?',
                       re.I | re.S | re.U)
@@ -250,6 +251,25 @@ class StorageObject(models.Model):
             if exists(_binary_data):
                 return _binary_data
 
+        return None
+
+    ## VALIDATION REPORT
+    def get_validation(self):
+        """
+        Returns the local path to the downloadable data or None if there is no
+        download data.
+        """
+        import re
+
+        pattern = re.compile("ELRC_VALREP.*\.pdf")
+        for f in os.listdir(self._storage_folder()):
+            if pattern.match(f):
+                _path = '{0}/{1}'.format(self._storage_folder(), pattern.match(f).group())
+                for _ext in ALLOWED_VALIDATION_EXTENSIONS:
+                    _binary_data = '{0}.{1}'.format(_path[:-4], _ext)
+                    if exists(_binary_data):
+                        return _binary_data
+                break
         return None
 
     def save(self, *args, **kwargs):

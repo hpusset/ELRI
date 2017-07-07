@@ -36,6 +36,24 @@ def _validate_resource_data(value):
     return value
 
 
+## VALIDATION REPORT
+def _validate_validation_report(value):
+    """
+    Validates that the uploaded resource data is valid.
+    """
+    _valid_extension = False
+    for _allowed_extension in ALLOWED_VALIDATION_EXTENSIONS:
+        if value.name.lower().endswith(_allowed_extension):
+            _valid_extension = True
+            break
+
+    if not _valid_extension:
+        raise ValidationError('Invalid upload file type. Valid file types ' \
+          'are: {}'.format(ALLOWED_VALIDATION_EXTENSIONS))
+
+    return value
+
+
 def _validate_resource_description(value):
     """
     Validates that the uploaded resource description is valid.
@@ -96,4 +114,15 @@ class ResourceDescriptionUploadForm(forms.Form):
     uploadTerms = forms.BooleanField(label="Upload Terms",
       help_text="By clicking this checkbox, you confirm that you have " \
       "cleared permissions for the description(s) you intend to upload.")
+
+
+## VALIDATION REPORT
+class ValidationUploadForm(forms.Form):
+    """
+    Form to upload resource data into a StorageObject instance.
+    """
+    report = forms.FileField(label="Report",
+      help_text="You can upload your validation report in" \
+      " '.pdf' format using this widget. Note that this will overwrite the current report if it exists!",
+      validators=[_validate_validation_report])
 

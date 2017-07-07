@@ -1,5 +1,6 @@
 import datetime
 from functools import update_wrapper
+from mimetypes import guess_type
 
 from django import forms
 from django.contrib import admin, messages
@@ -8,7 +9,7 @@ from django.contrib.admin.views.main import ChangeList
 from django.contrib.auth.decorators import permission_required
 from django.core.exceptions import ValidationError, PermissionDenied
 from django.db.models import Q
-from django.http import Http404, HttpResponseNotFound, HttpResponseRedirect
+from django.http import Http404, HttpResponseNotFound, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from django.utils.decorators import method_decorator
@@ -21,7 +22,7 @@ from django.views.decorators.csrf import csrf_protect
 from metashare import settings
 from metashare.accounts.models import EditorGroup, EditorGroupManagers
 from metashare.repository.editor.editorutils import FilteredChangeList, AllChangeList
-from metashare.repository.editor.forms import StorageObjectUploadForm
+from metashare.repository.editor.forms import StorageObjectUploadForm, ValidationUploadForm
 from metashare.repository.editor.inlines import ReverseInlineFormSet, \
     ReverseInlineModelAdmin
 from metashare.repository.editor.schemamodel_mixin import encode_as_inline
@@ -36,8 +37,10 @@ from metashare.repository.models import resourceComponentTypeType_model, \
 from metashare.repository.supermodel import SchemaModel
 from metashare.stats.model_utils import saveLRStats, UPDATE_STAT, INGEST_STAT, DELETE_STAT
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
-    ALLOWED_ARCHIVE_EXTENSIONS
+    ALLOWED_ARCHIVE_EXTENSIONS, ALLOWED_VALIDATION_EXTENSIONS
 from metashare.utils import verify_subclass, create_breadcrumb_template_params
+
+from os.path import split, getsize
 
 csrf_protect_m = method_decorator(csrf_protect)
 
@@ -690,7 +693,13 @@ class ResourceModelAdmin(SchemaModelAdmin):
             url(r'^(.+)/upload-data/$',
                 wrap(self.uploaddata_view),
                 name='%s_%s_uploaddata' % info),
-           url(r'^my/$',
+            url(r'^(.+)/upload-report/$',
+                wrap(self.uploadreport_view),
+                name='%s_%s_uploadreport' % info),
+            url(r'^(.+)/reportdl/$',
+                wrap(self.reportdl),
+                name='%s_%s_reportdl' % info),
+            url(r'^my/$',
                 wrap(self.changelist_view_filtered),
                 name='%s_%s_myresources' % info),
             url(r'^(.+)/export-xml/$',
@@ -816,6 +825,147 @@ class ResourceModelAdmin(SchemaModelAdmin):
         return render_to_response(
           ['admin/repository/resourceinfotype_model/upload_resource.html'], context,
           context_instance)
+
+    ## VALIDATION REPORT
+    @csrf_protect_m
+    def uploadreport_view(self, request, object_id, extra_context=None):
+        """
+        The 'upload validation' admin view for resourceInfoType_model instances.
+        """
+        model = self.model
+        opts = model._meta
+
+        obj = self.get_object(request, unquote(object_id))
+
+        if not self.has_change_permission(request, obj):
+            raise PermissionDenied
+
+        if obj is None:
+            raise Http404(_('%(name)s object with primary key %(key)s does not exist.') \
+                          % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
+
+        storage_object = obj.storage_object
+        if storage_object is None:
+            raise Http404(_('%(name)s object with primary key %(key)s does not have a StorageObject attached.') \
+                          % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
+
+        if not storage_object.master_copy:
+            raise Http404(_('%(name)s object with primary key %(key)s is not a master-copy.') \
+                          % {'name': force_unicode(opts.verbose_name), 'key': escape(object_id)})
+
+        existing_validation = storage_object.get_validation()
+        storage_folder = storage_object._storage_folder()
+
+        if request.method == 'POST':
+            form = ValidationUploadForm(request.POST, request.FILES)
+            form_validated = form.is_valid()
+
+            if form_validated:
+                # Check if a new file has been uploaded to resource.
+                report = request.FILES['report']
+                _extension = None
+                for _allowed_extension in ALLOWED_VALIDATION_EXTENSIONS:
+                    if report.name.endswith(_allowed_extension):
+                        _extension = _allowed_extension
+                        break
+
+                # We can assert that an extension has been found as the form
+                # validation would have raise a ValidationError otherwise;
+                # still, we raise an AssertionError if anything goes wrong!
+                assert (_extension in ALLOWED_VALIDATION_EXTENSIONS)
+
+                if _extension:
+                    _storage_folder = storage_object._storage_folder()
+
+                    _out_filename = u'{}/ELRC_VALREP_{}_{}.{}'.format(_storage_folder,
+                                                                      object_id,
+                                                                      obj.identificationInfo.resourceName['en']
+                                                                      .replace(u"/", u"_").replace(u" ", u"_"),
+                                                                      _extension)
+                    # we need to make sure the any existing report is removed
+                    # while the new one may have a different filename due to
+                    # resourceName change
+                    if existing_validation:
+                        import os
+                        os.remove(existing_validation)
+
+                    # Copy uploaded file to storage folder for this object.
+                    with open(_out_filename.encode('utf-8'), 'wb') as _out_file:
+                        # pylint: disable-msg=E1101
+                        for _chunk in report.chunks():
+                            _out_file.write(_chunk)
+
+                    # TODO: resource.name may contain unicode characters which throw UnicodeEncodeError
+                    change_message = u'Uploaded "{}" to "{}" in {}.'.format(
+                        report.name, storage_object._storage_folder(),
+                        storage_object)
+
+                    self.log_change(request, obj, change_message)
+
+                return self.response_change(request, obj)
+
+        else:
+            form = ValidationUploadForm()
+
+        context = {
+            'title': _('Upload validation report: "%s"') % force_unicode(obj),
+            'form': form,
+            'storage_folder': storage_folder,
+            'existing_validation': existing_validation,
+            'object_id': object_id,
+            'original': obj,
+            'root_path': self.admin_site.root_path,
+            'app_label': opts.app_label,
+        }
+        context.update(extra_context or {})
+        context_instance = RequestContext(request,
+                                          current_app=self.admin_site.name)
+        return render_to_response(
+            ['admin/repository/resourceinfotype_model/upload_report.html'], context,
+            context_instance)
+
+    ## VALIDATION REPORT
+    @csrf_protect_m
+    def reportdl(self, request, object_id, extra_context=None):
+
+        # return HttpResponse("OK")
+        """
+        Returns an HTTP response with a download of the given validation report.
+        """
+
+        model = self.model
+        opts = model._meta
+
+        obj = self.get_object(request, unquote(object_id))
+        storage_object = obj.storage_object
+        dl_path = storage_object.get_validation()
+        if dl_path:
+            try:
+                def dl_stream_generator():
+                    with open(dl_path, 'rb') as _local_data:
+                        _chunk = _local_data.read(4096)
+                        while _chunk:
+                            yield _chunk
+                            _chunk = _local_data.read(4096)
+
+                # build HTTP response with a guessed mime type; the response
+                # content is a stream of the download file
+                filemimetype = guess_type(dl_path)[0] or "application/octet-stream"
+                response = HttpResponse(dl_stream_generator(),
+                                        mimetype=filemimetype)
+                response['Content-Length'] = getsize(dl_path)
+                response['Content-Disposition'] = 'attachment; filename={0}' \
+                    .format(split(dl_path)[1])
+                # LOGGER.info("Offering a local editor download of resource #{0}." \
+                #             .format(object_id))
+                return response
+            except:
+                pass
+
+        # no download could be provided
+        return render_to_response('repository/report_not_downloadable.html',
+                                  {'resource': obj, 'reason': 'internal'},
+                                  context_instance=RequestContext(request))
 
     @csrf_protect_m
     def exportxml(self, request, object_id, extra_context=None):
