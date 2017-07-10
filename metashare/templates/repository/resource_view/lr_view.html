@@ -2,6 +2,7 @@
 {% load get_icon %}
 {% load static from staticfiles %}
 {% load is_member %}
+{% load url_target %}
 
 {% block title %}
   {{ resourceName }} &ndash; ELRC-SHARE
@@ -195,7 +196,7 @@
 			 	{% for address in url %}
 			 	    <h3 style="font-size:14px; margin-top: 1%;">
 						<label>
-							{{ address|urlize }}{% if not forloop.last %},{% endif %}
+							{{ address|urlize|url_target:"_blank" }}{% if not forloop.last %},{% endif %}
 						</label>
 					</h3>
 				{% endfor %}
