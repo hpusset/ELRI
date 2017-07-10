@@ -7,15 +7,9 @@
 
 	{% for key1, value1 in value.items %}
 		{% if "Licence" in key1 %}
-                <div class="subtitle">
+                <div>
                     <label class="licence">
-                        <strong><i>{{ value1|rep }}
-                        {% for key1, value1 in value.items %}
-                            {% if "Version" in key1 %}
-                                {{ value1 }}
-                            {% endif %}
-                        {% endfor %}</i>
-                        </strong>
+                        {{ value1|rep }}
                     </label>
                 </div>
         {% endif %}

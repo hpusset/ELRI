@@ -201,8 +201,10 @@
 				{% endfor %}
 			{% endif %}
 			
-			{% if not 'NOT_DEFINED' in metaShareId %}<h4 class="identifier">{{ metaShareId }}</h4>{% endif %}
-			{% if identifier %}
+			{% if metaShareId and not 'NOT_DEFINED' in metaShareId %}
+                <h4 class="identifier">{{ metaShareId }}</h4>
+            {% endif %}
+            {% if identifier %}
 				<div style="display:block;">
 				<h4 style="float:left; padding:3px;">ID: </h4>
 				{% for id in identifier %}
@@ -219,17 +221,26 @@
 			{% for desc in other_descriptions %}<h4 style="text-align:justify" class="readmore">{{ desc|linebreaksbr }}</h4>{% endfor %} 
 			</div> 
 		{% endifnotequal %}
-		
+
+        {% if dsi %}
+            <div style="font-size: 1.2em;">
+                <strong>DSI Relevance: </strong>{{ dsi|join:", " }}
+            </div>
+        {% endif %}
+        <hr class="actions"/>
 		<div style="clear: both;">
-			<a href="javascript:history.back();"><button class="span-12 button middle_button">&laquo; Back</button></a>
+			<a href="javascript:history.back();"><button class="span-12 button middle_button">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
             {% if user.is_superuser or user|is_member:"ecmembers" and resource.storage_object.publication_status == 'p' %}
                 <a href="{% url 'download' resource.storage_object.identifier %}">
-                    <button class="span-4 button middle_button">Download</button>
+                    <button class="span-4 button middle_button">
+                        <i class="fa fa-download" aria-hidden="true"></i> Download</button>
                 </a>
             {% endif %}
             {% if LR_EDIT %}
 		  	<a href="{{ LR_EDIT }}">
-		       	<button class="span-4 button middle_button">Edit Resource</button>
+		       	<button class="span-4 button middle_button">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Resource</button>
 		    </a>
             {% endif %}
 			<div style="clear: both;"></div>

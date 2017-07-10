@@ -127,7 +127,10 @@
 		<div>
 			<label class="dataline">
 				{% if person_dict.Communication.Country %}
-                     {{ person_dict.Communication.Country }} ({{ person_dict.Communication.Country_identifier }})
+                     {{ person_dict.Communication.Country }}
+                    {% if person_dict.Communication.Country_identifier %}
+                         ({{ person_dict.Communication.Country_identifier }})
+                    {% endif %}
                 {% endif %}
 			</label>
 		</div>

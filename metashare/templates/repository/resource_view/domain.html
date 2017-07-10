@@ -7,17 +7,17 @@
                 <label>
                     {% for key1, value1 in value.items %}
                         {% if key1 == "Domain" %}
-                            <strong>
+                            <label class="dataline indented">
                                 {{ value1 }}
                                 {% if value.Domain_identifier and not value.Subdomain_Identifier  %}
                                     (Eurovoc {{ value.Domain_identifier }})
                                 {% endif %}
                                 {% if "Size_per_domain" in value %}
                                 {% include "repository/resource_view/size.html" with size=value.Size_per_domain type="sub" %}{% endif %}
-                            </strong>
+                            </label>
                         {% endif %}
                         {% if key1 == "Subdomain" %}
-                            : {{ value1 }} (Eurovoc {{ value.Subdomain_Identifier }})
+                            <span style="margin-left: 15px;font-size: 0.9em; color: #333">{{ value1 }} (Eurovoc {{ value.Subdomain_Identifier }})</span>
                         {% endif %}
                         {% if key1 == "Conformance_to_classification_scheme" %}
                             <span style="display: none">{{ value1 }}</span>

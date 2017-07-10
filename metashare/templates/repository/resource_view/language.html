@@ -6,8 +6,11 @@
 	{% for key, value in languages.items %}
 		{% for key1, value1 in value.items %}
 				{% if key1 == "Language_name" %}
-					<label class="subtitle" title="{{value.Language_identifier}}">
+					<label title="{{value.Language_identifier}}">
 						{{ value1 }}
+                        {% if "Language_script" in value %}
+                            ({{ value.Language_identifier }})
+                        {% endif %}
 						{# Take care of size #}
 						{% if "Size_per_language" in value %} 
 							{% if value.Size_per_language %}
@@ -56,7 +59,8 @@
 								</div>
 							{% endif %}
 						{% endfor %}						
-					{% endif %} 
+					{% endif %}
+                    <hr />
 				{% endif %}
 		{% endfor %}
 	{% endfor %}
