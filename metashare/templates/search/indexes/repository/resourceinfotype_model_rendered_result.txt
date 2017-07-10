@@ -13,8 +13,6 @@
 &nbsp;<a href="{{ object.get_absolute_url }}"{% ifnotequal object.identificationInfo.get_default_description "METASHARE_NULL" %} 
     title="{{ object.identificationInfo.get_default_description|escape }}"{% endifnotequal %}>{{ object }}</a>
 
-&nbsp;{% resource_media_types object.resourceComponentType.as_subclass %} 
-
 <div class="accessStats">
   <img src="{% static "stats/img/download_icon.gif" %}" alt="Number of downloads" title="Number of downloads" />&nbsp;{{ object.storage_object.identifier|get_download_count }}
   <img src="{% static "stats/img/view_icon.gif" %}" alt="Number of views" title="Number of views" />&nbsp;{{ object.storage_object.identifier|get_view_count }}
