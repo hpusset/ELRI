@@ -73,7 +73,7 @@ div.resourceName{
 }
 
 div.resourceName a:hover {
-    color: #FF7E27 !important;
+    color: #A89B00 !important;
 }
 
 div.resourceName>div.accessStats {
@@ -87,7 +87,7 @@ div.resourceName>div.accessStats>img {
 
 div.resourceName a:active, div.resourceName a:visited, div.resourceName a:link {
     text-decoration: none;
-	color: #438085;
+	color: #006386;
 }
 
 div.resourceName ul li.languages {
