@@ -327,102 +327,6 @@
 			</xs:restriction>
 		</xs:simpleType>
 	</xs:element>
-	<!--
-	<xs:element name="useNLPSpecific">
-		<xs:annotation>
-			<xs:documentation>Specifies the NLP application for which the resource iscreated or the application in which it has actually been used.</xs:documentation>
-		</xs:annotation>
-		<xs:simpleType>
-			<xs:restriction base="xs:string">
-				<xs:maxLength value="100"/>
-				<xs:enumeration value="parsing"/>
-				<xs:enumeration value="contradictionDetection"/>
-				<xs:enumeration value="opinionMining"/>
-				<xs:enumeration value="wordSenseDisambiguation"/>
-				<xs:enumeration value="voiceControl"/>
-				<xs:enumeration value="topicDetection_Tracking"/>
-				<xs:enumeration value="textualEntailment"/>
-				<xs:enumeration value="textMining"/>
-				<xs:enumeration value="textCategorisation"/>
-				<xs:enumeration value="terminologyExtraction"/>
-				<xs:enumeration value="summarization"/>
-				<xs:enumeration value="spellChecking"/>
-				<xs:enumeration value="speechUnderstanding"/>
-				<xs:enumeration value="speechToSpeechTranslation"/>
-				<xs:enumeration value="speechSynthesis"/>
-				<xs:enumeration value="speechRecognition"/>
-				<xs:enumeration value="signLanguageRecognition"/>
-				<xs:enumeration value="signLanguageGeneration"/>
-				<xs:enumeration value="semanticWeb"/>
-				<xs:enumeration value="questionAnswering"/>
-				<xs:enumeration value="informationExtraction"/>
-				<xs:enumeration value="posTagging"/>
-				<xs:enumeration value="personIdentification"/>
-				<xs:enumeration value="naturalLanguageUnderstanding"/>
-				<xs:enumeration value="naturalLanguageGeneration"/>
-				<xs:enumeration value="namedEntityRecognition"/>
-				<xs:enumeration value="multimediaDocumentProcessing"/>
-				<xs:enumeration value="morphosyntacticTagging"/>
-				<xs:enumeration value="morphologicalAnalysis"/>
-				<xs:enumeration value="linguisticResearch"/>
-				<xs:enumeration value="lexiconEnhancement"/>
-				<xs:enumeration value="lemmatization"/>
-				<xs:enumeration value="languageModelsTraining"/>
-				<xs:enumeration value="languageModelling"/>
-				<xs:enumeration value="languageIdentification"/>
-				<xs:enumeration value="knowledgeRepresentation"/>
-				<xs:enumeration value="knowledgeDiscovery"/>
-				<xs:enumeration value="emotionRecognition"/>
-				<xs:enumeration value="emotionGeneration"/>
-				<xs:enumeration value="documentClassification"/>
-				<xs:enumeration value="derivationalMorphologicalAnalysis"/>
-				<xs:enumeration value="coreferenceResolution"/>
-				<xs:enumeration value="bilingualLexiconInduction"/>
-				<xs:enumeration value="annotation"/>
-				<xs:enumeration value="webServices"/>
-				<xs:enumeration value="eventExtraction"/>
-				<xs:enumeration value="semanticRoleLabelling"/>
-				<xs:enumeration value="readingAndWritingAidApplications"/>
-				<xs:enumeration value="temporalExpressionRecognition"/>
-				<xs:enumeration value="intra-documentCoreferenceResolution"/>
-				<xs:enumeration value="visualSceneUnderstanding"/>
-				<xs:enumeration value="entityMentionRecognition"/>
-				<xs:enumeration value="sentimentAnalysis"/>
-				<xs:enumeration value="machineTranslation"/>
-				<xs:enumeration value="persuasiveExpressionMining"/>
-				<xs:enumeration value="qualitativeAnalysis"/>
-				<xs:enumeration value="textToSpeechSynthesis"/>
-				<xs:enumeration value="personRecognition"/>
-				<xs:enumeration value="textGeneration"/>
-				<xs:enumeration value="avatarSynthesis"/>
-				<xs:enumeration value="discourseAnalysis"/>
-				<xs:enumeration value="expressionRecognition"/>
-				<xs:enumeration value="faceRecognition"/>
-				<xs:enumeration value="faceVerification"/>
-				<xs:enumeration value="humanoidAgentSynthesis"/>
-				<xs:enumeration value="informationRetrieval"/>
-				<xs:enumeration value="lexiconAccess"/>
-				<xs:enumeration value="lexiconAcquisitionFromCorpora"/>
-				<xs:enumeration value="lexiconExtractionFromLexica"/>
-				<xs:enumeration value="lexiconFormatConversion"/>
-				<xs:enumeration value="lexiconMerging"/>
-				<xs:enumeration value="lexiconVisualization"/>
-				<xs:enumeration value="lipTrackingAnalysis"/>
-				<xs:enumeration value="multimediaDevelopment"/>
-				<xs:enumeration value="speakerIdentification"/>
-				<xs:enumeration value="speakerVerification"/>
-				<xs:enumeration value="speechLipsCorrelationAnalysis"/>
-				<xs:enumeration value="speechAnalysis"/>
-				<xs:enumeration value="speechAssistedVideoControl"/>
-				<xs:enumeration value="speechVerification"/>
-				<xs:enumeration value="spokenDialogueSystems"/>
-				<xs:enumeration value="talkingHeadSynthesis"/>
-				<xs:enumeration value="userAuthentication"/>
-				<xs:enumeration value="other"/>
-			</xs:restriction>
-		</xs:simpleType>
-	</xs:element>
--->
 	<xs:element name="conformanceToClassificationScheme" type="xs:string" fixed="EUROVOC">
 		<xs:annotation>
 			<xs:documentation>Specifies the external classification schemes</xs:documentation>
@@ -430,28 +334,6 @@
 				<label>Conformance to classification scheme</label>
 			</xs:appinfo>
 		</xs:annotation>
-		<!--
-		<xs:simpleType>
-			<xs:restriction base="xs:string">
-				<xs:maxLength value="100"/>
-				<xs:enumeration value="ANC_domainClassification"/>
-				<xs:enumeration value="ANC_genreClassification"/>
-				<xs:enumeration value="BNC_domainClassification"/>
-				<xs:enumeration value="BNC_textTypeClassification"/>
-				<xs:enumeration value="DDC_classification"/>
-				<xs:enumeration value="DK-5"/>
-				<xs:enumeration value="EUROVOC"/>
-				<xs:enumeration value="libraryOfCongress_domainClassification"/>
-				<xs:enumeration value="libraryofCongressSubjectHeadings_classification"/>
-				<xs:enumeration value="MeSH_classification"/>
-				<xs:enumeration value="NLK_classification"/>
-				<xs:enumeration value="PAROLE_topicClassification"/>
-				<xs:enumeration value="PAROLE_genreClassification"/>
-				<xs:enumeration value="UDC_classification"/>
-				<xs:enumeration value="other"/>
-			</xs:restriction>
-		</xs:simpleType>
--->
 	</xs:element>
 	<xs:element name="annotationSchema">
 		<xs:annotation>
@@ -476,6 +358,28 @@
 		<xs:simpleType>
 			<xs:restriction base="xs:string">
 				<xs:maxLength value="500"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+    <xs:element name="segmentationLevel">
+		<xs:annotation>
+			<xs:documentation>Specifies the segmentation unit in terms of which the resource has been segmented or the level of segmentation a tool/service requires/outputs</xs:documentation>
+			<xs:appinfo>
+				<label>Segmentation level</label>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="50"/>
+				<xs:enumeration value="paragraph"/>
+				<xs:enumeration value="sentence"/>
+				<xs:enumeration value="clause"/>
+				<xs:enumeration value="word"/>
+				<xs:enumeration value="wordGroup"/>
+				<xs:enumeration value="utterance"/>
+				<xs:enumeration value="phrase"/>
+				<xs:enumeration value="token"/>
+				<xs:enumeration value="other"/>
 			</xs:restriction>
 		</xs:simpleType>
 	</xs:element>

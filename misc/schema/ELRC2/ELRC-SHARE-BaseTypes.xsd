@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 sp1 (http://www.altova.com) by ﻿Lemmy (Unicorn) -->
 <!-- edited by ILSP/Athena R.C. -->
 <xs:schema xmlns:ms="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0" xml:lang="en">
 	<xs:include schemaLocation="./ELRC-SHARE-SimpleTypes.xsd"/>
@@ -990,6 +991,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element ref="ms:segmentationLevel" minOccurs="0"/>
 			<xs:element ref="ms:typesystem" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>A name or a url reference to the typesystem used in the annotation of the resource or used by the tool/service</xs:documentation>

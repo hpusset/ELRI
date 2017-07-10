@@ -1070,7 +1070,7 @@ ANNOTATIONINFOTYPE_ANNOTATIONMODE_CHOICES = _make_choices_from_list([
 ])
 
 ANNOTATIONINFOTYPE_SEGMENTATIONLEVEL_CHOICES = _make_choices_from_list([
-    u'paragraph', u'sentence', u'clause', u'word', u'token', u'wordGroup', u'utterance', u'phrase', u'other',
+    u'paragraph', u'sentence', u'clause', u'word', u'wordGroup', u'utterance', u'phrase', u'token',  u'other',
 ])
 
 # pylint: disable-msg=C0103
@@ -1123,6 +1123,16 @@ class annotationInfoType_model(SchemaModel):
       'n a stand-off fashion',
       blank=True, )
 
+    segmentationLevel = MultiSelectField(
+        verbose_name='Segmentation level',
+        help_text='Specifies the segmentation unit in terms of which the r' \
+                  'esource has been segmented or the level of segmentation a tool/se' \
+                  'rvice requires/outputs',
+        blank=True,
+        max_length=1 + len(ANNOTATIONINFOTYPE_SEGMENTATIONLEVEL_CHOICES['choices']) / 4,
+        choices=ANNOTATIONINFOTYPE_SEGMENTATIONLEVEL_CHOICES['choices'],
+    )
+
     typesystem = XmlCharField(
       verbose_name='Typesystem',
       help_text='A name or a url reference to the typesystem used in the' \
@@ -1141,16 +1151,6 @@ class annotationInfoType_model(SchemaModel):
       ' ontology, term lexicon etc.) used in the annotation of the resou' \
       'rce or used by the tool/service',
       blank=True, max_length=500, )
-
-    segmentationLevel = MultiSelectField(
-      verbose_name='Segmentation level',
-      help_text='Specifies the segmentation unit in terms of which the r' \
-                  'esource has been segmented or the level of segmentation a tool/se' \
-                  'rvice requires/outputs',
-      blank=True,
-      max_length=1 + len(ANNOTATIONINFOTYPE_SEGMENTATIONLEVEL_CHOICES['choices']) / 4,
-      choices=ANNOTATIONINFOTYPE_SEGMENTATIONLEVEL_CHOICES['choices'],
-    )
 
     conformanceToStandardsBestPractices = MultiSelectField(
       verbose_name='Conformance to standards / best practices',
