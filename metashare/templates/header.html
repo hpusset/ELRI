@@ -7,11 +7,14 @@
     <div class="jsddm">
         {# drop-down menu created with http://javascript-array.com/scripts/jquery_simple_drop_down_menu/ #}
         <ul id="jsddm">
-            <li title="Home"><a href="{% url 'frontpage' %}" %}>Home</a></li>
+            <li title="Home"><a href="{% url 'frontpage' %}" %}>
+                <i class="fa fa-home menu_fontawesome" aria-hidden="true"></i> Home</a></li>
             <li title="Browse the resources of the META-SHARE catalogue"><a
-                    href="{% url 'frontpage' %}repository/search/">Browse Resources</a></li>
+                    href="{% url 'frontpage' %}repository/search/">
+                <i class="fa fa-list-ul menu_fontawesome" aria-hidden="true"></i> Browse Resources</a></li>
             {% if user.userprofile.has_editor_permission %}
-                <li title="Create/edit resource metadata or upload resource data"><a>Manage Resources</a>
+                <li title="Create/edit resource metadata or upload resource data"><a>
+                    <i class="fa fa-pencil-square-o menu_fontawesome" aria-hidden="true"></i> Manage Resources</a>
                     <ul>
                         <li title="Create/edit your own resource metadata or upload resource data"><a
                                 href="{% url 'editor:repository_resourceinfotype_model_myresources' %}">Manage your
@@ -37,7 +40,8 @@
                 </li>
             {% endif %}
             {% if user.is_superuser or user.userprofile.has_organization_manager_permission or user.userprofile.has_manager_permission %}
-                <li title="Manage groups and users"><a>Administration</a>
+                <li title="Manage groups and users"><a>
+                    <i class="fa fa-wrench menu_fontawesome" aria-hidden="true"></i> Administration</a>
                     <ul>
                         {% if user.is_superuser %}
                             <li><a href="{% url 'admin:auth_user_changelist' %}">Users</a></li>
@@ -60,9 +64,12 @@
                 </li>
             {% endif %}
             <li title="View various statistics for this META-SHARE Node"><a
-                    href="{% url 'metashare.views.frontpage' %}stats/top/">Statistics</a></li>
-            <li title="Help"><a href="{% url 'help' %}">Help</a></li>
-            <li><a href="{% url 'info' %}">About</a>
+                    href="{% url 'metashare.views.frontpage' %}stats/top/">
+                <i class="fa fa-bar-chart menu_fontawesome" aria-hidden="true"></i> Statistics</a></li>
+            <li title="Help"><a href="{% url 'help' %}">
+                <i class="fa fa-question-circle menu_fontawesome" aria-hidden="true"></i> Help</a></li>
+            <li><a href="{% url 'info' %}">
+                <i class="fa fa-info-circle menu_fontawesome" aria-hidden="true"></i> About</a>
                 <ul>
                     <li><a href="{% url 'info' %}#LR_Provision">LR Provision</a></li>
                     <li><a href="{% url 'info' %}#Licensing_LRs">Licensing LRs for the ELRC action</a></li>
@@ -73,7 +80,8 @@
                 </ul>
             </li>
             {% if user.is_active %}
-                <li title="Profile settings and actions"><a href="{% url 'edit_profile' %}">Your Profile,
+                <li title="Profile settings and actions"><a href="{% url 'edit_profile' %}">
+                    <i class="fa fa-user menu_fontawesome" aria-hidden="true"></i> Your Profile,
                     {% load firstof from future %}{% filter force_escape %}
                         {% firstof user.first_name user.username %}{% endfilter %}</a>
                     <ul>
@@ -95,10 +103,13 @@
                 </li>
             {% endif %}
             {% if user.username %}
-                <li><a href="{% url 'logout' %}?next={{ request.path }}">Logout</a></li>
+                <li><a href="{% url 'logout' %}?next={{ request.path }}">
+                    <i class="fa fa-sign-out menu_fontawesome" aria-hidden="true"></i> Logout</a></li>
             {% else %}
-                <li><a href="{% url 'create' %}">Register</a></li>
-                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'create' %}">
+                    <i class="fa fa-user-plus menu_fontawesome" aria-hidden="true"></i> Register</a></li>
+                <li><a href="{% url 'login' %}">
+                    <i class="fa fa-sign-in menu_fontawesome" aria-hidden="true"></i> Login</a></li>
             {% endif %}
         </ul>
     </div>

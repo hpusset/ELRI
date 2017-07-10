@@ -841,4 +841,28 @@ div.jsddm {
     padding-top: 16px;
 }
 
+.big_button_search {
+	font-size: 2.3em;
+	background-color: #fff;
+	color: #000;
+	border: none;
+	display: block;
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	border-radius: 100px;
+	padding-top: 12px;
+	text-decoration: none;
+}
+
+.big_button_search:hover {
+    cursor: pointer;
+	margin-top: -4px;
+    font-size: 2.8em;
+	color: #058dbe !important;
+	-webkit-transition: background 200ms linear;
+	-moz-transition: background 200ms linear;
+	-ms-transition: background 200ms linear;
+	-o-transition: background 200ms linear;
+	transition: background 200ms linear;
+}
 
