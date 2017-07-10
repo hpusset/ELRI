@@ -50,7 +50,7 @@ HTTPURI_VALIDATOR = RegexValidator(r"^(?i)((http|ftp)s?):\/\/"
         " see also RFC 2396).", ValidationError)
 
 # namespace of the META-SHARE metadata XML Schema
-SCHEMA_NAMESPACE = 'http://elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/'
+SCHEMA_NAMESPACE = 'http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/'
 # version of the META-SHARE metadata XML Schema
 SCHEMA_VERSION = '2.0'
 
