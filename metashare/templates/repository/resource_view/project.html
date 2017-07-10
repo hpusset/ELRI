@@ -42,7 +42,8 @@
 	<div class="dataline indented">
 		<label>
 			{% if project.Funding_country %}
-			<strong>Funding {% if "," in project.Funding_country%}Countries{% else %}Country{% endif %}: </strong>{{ project.Funding_country }} ({{ project.Funding_country_identifier }})
+			<strong>Funding {% if "," in project.Funding_country%}Countries{% else %}Country{% endif %}: </strong>{{ project.Funding_country }}
+                {% if project.Funding_country_identifier%}({{ project.Funding_country_identifier }}){% endif %}
 			{% endif %}
 		</label>
 	</div>

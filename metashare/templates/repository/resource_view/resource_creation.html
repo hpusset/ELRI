@@ -1,6 +1,10 @@
 {% spaceless %}
 
-<label class='component'>Resource Creation</label>
+{% if resource_creation_dict.items|length == 1 %}
+    {% if resource_creation_dict.Resource_creation.Created_using_ELRC_services == "True" or resource_creation_dict.Resource_creation.Anonymized == "True" %}
+        <label class='component'>Resource Creation</label>
+    {% endif %}
+{% endif %}
 
 <div class="dataline">
 {% for key, value in resource_creation_dict.items %}
@@ -39,6 +43,20 @@
 				</label>
 			</div>
 		{% endif %}
+        {% if resource_creation_dict.Resource_creation.Created_using_ELRC_services == "True" %}
+            <div class="dataline">
+                <label>
+                    <i style="font-size: 1.2em; color: darkblue" class="fa fa-info-circle" aria-hidden="true"></i> Created using ELRC Services
+                </label>
+            </div>
+        {% endif %}
+        {% if resource_creation_dict.Resource_creation.Anonymized == "True" %}
+            <div class="dataline">
+                <label>
+                    <i style="font-size: 1.2em; color: darkgreen;" class="fa fa-eye-slash" aria-hidden="true"></i> Anonymized
+                </label>
+            </div>
+        {% endif %}
 	{% endif %}
 	<div class="dataline">
 		{% for key, value in resource_creation_dict.items %}
@@ -50,6 +68,7 @@
 						{% include "repository/resource_view/project.html" with project=value1 %}						
 					{% endif %}
 				{% endfor %}
+
 		{% endfor %}
 	</div>
 </div>
