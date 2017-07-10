@@ -96,15 +96,15 @@ a:hover span.desc {
 }
 
 .middle_button {
-    background-color: #058dbe ;
-    border: none;
-    display: block;
-    margin-top: 7px;
-    height: 26px;
-    width: 130px;
-    color: white;
-    font-size: 16px !important;
-    text-decoration: none;
+	background-color: #058dbe;
+	border: none;
+	display: block;
+	margin-top: 7px;
+	height: 26px;
+	width: auto;
+	color: white;
+	font-size: 16px !important;
+	text-decoration: none;
 }
 
 .middle_button:hover {
@@ -659,15 +659,13 @@ div.split {
 }
 
 div.attribution {
-    display: block;
-    font-size: 12px;
-    background: #D1D1D1;
-    border-bottom: solid 1px #ccc;
-    border-left: solid 1px #ccc;
-    color: #000;
-    font-weight: normal;
-    padding: 1%;
-    margin-bottom: 10px;
+	display: block;
+	font-size: 12px;
+	background: #058DBE33;
+	color: #000;
+	font-weight: normal;
+	padding: 1%;
+	margin-bottom: 21px;
 }
 
 div.citation {

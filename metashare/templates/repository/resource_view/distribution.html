@@ -99,10 +99,12 @@
         {% endif %}
         {% if distribution.Distribution.IPR_holder %}
             <div class="dataline">
-                <label class="dataline indented"><strong>IPR Holders:</strong></label>
+                <label class="dataline indented"><strong>IPR Holders</strong></label>
                 {% for key, value in distribution.Distribution.items %}
                     {% if "IPR_holder" in key %}
+                        <div class="indented">
                         {% include "repository/resource_view/person.html" with person_dict=value.IPR_holder type="IPR Holder" %}
+                        </div>
                     {% endif %}
                 {% endfor %}
             </div>

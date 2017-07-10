@@ -52,6 +52,7 @@ div.right-corner{
 	font-weight: normal;
 	color: #333;
 	display:table;
+	margin-bottom: 5px;
 }
 
 .dataline a{
@@ -75,11 +76,9 @@ div.right-corner{
 label.title{
 	display:block;
 	font-size:14px;
-	background:#FFDDAA;
 	border-bottom:solid 1px #ccc;
-	border-left:solid 1px #ccc;
 	padding-left:2px;
-	color:#000;
+	color:#058dbe;
 }
 
 label.title, label.component {
@@ -96,10 +95,10 @@ label.tab_content, label.component {
 
 label.component{
 	/*background-color: #fda;*/
-	color: #fff;
+	color: #000;
 	font-size: 16px;
 	padding:3px;
-	background: #0578a5;
+	background: #cde8f2;
 	position:relative;
 }
 
@@ -183,7 +182,7 @@ label.component{
 	background: #ccc;
 	background: -moz-linear-gradient(bottom, #FFCC00, #FFFFAA);
 	background: -webkit-gradient(linear, left top, left bottom, to(#FFCC00), from(#FFFFAA));
-	filter:progid:DXImageTransform.Microsoft.Gradient(endColorstr='#FFCC00', startColorstr='#FFFFAA', gradientType='0');
+	filter:progid:DXImageTransform.Microsoft.Gradient(endColorstr='#FFCC00', startColorstr='#FFFFAA', gradientType=0);
 	height:20px;
 }
 
@@ -393,12 +392,12 @@ label span a{
 }
 
 .read-less{
-    padding-bottom:3px;
+    padding-bottom:4px;
     line-height: 1;
 }
 
 .details{
-	font-family: "TitilliumText","Helvetica Neue","Helvetica",Arial,sans-serif;
+	font-family: "Helvetica Neue","Helvetica",Arial,sans-serif;
 	font-size: 14px;
 	line-height: 1.25;
 	color: #111111;
@@ -498,3 +497,13 @@ a .indented{
 	background:#333;
 }
 
+.licence {
+	font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+	font-weight: bold;
+	font-size: 1.2em;
+	font-style: italic;
+}
+
+hr.actions {
+	margin: 10px 0 10px 0;
+}
