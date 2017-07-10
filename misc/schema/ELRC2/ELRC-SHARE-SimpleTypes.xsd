@@ -505,7 +505,7 @@
 				<xs:enumeration value="text/plain">
 					<xs:annotation>
 						<xs:appinfo>
-							<xs:label>plain text</xs:label>
+							<xs:label>Plain Text</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
