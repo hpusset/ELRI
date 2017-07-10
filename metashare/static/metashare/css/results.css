@@ -92,14 +92,11 @@ div.resourceName a:active, div.resourceName a:visited, div.resourceName a:link {
 
 div.resourceName ul li.languages {
     list-style-type: none;
-    /*margin: 2px 2px 2px 2px;*/
     padding: 3px;
-    font-size: 0.9em;
+    font-size: 0.8em;
     font-weight: 500;
     color: #333;
-    /*background-color: #ebebeb;*/
     float: left;
-    /*border-radius: 5px 5px 5px 5px;*/
     border-right: 1px solid #bbc;
 }
 
