@@ -423,7 +423,7 @@ form.form_helper tr td input {
 }
 
 form.form_helper td.readonly {
-    font-family: 'TitilliumText', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #999999;
     font-size: 16px;
 }
