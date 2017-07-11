@@ -1,22 +1,31 @@
 {% extends "base.html" %}
 {% block title %}
-{{ report }} &ndash; Download not Possible &ndash; ELRC
+    {{ report }} &ndash; Download not Possible &ndash; ELRC-SHARE
 {% endblock %}
 {% block content %}
-<h2>{{ resource }}</h2>
-<div class="content_box">
-  {% if reason == "no_suitable_license" %}
-    <h3>Validation Report Access Restricted</h3>
-    <p>Access to the selected validation report is restricted.</p>
-    <p>Please contact the resource maintainer for information on how to obtain a copy of this report.</p>
-  {% else %}
-    <h3>No Download Available</h3>
-    <p>We&rsquo;re afraid, the selected validation report is currently not available for download. This problem may be temporary due to network connection problems or internal errors. Trying again later might solve the problem.</p>
-    <p>Please contact the resource maintainer if this problem should persist.</p>
-  {% endif %}
-  <p>
-    <a href="{{ resource.get_absolute_url }}"><button class="span-12 button middle_button">&laquo;&nbsp;Resource View</button></a>
-    <a href="{% url metashare.repository.views.download_contact resource.storage_object.identifier %}"><input type="button" class="span-8 button middle_button" value="Contact Resource Maintainer" /></a>
-  </p>
-</div>
+    <h2>{{ resource }}</h2>
+    <div class="content_box">
+        {% if reason == "no_suitable_license" %}
+            <h3>Validation Report Access Restricted</h3>
+            <p>Access to the selected validation report is restricted.</p>
+            <p>Please contact the resource maintainer for information on how to obtain a copy of this report.</p>
+        {% else %}
+            <h3>No Download Available</h3>
+            <p>We&rsquo;re afraid, the selected validation report is currently not available for download. This problem
+                may be temporary due to network connection problems or internal errors. Trying again later might solve
+                the problem.</p>
+            <p>Please contact the resource maintainer if this problem should persist.</p>
+        {% endif %}
+        <p>
+            <a href="{{ resource.get_absolute_url }}">
+                <button class="span-4 button middle_button">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i> Resource View
+                </button>
+            </a>
+            <a href="{% url 'download_contact' resource.storage_object.identifier %}">
+                <button class="span-4 button middle_button">
+                    <i class="fa fa-envelope" aria-hidden="true"></i> Contact Resource Maintainer
+                </button>
+            </a></p>
+    </div>
 {% endblock %}
