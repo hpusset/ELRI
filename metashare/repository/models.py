@@ -1627,7 +1627,7 @@ class distributionInfoType_model(SchemaModel):
       help_text='Specifies the availability status of the resource; rest' \
       'rictionsOfUse can be further used to indicate the specific terms ' \
       'of availability',
-      editable=False,
+      # editable=False,
       max_length=40,
       choices=sorted(DISTRIBUTIONINFOTYPE_AVAILABILITY_CHOICES['choices'],
                      key=lambda choice: choice[1].lower()),
@@ -1765,19 +1765,8 @@ class distributionInfoType_model(SchemaModel):
 
     # def save(self, *args, **kwargs):
     #     licences = []
-    #     for licenceInfo in self.licenceinfotype_model_set.all():
+    #     for licenceInfo in self.licenceInfo.all():
     #         licences.append(licenceInfo.licence)
-    #
-    #     # for l in licences:
-    #     #     if not self.allowsUsesBesidesDGT:
-    #     #         if l == u'underNegotiation':
-    #     #             self.allowsUsesBesidesDGT = False
-    #     #
-    #     #         else:
-    #     #             self.allowsUsesBesidesDGT = True
-    #         # if l.startswith(u"CC") or l == u"non-standard/Other_Licence/Terms":
-    #         #     self.allowsUsesBesidesDGT = True
-    #
     #     if u'underReview' in licences:
     #         self.availability = u'underReview'
     #     else:
@@ -1962,6 +1951,16 @@ class licenceInfoType_model(SchemaModel):
             self.restrictionsOfUse = LICENCES_TO_CONDITIONS[self.licence]
         elif self.licence in LICENCES_NO_CONDITIONS:
             self.restrictionsOfUse = None
+
+        # If licence is openUnder-PSI
+        if self.licence == u"openUnder-PSI":
+            self.otherLicenceName = u"Terms for PSI-compliant resources"
+            self.otherLicence_TermsText["en"]= u"Used for resources that fall under the " \
+                                          u"scope of PSI (Public Sector Information) " \
+                                          u"regulations, and for which no further information " \
+                                          u"is required or available. For more information on the EU " \
+                                          u"legislation on the reuse of Public Sector Information, " \
+                                          u"see here: https://ec.europa.eu/digital-single-market/en/european-legislation-reuse-public-sector-information."
         # Call save() method from super class with all arguments.
         super(licenceInfoType_model, self).save(*args, **kwargs)
 
