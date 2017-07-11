@@ -178,8 +178,8 @@ class LicenseSelectionForm(forms.Form):
                 Creates an HTML block element string containing the restrictions
                 of the given license information.
                 """
-                result = u'<div><p>{0}</p>\n<ul>' \
-                    .format(_('Restrictions of use:'))
+                result = u'<div><p style = "font-size:1em">{0}</p>\n<ul>' \
+                    .format(_('Conditions of use:'))
                 r_list = licence_info.get_restrictionsOfUse_display_list()
                 if r_list:
                     for restr in r_list:

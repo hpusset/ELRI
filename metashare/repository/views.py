@@ -33,7 +33,6 @@ from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
 from metashare.storage.models import PUBLISHED
 
-
 MAXIMUM_READ_BLOCK_SIZE = 4096
 
 # Setup logging support.
@@ -80,7 +79,6 @@ def _convert_to_template_tuples(element_tree):
 # a type providing an enumeration of META-SHARE member types
 MEMBER_TYPES = type('MemberEnum', (), dict(GOD=100, FULL=3, ASSOCIATE=2, NON=1))
 
-
 # a dictionary holding a URL for each download licence and a member type which
 # is required at a minimum to be able to download the associated resource
 # straight away; otherwise the licence requires a hard-copy signature
@@ -98,9 +96,9 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
     'CC-BY-NC-SA-3.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-SA-3.0.pdf', MEMBER_TYPES.NON),
     'CC-BY-ND-3.0': (STATIC_URL + 'metashare/licences/CC-BY-ND-3.0.pdf', MEMBER_TYPES.NON),
     'CC-BY-SA-3.0': (STATIC_URL + 'metashare/licences/CC-BY-SA-3.0.pdf', MEMBER_TYPES.NON),
-    #TODO: PDDL
+    # TODO: PDDL
     'PDDL-1.0': (STATIC_URL + 'metashare/licences/PDDL-1.0.pdf', MEMBER_TYPES.NON),
-    #TODO: ODC-BY
+    # TODO: ODC-BY
     'ODC-BY-1.0': (STATIC_URL + 'metashare/licences/ODC-BY-1.0.pdf', MEMBER_TYPES.NON),
     'ODbL-1.0': (STATIC_URL + 'metashare/licences/ODbL-1.0.pdf', MEMBER_TYPES.NON),
     'AGPL-3.0': (STATIC_URL + 'metashare/licences/AGPL-3.0.pdf', MEMBER_TYPES.NON),
@@ -129,10 +127,9 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
     'OGL-3.0': (STATIC_URL + 'metashare/licences/OGL-3.0.pdf', MEMBER_TYPES.NON),
     'NCGL-1.0': (STATIC_URL + 'metashare/licences/NCGL-1.0.pdf', MEMBER_TYPES.GOD),
     'openUnder-PSI': ('', MEMBER_TYPES.NON),
-    'nonStandardLicenceTerms': ('', MEMBER_TYPES.NON),
+    'non-standard/Other_Licence/Terms': ('', MEMBER_TYPES.NON),
     'underReview': ('', MEMBER_TYPES.GOD),
 }
-
 
 
 def _get_user_membership(user):
@@ -161,10 +158,10 @@ def _get_licences(resource, user_membership):
 
     # licence_infos = tuple([(l_info, d_info.downloadLocation + d_info.executionLocation) \
     licence_infos = tuple([(l_info, d_info.downloadLocation + d_info.executionLocation) \
-        for d_info in distribution_infos  for l_info in d_info.licenceInfo.all()])
+                           for d_info in distribution_infos for l_info in d_info.licenceInfo.all()])
 
     all_licenses = dict([(l_info.licence, (l_info, access_links)) \
-                                        for l_info, access_links in licence_infos])
+                         for l_info, access_links in licence_infos])
     result = {}
     for name, info in all_licenses.items():
         l_info, access_links = info
@@ -184,6 +181,7 @@ def _get_licences(resource, user_membership):
             result[name] = (l_info, access_links, False)
     return result
 
+
 @user_passes_test(lambda u: u.is_superuser or u.groups.filter(name="ecmembers").exists())
 def download(request, object_id):
     """
@@ -191,6 +189,9 @@ def download(request, object_id):
     etc.
     """
     user_membership = _get_user_membership(request.user)
+    bypass_licence = False
+    if request.user.is_superuser or request.user.groups.filter(name="ecmembers").exists():
+        bypass_licence = True
 
     # here we are only interested in licenses (or their names) of the specified
     # resource that allow the current user a download/purchase
@@ -205,11 +206,16 @@ def download(request, object_id):
     # redirected to the master copy
     if not resource.storage_object.master_copy:
         return render_to_response('repository/redirect.html',
-                {'resource': resource,
-                 'redirection_url': model_utils.get_lr_master_url(resource)},
-                  context_instance=RequestContext(request))
+                                  {'resource': resource,
+                                   'redirection_url': model_utils.get_lr_master_url(resource)},
+                                  context_instance=RequestContext(request))
 
     licence_choice = None
+
+    # if the user is superuser or in ecmembers group, provide download directly bypassing licensing and stats
+    if request.method == "GET" and bypass_licence:
+        return _provide_download(request, resource, None, bypass_licence)
+
     if request.method == "POST":
         licence_choice = request.POST.get('licence', None)
         if licence_choice and 'in_licence_agree_form' in request.POST:
@@ -219,18 +225,18 @@ def download(request, object_id):
                 # before really providing the download, we have to make sure
                 # that the user hasn't tried to circumvent the permission system
                 if access:
-                    return _provide_download(request, resource, access_links)
+                    return _provide_download(request, resource, access_links, False)
             else:
                 _dict = {'form': la_form,
                          'resource': resource,
                          'licence_name': licence_choice,
                          'licence_path': LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
                          'download_available': access,
-                         'l_name': l_info.nonStandardLicenceName,
-                         'l_url': l_info.nonStandardLicenceTermsURL,
-                         'l_text': l_info.nonStandaradLicenceTermsText.values()}
+                         'l_name': l_info.otherLicenceName,
+                         'l_url': l_info.otherLicence_TermsURL,
+                         'l_text': l_info.otherLicence_TermsText.values()}
                 return render_to_response('repository/licence_agreement.html',
-                    _dict, context_instance=RequestContext(request))
+                                          _dict, context_instance=RequestContext(request))
         elif licence_choice and not licence_choice in licences:
             licence_choice = None
 
@@ -241,26 +247,28 @@ def download(request, object_id):
     if licence_choice:
         l_info, access_links, access = licences[licence_choice]
         _dict = {'form': LicenseAgreementForm(licence_choice),
-               'resource': resource, 'licence_name': licence_choice,
-               'licence_path': LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
-               'download_available': access,
-               'l_name': l_info.otherLicenceName,
-               'l_url': l_info.otherLicence_TermsURL,
-               'l_text': l_info.otherLicence_TermsText.values()}
+                 'resource': resource, 'licence_name': licence_choice,
+                 'licence_path': LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
+                 'download_available': access,
+                 'l_name': l_info.otherLicenceName,
+                 'l_url': l_info.otherLicence_TermsURL,
+                 'l_text': l_info.otherLicence_TermsText.values(),
+                 'l_conditions': l_info.restrictionsOfUse}
         return render_to_response('repository/licence_agreement.html',
-           _dict, context_instance=RequestContext(request))
+                                  _dict, context_instance=RequestContext(request))
     elif len(licences) > 1:
         return render_to_response('repository/licence_selection.html',
-            {'form': LicenseSelectionForm(licences),
-             'resource': resource},
-              context_instance=RequestContext(request))
+                                  {'form': LicenseSelectionForm(licences),
+                                   'resource': resource},
+                                  context_instance=RequestContext(request))
     else:
         return render_to_response('repository/lr_not_downloadable.html',
                                   {'resource': resource,
                                    'reason': 'no_suitable_license'},
                                   context_instance=RequestContext(request))
 
-def _provide_download(request, resource, access_links):
+
+def _provide_download(request, resource, access_links, bypass_stats):
     """
     Returns an HTTP response with a download of the given resource.
     """
@@ -279,10 +287,11 @@ def _provide_download(request, resource, access_links):
             filemimetype = guess_type(dl_path)[0] or "application/octet-stream"
             response = HttpResponse(dl_stream_generator(),
                                     content_type=filemimetype)
-            response['Content-Length'] = getsize(dl_path) 
+            response['Content-Length'] = getsize(dl_path)
             response['Content-Disposition'] = 'attachment; filename={0}' \
-                                                .format(split(dl_path)[1])
-            _update_download_stats(resource, request)
+                .format(split(dl_path)[1])
+            if not bypass_stats:
+                _update_download_stats(resource, request)
             LOGGER.info("Offering a local download of resource #{0}." \
                         .format(resource.id))
             return response
@@ -297,7 +306,7 @@ def _provide_download(request, resource, access_links):
                 req = requests.request('GET', url)
             except:
                 LOGGER.warn("No download could be offered for resource #{0}. The " \
-                    "URL {1} was tried: {1}".format(resource.id, url), exc_info=True)
+                            "URL {1} was tried: {1}".format(resource.id, url), exc_info=True)
                 continue
             if req.status_code == requests.codes.ok:
                 _update_download_stats(resource, request)
@@ -310,11 +319,11 @@ def _provide_download(request, resource, access_links):
         LOGGER.error("No download could be offered for resource #{0} with " \
                      "storage object identifier #{1} although our code " \
                      "considered it to be downloadable!".format(resource.id,
-                                           resource.storage_object.identifier))
+                                                                resource.storage_object.identifier))
 
     # no download could be provided
     return render_to_response('repository/lr_not_downloadable.html',
-                              { 'resource': resource, 'reason': 'internal' },
+                              {'resource': resource, 'reason': 'internal'},
                               context_instance=RequestContext(request))
 
 
@@ -377,22 +386,22 @@ def download_contact(request, object_id):
 
             # Render notification email template with correct values.
             data = {'message': message, 'resource': resource,
-                'resourceContactName': resource_contacts, 'user': request.user,
-                'user_email': user_email, 'node_url': DJANGO_URL}
+                    'resourceContactName': resource_contacts, 'user': request.user,
+                    'user_email': user_email, 'node_url': DJANGO_URL}
             try:
                 # Send out email to the resource contacts
                 send_mail('Request for information regarding a resource',
-                    render_to_string('repository/' \
-                      'resource_download_information.email', data),
-                    user_email, resource_emails, fail_silently=False)
-            except: #SMTPException:
+                          render_to_string('repository/' \
+                                           'resource_download_information.email', data),
+                          user_email, resource_emails, fail_silently=False)
+            except:  # SMTPException:
                 # If the email could not be sent successfully, tell the user
                 # about it.
                 messages.error(request,
-                  _("There was an error sending out the request email."))
+                               _("There was an error sending out the request email."))
             else:
                 messages.success(request, _('You have successfully ' \
-                    'sent a message to the resource contact person.'))
+                                            'sent a message to the resource contact person.'))
 
             # Redirect the user to the resource page.
             return redirect(resource.get_absolute_url())
@@ -402,13 +411,13 @@ def download_contact(request, object_id):
         form = DownloadContactForm(initial={'userEmail': request.user.email,
                                             'message': default_message})
 
-    dictionary = { 'username': request.user,
-      'resource': resource,
-      'resourceContactName': resource_contacts,
-      'resourceContactEmail': resource_emails,
-      'form': form }
+    dictionary = {'username': request.user,
+                  'resource': resource,
+                  'resourceContactName': resource_contacts,
+                  'resourceContactEmail': resource_emails,
+                  'form': form}
     return render_to_response('repository/download_contact_form.html',
-                        dictionary, context_instance=RequestContext(request))
+                              dictionary, context_instance=RequestContext(request))
 
 
 def view(request, resource_name=None, object_id=None):
@@ -431,9 +440,9 @@ def view(request, resource_name=None, object_id=None):
     res_short_names = resource.identificationInfo.resourceShortName.values()
     description = resource.identificationInfo.get_default_description()
     other_res_names = [name for name in resource.identificationInfo \
-            .resourceName.itervalues() if name != resource_name]
+        .resourceName.itervalues() if name != resource_name]
     other_descriptions = [name for name in resource.identificationInfo \
-            .description.itervalues() if name != description]
+        .description.itervalues() if name != description]
 
     # Create fields lists
     url = resource.identificationInfo.url
@@ -446,7 +455,6 @@ def view(request, resource_name=None, object_id=None):
     linguality_infos = set(model_utils.get_resource_linguality_infos(resource))
     license_types = set(model_utils.get_resource_license_types(resource))
 
-    
     distribution_info_tuple = None
     attribution_details = model_utils.get_resource_attribution_texts(resource)
     distribution_info_tuples = []
@@ -461,7 +469,7 @@ def view(request, resource_name=None, object_id=None):
     resource_component_tuple = None
     for _tuple in lr_content[1]:
         if _tuple[0] == "Distribution":
-            distribution_info_tuples.append( _tuple)
+            distribution_info_tuples.append(_tuple)
         elif _tuple[0] == "Contact person":
             contact_person_tuples.append(_tuple)
         elif _tuple[0] == "Metadata":
@@ -480,12 +488,12 @@ def view(request, resource_name=None, object_id=None):
             relation_info_tuples.append(_tuple)
         elif _tuple[0] == "Resource component type":
             resource_component_tuple = _tuple[1]
-    
+
     # Convert resource_component_tuple to nested dictionaries
     resource_component_dicts = {}
     validation_dicts = []
-    relation_dicts = []    
-    
+    relation_dicts = []
+
     # Convert several tuples to dictionaries to facilitate rendering
     # the templates.
     contact_person_dicts = []
@@ -514,109 +522,109 @@ def view(request, resource_name=None, object_id=None):
                 text_counts.append(value)
             elif "Corpus_video" in key:
                 video_counts.append(value)
-              
+
     # Create a list of resource components dictionaries
     if resource_type == "corpus":
         for media_type in media_types:
             if media_type == "text":
                 resource_component_dicts['text'] = \
-                  resource_component_dict['Resource_component_type'] \
-                      ['Media_type_component_of_corpus']['Corpus_text']
+                    resource_component_dict['Resource_component_type'] \
+                        ['Media_type_component_of_corpus']['Corpus_text']
             if media_type == "audio":
                 resource_component_dicts['audio'] = \
-                  resource_component_dict['Resource_component_type'] \
-                      ['Media_type_component_of_corpus']['Corpus_audio_component']
+                    resource_component_dict['Resource_component_type'] \
+                        ['Media_type_component_of_corpus']['Corpus_audio_component']
             if media_type == "video":
                 resource_component_dicts['video'] = \
-                  resource_component_dict['Resource_component_type'] \
-                      ['Media_type_component_of_corpus']['Corpus_video']
+                    resource_component_dict['Resource_component_type'] \
+                        ['Media_type_component_of_corpus']['Corpus_video']
             if media_type == "image":
                 resource_component_dicts['image'] = \
-                  resource_component_dict['Resource_component_type'] \
-                      ['Media_type_component_of_corpus']['Corpus_image_component']
+                    resource_component_dict['Resource_component_type'] \
+                        ['Media_type_component_of_corpus']['Corpus_image_component']
             if media_type == "textNgram":
                 resource_component_dicts['textNgram'] = \
-                  resource_component_dict['Resource_component_type'] \
-                      ['Media_type_component_of_corpus']['Corpus_textNgram']
+                    resource_component_dict['Resource_component_type'] \
+                        ['Media_type_component_of_corpus']['Corpus_textNgram']
             if media_type == "textNumerical":
                 resource_component_dicts['textNumerical'] = \
-                  resource_component_dict['Resource_component_type'] \
-                      ['Media_type_component_of_corpus']['Corpus_textNumerical']
-          
+                    resource_component_dict['Resource_component_type'] \
+                        ['Media_type_component_of_corpus']['Corpus_textNumerical']
+
     elif resource_type == "languageDescription":
         for media_type in media_types:
             if media_type == "text":
                 resource_component_dicts['text'] = \
-                  resource_component_dict['Resource_component_type'] \
-                    ['Media_type_component_of_language_description']['Language_description_text_component']
+                    resource_component_dict['Resource_component_type'] \
+                        ['Media_type_component_of_language_description']['Language_description_text_component']
             if media_type == "image":
                 resource_component_dicts['image'] = \
-                  resource_component_dict['Resource_component_type'] \
-                    ['Media_type_component_of_language_description']['Language_description_image_component']
+                    resource_component_dict['Resource_component_type'] \
+                        ['Media_type_component_of_language_description']['Language_description_image_component']
             if media_type == "video":
                 resource_component_dicts['video'] = \
-                  resource_component_dict['Resource_component_type'] \
-                    ['Media_type_component_of_language_description']['Language_description_video_component']
-            
+                    resource_component_dict['Resource_component_type'] \
+                        ['Media_type_component_of_language_description']['Language_description_video_component']
+
     elif resource_type == "lexicalConceptualResource":
         for media_type in media_types:
             if media_type == "text":
                 resource_component_dicts['text'] = \
-                  resource_component_dict['Resource_component_type'] \
+                    resource_component_dict['Resource_component_type'] \
                         ['Media_type_component_of_lexical___conceptual_resource'] \
                         ['Lexical___Conceptual_resource_text_component']
             if media_type == "audio":
                 resource_component_dicts['audio'] = \
-                  resource_component_dict['Resource_component_type'] \
+                    resource_component_dict['Resource_component_type'] \
                         ['Media_type_component_of_lexical___conceptual_resource'] \
                         ['Lexical___Conceptual_resource_audio_component']
             if media_type == "video":
                 resource_component_dicts['video'] = \
-                  resource_component_dict['Resource_component_type'] \
+                    resource_component_dict['Resource_component_type'] \
                         ['Media_type_component_of_lexical___conceptual_resource'] \
                         ['Lexical___Conceptual_resource_video_component']
             if media_type == "image":
                 resource_component_dicts['image'] = \
-                  resource_component_dict['Resource_component_type'] \
+                    resource_component_dict['Resource_component_type'] \
                         ['Media_type_component_of_lexical___conceptual_resource'] \
                         ['Lexical___Conceptual_resource_image_component']
 
     elif resource_type == "toolService":
         resource_component_dicts['toolService'] = \
-          resource_component_dict['Resource_component_type']
-   
+            resource_component_dict['Resource_component_type']
+
     # Define context for template rendering.
     context = {
-                'contact_person_dicts': contact_person_dicts,
-                'description': description,
-                'distribution_dicts': distribution_dicts,
-                'documentation_dict': documentation_dict,
-                'license_types': license_types,
-                'linguality_infos': linguality_infos,
-                'mediaTypes': media_types,
-                'metadata_dict': metadata_dict,
-                'metaShareId': metashare_id,
-                'identifier': identifier,
-                'islrn': islrn,
-                'dsi': dsi,
-                'other_res_names': other_res_names,
-                'other_descriptions': other_descriptions,
-                'relation_dicts': relation_dicts,
-                'res_short_names': res_short_names,
-                'resource': resource,
-                'resource_component_dicts': resource_component_dicts,
-                'resource_component_dict': resource_component_dict,
-                'resourceName': resource_name,
-                'attribution_details': attribution_details,
-                'resourceType': resource_type,
-                'resource_creation_dict': resource_creation_dict,
-                'url': url,
-                'usage_dict': usage_dict,
-                'validation_dicts': validation_dicts,
-                'version_dict': version_dict,
-                'text_counts': text_counts,
-                'video_counts': video_counts,
-              }
+        'contact_person_dicts': contact_person_dicts,
+        'description': description,
+        'distribution_dicts': distribution_dicts,
+        'documentation_dict': documentation_dict,
+        'license_types': license_types,
+        'linguality_infos': linguality_infos,
+        'mediaTypes': media_types,
+        'metadata_dict': metadata_dict,
+        'metaShareId': metashare_id,
+        'identifier': identifier,
+        'islrn': islrn,
+        'dsi': dsi,
+        'other_res_names': other_res_names,
+        'other_descriptions': other_descriptions,
+        'relation_dicts': relation_dicts,
+        'res_short_names': res_short_names,
+        'resource': resource,
+        'resource_component_dicts': resource_component_dicts,
+        'resource_component_dict': resource_component_dict,
+        'resourceName': resource_name,
+        'attribution_details': attribution_details,
+        'resourceType': resource_type,
+        'resource_creation_dict': resource_creation_dict,
+        'url': url,
+        'usage_dict': usage_dict,
+        'validation_dicts': validation_dicts,
+        'version_dict': version_dict,
+        'text_counts': text_counts,
+        'video_counts': video_counts,
+    }
     template = 'repository/resource_view/lr_view.html'
 
     # For users who have edit permission for this resource, we have to add 
@@ -625,7 +633,7 @@ def view(request, resource_name=None, object_id=None):
     if has_edit_permission(request, resource):
         context['LR_EDIT'] = reverse(
             'admin:repository_resourceinfotype_model_change', \
-              args=(resource.id,))
+            args=(resource.id,))
 
     # Update statistics:
     if saveLRStats(resource, VIEW_STAT, request):
@@ -638,7 +646,7 @@ def view(request, resource_name=None, object_id=None):
 
     # Add download/view/last updated statistics to the template context.
     context['LR_STATS'] = getLRStats(resource.storage_object.identifier)
-            
+
     # Add recommendations for 'also viewed' resources
     context['also_viewed'] = \
         _format_recommendations(get_view_recommendations(resource))
@@ -659,6 +667,7 @@ def view(request, resource_name=None, object_id=None):
     ctx = RequestContext(request)
     return render_to_response(template, context, context_instance=ctx)
 
+
 def tuple2dict(_tuple):
     '''
     Recursively converts a tuple into a dictionary for ease of use 
@@ -672,7 +681,7 @@ def tuple2dict(_tuple):
                 # Replace spaces by underscores for component names.
                 if item[0].find(" "):
                     _key = item[0].replace(" ", "_").replace("/", "_")
-                else: 
+                else:
                     _key = item[0]
                 if _key in _dict:
                     # If a repeatable component is found, a customized 
@@ -694,7 +703,7 @@ def tuple2dict(_tuple):
                     if item[0][0].find(" "):
                         _key = item[0][0].replace(" ", "_").replace('(', "").replace(")", "").replace("/", "_").replace(
                             "-", "_")
-                    else: 
+                    else:
                         _key = item[0][0]
 
                     # If the item is a date, convert it to real datetime
@@ -733,13 +742,14 @@ class MetashareFacetedSearchView(FacetedSearchView):
     A modified `FacetedSearchView` which makes sure that only such results will
     be returned that are accessible by the current user.
     """
+
     def get_results(self):
         sqs = super(MetashareFacetedSearchView, self).get_results()
 
         # Sort the results (on only one sorting value)
         if 'sort' in self.request.GET:
             sort_list = self.request.GET.getlist('sort')
-            
+
             if sort_list[0] == 'resourcename_asc':
                 sqs = sqs.order_by('resourceNameSort_exact')
             elif sort_list[0] == 'resourcename_desc':
@@ -771,11 +781,11 @@ class MetashareFacetedSearchView(FacetedSearchView):
 
         if self.query:
             saveQueryStats(self.query, \
-                str(sorted(self.request.GET.getlist("selected_facets"))), \
+                           str(sorted(self.request.GET.getlist("selected_facets"))), \
                            results_count, \
                            (datetime.now() - starttime).microseconds, self.request)
         return sqs
-    
+
     def _get_selected_facets(self):
         """
         Returns the selected facets from the current GET request as a more
@@ -791,7 +801,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
                     else:
                         result[field] = [value]
         return result
-    
+
     def _create_filters_structure(self, facet_fields):
         """
         Creates a data structure encapsulating most of the logic which is
@@ -814,7 +824,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
         if sel_facets:
             # add all top level facets (sorted by their facet IDs):
             for name, label, facet_id, _dummy in \
-              [f for f in filter_labels if f[3] == 0]:
+                    [f for f in filter_labels if f[3] == 0]:
                 name_exact = '{0}_exact'.format(name)
                 # only add selected facets in step (1)
                 if name_exact in sel_facets:
@@ -825,29 +835,29 @@ class MetashareFacetedSearchView(FacetedSearchView):
                         # only items with a count > 0 are shown
                         for item in [i for i in items if i[1] > 0]:
                             subfacets = [f for f in filter_labels if (f[3] == \
-                              facet_id and item[0] in f[0])]
+                                                                      facet_id and item[0] in f[0])]
                             subfacets_exactname_list = []
                             subfacets_exactname_list.extend( \
-                              [u'{0}_exact'.format(subfacet[0]) \
-                              for subfacet in subfacets])
+                                [u'{0}_exact'.format(subfacet[0]) \
+                                 for subfacet in subfacets])
                             subresults = []
                             for facet in subfacets:
                                 subresults = self.show_subfilter( \
-                                  facet, sel_facets, facet_fields, subresults)
+                                    facet, sel_facets, facet_fields, subresults)
                             if item[0] in sel_facets[name_exact]:
                                 if item[0] != "":
                                     lab_item = " ".join(re.findall( \
-                                      '[A-Z\_]*[^A-Z]*', \
-                                      item[0][0].capitalize()+item[0][1:]))[:-1]
+                                        '[A-Z\_]*[^A-Z]*', \
+                                        item[0][0].capitalize() + item[0][1:]))[:-1]
                                     removable.append({'label': lab_item,
-                                        'count': item[1], 'targets':
-                                            [u'{0}:{1}'.format(name, value)
-                                             for name, values in
-                                             sel_facets.iteritems() for value in
-                                             values if (name != name_exact
-                                             or value != item[0]) and name \
-                                               not in subfacets_exactname_list], \
-                                               'subresults': subresults})
+                                                      'count': item[1], 'targets':
+                                                          [u'{0}:{1}'.format(name, value)
+                                                           for name, values in
+                                                           sel_facets.iteritems() for value in
+                                                           values if (name != name_exact
+                                                                      or value != item[0]) and name \
+                                                           not in subfacets_exactname_list], \
+                                                      'subresults': subresults})
                             else:
                                 targets = [u'{0}:{1}'.format(name, value)
                                            for name, values in
@@ -857,20 +867,20 @@ class MetashareFacetedSearchView(FacetedSearchView):
                                                                  item[0]))
                                 if item[0] != "":
                                     lab_item = " ".join(re.findall( \
-                                      '[A-Z\_]*[^A-Z]*', \
-                                      item[0][0].capitalize()+item[0][1:]))[:-1]
+                                        '[A-Z\_]*[^A-Z]*', \
+                                        item[0][0].capitalize() + item[0][1:]))[:-1]
                                     addable.append({'label': lab_item,
-                                                'count': item[1],
-                                                'targets': targets,
-                                                'subresults': subresults})
+                                                    'count': item[1],
+                                                    'targets': targets,
+                                                    'subresults': subresults})
 
                         result.append({'label': label, 'removable': removable,
-                                       'addable': addable})                    
+                                       'addable': addable})
 
-        # Step (2): add all top level facets without selected facet items at the
+                        # Step (2): add all top level facets without selected facet items at the
         # end (sorted by their facet IDs):
         for name, label, facet_id, _dummy in \
-          [f for f in filter_labels if f[3] == 0]:
+                [f for f in filter_labels if f[3] == 0]:
             name_exact = '{0}_exact'.format(name)
             # only add facets without selected items in step (2)
             if not name_exact in sel_facets:
@@ -885,11 +895,11 @@ class MetashareFacetedSearchView(FacetedSearchView):
                         targets.append(u'{0}:{1}'.format(name_exact, item[0]))
 
                         if item[0] != "":
-                            lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', 
-                              item[0][0].capitalize()+item[0][1:]))[:-1]
+                            lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*',
+                                                           item[0][0].capitalize() + item[0][1:]))[:-1]
                             addable.append({'label': lab_item, 'count': item[1],
-                                        'targets': targets})
-                    subresults = [f for f in filter_labels if f[3] == facet_id] 
+                                            'targets': targets})
+                    subresults = [f for f in filter_labels if f[3] == facet_id]
                     result.append({'label': label, 'removable': [],
                                    'addable': addable, 'subresults': subresults})
 
@@ -901,14 +911,14 @@ class MetashareFacetedSearchView(FacetedSearchView):
         # for rendering the filters/facets
         if 'fields' in extra['facets']:
             extra['filters'] = self._create_filters_structure(
-                                        extra['facets']['fields'])
+                extra['facets']['fields'])
         else:
             # in case of forced empty search results, the fields entry is not set;
             # this can happen with recommendations when using the
             # get_more_from_same_... methods
             extra['filters'] = []
         return extra
-    
+
     def show_subfilter(self, facet, sel_facets, facet_fields, results):
         """
         Creates a second level for faceting. 
@@ -930,15 +940,15 @@ class MetashareFacetedSearchView(FacetedSearchView):
                 for item in [i for i in items if i[1] > 0]:
                     if item[0] in sel_facets[name_exact]:
                         if item[0] != "":
-                            lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', 
-                              item[0][0].capitalize()+item[0][1:]))[:-1]
+                            lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*',
+                                                           item[0][0].capitalize() + item[0][1:]))[:-1]
                             removable.append({'label': lab_item,
-                                'count': item[1], 'targets':
-                                    [u'{0}:{1}'.format(name, value)
-                                     for name, values in
-                                     sel_facets.iteritems() for value in
-                                     values if name != name_exact
-                                     or value != item[0]]})
+                                              'count': item[1], 'targets':
+                                                  [u'{0}:{1}'.format(name, value)
+                                                   for name, values in
+                                                   sel_facets.iteritems() for value in
+                                                   values if name != name_exact
+                                                   or value != item[0]]})
                     else:
                         targets = [u'{0}:{1}'.format(name, value)
                                    for name, values in
@@ -947,14 +957,14 @@ class MetashareFacetedSearchView(FacetedSearchView):
                         targets.append(u'{0}:{1}'.format(name_exact,
                                                          item[0]))
                         if item[0] != "":
-                            lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', 
-                              item[0][0].capitalize()+item[0][1:]))[:-1]
+                            lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*',
+                                                           item[0][0].capitalize() + item[0][1:]))[:-1]
                             addable.append({'label': lab_item,
-                                        'count': item[1],
-                                        'targets': targets})
-                if (addable+removable):
+                                            'count': item[1],
+                                            'targets': targets})
+                if (addable + removable):
                     results.append({'label': label, 'removable': removable,
-                               'addable': addable})
+                                    'addable': addable})
         else:
             items = facet_fields.get(name)
             if items:
@@ -966,12 +976,12 @@ class MetashareFacetedSearchView(FacetedSearchView):
                                for value in values]
                     targets.append(u'{0}:{1}'.format(name_exact, item[0]))
                     if item[0] != "":
-                        lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*', 
-                          item[0][0].capitalize()+item[0][1:]))[:-1]
+                        lab_item = " ".join(re.findall('[A-Z\_]*[^A-Z]*',
+                                                       item[0][0].capitalize() + item[0][1:]))[:-1]
                         addable.append({'label': lab_item, 'count': item[1],
-                                    'targets': targets})
+                                        'targets': targets})
                 if addable:
                     results.append({'label': label, 'removable': [],
-                               'addable': addable})
+                                    'addable': addable})
 
         return results
