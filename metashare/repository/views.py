@@ -11,7 +11,7 @@ from lxml import etree
 import dicttoxml
 import requests
 
-import datetime
+from datetime import date, datetime
 from os.path import split, getsize
 from mimetypes import guess_type
 
@@ -1472,8 +1472,8 @@ def create_description(xml_file, type, base, user):
         resource = resourceInfoType_model.objects.create(identificationInfo=identification,
                                                          resourceComponentType=corpus_info,
                                                          metadataInfo=metadataInfoType_model.objects.create \
-                                                         (metadataCreationDate=datetime.date.today(),
-                                                          metadataLastDateUpdated=datetime.date.today()),
+                                                         (metadataCreationDate=date.today(),
+                                                          metadataLastDateUpdated=date.today()),
                                                          resourceCreationInfo=resource_creation)
 
     elif type == 'langdesc':
@@ -1505,8 +1505,8 @@ def create_description(xml_file, type, base, user):
         resource = resourceInfoType_model.objects.create(identificationInfo=identification,
                                                          resourceComponentType=langdesc_info,
                                                          metadataInfo=metadataInfoType_model.objects.create \
-                                                             (metadataCreationDate=datetime.date.today(),
-                                                              metadataLastDateUpdated=datetime.date.today()))
+                                                             (metadataCreationDate=date.today(),
+                                                              metadataLastDateUpdated=date.today()))
 
     elif type == 'lexicon':
         lexicalConceptual_text = lexicalConceptualResourceTextInfoType_model.objects.create(mediaType='text',
@@ -1535,8 +1535,8 @@ def create_description(xml_file, type, base, user):
         resource = resourceInfoType_model.objects.create(identificationInfo=identification,
                                                          resourceComponentType=lexicon_info,
                                                          metadataInfo=metadataInfoType_model.objects.create \
-                                                             (metadataCreationDate=datetime.date.today(),
-                                                              metadataLastDateUpdated=datetime.date.today()))
+                                                             (metadataCreationDate=date.today(),
+                                                              metadataLastDateUpdated=date.today()))
     # create distributionInfo object
     distribution = distributionInfoType_model.objects.create(
         availability=u"underReview",
