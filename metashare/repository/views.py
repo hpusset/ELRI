@@ -1,12 +1,23 @@
+import json
 import logging
+import os
+import shutil
+import uuid
+
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.models import User
+from lxml import etree
+
+import dicttoxml
 import requests
 
-from datetime import datetime
+import datetime
 from os.path import split, getsize
 from mimetypes import guess_type
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.core.files import File
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404, redirect
@@ -17,6 +28,7 @@ from django.utils.translation import ugettext as _
 
 from haystack.views import FacetedSearchView
 
+from metashare.accounts.models import UserProfile
 from metashare.recommendations.recommendations import SessionResourcesTracker, \
     get_download_recommendations, get_view_recommendations, \
     get_more_from_same_creators_qs, get_more_from_same_projects_qs
@@ -25,10 +37,16 @@ from metashare.repository.editor.resource_editor import has_edit_permission
 from metashare.repository.forms import LicenseSelectionForm, \
     LicenseAgreementForm, DownloadContactForm, MORE_FROM_SAME_CREATORS, \
     MORE_FROM_SAME_PROJECTS
-from metashare.repository.models import resourceInfoType_model
+from metashare.repository.models import resourceInfoType_model, identificationInfoType_model, \
+    communicationInfoType_model, organizationInfoType_model, personInfoType_model, corpusMediaTypeType_model, \
+    corpusTextInfoType_model, lingualityInfoType_model, languageInfoType_model, corpusInfoType_model, \
+    metadataInfoType_model, languageDescriptionTextInfoType_model, languageDescriptionMediaTypeType_model, \
+    languageDescriptionInfoType_model, lexicalConceptualResourceTextInfoType_model, \
+    lexicalConceptualResourceMediaTypeType_model, lexicalConceptualResourceInfoType_model, distributionInfoType_model, \
+    licenceInfoType_model, resourceCreationInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex, \
     update_lr_index_entry
-from metashare.settings import LOG_HANDLER, STATIC_URL, DJANGO_URL
+from metashare.settings import LOG_HANDLER, STATIC_URL, DJANGO_URL, MAXIMUM_UPLOAD_SIZE, CONTRIBUTION_FORM_DATA
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
 from metashare.storage.models import PUBLISHED
@@ -985,3 +1003,573 @@ class MetashareFacetedSearchView(FacetedSearchView):
                                     'addable': addable})
 
         return results
+
+
+@login_required
+def contribute(request):
+    tmp_dir = '{}/tmp'.format(CONTRIBUTION_FORM_DATA)  # temp dir for resources downloaded from user provided url
+    if request.method == "POST":
+        id = str(uuid.uuid4())
+        profile = UserProfile.objects.get(user=request.user)
+        data = {
+            'userInfo': {
+                'user': request.user.username,
+                'first_name': request.user.first_name,
+                'last_name': request.user.last_name,
+                'email': request.user.email,
+                'institution': profile.affiliation,
+                'phoneNumber': profile.phone_number,
+                'country': profile.country
+            },
+
+            'resourceInfo': {
+                'resourceTitle': request.POST['resourceTitle'],
+                'shortDescription': request.POST['shortDescription'],
+            },
+            'administration': {
+                'processed': 'false'
+            }
+        }
+
+        if 'languages[]' in request.POST:
+            data['resourceInfo']['languages'] = request.POST.getlist('languages[]')
+
+        try:
+            data['resourceInfo']['resourceUrl'] = request.POST['resourceUrl']
+        except:
+            pass
+
+        dir1 = '{}/unprocessed'.format(CONTRIBUTION_FORM_DATA)
+        # dir2 = '{}/{}'.format(dir1, id)
+
+        import cgi
+
+        form_data = cgi.FieldStorage()
+        # file_data = form_data['filebutton'].value
+        filename = '{}_{}'.format(profile.country, id)
+
+        zipped = ""
+        # for chunk in request.FILES['filebutton'].chunks():
+        #     destination.write(chunk)
+        response = {}
+
+        # if not request.POST['mode']:
+        #     response['status'] = "failed"
+        #     response['message'] = "Your request could not be completed. " \
+        #                           "An unexpected error has occured. " \
+        #                           "Please check your contribution mode and try again in a few minutes."
+        #     return HttpResponse(json.dumps(response), mimetype="application/json")
+
+        if request.POST['mode'] == 'uploadzip':
+            zipped = filename + ".zip"
+            if not request.FILES['filebutton'].size > MAXIMUM_UPLOAD_SIZE:
+                try:
+                    if not os.path.isdir(dir1):
+                        os.makedirs(dir1)
+                except:
+                    raise OSError, "Could not write to CONTRIBUTION_FORM_DATA path"
+
+                destination = open('{}/{}'.format(dir1, zipped), 'wb+')
+                for chunk in request.FILES['filebutton'].chunks():
+                    destination.write(chunk)
+                destination.close()
+                import zipfile
+                file = '{}/{}'.format(dir1, zipped)
+                if not zipfile.is_zipfile(file) or not str(request.FILES['filebutton']).endswith(".zip"):
+                    os.remove(file)
+                    response['status'] = "failed"
+                    response['message'] = "Your request could not be completed. " \
+                                          "The file you tried to upload is corrupted or it is not a valid '.zip' file." \
+                                          "Please make sure that you have compressed your data properly."
+                    return HttpResponse(json.dumps(response), content_type="text/plain")
+
+            else:
+                response['status'] = "failed"
+                response['message'] = "The file you are trying to upload " \
+                                      "is larger than the maximum upload file size ({:.10} MB)!".format(
+                    float(MAXIMUM_UPLOAD_SIZE) / (1024 * 1024))
+                return HttpResponse(json.dumps(response), content_type="text/plain")
+
+        data['administration']['resource_file'] = filename + '.xml'
+        if zipped:
+            data['administration']['dataset'] = {"zip": zipped}
+        else:
+            try:
+                data['administration']['dataset'] = {"url": data['resourceInfo']['resourceUrl']}
+            except KeyError:
+                data['administration']['dataset'] = "None"
+
+        xml = dicttoxml.dicttoxml(data, custom_root='resource', attr_type=False)
+        xml_file = filename + ".xml"
+        with open('{}/{}'.format(dir1, xml_file), 'w') as f:
+            xml_file = File(f)
+            xml_file.write(xml)
+            xml_file.closed
+            f.closed
+        try:
+            send_mail("New unmanaged contributions",
+                      "You have new unmanaged contributed resources on elrc-share.eu",
+                      'no-reply@elrc-share.ilsp.gr', ["mdel@ilsp.gr"],
+                      # 'no-reply@elrc-share.ilsp.gr', ["penny@ilsp.gr", "kanella@ilsp.gr", "mdel@ilsp.gr"], \
+                      # 'no-reply@elrc-share.ilsp.gr', ["mdel@ilsp.gr"], \
+                      fail_silently=False)
+        except:
+            pass
+
+        response['status'] = "succeded"
+        response['message'] = "Thank you for sharing! Your data have been successfully submitted. " \
+                              "You can now go on and contribute more data."
+        # if request.POST['mode'] == 'uploadzip':
+        return HttpResponse(json.dumps(response), content_type="text/plain")
+        # else:
+        #     return render_to_response('repository/editor/contributions/contribute.html', \
+        #                               response, context_instance=RequestContext(request))
+
+    return render_to_response('repository/editor/contributions/contribute.html', \
+                              context_instance=RequestContext(request))
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def manage_contributed_data(request):
+    template = 'repository/editor/contributions/manage_contributed_data.html'
+    xml_files = list()
+    base = '{}/unprocessed'.format(CONTRIBUTION_FORM_DATA)
+    for file in os.listdir(base):
+        if file.endswith(".xml"):
+            xml_files.append(file)
+
+    info = list()
+    for xml_file in xml_files:
+        doc = etree.parse('{}/{}'.format(base, xml_file))
+        dataset = {}
+        if doc.xpath("//resource/administration/dataset/zip"):
+            dataset = {
+                "zip": doc.xpath("//resource/administration/dataset/zip/text()")
+            }
+
+        elif doc.xpath("//resource/administration/dataset/url"):
+            dataset = {
+                "url": doc.xpath("//resource/administration/dataset/url/text()")
+            }
+
+        info.append({
+            "title": doc.xpath("//resourceTitle//text()"),
+            "description": doc.xpath("//shortDescription//text()"),
+            "languages": doc.xpath("//languages/item/text()"),
+            "userInfo": {
+                "firstname": doc.xpath("//userInfo/first_name/text()"),
+                "lastname": doc.xpath("//userInfo/last_name/text()"),
+                "country": doc.xpath("//userInfo/country/text()"),
+                "phoneNumber": doc.xpath("//userInfo/phoneNumber/text()"),
+                "email": doc.xpath("//userInfo/email/text()"),
+                "user": doc.xpath("//userInfo/user/text()"),
+                "institution": doc.xpath("//userInfo/institution/text()"),
+
+            },
+            "resource_file": doc.xpath("//resource/administration/resource_file/text()"),
+            "dataset": dataset
+
+        })
+    context = {
+        'filelist': info
+    }
+    ctx = RequestContext(request)
+
+    return render_to_response(template, context, context_instance=ctx)
+
+
+@staff_member_required
+def get_data(request, filename):
+    dl_path = "{}/unprocessed/{}".format(CONTRIBUTION_FORM_DATA, filename)
+    if dl_path:
+        try:
+            def dl_stream_generator():
+                with open(dl_path, 'rb') as _local_data:
+                    _chunk = _local_data.read(4096)
+                    while _chunk:
+                        yield _chunk
+                        _chunk = _local_data.read(4096)
+
+            # build HTTP response with a guessed mime type; the response
+            # content is a stream of the download file
+            filemimetype = guess_type(dl_path)[0] or "application/octet-stream"
+            response = HttpResponse(dl_stream_generator(),
+                                    content_type=filemimetype)
+            response['Content-Length'] = getsize(dl_path)
+            response['Content-Disposition'] = 'attachment; filename={0}' \
+                .format(split(dl_path)[1])
+            # LOGGER.info("Offering a local editor download of resource #{0}." \
+            #             .format(object_id))
+            return response
+        except:
+            pass
+
+
+@staff_member_required
+def remove(request, record):
+    record = record.split(".xml")[0]
+    path = "{}/unprocessed/{}".format(CONTRIBUTION_FORM_DATA, record)
+    # if xml exists, flag it and move it to the processed
+    if os.path.exists(path + ".xml"):
+        xml_destination = '{}/processed/{}'.format(CONTRIBUTION_FORM_DATA,
+                                                   "REMOVED_{}.xml".format(record))
+        shutil.move(path + ".xml", xml_destination)
+    if os.path.exists(path + ".zip"):
+        xml_destination = '{}/processed/{}'.format(CONTRIBUTION_FORM_DATA,
+                                                   "REMOVED_{}.zip".format(record))
+        shutil.move(path + ".zip", xml_destination)
+    return redirect(manage_contributed_data)
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def addtodb(request):
+    recipients = []
+    total_res = 0
+    # get the list of maintainers from the dat file
+    maintainers = {}
+    with open('{}/maintainers.dat'.format(CONTRIBUTION_FORM_DATA)) as f:
+        for line in f:
+            (key, val) = line.split(":")
+            maintainers[key.strip()] = val.strip()
+        f.close()
+    # get the list all of files listed
+    files = request.POST.getlist('file[]')
+
+    # get the list of resource types
+    types = request.POST.getlist('resourceType[]')
+
+    # map the two list into a dictionary
+    dictionary = dict(zip(files, types))
+
+    # we will create descriptions only for those resources that have a
+    # resource type specified
+    valid = {}
+    recipients_resources = {}
+    contributor_resources = {}
+    base = '{}/unprocessed'.format(CONTRIBUTION_FORM_DATA)
+    for key, value in dictionary.items():
+        if dictionary[key] != "":
+            valid[key] = dictionary[key]
+    for file, type in valid.iteritems():
+        doc = etree.parse('{}/{}'.format(base, file))
+        c_fname = ''.join(doc.xpath("//userInfo/first_name/text()"))
+        c_lname = ''.join(doc.xpath("//userInfo/last_name/text()"))
+        c_username = ''.join(doc.xpath("//userInfo/user/text()"))
+
+        contributor = User.objects.get(first_name=c_fname,
+                                       last_name=c_lname,
+                                       username=c_username)
+        contributor_name = "{} {}".format(contributor.first_name.encode('utf-8'),
+                                          contributor.last_name.encode('utf-8'))
+        contributor_email = contributor.email
+
+        d = create_description(file, type, base, request.user)
+        # d[0]: resource, d[1]:person, d[2]: country
+        if not contributor_name in contributor_resources.keys():
+            contributor_resources[contributor_name] = {"email": contributor_email, "resources": []}
+        contributor_resources[contributor_name]["resources"].append(
+            d[0].identificationInfo.resourceName['en']
+        )
+        # add the contributor to owners nevertheless
+        d[0].owners.add(contributor.id)
+
+        res_maintainers = maintainers[d[2]].split(",")
+        users = []
+        for rm in res_maintainers:
+            rm_user = User.objects.get(username=rm)
+            users.append(rm_user)
+            d[0].owners.add(rm_user.id)
+            d[0].contactPerson.add(d[1])
+            info = "\nContact Details:\n" \
+                   "First Name: {}\n" \
+                   "Last Name: {}\n" \
+                   "Email: {}\n" \
+                   "Tel No: {}\n" \
+                   "Organization: {}".format \
+                (d[1].givenName, d[1].surname, d[1].communicationInfo.email,
+                 d[1].communicationInfo.telephoneNumber, d[1].affiliation)
+
+            if not rm_user.first_name + " " + rm_user.last_name in recipients:
+                recipients.append(rm_user.first_name + " " + rm_user.last_name)
+
+        if not recipients_resources.has_key(maintainers[d[2]]):
+            recipients_resources[maintainers[d[2]]] = {"count": 1}
+            recipients_resources[maintainers[d[2]]]["email"] = [rm.email for rm in users]
+        else:
+            recipients_resources[maintainers[d[2]]]["count"] += 1
+
+        total_res += 1
+
+    for recipient in recipients_resources.iterkeys():
+        if recipients_resources[recipient]["count"] > 0:
+            if recipients_resources[recipient]["count"] > 1:
+                title = "{} new resources from contributors".format(recipients_resources[recipient]["count"])
+                text = "You have received {} new resources from contributors. " \
+                       "Please check your ELRC-SHARE repository account.".format(
+                    recipients_resources[recipient]["count"])
+            else:
+                title = "1 new resource from contributors"
+                text = "You have received 1 new resource from contributors. " \
+                       "Please check your ELRC-SHARE repository account."
+
+            try:
+                send_mail(title, text, \
+                          'no-reply@elrc-share.ilsp.gr', recipients_resources[recipient]["email"], fail_silently=False)
+            except:
+                if total_res > 1:
+                    msg = '{} resources have been successfully imported into the database. '.format(total_res)
+                else:
+                    msg = '1 resource has been successfully imported into the database. '
+                messages.error(request, msg + 'However, there was a problem sending email to the maintainers.')
+                return redirect(manage_contributed_data)
+
+    ### email to contributors
+    for cr in contributor_resources:
+        lr_list = ""
+        mailto = contributor_resources[cr]['email']
+        for lr in contributor_resources[cr]['resources']:
+            lr_list += "\n\t" + str(contributor_resources[cr]['resources'].index(lr) + 1) + ". " + lr
+
+        msg_to_contributor = "Dear {},\n\n" \
+                             "Your resources" \
+                             "{}\n" \
+                             "have been imported into the ELRC-SHARE repository.\n" \
+                             "An ELRC member will now further describe your resources, " \
+                             "i.e. will complete the required metadata and will review the " \
+                             "licencing conditions. During this process, it is possible " \
+                             "that we contact you for additional information. " \
+                             "Please note that the description of your contributed resource(s) " \
+                             "will be available for browsing and searching through the repository " \
+                             "only when this process is completed.\n\n" \
+                             "Thank you for sharing!\n\n" \
+                             "The ELRC-SHARE team".format(cr, lr_list).decode('utf-8')
+
+        try:
+            send_mail("Your resources in the ELRC-SHARE repository", msg_to_contributor, \
+                      'no-reply@elrc-share.ilsp.gr', [mailto], fail_silently=False)
+        except:
+            pass
+
+    if total_res > 1:
+
+        msg = u'{} resources have been successfully imported into ' \
+              u'the database. ' \
+              u'A notification email has been sent to the maintainers ({})'.format(total_res, u", ".join(recipients))
+        messages.success(request, msg)
+    elif total_res == 1:
+        msg = u'1 resource has been successfully imported into ' \
+              u'the database. ' \
+              u'A notification email has been sent to ' \
+              u'{}'.format(u", ".join(recipients))
+        messages.success(request, msg)
+    else:
+        msg = u'No Resources Selected'
+        messages.warning(request, msg)
+    return redirect(manage_contributed_data)
+
+
+def create_description(xml_file, type, base, user):
+    # base = '{}/unprocessed'.format(WEB_FORM_STORAGE)
+    doc = etree.parse('{}/{}'.format(base, xml_file))
+    info = {
+        "title": ''.join(doc.xpath("//resourceTitle//text()")),
+        "description": ''.join(doc.xpath("//shortDescription//text()")),
+        "languages": doc.xpath("//languages/item/text()"),
+        "userInfo": {
+            "firstname": ''.join(doc.xpath("//userInfo/first_name/text()")),
+            "lastname": ''.join(doc.xpath("//userInfo/last_name/text()")),
+            "country": ''.join(doc.xpath("//userInfo/country/text()")),
+            "phoneNumber": ''.join(doc.xpath("//userInfo/phoneNumber/text()")),
+            "email": ''.join(doc.xpath("//userInfo/email/text()")),
+            "user": ''.join(doc.xpath("//userInfo/user/text()")),
+            "institution": ''.join(doc.xpath("//userInfo/institution/text()")),
+
+        },
+        "resource_file": ''.join(doc.xpath("//resource/administration/resource_file/text()")),
+        "dataset": ''.join(doc.xpath("//resource/administration/dataset/zip/text()"))
+    }
+    # Create a new Identification object
+    identification = identificationInfoType_model.objects.create( \
+        resourceName={'en': info['title'].encode('utf-8')},
+        description={'en': info['description'].encode('utf-8')},)
+    resource_creation = resourceCreationInfoType_model.objects.create(
+        createdUsingELRCServices=False
+    )
+
+    # CONTACT PERSON:
+
+    # COMMUNICATION
+    email = info["userInfo"]["email"]
+    if not communicationInfoType_model.objects.filter \
+                (email=[email]).exists():
+        communication = communicationInfoType_model.objects.create \
+            (email=[email], country=info["userInfo"]["country"],
+             telephoneNumber=[info["userInfo"]["phoneNumber"]])
+    else:
+        communication = communicationInfoType_model.objects.filter \
+                            (email=[email])[:1][0]
+    # ORGANIZATION
+    if not organizationInfoType_model.objects.filter \
+                (organizationName={'en': info["userInfo"]["institution"]},
+                 communicationInfo=communication).exists():
+        organization = organizationInfoType_model.objects.create \
+            (organizationName={'en': info["userInfo"]["institution"]},
+             communicationInfo=communicationInfoType_model.objects.create \
+                 (email=[email], country=info["userInfo"]["country"], \
+                  telephoneNumber=[info["userInfo"]["phoneNumber"]]))
+
+    else:
+        organization = organizationInfoType_model.objects.filter \
+            (organizationName={'en': info["userInfo"]["institution"]},
+             communicationInfo=communication)[0]
+
+    # PERSON
+    if not personInfoType_model.objects.filter \
+                (surname={'en': info["userInfo"]["lastname"]},
+                 givenName={'en': info["userInfo"]["firstname"]},
+                 ).exists():
+        cperson = personInfoType_model.objects.create \
+            (surname={'en': info["userInfo"]["lastname"]},
+             givenName={'en': info["userInfo"]["firstname"]},
+             communicationInfo= \
+                 communicationInfoType_model.objects.create \
+                     (email=[email], country=info["userInfo"]["country"], \
+                      telephoneNumber=[info["userInfo"]["phoneNumber"]]))
+        cperson.affiliation.add(organization)
+
+    else:
+        cperson = personInfoType_model.objects.filter \
+            (surname={'en': info["userInfo"]["lastname"]},
+             givenName={'en': info["userInfo"]["firstname"]},
+             )[0]
+    resource = None
+
+    # Handle different resource type structures
+    if type == 'corpus':
+        corpus_media_type = corpusMediaTypeType_model.objects.create()
+
+        corpus_text = corpusTextInfoType_model.objects.create(mediaType='text',
+                                                              back_to_corpusmediatypetype_model_id=corpus_media_type.id, \
+                                                              lingualityInfo=lingualityInfoType_model.objects.create())
+
+        # create language Infos
+        if info['languages']:
+            for lang in info['languages']:
+                languageInfoType_model.objects.create(languageName=lang, \
+                                                      back_to_corpustextinfotype_model=corpus_text)
+        if len(info['languages']) == 1:
+            corpus_text.lingualityInfo.lingualityType = u'monolingual'
+            corpus_text.lingualityInfo.save()
+        elif len(info['languages']) == 2:
+            corpus_text.lingualityInfo.lingualityType = u'bilingual'
+            corpus_text.lingualityInfo.save()
+        elif len(info['languages']) > 2:
+            corpus_text.lingualityInfo.lingualityType = u'multilingual'
+            corpus_text.lingualityInfo.save()
+
+        corpus_info = corpusInfoType_model.objects.create(corpusMediaType=corpus_media_type)
+
+        resource = resourceInfoType_model.objects.create(identificationInfo=identification,
+                                                         resourceComponentType=corpus_info,
+                                                         metadataInfo=metadataInfoType_model.objects.create \
+                                                         (metadataCreationDate=datetime.date.today(),
+                                                          metadataLastDateUpdated=datetime.date.today()),
+                                                         resourceCreationInfo=resource_creation)
+
+    elif type == 'langdesc':
+        langdesc_text = languageDescriptionTextInfoType_model.objects.create(mediaType='text',
+                                                                             lingualityInfo=lingualityInfoType_model.objects.create())
+
+        language_description_media_type = languageDescriptionMediaTypeType_model.objects.create(
+            languageDescriptionTextInfo=langdesc_text)
+
+        # create language Infos
+        if info['languages']:
+            for lang in info['languages']:
+                languageInfoType_model.objects.create(languageName=lang, \
+                                                      back_to_languagedescriptiontextinfotype_model=langdesc_text)
+
+        if len(info['languages']) == 1:
+            langdesc_text.lingualityInfo.lingualityType = u'monolingual'
+            langdesc_text.lingualityInfo.save()
+        elif len(info['languages']) == 2:
+            langdesc_text.lingualityInfo.lingualityType = u'bilingual'
+            langdesc_text.lingualityInfo.save()
+        elif len(info['languages']) > 2:
+            langdesc_text.lingualityInfo.lingualityType = u'multilingual'
+            langdesc_text.lingualityInfo.save()
+
+        langdesc_info = languageDescriptionInfoType_model.objects.create(
+            languageDescriptionMediaType=language_description_media_type)
+
+        resource = resourceInfoType_model.objects.create(identificationInfo=identification,
+                                                         resourceComponentType=langdesc_info,
+                                                         metadataInfo=metadataInfoType_model.objects.create \
+                                                             (metadataCreationDate=datetime.date.today(),
+                                                              metadataLastDateUpdated=datetime.date.today()))
+
+    elif type == 'lexicon':
+        lexicalConceptual_text = lexicalConceptualResourceTextInfoType_model.objects.create(mediaType='text',
+                                                                                            lingualityInfo=lingualityInfoType_model.objects.create())
+        lexicon_media_type = lexicalConceptualResourceMediaTypeType_model.objects.create(
+            lexicalConceptualResourceTextInfo=lexicalConceptual_text)
+
+        if info['languages']:
+            for lang in info['languages']:
+                languageInfoType_model.objects.create(languageName=lang, \
+                                                      back_to_lexicalconceptualresourcetextinfotype_model=lexicalConceptual_text)
+
+        if len(info['languages']) == 1:
+            lexicalConceptual_text.lingualityInfo.lingualityType = u'monolingual'
+            lexicalConceptual_text.lingualityInfo.save()
+        elif len(info['languages']) == 2:
+            lexicalConceptual_text.lingualityInfo.lingualityType = u'bilingual'
+            lexicalConceptual_text.lingualityInfo.save()
+        elif len(info['languages']) > 2:
+            lexicalConceptual_text.lingualityInfo.lingualityType = u'multilingual'
+            lexicalConceptual_text.lingualityInfo.save()
+
+        lexicon_info = lexicalConceptualResourceInfoType_model.objects.create(
+            lexicalConceptualResourceMediaType=lexicon_media_type)
+
+        resource = resourceInfoType_model.objects.create(identificationInfo=identification,
+                                                         resourceComponentType=lexicon_info,
+                                                         metadataInfo=metadataInfoType_model.objects.create \
+                                                             (metadataCreationDate=datetime.date.today(),
+                                                              metadataLastDateUpdated=datetime.date.today()))
+    # create distributionInfo object
+    distribution = distributionInfoType_model.objects.create(
+        availability=u"underReview",
+        PSI=False)
+    licence_obj = licenceInfoType_model.objects.create(licence=u"underReview")
+    distribution.licenceInfo.add(licence_obj)
+    resource.distributioninfotype_model_set.add(distribution)
+    resource.save()
+
+    # also add the designated maintainer, based on the country of the country of the donor
+    resource.owners.add(user.id)
+    # finally move the dataset to the respective storage folder
+    data_destination = resource.storage_object._storage_folder()
+    try:
+        if not os.path.isdir(data_destination):
+            os.makedirs(data_destination)
+    except:
+        raise OSError, "STORAGE_PATH and LOCK_DIR must exist and be writable!"
+
+    # finally, if the user has provided a zip file dataset,
+    # move the dataset to the respective storage folder
+    if info['dataset'] != '':
+        data_source = '{}/{}'.format(base, info['dataset'])
+
+        shutil.move(data_source, '{}/{}'.format(data_destination, "archive.zip"))
+        resource.storage_object.compute_checksum()
+        resource.storage_object.save()
+        resource.storage_object.update_storage()
+
+    # move the processed xml file to the web_form/processed folder
+    xml_source = '{}/{}'.format(base, xml_file)
+    processed_file = "{}_{}.xml".format(xml_file.split('_')[0], resource.id)
+    xml_destination = '{}/processed/{}'.format(CONTRIBUTION_FORM_DATA, processed_file)
+    shutil.move(xml_source, xml_destination)
+
+    return (resource, cperson, info['userInfo']['country'])

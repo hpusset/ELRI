@@ -27,3 +27,4 @@ opt/
 venv
 # temporary
 .travis.yml
+/metashare/contributions_data/*

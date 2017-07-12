@@ -12,10 +12,17 @@
             <li title="Browse the resources of the META-SHARE catalogue"><a
                     href="{% url 'frontpage' %}repository/search/">
                 <i class="fa fa-list-ul menu_fontawesome" aria-hidden="true"></i> Browse Resources</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'contribute' %}">
+                    <i class="fa fa-share-square-o menu_fontawesome" aria-hidden="true"></i> Contribute Resources</a></li>
+            {% endif %}
             {% if user.userprofile.has_editor_permission %}
                 <li title="Create/edit resource metadata or upload resource data"><a>
                     <i class="fa fa-pencil-square-o menu_fontawesome" aria-hidden="true"></i> Manage Resources</a>
                     <ul>
+                        <li title="Manage contributed resources">
+                            <a href="{% url 'manage_contributed_data' %}">Manage resources from contributors</a>
+                        </li>
                         <li title="Create/edit your own resource metadata or upload resource data"><a
                                 href="{% url 'editor:repository_resourceinfotype_model_myresources' %}">Manage your
                             own resources</a></li>
