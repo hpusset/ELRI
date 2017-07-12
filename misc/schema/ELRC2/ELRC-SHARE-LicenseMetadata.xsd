@@ -42,7 +42,7 @@
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
-			<xs:element name="PSI" type="xs:boolean">
+			<xs:element name="PSI" type="xs:boolean" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Indicates that the resource falls under the Public Sector Information regulations</xs:documentation>
 					<xs:appinfo>

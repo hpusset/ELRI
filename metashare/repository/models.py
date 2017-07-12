@@ -1601,7 +1601,7 @@ class distributionInfoType_model(SchemaModel):
     __schema_name__ = 'distributionInfoType'
     __schema_fields__ = (
       ( u'availability', u'availability', REQUIRED ),
-      ( u'PSI', u'PSI', REQUIRED ),
+      ( u'PSI', u'PSI', OPTIONAL ),
       ( u'allowsUsesBesidesDGT', u'allowsUsesBesidesDGT', REQUIRED ),
       ( u'licenceInfo', u'licenceInfo', REQUIRED ),
       ( u'distributionMedium', u'distributionMedium', RECOMMENDED ),
@@ -1691,7 +1691,7 @@ class distributionInfoType_model(SchemaModel):
       verbose_name='Personal data included',
       help_text='Specifies whether the resource contains or not personal' \
       ' data; this might mean that special handling of the resource is r' \
-      'equired (e.g. anonymisation)',
+      'equired (e.g. anonymisation)', default=False
       )
 
     personalDataAdditionalInfo = XmlCharField(
@@ -1706,7 +1706,7 @@ class distributionInfoType_model(SchemaModel):
       verbose_name='Sensitive data included',
       help_text='Specifies whether the resource contains or not sensitiv' \
       'e data; this might mean that special handling of the resource is ' \
-      'required (e.g. anonymisation)',
+      'required (e.g. anonymisation)', default=False
       )
 
     sensitiveDataAdditionalInfo = XmlCharField(
@@ -1897,7 +1897,7 @@ class licenceInfoType_model(SchemaModel):
     licence = models.CharField(
       verbose_name='Licence',
       help_text='The licence of use for the resource; for an overview of' \
-      ' licences, please visit: https://elrc-share.eu/info/#Licensi' \
+      ' licences, please visit: https://www.elrc-share.eu/info/#Licensi' \
       'ng_LRs',
 
       max_length=100,
