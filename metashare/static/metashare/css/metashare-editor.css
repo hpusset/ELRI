@@ -135,11 +135,10 @@ a:hover .topright {
 }
 
 .module h2 {
-    background: #FF6633;
-    background: -moz-linear-gradient(top, #FFCC00, #FF6633);
-    background: -webkit-gradient(linear, left top, left bottom, from(#FFCC00), to(#FF6633));
-    filter: progid:DXImageTransform.Microsoft.Gradient(endColorstr='#FFCC00', startColorstr='#FF6633', gradientType=0);
-
+	background: #058DBE;
+	background: -moz-linear-gradient(top, #2BA7D5, #058DBE);
+	background: -webkit-gradient(linear, left top, left bottom, from(#2BA7D5), to(#058DBE));
+	filter: progid:DXImageTransform.Microsoft.Gradient(endColorstr='#FFCC00', startColorstr='#FF6633', gradientType=0);
 }
 
 .inline-group h2, .form-row h2 {
