@@ -1109,8 +1109,8 @@ def contribute(request):
         try:
             send_mail("New unmanaged contributions",
                       "You have new unmanaged contributed resources on elrc-share.eu",
-                      'no-reply@elrc-share.ilsp.gr', ["mdel@ilsp.gr"],
-                      # 'no-reply@elrc-share.ilsp.gr', ["penny@ilsp.gr", "kanella@ilsp.gr", "mdel@ilsp.gr"], \
+                      # 'no-reply@elrc-share.ilsp.gr', ["mdel@ilsp.gr"],
+                      'no-reply@elrc-share.ilsp.gr', ["penny@ilsp.gr", "kanella@ilsp.gr", "mdel@ilsp.gr"], \
                       # 'no-reply@elrc-share.ilsp.gr', ["mdel@ilsp.gr"], \
                       fail_silently=False)
         except:
