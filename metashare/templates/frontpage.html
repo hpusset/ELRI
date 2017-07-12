@@ -38,19 +38,19 @@
 		<p>If you want to contribute resources, all you have to do is
             {% if not user.is_authenticated %}
                 <a href="/accounts/create/">register</a> (new user)
-                or <a href="/repository/simple_form">login</a> (returing user)
+                or <a href="/repository/contribute">login</a> (returing user)
             {% else %}
-                click <a href="/repository/simple_form">here</a>
+                click <a href="/repository/contribute">here</a>
             {% endif %}
             and go on to describe and upload your data with a simple form.
         <br/>
         <div>
           <map name="registerMap">
                 <area shape="circle" coords="47,82,45" alt="Register" href="/accounts/create/">
-                <area shape="circle" coords="290,82,45" alt="Contribute data" href="/repository/simple_form">
+                <area shape="circle" coords="290,82,45" alt="Contribute data" href="/repository/contribute">
           </map>
           <map name="contributeMap">
-                <area shape="circle" coords="290,82,45" alt="Contribute data" href="/repository/simple_form">
+                <area shape="circle" coords="290,82,45" alt="Contribute data" href="/repository/contribute">
           </map>
           <img
                   {% if not user.is_authenticated %}
