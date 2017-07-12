@@ -1335,10 +1335,10 @@ def addtodb(request):
                              "{}\n" \
                              "have been imported into the ELRC-SHARE repository.\n" \
                              "An ELRC member will now further describe your resources, " \
-                             "i.e. will complete the required metadata and will review the " \
-                             "licencing conditions. During this process, it is possible " \
-                             "that we contact you for additional information. " \
-                             "Please note that the description of your contributed resource(s) " \
+                             "i.e. will complete the required metadata and review the " \
+                             "licencing conditions. During this process, we may " \
+                             "contact you for additional information. " \
+                             "Please, note that the description of your contributed resources " \
                              "will be available for browsing and searching through the repository " \
                              "only when this process is completed.\n\n" \
                              "Thank you for sharing!\n\n" \
