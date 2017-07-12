@@ -1,4 +1,5 @@
 {% load static from staticfiles %}
+{% load is_member %}
 {% spaceless %}
     <div id="header">
         <a href="http://lr-coordination.eu/" title="Languages - the heart of Multilingual Europe | ELRC"
@@ -24,11 +25,13 @@
                             <li title="Create/edit your own resource metadata or upload resource data"><a
                                     href="{% url 'editor:repository_resourceinfotype_model_myresources' %}">Manage your
                                 own resources</a></li>
-                            {% if user.is_superuser %}
+                            {% if user.is_superuser or user|is_member:"legalReviewers" or user|is_member:"technicalReviewers" %}
                                 <li title="Create/edit resource metadata or upload resource data"><a
                                         href="{% url 'editor:repository_resourceinfotype_model_changelist' %}">Manage
                                     all resources</a>
                                 </li>
+                            {% endif %}
+                            {% if user.is_superuser %}
                                 <li title="Manage contributed resources">
                                     <a href="{% url 'manage_contributed_data' %}">Manage resources from contributors</a>
                                 </li>
