@@ -3,10 +3,13 @@ import logging
 from uuid import uuid1
 
 from django.contrib.auth.models import User, Group
+from django.core.exceptions import ValidationError
+from django.core.validators import RegexValidator
 from django.db import models
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
+from metashare.repository.supermodel import _make_choices_from_list
 from metashare.settings import LOG_HANDLER
 from metashare import repository
 
@@ -199,6 +202,14 @@ class OrganizationManagers(Group):
     def get_members(self):
         return User.objects.filter(groups__name=self.name)
 
+EUCOUNTRIES = [
+   "Germany", "Austria", "Luxembourg", "Netherlands", "Hungary", "Czech Republic","United Kingdom",
+"Ireland", "Spain", "Portugal", "Belgium", "Italy", "Malta", "France", "Latvia", "Estonia", "Lithuania",
+"Finland", "Sweden", "Denmark", "Iceland", "Norway","Greece", "Cyprus", "Slovakia", "Slovenia", "Bulgaria",
+"Poland", "Romania", "Croatia"]
+
+PHONENUMBER_VALIDATOR = RegexValidator(r'^\+(?:[0-9] ?){6,14}[0-9]$',
+'Not a valid phone number', ValidationError)
 
 class UserProfile(models.Model):
     """
@@ -218,6 +229,12 @@ class UserProfile(models.Model):
       blank=True, null=True)
     birthdate = models.DateField("Date of birth", blank=True,
       null=True)
+
+    phone_number = models.CharField("Phone Number", max_length=50, null=True, \
+                                    blank=True, validators=[PHONENUMBER_VALIDATOR])
+    country = models.CharField('Country', choices=_make_choices_from_list(sorted(EUCOUNTRIES))['choices'],
+                               max_length=100, null=True, blank=True)
+
     affiliation = models.TextField("Affiliation(s)", blank=True)
     position = models.CharField(max_length=50, blank=True)
     homepage = models.URLField(blank=True)
