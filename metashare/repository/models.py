@@ -3046,7 +3046,7 @@ INPUTINFOTYPE_DATAFORMAT_CHOICES = _make_choices_from_list([
   u'text/sgml',u'text/html', u'application/x-tex', u'application/rtf',
   u'application/x-latex',u'text/csv', u'text/tab-separated-values',
   u'application/pdf',u'application/x-msaccess', u'application/x-SDL-TM',
-  u'other',
+  u"application/x-tbx", u'other',
 ])
 
 INPUTINFOTYPE_CHARACTERENCODING_CHOICES = _make_choices_from_list([
@@ -3246,7 +3246,7 @@ OUTPUTINFOTYPE_DATAFORMAT_CHOICES = _make_choices_from_list([
   u'text/sgml',u'text/html', u'application/x-tex', u'application/rtf',
   u'application/x-latex',u'text/csv', u'text/tab-separated-values',
   u'application/pdf',u'application/x-msaccess', u'application/x-SDL-TM',
-  u'other',
+  u"application/x-tbx", u'other',
 ])
 
 OUTPUTINFOTYPE_CHARACTERENCODING_CHOICES = _make_choices_from_list([

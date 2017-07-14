@@ -16,6 +16,7 @@ MIMETYPELABEL_TO_MIMETYPEVALUE[u'LATEX'] = u"application/x-latex"
 MIMETYPELABEL_TO_MIMETYPEVALUE[u'PDF'] = u"application/pdf"
 MIMETYPELABEL_TO_MIMETYPEVALUE[u'XMI'] = u"application/vnd.xmi+xml"
 MIMETYPELABEL_TO_MIMETYPEVALUE[u'XML'] = u"application/xml"
+MIMETYPELABEL_TO_MIMETYPEVALUE[u'TBX'] = u"application/x-tbx"
 MIMETYPELABEL_TO_MIMETYPEVALUE[u'JSON'] = u"application/json"
 MIMETYPELABEL_TO_MIMETYPEVALUE[u'SGML'] = u"text/sgml"
 MIMETYPELABEL_TO_MIMETYPEVALUE[u'MS-Access database'] = u"application/x-msaccess"
@@ -35,6 +36,7 @@ MIMETYPEVALUE_TO_MIMETYPELABEL[u'application/rtf'] = u"RTF"
 MIMETYPEVALUE_TO_MIMETYPELABEL[u'application/vnd.xmi+xml'] = u"XMI"
 MIMETYPEVALUE_TO_MIMETYPELABEL[u'application/x-latex'] = u"LATEX"
 MIMETYPEVALUE_TO_MIMETYPELABEL[u'application/x-tmx+xml'] = u"TMX"
+MIMETYPEVALUE_TO_MIMETYPELABEL[u'application/x-tbx'] = u"TBX"
 MIMETYPEVALUE_TO_MIMETYPELABEL[u'text/html'] = u"HTML"
 MIMETYPEVALUE_TO_MIMETYPELABEL[u'text/sgml'] = u"SGML"
 MIMETYPEVALUE_TO_MIMETYPELABEL[u'application/x-tex'] = u"TEX"
@@ -57,6 +59,7 @@ TEXTFORMATINFOTYPE_DATAFORMAT_CHOICES = _make_choices_from_list_alt([
 u'text/plain',u'application/vnd.xmi+xml',
 u'application/xml', u'application/json', u'application/x-tmx+xml',
 u'application/x-xces+xml', u'application/tei+xml',u'application/rdf+xml',
+u'application/x-tbx',
 u'application/xhtml+xml', u'text/sgml',
 u'text/html', u'application/x-tex',
 u'application/rtf', u'application/x-latex',
