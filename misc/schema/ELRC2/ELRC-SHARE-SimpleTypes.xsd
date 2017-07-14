@@ -361,7 +361,7 @@
 			</xs:restriction>
 		</xs:simpleType>
 	</xs:element>
-    <xs:element name="segmentationLevel">
+	<xs:element name="segmentationLevel">
 		<xs:annotation>
 			<xs:documentation>Specifies the segmentation unit in terms of which the resource has been segmented or the level of segmentation a tool/service requires/outputs</xs:documentation>
 			<xs:appinfo>
@@ -531,28 +531,28 @@
 							<xs:label>MS-Access database</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
-				</xs:enumeration>			
+				</xs:enumeration>
 				<xs:enumeration value="application/vnd.ms-excel">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>MS-Excel xls</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
-				</xs:enumeration>		
+				</xs:enumeration>
 				<xs:enumeration value="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>MS-Excel xlsx</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
-				</xs:enumeration>			
+				</xs:enumeration>
 				<xs:enumeration value="application/vnd.openxmlformats-officedocument.wordprocessingml.document">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>MS-Word docx</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
-				</xs:enumeration>			
+				</xs:enumeration>
 				<xs:enumeration value="application/msword">
 					<xs:annotation>
 						<xs:appinfo>
@@ -564,6 +564,13 @@
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>TM format of the SDL alignment tool</xs:label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="application/x-tbx">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>TBX (Term Base eXchange)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
