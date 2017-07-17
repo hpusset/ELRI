@@ -3374,7 +3374,7 @@
 		</subdomains>
 	</domain>
 	<domain id="32">
-		<description>EDUCATION AND COMMUNICATIONS</description>
+		<description>EDUCATION &amp; COMMUNICATIONS</description>
 		<subdomains>
 			<subdomain id="3206">
 				<description>education</description>
@@ -3941,7 +3941,7 @@
 		</subdomains>
 	</domain>
 	<domain id="40">
-		<description>BUSINESS AND COMPETITION</description>
+		<description>BUSINESS &amp; COMPETITION</description>
 		<subdomains>
 			<subdomain id="4006">
 				<description>business organisation</description>
@@ -4190,7 +4190,7 @@
 		</subdomains>
 	</domain>
 	<domain id="44">
-		<description>EMPLOYMENT AND WORKING CONDITIONS</description>
+		<description>EMPLOYMENT &amp; WORKING CONDITIONS</description>
 		<subdomains>
 			<subdomain id="4406">
 				<description>employment</description>
@@ -4986,7 +4986,7 @@
 		</subdomains>
 	</domain>
 	<domain id="56">
-		<description>AGRICULTURE, FORESTRY AND FISHERIES</description>
+		<description>AGRICULTURE, FORESTRY &amp; FISHERIES</description>
 		<subdomains>
 			<subdomain id="5606">
 				<description>agricultural policy</description>
@@ -5675,7 +5675,7 @@
 		</subdomains>
 	</domain>
 	<domain id="64">
-		<description>PRODUCTION, TECHNOLOGY AND RESEARCH</description>
+		<description>PRODUCTION, TECHNOLOGY &amp; RESEARCH</description>
 		<subdomains>
 			<subdomain id="6406">
 				<description>production</description>

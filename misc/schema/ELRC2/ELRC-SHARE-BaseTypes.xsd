@@ -1209,6 +1209,22 @@
 								</xs:appinfo>
 							</xs:annotation>
 						</xs:enumeration>
+						<xs:enumeration value="isConvertedVersionOf">
+							<xs:annotation>
+								<xs:documentation>Indicates that resource A (the one being described) has been converted from resource B (e.g. a PDF to text conversion)</xs:documentation>
+								<xs:appinfo>
+									<label>Is related to</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="hasConvertedVersion">
+							<xs:annotation>
+								<xs:documentation>Indicates that resource A (the one being described) has resulted through a conversion process into resource B (e.g. a PDF to text conversion)</xs:documentation>
+								<xs:appinfo>
+									<label>Is related to</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:enumeration>
 						<!--
 						<xs:enumeration value="hasOutcome"/>
 						<xs:enumeration value="isCombinedWith"/>
@@ -2415,6 +2431,7 @@
 	<xs:element name="domain">
 		<xs:annotation>
 			<xs:documentation>Specifies the application domain of the resource or the tool/service; please, select one of the values supplied (taken from the EUROVOC domains, cf. http://eurovoc.europa.eu)</xs:documentation>
+			<xs:documentation>Specifies the application domain of the resource or the tool/service; please, select one of the values supplied (taken from the EUROVOC domains, cf. http://eurovoc.europa.eu)</xs:documentation>
 			<xs:appinfo>
 				<inline-type>tabular</inline-type>
 				<label>Domain</label>
@@ -2431,15 +2448,15 @@
 				<xs:enumeration value="TRADE"/>
 				<xs:enumeration value="FINANCE"/>
 				<xs:enumeration value="SOCIAL QUESTIONS"/>
-				<xs:enumeration value="EDUCATION AND COMMUNICATIONS"/>
+				<xs:enumeration value="EDUCATION &amp; COMMUNICATIONS"/>
 				<xs:enumeration value="SCIENCE"/>
-				<xs:enumeration value="BUSINESS AND COMPETITION"/>
-				<xs:enumeration value="EMPLOYMENT AND WORKING CONDITIONS"/>
+				<xs:enumeration value="BUSINESS &amp; COMPETITION"/>
+				<xs:enumeration value="EMPLOYMENT &amp; WORKING CONDITIONS"/>
 				<xs:enumeration value="TRANSPORT"/>
 				<xs:enumeration value="ENVIRONMENT"/>
-				<xs:enumeration value="AGRICULTURE, FORESTRY AND FISHERIES"/>
+				<xs:enumeration value="AGRICULTURE, FORESTRY &amp; FISHERIES"/>
 				<xs:enumeration value="AGRI-FOODSTUFFS"/>
-				<xs:enumeration value="PRODUCTION, TECHNOLOGY AND RESEARCH"/>
+				<xs:enumeration value="PRODUCTION, TECHNOLOGY &amp; RESEARCH"/>
 				<xs:enumeration value="ENERGY"/>
 				<xs:enumeration value="INDUSTRY"/>
 				<xs:enumeration value="GEOGRAPHY"/>
