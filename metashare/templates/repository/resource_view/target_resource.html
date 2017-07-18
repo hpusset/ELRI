@@ -1,12 +1,27 @@
+{% load get_resource_url %}
 {% spaceless %}
-
-{% if level == "list" %}
-	<li>{{target.Target_resource|urlizetrunc:23}}</li>
-{% else %}
-	<div class="dataline {% if level != "top" %}indented{% endif %}">
-		<label>
-            <strong>{{title}}: </strong>{{target.Target_resource|urlizetrunc:23}}
-		</label>
-	</div>
-{% endif %}
+    {% if level == "list" %}
+        <li>
+            {% if target.Target_resource|get_resource_status == "p" %}
+                <a href="{{ target.Target_resource|get_resource_url }}" target="_blank">
+                    {{ target.Target_resource|get_resource_name }}
+                </a>
+            {% else %}
+                {{ target.Target_resource|get_resource_name }}
+            {% endif %}
+        </li>
+    {% else %}
+        <div class="dataline {% if level != "top" %}indented{% endif %}">
+            <label>
+                <strong>{{ title }}: </strong>
+                {% if target.Target_resource|get_resource_status == "p" %}
+                    <a href="{{ target.Target_resource|get_resource_url }}" target="_blank">
+                        {{ target.Target_resource|get_resource_name }}
+                    </a>
+                {% else %}
+                    {{ target.Target_resource|get_resource_name }}
+                {% endif %}
+            </label>
+        </div>
+    {% endif %}
 {% endspaceless %}
