@@ -1240,7 +1240,7 @@ class targetResourceInfoType_model(SchemaModel):
 RELATIONINFOTYPE_RELATIONTYPE_CHOICES = _make_choices_from_list([
   u'isPartOf', u'isPartWith', u'hasPart', u'isVersionOf', u'hasVersion',
   u'isAnnotatedVersionOf',u'hasAnnotatedVersion', u'isAlignedVersionOf',
-  u'hasAlignedVersion',u'isRelatedTo',
+  u'hasAlignedVersion',u'isRelatedTo', u'isConvertedVersionOf', u'hasConvertedVersion'
 ])
 
 # pylint: disable-msg=C0103
