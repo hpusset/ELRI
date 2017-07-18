@@ -63,6 +63,7 @@
 						<xs:enumeration value="rules"/>
 						<xs:enumeration value="translationUnits"/>
 						<xs:enumeration value="phrases"/>
+						<xs:enumeration value="segments"/>
 						<xs:enumeration value="other"/>
 					</xs:restriction>
 				</xs:simpleType>

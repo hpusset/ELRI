@@ -260,7 +260,7 @@ SIZEINFOTYPE_SIZEUNIT_CHOICES = _make_choices_from_list([
   u'bytes',u'tokens', u'words', u'keywords', u'idiomaticExpressions',
   u'neologisms',u'multiWordUnits', u'expressions', u'concepts',
   u'lexicalTypes',u'kb', u'mb', u'gb', u'rules', u'translationUnits',
-  u'phrases',u'other',
+  u'phrases', u'segments', u'other',
 ])
 
 # pylint: disable-msg=C0103
