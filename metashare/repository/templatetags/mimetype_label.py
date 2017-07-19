@@ -15,7 +15,9 @@ def mimetype_label(input):
     output = []
     for m in mimetypes:
         # um = unicode(m, "utf-8")
-        xpath = u"//*[@name='dataFormat']/xs:simpleType/xs:restriction/xs:enumeration[@value='{}']//xs:label/text()".format(m.replace(u' ', u'').lower())
+        print m.replace(u' ', u'').lower()
+        xpath = u"//*[@name='dataFormat']/xs:simpleType/xs:restriction/xs:enumeration[@value='{}']//xs:label/text()" \
+            .format(m.replace(u' ', u'')[0].lower()+ m.replace(u' ', u'')[1:])
         output.append(''.join(xsd.xpath(xpath, namespaces={'xs': 'http://www.w3.org/2001/XMLSchema'})))
     return ', '.join(output)
 

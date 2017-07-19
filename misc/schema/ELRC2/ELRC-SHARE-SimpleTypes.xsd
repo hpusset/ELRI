@@ -571,7 +571,7 @@
 				<xs:enumeration value="application/x-tbx">
 					<xs:annotation>
 						<xs:appinfo>
-							<xs:label>TBX (Term Base eXchange)</xs:label>
+							<xs:label>Term Base eXchange</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
