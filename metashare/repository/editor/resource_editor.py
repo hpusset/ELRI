@@ -369,7 +369,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         response = http.HttpResponse()
         response['Content-Disposition'] = \
             'attachment; filename=%s' % (zipfilename)
-        response['mimetype'] = 'application/zip'
+        response['content_type'] = 'application/zip'
         in_memory.seek(0)
         response.write(in_memory.read())  
         return response
@@ -1201,8 +1201,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
             xml_string = to_xml_string(root_node, encoding="utf-8").encode('utf-8')
             resource_filename = 'resource-{0}.xml'.format(object_id)
         
-            response = http.HttpResponse(xml_string)
-            response["mimetype"] = 'text/xml'
+            response = http.HttpResponse(xml_string, content_type='text/xml')
             response['Content-Disposition'] = 'attachment; filename=%s' % (resource_filename)
             return response
 
