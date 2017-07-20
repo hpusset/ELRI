@@ -2456,6 +2456,8 @@ class projectInfoType_model(SchemaModel):
 
     def save(self, *args, **kwargs):
         if self.fundingCountry:
+            # reset the id list
+            self.fundingCountryId = []
             for fc in self.fundingCountry:
                 self.fundingCountryId.append(iana.get_region_subtag(fc))
         elif self.fundingCountryId:
