@@ -1,12 +1,12 @@
 import pprint
 import shutil
 
-from datetime import date
+from datetime import date, datetime
 from django.contrib.gis.measure import D
 from django.utils.encoding import smart_str
 
 from metashare.repository.models import resourceInfoType_model, versionInfoType_model, targetResourceInfoType_model, \
-    relationInfoType_model
+    relationInfoType_model, projectInfoType_model
 from metashare.settings import DJANGO_BASE, DJANGO_URL
 from metashare.storage.models import INGESTED, MASTER
 from metashare.xml_utils import to_xml_string, import_from_string
@@ -36,6 +36,29 @@ relations_map = {
     "TBX": (u"isConvertedVersionOf", u"hasConvertedVersion"),
     "TXT": (u"isConvertedVersionOf", u"hasConvertedVersion")
 }
+
+
+# One off project creation for all
+def get_or_create_project():
+    for p in projectInfoType_model.objects.all():
+        # first check if the LOT3 project already exists and return that
+        if len(p.projectShortName) > 0 and p.projectShortName[u"en"] == u"ELRC Data":
+            print "project {} found".format(p)
+            return p
+
+    fp = projectInfoType_model.objects.create()
+    fp.projectName["en"] = u"European Language Resources Coordination LOT3"
+    fp.projectShortName["en"] = u"ELRC Data"
+    fp.projectID = u"Tools and Resources for CEF Automated Translation - " \
+                   u"LOT3 (SMART 2015/1091 - 30-CE-0816766/00-92)"
+    fp.url = [u"http://www.lr-coordination.eu", ]
+    fp.fundingType = [u"serviceContract", ]
+    fp.funder = [u"European Commission", ]
+    fp.fundingCountry = [u"European Union", ]
+    fp.projectStartDate = datetime.strptime(u"2016-12-13", u"%Y-%m-%d").date()
+    fp.projectEndDate = datetime.strptime(u"2020-02-12", u"%Y-%m-%d").date()
+    fp.save()
+    return fp
 
 
 def extract_zip(zip_file_name):
@@ -225,7 +248,7 @@ def build_target_metadata(data_dict):
     resourceName = xml.find("{}identificationInfo/{}resourceName[@lang='en']".format(ns, ns), namespaces=NS)
     add_to_name = u"(Processed)"
     resourceName.text = u"{} {}".format(resourceName.text, add_to_name)
-    print "Adding {}".format(resourceName.text)
+    print "Adding {} with source id{}".format(smart_str(resourceName.text), data_dict.get("resource_id"))
     #
     # # PROCESS DESCRIPTION
     description = xml.find("{}identificationInfo/{}description[@lang='en']".format(ns, ns), namespaces=NS)
@@ -288,7 +311,7 @@ def build_target_metadata(data_dict):
     metadataInfo = resourceCreationInfo = xml.xpath(u'//ms:metadataInfo[last()]', namespaces=NS)
     metadataInfo[0].addnext(create_version_element(u"2.0"))
 
-    #metadataCreationDate=date.today()
+    # metadataCreationDate=date.today()
     # edit the dates
     updated = metadataInfo[0].find("{}metadataLastDateUpdated".format(ns), namespaces=NS)
     # remove the lastupdated since it's a new record
@@ -302,7 +325,10 @@ def build_target_metadata(data_dict):
     # edit the creation in metadatainfo
     new_resource.metadataInfo.metadataCreationDate = date.today()
     new_resource.metadataInfo.save()
+
+    new_resource.resourceCreationInfo.fundingProject.add(get_or_create_project())
     new_resource.save()
+
     # and finally "upload" the dataset and validation report to the respective folder
     for ftomove in os.listdir(data_dict.get("path")):
         shutil.move(os.path.join(data_dict.get("path"), ftomove),
@@ -314,8 +340,9 @@ def build_target_metadata(data_dict):
     source = data_dict.get("resource_info").get("resource")
     source.versionInfo = versionInfoType_model.objects.create(version=u"1.0")
     target_resource = targetResourceInfoType_model.objects.create(targetResourceNameURI=str(new_resource.id))
-    source_relation = relationInfoType_model.objects.create(relationType=relations_map.get(data_dict.get("mimetype"))[1],
-                                                                relatedResource=target_resource)
+    source_relation = relationInfoType_model.objects.create(
+        relationType=relations_map.get(data_dict.get("mimetype"))[1],
+        relatedResource=target_resource)
     source_relation.back_to_resourceinfotype_model = source
     source_relation.save()
     source.save()
@@ -326,6 +353,7 @@ def build_target_metadata(data_dict):
 
 
 def process():
+    print "Preparing directories..."
     directories = prepare_input()
 
     for item in directories:
