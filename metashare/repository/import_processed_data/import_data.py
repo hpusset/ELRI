@@ -2,16 +2,14 @@ import pprint
 import shutil
 
 from datetime import date, datetime
-from django.contrib.gis.measure import D
 from django.utils.encoding import smart_str
 
 from metashare.repository.models import resourceInfoType_model, versionInfoType_model, targetResourceInfoType_model, \
     relationInfoType_model, projectInfoType_model
-from metashare.settings import DJANGO_BASE, DJANGO_URL
+from metashare.settings import DJANGO_URL
 from metashare.storage.models import INGESTED, MASTER
 from metashare.xml_utils import to_xml_string, import_from_string
-from django import http
-from lxml import etree, objectify
+from lxml import etree
 import os
 import zipfile
 import fnmatch
