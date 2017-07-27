@@ -31,8 +31,8 @@ def get_by_lang_pair(request):
 
     in_memory = StringIO()
 
-    output_filename = "tmx_{}-{}_{}.tmx".format(l1, l2, datetime.datetime.today())
-
+    output_filename = "ELRC-SHARE_{}-{}_{}.tmx".format(l1, l2, datetime.date.today())
+    print output_filename
     in_memory.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
     for typecode, item in query.iter():
         # print("typecode=%d" % typecode)
