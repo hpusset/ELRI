@@ -44,6 +44,14 @@ urlpatterns += patterns('metashare.bcp47.xhr',
   (r'^{0}bcp47/'.format(DJANGO_BASE), include('metashare.bcp47.urls')),
 )
 
+urlpatterns += patterns('metashare.tmx_management.views',
+  (r'^{0}tmx/'.format(DJANGO_BASE), include('metashare.tmx_management.urls')),
+)
+
+urlpatterns += patterns('metashare.bcp47.xhr',
+  (r'^{0}bcp47/'.format(DJANGO_BASE), include('metashare.bcp47.urls')),
+)
+
 urlpatterns += patterns('',
   (r'^{0}selectable/'.format(DJANGO_BASE), include('selectable.urls')),
 )
@@ -61,13 +69,13 @@ urlpatterns += patterns('',
 )
 
 class RobotView(TemplateView):
-    
+
     def get_context_data(self, **kwargs):
         """ This method is overloaded to pass the SITEMAP_URL into the context data"""
         context = super(RobotView, self).get_context_data(**kwargs)
         context['sitemap_url'] = SITEMAP_URL
         return context
-  
+
 if DJANGO_BASE == "":
     urlpatterns += patterns('',
     (r'^{}robots\.txt$'.format(DJANGO_BASE), RobotView.as_view(template_name='robots.txt'))
