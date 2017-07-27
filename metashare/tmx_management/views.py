@@ -16,6 +16,7 @@ def db_info(request):
     return HttpResponse(SESSION.execute("INFO DB").replace("\n", "<br/>"))
 
 
+@login_required()
 def get_by_lang_pair(request):
     l1 = request.GET['l1']
     l2 = request.GET['l2']
