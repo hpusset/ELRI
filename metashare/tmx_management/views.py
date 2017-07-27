@@ -20,7 +20,6 @@ def get_by_lang_pair(request):
     l1 = request.GET['l1']
     l2 = request.GET['l2']
 
-    print l1, l2
     query_string = None
 
     # read the predefined xquery file
