@@ -1,0 +1,8 @@
+# Connection Settings
+BASEX_SERVER_URL = "your basex server ip"
+BASEX_SERVER_PORT = 1984
+BASEX_USER = "user name"
+BASEX_PASSWORD = "password"
+
+# active DB
+BASEX_DB = "the database you want to open by default"
