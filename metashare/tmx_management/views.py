@@ -27,7 +27,6 @@ def get_by_lang_pair(request):
     with open(os.path.join(os.path.dirname(__file__), 'queries/get_tus_by_lang_pair.xq'), 'r') as xq:
         query_string = xq.read()
 
-    print str(query_string % (l1, l2, l1, l2))
     query = SESSION.query(str(query_string % (l1, l2, l1, l2)))
 
     in_memory = StringIO()
@@ -37,9 +36,11 @@ def get_by_lang_pair(request):
     in_memory.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
     for typecode, item in query.iter():
         # print("typecode=%d" % typecode)
-        print item.encode('utf-8')
         in_memory.write(item.encode('utf-8'))
     query.close()
+
+    if in_memory.len < 100:
+        return HttpResponse("Your query did not return any translation units")
 
     response = HttpResponse(content_type="application/xml")
     response['Content-Disposition'] = \
