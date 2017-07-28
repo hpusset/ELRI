@@ -28,9 +28,9 @@ def add_to_basex():
 
             count = 0
             for f in zip.namelist():
-                if len(zip.namelist()) > 1:
-                    count += 1
                 if f.endswith(".tmx"):
+                    if len(zip.namelist()) > 1:
+                        count += 1
                     fl = zip.open(f)
                     out_filename = "{}".format(str(obj.id))
                     if count:
