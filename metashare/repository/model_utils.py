@@ -6,6 +6,7 @@ import logging
 
 from django.db.models import OneToOneField, Sum
 
+from metashare.repository.dataformat_choices import MIMETYPEVALUE_TO_MIMETYPELABEL
 from metashare.repository.models import resourceInfoType_model, \
     corpusInfoType_model, lexicalConceptualResourceInfoType_model, \
     languageDescriptionInfoType_model, toolServiceInfoType_model
@@ -203,6 +204,45 @@ def get_resource_media_types(res_obj):
         result_lower.append(res.lower())
 
     return result_lower
+
+
+def get_resource_dataformats(res_obj):
+    dataFormat_list = []
+    corpus_media = res_obj.resourceComponentType.as_subclass()
+
+    if isinstance(corpus_media, corpusInfoType_model):
+        media_type = corpus_media.corpusMediaType
+        for corpus_info in media_type.corpustextinfotype_model_set.all():
+            dataFormat_list.extend([MIMETYPEVALUE_TO_MIMETYPELABEL[dataFormat.dataFormat]
+                                    if dataFormat.dataFormat in MIMETYPEVALUE_TO_MIMETYPELABEL
+                                    else dataFormat.dataFormat for dataFormat in
+                                    corpus_info.textformatinfotype_model_set.all()])
+
+    elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
+        lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
+        if lcr_media_type.lexicalConceptualResourceTextInfo:
+            dataFormat_list.extend([MIMETYPEVALUE_TO_MIMETYPELABEL[dataFormat.dataFormat]
+                                    if dataFormat.dataFormat in MIMETYPEVALUE_TO_MIMETYPELABEL
+                                    else dataFormat.dataFormat for dataFormat in
+                                    lcr_media_type.lexicalConceptualResourceTextInfo \
+                                   .textformatinfotype_model_set.all()])
+
+    elif isinstance(corpus_media, languageDescriptionInfoType_model):
+        ld_media_type = corpus_media.languageDescriptionMediaType
+        if ld_media_type.languageDescriptionTextInfo:
+            dataFormat_list.extend([MIMETYPEVALUE_TO_MIMETYPELABEL[dataFormat.dataFormat]
+                                    if dataFormat.dataFormat in MIMETYPEVALUE_TO_MIMETYPELABEL
+                                    else dataFormat.dataFormat for dataFormat in
+                                    ld_media_type.languageDescriptionTextInfo \
+                                   .textformatinfotype_model_set.all()])
+
+    elif isinstance(corpus_media, toolServiceInfoType_model):
+        if corpus_media.inputInfo:
+            dataFormat_list.extend(corpus_media.inputInfo.dataFormat)
+        if corpus_media.outputInfo:
+            dataFormat_list.extend(corpus_media.outputInfo.dataFormat)
+
+    return dataFormat_list
 
 def get_lr_stat_action_count(obj_identifier, stats_action):
     """
