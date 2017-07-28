@@ -8,7 +8,7 @@ import datetime
 from connector import connect
 from metashare.tmx_management.forms import TmxQueryForm
 
-SESSION = connect("tmx_test2")
+SESSION = connect("tmx_test")
 
 
 @login_required
