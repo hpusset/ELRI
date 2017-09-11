@@ -267,7 +267,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                               'metadataInfo':MetadataInline, }
 
     content_fields = ('resourceComponentType',)
-    list_display = ('__unicode__', 'resource_type', 'publication_status', 'resource_Owners', 'editor_Groups',)
+    list_display = ('__unicode__', 'id', 'resource_type', 'publication_status', 'resource_Owners', 'editor_Groups',)
     list_filter = ('storage_object__publication_status',)
     actions = ('publish_action', 'unpublish_action', 'ingest_action',
         'export_xml_action', 'delete', 'add_group', 'remove_group',
