@@ -107,6 +107,24 @@ a:hover span.desc {
 	text-decoration: none;
 }
 
+.euLogin {
+	background-color: #ffd500;
+	border: none;
+	display: block;
+	margin-top: 7px;
+	height: 26px;
+	color: #000;
+	font-size: 16px !important;
+	text-decoration: none;
+    width: 18%;
+}
+
+.euLogin:hover {
+	background-color: #058dbe;
+	color: #fff;
+    transition: background 200ms linear;
+}
+
 .middle_button:hover {
     background-color: #ffd500;
     color: #333333 !important;
