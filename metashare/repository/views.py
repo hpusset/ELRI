@@ -29,6 +29,7 @@ from django.utils.translation import ugettext as _
 from haystack.views import FacetedSearchView
 
 from metashare.accounts.models import UserProfile
+from metashare.local_settings import CONTRIBUTIONS_ALERT_EMAILS
 from metashare.recommendations.recommendations import SessionResourcesTracker, \
     get_download_recommendations, get_view_recommendations, \
     get_more_from_same_creators_qs, get_more_from_same_projects_qs
@@ -1110,11 +1111,12 @@ def contribute(request):
             send_mail("New unmanaged contributions",
                       "You have new unmanaged contributed resources on elrc-share.eu",
                       # 'no-reply@elrc-share.ilsp.gr', ["mdel@ilsp.gr"],
-                      'no-reply@elrc-share.ilsp.gr', ["penny@ilsp.gr", "kanella@ilsp.gr", "mdel@ilsp.gr"], \
+                      'no-reply@elrc-share.ilsp.gr', CONTRIBUTIONS_ALERT_EMAILS, \
                       # 'no-reply@elrc-share.ilsp.gr', ["mdel@ilsp.gr"], \
                       fail_silently=False)
         except:
-            pass
+            LOGGER.error("An error has occurred while trying to send email to contributions"
+                         "alert recipients.")
 
         response['status'] = "succeded"
         response['message'] = "Thank you for sharing! Your data have been successfully submitted. " \
