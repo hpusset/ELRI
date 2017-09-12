@@ -91,9 +91,9 @@ class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
     mediaTypeFilter = LabeledMultiValueField(
         label=_('Media Type'), facet_id=3, parent_id=0,
         faceted=True)
-    availabilityFilter = LabeledMultiValueField(
-        label=_('Availability'), facet_id=4, parent_id=0,
-        faceted=True)
+    # availabilityFilter = LabeledMultiValueField(
+    #     label=_('Availability'), facet_id=4, parent_id=0,
+    #     faceted=True)
     licenceFilter = LabeledMultiValueField(
         label=_('Licence'), facet_id=5, parent_id=0,
         faceted=True)
@@ -118,9 +118,9 @@ class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
     dataFormatFilter = LabeledMultiValueField(
         label=_('Data Format'), facet_id=13, parent_id=0,
         faceted=True)
-    bestPracticesFilter = LabeledMultiValueField(
-        label=_('Conformance to Standards/Best Practices'), facet_id=14, parent_id=0,
-        faceted=True)
+    # bestPracticesFilter = LabeledMultiValueField(
+    #     label=_('Conformance to Standards/Best Practices'), facet_id=14, parent_id=0,
+    #     faceted=True)
     domainFilter = LabeledMultiValueField(
         label=_('Domain'), facet_id=15, parent_id=0,
         faceted=True)
@@ -174,9 +174,9 @@ class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
         label=_('Appropriateness For DSI'), facet_id=56, parent_id=0,
         faceted=True)
 
-    publicationStatusFilter = LabeledCharField(
-        label=_('Publication Status'), facet_id=57, parent_id=0,
-        faceted=True)
+    # publicationStatusFilter = LabeledCharField(
+    #     label=_('Publication Status'), facet_id=57, parent_id=0,
+    #     faceted=True)
 
     # Start sub filters
     textTextGenreFilter = LabeledMultiValueField(
@@ -185,9 +185,9 @@ class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
     textTextTypeFilter = LabeledMultiValueField(
         label=_('Text Type'), facet_id=36, parent_id=3,
         faceted=True)
-    languageVarietyFilter = LabeledMultiValueField(
-        label=_('Language Variety'), facet_id=55, parent_id=0,
-        faceted=True)
+    # languageVarietyFilter = LabeledMultiValueField(
+    #     label=_('Language Variety'), facet_id=55, parent_id=0,
+    #     faceted=True)
 
     # we create all items that may appear in the search results list already at
     # index time
