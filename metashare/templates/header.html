@@ -79,9 +79,11 @@
                         </ul>
                     </li>
                 {% endif %}
+                {% if user.is_superuser %}
                 <li title="View various statistics for this META-SHARE Node"><a
                         href="{% url 'metashare.views.frontpage' %}stats/top/">
                     <i class="fa fa-bar-chart menu_fontawesome" aria-hidden="true"></i> Statistics</a></li>
+                {% endif %}
                 <li title="Help"><a href="{% url 'help' %}">
                     <i class="fa fa-question-circle menu_fontawesome" aria-hidden="true"></i> Help</a></li>
                 <li><a href="{% url 'info' %}">

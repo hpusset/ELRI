@@ -11,7 +11,5 @@ urlpatterns = patterns('metashare.stats.views',
     'statdays'),
   (r'get.*',
     'getstats'),
-  (r'portalstats/$',
-   'portalstats'),
 )
 
