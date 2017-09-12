@@ -20,12 +20,12 @@ def get_language_codes():
 
 
 def get_most_used_languages():
-    xpath = u"//language[position()<25]/description/text()"
+    xpath = u"//language[position()<28]/description/text()"
     return registry.xpath(xpath)
 
 
 def get_rest_of_languages():
-    xpath = u"//language[position()>25]/description/text()"
+    xpath = u"//language[position()>28]/description/text()"
     return registry.xpath(xpath)
 
 
