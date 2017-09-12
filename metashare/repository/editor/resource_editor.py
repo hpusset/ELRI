@@ -267,7 +267,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                               'metadataInfo':MetadataInline, }
 
     content_fields = ('resourceComponentType',)
-    list_display = ('__unicode__', 'id', 'resource_type', 'publication_status', 'resource_Owners', 'editor_Groups',)
+    # list_display = ('__unicode__', 'id', 'resource_type', 'publication_status', 'resource_Owners', 'editor_Groups',)
+    list_display = ('__unicode__', 'id', 'resource_type', 'publication_status', 'resource_Owners', 'validated')
     list_filter = ('storage_object__publication_status',)
     actions = ('publish_action', 'unpublish_action', 'ingest_action',
         'export_xml_action', 'delete', 'add_group', 'remove_group',
@@ -402,7 +403,13 @@ class ResourceModelAdmin(SchemaModelAdmin):
             groups_list += group.name + ', '
         groups_list = groups_list.rstrip(', ')
         return groups_list
-    
+
+    def validated(self, obj):
+        """
+        Method used for changelist view for resources.
+        """
+        return "YES" if obj.storage_object.get_validation() else "NO"
+
     class ConfirmDeleteForm(forms.Form):
         _selected_action = forms.CharField(widget=forms.MultipleHiddenInput)
     
