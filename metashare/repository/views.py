@@ -129,15 +129,7 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
     'GPL-3.0': (STATIC_URL + 'metashare/licences/GPL-3.0.pdf', MEMBER_TYPES.NON),
     'LGPL-3.0': (STATIC_URL + 'metashare/licences/LGPL-3.0.pdf', MEMBER_TYPES.NON),
     'MIT': (STATIC_URL + 'metashare/licences/MIT.pdf', MEMBER_TYPES.NON),
-    # TODO: Princeton
-    'Princeton-WordNet': (STATIC_URL + 'metashare/licences/Princeton-WordNet.pdf', MEMBER_TYPES.NON),
     'EPL-1.0': (STATIC_URL + 'metashare/licences/EPL-1.0.pdf', MEMBER_TYPES.NON),
-    # TODO: NLM
-    'NLM': (STATIC_URL + 'metashare/licences/NLM.pdf', MEMBER_TYPES.NON),
-    # TODO: f-DPPL-3.0
-    'f-DPPL-3.0': (STATIC_URL + 'metashare/licences/f-DPPL-3.0.pdf', MEMBER_TYPES.NON),
-    # TODO: M-DPPL-3.0
-    'M-DPPL-3.0': (STATIC_URL + 'metashare/licences/M-DPPL-3.0.pdf', MEMBER_TYPES.NON),
     'LO-OL-v2': (STATIC_URL + 'metashare/licences/LO-OL-v2.pdf', MEMBER_TYPES.NON),
     'dl-de/by-2-0': (STATIC_URL + 'metashare/licences/dl-de_by-2-0.pdf', MEMBER_TYPES.NON),
     'dl-de/zero-2-0': (STATIC_URL + 'metashare/licences/dl-de_zero-2-0.pdf', MEMBER_TYPES.NON),
