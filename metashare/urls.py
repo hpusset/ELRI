@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
 
+from metashare.local_settings import DOCUMENTATION_ROOT
 from metashare.repository.editor import admin_site as editor_site
 from metashare.repository.sitemap import RepositorySitemap
 from metashare.settings import DJANGO_BASE, SITEMAP_URL
@@ -60,6 +61,11 @@ urlpatterns += patterns('metashare.bcp47.xhr',
 
 urlpatterns += patterns('',
   (r'^{0}selectable/'.format(DJANGO_BASE), include('selectable.urls')),
+)
+
+urlpatterns += patterns('',
+  (r'^{0}documentation/(?P<path>.*)$'.format(DJANGO_BASE), \
+        'django.views.static.serve', {'document_root': DOCUMENTATION_ROOT})
 )
 
 sitemaps = {
