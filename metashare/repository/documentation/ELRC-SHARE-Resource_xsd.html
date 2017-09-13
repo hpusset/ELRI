@@ -1,0 +1,533 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for ELRC-SHARE-Resource.xsd</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript">
+         <!--
+        var diagramBoxes= new Array('diagram_resourceInfoType_contactPerson', 
+				'diagram_resourceInfoType_resourceComponentType', 
+				'diagram_resourceInfo', 
+				'diagram_resourceInfoType');
+var annotationBoxes= new Array('annotations_resourceInfoType_contactPerson', 
+				'annotations_resourceInfoType_resourceComponentType', 
+				'annotations_resourceInfo');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="ELRC-SHARE-Resource.xsd"></a><div class="componentTitle">Main schema <span class="qname">ELRC-SHARE-Resource.xsd</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody></tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="resourceInfoType_contactPerson"></a><div class="componentTitle">Element <span class="qname"><b><a href="ELRC-SHARE-Resource_xsd.html#resourceInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-Resource.xsd')">ms:resourceInfoType</a></b> / ms:contactPerson</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_resourceInfoType_contactPerson" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_resourceInfoType_contactPerson');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_resourceInfoType_contactPerson" style="display:block">
+                              <div class="annotation">Groups information on the person(s) that is/are responsible for providing further
+                                 information regarding the resource
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_resourceInfoType_contactPerson" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_resourceInfoType_contactPerson');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_resourceInfoType_contactPerson" style="display:block"><img alt="Diagram" border="0" src="img/ELRC-SHARE-Resource_xsd_Element_ms_contactPerson.jpeg" usemap="#ELRC-SHARE-Resource_xsd_Element_ms_contactPerson" /><map name="ELRC-SHARE-Resource_xsd_Element_ms_contactPerson" id="ELRC-SHARE-Resource_xsd_Element_ms_contactPerson">
+                                 <area alt="ELRC-SHARE-RoleTypes_xsd.tmp#personInfoType_surname" href="ELRC-SHARE-RoleTypes_xsd.html#personInfoType_surname" coords="289,40,362,65" />
+                                 <area alt="ELRC-SHARE-RoleTypes_xsd.tmp#personInfoType_givenName" href="ELRC-SHARE-RoleTypes_xsd.html#personInfoType_givenName" coords="289,75,373,100" />
+                                 <area alt="ELRC-SHARE-BaseTypes_xsd.tmp#sex" href="ELRC-SHARE-BaseTypes_xsd.html#sex" coords="289,110,355,135" />
+                                 <area alt="ELRC-SHARE-RoleTypes_xsd.tmp#communicationInfo" href="ELRC-SHARE-RoleTypes_xsd.html#communicationInfo" coords="289,145,426,170" />
+                                 <area alt="ELRC-SHARE-RoleTypes_xsd.tmp#personInfoType_position" href="ELRC-SHARE-RoleTypes_xsd.html#personInfoType_position" coords="289,180,357,205" />
+                                 <area alt="ELRC-SHARE-RoleTypes_xsd.tmp#personInfoType_affiliation" href="ELRC-SHARE-RoleTypes_xsd.html#personInfoType_affiliation" coords="289,215,363,240" />
+                                 <area alt="ELRC-SHARE-RoleTypes_xsd.tmp#personInfoType" href="ELRC-SHARE-RoleTypes_xsd.html#personInfoType" coords="187,3,331,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="ELRC-SHARE-RoleTypes_xsd.html#personInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-RoleTypes.xsd')">ms:personInfoType</a></b></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="resourceInfoType_resourceComponentType"></a><div class="componentTitle">Element <span class="qname"><b><a href="ELRC-SHARE-Resource_xsd.html#resourceInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-Resource.xsd')">ms:resourceInfoType</a></b> / ms:resourceComponentType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_resourceInfoType_resourceComponentType" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_resourceInfoType_resourceComponentType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_resourceInfoType_resourceComponentType" style="display:block">
+                              <div class="annotation">Used for distinguishing between resource types</div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_resourceInfoType_resourceComponentType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_resourceInfoType_resourceComponentType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_resourceInfoType_resourceComponentType" style="display:block"><img alt="Diagram" border="0" src="img/ELRC-SHARE-Resource_xsd_Element_ms_resourceComponentType.jpeg" usemap="#ELRC-SHARE-Resource_xsd_Element_ms_resourceComponentType" /><map name="ELRC-SHARE-Resource_xsd_Element_ms_resourceComponentType" id="ELRC-SHARE-Resource_xsd_Element_ms_resourceComponentType">
+                                 <area alt="Corpus_xsd.tmp#corpusInfo" href="Corpus_xsd.html#corpusInfo" coords="252,2,352,27" />
+                                 <area alt="toolService_xsd.tmp#toolServiceInfo" href="toolService_xsd.html#toolServiceInfo" coords="252,37,372,62" />
+                                 <area alt="languageDescription_xsd.tmp#languageDescriptionInfo" href="languageDescription_xsd.html#languageDescriptionInfo" coords="252,72,416,97" />
+                                 <area alt="lexicalConceptualResource_xsd.tmp#lexicalConceptualResourceInfo" href="lexicalConceptualResource_xsd.html#lexicalConceptualResourceInfo" coords="252,107,449,132" /></map></div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="resourceInfo"></a><div class="componentTitle">Element <span class="qname">ms:resourceInfo</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_resourceInfo" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_resourceInfo');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_resourceInfo" style="display:block">
+                              <div class="annotation">Groups together all information required for the description of language resources</div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_resourceInfo" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_resourceInfo');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_resourceInfo" style="display:block"><img alt="Diagram" border="0" src="img/ELRC-SHARE-Resource_xsd_Element_ms_resourceInfo.jpeg" usemap="#ELRC-SHARE-Resource_xsd_Element_ms_resourceInfo" /><map name="ELRC-SHARE-Resource_xsd_Element_ms_resourceInfo" id="ELRC-SHARE-Resource_xsd_Element_ms_resourceInfo">
+                                 <area alt="ELRC-SHARE-BaseTypes_xsd.tmp#identificationInfo" href="ELRC-SHARE-BaseTypes_xsd.html#identificationInfo" coords="299,40,425,65" />
+                                 <area alt="ELRC-SHARE-LicenseMetadata_xsd.tmp#distributionInfo" href="ELRC-SHARE-LicenseMetadata_xsd.html#distributionInfo" coords="299,75,417,100" />
+                                 <area alt="ELRC-SHARE-Resource_xsd.tmp#resourceInfoType_contactPerson" href="ELRC-SHARE-Resource_xsd.html#resourceInfoType_contactPerson" coords="299,110,455,154" />
+                                 <area alt="ELRC-SHARE-BaseTypes_xsd.tmp#metadataInfo" href="ELRC-SHARE-BaseTypes_xsd.html#metadataInfo" coords="299,164,409,189" />
+                                 <area alt="ELRC-SHARE-BaseTypes_xsd.tmp#versionInfo" href="ELRC-SHARE-BaseTypes_xsd.html#versionInfo" coords="299,199,401,224" />
+                                 <area alt="ELRC-SHARE-BaseTypes_xsd.tmp#resourceCreationInfo" href="ELRC-SHARE-BaseTypes_xsd.html#resourceCreationInfo" coords="299,234,449,259" />
+                                 <area alt="ELRC-SHARE-BaseTypes_xsd.tmp#resourceDocumentationInfo" href="ELRC-SHARE-BaseTypes_xsd.html#resourceDocumentationInfo" coords="299,269,480,294" />
+                                 <area alt="ELRC-SHARE-BaseTypes_xsd.tmp#validationInfo" href="ELRC-SHARE-BaseTypes_xsd.html#validationInfo" coords="299,304,410,329" />
+                                 <area alt="ELRC-SHARE-BaseTypes_xsd.tmp#relationInfo" href="ELRC-SHARE-BaseTypes_xsd.html#relationInfo" coords="299,339,400,364" />
+                                 <area alt="ELRC-SHARE-Resource_xsd.tmp#resourceInfoType_resourceComponentType" href="ELRC-SHARE-Resource_xsd.html#resourceInfoType_resourceComponentType" coords="299,374,452,399" />
+                                 <area alt="ELRC-SHARE-Resource_xsd.tmp#resourceInfoType" href="ELRC-SHARE-Resource_xsd.html#resourceInfoType" coords="197,3,351,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="ELRC-SHARE-Resource_xsd.html#resourceInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-Resource.xsd')">ms:resourceInfoType</a></b></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="resourceInfoType"></a><div class="componentTitle">Complex Type <span class="qname">ms:resourceInfoType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_resourceInfoType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_resourceInfoType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_resourceInfoType" style="display:block"><img alt="Diagram" border="0" src="img/ELRC-SHARE-Resource_xsd_Complex_Type_ms_resourceInfoType.jpeg" usemap="#ELRC-SHARE-Resource_xsd_Complex_Type_ms_resourceInfoType" /><map name="ELRC-SHARE-Resource_xsd_Complex_Type_ms_resourceInfoType" id="ELRC-SHARE-Resource_xsd_Complex_Type_ms_resourceInfoType">
+                                 <area alt="ELRC-SHARE-BaseTypes_xsd.tmp#identificationInfo" href="ELRC-SHARE-BaseTypes_xsd.html#identificationInfo" coords="260,0,386,25" />
+                                 <area alt="ELRC-SHARE-LicenseMetadata_xsd.tmp#distributionInfo" href="ELRC-SHARE-LicenseMetadata_xsd.html#distributionInfo" coords="260,35,378,60" />
+                                 <area alt="ELRC-SHARE-Resource_xsd.tmp#resourceInfoType_contactPerson" href="ELRC-SHARE-Resource_xsd.html#resourceInfoType_contactPerson" coords="260,70,416,114" />
+                                 <area alt="ELRC-SHARE-BaseTypes_xsd.tmp#metadataInfo" href="ELRC-SHARE-BaseTypes_xsd.html#metadataInfo" coords="260,124,370,149" />
+                                 <area alt="ELRC-SHARE-BaseTypes_xsd.tmp#versionInfo" href="ELRC-SHARE-BaseTypes_xsd.html#versionInfo" coords="260,159,362,184" />
+                                 <area alt="ELRC-SHARE-BaseTypes_xsd.tmp#resourceCreationInfo" href="ELRC-SHARE-BaseTypes_xsd.html#resourceCreationInfo" coords="260,194,410,219" />
+                                 <area alt="ELRC-SHARE-BaseTypes_xsd.tmp#resourceDocumentationInfo" href="ELRC-SHARE-BaseTypes_xsd.html#resourceDocumentationInfo" coords="260,229,441,254" />
+                                 <area alt="ELRC-SHARE-BaseTypes_xsd.tmp#validationInfo" href="ELRC-SHARE-BaseTypes_xsd.html#validationInfo" coords="260,264,371,289" />
+                                 <area alt="ELRC-SHARE-BaseTypes_xsd.tmp#relationInfo" href="ELRC-SHARE-BaseTypes_xsd.html#relationInfo" coords="260,299,361,324" />
+                                 <area alt="ELRC-SHARE-Resource_xsd.tmp#resourceInfoType_resourceComponentType" href="ELRC-SHARE-Resource_xsd.html#resourceInfoType_resourceComponentType" coords="260,334,413,359" /></map></div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.
+         </div>
+      </div><script type="text/javascript">
+         <!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

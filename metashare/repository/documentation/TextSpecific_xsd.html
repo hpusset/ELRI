@@ -1,0 +1,991 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for TextSpecific.xsd</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript">
+         <!--
+        var facetsBoxes= new Array('facets_textGenre', 
+				'facets_textType');
+var diagramBoxes= new Array('diagram_textFormatInfo', 
+				'diagram_textFormatInfoType_sizePerTextFormat', 
+				'diagram_textClassificationInfo', 
+				'diagram_textGenre', 
+				'diagram_textType', 
+				'diagram_textClassificationInfoType_sizePerTextClassification', 
+				'diagram_textFormatInfoType', 
+				'diagram_textClassificationInfoType');
+var annotationBoxes= new Array('annotations_textFormatInfo', 
+				'annotations_textFormatInfoType_sizePerTextFormat', 
+				'annotations_textClassificationInfo', 
+				'annotations_textGenre', 
+				'annotations_textType', 
+				'annotations_textClassificationInfoType_sizePerTextClassification');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, facetsBoxes);" class="control" /></span><span class="globalControlName">Facets </span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="TextSpecific.xsd"></a><div class="componentTitle">Included schema <span class="qname">TextSpecific.xsd</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody></tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="textFormatInfo"></a><div class="componentTitle">Element <span class="qname">ms:textFormatInfo</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_textFormatInfo" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_textFormatInfo');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_textFormatInfo" style="display:block">
+                              <div class="annotation">Groups information on the text format(s) of a resource</div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_textFormatInfo" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_textFormatInfo');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_textFormatInfo" style="display:block"><img alt="Diagram" border="0" src="img/TextSpecific_xsd_Element_ms_textFormatInfo.jpeg" usemap="#TextSpecific_xsd_Element_ms_textFormatInfo" /><map name="TextSpecific_xsd_Element_ms_textFormatInfo" id="TextSpecific_xsd_Element_ms_textFormatInfo">
+                                 <area alt="ELRC-SHARE-SimpleTypes_xsd.tmp#dataFormat" href="ELRC-SHARE-SimpleTypes_xsd.html#dataFormat" coords="213,40,315,65" />
+                                 <area alt="TextSpecific_xsd.tmp#textFormatInfoType_sizePerTextFormat" href="TextSpecific_xsd.html#textFormatInfoType_sizePerTextFormat" coords="213,75,334,100" />
+                                 <area alt="TextSpecific_xsd.tmp#textFormatInfoType" href="TextSpecific_xsd.html#textFormatInfoType" coords="131,3,292,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="TextSpecific_xsd.html#textFormatInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for TextSpecific.xsd')">ms:textFormatInfoType</a></b></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="textFormatInfoType_sizePerTextFormat"></a><div class="componentTitle">Element <span class="qname"><b><a href="TextSpecific_xsd.html#textFormatInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for TextSpecific.xsd')">ms:textFormatInfoType</a></b> / ms:sizePerTextFormat</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_textFormatInfoType_sizePerTextFormat" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_textFormatInfoType_sizePerTextFormat');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_textFormatInfoType_sizePerTextFormat" style="display:block">
+                              <div class="annotation">Provides information on the size of the resource parts with different format</div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_textFormatInfoType_sizePerTextFormat" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_textFormatInfoType_sizePerTextFormat');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_textFormatInfoType_sizePerTextFormat" style="display:block"><img alt="Diagram" border="0" src="img/TextSpecific_xsd_Element_ms_sizePerTextFormat.jpeg" usemap="#TextSpecific_xsd_Element_ms_sizePerTextFormat" /><map name="TextSpecific_xsd_Element_ms_sizePerTextFormat" id="TextSpecific_xsd_Element_ms_sizePerTextFormat">
+                                 <area alt="ELRC-SHARE-SimpleTypes_xsd.tmp#sizeInfoType_size" href="ELRC-SHARE-SimpleTypes_xsd.html#sizeInfoType_size" coords="234,40,285,65" />
+                                 <area alt="ELRC-SHARE-SimpleTypes_xsd.tmp#sizeInfoType_sizeUnit" href="ELRC-SHARE-SimpleTypes_xsd.html#sizeInfoType_sizeUnit" coords="234,75,303,100" />
+                                 <area alt="ELRC-SHARE-SimpleTypes_xsd.tmp#sizeInfoType" href="ELRC-SHARE-SimpleTypes_xsd.html#sizeInfoType" coords="152,3,282,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="ELRC-SHARE-SimpleTypes_xsd.html#sizeInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-SimpleTypes.xsd')">ms:sizeInfoType</a></b></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="textClassificationInfo"></a><div class="componentTitle">Element <span class="qname">ms:textClassificationInfo</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_textClassificationInfo" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_textClassificationInfo');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_textClassificationInfo" style="display:block">
+                              <div class="annotation">Groups together information on text type/genre of the resource</div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_textClassificationInfo" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_textClassificationInfo');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_textClassificationInfo" style="display:block"><img alt="Diagram" border="0" src="img/TextSpecific_xsd_Element_ms_textClassificationInfo.jpeg" usemap="#TextSpecific_xsd_Element_ms_textClassificationInfo" /><map name="TextSpecific_xsd_Element_ms_textClassificationInfo" id="TextSpecific_xsd_Element_ms_textClassificationInfo">
+                                 <area alt="TextSpecific_xsd.tmp#textGenre" href="TextSpecific_xsd.html#textGenre" coords="244,40,340,65" />
+                                 <area alt="TextSpecific_xsd.tmp#textType" href="TextSpecific_xsd.html#textType" coords="244,75,334,100" />
+                                 <area alt="ELRC-SHARE-SimpleTypes_xsd.tmp#conformanceToClassificationScheme" href="ELRC-SHARE-SimpleTypes_xsd.html#conformanceToClassificationScheme" coords="244,110,471,135" />
+                                 <area alt="TextSpecific_xsd.tmp#textClassificationInfoType_sizePerTextClassification" href="TextSpecific_xsd.html#textClassificationInfoType_sizePerTextClassification" coords="244,145,396,170" />
+                                 <area alt="TextSpecific_xsd.tmp#textClassificationInfoType" href="TextSpecific_xsd.html#textClassificationInfoType" coords="162,3,354,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="TextSpecific_xsd.html#textClassificationInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for TextSpecific.xsd')">ms:textClassificationInfoType</a></b></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="textGenre"></a><div class="componentTitle">Element <span class="qname">ms:textGenre</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_textGenre" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_textGenre');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_textGenre" style="display:block">
+                              <div class="annotation">Genre: The conventionalized discourse or text types of the content of the resource,
+                                 based on extra-linguistic and internal linguistic criteria; please, select one of
+                                 the predefined values as it increases the interoperability between resources and processing
+                                 tools and services; if none fits the contents of your resource, you can add your own
+                                 value
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_textGenre" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_textGenre');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_textGenre" style="display:block"><img alt="Diagram" border="0" src="img/TextSpecific_xsd_Element_ms_textGenre.jpeg" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>restriction of <b>xs:string</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_textGenre" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_textGenre');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_textGenre" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">maxLength</td>
+                                    <td width="30%"><b>50</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>advertising</b></td>
+                                    <td>
+                                       <div class="annotation">For corpora that include advertising texts (value taken from the PAROLE genre classifcation
+                                          schema)
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>discussion</b></td>
+                                    <td>
+                                       <div class="annotation">For corpora that include texts of discussion, debate and conversation, written as
+                                          well as spoken, including interviews, parliamentary speeches, letters to the editor,
+                                          etc. (value taken from the PAROLE genre classifcation schema)
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>feature</b></td>
+                                    <td>
+                                       <div class="annotation">For corpora that include feature texts such as articles in newspaper etc., which do
+                                          not belong to the Information or another, more specific genre, rebiews, radio/TV magazines
+                                          etc. (value taken from the PAROLE genre classifcation schema)
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>fiction</b></td>
+                                    <td>
+                                       <div class="annotation">For corpora that include fiction texts, including faction and e.g. comic strips, entertainment,
+                                          children and youth pages, jokes and games; drama, including film manuscripts and TV-series;
+                                          poems and song lyrics (value taken from the PAROLE genre classifcation schema)
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>information</b></td>
+                                    <td>
+                                       <div class="annotation">For corpora that include texts of information, such as news articles in newspaper
+                                          texts, as well as similar programs in radio and television, folders and leaflets from
+                                          the authorities, posters, signs (value taken from the PAROLE genre classifcation schema)
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>instruction</b></td>
+                                    <td>
+                                       <div class="annotation">For corpora that include texts of instruction, including reference and text books,
+                                          specialised articles in correspondence columns of newspapers or magazines (value taken
+                                          from the PAROLE genre classifcation schema)
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>nonFiction</b></td>
+                                    <td>
+                                       <div class="annotation">For corpora that include non-fiction texts, such as biography, including obituaries
+                                          and auto-biographies, sermons, school and student essays etc. (value taken from the
+                                          PAROLE genre classifcation schema)
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>official</b></td>
+                                    <td>
+                                       <div class="annotation">For corpora that include official texts, including laws, government circulars, official
+                                          announcements, business correspondence (value taken from the PAROLE genre classifcation
+                                          schema)
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>private</b></td>
+                                    <td>
+                                       <div class="annotation">For corpora that include private texts, like diaries and private letters (value taken
+                                          from the PAROLE genre classifcation schema)
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>other</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="textType"></a><div class="componentTitle">Element <span class="qname">ms:textType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_textType" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_textType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_textType" style="display:block">
+                              <div class="annotation">Specifies the type of the text according to a text type classification; please, select
+                                 one of the predefined values as it increases the interoperability between resources
+                                 and processing tools and services; if none fits the contents of your resource, you
+                                 can add your own value
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_textType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_textType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_textType" style="display:block"><img alt="Diagram" border="0" src="img/TextSpecific_xsd_Element_ms_textType.jpeg" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>restriction of <b>xs:string</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_textType" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_textType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_textType" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">maxLength</td>
+                                    <td width="30%"><b>50</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>academicTexts</b></td>
+                                    <td>
+                                       <div class="annotation">For corpora that include essays, lectures, course materials, school texts, student
+                                          exam papers...
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>administrativeTexts</b></td>
+                                    <td>
+                                       <div class="annotation">For corpora that include public and private administration documents, such as government
+                                          circulars, laws, legislation, corporate texts and similar material
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>blogTexts</b></td>
+                                    <td>
+                                       <div class="annotation">For corpora that include texts from blogs</div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>chatTexts</b></td>
+                                    <td>
+                                       <div class="annotation">For corpora that include chat conversations</div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>faceToFaceConversationsDiscussions</b></td>
+                                    <td>
+                                       <div class="annotation">For corpora that include transcripts from conversations and discussions (face-to-face),
+                                          both formal and informal
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>emails</b></td>
+                                    <td>
+                                       <div class="annotation">For corpora that include email texts, both formal and informal</div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>encyclopaedicTexts</b></td>
+                                    <td>
+                                       <div class="annotation">For corpora that include articles in encyclopaedias, printed and digital (e.g. wikipedia)</div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>interviews</b></td>
+                                    <td>
+                                       <div class="annotation">For corpora that include interviews, either from printed media or transcripts from
+                                          oral conversations
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>journalisticTexts</b></td>
+                                    <td>
+                                       <div class="annotation">For corpora that include articles, reportage, travel guides etc. in newspapers, magazines,
+                                          printed or electronic
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>letters</b></td>
+                                    <td>
+                                       <div class="annotation">For corpora that include correspondence (private, business, formal ...); N.B. emails
+                                          and other forms of digital communication are not to be included here
+                                       </div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>literaryTexts</b></td>
+                                    <td>
+                                       <div class="annotation">For corpora that include novels, stories, fairy tales, biographies, poems etc.</div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>meetingProceedings</b></td>
+                                    <td>
+                                       <div class="annotation">For corpora that include court, parliamentary, municipal, corporate meetings...</div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>reviews</b></td>
+                                    <td>
+                                       <div class="annotation">For corpora that include reviews of books, music, films, restaurants etc.</div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>scripts</b></td>
+                                    <td>
+                                       <div class="annotation">For corpora that include movie scripts, advertisement scripts...</div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>subtitles</b></td>
+                                    <td>
+                                       <div class="annotation">For corpora that include subtitles of movies, TV shows, documentaries...</div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>technicalTexts</b></td>
+                                    <td>
+                                       <div class="annotation">For corpora that include manuals and other technical documents</div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>telephoneConversations</b></td>
+                                    <td>
+                                       <div class="annotation">For corpora that include transcripts of telephone conversations</div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>tweets</b></td>
+                                    <td>
+                                       <div class="annotation">For corpora that include tweets, both formal and informal</div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>other</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="textClassificationInfoType_sizePerTextClassification"></a><div class="componentTitle">Element <span class="qname"><b><a href="TextSpecific_xsd.html#textClassificationInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for TextSpecific.xsd')">ms:textClassificationInfoType</a></b> / ms:sizePerTextClassification</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_textClassificationInfoType_sizePerTextClassification" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_textClassificationInfoType_sizePerTextClassification');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_textClassificationInfoType_sizePerTextClassification" style="display:block">
+                              <div class="annotation">Provides information on size of resource parts with different text classification</div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_textClassificationInfoType_sizePerTextClassification" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_textClassificationInfoType_sizePerTextClassification');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_textClassificationInfoType_sizePerTextClassification" style="display:block"><img alt="Diagram" border="0" src="img/TextSpecific_xsd_Element_ms_sizePerTextClassification.jpeg" usemap="#TextSpecific_xsd_Element_ms_sizePerTextClassification" /><map name="TextSpecific_xsd_Element_ms_sizePerTextClassification" id="TextSpecific_xsd_Element_ms_sizePerTextClassification">
+                                 <area alt="ELRC-SHARE-SimpleTypes_xsd.tmp#sizeInfoType_size" href="ELRC-SHARE-SimpleTypes_xsd.html#sizeInfoType_size" coords="265,40,316,65" />
+                                 <area alt="ELRC-SHARE-SimpleTypes_xsd.tmp#sizeInfoType_sizeUnit" href="ELRC-SHARE-SimpleTypes_xsd.html#sizeInfoType_sizeUnit" coords="265,75,334,100" />
+                                 <area alt="ELRC-SHARE-SimpleTypes_xsd.tmp#sizeInfoType" href="ELRC-SHARE-SimpleTypes_xsd.html#sizeInfoType" coords="183,3,313,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="ELRC-SHARE-SimpleTypes_xsd.html#sizeInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-SimpleTypes.xsd')">ms:sizeInfoType</a></b></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="textFormatInfoType"></a><div class="componentTitle">Complex Type <span class="qname">ms:textFormatInfoType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_textFormatInfoType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_textFormatInfoType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_textFormatInfoType" style="display:block"><img alt="Diagram" border="0" src="img/TextSpecific_xsd_Complex_Type_ms_textFormatInfoType.jpeg" usemap="#TextSpecific_xsd_Complex_Type_ms_textFormatInfoType" /><map name="TextSpecific_xsd_Complex_Type_ms_textFormatInfoType" id="TextSpecific_xsd_Complex_Type_ms_textFormatInfoType">
+                                 <area alt="ELRC-SHARE-SimpleTypes_xsd.tmp#dataFormat" href="ELRC-SHARE-SimpleTypes_xsd.html#dataFormat" coords="247,0,349,25" />
+                                 <area alt="TextSpecific_xsd.tmp#textFormatInfoType_sizePerTextFormat" href="TextSpecific_xsd.html#textFormatInfoType_sizePerTextFormat" coords="247,35,368,60" /></map></div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="textClassificationInfoType"></a><div class="componentTitle">Complex Type <span class="qname">ms:textClassificationInfoType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_textClassificationInfoType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_textClassificationInfoType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_textClassificationInfoType" style="display:block"><img alt="Diagram" border="0" src="img/TextSpecific_xsd_Complex_Type_ms_textClassificationInfoType.jpeg" usemap="#TextSpecific_xsd_Complex_Type_ms_textClassificationInfoType" /><map name="TextSpecific_xsd_Complex_Type_ms_textClassificationInfoType" id="TextSpecific_xsd_Complex_Type_ms_textClassificationInfoType">
+                                 <area alt="TextSpecific_xsd.tmp#textGenre" href="TextSpecific_xsd.html#textGenre" coords="278,0,374,25" />
+                                 <area alt="TextSpecific_xsd.tmp#textType" href="TextSpecific_xsd.html#textType" coords="278,35,368,60" />
+                                 <area alt="ELRC-SHARE-SimpleTypes_xsd.tmp#conformanceToClassificationScheme" href="ELRC-SHARE-SimpleTypes_xsd.html#conformanceToClassificationScheme" coords="278,70,505,95" />
+                                 <area alt="TextSpecific_xsd.tmp#textClassificationInfoType_sizePerTextClassification" href="TextSpecific_xsd.html#textClassificationInfoType_sizePerTextClassification" coords="278,105,430,130" /></map></div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.
+         </div>
+      </div><script type="text/javascript">
+         <!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

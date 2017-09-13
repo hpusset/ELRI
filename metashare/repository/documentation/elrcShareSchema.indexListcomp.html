@@ -1,0 +1,495 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for </title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript">
+         <!--
+        
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                        //--></script></head>
+   <body>
+      <h2><a id="INDEX">Table of Contents</a></h2>
+      <p><a href="elrcShareSchema.indexList.html">Components</a><span> | </span><a href="schHierarchy.html">Resource Hierarchy</a></p>
+      <hr />
+      <div class="toc">
+         <form action="none">
+            <div><span> Group by: <select id="selectTOC" onchange="selectTOCGroupBy(this.options[this.selectedIndex].value, true, 'elrcShareSchema.indexList.html', 'elrcShareSchema.indexListns.html', 'elrcShareSchema.indexListcomp.html');">
+                     <option value="toc_group_by_namespace">Namespace</option>
+                     <option value="toc_group_by_location">Location</option>
+                     <option value="toc_group_by_component_type" selected="selected">Component Type</option></select></span></div>
+         </form>
+         <div class="level1" id="toc_group_by_component_type" style="display:block">
+            <div>
+               <div class="horizontalLayout">
+                  <table class="rt">
+                     <tr>
+                        <td class="rt_cornerTopLeft"></td>
+                        <td class="rt_lineTop"></td>
+                        <td class="rt_cornerTopRight"></td>
+                     </tr>
+                     <tr>
+                        <td class="rt_lineLeft"></td>
+                        <td class="rt_content">
+                           <table class="componentGroup">
+                              <tbody>
+                                 <tr>
+                                    <td class="componentGroup"><input id="button_Element" type="image" value="-" src="img/btM.gif" onclick="switchState('Element');" class="control" /></td>
+                                    <td class="componentGroup">
+                                       <div class="componentGroupTitle">Elements</div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="componentGroup"></td>
+                                    <td class="componentGroup">
+                                       <div id="Element" class="componentGroup" style="display:block">
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#annotationInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:annotationInfo</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-SimpleTypes_xsd.html#annotationResource" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-SimpleTypes.xsd')">ms:annotationResource</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-SimpleTypes_xsd.html#annotationSchema" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-SimpleTypes.xsd')">ms:annotationSchema</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-SimpleTypes_xsd.html#annotationType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-SimpleTypes.xsd')">ms:annotationType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-SimpleTypes_xsd.html#characterEncoding" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-SimpleTypes.xsd')">ms:characterEncoding</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-LanguageMetadata_xsd.html#characterEncodingInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-LanguageMetadata.xsd')">ms:characterEncodingInfo</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-RoleTypes_xsd.html#communicationInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-RoleTypes.xsd')">ms:communicationInfo</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-SimpleTypes_xsd.html#conformanceToClassificationScheme" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-SimpleTypes.xsd')">ms:conformanceToClassificationScheme</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#conformanceToStandardsBestPractices" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:conformanceToStandardsBestPractices</a></b></div>
+                                          <div><b><a href="Corpus_xsd.html#corpusInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for Corpus.xsd')">ms:corpusInfo</a></b></div>
+                                          <div><b><a href="corpusTextInfo_xsd.html#corpusTextInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for corpusTextInfo.xsd')">ms:corpusTextInfo</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#creationInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:creationInfo</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-SimpleTypes_xsd.html#dataFormat" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-SimpleTypes.xsd')">ms:dataFormat</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#dependenciesInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:dependenciesInfo</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-LicenseMetadata_xsd.html#distributionInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-LicenseMetadata.xsd')">ms:distributionInfo</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#documentInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:documentInfo</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-SimpleTypes_xsd.html#documentUnstructured" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-SimpleTypes.xsd')">ms:documentUnstructured</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#documentationInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:documentationInfo</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#domain" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:domain</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#domainId" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:domainId</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#domainInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:domainInfo</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-SimpleTypes_xsd.html#encodingLevel" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-SimpleTypes.xsd')">ms:encodingLevel</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#identificationInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:identificationInfo</a></b></div>
+                                          <div><b><a href="toolService_xsd.html#inputInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for toolService.xsd')">ms:inputInfo</a></b></div>
+                                          <div><b><a href="languageDescription_xsd.html#languageDescriptionEncodingInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for languageDescription.xsd')">ms:languageDescriptionEncodingInfo</a></b></div>
+                                          <div><b><a href="languageDescription_xsd.html#languageDescriptionInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for languageDescription.xsd')">ms:languageDescriptionInfo</a></b></div>
+                                          <div><b><a href="LanguageDescTextInfo_xsd.html#languageDescriptionTextInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for LanguageDescTextInfo.xsd')">ms:languageDescriptionTextInfo</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-LanguageMetadata_xsd.html#languageId" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-LanguageMetadata.xsd')">ms:languageId</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-LanguageMetadata_xsd.html#languageInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-LanguageMetadata.xsd')">ms:languageInfo</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-LanguageMetadata_xsd.html#languageName" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-LanguageMetadata.xsd')">ms:languageName</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-LanguageMetadata_xsd.html#languageScript" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-LanguageMetadata.xsd')">ms:languageScript</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-LanguageMetadata_xsd.html#languageSetInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-LanguageMetadata.xsd')">ms:languageSetInfo</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-LanguageMetadata_xsd.html#languageVarietyInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-LanguageMetadata.xsd')">ms:languageVarietyInfo</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-LanguageMetadata_xsd.html#languageVarietyName" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-LanguageMetadata.xsd')">ms:languageVarietyName</a></b></div>
+                                          <div><b><a href="lexicalConceptualResource_xsd.html#lexicalConceptualResourceEncodingInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for lexicalConceptualResource.xsd')">ms:lexicalConceptualResourceEncodingInfo</a></b></div>
+                                          <div><b><a href="lexicalConceptualResource_xsd.html#lexicalConceptualResourceInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for lexicalConceptualResource.xsd')">ms:lexicalConceptualResourceInfo</a></b></div>
+                                          <div><b><a href="lexicalConceptualResourceTextInfo_xsd.html#lexicalConceptualResourceTextInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for lexicalConceptualResourceTextInfo.xsd')">ms:lexicalConceptualResourceTextInfo</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-LicenseMetadata_xsd.html#licenceInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-LicenseMetadata.xsd')">ms:licenceInfo</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-LanguageMetadata_xsd.html#lingualityInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-LanguageMetadata.xsd')">ms:lingualityInfo</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-SimpleTypes_xsd.html#mediaType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-SimpleTypes.xsd')">ms:mediaType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#metadataInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:metadataInfo</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-RoleTypes_xsd.html#organizationInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-RoleTypes.xsd')">ms:organizationInfo</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#originalSource" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:originalSource</a></b></div>
+                                          <div><b><a href="toolService_xsd.html#outputInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for toolService.xsd')">ms:outputInfo</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-RoleTypes_xsd.html#personInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-RoleTypes.xsd')">ms:personInfo</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-UsageMetadata_xsd.html#projectInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-UsageMetadata.xsd')">ms:projectInfo</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-LanguageMetadata_xsd.html#region" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-LanguageMetadata.xsd')">ms:region</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#relationInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:relationInfo</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#resourceCreationInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:resourceCreationInfo</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#resourceDocumentationInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:resourceDocumentationInfo</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-Resource_xsd.html#resourceInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-Resource.xsd')">ms:resourceInfo</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-SimpleTypes_xsd.html#segmentationLevel" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-SimpleTypes.xsd')">ms:segmentationLevel</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#sex" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:sex</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-SimpleTypes_xsd.html#sizeInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-SimpleTypes.xsd')">ms:sizeInfo</a></b></div>
+                                          <div><b><a href="TextSpecific_xsd.html#textClassificationInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for TextSpecific.xsd')">ms:textClassificationInfo</a></b></div>
+                                          <div><b><a href="TextSpecific_xsd.html#textFormatInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for TextSpecific.xsd')">ms:textFormatInfo</a></b></div>
+                                          <div><b><a href="TextSpecific_xsd.html#textGenre" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for TextSpecific.xsd')">ms:textGenre</a></b></div>
+                                          <div><b><a href="TextSpecific_xsd.html#textType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for TextSpecific.xsd')">ms:textType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#theoreticModel" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:theoreticModel</a></b></div>
+                                          <div><b><a href="toolService_xsd.html#toolServiceCreationInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for toolService.xsd')">ms:toolServiceCreationInfo</a></b></div>
+                                          <div><b><a href="toolService_xsd.html#toolServiceEvaluationInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for toolService.xsd')">ms:toolServiceEvaluationInfo</a></b></div>
+                                          <div><b><a href="toolService_xsd.html#toolServiceInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for toolService.xsd')">ms:toolServiceInfo</a></b></div>
+                                          <div><b><a href="toolService_xsd.html#toolServiceOperationInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for toolService.xsd')">ms:toolServiceOperationInfo</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-SimpleTypes_xsd.html#typesystem" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-SimpleTypes.xsd')">ms:typesystem</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-SimpleTypes_xsd.html#url" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-SimpleTypes.xsd')">ms:url</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#validationInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:validationInfo</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-LanguageMetadata_xsd.html#variant" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-LanguageMetadata.xsd')">ms:variant</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#versionInfo" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:versionInfo</a></b></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </td>
+                        <td class="rt_lineRight"></td>
+                     </tr>
+                     <tr>
+                        <td class="rt_cornerBottomLeft"></td>
+                        <td class="rt_lineBottom"></td>
+                        <td class="rt_cornerBottomRight"></td>
+                     </tr>
+                  </table>
+               </div>
+               <div class="horizontalLayout">
+                  <table class="rt">
+                     <tr>
+                        <td class="rt_cornerTopLeft"></td>
+                        <td class="rt_lineTop"></td>
+                        <td class="rt_cornerTopRight"></td>
+                     </tr>
+                     <tr>
+                        <td class="rt_lineLeft"></td>
+                        <td class="rt_content">
+                           <table class="componentGroup">
+                              <tbody>
+                                 <tr>
+                                    <td class="componentGroup"><input id="button_Complex_Type" type="image" value="-" src="img/btM.gif" onclick="switchState('Complex_Type');" class="control" /></td>
+                                    <td class="componentGroup">
+                                       <div class="componentGroupTitle">Complex Types</div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="componentGroup"></td>
+                                    <td class="componentGroup">
+                                       <div id="Complex_Type" class="componentGroup" style="display:block">
+                                          <div><b><a href="ELRC-SHARE-RoleTypes_xsd.html#actorInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-RoleTypes.xsd')">ms:actorInfoType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#annotationInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:annotationInfoType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-LanguageMetadata_xsd.html#characterEncodingInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-LanguageMetadata.xsd')">ms:characterEncodingInfoType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-RoleTypes_xsd.html#communicationInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-RoleTypes.xsd')">ms:communicationInfoType</a></b></div>
+                                          <div><b><a href="Corpus_xsd.html#corpusInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for Corpus.xsd')">ms:corpusInfoType</a></b></div>
+                                          <div><b><a href="corpusTextInfo_xsd.html#corpusTextInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for corpusTextInfo.xsd')">ms:corpusTextInfoType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#creationInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:creationInfoType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#dependenciesInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:dependenciesInfoType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-LicenseMetadata_xsd.html#distributionInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-LicenseMetadata.xsd')">ms:distributionInfoType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#documentInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:documentInfoType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#documentationInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:documentationInfoType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#domainInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:domainInfoType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#identificationInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:identificationInfoType</a></b></div>
+                                          <div><b><a href="toolService_xsd.html#inputInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for toolService.xsd')">ms:inputInfoType</a></b></div>
+                                          <div><b><a href="languageDescription_xsd.html#languageDescriptionEncodingInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for languageDescription.xsd')">ms:languageDescriptionEncodingInfoType</a></b></div>
+                                          <div><b><a href="languageDescription_xsd.html#languageDescriptionInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for languageDescription.xsd')">ms:languageDescriptionInfoType</a></b></div>
+                                          <div><b><a href="LanguageDescTextInfo_xsd.html#languageDescriptionTextInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for LanguageDescTextInfo.xsd')">ms:languageDescriptionTextInfoType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-LanguageMetadata_xsd.html#languageInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-LanguageMetadata.xsd')">ms:languageInfoType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-LanguageMetadata_xsd.html#languageVarietyInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-LanguageMetadata.xsd')">ms:languageVarietyInfoType</a></b></div>
+                                          <div><b><a href="lexicalConceptualResource_xsd.html#lexicalConceptualResourceEncodingInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for lexicalConceptualResource.xsd')">ms:lexicalConceptualResourceEncodingInfoType</a></b></div>
+                                          <div><b><a href="lexicalConceptualResource_xsd.html#lexicalConceptualResourceInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for lexicalConceptualResource.xsd')">ms:lexicalConceptualResourceInfoType</a></b></div>
+                                          <div><b><a href="lexicalConceptualResourceTextInfo_xsd.html#lexicalConceptualResourceTextInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for lexicalConceptualResourceTextInfo.xsd')">ms:lexicalConceptualResourceTextInfoType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-LicenseMetadata_xsd.html#licenceInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-LicenseMetadata.xsd')">ms:licenceInfoType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-LanguageMetadata_xsd.html#lingualityInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-LanguageMetadata.xsd')">ms:lingualityInfoType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#metadataInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:metadataInfoType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-SimpleTypes_xsd.html#myString" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-SimpleTypes.xsd')">ms:myString</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-RoleTypes_xsd.html#organizationInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-RoleTypes.xsd')">ms:organizationInfoType</a></b></div>
+                                          <div><b><a href="toolService_xsd.html#outputInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for toolService.xsd')">ms:outputInfoType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-RoleTypes_xsd.html#personInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-RoleTypes.xsd')">ms:personInfoType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-UsageMetadata_xsd.html#projectInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-UsageMetadata.xsd')">ms:projectInfoType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#relationInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:relationInfoType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#resourceCreationInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:resourceCreationInfoType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#resourceDocumentationInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:resourceDocumentationInfoType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-Resource_xsd.html#resourceInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-Resource.xsd')">ms:resourceInfoType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-SimpleTypes_xsd.html#sizeInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-SimpleTypes.xsd')">ms:sizeInfoType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#targetResourceInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:targetResourceInfoType</a></b></div>
+                                          <div><b><a href="TextSpecific_xsd.html#textClassificationInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for TextSpecific.xsd')">ms:textClassificationInfoType</a></b></div>
+                                          <div><b><a href="TextSpecific_xsd.html#textFormatInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for TextSpecific.xsd')">ms:textFormatInfoType</a></b></div>
+                                          <div><b><a href="toolService_xsd.html#toolServiceCreationInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for toolService.xsd')">ms:toolServiceCreationInfoType</a></b></div>
+                                          <div><b><a href="toolService_xsd.html#toolServiceEvaluationInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for toolService.xsd')">ms:toolServiceEvaluationInfoType</a></b></div>
+                                          <div><b><a href="toolService_xsd.html#toolServiceInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for toolService.xsd')">ms:toolServiceInfoType</a></b></div>
+                                          <div><b><a href="toolService_xsd.html#toolServiceOperationInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for toolService.xsd')">ms:toolServiceOperationInfoType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#validationInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:validationInfoType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-BaseTypes_xsd.html#versionInfoType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-BaseTypes.xsd')">ms:versionInfoType</a></b></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </td>
+                        <td class="rt_lineRight"></td>
+                     </tr>
+                     <tr>
+                        <td class="rt_cornerBottomLeft"></td>
+                        <td class="rt_lineBottom"></td>
+                        <td class="rt_cornerBottomRight"></td>
+                     </tr>
+                  </table>
+               </div>
+               <div class="horizontalLayout">
+                  <table class="rt">
+                     <tr>
+                        <td class="rt_cornerTopLeft"></td>
+                        <td class="rt_lineTop"></td>
+                        <td class="rt_cornerTopRight"></td>
+                     </tr>
+                     <tr>
+                        <td class="rt_lineLeft"></td>
+                        <td class="rt_content">
+                           <table class="componentGroup">
+                              <tbody>
+                                 <tr>
+                                    <td class="componentGroup"><input id="button_Simple_Type" type="image" value="-" src="img/btM.gif" onclick="switchState('Simple_Type');" class="control" /></td>
+                                    <td class="componentGroup">
+                                       <div class="componentGroupTitle">Simple Types</div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="componentGroup"></td>
+                                    <td class="componentGroup">
+                                       <div id="Simple_Type" class="componentGroup" style="display:block">
+                                          <div><b><a href="ELRC-SHARE-SimpleTypes_xsd.html#emailAddress" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-SimpleTypes.xsd')">ms:emailAddress</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-SimpleTypes_xsd.html#httpURI" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-SimpleTypes.xsd')">ms:httpURI</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-ISOVocabularies_xsd.html#languageNameType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-ISOVocabularies.xsd')">ms:languageNameType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-ISOVocabularies_xsd.html#languageScriptNameType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-ISOVocabularies.xsd')">ms:languageScriptNameType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-ISOVocabularies_xsd.html#languageTagType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-ISOVocabularies.xsd')">ms:languageTagType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-ISOVocabularies_xsd.html#regionIdType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-ISOVocabularies.xsd')">ms:regionIdType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-ISOVocabularies_xsd.html#regionNameType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-ISOVocabularies.xsd')">ms:regionNameType</a></b></div>
+                                          <div><b><a href="ELRC-SHARE-ISOVocabularies_xsd.html#variantNameType" target="mainFrame" title="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" onclick="updatePageTitle('Schema documentation for ELRC-SHARE-ISOVocabularies.xsd')">ms:variantNameType</a></b></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </td>
+                        <td class="rt_lineRight"></td>
+                     </tr>
+                     <tr>
+                        <td class="rt_cornerBottomLeft"></td>
+                        <td class="rt_lineBottom"></td>
+                        <td class="rt_cornerBottomRight"></td>
+                     </tr>
+                  </table>
+               </div>
+               <div style="clear:left"></div>
+            </div>
+         </div>
+      </div>
+      <div class="footer">
+         <hr />
+         <div align="center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.
+         </div>
+      </div>
+   </body>
+</html>
