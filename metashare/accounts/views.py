@@ -17,7 +17,7 @@ from metashare.accounts.forms import RegistrationRequestForm, ResetRequestForm, 
     OrganizationApplicationForm, ContactForm
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
     EditorGroupApplication, EditorGroupManagers, EditorGroup, \
-    OrganizationApplication, OrganizationManagers, Organization
+    OrganizationApplication, OrganizationManagers, Organization, UserProfile
 from metashare.settings import DJANGO_URL, LOG_HANDLER
 
 
@@ -131,6 +131,13 @@ def create(request):
             _user.last_name = form.cleaned_data['last_name']
             _user.is_active = False
             _user.save()
+
+            _profile = UserProfile.objects.get(user_id= _user.id)
+            _profile.affiliation = form.cleaned_data['organization']
+            _profile.country = form.cleaned_data['country']
+            if 'phone_number' in form.cleaned_data:
+                _profile.phone_number = form.cleaned_data['phone_number']
+            _profile.save()
             # Create new RegistrationRequest instance.
             new_object = RegistrationRequest(user=_user)
             # Save new RegistrationRequest instance to django database.

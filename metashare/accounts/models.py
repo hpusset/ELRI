@@ -24,11 +24,11 @@ def _create_uuid():
     """
     # Create new UUID-1 id.
     new_id = uuid1().hex
-    
+
     # Re-create id in case of collision(s).
     while RegistrationRequest.objects.filter(uuid=new_id) or \
-      ResetRequest.objects.filter(uuid=new_id) or \
-      UserProfile.objects.filter(uuid=new_id):
+            ResetRequest.objects.filter(uuid=new_id) or \
+            UserProfile.objects.filter(uuid=new_id):
         new_id = uuid1().hex
     return new_id
 
@@ -41,7 +41,7 @@ class RegistrationRequest(models.Model):
     uuid = models.CharField(max_length=32, verbose_name="UUID",
                             null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
-    
+
     def __init__(self, *args, **kwargs):
         super(RegistrationRequest, self).__init__(*args, **kwargs)
 
@@ -74,7 +74,8 @@ class RegistrationRequest(models.Model):
         if not self.uuid:
             self.uuid = _create_uuid()
         super(RegistrationRequest, self).save(*args, **kwargs)
-        
+
+
 # make sure to delete the related `User` object of a deleted
 # `RegistrationRequest`, if necessary
 post_delete.connect(RegistrationRequest._delete_related_user,
@@ -87,14 +88,14 @@ class ResetRequest(models.Model):
     """
     user = models.ForeignKey(User)
     uuid = models.CharField(max_length=32, verbose_name="UUID",
-      null=True, blank=True)
+                            null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
-    
+
     def save(self, *args, **kwargs):
         if not self.uuid:
             self.uuid = _create_uuid()
         super(ResetRequest, self).save(*args, **kwargs)
-    
+
     def __unicode__(self):
         """
         Return Unicode representation for this instance.
@@ -110,6 +111,7 @@ class EditorGroup(Group):
     The corresponding `ModelAdmin` class suggests basic resource edit
     permissions for this group. 
     """
+
     # Currently the group is just used as a marker, i.e., in order to
     # differentiate its instances from other Django `Group`s. That's why it
     # doesn't have any custom fields.
@@ -119,8 +121,8 @@ class EditorGroup(Group):
 
     def get_managers(self):
         return User.objects.filter(groups__name__in=
-            EditorGroupManagers.objects.filter(managed_group__name=self.name)
-                .values_list('name', flat=True))
+                                   EditorGroupManagers.objects.filter(managed_group__name=self.name)
+                                   .values_list('name', flat=True))
 
 
 class EditorGroupApplication(models.Model):
@@ -136,7 +138,7 @@ class EditorGroupApplication(models.Model):
         Return Unicode representation for this instance.
         """
         return u'<EditorGroupApplication of "{0}" for "{1}">'.format(
-                self.user, self.editor_group)
+            self.user, self.editor_group)
 
 
 class EditorGroupManagers(Group):
@@ -169,8 +171,8 @@ class Organization(Group):
 
     def get_managers(self):
         return User.objects.filter(groups__name__in=
-            OrganizationManagers.objects.filter(managed_organization__name=self.name)
-                .values_list('name', flat=True))
+                                   OrganizationManagers.objects.filter(managed_organization__name=self.name)
+                                   .values_list('name', flat=True))
 
 
 class OrganizationApplication(models.Model):
@@ -186,7 +188,7 @@ class OrganizationApplication(models.Model):
         Return Unicode representation for this instance.
         """
         return u'<OrganizationApplication of "{0}" for "{1}">'.format(
-                self.user, self.organization)
+            self.user, self.organization)
 
 
 class OrganizationManagers(Group):
@@ -202,19 +204,21 @@ class OrganizationManagers(Group):
     def get_members(self):
         return User.objects.filter(groups__name=self.name)
 
-EUCOUNTRIES = [
-   "Germany", "Austria", "Luxembourg", "Netherlands", "Hungary", "Czech Republic","United Kingdom",
-"Ireland", "Spain", "Portugal", "Belgium", "Italy", "Malta", "France", "Latvia", "Estonia", "Lithuania",
-"Finland", "Sweden", "Denmark", "Iceland", "Norway","Greece", "Cyprus", "Slovakia", "Slovenia", "Bulgaria",
-"Poland", "Romania", "Croatia"]
+
+EUCOUNTRIES = ["Germany", "Austria", "Luxembourg", "Netherlands", "Hungary", "Czech Republic", "United Kingdom",
+               "Ireland", "Spain", "Portugal", "Belgium", "Italy", "Malta", "France", "Latvia", "Estonia", "Lithuania",
+               "Finland", "Sweden", "Denmark", "Iceland", "Norway", "Greece", "Cyprus", "Slovakia", "Slovenia",
+               "Bulgaria", "Poland", "Romania", "Croatia"]
 
 PHONENUMBER_VALIDATOR = RegexValidator(r'^\+(?:[0-9] ?){6,14}[0-9]$',
-'Not a valid phone number', ValidationError)
+                                       'Not a valid phone number', ValidationError)
+
 
 class UserProfile(models.Model):
     """
     Contains additional user data related to a Django User instance.
     """
+
     class Meta:
         # global permissions for which there does not seem to be any better
         # place around ...
@@ -226,9 +230,9 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     modified = models.DateTimeField(auto_now=True)
     uuid = models.CharField(max_length=32, verbose_name="UUID",
-      blank=True, null=True)
+                            blank=True, null=True)
     birthdate = models.DateField("Date of birth", blank=True,
-      null=True)
+                                 null=True)
 
     phone_number = models.CharField("Phone Number", max_length=50, null=True, \
                                     blank=True, validators=[PHONENUMBER_VALIDATOR])
@@ -238,33 +242,33 @@ class UserProfile(models.Model):
     affiliation = models.TextField("Affiliation(s)", blank=True)
     position = models.CharField(max_length=50, blank=True)
     homepage = models.URLField(blank=True)
-    
+
     default_editor_groups = models.ManyToManyField(EditorGroup, blank=True)
 
     # These fields can be edited by the user in the browser.
-    __editable_fields__ = ('birthdate', 'affiliation', 'position', 'homepage')
-    
+    __editable_fields__ = ('birthdate', 'phone_number', 'country', 'affiliation', 'position', 'homepage')
+
     # These fields are synchronized between META-SHARE nodes.
-    __synchronized_fields__ = ('modified', 'birthdate',
-      'affiliation', 'position', 'homepage')
-    
+    __synchronized_fields__ = ('modified', 'phone_number', 'country', 'birthdate',
+                               'affiliation', 'position', 'homepage')
+
     def save(self, *args, **kwargs):
         self.uuid = _create_uuid()
         super(UserProfile, self).save(*args, **kwargs)
-        
+
     def __unicode__(self):
         """
         Return Unicode representation for this instance.
         """
         return u'<UserProfile "{0}">'.format(self.user.username)
-    
+
     def delete(self, *args, **kwargs):
         """
         Only deletes the instance if the related User instance is gone.
         """
         if not self.user:
             super(UserProfile, self).delete(*args, **kwargs)
-                
+
     @property
     def has_editor_permission(self):
         """
@@ -272,14 +276,14 @@ class UserProfile(models.Model):
         profile can edit or create; `False` otherwise.
         """
         if self.user.is_superuser:
-            return True      
+            return True
 
         return self.user.is_staff and \
-            (EditorGroup.objects.filter(name__in=
-                self.user.groups.values_list('name', flat=True)).exists()
-             or repository.models.resourceInfoType_model.objects \
+               (EditorGroup.objects.filter(name__in=
+                                           self.user.groups.values_list('name', flat=True)).exists()
+                or repository.models.resourceInfoType_model.objects \
                 .filter(owners__username=self.user.username).exists())
-        
+
     def has_manager_permission(self, editor_group=None):
         """
         Return whether the user profile has permission to manage the given
@@ -329,7 +333,7 @@ def create_profile(sender, instance, created, **kwargs):
     if created:
         # pylint: disable-msg=W0612
         profile, new = UserProfile.objects.get_or_create(user=instance)
-    
+
     # Otherwise, the corresponding UserProfile for this User instance has to
     # be saved in order to update the modified timestamp.  This will trigger
     # synchronise_profile() and perform synchronisation if required.
