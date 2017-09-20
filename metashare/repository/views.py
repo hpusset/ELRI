@@ -4,14 +4,21 @@ import os
 import shutil
 import uuid
 
+try:
+    import cStringIO as StringIO
+except ImportError:
+    import StringIO
+
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.models import User
+from django.utils.encoding import smart_str
 from lxml import etree
 
 import dicttoxml
 import requests
 
-from datetime import date, datetime
+import xlsxwriter
+import datetime
 from os.path import split, getsize
 from mimetypes import guess_type
 
@@ -23,13 +30,13 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
 from django.template.loader import render_to_string
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage
 from django.utils.translation import ugettext as _
 
 from haystack.views import FacetedSearchView
 
 from metashare.accounts.models import UserProfile
-from metashare.local_settings import CONTRIBUTIONS_ALERT_EMAILS
+from metashare.local_settings import CONTRIBUTIONS_ALERT_EMAILS, TMP
 from metashare.recommendations.recommendations import SessionResourcesTracker, \
     get_download_recommendations, get_view_recommendations, \
     get_more_from_same_creators_qs, get_more_from_same_projects_qs
@@ -51,6 +58,7 @@ from metashare.settings import LOG_HANDLER, STATIC_URL, DJANGO_URL, MAXIMUM_UPLO
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
 from metashare.storage.models import PUBLISHED
+from metashare.utils import prettify_camel_case_string
 
 MAXIMUM_READ_BLOCK_SIZE = 4096
 
@@ -349,7 +357,7 @@ def _update_download_stats(resource, request):
         update_lr_index_entry(resource)
     # update download tracker
     tracker = SessionResourcesTracker.getTracker(request)
-    tracker.add_download(resource, datetime.now())
+    tracker.add_download(resource, datetime.datetime.now())
     request.session['tracker'] = tracker
 
 
@@ -652,7 +660,7 @@ def view(request, resource_name=None, object_id=None):
         update_lr_index_entry(resource)
     # update view tracker
     tracker = SessionResourcesTracker.getTracker(request)
-    tracker.add_view(resource, datetime.now())
+    tracker.add_view(resource, datetime.datetime.now())
     request.session['tracker'] = tracker
 
     # Add download/view/last updated statistics to the template context.
@@ -719,7 +727,7 @@ def tuple2dict(_tuple):
 
                     # If the item is a date, convert it to real datetime
                     if _key.find("_date") != -1:
-                        new_item = datetime.strptime(item[0][1], "%Y-%m-%d")
+                        new_item = datetime.datetime.strptime(item[0][1], "%Y-%m-%d")
                     else:
                         new_item = item[0][1]
                     # If a repeatable element is found, the old value is
@@ -787,14 +795,14 @@ class MetashareFacetedSearchView(FacetedSearchView):
             sqs = sqs.order_by('resourceNameSort_exact')
 
         # collect statistics about the query
-        starttime = datetime.now()
+        starttime = datetime.datetime.now()
         results_count = sqs.count()
 
         if self.query:
             saveQueryStats(self.query, \
                            str(sorted(self.request.GET.getlist("selected_facets"))), \
                            results_count, \
-                           (datetime.now() - starttime).microseconds, self.request)
+                           (datetime.datetime.now() - starttime).microseconds, self.request)
         return sqs
 
     def _get_selected_facets(self):
@@ -1466,8 +1474,8 @@ def create_description(xml_file, type, base, user):
         resource = resourceInfoType_model.objects.create(identificationInfo=identification,
                                                          resourceComponentType=corpus_info,
                                                          metadataInfo=metadataInfoType_model.objects.create \
-                                                         (metadataCreationDate=date.today(),
-                                                          metadataLastDateUpdated=date.today()),
+                                                         (metadataCreationDate=datetime.date.today(),
+                                                          metadataLastDateUpdated=datetime.date.today()),
                                                          resourceCreationInfo=resource_creation)
 
     elif type == 'langdesc':
@@ -1499,8 +1507,8 @@ def create_description(xml_file, type, base, user):
         resource = resourceInfoType_model.objects.create(identificationInfo=identification,
                                                          resourceComponentType=langdesc_info,
                                                          metadataInfo=metadataInfoType_model.objects.create \
-                                                             (metadataCreationDate=date.today(),
-                                                              metadataLastDateUpdated=date.today()))
+                                                             (metadataCreationDate=datetime.date.today(),
+                                                              metadataLastDateUpdated=datetime.date.today()))
 
     elif type == 'lexicon':
         lexicalConceptual_text = lexicalConceptualResourceTextInfoType_model.objects.create(mediaType='text',
@@ -1529,8 +1537,8 @@ def create_description(xml_file, type, base, user):
         resource = resourceInfoType_model.objects.create(identificationInfo=identification,
                                                          resourceComponentType=lexicon_info,
                                                          metadataInfo=metadataInfoType_model.objects.create \
-                                                             (metadataCreationDate=date.today(),
-                                                              metadataLastDateUpdated=date.today()))
+                                                             (metadataCreationDate=datetime.date.today(),
+                                                              metadataLastDateUpdated=datetime.date.today()))
     # create distributionInfo object
     distribution = distributionInfoType_model.objects.create(
         availability=u"underReview",
@@ -1567,3 +1575,406 @@ def create_description(xml_file, type, base, user):
     shutil.move(xml_source, xml_destination)
 
     return (resource, cperson, info['userInfo']['country'])
+
+
+status = {"p": "PUBLISHED", "g": "INGESTED", "i": "INTERNAL"}
+
+
+def repo_report(request):
+    '''
+    Returns all resources in the repository as an excel file with
+    predefined data to include.
+    Get from url the 'email_to' variable
+    '''
+    email_to = request.GET.get('email_to', '')
+    now = datetime.datetime.now()
+    then = now - datetime.timedelta(days=15)
+    resources = resourceInfoType_model.objects.filter(
+        storage_object__deleted=False)
+    link = None
+    if len(resources) > 0:
+        output = StringIO.StringIO()
+        workbook = xlsxwriter.Workbook(output)
+
+        ## formating
+        heading = workbook.add_format(
+            {'font_size': 13, 'font_color': 'white', 'bold': True, 'bg_color': "#058DBE", 'border': 1})
+        bold = workbook.add_format({'bold': True})
+        date_format = workbook.add_format({'num_format': 'yyyy, mmmm d'})
+        title = "ELRC-SHARE_OVERVIEW_{}".format(
+            datetime.datetime.now().strftime("%d-%m-%y"))
+        print title
+        worksheet = workbook.add_worksheet(name=title)
+
+        worksheet.write('A1', 'Resource ID', heading)
+        worksheet.write('B1', 'Resource Name', heading)
+        worksheet.write('C1', 'Type', heading)
+        worksheet.write('D1', 'Language(s)', heading)
+        worksheet.write('E1', 'Size per Language', heading)
+        worksheet.write_comment('E1', 'Delimited by "|" as per language')
+        worksheet.write('F1', 'Resource Size', heading)
+        worksheet.write('G1', 'Resource Size Unit(s)', heading)
+        worksheet.write_comment('G1', 'Delimited by "|" as per size')
+        worksheet.write('H1', 'Domain(s)', heading)
+        worksheet.write('I1', 'DSI Relevance', heading)
+        worksheet.write('J1', 'Date', heading)
+        worksheet.write('K1', 'Status', heading)
+        worksheet.write('L1', 'Editors', heading)
+        worksheet.write('M1', 'Countries', heading)
+        worksheet.write('N1', 'Legal Status', heading)
+        worksheet.write('O1', 'Contacts', heading)
+        worksheet.write('P1', 'ELRC Services', heading)
+        worksheet.write('Q1', 'PSI', heading)
+        worksheet.write('R1', 'Validated', heading)
+        worksheet.write('S1', 'Mimetypes', heading)
+        link = True
+
+        j = 1
+        for i in range(len(resources)):
+
+            res = resources[i]
+            crawled = "YES" if res.resourceCreationInfo.createdUsingELRCServices else "NO"
+            psi_list = [d.PSI for d in res.distributioninfotype_model_set.all()]
+            psi = "YES" if any(psi_list) else "NO"
+            validated = "YES" if res.storage_object.get_validation() else "NO"
+            countries = []
+            contacts = []
+            licences = []
+            affiliations = []
+            try:
+                licenceInfos = res.distributionInfo.licenceinfotype_model_set.all()
+
+                for l in licenceInfos:
+                    licences.append(l.licence)
+            except:
+                licences.append("underReview")
+
+            for cp in res.contactPerson.all():
+                for afl in cp.affiliation.all():
+                    try:
+                        org_name = afl.organizationName['en']
+                    except KeyError:
+                        org_name = afl.organizationName[afl.organizationName.keys()[0]]
+                    affiliations.append(org_name)
+                countries.append(cp.communicationInfo.country)
+
+                # try to get first and last name otherwise get only last name which is mandatory
+                try:
+                    contacts.append(u"{} {} ({}) {}".format(cp.surname.values()[0], cp.givenName.values()[0],
+                                                            ", ".join(cp.communicationInfo.email),
+                                                            ", ".join(affiliations)))
+                except IndexError:
+                    contacts.append(u"{} ({}) {}".format(cp.surname.values()[0],
+                                                         ", ".join(cp.communicationInfo.email),
+                                                         ", ".join(affiliations)))
+                    # data to be reported
+                    # resource name
+            try:
+                res_name = smart_str(res.identificationInfo.resourceName['en'])
+            except KeyError:
+                res_name = smart_str(res.identificationInfo.resourceName[res.identificationInfo.resourceName.keys()[0]])
+
+            # date
+            date = datetime.datetime.strptime(unicode(res.storage_object.modified).split(" ")[0], "%Y-%m-%d")
+            worksheet.write(j, 0, res.id)
+            worksheet.write(j, 1, res_name.decode('utf-8'), bold)
+            worksheet.write(j, 2, res.resource_type())
+            lang_info = _get_resource_lang_info(res)
+            size_info = _get_resource_sizes(res)
+            mimetypes = _get_resource_mimetypes(res)
+            domain_info = _get_resource_domain_info(res)
+            dsis = "N/A"
+            if res.identificationInfo.appropriatenessForDSI:
+                dsis = ", ".join(res.identificationInfo.appropriatenessForDSI)
+
+            langs = []
+            lang_sizes = []
+            for l in lang_info:
+                langs.append(l)
+                lang_sizes.extend(_get_resource_lang_sizes(res, l))
+            worksheet.write(j, 3, " | ".join(langs))
+
+            worksheet.write(j, 4, " | ".join(lang_sizes))
+
+            sizes = []
+            size_units = []
+            for s in size_info:
+                sizes.append(s)
+                size_units.extend(_get_resource_size_units(res, s))
+            worksheet.write(j, 5, " | ".join(sizes))
+
+            worksheet.write(j, 6, " | ".join(size_units))
+
+            if domain_info:
+                domains = []
+                for d in domain_info:
+                    domains.append(d)
+                worksheet.write(j, 7, " | ".join(domains))
+            else:
+                worksheet.write(j, 7, "N/A")
+
+            worksheet.write(j, 8, dsis)
+            worksheet.write_datetime(j, 9, date, date_format)
+            worksheet.write(j, 10, status[res.storage_object.publication_status])
+            owners = []
+            for o in res.owners.all():
+                owners.append(o.username)
+            worksheet.write(j, 11, ", ".join(owners))
+
+            if countries:
+                worksheet.write(j, 12, ", ".join(countries))
+            else:
+                worksheet.write(j, 12, "N/A")
+            worksheet.write(j, 13, ", ".join(licences))
+            if contacts:
+                worksheet.write(j, 14, " | ".join(contacts))
+            else:
+                worksheet.write(j, 14, "N/A")
+            worksheet.write(j, 15, crawled)
+            worksheet.write(j, 16, psi)
+            worksheet.write(j, 17, validated)
+
+            if mimetypes:
+                mim = []
+                for d in mimetypes:
+                    mim.append(d)
+                worksheet.write(j, 18, " | ".join(mim))
+            else:
+                worksheet.write(j, 18, "N/A")
+
+            j += 1
+            # worksheet.write(i + 1, 3, _get_resource_size_info(res))
+        # worksheet.write(len(resources)+2, 3, "Total Resources", bold)
+        # worksheet.write_number(len(resources)+3, 3, len(resources))
+        worksheet.freeze_panes(1, 0)
+        workbook.close()
+    if link:
+        if not email_to == u'true':
+            output.seek(0)
+            response = HttpResponse(output.read(),
+                                    content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+            response['Content-Disposition'] = "attachment; filename={}.xlsx".format(title)
+            return response
+        # return HttpResponse(_get_resource_lang_info(res))
+        else:
+            rp = open('{}/report_recipients.dat'.format(TMP)).read().splitlines()
+
+            msg_body = "Dear all,\n" \
+                       "Please find attached an overview of the resources available in the ELRC-SHARE " \
+                       "repository and their status today, {}.\n" \
+                       "Best regards,\n\n" \
+                       "The ELRC-SHARE group".format(datetime.datetime.now().strftime("%d, %b %Y"))
+            msg = EmailMessage("[ELRC] ERLC-SHARE weekly report", msg_body,
+                               from_email='elrc-share@ilsp.gr', to=rp)
+            msg.attach("{}.xlsx".format(title), output.getvalue(),
+                       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+            msg.send()
+            return HttpResponse("{}: Weekly repository report sent to: {}\n"
+                                .format(datetime.datetime.now().strftime("%a, %d %b %Y"), ", ".join(rp)))
+    else:
+        return HttpResponse("No Language Resources published within the last two weeks\n")
+
+
+def _get_resource_lang_info(resource):
+    result = []
+    media = resource.resourceComponentType.as_subclass()
+
+    if isinstance(media, corpusInfoType_model):
+        media_type = media.corpusMediaType
+        for corpus_info in media_type.corpustextinfotype_model_set.all():
+            for lang in corpus_info.languageinfotype_model_set.all():
+                l = [lang.languageName]
+                result.extend(l)
+
+    elif isinstance(media, lexicalConceptualResourceInfoType_model):
+        lcr_media_type = media.lexicalConceptualResourceMediaType
+        if lcr_media_type.lexicalConceptualResourceTextInfo:
+            for lang in lcr_media_type \
+                    .lexicalConceptualResourceTextInfo.languageinfotype_model_set.all():
+                l = [lang.languageName]
+                result.extend(l)
+
+    elif isinstance(media, languageDescriptionInfoType_model):
+        ld_media_type = media.languageDescriptionMediaType
+        if ld_media_type.languageDescriptionTextInfo:
+            for lang in ld_media_type \
+                    .languageDescriptionTextInfo.languageinfotype_model_set.all():
+                l = [lang.languageName]
+                result.extend(l)
+    result = list(set(result))
+    result.sort()
+    return result
+
+
+def _get_resource_lang_sizes(resource, language):
+    result = []
+    media = resource.resourceComponentType.as_subclass()
+
+    if isinstance(media, corpusInfoType_model):
+        media_type = media.corpusMediaType
+        for corpus_info in media_type.corpustextinfotype_model_set.all():
+            for lang in corpus_info.languageinfotype_model_set.all():
+                l = []
+                if lang.languageName == language:
+                    if _get_lang_sizes(lang):
+                        l = [" - ".join(_get_lang_sizes(lang))]
+                    else:
+                        l = ["N/A"]
+                result.extend(l)
+
+    elif isinstance(media, lexicalConceptualResourceInfoType_model):
+        lcr_media_type = media.lexicalConceptualResourceMediaType
+        if lcr_media_type.lexicalConceptualResourceTextInfo:
+            for lang in lcr_media_type \
+                    .lexicalConceptualResourceTextInfo.languageinfotype_model_set.all():
+                l = []
+                if lang.languageName == language:
+                    if _get_lang_sizes(lang):
+                        l = [" - ".join(_get_lang_sizes(lang))]
+                    else:
+                        l = ["N/A"]
+                result.extend(l)
+
+    elif isinstance(media, languageDescriptionInfoType_model):
+        ld_media_type = media.languageDescriptionMediaType
+        if ld_media_type.languageDescriptionTextInfo:
+            for lang in ld_media_type \
+                    .languageDescriptionTextInfo.languageinfotype_model_set.all():
+                l = []
+                if lang.languageName == language:
+                    if _get_lang_sizes(lang):
+                        l = [" - ".join(_get_lang_sizes(lang))]
+                    else:
+                        l = ["N/A"]
+                result.extend(l)
+    result = list(set(result))
+    result.sort()
+    return result
+
+
+def _get_lang_sizes(lang):
+    return ['{:,}'.format(int(sp.size)) + " " + prettify_camel_case_string(sp.sizeUnit) for sp in
+            lang.sizePerLanguage.all()]
+
+
+def _get_resource_domain_info(resource):
+    result = []
+    media = resource.resourceComponentType.as_subclass()
+
+    if isinstance(media, corpusInfoType_model):
+        media_type = media.corpusMediaType
+        for corpus_info in media_type.corpustextinfotype_model_set.all():
+            result.extend([prettify_camel_case_string(d.domain) + " (" + d.subdomain + ")"
+                           if d.subdomain else prettify_camel_case_string(d.domain) for d in
+                           corpus_info.domaininfotype_model_set.all()])
+
+    elif isinstance(media, lexicalConceptualResourceInfoType_model):
+        lcr_media_type = media.lexicalConceptualResourceMediaType
+        if lcr_media_type.lexicalConceptualResourceTextInfo:
+            result.extend([prettify_camel_case_string(d.domain) + " (" + d.subdomain + ")"
+                           if d.subdomain else prettify_camel_case_string(d.domain) for d in lcr_media_type \
+                          .lexicalConceptualResourceTextInfo.domaininfotype_model_set.all()])
+
+    elif isinstance(media, languageDescriptionInfoType_model):
+        ld_media_type = media.languageDescriptionMediaType
+        if ld_media_type.languageDescriptionTextInfo:
+            result.extend([prettify_camel_case_string(d.domain) + " (" + d.subdomain + ")"
+                           if d.subdomain else prettify_camel_case_string(d.domain) for d in ld_media_type \
+                          .languageDescriptionTextInfo.domaininfotype_model_set.all()])
+    result = list(set(result))
+    result.sort()
+
+    return result
+
+
+def _get_resource_mimetypes(resource):
+    result = []
+    media = resource.resourceComponentType.as_subclass()
+
+    if isinstance(media, corpusInfoType_model):
+        media_type = media.corpusMediaType
+        for corpus_info in media_type.corpustextinfotype_model_set.all():
+            result.extend([prettify_camel_case_string(d.dataFormat) for d in
+                           corpus_info.textformatinfotype_model_set.all()])
+
+    elif isinstance(media, lexicalConceptualResourceInfoType_model):
+        lcr_media_type = media.lexicalConceptualResourceMediaType
+        result.extend([prettify_camel_case_string(d.dataFormat) for d in lcr_media_type \
+                          .lexicalConceptualResourceTextInfo.textformatinfotype_model_set.all()])
+
+    elif isinstance(media, languageDescriptionInfoType_model):
+        ld_media_type = media.languageDescriptionMediaType
+        if ld_media_type.languageDescriptionTextInfo:
+            result.extend([prettify_camel_case_string(d.dataFormat) for d in ld_media_type \
+                          .languageDescriptionTextInfo.textformatinfotype_model_set.all()])
+    result = list(set(result))
+    result.sort()
+
+    return result
+
+
+def _get_resource_sizes(resource):
+    result = []
+    media = resource.resourceComponentType.as_subclass()
+
+    if isinstance(media, corpusInfoType_model):
+        media_type = media.corpusMediaType
+        for corpus_info in media_type.corpustextinfotype_model_set.all():
+            try:
+                result.extend(
+                    ["{}".format('{:,}'.format(int(s.size) if float(s.size).is_integer() else float(s.size))) for s in
+                     corpus_info.sizeinfotype_model_set.all()])
+            except ValueError:
+                print ValueError.message, resource
+
+    elif isinstance(media, lexicalConceptualResourceInfoType_model):
+        lcr_media_type = media.lexicalConceptualResourceMediaType
+        if lcr_media_type.lexicalConceptualResourceTextInfo:
+            result.extend(["{}".format('{:,}'.format(int(s.size) if float(s.size).is_integer() else float(s.size)))
+                           for s in lcr_media_type \
+                          .lexicalConceptualResourceTextInfo.sizeinfotype_model_set.all()])
+
+    elif isinstance(media, languageDescriptionInfoType_model):
+        ld_media_type = media.languageDescriptionMediaType
+        if ld_media_type.languageDescriptionTextInfo:
+            result.extend(["{}".format('{:,}'.format(int(s.size) if float(s.size).is_integer() else float(s.size)))
+                           for s in ld_media_type \
+                          .languageDescriptionTextInfo.sizeinfotype_model_set.all()])
+    result = list(set(result))
+    result.sort()
+    return result
+
+
+def _get_resource_size_units(resource, size):
+    result = []
+    media = resource.resourceComponentType.as_subclass()
+
+    if isinstance(media, corpusInfoType_model):
+        media_type = media.corpusMediaType
+        for corpus_info in media_type.corpustextinfotype_model_set.all():
+            for s in corpus_info.sizeinfotype_model_set.all():
+                this_size = "{}".format('{:,}'.format(int(s.size) if float(s.size).is_integer() else float(s.size)))
+                if this_size == size:
+                    result.extend(["{}".format(prettify_camel_case_string(s.sizeUnit))])
+
+    elif isinstance(media, lexicalConceptualResourceInfoType_model):
+        lcr_media_type = media.lexicalConceptualResourceMediaType
+        if lcr_media_type.lexicalConceptualResourceTextInfo:
+            for s in lcr_media_type \
+                    .lexicalConceptualResourceTextInfo.sizeinfotype_model_set.all():
+                this_size = "{}".format('{:,}'.format(int(s.size) if float(s.size).is_integer() else float(s.size)))
+                if this_size == size:
+                    result.extend(["{}".format(prettify_camel_case_string(s.sizeUnit))])
+
+    elif isinstance(media, languageDescriptionInfoType_model):
+        ld_media_type = media.languageDescriptionMediaType
+        if ld_media_type.languageDescriptionTextInfo:
+            for s in ld_media_type \
+                    .languageDescriptionTextInfo.sizeinfotype_model_set.all():
+                this_size = "{}".format('{:,}'.format(int(s.size) if float(s.size).is_integer() else float(s.size)))
+                if this_size == size:
+                    result.extend(["{}".format(prettify_camel_case_string(s.sizeUnit))])
+    result = list(set(result))
+    result.sort()
+
+    return result

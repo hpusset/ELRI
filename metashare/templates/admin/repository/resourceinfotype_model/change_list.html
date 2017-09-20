@@ -11,6 +11,11 @@
       {% if has_add_permission %}
         <ul class="object-tools">
           {% block object-tools-items %}
+            {% if user.get_profile.is_superuser %}
+                <li>
+                    <a href="/repository/repo_report?email_to=false">Generate Report</a>
+                </li>
+            {% endif %}
             <li>
               <a href="{% url 'editor:repository_resourceinfotype_model_add' %}{% if is_popup %}?_popup=1{% endif %}" class="addlink">
                 {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
