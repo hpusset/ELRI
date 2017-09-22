@@ -1393,7 +1393,7 @@ def create_description(xml_file, type, base, user):
     # Create a new Identification object
     identification = identificationInfoType_model.objects.create( \
         resourceName={'en': info['title'].encode('utf-8')},
-        description={'en': info['description'].encode('utf-8')},)
+        description={'en': info['description'].encode('utf-8')}, )
     resource_creation = resourceCreationInfoType_model.objects.create(
         createdUsingELRCServices=False
     )
@@ -1474,8 +1474,8 @@ def create_description(xml_file, type, base, user):
         resource = resourceInfoType_model.objects.create(identificationInfo=identification,
                                                          resourceComponentType=corpus_info,
                                                          metadataInfo=metadataInfoType_model.objects.create \
-                                                         (metadataCreationDate=datetime.date.today(),
-                                                          metadataLastDateUpdated=datetime.date.today()),
+                                                             (metadataCreationDate=datetime.date.today(),
+                                                              metadataLastDateUpdated=datetime.date.today()),
                                                          resourceCreationInfo=resource_creation)
 
     elif type == 'langdesc':
@@ -1609,24 +1609,25 @@ def repo_report(request):
         worksheet.write('A1', 'Resource ID', heading)
         worksheet.write('B1', 'Resource Name', heading)
         worksheet.write('C1', 'Type', heading)
-        worksheet.write('D1', 'Language(s)', heading)
-        worksheet.write('E1', 'Size per Language', heading)
+        # worksheet.write('D1', 'Linguality', heading)
+        worksheet.write('E1', 'Language(s)', heading)
+        worksheet.write('F1', 'Size per Language', heading)
         worksheet.write_comment('E1', 'Delimited by "|" as per language')
-        worksheet.write('F1', 'Resource Size', heading)
-        worksheet.write('G1', 'Resource Size Unit(s)', heading)
+        worksheet.write('G1', 'Resource Size', heading)
+        worksheet.write('H1', 'Resource Size Unit(s)', heading)
         worksheet.write_comment('G1', 'Delimited by "|" as per size')
-        worksheet.write('H1', 'Domain(s)', heading)
-        worksheet.write('I1', 'DSI Relevance', heading)
-        worksheet.write('J1', 'Date', heading)
-        worksheet.write('K1', 'Status', heading)
-        worksheet.write('L1', 'Editors', heading)
-        worksheet.write('M1', 'Countries', heading)
-        worksheet.write('N1', 'Legal Status', heading)
-        worksheet.write('O1', 'Contacts', heading)
-        worksheet.write('P1', 'ELRC Services', heading)
-        worksheet.write('Q1', 'PSI', heading)
-        worksheet.write('R1', 'Validated', heading)
-        worksheet.write('S1', 'Mimetypes', heading)
+        worksheet.write('I1', 'Domain(s)', heading)
+        worksheet.write('J1', 'DSI Relevance', heading)
+        worksheet.write('K1', 'Date', heading)
+        worksheet.write('L1', 'Status', heading)
+        worksheet.write('M1', 'Editors', heading)
+        worksheet.write('N1', 'Countries', heading)
+        worksheet.write('O1', 'Legal Status', heading)
+        worksheet.write('P1', 'Contacts', heading)
+        worksheet.write('Q1', 'ELRC Services', heading)
+        worksheet.write('R1', 'PSI', heading)
+        worksheet.write('S1', 'Validated', heading)
+        worksheet.write('T1', 'Mimetypes', heading)
         link = True
 
         j = 1
@@ -1679,6 +1680,7 @@ def repo_report(request):
             worksheet.write(j, 0, res.id)
             worksheet.write(j, 1, res_name.decode('utf-8'), bold)
             worksheet.write(j, 2, res.resource_type())
+            worksheet.write(j, 3, _get_resource_linguality(res))
             lang_info = _get_resource_lang_info(res)
             size_info = _get_resource_sizes(res)
             mimetypes = _get_resource_mimetypes(res)
@@ -1692,55 +1694,55 @@ def repo_report(request):
             for l in lang_info:
                 langs.append(l)
                 lang_sizes.extend(_get_resource_lang_sizes(res, l))
-            worksheet.write(j, 3, " | ".join(langs))
+            worksheet.write(j, 4, " | ".join(langs))
 
-            worksheet.write(j, 4, " | ".join(lang_sizes))
+            worksheet.write(j, 5, " | ".join(lang_sizes))
 
             sizes = []
             size_units = []
             for s in size_info:
                 sizes.append(s)
                 size_units.extend(_get_resource_size_units(res, s))
-            worksheet.write(j, 5, " | ".join(sizes))
+            worksheet.write(j, 6, " | ".join(sizes))
 
-            worksheet.write(j, 6, " | ".join(size_units))
+            worksheet.write(j, 7, " | ".join(size_units))
 
             if domain_info:
                 domains = []
                 for d in domain_info:
                     domains.append(d)
-                worksheet.write(j, 7, " | ".join(domains))
+                worksheet.write(j, 8, " | ".join(domains))
             else:
-                worksheet.write(j, 7, "N/A")
+                worksheet.write(j, 8, "N/A")
 
-            worksheet.write(j, 8, dsis)
-            worksheet.write_datetime(j, 9, date, date_format)
-            worksheet.write(j, 10, status[res.storage_object.publication_status])
+            worksheet.write(j, 9, dsis)
+            worksheet.write_datetime(j, 10, date, date_format)
+            worksheet.write(j, 11, status[res.storage_object.publication_status])
             owners = []
             for o in res.owners.all():
                 owners.append(o.username)
-            worksheet.write(j, 11, ", ".join(owners))
+            worksheet.write(j, 12, ", ".join(owners))
 
             if countries:
-                worksheet.write(j, 12, ", ".join(countries))
+                worksheet.write(j, 13, ", ".join(countries))
             else:
-                worksheet.write(j, 12, "N/A")
-            worksheet.write(j, 13, ", ".join(licences))
+                worksheet.write(j, 13, "N/A")
+            worksheet.write(j, 14, ", ".join(licences))
             if contacts:
-                worksheet.write(j, 14, " | ".join(contacts))
+                worksheet.write(j, 15, " | ".join(contacts))
             else:
-                worksheet.write(j, 14, "N/A")
-            worksheet.write(j, 15, crawled)
-            worksheet.write(j, 16, psi)
-            worksheet.write(j, 17, validated)
+                worksheet.write(j, 15, "N/A")
+            worksheet.write(j, 16, crawled)
+            worksheet.write(j, 17, psi)
+            worksheet.write(j, 18, validated)
 
             if mimetypes:
                 mim = []
                 for d in mimetypes:
                     mim.append(d)
-                worksheet.write(j, 18, " | ".join(mim))
+                worksheet.write(j, 19, " | ".join(mim))
             else:
-                worksheet.write(j, 18, "N/A")
+                worksheet.write(j, 19, "N/A")
 
             j += 1
             # worksheet.write(i + 1, 3, _get_resource_size_info(res))
@@ -1801,6 +1803,31 @@ def _get_resource_lang_info(resource):
                     .languageDescriptionTextInfo.languageinfotype_model_set.all():
                 l = [lang.languageName]
                 result.extend(l)
+    result = list(set(result))
+    result.sort()
+    return result
+
+
+def _get_resource_linguality(resource):
+    result = []
+    media = resource.resourceComponentType.as_subclass()
+
+    if isinstance(media, corpusInfoType_model):
+        media_type = media.corpusMediaType
+        for corpus_info in media_type.corpustextinfotype_model_set.all():
+            result.append(corpus_info.lingualityInfo.lingualityType.title())
+
+    elif isinstance(media, lexicalConceptualResourceInfoType_model):
+        lcr_media_type = media.lexicalConceptualResourceMediaType
+        if lcr_media_type.lexicalConceptualResourceTextInfo:
+            result.append(lcr_media_type \
+                          .lexicalConceptualResourceTextInfo.lingualityInfo.lingualityType)
+
+    elif isinstance(media, languageDescriptionInfoType_model):
+        ld_media_type = media.languageDescriptionMediaType
+        if ld_media_type.languageDescriptionTextInfo:
+            result.append(ld_media_type \
+                          .languageDescriptionTextInfo.lingualityInfo.lingualityType)
     result = list(set(result))
     result.sort()
     return result
@@ -1900,7 +1927,7 @@ def _get_resource_mimetypes(resource):
     elif isinstance(media, lexicalConceptualResourceInfoType_model):
         lcr_media_type = media.lexicalConceptualResourceMediaType
         result.extend([prettify_camel_case_string(d.dataFormat) for d in lcr_media_type \
-                          .lexicalConceptualResourceTextInfo.textformatinfotype_model_set.all()])
+                      .lexicalConceptualResourceTextInfo.textformatinfotype_model_set.all()])
 
     elif isinstance(media, languageDescriptionInfoType_model):
         ld_media_type = media.languageDescriptionMediaType
