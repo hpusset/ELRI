@@ -1609,7 +1609,7 @@ def repo_report(request):
         worksheet.write('A1', 'Resource ID', heading)
         worksheet.write('B1', 'Resource Name', heading)
         worksheet.write('C1', 'Type', heading)
-        # worksheet.write('D1', 'Linguality', heading)
+        worksheet.write('D1', 'Linguality', heading)
         worksheet.write('E1', 'Language(s)', heading)
         worksheet.write('F1', 'Size per Language', heading)
         worksheet.write_comment('E1', 'Delimited by "|" as per language')
