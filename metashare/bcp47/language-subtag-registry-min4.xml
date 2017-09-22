@@ -206,7 +206,7 @@
 				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
 				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
 			</variants>
-		</language>		
+		</language>
 		<language subtag="nn">
 			<description>Norwegian Nynorsk</description>
 			<iso639_description>Norwegian Nynorsk; Nynorsk, Norwegian</iso639_description>
@@ -73541,6 +73541,103 @@
 		</script>
 	</scripts>
 	<regions>
+		<!-- EU -->
+		<region subtag="AT">
+			<description>Austria</description>
+		</region>
+		<region subtag="BE">
+			<description>Belgium</description>
+		</region>
+		<region subtag="BG">
+			<description>Bulgaria</description>
+		</region>
+		<region subtag="HR">
+			<description>Croatia</description>
+		</region>
+		<region subtag="CY">
+			<description>Cyprus</description>
+		</region>
+		<region subtag="CZ">
+			<description>Czech Republic</description>
+		</region>
+		<region subtag="DK">
+			<description>Denmark</description>
+		</region>
+		<region subtag="EE">
+			<description>Estonia</description>
+		</region>
+		<region subtag="EU">
+			<description>European Union</description>
+		</region>
+		<region subtag="FI">
+			<description>Finland</description>
+		</region>
+		<region subtag="FR">
+			<description>France</description>
+		</region>
+		<region subtag="DE">
+			<description>Germany</description>
+		</region>
+		<region subtag="GR">
+			<description>Greece</description>
+		</region>
+		<region subtag="HU">
+			<description>Hungary</description>
+		</region>
+		<region subtag="IS">
+			<description>Iceland</description>
+		</region>
+		<region subtag="IE">
+			<description>Ireland</description>
+		</region>
+		<region subtag="IT">
+			<description>Italy</description>
+		</region>
+		<region subtag="LV">
+			<description>Latvia</description>
+		</region>
+		<region subtag="LT">
+			<description>Lithuania</description>
+		</region>
+		<region subtag="LU">
+			<description>Luxembourg</description>
+		</region>
+		<region subtag="MT">
+			<description>Malta</description>
+		</region>
+		<region subtag="NL">
+			<description>Netherlands</description>
+		</region>
+		<region subtag="NO">
+			<description>Norway</description>
+		</region>
+		<region subtag="PL">
+			<description>Poland</description>
+		</region>
+		<region subtag="PT">
+			<description>Portugal</description>
+		</region>
+		<region subtag="RO">
+			<description>Romania</description>
+		</region>
+		<region subtag="SK">
+			<description>Slovakia</description>
+		</region>
+		<region subtag="SI">
+			<description>Slovenia</description>
+		</region>
+		<region subtag="ES">
+			<description>Spain</description>
+		</region>
+		<region subtag="SE">
+			<description>Sweden</description>
+		</region>
+		<region subtag="GB">
+			<description>United Kingdom</description>
+			<comments>as of 2006-03-29 GB no longer includes the Channel Islands and
+  Isle of Man; see GG, JE, IM</comments>
+		</region>
+		<!--OTHER-->
 		<region subtag="AA">
 			<description>Private use</description>
 		</region>
@@ -73580,9 +73677,6 @@
 		<region subtag="AS">
 			<description>American Samoa</description>
 		</region>
-		<region subtag="AT">
-			<description>Austria</description>
-		</region>
 		<region subtag="AU">
 			<description>Australia</description>
 		</region>
@@ -73604,14 +73698,8 @@
 		<region subtag="BD">
 			<description>Bangladesh</description>
 		</region>
-		<region subtag="BE">
-			<description>Belgium</description>
-		</region>
 		<region subtag="BF">
 			<description>Burkina Faso</description>
-		</region>
-		<region subtag="BG">
-			<description>Bulgaria</description>
 		</region>
 		<region subtag="BH">
 			<description>Bahrain</description>
@@ -73712,23 +73800,11 @@
 		<region subtag="CX">
 			<description>Christmas Island</description>
 		</region>
-		<region subtag="CY">
-			<description>Cyprus</description>
-		</region>
-		<region subtag="CZ">
-			<description>Czech Republic</description>
-		</region>
-		<region subtag="DE">
-			<description>Germany</description>
-		</region>
 		<region subtag="DG">
 			<description>Diego Garcia</description>
 		</region>
 		<region subtag="DJ">
 			<description>Djibouti</description>
-		</region>
-		<region subtag="DK">
-			<description>Denmark</description>
 		</region>
 		<region subtag="DM">
 			<description>Dominica</description>
@@ -73745,9 +73821,6 @@
 		<region subtag="EC">
 			<description>Ecuador</description>
 		</region>
-		<region subtag="EE">
-			<description>Estonia</description>
-		</region>
 		<region subtag="EG">
 			<description>Egypt</description>
 		</region>
@@ -73757,17 +73830,8 @@
 		<region subtag="ER">
 			<description>Eritrea</description>
 		</region>
-		<region subtag="ES">
-			<description>Spain</description>
-		</region>
 		<region subtag="ET">
 			<description>Ethiopia</description>
-		</region>
-		<region subtag="EU">
-			<description>European Union</description>
-		</region>
-		<region subtag="FI">
-			<description>Finland</description>
 		</region>
 		<region subtag="FJ">
 			<description>Fiji</description>
@@ -73781,16 +73845,8 @@
 		<region subtag="FO">
 			<description>Faroe Islands</description>
 		</region>
-		<region subtag="FR">
-			<description>France</description>
-		</region>
 		<region subtag="GA">
 			<description>Gabon</description>
-		</region>
-		<region subtag="GB">
-			<description>United Kingdom</description>
-			<comments>as of 2006-03-29 GB no longer includes the Channel Islands and
-  Isle of Man; see GG, JE, IM</comments>
 		</region>
 		<region subtag="GD">
 			<description>Grenada</description>
@@ -73825,9 +73881,6 @@
 		<region subtag="GQ">
 			<description>Equatorial Guinea</description>
 		</region>
-		<region subtag="GR">
-			<description>Greece</description>
-		</region>
 		<region subtag="GS">
 			<description>South Georgia and the South Sandwich Islands</description>
 		</region>
@@ -73852,23 +73905,14 @@
 		<region subtag="HN">
 			<description>Honduras</description>
 		</region>
-		<region subtag="HR">
-			<description>Croatia</description>
-		</region>
 		<region subtag="HT">
 			<description>Haiti</description>
-		</region>
-		<region subtag="HU">
-			<description>Hungary</description>
 		</region>
 		<region subtag="IC">
 			<description>Canary Islands</description>
 		</region>
 		<region subtag="ID">
 			<description>Indonesia</description>
-		</region>
-		<region subtag="IE">
-			<description>Ireland</description>
 		</region>
 		<region subtag="IL">
 			<description>Israel</description>
@@ -73887,12 +73931,6 @@
 		</region>
 		<region subtag="IR">
 			<description>Islamic Republic of Iran</description>
-		</region>
-		<region subtag="IS">
-			<description>Iceland</description>
-		</region>
-		<region subtag="IT">
-			<description>Italy</description>
 		</region>
 		<region subtag="JE">
 			<description>Jersey</description>
@@ -73960,15 +73998,6 @@
 		<region subtag="LS">
 			<description>Lesotho</description>
 		</region>
-		<region subtag="LT">
-			<description>Lithuania</description>
-		</region>
-		<region subtag="LU">
-			<description>Luxembourg</description>
-		</region>
-		<region subtag="LV">
-			<description>Latvia</description>
-		</region>
 		<region subtag="LY">
 			<description>Libya</description>
 		</region>
@@ -74020,9 +74049,6 @@
 		<region subtag="MS">
 			<description>Montserrat</description>
 		</region>
-		<region subtag="MT">
-			<description>Malta</description>
-		</region>
 		<region subtag="MU">
 			<description>Mauritius</description>
 		</region>
@@ -74059,12 +74085,6 @@
 		<region subtag="NI">
 			<description>Nicaragua</description>
 		</region>
-		<region subtag="NL">
-			<description>Netherlands</description>
-		</region>
-		<region subtag="NO">
-			<description>Norway</description>
-		</region>
 		<region subtag="NP">
 			<description>Nepal</description>
 		</region>
@@ -74098,9 +74118,6 @@
 		<region subtag="PK">
 			<description>Pakistan</description>
 		</region>
-		<region subtag="PL">
-			<description>Poland</description>
-		</region>
 		<region subtag="PM">
 			<description>Saint Pierre and Miquelon</description>
 		</region>
@@ -74112,9 +74129,6 @@
 		</region>
 		<region subtag="PS">
 			<description>State of Palestine</description>
-		</region>
-		<region subtag="PT">
-			<description>Portugal</description>
 		</region>
 		<region subtag="PW">
 			<description>Palau</description>
@@ -74130,9 +74144,6 @@
 		</region>
 		<region subtag="RE">
 			<description>Réunion</description>
-		</region>
-		<region subtag="RO">
-			<description>Romania</description>
 		</region>
 		<region subtag="RS">
 			<description>Serbia</description>
@@ -74155,23 +74166,14 @@
 		<region subtag="SD">
 			<description>Sudan</description>
 		</region>
-		<region subtag="SE">
-			<description>Sweden</description>
-		</region>
 		<region subtag="SG">
 			<description>Singapore</description>
 		</region>
 		<region subtag="SH">
 			<description>Saint Helena, Ascension and Tristan da Cunha</description>
 		</region>
-		<region subtag="SI">
-			<description>Slovenia</description>
-		</region>
 		<region subtag="SJ">
 			<description>Svalbard and Jan Mayen</description>
-		</region>
-		<region subtag="SK">
-			<description>Slovakia</description>
 		</region>
 		<region subtag="SL">
 			<description>Sierra Leone</description>
