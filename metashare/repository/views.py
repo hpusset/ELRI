@@ -1821,13 +1821,13 @@ def _get_resource_linguality(resource):
         lcr_media_type = media.lexicalConceptualResourceMediaType
         if lcr_media_type.lexicalConceptualResourceTextInfo:
             result.append(lcr_media_type \
-                          .lexicalConceptualResourceTextInfo.lingualityInfo.lingualityType)
+                          .lexicalConceptualResourceTextInfo.lingualityInfo.lingualityType.title())
 
     elif isinstance(media, languageDescriptionInfoType_model):
         ld_media_type = media.languageDescriptionMediaType
         if ld_media_type.languageDescriptionTextInfo:
             result.append(ld_media_type \
-                          .languageDescriptionTextInfo.lingualityInfo.lingualityType)
+                          .languageDescriptionTextInfo.lingualityInfo.lingualityType.title())
     result = list(set(result))
     result.sort()
     return result
