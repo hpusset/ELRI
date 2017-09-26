@@ -1776,19 +1776,61 @@ class distributionInfoType_model(SchemaModel):
     #     super(distributionInfoType_model, self).save(*args, **kwargs)
 
 
-
 LICENCEINFOTYPE_LICENCE_CHOICES = _make_choices_from_list([
-  u'CC-BY-4.0', u'CC-BY-NC-4.0', u'CC-BY-NC-ND-4.0', u'CC-BY-NC-SA-4.0',
-  u'CC-BY-ND-4.0',u'CC-BY-SA-4.0', u'CC0-1.0', u'CC-BY-3.0',
-  u'CC-BY-NC-3.0',u'CC-BY-NC-ND-3.0', u'CC-BY-NC-SA-3.0', u'CC-BY-ND-3.0',
-  u'CC-BY-SA-3.0',u'PDDL-1.0', u'ODC-BY-1.0', u'ODbL-1.0', u'AGPL-3.0',
-  u'Apache-2.0',u'BSD-4-Clause', u'BSD-3-Clause', u'BSD-2-Clause',
-  u'GFDL-1.3',u'GPL-3.0', u'LGPL-3.0', u'MIT', u'EPL-1.0', u'LO-OL-v2',
-  u'dl-de/by-2-0',u'dl-de/zero-2-0', u'IODL-1.0', u'NLOD-1.0', u'OGL-3.0',
-  u'NCGL-1.0',u'underReview', u'non-standard/Other_Licence/Terms',
-  u'openUnder-PSI',
+    # International/National Data Licences
+    u'CC0-1.0',
+    u'CC-BY-4.0',
+    u'CC-BY-NC-4.0',
+    u'CC-BY-NC-ND-4.0',
+    u'CC-BY-NC-SA-4.0',
+    u'CC-BY-ND-4.0',
+    u'CC-BY-SA-4.0',
+    u'ODbL-1.0',
+    u'ODC-BY-1.0',
+    u'OGL-3.0',
+    u'PDDL-1.0',
+    u'openUnder-PSI',
+    u'CC-BY-3.0',
+    u'CC-BY-NC-3.0',
+    u'CC-BY-NC-ND-3.0',
+    u'CC-BY-NC-SA-3.0',
+    u'CC-BY-ND-3.0',
+    u'CC-BY-SA-3.0',
+    # National Data Licences
+    u'dl-de/by-2-0',
+    u'dl-de/zero-2-0',
+    u'IODL-1.0',
+    u'LO-OL-v2',
+    u'NCGL-1.0',
+    u'NLOD-1.0',
+    # International Software Licences
+    u'AGPL-3.0',
+    u'Apache-2.0',
+    u'BSD-4-Clause',
+    u'BSD-3-Clause',
+    u'BSD-2-Clause',
+    u'EPL-1.0',
+    u'GFDL-1.3',
+    u'GPL-3.0',
+    u'LGPL-3.0',
+    u'MIT',
+    # Other
+    u'underReview',
+    u'non-standard/Other_Licence/Terms',
 ])
 
+
+def licenceinfotype_licence_optgroup_choices():
+    """
+    Group the choices in groups. The first group is the most used choices
+    and the second group is the rest.
+    """
+    indl = ('International/National Data Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][:18])
+    ndl = ('National Data Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][18:24])
+    isl = ('International Software Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][24:34])
+    other = ('Other', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][34:])
+    optgroup = [indl, ndl, isl, other]
+    return optgroup
 
 LICENCES_DETAILS = {
     u'ODC-BY-1.0': {"url": "http://opendatacommons.org/licenses/by/", "version": "1.0"},
@@ -1901,8 +1943,7 @@ class licenceInfoType_model(SchemaModel):
       'ng_LRs',
 
       max_length=100,
-      choices=sorted(LICENCEINFOTYPE_LICENCE_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
+      choices=licenceinfotype_licence_optgroup_choices()
       )
 
     otherLicenceName = XmlCharField(
