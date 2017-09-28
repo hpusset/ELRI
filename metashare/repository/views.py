@@ -1628,6 +1628,7 @@ def repo_report(request):
         worksheet.write('R1', 'PSI', heading)
         worksheet.write('S1', 'Validated', heading)
         worksheet.write('T1', 'Mimetypes', heading)
+        worksheet.write('U1', 'Processed', heading)
         link = True
 
         j = 1
@@ -1638,15 +1639,18 @@ def repo_report(request):
             psi_list = [d.PSI for d in res.distributioninfotype_model_set.all()]
             psi = "YES" if any(psi_list) else "NO"
             validated = "YES" if res.storage_object.get_validation() else "NO"
+
+            # is it processed?
+            relations = [relation.relationType.startswith('is') for relation in res.relationinfotype_model_set.all()]
+            processed = "YES" if any(relations) else "NO"
             countries = []
             contacts = []
             licences = []
             affiliations = []
             try:
-                licenceInfos = res.distributionInfo.licenceinfotype_model_set.all()
-
-                for l in licenceInfos:
-                    licences.append(l.licence)
+                for dist in res.distributioninfotype_model_set.all():
+                    for licence_info in dist.licenceInfo.all():
+                        licences.append(licence_info.licence)
             except:
                 licences.append("underReview")
 
@@ -1744,7 +1748,7 @@ def repo_report(request):
                 worksheet.write(j, 19, " | ".join(mim))
             else:
                 worksheet.write(j, 19, "N/A")
-
+            worksheet.write(j, 20, processed)
             j += 1
             # worksheet.write(i + 1, 3, _get_resource_size_info(res))
         # worksheet.write(len(resources)+2, 3, "Total Resources", bold)
