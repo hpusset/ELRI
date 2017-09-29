@@ -1680,7 +1680,7 @@ def repo_report(request):
                 res_name = smart_str(res.identificationInfo.resourceName[res.identificationInfo.resourceName.keys()[0]])
 
             # date
-            date = datetime.datetime.strptime(unicode(res.storage_object.modified).split(" ")[0], "%Y-%m-%d")
+            date = datetime.datetime.strptime(unicode(res.storage_object.created).split(" ")[0], "%Y-%m-%d")
             worksheet.write(j, 0, res.id)
             worksheet.write(j, 1, res_name.decode('utf-8'), bold)
             worksheet.write(j, 2, res.resource_type())
