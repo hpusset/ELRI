@@ -13,7 +13,7 @@ all_resources = rm.objects.all()
 pub_resources = []
 ing_resources = []
 # get only published or ingested processed resources
-for r in all_resources:
+for r in all_resources.filter(storage_object__deleted=False):
     is_relations = [rel.relationType.startswith("is") for rel in r.relationinfotype_model_set.all()]
     status = r.storage_object.publication_status
     if status == 'p':
