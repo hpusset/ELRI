@@ -10,13 +10,22 @@ import xlsxwriter
 
 pp = pprint.PrettyPrinter(indent=4)
 all_resources = rm.objects.all()
-resources = []
+pub_resources = []
+ing_resources = []
 # get only published or ingested processed resources
 for r in all_resources:
     is_relations = [rel.relationType.startswith("is") for rel in r.relationinfotype_model_set.all()]
     status = r.storage_object.publication_status
-    if status == 'p' or (status == 'g' and any(is_relations)):
-        resources.append(r)
+    if status == 'p':
+        pub_resources.append(r)
+    elif status == 'g' and any(is_relations):
+        ing_resources.append(r)
+
+print len(pub_resources)
+print len(ing_resources)
+
+resources = pub_resources + ing_resources
+print len(resources)
 
 all_dsi = {
     u'OnlineDisputeResolution': 0, u'Europeana': 0, u'OpenDataPortal': 0, u'eJustice': 0,
