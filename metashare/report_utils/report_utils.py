@@ -162,13 +162,12 @@ for c in all_countries:
 result_dict["languages"] = lang_dict
 
 
-def process(start=None, end=None):
+def process(end=None):
     objects = get_resources()
     print len(objects)
-    if start and end:
-        s = datetime.strptime(start, "%Y-%m-%d")
+    if end:
         e = datetime.strptime(end, "%Y-%m-%d")
-        objects = [res for res in objects if s <= res.storage_object.created <= e]
+        objects = [res for res in objects if res.storage_object.created <= e]
         print len(objects)
     for res in objects:
         type_info = _get_media_type(res)
@@ -200,7 +199,7 @@ def process(start=None, end=None):
                 result_dict["languages"][lang][r_type] += 1
             except KeyError:
                 result_dict["languages"][lang][r_type] = 1
-    make_excel(result_dict, "ELRC-SHARE_CEF_Digital_report_{}__{}".format(start, end))
+    make_excel(result_dict, "ELRC-SHARE_[]_[]")
 
 
 # TRY TO MAKE A COMPLEX EXCEL FILE
