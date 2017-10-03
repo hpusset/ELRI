@@ -171,7 +171,6 @@ def process(start=None, end=None):
         objects = [res for res in objects if s <= res.storage_object.created <= e]
         print len(objects)
     for res in objects:
-        print len(objects)
         type_info = _get_media_type(res)
         langs = set(_get_resource_lang_info(res))
         domains = set(_get_resource_domain_info(res))
@@ -202,7 +201,6 @@ def process(start=None, end=None):
             except KeyError:
                 result_dict["languages"][lang][r_type] = 1
     make_excel(result_dict, "ELRC-SHARE_CEF_Digital_report_{}__{}".format(start, end))
-    return result_dict
 
 
 # TRY TO MAKE A COMPLEX EXCEL FILE
