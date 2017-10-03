@@ -1,6 +1,8 @@
 # coding=utf-8
 from collections import OrderedDict
 
+from datetime import datetime
+
 from metashare.repository.models import resourceInfoType_model as rm, corpusInfoType_model, \
     lexicalConceptualResourceInfoType_model, languageDescriptionInfoType_model, toolServiceInfoType_model
 from metashare.utils import prettify_camel_case_string
@@ -9,23 +11,18 @@ import pprint
 import xlsxwriter
 
 pp = pprint.PrettyPrinter(indent=4)
-all_resources = rm.objects.all()
-pub_resources = []
-ing_resources = []
-# get only published or ingested processed resources
-for r in all_resources.filter(storage_object__deleted=False):
-    is_relations = [rel.relationType.startswith("is") for rel in r.relationinfotype_model_set.all()]
-    status = r.storage_object.publication_status
-    if status == 'p':
-        pub_resources.append(r)
-    elif status == 'g' and any(is_relations):
-        ing_resources.append(r)
 
-print len(pub_resources)
-print len(ing_resources)
 
-resources = pub_resources + ing_resources
-print len(resources)
+def get_resources():
+    all_resources = rm.objects.filter(storage_object__deleted=False)
+    resources = []
+    # get only published or ingested processed resources
+    for r in all_resources:
+        is_relations = [rel.relationType.startswith("is") for rel in r.relationinfotype_model_set.all()]
+        status = r.storage_object.publication_status
+        if status == 'p' or (status == 'g' and any(is_relations)):
+            resources.append(r)
+    return resources
 
 all_dsi = {
     u'OnlineDisputeResolution': 0, u'Europeana': 0, u'OpenDataPortal': 0, u'eJustice': 0,
@@ -44,7 +41,7 @@ def count_by_domain():
     result = []
     for d in domains:
         count = 0
-        for res in resources:
+        for res in get_resources():
             if d in _get_resource_domain_info(res):
                 count += 1
         result.append((d, count))
@@ -165,9 +162,16 @@ for c in all_countries:
 result_dict["languages"] = lang_dict
 
 
-def process():
-    print len(resources)
-    for res in resources:
+def process(start=None, end=None):
+    objects = get_resources()
+    print len(objects)
+    if start and end:
+        s = datetime.strptime(start, "%Y-%m-%d")
+        e = datetime.strptime(end, "%Y-%m-%d")
+        objects = [res for res in objects if s <= res.storage_object.created <= e]
+        print len(objects)
+    for res in objects:
+        print len(objects)
         type_info = _get_media_type(res)
         langs = set(_get_resource_lang_info(res))
         domains = set(_get_resource_domain_info(res))
@@ -197,129 +201,131 @@ def process():
                 result_dict["languages"][lang][r_type] += 1
             except KeyError:
                 result_dict["languages"][lang][r_type] = 1
+    make_excel(result_dict, "ELRC-SHARE_CEF_Digital_report_{}__{}".format(start, end))
     return result_dict
 
 
 # TRY TO MAKE A COMPLEX EXCEL FILE
 
-data = process()
+# data = process("2017-01-01", "2017-01-30")
 
 
 def next_col(ccol):
     return chr(ord(ccol) + 1)
 
 
-workbook = xlsxwriter.Workbook('DATA.xlsx')  # Change path
-wb_format_light_grey = workbook.add_format({'font_size': 11, 'bold': True,
-                                            'bg_color': "#f2f2f2"})
-wb_format_light_grey.set_bottom(2)
-wb_format_light_grey.set_bottom_color("#ffffff")
-# --------------
-wb_format_light_grey_center = workbook.add_format({'font_size': 11, 'bold': True,
-                                                   'bg_color': "#f2f2f2", 'align': "center"})
-wb_format_light_grey_center.set_bottom(2)
-wb_format_light_grey_center.set_bottom_color("#ffffff")
-# --------------
-wb_format_dark_grey = workbook.add_format({'font_size': 12, 'bold': True, 'font_color': 'white',
-                                           'bg_color': "#808080"})
-wb_format_dark_grey.set_bottom(2)
-wb_format_dark_grey.set_right(2)
-wb_format_dark_grey.set_bottom_color("#ffffff")
-wb_format_dark_grey.set_right_color("#ffffff")
+def make_excel(data, filename):
+    workbook = xlsxwriter.Workbook('{}.xlsx'.format(filename))  # Change path
+    wb_format_light_grey = workbook.add_format({'font_size': 11, 'bold': True,
+                                                'bg_color': "#f2f2f2"})
+    wb_format_light_grey.set_bottom(2)
+    wb_format_light_grey.set_bottom_color("#ffffff")
+    # --------------
+    wb_format_light_grey_center = workbook.add_format({'font_size': 11, 'bold': True,
+                                                       'bg_color': "#f2f2f2", 'align': "center"})
+    wb_format_light_grey_center.set_bottom(2)
+    wb_format_light_grey_center.set_bottom_color("#ffffff")
+    # --------------
+    wb_format_dark_grey = workbook.add_format({'font_size': 12, 'bold': True, 'font_color': 'white',
+                                               'bg_color': "#808080"})
+    wb_format_dark_grey.set_bottom(2)
+    wb_format_dark_grey.set_right(2)
+    wb_format_dark_grey.set_bottom_color("#ffffff")
+    wb_format_dark_grey.set_right_color("#ffffff")
 
-ws_countries = workbook.add_worksheet("COUNTRIES")
-ws_countries_types = workbook.add_worksheet("COUNTRIES-TYPES")
-ws_countries_domains = workbook.add_worksheet("COUNTRIES-DOMAINS")
-ws_countries_dsis = workbook.add_worksheet("COUNTRIES-DSIs")
-ws_countries_openess = workbook.add_worksheet("COUNTRIES-OPENESS")
+    ws_countries = workbook.add_worksheet("COUNTRIES")
+    ws_countries_types = workbook.add_worksheet("COUNTRIES-TYPES")
+    ws_countries_domains = workbook.add_worksheet("COUNTRIES-DOMAINS")
+    ws_countries_dsis = workbook.add_worksheet("COUNTRIES-DSIs")
+    ws_countries_openess = workbook.add_worksheet("COUNTRIES-OPENESS")
 
-# WS_COUNTRIES
+    # WS_COUNTRIES
 
-# set backgrounds col1 row3-32
-i = 3
-for country in sorted(data["countries"].keys()):
-    ws_countries.write("A{}".format(i), country, wb_format_light_grey)
-    ws_countries_types.write("A{}".format(i), country, wb_format_light_grey)
-    ws_countries_domains.write("A{}".format(i), country, wb_format_light_grey)
-    ws_countries_dsis.write("A{}".format(i), country, wb_format_light_grey)
-    ws_countries_openess.write("A{}".format(i), country, wb_format_light_grey)
-    i += 1
-ws_countries.write("A{}".format(i), "Grand Total", wb_format_dark_grey)
-ws_countries.write("B{}".format(i), "=SUM(B3:B32)", wb_format_dark_grey)
-ws_countries.write("B1", "", wb_format_dark_grey)
-ws_countries.write("B2", " #language resources", wb_format_dark_grey)
-ws_countries.write("A{}".format(i), "Grand Total", wb_format_dark_grey)
-# add the values
-i = 3
-for country in sorted(data["countries"].keys()):
-    ws_countries.write("A{}".format(i), country, wb_format_light_grey)
-    ws_countries.write("B{}".format(i), data["countries"][country]["total"], wb_format_dark_grey)
-    i += 1
+    # set backgrounds col1 row3-32
+    i = 3
+    for country in sorted(data["countries"].keys()):
+        ws_countries.write("A{}".format(i), country, wb_format_light_grey)
+        ws_countries_types.write("A{}".format(i), country, wb_format_light_grey)
+        ws_countries_domains.write("A{}".format(i), country, wb_format_light_grey)
+        ws_countries_dsis.write("A{}".format(i), country, wb_format_light_grey)
+        ws_countries_openess.write("A{}".format(i), country, wb_format_light_grey)
+        i += 1
+    ws_countries.write("A{}".format(i), "Grand Total", wb_format_dark_grey)
+    ws_countries.write("B{}".format(i), "=SUM(B3:B32)", wb_format_dark_grey)
+    ws_countries.write("B1", "", wb_format_dark_grey)
+    ws_countries.write("B2", " #language resources", wb_format_dark_grey)
+    ws_countries.write("A{}".format(i), "Grand Total", wb_format_dark_grey)
+    # add the values
+    i = 3
+    for country in sorted(data["countries"].keys()):
+        ws_countries.write("A{}".format(i), country, wb_format_light_grey)
+        ws_countries.write("B{}".format(i), data["countries"][country]["total"], wb_format_dark_grey)
+        i += 1
 
-# WS_COUNTRIES_TYPES
-ws_countries_types.merge_range('B1:H1', 'Type of Language Resource', wb_format_light_grey_center)
-ws_countries_types.write("A{}".format(i), "Totals per type", wb_format_dark_grey)
-for i in range(ord("B"), ord("I")):
-    ws_countries_types.write("{}{}".format(chr(i), 33), "=SUM({}3:{}32)".format(chr(i), chr(i)),
-                             wb_format_dark_grey)
-    i += 1
+    # WS_COUNTRIES_TYPES
+    ws_countries_types.merge_range('B1:H1', 'Type of Language Resource', wb_format_light_grey_center)
+    ws_countries_types.write("A{}".format(i), "Totals per type", wb_format_dark_grey)
+    for i in range(ord("B"), ord("I")):
+        ws_countries_types.write("{}{}".format(chr(i), 33), "=SUM({}3:{}32)".format(chr(i), chr(i)),
+                                 wb_format_dark_grey)
+        i += 1
 
-col = "B"
-for r_type in types.keys():
-    ws_countries_types.write("{}2".format(col), r_type, wb_format_light_grey)
-    col = next_col(col)
+    col = "B"
+    for r_type in types.keys():
+        ws_countries_types.write("{}2".format(col), r_type, wb_format_light_grey)
+        col = next_col(col)
 
-ws_countries_types.write("I1", "", wb_format_dark_grey)
-ws_countries_types.write("I2", "Totals per country", wb_format_dark_grey)
-for i in range(3, 34):
-    ws_countries_types.write("I{}".format(i), "=SUM(B{}:H{})".format(i, i), wb_format_dark_grey)
+    ws_countries_types.write("I1", "", wb_format_dark_grey)
+    ws_countries_types.write("I2", "Totals per country", wb_format_dark_grey)
+    for i in range(3, 34):
+        ws_countries_types.write("I{}".format(i), "=SUM(B{}:H{})".format(i, i), wb_format_dark_grey)
 
-# add values
-for country in data["countries"].keys():
-    for type in data["countries"][country]["types"].keys():
-        ws_countries_types.write(excel_matrix["country_row"][country],
-                                 excel_matrix["type_col"][type], data["countries"][country]["types"][type])
-# WS_COUNTRIES_DOMAINS
-ws_countries_domains.merge_range('B1:V1', 'EUROVOC DOMAIN', wb_format_light_grey_center)
-ws_countries_domains.write("W2", "Totals", wb_format_dark_grey)
-ws_countries_domains.write("A33", "Totals per domain", wb_format_dark_grey)
-for i in range(ord("B"), ord("W")):
-    ws_countries_domains.write("{}{}".format(chr(i), 33), "=SUM({}3:{}32)".format(chr(i), chr(i)),
-                               wb_format_dark_grey)
-    i += 1
-for i in range(3, 33):
-    ws_countries_domains.write("W{}".format(i), "=SUM(B{}:V{})".format(i, i), wb_format_dark_grey)
+    # add values
+    for country in data["countries"].keys():
+        for type in data["countries"][country]["types"].keys():
+            ws_countries_types.write(excel_matrix["country_row"][country],
+                                     excel_matrix["type_col"][type], data["countries"][country]["types"][type])
+    # WS_COUNTRIES_DOMAINS
+    ws_countries_domains.merge_range('B1:V1', 'EUROVOC DOMAIN', wb_format_light_grey_center)
+    ws_countries_domains.write("W2", "Totals", wb_format_dark_grey)
+    ws_countries_domains.write("A33", "Totals per domain", wb_format_dark_grey)
+    for i in range(ord("B"), ord("W")):
+        ws_countries_domains.write("{}{}".format(chr(i), 33), "=SUM({}3:{}32)".format(chr(i), chr(i)),
+                                   wb_format_dark_grey)
+        i += 1
+    for i in range(3, 33):
+        ws_countries_domains.write("W{}".format(i), "=SUM(B{}:V{})".format(i, i), wb_format_dark_grey)
 
-col = 'B'
-for d in OrderedDict(all_domains).keys():
-    ws_countries_domains.write("{}2".format(col), d, wb_format_light_grey)
-    col = next_col(col)
-# add values
-for country in data["countries"].keys():
-    for dom in data["countries"][country]["domains"].keys():
-        if dom != u"Other":
-            ws_countries_domains.write(excel_matrix["country_row"][country],
-                                       excel_matrix["domain_col"][dom], data["countries"][country]["domains"][dom])
+    col = 'B'
+    for d in OrderedDict(all_domains).keys():
+        ws_countries_domains.write("{}2".format(col), d, wb_format_light_grey)
+        col = next_col(col)
+    # add values
+    for country in data["countries"].keys():
+        for dom in data["countries"][country]["domains"].keys():
+            if dom != u"Other":
+                ws_countries_domains.write(excel_matrix["country_row"][country],
+                                           excel_matrix["domain_col"][dom], data["countries"][country]["domains"][dom])
 
-# WS_COUNTRIES_DSIs
-ws_countries_dsis.merge_range('B1:L1', 'Relevance to Sector Specific DSIs', wb_format_light_grey_center)
-ws_countries_dsis.write("L2", "Totals", wb_format_dark_grey)
-ws_countries_dsis.write("A33", "Totals per DSI", wb_format_dark_grey)
-for i in range(ord("B"), ord("L")):
-    ws_countries_dsis.write("{}{}".format(chr(i), 33), "=SUM({}3:{}32)".format(chr(i), chr(i)),
-                            wb_format_dark_grey)
-    i += 1
-for i in range(3, 33):
-    ws_countries_dsis.write("L{}".format(i), "=SUM(B{}:K{})".format(i, i), wb_format_dark_grey)
+    # WS_COUNTRIES_DSIs
+    ws_countries_dsis.merge_range('B1:L1', 'Relevance to Sector Specific DSIs', wb_format_light_grey_center)
+    ws_countries_dsis.write("L2", "Totals", wb_format_dark_grey)
+    ws_countries_dsis.write("A33", "Totals per DSI", wb_format_dark_grey)
+    for i in range(ord("B"), ord("L")):
+        ws_countries_dsis.write("{}{}".format(chr(i), 33), "=SUM({}3:{}32)".format(chr(i), chr(i)),
+                                wb_format_dark_grey)
+        i += 1
+    for i in range(3, 33):
+        ws_countries_dsis.write("L{}".format(i), "=SUM(B{}:K{})".format(i, i), wb_format_dark_grey)
 
-col = 'B'
-for d in OrderedDict(all_dsi).keys():
-    ws_countries_dsis.write("{}2".format(col), d, wb_format_light_grey)
-    col = next_col(col)
-# add values
-for country in data["countries"].keys():
-    for dsi in data["countries"][country]["dsis"].keys():
-        ws_countries_dsis.write(excel_matrix["country_row"][country],
-                                   excel_matrix["dsi_col"][dsi], data["countries"][country]["dsis"][dsi])
+    col = 'B'
+    for d in OrderedDict(all_dsi).keys():
+        ws_countries_dsis.write("{}2".format(col), d, wb_format_light_grey)
+        col = next_col(col)
+    # add values
+    for country in data["countries"].keys():
+        for dsi in data["countries"][country]["dsis"].keys():
+            ws_countries_dsis.write(excel_matrix["country_row"][country],
+                                    excel_matrix["dsi_col"][dsi], data["countries"][country]["dsis"][dsi])
 
-workbook.close()
+    workbook.close()
