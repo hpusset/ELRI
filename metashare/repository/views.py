@@ -1635,7 +1635,7 @@ def repo_report(request):
         for i in range(len(resources)):
 
             res = resources[i]
-            crawled = "YES" if res.resourceCreationInfo.createdUsingELRCServices else "NO"
+            crawled = "YES" if res.resourceCreationInfo and res.resourceCreationInfo.createdUsingELRCServices else "NO"
             psi_list = [d.PSI for d in res.distributioninfotype_model_set.all()]
             psi = "YES" if any(psi_list) else "NO"
             validated = "YES" if res.storage_object.get_validation() else "NO"
@@ -1812,7 +1812,11 @@ def _get_preferred_size(resource):
                     if terms:
                         return terms
                     else:
-                        return size_infos[0]
+                        try:
+			    return size_infos[0]
+			except IndexError:
+			    return None
+			    
 
 
 def _get_country(res):
