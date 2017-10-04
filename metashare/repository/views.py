@@ -1643,7 +1643,7 @@ def repo_report(request):
             # is it processed?
             relations = [relation.relationType.startswith('is') for relation in res.relationinfotype_model_set.all()]
             processed = "YES" if any(relations) else "NO"
-            countries = []
+            country = _get_country(res)
             contacts = []
             licences = []
             affiliations = []
@@ -1661,7 +1661,7 @@ def repo_report(request):
                     except KeyError:
                         org_name = afl.organizationName[afl.organizationName.keys()[0]]
                     affiliations.append(org_name)
-                countries.append(cp.communicationInfo.country)
+                # country.append(cp.communicationInfo.country)
 
                 # try to get first and last name otherwise get only last name which is mandatory
                 try:
@@ -1702,15 +1702,23 @@ def repo_report(request):
             worksheet.write(j, 4, " | ".join(langs))
 
             worksheet.write(j, 5, " | ".join(lang_sizes))
+            # sizes = []
+            # size_units = []
+            # for s in size_info:
+            #     sizes.append(s)
+            #     size_units.extend(_get_resource_size_units(res, s))
 
-            sizes = []
-            size_units = []
-            for s in size_info:
-                sizes.append(s)
-                size_units.extend(_get_resource_size_units(res, s))
-            worksheet.write(j, 6, " | ".join(sizes))
-
-            worksheet.write(j, 7, " | ".join(size_units))
+            preferred_size = _get_preferred_size(res)
+            if preferred_size:
+                if float(preferred_size.size).is_integer():
+                    size_num = int(preferred_size.size)
+                else:
+                    size_num = float(preferred_size.size)
+                worksheet.write_number(j, 6, size_num)
+                worksheet.write(j, 7, prettify_camel_case_string(preferred_size.sizeUnit))
+            else:
+                worksheet.write(j, 6, "")
+                worksheet.write(j, 7, "")
 
             if domain_info:
                 domains = []
@@ -1728,8 +1736,8 @@ def repo_report(request):
                 owners.append(o.username)
             worksheet.write(j, 12, ", ".join(owners))
 
-            if countries:
-                worksheet.write(j, 13, ", ".join(countries))
+            if country:
+                worksheet.write(j, 13, country)
             else:
                 worksheet.write(j, 13, "N/A")
             worksheet.write(j, 14, ", ".join(licences))
@@ -1780,6 +1788,43 @@ def repo_report(request):
                                 .format(datetime.datetime.now().strftime("%a, %d %b %Y"), ", ".join(rp)))
     else:
         return HttpResponse("No Language Resources published within the last two weeks\n")
+
+
+def _get_preferred_size(resource):
+    size_infos = _get_resource_size_infos(resource)
+    tu = next((size_info for size_info in size_infos if size_info.sizeUnit == u"translationUnits"), None)
+    if tu:
+        return tu
+    else:
+        tokens = next((size_info for size_info in size_infos if size_info.sizeUnit == u"tokens"), None)
+        if tokens:
+            return tokens
+        else:
+            words = next((size_info for size_info in size_infos if size_info.sizeUnit == u"words"), None)
+            if words:
+                return words
+            else:
+                entries = next((size_info for size_info in size_infos if size_info.sizeUnit == u"entries"), None)
+                if entries:
+                    return entries
+                else:
+                    terms = next((size_info for size_info in size_infos if size_info.sizeUnit == u"terms"), None)
+                    if terms:
+                        return terms
+                    else:
+                        return size_infos[0]
+
+
+def _get_country(res):
+    res_countries = []
+    for cp in res.contactPerson.all():
+        res_countries.append(cp.communicationInfo.country)
+        # now try to get the correct coutry
+    if len(set(res_countries)) > 1 and res_countries[1]:
+        res_country = res_countries[1]
+    else:
+        res_country = res_countries[0]
+    return res_country
 
 
 def _get_resource_lang_info(resource):
@@ -1974,6 +2019,28 @@ def _get_resource_sizes(resource):
                           .languageDescriptionTextInfo.sizeinfotype_model_set.all()])
     result = list(set(result))
     result.sort()
+    return result
+
+
+def _get_resource_size_infos(resource):
+    result = []
+    media = resource.resourceComponentType.as_subclass()
+
+    if isinstance(media, corpusInfoType_model):
+        media_type = media.corpusMediaType
+        for corpus_info in media_type.corpustextinfotype_model_set.all():
+            result.extend([s for s in corpus_info.sizeinfotype_model_set.all()])
+
+    elif isinstance(media, lexicalConceptualResourceInfoType_model):
+        lcr_media_type = media.lexicalConceptualResourceMediaType
+        if lcr_media_type.lexicalConceptualResourceTextInfo:
+            result.extend([s for s in lcr_media_type \
+                    .lexicalConceptualResourceTextInfo.sizeinfotype_model_set.all()])
+    elif isinstance(media, languageDescriptionInfoType_model):
+        ld_media_type = media.languageDescriptionMediaType
+        if ld_media_type.languageDescriptionTextInfo:
+            result.extend([s for s in ld_media_type \
+                    .languageDescriptionTextInfo.sizeinfotype_model_set.all()])
     return result
 
 
