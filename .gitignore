@@ -28,3 +28,5 @@ venv
 # temporary
 .travis.yml
 /metashare/contributions_data/*
+/metashare/tmx_management/settings.py
+/metashare/tmp/*
