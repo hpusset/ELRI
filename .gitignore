@@ -30,3 +30,4 @@ venv
 /metashare/contributions_data/*
 /metashare/tmx_management/settings.py
 /metashare/tmp/*
+/metashare/edelivery/files/*
