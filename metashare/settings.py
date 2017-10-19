@@ -185,6 +185,7 @@ INSTALLED_APPS = (
     'metashare.repository',
     'metashare.bcp47',
     'progressbarupload',
+    'metashare.edelivery',
 )
 
 FILE_UPLOAD_HANDLERS = (

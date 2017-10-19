@@ -82,6 +82,7 @@
              <th class="sorting">Country</th>
              <th>Phone Number</th>
              <th class="sorting">Organization</th>
+             <th class="sorting">eDelivery</th>
              {% if user.is_superuser %}
                  <th>Data</th>
                  <th>Import as</th>
@@ -104,6 +105,13 @@
         <td>{{ file.userInfo.country|join:", "}}</td>
         <td>{{ file.userInfo.phoneNumber|join:", "}}</td>
         <td>{{ file.userInfo.institution|join:", "}}</td>
+        <td>
+            {% if file.edelivery %}
+                {{ file.msg_id|join:"" }}
+            {% else %}
+                <span style="color:#ffa40e;">Not through eDelivery</span>
+            {% endif %}
+        </td>
         {% if user.is_superuser %}
             <td>
                 {% if file.dataset.zip %}

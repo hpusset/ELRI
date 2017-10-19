@@ -1,3 +1,4 @@
+import distutils
 import json
 import logging
 import os
@@ -1028,7 +1029,8 @@ def contribute(request):
                 'shortDescription': request.POST['shortDescription'],
             },
             'administration': {
-                'processed': 'false'
+                'processed': 'false',
+                'edelivery': 'false'
             }
         }
 
@@ -1169,7 +1171,9 @@ def manage_contributed_data(request):
 
             },
             "resource_file": doc.xpath("//resource/administration/resource_file/text()"),
-            "dataset": dataset
+            "dataset": dataset,
+            'edelivery':  distutils.util.strtobool(doc.xpath("//resource/administration/edelivery/text()")[0]),
+            'msg_id': doc.xpath("//resource/administration/edelivery/@msg_id")
 
         })
     context = {
