@@ -51,9 +51,9 @@ urlpatterns += patterns('metashare.bcp47.xhr',
   (r'^{0}bcp47/'.format(DJANGO_BASE), include('metashare.bcp47.urls')),
 )
 
-urlpatterns += patterns('metashare.tmx_management.views',
-  (r'^{0}tmx/'.format(DJANGO_BASE), include('metashare.tmx_management.urls')),
-)
+# urlpatterns += patterns('metashare.tmx_management.views',
+#   (r'^{0}tmx/'.format(DJANGO_BASE), include('metashare.tmx_management.urls')),
+# )
 
 urlpatterns += patterns('metashare.bcp47.xhr',
   (r'^{0}bcp47/'.format(DJANGO_BASE), include('metashare.bcp47.urls')),
