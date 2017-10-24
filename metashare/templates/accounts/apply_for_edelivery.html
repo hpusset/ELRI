@@ -1,13 +1,55 @@
 {% extends "base.html" %}
 {% block title %}Apply for eDelivery membership &ndash; ELRC-SHARE{% endblock %}
-
+{% block messages %}
+{% if form.errors %}
+<p class="error">{{form.errors}}</p>
+{% endif %}
+{% endblock %}
 {% block content %}
-    <form class="form_helper"
+    <form class="form-horizontal"
           enctype="multipart/form-data"
           action="{% url 'edelivery_application' %}"
           method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
+        <fieldset>
+            <legend style="padding:20px">Apply for eDelivery membership</legend>
+            <div class="form-group required">
+                <label class="col-md-4 control-label" for="endpoint">MSH Endpoint</label>
+
+                <div class="col-md-8">
+                    <input id="endpoint" name="endpoint" placeholder="" class="form-control input-md" required=""
+                           type="text">
+{#                    <span class="help-block"> A valid URL pointing at the Web Service endpoint</span>#}
+                </div>
+            </div>
+            <div class="form-group required">
+                <label class="col-md-4 control-label" for="gateway_party_name">Access Point Gateway Party Name</label>
+
+                <div class="col-md-8">
+                    <input id="gateway_party_name" name="gateway_party_name" placeholder="" class="form-control input-md" required=""
+                           type="text">
+{#                    <span class="help-block"> A valid URL pointing at the Web Service endpoint</span>#}
+                </div>
+            </div>
+            <div class="form-group required">
+                <label class="col-md-4 control-label" for="gateway_party_id">Access Point Gateway Party ID</label>
+
+                <div class="col-md-8">
+                    <input id="gateway_party_id" name="gateway_party_id" placeholder="" class="form-control input-md" required=""
+                           type="text">
+{#                    <span class="help-block"> A valid URL pointing at the Web Service endpoint</span>#}
+                </div>
+            </div>
+
+            <div class="form-group required" id="public_key">
+            <label class="col-md-4 control-label" for="public_key">Public Certificate (.cer)</label>
+
+            <div class="col-md-4">
+                <input accept=".cer" id="public_key" name="public_key" class="input-file" type="file" required="">
+
+            </div>
+        </div>
+            {% csrf_token %}
+        </fieldset>
         <input type="submit" value="Submit"/>
     </form>
 {% endblock %}
