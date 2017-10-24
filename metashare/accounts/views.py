@@ -595,13 +595,12 @@ def reset(request, uuid=None):
 
 @login_required
 def edelivery_application(request):
-    user = request.user
     if request.method == "POST":
         form = EdeliveryApplicationForm(request.POST, request.FILES)
         if form.is_valid():
             # check if user has already applied for edelivery membership
             try:
-                appl = AccessPointEdeliveryApplication.objects.get(user=user)
+                appl = AccessPointEdeliveryApplication.objects.get(user=request.user)
                 if appl.status == "PENDING":
                     messages.warning(request, "There is already an eDelivery application for your account,"
                                               " pending for approval.")
@@ -609,7 +608,7 @@ def edelivery_application(request):
                     messages.warning(request, "You have already joined the ELRC-SHARE eDelivery network.")
             except ObjectDoesNotExist:
                 application = AccessPointEdeliveryApplication(
-                    user=user,
+                    user=request.user,
                     endpoint=form.cleaned_data['endpoint'],
                     gateway_party_name=form.cleaned_data['gateway_party_name'],
                     gateway_party_id=form.cleaned_data['gateway_party_id'],
@@ -629,6 +628,9 @@ def edelivery_application(request):
             return redirect('metashare.views.frontpage')
     else:
         form = EdeliveryApplicationForm()
-    return render_to_response(
-        'accounts/apply_for_edelivery.html',
-        {'form': form})
+    # return render_to_response(
+    #     'accounts/apply_for_edelivery.html',
+    #     {'form': form})
+    dictionary = {'title': _('Apply for eDelivery membership'), 'form': form}
+    return render_to_response('accounts/apply_for_edelivery.html', dictionary,
+                                  context_instance=RequestContext(request))
