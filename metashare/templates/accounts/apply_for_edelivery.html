@@ -6,6 +6,9 @@
 {% endif %}
 {% endblock %}
 {% block content %}
+    <div>
+        <img src="{{ STATIC_URL }}metashare/images/cef_digital.svg" alt="">
+    </div>
     <form class="form-horizontal"
           enctype="multipart/form-data"
           action="{% url 'edelivery_application' %}"
