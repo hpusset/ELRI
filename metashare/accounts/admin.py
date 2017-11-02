@@ -18,8 +18,8 @@ from metashare.accounts.forms import EditorGroupForm, OrganizationForm, \
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
     UserProfile, EditorGroup, EditorGroupApplication, EditorGroupManagers, \
     Organization, OrganizationApplication, OrganizationManagers, AccessPointEdeliveryApplication
-from metashare.local_settings import AP_CERTS_DIR
 from metashare.utils import create_breadcrumb_template_params
+from ..edelivery.update_ap_files import update_pmode, update_truststore
 
 
 class RegistrationRequestAdmin(admin.ModelAdmin):
@@ -1044,12 +1044,24 @@ class OrganizationManagersAdmin(admin.ModelAdmin):
 
 class EdeliveryApplicationAdmin(admin.ModelAdmin):
     list_display = ('user', 'endpoint', 'gateway_party_name', 'gateway_party_id', 'status')
-    actions = ('accept_selected', 'reject_selected', 'move_to_pending')
+    actions = ('accept_selected', 'reject_selected', 'revoke_selected', 'reactivate_selected')
+
+    @staticmethod
+    def _accept_application(request, req):
+        # update pmode
+        pmode_result = update_pmode(req)
+        if not pmode_result['success']:
+            messages.error(request, pmode_result['msg'])
+        truststore_result = update_truststore(req.gateway_party_name, certificate=req.public_key.path)
+        if truststore_result['success']:
+            # TODO: email user
+            req.status = "ACTIVE"
+            req.save()
+            messages.success(request, "All selected eDelivery applications have been accepted")
+        else:
+            messages.error(request, truststore_result['msg'])
 
     def accept_selected(self, request, queryset):
-
-        from ..edelivery import update_pmode_xml as up_xml
-
         """
         The action to accept eDelivery applications.
         """
@@ -1063,13 +1075,7 @@ class EdeliveryApplicationAdmin(admin.ModelAdmin):
         for req in queryset:
             # set status to "accepted"
             if req.status == "PENDING":
-                req.status = "ACCEPTED"
-                req.save()
-                # update pmode
-                up_xml.update_pmode_xml(req)
-                # TODO: update truststore
-                # TODO: email us
-                messages.success(request, "All selected eDelivery applications have been accepted")
+                self._accept_application(request, req)
             else:
                 messages.error(request, "{} with status '{}' is not eligible for approval. "
                                         "'PENDING' status is required for this operation.".format(req, req.status))
@@ -1077,41 +1083,93 @@ class EdeliveryApplicationAdmin(admin.ModelAdmin):
     accept_selected.short_description = \
         _("Accept selected eDelivery applications")
 
-    def move_to(self, request, directory, source, filename):
-        dest = os.path.join(AP_CERTS_DIR, directory, request.user.username)
-        try:
-            os.makedirs(dest)
-            shutil.move(os.path.join(source, filename), os.path.join(dest, filename))
-            shutil.rmtree(source)
-            return os.path.join(dest, filename)
-        except OSError, e:
-            messages.error(e)
-            messages.error(request, "Could not move {} to '{}' directory".format(filename, directory))
-
-
     def reject_selected(self, request, queryset):
         if not request.user.is_superuser:
             messages.error(request,
-                           _('You must be superuser to delete eDelivery applications.'))
+                           _('You must be superuser to reject eDelivery applications.'))
             return HttpResponseRedirect(request.get_full_path())
         if queryset.count() == 0:
             return HttpResponseRedirect(request.get_full_path())
 
         for req in queryset:
-            if req.status != "REJECTED":
-                req.status = "REJECTED"
-                # TODO: request for rejection reason
-                # TODO: fire ansible to remove from domibus
-                # TODO: email user
-                req.save()
-                messages.success(request, "The selected applications have been rejected")
+            if req.status == "PENDING":
+                if req.rejection_reason:
+                    req.status = "REJECTED"
+                    # TODO: email user
+                    req.save()
+                    messages.success(request, "The selected applications have been rejected. "
+                                              "The requesting users have been notified via email.")
+                else:
+                    messages.error(request, "You need to provide a reason for rejecting the application {}".format(req))
             else:
                 messages.error(request,
-                               _('{} has already been rejected'.format(req))
-                               )
+                               _('{} cannot be rejected. Only "PENDING" applications can be rejected'
+                                 .format(req)))
 
     reject_selected.short_description = \
         _("Reject selected eDelivery applications")
+
+    def revoke_selected(self, request, queryset):
+        if not request.user.is_superuser:
+            messages.error(request,
+                           _('You must be superuser to revoke active eDelivery applications.'))
+            return HttpResponseRedirect(request.get_full_path())
+        if queryset.count() == 0:
+            return HttpResponseRedirect(request.get_full_path())
+
+        for req in queryset:
+            if req.status == "ACTIVE":
+                if req.rejection_reason:
+                    # remove from Access Point
+
+                    # update pmode
+                    pmode_result = update_pmode(req, mode="remove")
+                    if not pmode_result['success']:
+                        messages.error(request, pmode_result['msg'])
+                    truststore_result = update_truststore(req.gateway_party_name, mode="remove")
+                    if truststore_result['success']:
+                        # TODO: email user
+                        req.status = "ACTIVE"
+                        req.save()
+                    else:
+                        messages.error(request, truststore_result['msg'])
+
+                    req.status = "REVOKED"
+                    # TODO: remove pmode and certificate from access point
+                    # TODO: email user
+                    req.save()
+                    messages.success(request, "The selected applications have been revoked. "
+                                              "The requesting users have been notified via email.")
+                else:
+                    messages.error(request, "You need to provide a reason for revoking the application {}".format(req))
+            else:
+                messages.error(request,
+                               _('{} cannot be rejected. Only "ACTIVE" applications can be revoked.'
+                                 .format(req)))
+
+    revoke_selected.short_description = \
+        _("Revoke selected eDelivery applications")
+
+    def reactivate_selected(self, request, queryset):
+        if not request.user.is_superuser:
+            messages.error(request,
+                           _('You must be superuser to reactivate revoked eDelivery applications.'))
+            return HttpResponseRedirect(request.get_full_path())
+        if queryset.count() == 0:
+            return HttpResponseRedirect(request.get_full_path())
+
+        for req in queryset:
+            if req.status == "REVOKED":
+                # accept it
+                self._accept_application(request, req)
+            else:
+                messages.error(request,
+                               _('{} cannot be reactivated. Only "REVOKED" applications can be reactivated.'
+                                 .format(req)))
+
+    reactivate_selected.short_description = \
+        _("Reactivate selected eDelivery applications")
+
 
 admin.site.register(RegistrationRequest, RegistrationRequestAdmin)
 admin.site.register(ResetRequest, ResetRequestAdmin)

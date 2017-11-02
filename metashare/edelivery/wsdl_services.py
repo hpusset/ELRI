@@ -3,14 +3,20 @@ import logging
 import os
 
 import requests
-from lxml import etree
-from requests.auth import HTTPBasicAuth
-from suds import WebFault
+import suds_requests
 from django.conf import settings
-from . import client as cl
+from lxml import etree
+from suds import WebFault
+from suds.client import Client
 
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(settings.LOG_HANDLER)
+
+session = requests.Session()
+
+session.auth = (settings.WSDL_USERNAME, settings.WSDL_PASSWORD)
+
+client = Client(settings.WSDL_URL, transport=suds_requests.RequestsTransport(session))
 
 
 # local methods
@@ -45,7 +51,7 @@ def list_pending_messages():
     Returns: A list of message ids pending for download
     """
     try:
-        return cl.service.listPendingMessages()
+        return client.service.listPendingMessages()
     except WebFault as ex:
         LOGGER.error(u"{}".format(ex))
 
@@ -59,7 +65,7 @@ def get_message_status(msg_id):
     """
     # it always returns <empty>
     try:
-        return cl.service.getStatus(msg_id)
+        return client.service.getStatus(msg_id)
     except WebFault as ex:
         LOGGER.error(u"{}".format(ex))
 
@@ -75,7 +81,7 @@ def download_message(msg_id):
     """
     try:
         # Call the service
-        data = cl.service.downloadMessage(msg_id)
+        data = client.service.downloadMessage(msg_id)
 
         # Build the desired filename using the payload cid:message which is an xml
         admin_info = None

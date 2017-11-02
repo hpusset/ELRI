@@ -9,7 +9,7 @@ from django.utils.translation import ugettext as _
 from metashare.accounts.models import UserProfile, EditorGroupApplication, \
     OrganizationApplication, Organization, OrganizationManagers, EditorGroup, \
     EditorGroupManagers, AccessPointEdeliveryApplication
-from metashare.accounts.validators import validate_wsdl_url
+from metashare.accounts.validators import validate_wsdl_url, validate_cer_file
 
 
 class ModelForm(forms.ModelForm):

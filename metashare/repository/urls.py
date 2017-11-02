@@ -10,7 +10,6 @@ sqs = SearchQuerySet() \
     .facet("languageNameFilter") \
     .facet("resourceTypeFilter") \
     .facet("mediaTypeFilter") \
-    .facet("availabilityFilter") \
     .facet("licenceFilter") \
     .facet("restrictionsOfUseFilter") \
     .facet("validatedFilter") \
@@ -19,7 +18,6 @@ sqs = SearchQuerySet() \
     .facet("multilingualityTypeFilter") \
     .facet("modalityTypeFilter") \
     .facet("dataFormatFilter") \
-    .facet("bestPracticesFilter") \
     .facet("domainFilter") \
     .facet("corpusAnnotationTypeFilter") \
     .facet("languageDescriptionLDTypeFilter") \
@@ -38,9 +36,12 @@ sqs = SearchQuerySet() \
     .facet("toolServiceEvaluatedFilter") \
     .facet("textTextGenreFilter") \
     .facet("textTextTypeFilter") \
-    .facet("languageVarietyFilter") \
     .facet("appropriatenessForDSIFilter") \
-    .facet("publicationStatusFilter")
+    # .facet("publicationStatusFilter")
+    # .facet("availabilityFilter") \
+    # .facet("bestPracticesFilter") \
+    # .facet("languageVarietyFilter") \
+
 
 urlpatterns = patterns('metashare.repository.views',
                        url(r'^browse/(?P<resource_name>[\w\-]*)/(?P<object_id>\w+)/$',

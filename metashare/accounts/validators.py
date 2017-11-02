@@ -17,3 +17,9 @@ def validate_wsdl_url(value):
         raise ValidationError(u'%s is not a valid WSDL endpoint. '
                               u'Please make sure that you have added \"/msh\" '
                               u'at the end of the URL.' % value)
+
+
+# def validate_cer_file(value):
+#     if not value.lower().endswith(".cer"):
+#         raise ValueError(u'The file you are trying to upload does not'
+#                          u'appear to be a ".cer" file.')

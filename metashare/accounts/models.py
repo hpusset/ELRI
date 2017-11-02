@@ -106,7 +106,7 @@ class ResetRequest(models.Model):
 
 
 EDELIVERY_APPLICATIONS_STATUS = [
-    "PENDING", "ACCEPTED", "REJECTED"
+    "PENDING", "REJECTED", "ACTIVE", "REVOKED"
 ]
 
 
