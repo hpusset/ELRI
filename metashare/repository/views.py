@@ -59,6 +59,7 @@ from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
 from metashare.storage.models import PUBLISHED
 from metashare.utils import prettify_camel_case_string
+from decorators import resource_downloadable, resource_downloadable_view
 
 MAXIMUM_READ_BLOCK_SIZE = 4096
 
@@ -201,7 +202,10 @@ def _get_licences(resource, user_membership):
     return result
 
 
-@user_passes_test(lambda u: u.is_superuser or u.groups.filter(name="ecmembers").exists())
+
+# @user_passes_test(lambda u: u.is_superuser or u.groups.filter(name="ecmembers").exists())
+# MDEL: temporary implementation to provide download for specific resources
+@resource_downloadable
 def download(request, object_id):
     """
     Renders the resource download/purchase view including license selection,
@@ -438,7 +442,8 @@ def download_contact(request, object_id):
     return render_to_response('repository/download_contact_form.html',
                               dictionary, context_instance=RequestContext(request))
 
-
+# MDEL: temporary implementation to provide download for specific resources
+@resource_downloadable_view
 def view(request, resource_name=None, object_id=None):
     """
     Render browse or detail view for the repository application.
@@ -1603,7 +1608,6 @@ def repo_report(request):
         date_format = workbook.add_format({'num_format': 'yyyy, mmmm d'})
         title = "ELRC-SHARE_OVERVIEW_{}".format(
             datetime.datetime.now().strftime("%d-%m-%y"))
-        print title
         worksheet = workbook.add_worksheet(name=title)
 
         worksheet.write('A1', 'Resource ID', heading)
@@ -1813,10 +1817,9 @@ def _get_preferred_size(resource):
                         return terms
                     else:
                         try:
-			    return size_infos[0]
-			except IndexError:
-			    return None
-			    
+                            return size_infos[0]
+                        except IndexError:
+                            return None
 
 
 def _get_country(res):
@@ -2039,12 +2042,12 @@ def _get_resource_size_infos(resource):
         lcr_media_type = media.lexicalConceptualResourceMediaType
         if lcr_media_type.lexicalConceptualResourceTextInfo:
             result.extend([s for s in lcr_media_type \
-                    .lexicalConceptualResourceTextInfo.sizeinfotype_model_set.all()])
+                          .lexicalConceptualResourceTextInfo.sizeinfotype_model_set.all()])
     elif isinstance(media, languageDescriptionInfoType_model):
         ld_media_type = media.languageDescriptionMediaType
         if ld_media_type.languageDescriptionTextInfo:
             result.extend([s for s in ld_media_type \
-                    .languageDescriptionTextInfo.sizeinfotype_model_set.all()])
+                          .languageDescriptionTextInfo.sizeinfotype_model_set.all()])
     return result
 
 

@@ -232,7 +232,8 @@
 		<div style="clear: both;">
 			<a href="javascript:history.back();"><button class="span-12 button middle_button">
                 <i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
-            {% if user.is_superuser or user|is_member:"ecmembers" and resource.storage_object.publication_status == 'p' %}
+{#            {% if user.is_superuser or user|is_member:"ecmembers" and resource.storage_object.publication_status == 'p' %}#}
+            {% if request.download_permitted %}
                 <a href="{% url 'download' resource.storage_object.identifier %}">
                     <button class="span-4 button middle_button">
                         <i class="fa fa-download" aria-hidden="true"></i> Download</button>
