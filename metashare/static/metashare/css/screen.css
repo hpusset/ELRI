@@ -882,3 +882,7 @@ div.jsddm {
 	transition: background 200ms linear;
 }
 
+#messages {
+    position: relative;
+	top: 32px;
+}
