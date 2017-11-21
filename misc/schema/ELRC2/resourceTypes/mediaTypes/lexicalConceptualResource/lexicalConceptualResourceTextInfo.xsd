@@ -42,7 +42,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element ref="ms:textFormatInfo" minOccurs="0" maxOccurs="unbounded">
+			<xs:element ref="ms:textFormatInfo" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Groups information on the text format(s) of a resource</xs:documentation>
 					<xs:appinfo>

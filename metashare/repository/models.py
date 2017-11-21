@@ -3030,9 +3030,9 @@ class lexicalConceptualResourceTextInfoType_model(SchemaModel):
       ( u'lingualityInfo', u'lingualityInfo', REQUIRED ),
       ( u'languageInfo', u'languageinfotype_model_set', REQUIRED ),
       ( u'sizeInfo', u'sizeinfotype_model_set', REQUIRED ),
-      ( u'textFormatInfo', u'textformatinfotype_model_set', RECOMMENDED ),
-      ( u'characterEncodingInfo', u'characterencodinginfotype_model_set', OPTIONAL ),
-      ( u'domainInfo', u'domaininfotype_model_set', OPTIONAL ),
+      ( u'textFormatInfo', u'textformatinfotype_model_set', REQUIRED ),
+      ( u'characterEncodingInfo', u'characterencodinginfotype_model_set', RECOMMENDED ),
+      ( u'domainInfo', u'domaininfotype_model_set', RECOMMENDED ),
     )
     __schema_classes__ = {
       u'characterEncodingInfo': "characterEncodingInfoType_model",
