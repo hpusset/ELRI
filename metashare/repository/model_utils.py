@@ -14,7 +14,6 @@ from metashare.repository.templatetags.replace import pretty_camel
 from metashare.settings import LOG_HANDLER
 from metashare.stats.models import LRStats
 
-
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
@@ -28,28 +27,28 @@ def get_related_models(instance, parent):
     set to X via a ForeignKey field.
     """
     LOGGER.info('get_related_models({0}) called.'.format(
-      instance.__class__.__name__))
-    
+        instance.__class__.__name__))
+
     # If a parent is given, compute the corresponding parent_set String.
     parent_set = None
     if parent:
         parent_set = '{0}_set'.format(parent).lower()
-    
+
     # Related model class names should have this suffix.
     related_suffix = '_{0}'.format(instance.__class__.__name__)
-    
+
     result = []
     for name in dir(instance):
         if name.endswith('_set'):
             if name != parent_set:
                 model_instance = getattr(instance, name)
                 model_name = model_instance.model.__name__
-                
+
                 LOGGER.info('{0} ({1})'.format(name, model_name))
-                
+
                 if model_name.endswith(related_suffix):
                     result.append(model_name)
-    
+
     return result
 
 
@@ -82,7 +81,7 @@ def _get_root_resources(ignore, *instances):
         ignore.add(instance)
 
         # `resourceInfoType_model` instances are our actual results
-        if instance.__class__.__name__  ==  u'resourceInfoType_model':
+        if instance.__class__.__name__ == u'resourceInfoType_model':
             result.add(instance)
         # an instance may be None, in which case we ignore it
         elif hasattr(instance, '_meta'):
@@ -117,7 +116,7 @@ def _get_root_resources(ignore, *instances):
             #   which is closer to the searched root model:
             for rel in instance._meta.get_all_related_many_to_many_objects():
                 result.update(_get_root_resources(ignore,
-                        *getattr(instance, rel.get_accessor_name()).all()))
+                                                  *getattr(instance, rel.get_accessor_name()).all()))
 
     return result
 
@@ -150,6 +149,7 @@ def get_resource_linguality_infos(res_obj):
 
     return result
 
+
 def get_resource_license_types(res_obj):
     """
     Returns a list of license under which the given language resource is
@@ -159,7 +159,8 @@ def get_resource_license_types(res_obj):
             res_obj.distributioninfotype_model_set.all()
             for licence_info in
             distributionInfo.licenceInfo.all()]
- 
+
+
 def get_resource_attribution_texts(res_obj):
     """
     Returns a list of attribution texts for the given resource. The attribution
@@ -167,6 +168,7 @@ def get_resource_attribution_texts(res_obj):
     """
     return [distributionInfo.get_default_attributionText() for distributionInfo in
             res_obj.distributioninfotype_model_set.all()]
+
 
 def get_resource_media_types(res_obj):
     """
@@ -244,6 +246,40 @@ def get_resource_dataformats(res_obj):
 
     return dataFormat_list
 
+
+def get_resource_encodings(res_obj):
+    encoding_list = []
+    corpus_media = res_obj.resourceComponentType.as_subclass()
+
+    if isinstance(corpus_media, corpusInfoType_model):
+        media_type = corpus_media.corpusMediaType
+        for corpus_info in media_type.corpustextinfotype_model_set.all():
+            encoding_list.extend([chr.characterEncoding for chr in
+                                  corpus_info.characterencodinginfotype_model_set.all()])
+
+    elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
+        lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
+        if lcr_media_type.lexicalConceptualResourceTextInfo:
+            encoding_list.extend([chr.characterEncoding for chr in
+                                  lcr_media_type.lexicalConceptualResourceTextInfo \
+                                 .characterencodinginfotype_model_set.all()])
+
+    elif isinstance(corpus_media, languageDescriptionInfoType_model):
+        ld_media_type = corpus_media.languageDescriptionMediaType
+        if ld_media_type.languageDescriptionTextInfo:
+            encoding_list.extend([chr.characterEncoding for chr in
+                                  ld_media_type.languageDescriptionTextInfo \
+                                 .characterencodinginfotype_model_set.all()])
+
+    elif isinstance(corpus_media, toolServiceInfoType_model):
+        if corpus_media.inputInfo:
+            encoding_list.extend(corpus_media.inputInfo.characterEncoding)
+        if corpus_media.outputInfo:
+            encoding_list.extend(corpus_media.outputInfo.characterEncoding)
+
+    return encoding_list
+
+
 def get_lr_stat_action_count(obj_identifier, stats_action):
     """
     Returns the count of the given stats action for the given resource instance.
@@ -259,6 +295,7 @@ def get_lr_stat_action_count(obj_identifier, stats_action):
     else:
         return 0
 
+
 def get_lr_master_url(resource):
     """
     Returns the full URL of the master copy of the given resource object.
@@ -268,3 +305,8 @@ def get_lr_master_url(resource):
     """
     return "{0}/{1}".format(resource.storage_object.source_url,
                             resource.get_relative_url())
+
+
+def lr_is_processable(resource):
+    #dataformats = get_resource_dataformats(resource)
+    pass
