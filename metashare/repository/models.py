@@ -2315,7 +2315,7 @@ class languageInfoType_model(SchemaModel):
     def real_unicode_(self):
         # pylint: disable-msg=C0301
         formatargs = ['languageName', 'languageId']
-        formatstring = u'{} ({})'
+        formatstring = u'{} ({})'.encode('utf-8')
         return self.unicode_(formatstring, formatargs)
 
 # pylint: disable-msg=C0103
