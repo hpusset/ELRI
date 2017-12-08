@@ -1633,6 +1633,8 @@ def repo_report(request):
         worksheet.write('S1', 'Validated', heading)
         worksheet.write('T1', 'Mimetypes', heading)
         worksheet.write('U1', 'Processed', heading)
+        worksheet.write('V1', 'Views', heading)
+        worksheet.write('W1', 'Downloads', heading)
         link = True
 
         j = 1
@@ -1685,6 +1687,11 @@ def repo_report(request):
 
             # date
             date = datetime.datetime.strptime(unicode(res.storage_object.created).split(" ")[0], "%Y-%m-%d")
+
+            # stats
+            num_downloads = model_utils.get_lr_stat_action_count(res.storage_object.identifier, DOWNLOAD_STAT)
+            num_views = model_utils.get_lr_stat_action_count(res.storage_object.identifier, VIEW_STAT)
+
             worksheet.write(j, 0, res.id)
             worksheet.write(j, 1, res_name.decode('utf-8'), bold)
             worksheet.write(j, 2, res.resource_type())
@@ -1761,6 +1768,8 @@ def repo_report(request):
             else:
                 worksheet.write(j, 19, "N/A")
             worksheet.write(j, 20, processed)
+            worksheet.write(j, 21, num_views)
+            worksheet.write(j, 22, num_downloads)
             j += 1
             # worksheet.write(i + 1, 3, _get_resource_size_info(res))
         # worksheet.write(len(resources)+2, 3, "Total Resources", bold)
