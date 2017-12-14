@@ -281,6 +281,7 @@ class UserProfile(models.Model):
         return self.user.is_staff and \
                (EditorGroup.objects.filter(name__in=
                                            self.user.groups.values_list('name', flat=True)).exists()
+                or u'globaleditors' in self.user.groups.values_list('name', flat=True)
                 or repository.models.resourceInfoType_model.objects \
                 .filter(owners__username=self.user.username).exists())
 
