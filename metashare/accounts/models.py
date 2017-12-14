@@ -275,15 +275,18 @@ class UserProfile(models.Model):
         Returns `True` if there are any resources that the user behind this
         profile can edit or create; `False` otherwise.
         """
-        if self.user.is_superuser:
+        # if self.user.is_superuser:
+        #     return True
+        #
+        # return self.user.is_staff and \
+        #        (EditorGroup.objects.filter(name__in=
+        #                                    self.user.groups.values_list('name', flat=True)).exists()
+        #         or u'globaleditors' in self.user.groups.values_list('name', flat=True)
+        #         or repository.models.resourceInfoType_model.objects \
+        #         .filter(owners__username=self.user.username).exists())
+        if self.user.is_staff:
             return True
-
-        return self.user.is_staff and \
-               (EditorGroup.objects.filter(name__in=
-                                           self.user.groups.values_list('name', flat=True)).exists()
-                or u'globaleditors' in self.user.groups.values_list('name', flat=True)
-                or repository.models.resourceInfoType_model.objects \
-                .filter(owners__username=self.user.username).exists())
+        return False
 
     def has_manager_permission(self, editor_group=None):
         """

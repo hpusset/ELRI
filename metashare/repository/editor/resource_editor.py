@@ -231,16 +231,18 @@ def has_publish_permission(request, queryset):
     Returns `True` if the given request has permission to change the publication
     status of all given language resources, `False` otherwise.
     """
-    if not request.user.is_superuser:
-        for obj in queryset:
-            res_groups = obj.editor_groups.all()
-            # we only allow a user to ingest/publish/unpublish a resource if she
-            # is a manager of one of the resource's `EditorGroup`s
-            if not any(res_group.name == mgr_group.managed_group.name
-                       for res_group in res_groups
-                       for mgr_group in EditorGroupManagers.objects.filter(name__in=
-                           request.user.groups.values_list('name', flat=True))):
-                return False
+    # if not request.user.is_superuser:
+    #     for obj in queryset:
+    #         res_groups = obj.editor_groups.all()
+    #         # we only allow a user to ingest/publish/unpublish a resource if she
+    #         # is a manager of one of the resource's `EditorGroup`s
+    #         if not any(res_group.name == mgr_group.managed_group.name
+    #                    for res_group in res_groups
+    #                    for mgr_group in EditorGroupManagers.objects.filter(name__in=
+    #                        request.user.groups.values_list('name', flat=True))):
+    #             return False
+    if not request.user.is_staff or request.user.groups.filter(name='naps').exists():
+            return False
     return True
 
 
@@ -322,7 +324,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         _("Unpublish selected published resources")
 
     def ingest_action(self, request, queryset):
-        if has_publish_permission(request, queryset):
+        if has_publish_permission(request, queryset) or request.user.is_staff:
             successful = 0
             for obj in queryset:
                 if change_resource_status(obj, status=INGESTED,
@@ -1375,12 +1377,12 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 del result['delete']
             # only users who are the manager of some group can see the
             # ingest/publish/unpublish actions:
-            if EditorGroupManagers.objects.filter(name__in=
-                        request.user.groups.values_list('name', flat=True)) \
-                    .count() == 0:
-                for action in (self.publish_action, self.unpublish_action,
-                               self.ingest_action):
+            if not request.user.is_staff:
+                for action in (self.publish_action, self.unpublish_action,):
                     del result[action.__name__]
+        if request.user.groups.filter(name='naps').exists():
+            del result['publish_action']
+            del result['unpublish_action']
         return result
 
     def create_hidden_structures(self, request):

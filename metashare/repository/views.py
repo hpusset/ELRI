@@ -4,6 +4,10 @@ import os
 import shutil
 import uuid
 
+from django.core.exceptions import PermissionDenied
+
+from metashare.repository.templatetags.is_member import is_member
+
 try:
     import cStringIO as StringIO
 except ImportError:
@@ -57,7 +61,7 @@ from metashare.repository.search_indexes import resourceInfoType_modelIndex, \
 from metashare.settings import LOG_HANDLER, STATIC_URL, DJANGO_URL, MAXIMUM_UPLOAD_SIZE, CONTRIBUTION_FORM_DATA
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
-from metashare.storage.models import PUBLISHED
+from metashare.storage.models import PUBLISHED, INGESTED
 from metashare.utils import prettify_camel_case_string
 from decorators import resource_downloadable, resource_downloadable_view
 
@@ -213,7 +217,9 @@ def download(request, object_id):
     """
     user_membership = _get_user_membership(request.user)
     bypass_licence = False
-    if request.user.is_superuser or request.user.groups.filter(name="ecmembers").exists():
+    if request.user.is_superuser \
+            or request.user.groups.filter(name="ecmembers").exists()\
+            or request.user.groups.filter(name="technicalReviewers").exists():
         bypass_licence = True
 
     # here we are only interested in licenses (or their names) of the specified
@@ -442,16 +448,37 @@ def download_contact(request, object_id):
     return render_to_response('repository/download_contact_form.html',
                               dictionary, context_instance=RequestContext(request))
 
+
+def has_view_permission(request, res_obj):
+    """
+    Returns `True` if the given request has permission to view the description
+    of the current resource, `False` otherwise.
+    """
+    if res_obj.storage_object.publication_status == PUBLISHED:
+        return True
+    else:
+        if request.user.is_superuser \
+                or request.user.groups.filter(name='ecmembers').exists() \
+                or request.user.groups.filter(name='technicalReviewers').exists():
+            return True
+
+        return False
+
 # MDEL: temporary implementation to provide download for specific resources
 @resource_downloadable_view
 def view(request, resource_name=None, object_id=None):
     """
     Render browse or detail view for the repository application.
     """
-    # only published resources may be viewed
+    # only published resources may be viewed. Ingested LRs can be viewed only
+    # by EC members and technical reviewers
     resource = get_object_or_404(resourceInfoType_model,
                                  storage_object__identifier=object_id,
-                                 storage_object__publication_status=PUBLISHED)
+                                 storage_object__publication_status__in=[INGESTED, PUBLISHED])
+
+    if not has_view_permission(request, resource):
+        raise PermissionDenied
+
     if request.path_info != resource.get_absolute_url():
         return redirect(resource.get_absolute_url())
 
@@ -769,6 +796,11 @@ class MetashareFacetedSearchView(FacetedSearchView):
 
     def get_results(self):
         sqs = super(MetashareFacetedSearchView, self).get_results()
+
+        if not is_member(self.request.user, 'ecmembers') \
+                and not is_member(self.request.user, 'technicalReviewers') \
+                and not self.request.user.is_superuser:
+            sqs = sqs.filter_and(publicationStatusFilter__exact='published')
 
         # Sort the results (on only one sorting value)
         if 'sort' in self.request.GET:
