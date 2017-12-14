@@ -25,7 +25,8 @@
                             <li title="Create/edit your own resource metadata or upload resource data"><a
                                     href="{% url 'editor:repository_resourceinfotype_model_myresources' %}">Manage your
                                 own resources</a></li>
-                            {% if user.is_superuser or user|is_member:"legalReviewers" or user|is_member:"technicalReviewers" %}
+{#                            {% if user.is_superuser or user|is_member:"legalReviewers" or user|is_member:"technicalReviewers" %}#}
+                            {% if user.is_superuser or user|is_member:"legalReviewers" %}
                                 <li title="Create/edit resource metadata or upload resource data"><a
                                         href="{% url 'editor:repository_resourceinfotype_model_changelist' %}">Manage
                                     all resources</a>
