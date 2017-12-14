@@ -226,7 +226,7 @@ def download(request, object_id):
     # resource that allow the current user a download/purchase
     resource = get_object_or_404(resourceInfoType_model,
                                  storage_object__identifier=object_id,
-                                 storage_object__publication_status__in=[PUBLISHED, INGESTED])
+                                 storage_object__deleted=False)
     # Get a dictionary, where the values are triplets:
     # (licenceInfo instance, download location, access)
     licences = _get_licences(resource, user_membership)
