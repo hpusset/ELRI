@@ -4,7 +4,7 @@ from smtplib import SMTPException
 from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.core.mail import send_mail
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
@@ -36,6 +36,9 @@ def confirm(request, uuid):
     # Activate the corresponding User instance.
     user = registration_request.user
     user.is_active = True
+    # Do not set user as staff/ editor
+    user.is_staff = False
+    user.groups.add(Group.objects.get(name='contributors'))
     # For convenience, log user in:
     # (We would actually have to authenticate the user before logging in,
     # however, as we don't know the password, we manually set the authenication
