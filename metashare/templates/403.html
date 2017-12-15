@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Permission Denied (403)</h2>
+<div class="content_box">
+{% if request.msg %}
+  <p>{{ request.msg }}</p>
+{% else %}
+  <p>You don't have the sufficient rights to access this resource.</p>
+{% endif %}
+</div>
+{% endblock %}
