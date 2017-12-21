@@ -1667,7 +1667,8 @@ def repo_report(request):
         worksheet.write('U1', 'Processed', heading)
         worksheet.write('V1', 'Views', heading)
         worksheet.write('W1', 'Downloads', heading)
-        worksheet.write('X1', 'Funding Projects', heading)
+        if not email_to == u'true':
+            worksheet.write('X1', 'Funding Projects', heading)
         link = True
 
         j = 1
