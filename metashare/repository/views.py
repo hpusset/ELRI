@@ -1729,7 +1729,10 @@ def repo_report(request):
             # Funding projects
             try:
                 rc = res.resourceCreationInfo
-                fundingProjects = [fp.projectShortName['en'] for fp in rc.fundingProject.all()]
+                try:
+                    fundingProjects = [fp.projectShortName['en'] for fp in rc.fundingProject.all()]
+                except KeyError:
+                    fundingProjects = [fp.projectName['en'] for fp in rc.fundingProject.all()]
             except AttributeError:
                 fundingProjects = []
 
