@@ -1643,7 +1643,7 @@ class distributionInfoType_model(SchemaModel):
       verbose_name='Allows uses besides DGT',
       help_text='Whether the resource can be used for purposes other tha' \
       'n those of the DGT',
-      default=True
+      default=False
       )
 
     licenceInfo = models.ManyToManyField("licenceInfoType_model",
