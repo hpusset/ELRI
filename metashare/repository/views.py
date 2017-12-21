@@ -1667,6 +1667,7 @@ def repo_report(request):
         worksheet.write('U1', 'Processed', heading)
         worksheet.write('V1', 'Views', heading)
         worksheet.write('W1', 'Downloads', heading)
+        worksheet.write('X1', 'Funding Projects', heading)
         link = True
 
         j = 1
@@ -1723,6 +1724,13 @@ def repo_report(request):
             # stats
             num_downloads = model_utils.get_lr_stat_action_count(res.storage_object.identifier, DOWNLOAD_STAT)
             num_views = model_utils.get_lr_stat_action_count(res.storage_object.identifier, VIEW_STAT)
+
+            # Funding projects
+            try:
+                rc = res.resourceCreationInfo
+                fundingProjects = [fp.projectShortName['en'] for fp in rc.fundingProject.all()]
+            except AttributeError:
+                fundingProjects = []
 
             worksheet.write(j, 0, res.id)
             worksheet.write(j, 1, res_name.decode('utf-8'), bold)
@@ -1802,6 +1810,8 @@ def repo_report(request):
             worksheet.write(j, 20, processed)
             worksheet.write(j, 21, num_views)
             worksheet.write(j, 22, num_downloads)
+            if not email_to == u'true':
+                worksheet.write(j, 23, ", ".join(fundingProjects))
             j += 1
             # worksheet.write(i + 1, 3, _get_resource_size_info(res))
         # worksheet.write(len(resources)+2, 3, "Total Resources", bold)
