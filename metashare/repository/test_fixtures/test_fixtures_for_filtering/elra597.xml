@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xmlns="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ http://elrc-share2.ilsp.gr/ELRC-SHARE_SCHEMA/v2.0/ELRC-SHARE-Resource.xsd">
+<resourceInfo xmlns="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/ http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/ELRC-SHARE-Resource.xsd">
 	<identificationInfo>
 		<resourceName lang="en">PAROLE Spanish Lexicon</resourceName>
 		<resourceName lang="fr">Lexique PAROLE de l'espagnol</resourceName>
