@@ -241,7 +241,8 @@ class CreateViewTest(django.test.TestCase):
     def testCreatePost(self):
         client = Client()
         post_data = {'shortname':'test', 'first_name':'Test',
-          'last_name':'Testson', 'email':'a@b.com', 'password':'test',
+          'last_name':'Testson', 'email':'a@b.com', 'country':'Greece',
+          'organization': 'ILSP', 'password':'test',
           'confirm_password': 'test', 'accepted_tos': 'yes'}
         response = client.post('/{0}accounts/create/'.format(DJANGO_BASE),
           follow=True, data=post_data)
@@ -304,7 +305,8 @@ class RegistrationRequestTest(django.test.TestCase):
         _prev_count = RegistrationRequest.objects.count()
         response = self.client.post(reverse(views.create),
             {'first_name': 'Test', 'last_name': 'Testson2', 'shortname': 'good',
-             'email': 'ok@example.com', 'password': 'secret',
+             'email': 'ok@example.com', 'country':'Greece',
+             'organization': 'ILSP', 'password': 'secret',
              'confirm_password': 'secret', 'accepted_tos': 'yes'}, follow=True)
         self.assertContains(response, 'received your registration data',
             msg_prefix="should have successfully created a registration")
