@@ -216,15 +216,16 @@ def change_resource_status(resource, status, precondition_status=None):
         return True
     return False
 
+
 def has_edit_permission(request, res_obj):
     """
     Returns `True` if the given request has permission to edit the metadata
     for the current resource, `False` otherwise.
     """
     return request.user.is_active and (request.user.is_superuser \
-        or request.user in res_obj.owners.all() \
-        or res_obj.editor_groups.filter(name__in=
-            request.user.groups.values_list('name', flat=True)).count() != 0)
+        or request.user in res_obj.owners.all()
+        or request.user.groups.filter(name="elrcReviewers").exists())
+
 
 def has_publish_permission(request, queryset):
     """
@@ -1324,8 +1325,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         # all users but the superusers may only see resources for which they are
         # either owner or editor group member:
         if not request.user.is_superuser \
-                and not request.user.groups.filter(name='legalReviewers').exists() \
-                and not request.user.groups.filter(name='technicalReviewers').exists():
+                and not request.user.groups.filter(name='elrcReviewers').exists():
             result = result.distinct().filter(Q(owners=request.user)
                     | Q(editor_groups__name__in=
                            request.user.groups.values_list('name', flat=True)))
@@ -1369,9 +1369,10 @@ class ResourceModelAdmin(SchemaModelAdmin):
         if not request.user.is_superuser:
             del result['remove_group']
             del result['remove_owner']
-            if not 'myresources' in request.POST:
-                del result['add_group']
-                del result['add_owner']
+            # TODO: revisit
+            # if not 'myresources' in request.POST:
+            #     del result['add_group']
+            #     del result['add_owner']
             # only users with delete permissions can see the delete action:
             if not self.has_delete_permission(request):
                 del result['delete']
@@ -1383,6 +1384,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
         if request.user.groups.filter(name='naps').exists():
             del result['publish_action']
             del result['unpublish_action']
+            del result['add_group']
+            del result['add_owner']
         return result
 
     def create_hidden_structures(self, request):

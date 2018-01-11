@@ -219,7 +219,7 @@ def download(request, object_id):
     bypass_licence = False
     if request.user.is_superuser \
             or request.user.groups.filter(name="ecmembers").exists()\
-            or request.user.groups.filter(name="technicalReviewers").exists():
+            or request.user.groups.filter(name="elrcReviewers").exists():
         bypass_licence = True
 
     # here we are only interested in licenses (or their names) of the specified
@@ -459,7 +459,7 @@ def has_view_permission(request, res_obj):
     else:
         if request.user.is_superuser \
                 or request.user.groups.filter(name='ecmembers').exists() \
-                or request.user.groups.filter(name='technicalReviewers').exists():
+                or request.user.groups.filter(name='elrcReviewers').exists():
             return True
 
         return False
@@ -798,7 +798,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
         sqs = super(MetashareFacetedSearchView, self).get_results()
 
         if not is_member(self.request.user, 'ecmembers') \
-                and not is_member(self.request.user, 'technicalReviewers') \
+                and not is_member(self.request.user, 'elrcReviewers') \
                 and not self.request.user.is_superuser:
             sqs = sqs.filter_and(publicationStatusFilter__exact='published')
 
