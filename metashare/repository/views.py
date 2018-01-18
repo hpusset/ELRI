@@ -1665,8 +1665,9 @@ def repo_report(request):
         worksheet.write('S1', 'Validated', heading)
         worksheet.write('T1', 'Mimetypes', heading)
         worksheet.write('U1', 'Processed', heading)
-        worksheet.write('V1', 'Views', heading)
-        worksheet.write('W1', 'Downloads', heading)
+        worksheet.write('V1', 'Related To', heading)
+        worksheet.write('W1', 'Views', heading)
+        worksheet.write('X1', 'Downloads', heading)
         if not email_to == u'true':
             worksheet.write('X1', 'Funding Projects', heading)
         link = True
@@ -1683,6 +1684,12 @@ def repo_report(request):
             # is it processed?
             relations = [relation.relationType.startswith('is') for relation in res.relationinfotype_model_set.all()]
             processed = "YES" if any(relations) else "NO"
+
+            #related_ids
+            related_ids=""
+            if res.relationinfotype_model_set.all():
+                related_ids = ", ".join(set([rel.relatedResource.targetResourceNameURI
+                                             for rel in res.relationinfotype_model_set.all()]))
             country = _get_country(res)
             contacts = []
             licences = []
@@ -1812,10 +1819,11 @@ def repo_report(request):
             else:
                 worksheet.write(j, 19, "N/A")
             worksheet.write(j, 20, processed)
-            worksheet.write(j, 21, num_views)
-            worksheet.write(j, 22, num_downloads)
+            worksheet.write(j, 21, related_ids)
+            worksheet.write(j, 22, num_views)
+            worksheet.write(j, 23, num_downloads)
             if not email_to == u'true':
-                worksheet.write(j, 23, ", ".join(fundingProjects))
+                worksheet.write(j, 24, ", ".join(fundingProjects))
             j += 1
             # worksheet.write(i + 1, 3, _get_resource_size_info(res))
         # worksheet.write(len(resources)+2, 3, "Total Resources", bold)
