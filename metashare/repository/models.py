@@ -1790,6 +1790,7 @@ LICENCEINFOTYPE_LICENCE_CHOICES = _make_choices_from_list([
     u'OGL-3.0',
     u'PDDL-1.0',
     u'openUnder-PSI',
+    u'publicDomain',
     u'CC-BY-3.0',
     u'CC-BY-NC-3.0',
     u'CC-BY-NC-ND-3.0',
@@ -1825,10 +1826,10 @@ def licenceinfotype_licence_optgroup_choices():
     Group the choices in groups. The first group is the most used choices
     and the second group is the rest.
     """
-    indl = ('International/National Data Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][:18])
-    ndl = ('National Data Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][18:24])
-    isl = ('International Software Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][24:34])
-    other = ('Other', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][34:])
+    indl = ('International/National Data Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][:19])
+    ndl = ('National Data Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][19:25])
+    isl = ('International Software Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][25:35])
+    other = ('Other', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][35:])
     optgroup = [indl, ndl, isl, other]
     return optgroup
 
@@ -1994,7 +1995,10 @@ class licenceInfoType_model(SchemaModel):
             self.restrictionsOfUse = None
 
         # If licence is openUnder-PSI
-        if self.licence == u"openUnder-PSI":
+        if self.licence == u"publicDomain":
+            self.otherLicenceName = u"Terms for Public Domain resources"
+            self.otherLicence_TermsText["en"]= u"The resource is free of all known legal restrictions."
+        elif self.licence == u"openUnder-PSI":
             self.otherLicenceName = u"Terms for PSI-compliant resources"
             self.otherLicence_TermsText["en"]= u"Used for resources that fall under the " \
                                           u"scope of PSI (Public Sector Information) " \
@@ -2349,8 +2353,7 @@ class languageSetInfoType_model(SchemaModel):
       verbose_name='Language name',
       help_text='A human understandable name of the language that is use' \
       'd in the resource; the name is selected according to the IETF BCP' \
-      '47 specifications',
-      max_length=1000, )
+      '47 specifications',choices=languageinfotype_languagename_optgroup_choices(), max_length=100, )
 
     languageScript = XmlCharField(
       verbose_name='Language script',
@@ -2389,8 +2392,8 @@ class languageSetInfoType_model(SchemaModel):
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
-        formatargs = ['languageName', ]
-        formatstring = u'{}'
+        formatargs = ['languageName', 'languageId' ]
+        formatstring = u'{} ({})'
         return self.unicode_(formatstring, formatargs)
 
 
@@ -3074,12 +3077,11 @@ class lexicalConceptualResourceTextInfoType_model(SchemaModel):
         return _unicode
 
 INPUTINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical',
+  u'text', u'textNumerical',
 ])
 
 INPUTINFOTYPE_RESOURCETYPE_CHOICES = _make_choices_from_list([
   u'corpus', u'lexicalConceptualResource', u'languageDescription',
-  u'document',
 ])
 
 INPUTINFOTYPE_DATAFORMAT_CHOICES = _make_choices_from_list([

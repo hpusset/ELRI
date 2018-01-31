@@ -151,6 +151,7 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
     'OGL-3.0': (STATIC_URL + 'metashare/licences/OGL-3.0.pdf', MEMBER_TYPES.NON),
     'NCGL-1.0': (STATIC_URL + 'metashare/licences/NCGL-1.0.pdf', MEMBER_TYPES.GOD),
     'openUnder-PSI': ('', MEMBER_TYPES.NON),
+    'publicDomain': ('', MEMBER_TYPES.NON),
     'non-standard/Other_Licence/Terms': ('', MEMBER_TYPES.NON),
     'underReview': ('', MEMBER_TYPES.GOD),
 }
