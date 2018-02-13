@@ -1790,7 +1790,6 @@ LICENCEINFOTYPE_LICENCE_CHOICES = _make_choices_from_list([
     u'OGL-3.0',
     u'PDDL-1.0',
     u'openUnder-PSI',
-    u'publicDomain',
     u'CC-BY-3.0',
     u'CC-BY-NC-3.0',
     u'CC-BY-NC-ND-3.0',
@@ -1816,6 +1815,7 @@ LICENCEINFOTYPE_LICENCE_CHOICES = _make_choices_from_list([
     u'LGPL-3.0',
     u'MIT',
     # Other
+    u'publicDomain',
     u'underReview',
     u'non-standard/Other_Licence/Terms',
 ])
@@ -1826,10 +1826,10 @@ def licenceinfotype_licence_optgroup_choices():
     Group the choices in groups. The first group is the most used choices
     and the second group is the rest.
     """
-    indl = ('International/National Data Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][:19])
-    ndl = ('National Data Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][19:25])
-    isl = ('International Software Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][25:35])
-    other = ('Other', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][35:])
+    indl = ('International/National Data Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][:18])
+    ndl = ('National Data Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][18:24])
+    isl = ('International Software Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][24:34])
+    other = ('Other', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][34:])
     optgroup = [indl, ndl, isl, other]
     return optgroup
 
