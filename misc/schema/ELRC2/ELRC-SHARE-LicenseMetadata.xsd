@@ -531,6 +531,14 @@
 								</xs:appinfo>
 							</xs:annotation>
 						</xs:enumeration>
+						<xs:enumeration value="publicDomain">
+							<xs:annotation>
+								<xs:documentation>Used for resources that are free of all known legal restrictions</xs:documentation>
+								<xs:appinfo>
+									<label>Public Domain</label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:enumeration>
 						<xs:enumeration value="underReview">
 							<xs:annotation>
 								<xs:documentation>Used for resources whose licence value is pending</xs:documentation>
