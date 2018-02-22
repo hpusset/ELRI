@@ -502,7 +502,7 @@ div.text_header {
 
 /*filters separate box*/
 div.left_box {
-    width: 300px;
+    width: 28%;
     position: relative;
     float: left;
     display: block;
@@ -893,3 +893,7 @@ div.jsddm {
     transition: background 200ms linear;
 }
 
+#messages {
+    position: relative;
+	top: 32px;
+}

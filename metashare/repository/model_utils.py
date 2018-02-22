@@ -247,12 +247,6 @@ def get_resource_dataformats(res_obj):
     return dataFormat_list
 
 
-
-def is_processable(res_obj):
-    dataformats = get_resource_dataformats(res_obj)
-    print dataformats
-
-
 def get_resource_encodings(res_obj):
     encoding_list = []
     corpus_media = res_obj.resourceComponentType.as_subclass()
@@ -284,92 +278,6 @@ def get_resource_encodings(res_obj):
             encoding_list.extend(corpus_media.outputInfo.characterEncoding)
 
     return encoding_list
-
-
-def get_resource_languages(res_obj):
-    """
-    Returns a tuple with the list  of the language IDs and the language Names
-    """
-    langIds = []
-    langNames = []
-    corpus_media = res_obj.resourceComponentType.as_subclass()
-
-    if isinstance(corpus_media, corpusInfoType_model):
-        media_type = corpus_media.corpusMediaType
-        for corpus_info in media_type.corpustextinfotype_model_set.all():
-            languageinfo = corpus_info.languageinfotype_model_set.all()
-            for languages in languageinfo:
-                langNames.append(languages)
-                langIds.append(languages.languageId)
-        if media_type.corpusTextNgramInfo:
-            languageinfo = media_type.corpusTextNgramInfo.languageinfotype_model_set.all()
-            for languages in languageinfo:
-                langNames.append(languages)
-                langIds.append(languages.languageId)
-        if media_type.corpusAudioInfo:
-            languageinfo = media_type.corpusAudioInfo.languageinfotype_model_set.all()
-            for languages in languageinfo:
-                langNames.append(languages)
-                langIds.append(languages.languageId)
-        for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-            languageinfo = corpus_info.languageinfotype_model_set.all()
-            for languages in languageinfo:
-                langNames.append(languages)
-                langIds.append(languages.languageId)
-        if media_type.corpusImageInfo:
-            languageinfo = media_type.corpusImageInfo.languageinfotype_model_set.all()
-            for languages in languageinfo:
-                langNames.append(languages)
-                langIds.append(languages.languageId)
-    elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
-        lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
-        if lcr_media_type.lexicalConceptualResourceTextInfo:
-            languageinfo = lcr_media_type.lexicalConceptualResourceTextInfo.languageinfotype_model_set.all()
-            for languages in languageinfo:
-                langNames.append(languages)
-                langIds.append(languages.languageId)
-        if lcr_media_type.lexicalConceptualResourceAudioInfo:
-            languageinfo = lcr_media_type.lexicalConceptualResourceAudioInfo.languageinfotype_model_set.all()
-            for languages in languageinfo:
-                langNames.append(languages)
-                langIds.append(languages.languageId)
-        if lcr_media_type.lexicalConceptualResourceVideoInfo:
-            languageinfo = lcr_media_type.lexicalConceptualResourceVideoInfo.languageinfotype_model_set.all()
-            for languages in languageinfo:
-                langNames.append(languages)
-                langIds.append(languages.languageId)
-        if lcr_media_type.lexicalConceptualResourceImageInfo:
-            languageinfo = lcr_media_type.lexicalConceptualResourceImageInfo.languageinfotype_model_set.all()
-            for languages in languageinfo:
-                langNames.append(languages)
-                langIds.append(languages.languageId)
-
-    elif isinstance(corpus_media, languageDescriptionInfoType_model):
-        ld_media_type = corpus_media.languageDescriptionMediaType
-        if ld_media_type.languageDescriptionTextInfo:
-            languageinfo = ld_media_type.languageDescriptionTextInfo.languageinfotype_model_set.all()
-            for languages in languageinfo:
-                langNames.append(languages)
-                langIds.append(languages.languageId)
-        if ld_media_type.languageDescriptionVideoInfo:
-            languageinfo = ld_media_type.languageDescriptionVideoInfo.languageinfotype_model_set.all()
-            for languages in languageinfo:
-                langNames.append(languages)
-                langIds.append(languages.languageId)
-        if ld_media_type.languageDescriptionImageInfo:
-            languageinfo = ld_media_type.languageDescriptionImageInfo.languageinfotype_model_set.all()
-            for languages in languageinfo:
-                langNames.append(languages)
-                langIds.append(languages.languageId)
-
-    elif isinstance(corpus_media, toolServiceInfoType_model):
-        if corpus_media.inputInfo:
-            langIds.extend([lsi.languageId for lsi in corpus_media.inputInfo.languagesetinfotype_model_set.all()])
-            langNames.extend(lsi.languageName for lsi in corpus_media.inputInfo.languagesetinfotype_model_set.all())
-        if corpus_media.outputInfo:
-            langIds.extend([lsi.languageId for lsi in corpus_media.outputInfo.languagesetinfotype_model_set.all()])
-            langNames.extend(lsi.languageName for lsi in corpus_media.outputInfo.languagesetinfotype_model_set.all())
-    return (langIds, langNames)
 
 
 def get_lr_stat_action_count(obj_identifier, stats_action):

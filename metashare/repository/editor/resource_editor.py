@@ -216,31 +216,34 @@ def change_resource_status(resource, status, precondition_status=None):
         return True
     return False
 
+
 def has_edit_permission(request, res_obj):
     """
     Returns `True` if the given request has permission to edit the metadata
     for the current resource, `False` otherwise.
     """
     return request.user.is_active and (request.user.is_superuser \
-        or request.user in res_obj.owners.all() \
-        or res_obj.editor_groups.filter(name__in=
-            request.user.groups.values_list('name', flat=True)).count() != 0)
+        or request.user in res_obj.owners.all()
+        or request.user.groups.filter(name="elrcReviewers").exists())
+
 
 def has_publish_permission(request, queryset):
     """
     Returns `True` if the given request has permission to change the publication
     status of all given language resources, `False` otherwise.
     """
-    if not request.user.is_superuser:
-        for obj in queryset:
-            res_groups = obj.editor_groups.all()
-            # we only allow a user to ingest/publish/unpublish a resource if she
-            # is a manager of one of the resource's `EditorGroup`s
-            if not any(res_group.name == mgr_group.managed_group.name
-                       for res_group in res_groups
-                       for mgr_group in EditorGroupManagers.objects.filter(name__in=
-                           request.user.groups.values_list('name', flat=True))):
-                return False
+    # if not request.user.is_superuser:
+    #     for obj in queryset:
+    #         res_groups = obj.editor_groups.all()
+    #         # we only allow a user to ingest/publish/unpublish a resource if she
+    #         # is a manager of one of the resource's `EditorGroup`s
+    #         if not any(res_group.name == mgr_group.managed_group.name
+    #                    for res_group in res_groups
+    #                    for mgr_group in EditorGroupManagers.objects.filter(name__in=
+    #                        request.user.groups.values_list('name', flat=True))):
+    #             return False
+    if not request.user.is_staff or request.user.groups.filter(name='naps').exists():
+            return False
     return True
 
 
@@ -322,7 +325,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         _("Unpublish selected published resources")
 
     def ingest_action(self, request, queryset):
-        if has_publish_permission(request, queryset):
+        if has_publish_permission(request, queryset) or request.user.is_staff:
             successful = 0
             for obj in queryset:
                 if change_resource_status(obj, status=INGESTED,
@@ -1322,8 +1325,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         # all users but the superusers may only see resources for which they are
         # either owner or editor group member:
         if not request.user.is_superuser \
-                and not request.user.groups.filter(name='legalReviewers').exists() \
-                and not request.user.groups.filter(name='technicalReviewers').exists():
+                and not request.user.groups.filter(name='elrcReviewers').exists():
             result = result.distinct().filter(Q(owners=request.user)
                     | Q(editor_groups__name__in=
                            request.user.groups.values_list('name', flat=True)))
@@ -1367,20 +1369,23 @@ class ResourceModelAdmin(SchemaModelAdmin):
         if not request.user.is_superuser:
             del result['remove_group']
             del result['remove_owner']
-            if not 'myresources' in request.POST:
-                del result['add_group']
-                del result['add_owner']
+            # TODO: revisit
+            # if not 'myresources' in request.POST:
+            #     del result['add_group']
+            #     del result['add_owner']
             # only users with delete permissions can see the delete action:
             if not self.has_delete_permission(request):
                 del result['delete']
             # only users who are the manager of some group can see the
             # ingest/publish/unpublish actions:
-            if EditorGroupManagers.objects.filter(name__in=
-                        request.user.groups.values_list('name', flat=True)) \
-                    .count() == 0:
-                for action in (self.publish_action, self.unpublish_action,
-                               self.ingest_action):
+            if not request.user.is_staff:
+                for action in (self.publish_action, self.unpublish_action,):
                     del result[action.__name__]
+        if request.user.groups.filter(name='naps').exists():
+            del result['publish_action']
+            del result['unpublish_action']
+            del result['add_group']
+            del result['add_owner']
         return result
 
     def create_hidden_structures(self, request):

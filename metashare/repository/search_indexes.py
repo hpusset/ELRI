@@ -173,10 +173,9 @@ class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
     appropriatenessForDSIFilter = LabeledMultiValueField(
         label=_('Appropriateness For DSI'), facet_id=56, parent_id=0,
         faceted=True)
-
-    # publicationStatusFilter = LabeledCharField(
-    #     label=_('Publication Status'), facet_id=57, parent_id=0,
-    #     faceted=True)
+    publicationStatusFilter = LabeledCharField(
+        label=_('Publication Status'), facet_id=57, parent_id=0,
+        faceted=True)
 
     # Start sub filters
     textTextGenreFilter = LabeledMultiValueField(
@@ -216,7 +215,7 @@ class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
         have not been deleted, yet.
         """
         return self.get_model().objects.filter(storage_object__deleted=False,
-                                               storage_object__publication_status=PUBLISHED)
+                                               storage_object__publication_status__in=[INGESTED, PUBLISHED])
 
     def should_update(self, instance, **kwargs):
         '''

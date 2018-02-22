@@ -5,7 +5,6 @@ import os
 import shutil
 import uuid
 
-import xmltodict
 from django.core.exceptions import PermissionDenied
 
 from metashare.repository.templatetags.is_member import is_member
@@ -480,8 +479,6 @@ def view(request, resource_name=None, object_id=None):
                                  storage_object__identifier=object_id,
                                  storage_object__publication_status__in=[INGESTED, PUBLISHED])
 
-    xml = open("{}/processing/services-ELRC.xml".format(ROOT_PATH), 'r').read()
-    dict_xml = xmltodict.parse(xml, encoding='utf-8')
 
     if not has_view_permission(request, resource):
         raise PermissionDenied

@@ -48,6 +48,10 @@
                 {% endif %}
             </div>
             <div class="licence_agreement_form">
+                {% if not request.user.is_authenticated %}
+                    <div style="font-size: 1.25em; font-weight: bold;background: #f2e89db3;padding: 10px;margin-top: 10px;border-radius: 5px;">Stay in touch with ELRC!
+                    Register <a target="_blank" href="/accounts/create">here</a>.</div>
+                {% endif %}
                 {% if not download_available %}
                     <p>
                         Please contact the resource maintainer for more information on how to

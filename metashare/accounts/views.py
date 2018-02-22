@@ -36,6 +36,9 @@ def confirm(request, uuid):
     # Activate the corresponding User instance.
     user = registration_request.user
     user.is_active = True
+    # Do not set user as staff/ editor
+    user.is_staff = False
+    user.groups.add(Group.objects.get(name='contributors'))
     # For convenience, log user in:
     # (We would actually have to authenticate the user before logging in,
     # however, as we don't know the password, we manually set the authenication

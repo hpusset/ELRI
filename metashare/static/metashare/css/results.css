@@ -146,6 +146,7 @@ div.resourceName ul li.licence {
 
 div.results {
     margin-bottom: 1.5em;
+	display: inline-block;
 }
 
 /*end override container size*/

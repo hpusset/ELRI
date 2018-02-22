@@ -157,7 +157,7 @@ class SchemaModelAdmin(MetaShareSearchModelAdmin, RelatedAdminMixin, SchemaModel
         result = super(SchemaModelAdmin, self) \
             .has_change_permission(request, obj)
         if result and obj:
-            if request.user.is_superuser:
+            if request.user.is_superuser or request.user.is_staff:
                 return True
             # find out to which resourceInfoType_model instance the obj belongs
             root_resources = get_root_resources(obj)
