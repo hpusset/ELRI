@@ -24,6 +24,8 @@ from xml.etree import ElementTree
 
 
 # Setup logging support.
+from metashare.storage.models import PUBLISHED, MASTER
+
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
@@ -48,15 +50,15 @@ def xml_compare(file1, file2, outfile=None):
 
     if not outfile:
         outfile = "{0}.diff".format(file1)
-
+    
     # If diff-file exists, remove it so that there is no diff after a clean run:
     if os.access(outfile, os.F_OK):
         os.remove(outfile)
-
+        
     for __f in [file1, file2]:
         if not os.path.isfile(__f):
             LOGGER.warning("file {0} does not exist".format(__f))
-
+    
     with open(CONSOLE, "w+") as out:
         retval = call([XDIFF_LOCATION, file1, file2, outfile],
                       stdout=out, stderr=STDOUT)
@@ -72,22 +74,22 @@ if __name__ == "__main__":
 
 def import_from_string(xml_string, targetstatus, copy_status, owner_id=None):
     """
-    Import a single resource from a string representation of its XML tree,
+    Import a single resource from a string representation of its XML tree, 
     and save it with the given target status.
-
+    
     Returns the imported resource object on success, raises and Exception on failure.
     """
     from metashare.repository.models import resourceInfoType_model
     result = resourceInfoType_model.import_from_string(xml_string, copy_status=copy_status)
-
+    
     if not result[0]:
         msg = u''
         if len(result) > 2:
             msg = u'{}'.format(result[2])
         raise Exception(msg)
-
+    
     resource = result[0]
-
+    
     # Set publication_status for the new object. Also make sure that the
     # deletion flag is not set (may happen in case of re-importing a previously
     # deleted resource).
@@ -120,15 +122,15 @@ def import_from_string(xml_string, targetstatus, copy_status, owner_id=None):
     saveLRStats(resource, UPDATE_STAT)
 
     return resource
-
-
+    
+    
 def import_from_file(filehandle, descriptor, targetstatus, copy_status, owner_id=None):
     """
     Import the xml metadata record(s) contained in the opened file identified by filehandle.
     filehandle: an opened file handle to either a single XML file or a zip archive containing
         only XML files.
     descriptor: a descriptor for the file handle, e.g. the file name.
-    targetstatus: one of PUBLISHED, INGESTED or INTERNAL.
+    targetstatus: one of PUBLISHED, INGESTED or INTERNAL. 
         All imported records will be assigned this status.
     owner_id (optional): if present, the given user ID will be added to the list of owners of the
         resource.
@@ -157,10 +159,10 @@ def import_from_file(filehandle, descriptor, targetstatus, copy_status, owner_id
                 # reset database connection (required for PostgreSQL)
                 db.close_connection()
             erroneous_descriptors.append((descriptor, problem))
-
+    
     else:
         temp_zip = ZipFile(filehandle)
-
+        
         LOGGER.info('Importing ZIP file: "{0}"'.format(descriptor))
         file_count = 0
         for xml_name in temp_zip.namelist():
@@ -187,10 +189,10 @@ def to_xml_string(node, encoding="ASCII"):
     """
     Serialize the given XML node as Unicode string using the given encoding.
     """
-
+    
     xml_string = ElementTree.tostring(node, encoding=encoding)
     xml_string = xml_string.decode(encoding)
-
+    
     # Delete any XML declaration inside the given XML String.
     xml_string = XML_DECL.sub(u'', xml_string)
     xml_string = XML_DECL_2.sub(u'', xml_string)

@@ -195,11 +195,11 @@ def get_resource_media_types(res_obj):
 
     elif isinstance(corpus_media, toolServiceInfoType_model):
         if corpus_media.inputInfo:
-            result.extend(corpus_media.inputInfo \
-                          .get_mediaType_display())
+            result.append(corpus_media.inputInfo \
+                          .mediaType)
         if corpus_media.outputInfo:
             result.extend(corpus_media.outputInfo \
-                          .get_mediaType_display())
+                          .mediaType)
 
     result_lower = []
     for res in result:

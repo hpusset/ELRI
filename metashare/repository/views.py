@@ -1,4 +1,4 @@
-import distutils
+from distutils import util
 import json
 import logging
 import os
@@ -1217,7 +1217,7 @@ def manage_contributed_data(request):
             },
             "resource_file": doc.xpath("//resource/administration/resource_file/text()"),
             "dataset": dataset,
-            'edelivery':  distutils.util.strtobool(doc.xpath("//resource/administration/edelivery/text()")[0]),
+            'edelivery':  util.strtobool(doc.xpath("//resource/administration/edelivery/text()")[0]),
             'msg_id': doc.xpath("//resource/administration/edelivery/@msg_id")
 
         })

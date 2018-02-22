@@ -1053,12 +1053,15 @@ class EdeliveryApplicationAdmin(admin.ModelAdmin):
         if not pmode_result['success']:
             messages.error(request, pmode_result['msg'])
         truststore_result = update_truststore(req.gateway_party_name, certificate=req.public_key.path)
-        if truststore_result['success']:
-            # TODO: email user
-            req.status = "ACTIVE"
-            req.save()
-            messages.success(request, "All selected eDelivery applications have been accepted")
-        else:
+        try:
+            if truststore_result['success']:
+                # TODO: email user
+                req.status = "ACTIVE"
+                req.save()
+                messages.success(request, "All selected eDelivery applications have been accepted")
+            else:
+                messages.error(request, truststore_result['msg'])
+        except:
             messages.error(request, truststore_result['msg'])
 
     def accept_selected(self, request, queryset):
@@ -1127,11 +1130,14 @@ class EdeliveryApplicationAdmin(admin.ModelAdmin):
                     if not pmode_result['success']:
                         messages.error(request, pmode_result['msg'])
                     truststore_result = update_truststore(req.gateway_party_name, mode="remove")
-                    if truststore_result['success']:
-                        # TODO: email user
-                        req.status = "ACTIVE"
-                        req.save()
-                    else:
+                    try:
+                        if truststore_result['success']:
+                            # TODO: email user
+                            req.status = "ACTIVE"
+                            req.save()
+                        else:
+                            messages.error(request, truststore_result['msg'])
+                    except:
                         messages.error(request, truststore_result['msg'])
 
                     req.status = "REVOKED"

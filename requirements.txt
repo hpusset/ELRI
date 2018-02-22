@@ -25,6 +25,3 @@ mock
 dicttoxml
 reportlab
 celery
-suds
-suds-requests
-pyjks

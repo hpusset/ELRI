@@ -27,7 +27,8 @@ def update_pmode(obj, mode="add"):
 
         parties = pmode.find("/businessProcesses/parties")
         init_parties = pmode.find("//initiatorParties")
-        if mode == 'add':
+        party_exists = pmode.xpath("//party[@name='{}']".format(obj.gateway_party_name))
+        if not party_exists and mode == 'add':
             new_party = etree.SubElement(parties, 'party',
                                          {
                                              'name': obj.gateway_party_name,
@@ -43,17 +44,17 @@ def update_pmode(obj, mode="add"):
             etree.SubElement(init_parties, 'initiatorParty', {'name': obj.gateway_party_name})
         else:
             # get party to remove
-            for party in parties.xpath(".//party[@name={}]".format(obj.gateway_party_name)):
+            for party in parties.xpath(".//party[@name='{}']".format(obj.gateway_party_name)):
                 party.getparent().remove(party)
             # also remove from initiatorParties
-            for init_party in init_parties.xpath(".//initiatorParty[@name={}]".format(obj.gateway_party_name)):
-                init_party.getparent().remove(party)
+            for init_party in init_parties.xpath(".//initiatorParty[@name='{}']".format(obj.gateway_party_name)):
+                init_party.getparent().remove(init_party)
         # write the reult tree back to xml
         f = open(PMODE_FILE, 'w')
         f.write(etree.tostring(pmode, pretty_print=True, xml_declaration=True, encoding='UTF-8'))
         f.close()
     except Exception, e:
-        return {'success': False, 'msg': "Could not parse pmode template: {}".format(e.error_log)}
+        return {'success': False, 'msg': "Could not parse pmode template: {}".format(e.message)}
     # Next we try to update the actual access point pmode using the updated template
     return _update_ap_pmode(PMODE_FILE)
 
@@ -123,7 +124,11 @@ def update_truststore(alias, certificate=None, mode="add"):
     # verify that cert is inserted
     ks = jks.KeyStore.load(TRUSTORE_FILE, TRUSTSTORE_PASSWORD)
 
-    if alias in ks.entries.keys():
-        return _update_ap_trustore(TRUSTORE_FILE)
+    if mode is not "add":
+        if alias not in ks.entries.keys():
+            return _update_ap_trustore(TRUSTORE_FILE)
     else:
-        return "Could not update local trustore."
+        if alias in ks.entries.keys():
+            return _update_ap_trustore(TRUSTORE_FILE)
+
+    return {'success': False, 'msg': "Could not update local trustore."}
