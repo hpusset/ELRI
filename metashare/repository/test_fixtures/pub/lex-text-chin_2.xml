@@ -69,7 +69,7 @@
 				<corpusTextInfo>
 					<mediaType>text</mediaType>
 					<lingualityInfo>
-						<lingualityType>monolingual</lingualityType>
+						<lingualityType>bilingual</lingualityType>
 					</lingualityInfo>
 					<languageInfo>
 						<languageId>chi</languageId>

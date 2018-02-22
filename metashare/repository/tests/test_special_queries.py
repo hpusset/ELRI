@@ -1,4 +1,6 @@
 import logging
+
+from django.contrib.auth.models import Group
 from metashare.repository.forms import _extract_special_queries, \
     _process_special_query, MORE_FROM_SAME_CREATORS, MORE_FROM_SAME_PROJECTS
 from metashare import test_utils
@@ -39,6 +41,10 @@ class SpecialQueryTest(django.test.TestCase):
         self.res_3 = _import_resource('creators-projects-3.xml')
         self.res_4 = _import_resource('creators-projects-4.xml')
         update_index.Command().handle(using=[settings.TEST_MODE_NAME,])
+
+        # create an groups used to get the proper results
+        Group.objects.create(name='ecmembers')
+        Group.objects.create(name='technicalReviewers')
     
     def tearDown(self):
         """

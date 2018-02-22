@@ -70,7 +70,7 @@
 				<lexicalConceptualResourceTextInfo>
 					<mediaType>text</mediaType>
 					<lingualityInfo>
-						<lingualityType>monolingual</lingualityType>
+						<lingualityType>bilingual</lingualityType>
 						<multilingualityType>comparable</multilingualityType>
 					</lingualityInfo>
 					<languageInfo>
@@ -81,6 +81,9 @@
 						<size>567</size>
 						<sizeUnit>words</sizeUnit>
 					</sizeInfo>
+					<textFormatInfo>
+						<dataFormat>other</dataFormat>
+					</textFormatInfo>
 					<domainInfo>
 						<domain>SCIENCE</domain>
 						<domainId>04</domainId>

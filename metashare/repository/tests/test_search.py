@@ -1,6 +1,7 @@
 import os
 import logging
 
+from django.contrib.auth.models import Group
 from django.core.urlresolvers import reverse
 from django.test.client import Client
 from django.test.testcases import TestCase
@@ -178,6 +179,10 @@ class SearchTest(test_utils.IndexAwareTestCase):
         normaluser = create_user('normaluser', 'normal@example.com', 'secret')
         normaluser.save()
 
+        # create an groups used to get the proper results
+        Group.objects.create(name='ecmembers')
+        Group.objects.create(name='technicalReviewers')
+
     def tearDown(self):
         """
         Clean up the test
@@ -239,14 +244,18 @@ class SearchTest(test_utils.IndexAwareTestCase):
         self.assertContains(response, 'title="Number of views" />&nbsp;0')
         # view the resource, download it, go back to the browse page and then
         # assert that both view and download counts have changed:
-        client.get(test_res.get_absolute_url())
-        client.post(
-            reverse(views.download, args=(test_res.storage_object.identifier,)),
-            { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
-              'licence': 'CC-BY-NC-SA-4.0' })
-        response = client.get(_SEARCH_PAGE_PATH)
-        self.assertContains(response, 'title="Number of downloads" />&nbsp;1')
-        self.assertContains(response, 'title="Number of views" />&nbsp;1')
+
+        # Disable this test until downloads are fully activated
+        # TODO: Review this
+
+        # client.get(test_res.get_absolute_url())
+        # client.post(
+        #     reverse(views.download, args=(test_res.storage_object.identifier,)),
+        #     { 'in_licence_agree_form': 'True', 'licence_agree': 'True',
+        #       'licence': 'CC-BY-NC-SA-4.0' })
+        # response = client.get(_SEARCH_PAGE_PATH)
+        # self.assertContains(response, 'title="Number of downloads" />&nbsp;1')
+        # self.assertContains(response, 'title="Number of views" />&nbsp;1')
 
     def test_case_insensitive_search(self):
         """
@@ -311,8 +320,7 @@ class SearchTest(test_utils.IndexAwareTestCase):
     def testSearch(self):
         client = Client()
         self.importOneFixture()
-        response = client.get(_SEARCH_PAGE_PATH, follow=True,
-          data={'q':'Italian'})
+        response = client.get(_SEARCH_PAGE_PATH, follow=True, data={'q':'Italian'}, )
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
 
@@ -353,6 +361,11 @@ class SearchTestPublishedResources(TestCase):
         """
         LOGGER.info("running '{}' tests...".format(cls.__name__))
         test_utils.setup_test_storage()
+
+        # create an groups used to get the proper results
+        Group.objects.create(name='ecmembers')
+        Group.objects.create(name='technicalReviewers')
+
         cls.importPublishedFixtures()
         # Make sure the index does not contain any stale entries:
 
@@ -394,13 +407,13 @@ class SearchTestPublishedResources(TestCase):
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "2 Language Resources", status_code=200)
      
-    def testAvailabilityFacet(self):   
-        client = Client()
-        response = client.get(_SEARCH_PAGE_PATH, follow=True, 
-          data={'selected_facets':
-                'availabilityFilter_exact:Available'})
-        self.assertEqual('repository/search.html', response.templates[0].name)
-        self.assertContains(response, "1 Language Resource", status_code=200)
+    # def testAvailabilityFacet(self):
+    #     client = Client()
+    #     response = client.get(_SEARCH_PAGE_PATH, follow=True,
+    #       data={'selected_facets':
+    #             'availabilityFilter_exact:Available'})
+    #     self.assertEqual('repository/search.html', response.templates[0].name)
+    #     self.assertContains(response, "1 Language Resource", status_code=200)
               
     def testLicenceFacet(self):   
         client = Client()
@@ -429,7 +442,7 @@ class SearchTestPublishedResources(TestCase):
     def testLingualityTypeFacet(self):   
         client = Client()
         response = client.get(_SEARCH_PAGE_PATH, follow=True, 
-          data={'selected_facets':'lingualityTypeFilter_exact:Monolingual'})
+          data={'selected_facets':'lingualityTypeFilter_exact:Bilingual'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "2 Language Resources", status_code=200)
         
@@ -443,7 +456,7 @@ class SearchTestPublishedResources(TestCase):
     def testDataFormatFacet(self):
         client = Client()
         response = client.get(_SEARCH_PAGE_PATH, follow=True, 
-          data={'selected_facets':'dataFormatFilter_exact:text/plain'})
+          data={'selected_facets':'dataFormatFilter_exact:Plain text'})
         self.assertEqual('repository/search.html', response.templates[0].name)
         self.assertContains(response, "1 Language Resource", status_code=200)
     

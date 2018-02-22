@@ -5,7 +5,7 @@ import django.db.models
 
 from django.contrib import admin
 from django.contrib.auth import REDIRECT_FIELD_NAME
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.client import Client
@@ -65,16 +65,32 @@ class EditorTest(TestCase):
     Test the python/server side of the editor
     """
     # static variables to be initialized in setUpClass():
+
+    # groups
+    trgroup = None
+    ecgroup = None
+    lrgroup = None
+    napgroup = None
+    contrib_group = None
+    globaleditors = None
+
     test_editor_group = None
     staff_login = None
     normal_login = None
     editor_login = None
     manager_login = None
+    # ELRC groups logins
+    ec_login = None
+    tr_login = None
+    lr_login = None
+    nap_login = None
+
     superuser_login = None
     testfixture = None
     testfixture2 = None
     testfixture3 = None
     testfixture4 = None
+
     
     def setUp(self):
         """
@@ -85,6 +101,14 @@ class EditorTest(TestCase):
         """
         test_utils.set_index_active(False)
         test_utils.setup_test_storage()
+
+        # create ELRC Groups
+        EditorTest.trgroup = Group.objects.create(name="technicalReviewers")
+        EditorTest.ecgroup = Group.objects.create(name='ecmembers')
+        EditorTest.lrgroup = Group.objects.create(name='legalReviewers')
+        EditorTest.napgroup = Group.objects.create(name='naps')
+        EditorTest.contrib_group = Group.objects.create(name='contributors')
+        EditorTest.globaleditors = Group.objects.get(name='globaleditors')
 
         EditorTest.test_editor_group = EditorGroup.objects.create(
                                                     name='test_editor_group')
@@ -99,11 +123,33 @@ class EditorTest(TestCase):
           'secret')
         staffuser.is_staff = True
         staffuser.save()
-        
+
+        # ELRC groups users
+        ecuser = User.objects.create_user('ecuser', 'ecuser@example.com','ecpass')
+        ecuser.is_staff = True
+        ecuser.groups.add(EditorTest.globaleditors, EditorTest.ecgroup, EditorTest.contrib_group)
+        ecuser.save()
+
+        lruser = User.objects.create_user('lruser', 'lruser@example.com','lrpass')
+        lruser.is_staff = True
+        lruser.groups.add(EditorTest.globaleditors, EditorTest.lrgroup, EditorTest.contrib_group)
+        lruser.save()
+
+        truser = User.objects.create_user('truser', 'truser@example.com','trpass')
+        truser.is_staff = True
+        truser.groups.add(EditorTest.globaleditors, EditorTest.lrgroup, EditorTest.contrib_group)
+        truser.save()
+
+        napuser = User.objects.create_user('napuser', 'napuser@example.com','nappass')
+        napuser.is_staff = True
+        napuser.groups.add(EditorTest.globaleditors, EditorTest.contrib_group, EditorTest.napgroup)
+        napuser.save()
+
+
         User.objects.create_user('normaluser', 'normal@example.com', 'secret')
 
         editoruser = test_utils.create_editor_user('editoruser',
-            'editor@example.com', 'secret', (EditorTest.test_editor_group,))
+            'editor@example.com', 'secret', (EditorTest.globaleditors, EditorTest.test_editor_group,))
 
         test_utils.create_manager_user(
             'manageruser', 'manager@example.com', 'secret',
@@ -146,6 +192,34 @@ class EditorTest(TestCase):
             'username': 'superuser',
             'password': 'secret',
         }
+
+        EditorTest.ec_login = {
+            REDIRECT_FIELD_NAME: ADMINROOT,
+            LOGIN_FORM_KEY: 1,
+            'username': 'ecuser',
+            'password': 'ecpass',
+        }
+
+        EditorTest.tr_login = {
+            REDIRECT_FIELD_NAME: ADMINROOT,
+            LOGIN_FORM_KEY: 1,
+            'username': 'truser',
+            'password': 'trpass',
+        }
+
+        EditorTest.lr_login = {
+            REDIRECT_FIELD_NAME: ADMINROOT,
+            LOGIN_FORM_KEY: 1,
+            'username': 'lruser',
+            'password': 'lrpass',
+        }
+
+        EditorTest.nap_login = {
+            REDIRECT_FIELD_NAME: ADMINROOT,
+            LOGIN_FORM_KEY: 1,
+            'username': 'napuser',
+            'password': 'nappass',
+        }
         
         EditorTest.testfixture = _import_test_resource(
                                                 EditorTest.test_editor_group)
@@ -154,7 +228,7 @@ class EditorTest(TestCase):
         # third resource which is owned by the editoruser
         EditorTest.testfixture3 = _import_test_resource(None, TESTFIXTURE3_XML,
                                                         pub_status=PUBLISHED)
-        EditorTest.testfixture3.owners.add(editoruser)
+        EditorTest.testfixture3.owners.add(editoruser, napuser)
         EditorTest.testfixture3.save()
         # fourth test resource which is owned by the editor user
         EditorTest.testfixture4 = _import_test_resource(
@@ -186,7 +260,7 @@ class EditorTest(TestCase):
     def test_staff_cannot_see_model_list(self):
         client = test_utils.get_client_with_user_logged_in(EditorTest.staff_login)
         response = client.get(ADMINROOT+'repository/')
-        self.assertContains(response, '403 Forbidden', status_code=403)
+        self.assertContains(response, 'Permission Denied (403)', status_code=403)
 
     def test_editor_can_see_resource_add(self):
         client = test_utils.get_client_with_user_logged_in(EditorTest.editor_login)
@@ -206,7 +280,7 @@ class EditorTest(TestCase):
     def test_staff_cannot_see_corpus_add(self):
         client = test_utils.get_client_with_user_logged_in(EditorTest.staff_login)
         response = client.get(ADMINROOT+'repository/corpusinfotype_model/add/')
-        self.assertContains(response, '403 Forbidden', status_code=403)
+        self.assertContains(response, 'Permission Denied (403)', status_code=403)
 
     def test_editor_can_see_models_add(self):
         # We don't expect the following add forms to work, because the editor
@@ -250,59 +324,89 @@ class EditorTest(TestCase):
 
     def test_manage_action_visibility(self):
         """
-        Verifies that manage actions (delete/ingest/publish/unpublish/add groups/
-        remove groups/add owners/remove owners) are only visible for authorized users.
+        Verifies that manage actions (delete/ingest/publish/unpublish/add owners/remove owners)
+        are only visible for authorized users.
+
+        +---------------+------------+------------+----------------+--------------------+------+--------+
+        |               | editors    | ecmembers  | legalReviewers | technicalReviewers | naps | admins |
+        +===============+============+============+================+====================+======+========+
+        | delete        | NO         | NO         | NO             | NO                 | NO   | YES    |
+        +---------------+------------+------------+----------------+--------------------+------+--------+
+        | ingest        | YES        | YES        | YES            | YES                | YES  | YES    |
+        +---------------+------------+------------+----------------+--------------------+------+--------+
+        | publish       | YES        | YES        | YES            | YES                | NO   | YES    |
+        +---------------+------------+------------+----------------+--------------------+------+--------+
+        | unpublish     | YES        | YES        | YES            | YES                | NO   | YES    |
+        +---------------+------------+------------+----------------+--------------------+------+--------+
+        | add owners    | YES        | YES        | YES            | YES                | NO   | YES    |
+        +---------------+------------+------------+----------------+--------------------+------+--------+
+        | remove owners | YES        | YES        | YES            | YES                | NO   | YES    |
+        +---------------+------------+------------+----------------+--------------------+------+--------+
         """
         # make sure the editor user cannot see the manage actions:
+        # globaleditors
         client = test_utils.get_client_with_user_logged_in(EditorTest.editor_login)
         response = client.get(ADMINROOT + 'repository/resourceinfotype_model/')
-        self.assertNotContains(response, 'Ingest selected internal resources',
-            msg_prefix='an editor user must not see the "ingest" action')
-        self.assertNotContains(response, 'Publish selected ingested resources',
-            msg_prefix='an editor user must not see the "publish" action')
-        self.assertNotContains(response, 'Unpublish selected published',
-            msg_prefix='an editor user must not see the "unpublish" action')
+        self.assertContains(response, 'Ingest selected internal resources',
+            msg_prefix='an editor user must see the "ingest" action')
+        self.assertContains(response, 'Publish selected ingested resources',
+            msg_prefix='an editor user must see the "publish" action')
+        self.assertContains(response, 'Unpublish selected published',
+            msg_prefix='an editor user must see the "unpublish" action')
         self.assertNotContains(response, 'Mark selected resources as deleted',
             msg_prefix='an editor user must not see the "delete" action')
-        self.assertNotContains(response, 'value="add_group">Add editor groups',
-            msg_prefix='an editor user must not see the "add groups" action')
-        self.assertNotContains(response,
-            'value="remove_group">Remove editor groups from selected',
-            msg_prefix='an editor user must not see the "remove groups" action')
-        self.assertNotContains(response, 'Add owners',
+        # self.assertNotContains(response, 'value="add_group">Add editor groups',
+        #     msg_prefix='an editor user must not see the "add groups" action')
+        # self.assertNotContains(response,
+        #     'value="remove_group">Remove editor groups from selected',
+        #     msg_prefix='an editor user must not see the "remove groups" action')
+        self.assertContains(response, 'Add owners',
             msg_prefix='an editor user must not see the "add owners" action')
         self.assertNotContains(response, 'Remove owners',
             msg_prefix='an editor user must not see the "remove owners" action')
-        # make sure the manager user can see the manage actions in 'my resources':
+        # make sure the editor user can see the manage actions in 'my resources':
         response_my = client.get(ADMINROOT + 'repository/resourceinfotype_model/my/')
         self.assertContains(response_my, 'Add editor groups',
-            msg_prefix='a manager user should see the "add groups" action')
-        self.assertContains(response_my, 'Add owners',
-            msg_prefix='a manager user should see the "add owners" action')
-        # make sure the manager user can see the manage actions:
-        client = test_utils.get_client_with_user_logged_in(EditorTest.manager_login)
-        response = client.get(ADMINROOT + 'repository/resourceinfotype_model/')
-        self.assertContains(response, 'Ingest selected internal resources',
-            msg_prefix='a manager user should see the "ingest" action')
-        self.assertContains(response, 'Publish selected ingested resources',
-            msg_prefix='a manager user should see the "publish" action')
-        self.assertContains(response, 'Unpublish selected published resources',
-            msg_prefix='a manager user should see the "unpublish" action')
-        self.assertContains(response, 'Mark selected resources as deleted',
-            msg_prefix='a manager user should see the "delete" action')
-        self.assertNotContains(response, 'value="add_group">Add editor groups',
-            msg_prefix='a manager user must not see the "add groups" action')
-        self.assertNotContains(response, 
-            'value="remove_group">Remove editor groups from selected',
-            msg_prefix='a manager user must not see the "remove groups" action')
-        self.assertNotContains(response, 'Add owners',
-            msg_prefix='a manager user must not see the "add owners" action')
-        self.assertNotContains(response, 'Remove owners',
-            msg_prefix='a manager user must not see the "remove owners" action')
-        # make sure the editor user can see the relevant manage actions in 'my
-        # 'resources':
+            msg_prefix='an editor user should see the "add groups" action')
         self.assertContains(response_my, 'Add owners',
             msg_prefix='an editor user should see the "add owners" action')
+
+
+        # ecmembers
+        client = test_utils.get_client_with_user_logged_in(EditorTest.ec_login)
+        response = client.get(ADMINROOT + 'repository/resourceinfotype_model/')
+        self.assertNotContains(response, 'Mark selected resources as deleted',
+            msg_prefix='an ecmember user must not see the "delete" action')
+
+        # legalReviewers
+        client = test_utils.get_client_with_user_logged_in(EditorTest.lr_login)
+        response = client.get(ADMINROOT + 'repository/resourceinfotype_model/')
+        self.assertNotContains(response, 'Mark selected resources as deleted',
+            msg_prefix='an legalReviewer user must not see the "delete" action')
+
+        # technicalReviewers
+        client = test_utils.get_client_with_user_logged_in(EditorTest.tr_login)
+        response = client.get(ADMINROOT + 'repository/resourceinfotype_model/')
+        self.assertNotContains(response, 'Mark selected resources as deleted',
+            msg_prefix='an technicalReviewer user must not see the "delete" action')
+
+
+        # naps
+        client = test_utils.get_client_with_user_logged_in(EditorTest.nap_login)
+        response = client.get(ADMINROOT + 'repository/resourceinfotype_model/my/')
+        self.assertNotContains(response, 'Mark selected resources as deleted',
+            msg_prefix='an nap user must not see the "delete" action')
+        self.assertContains(response, 'Ingest selected internal resources',
+            msg_prefix='an nap user must see the "ingest" action')
+        self.assertNotContains(response, 'Publish selected ingested resources',
+            msg_prefix='an nap user must not see the "publish" action')
+        self.assertNotContains(response, 'Unpublish selected published',
+            msg_prefix='an nap user must not see the "unpublish" action')
+        self.assertNotContains(response, 'Add owners',
+            msg_prefix='an nap user must not see the "add owners" action')
+        self.assertNotContains(response, 'Remove owners',
+            msg_prefix='an nap user must not see the "remove owners" action')
+
         # make sure the superuser can see the manage actions:
         client = test_utils.get_client_with_user_logged_in(EditorTest.superuser_login)
         response = client.get(ADMINROOT + 'repository/resourceinfotype_model/')
