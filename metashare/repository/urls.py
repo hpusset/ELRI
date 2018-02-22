@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import patterns, url, include
 
 from haystack.views import search_view_factory
 from haystack.query import SearchQuerySet
@@ -32,8 +32,6 @@ sqs = SearchQuerySet() \
     .facet("toolServiceInputOutputResourceTypeFilter") \
     .facet("toolServiceInputOutputMediaTypeFilter") \
     .facet("toolServiceAnnotationTypeFilter") \
-    .facet("toolServiceAnnotationFormatFilter") \
-    .facet("toolServiceEvaluatedFilter") \
     .facet("textTextGenreFilter") \
     .facet("textTextTypeFilter") \
     .facet("appropriatenessForDSIFilter") \
@@ -62,5 +60,6 @@ urlpatterns = patterns('metashare.repository.views',
                        url(r'contributions', 'manage_contributed_data', name='manage_contributed_data'),
                        url(r'repo_report', 'repo_report'),
                        url(r'addtodb/$', 'addtodb', name='addtodb'),
-                       url(r'get_data/(?P<filename>.+\.zip)', 'get_data', name='get_data')
+                       url(r'get_data/(?P<filename>.+\.zip)', 'get_data', name='get_data'),
+                       url(r'^processing/', include('metashare.processing.urls')),
                        )

@@ -164,12 +164,12 @@ class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
     toolServiceAnnotationTypeFilter = LabeledMultiValueField(
         label=_('Annotation Type'), facet_id=32, parent_id=2,
         faceted=True)
-    toolServiceAnnotationFormatFilter = LabeledMultiValueField(
-        label=_('Annotation Format'), facet_id=33, parent_id=2,
-        faceted=True)
-    toolServiceEvaluatedFilter = LabeledMultiValueField(
-        label=_('Evaluated'), facet_id=34, parent_id=2,
-        faceted=True)
+    # toolServiceAnnotationFormatFilter = LabeledMultiValueField(
+    #     label=_('Annotation Format'), facet_id=33, parent_id=2,
+    #     faceted=True)
+    # toolServiceEvaluatedFilter = LabeledMultiValueField(
+    #     label=_('Evaluated'), facet_id=34, parent_id=2,
+    #     faceted=True)
     appropriatenessForDSIFilter = LabeledMultiValueField(
         label=_('Appropriateness For DSI'), facet_id=56, parent_id=0,
         faceted=True)

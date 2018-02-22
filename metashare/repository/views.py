@@ -5,6 +5,11 @@ import os
 import shutil
 import uuid
 
+import xmltodict
+from django.core.exceptions import PermissionDenied
+
+from metashare.repository.templatetags.is_member import is_member
+
 try:
     import cStringIO as StringIO
 except ImportError:
@@ -55,11 +60,13 @@ from metashare.repository.models import resourceInfoType_model, identificationIn
     licenceInfoType_model, resourceCreationInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex, \
     update_lr_index_entry
-from metashare.settings import LOG_HANDLER, STATIC_URL, DJANGO_URL, MAXIMUM_UPLOAD_SIZE, CONTRIBUTION_FORM_DATA
+from metashare.settings import LOG_HANDLER, STATIC_URL, DJANGO_URL, MAXIMUM_UPLOAD_SIZE, CONTRIBUTION_FORM_DATA, \
+    ROOT_PATH
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
-from metashare.storage.models import PUBLISHED
+from metashare.storage.models import PUBLISHED, INGESTED
 from metashare.utils import prettify_camel_case_string
+from decorators import resource_downloadable, resource_downloadable_view
 
 MAXIMUM_READ_BLOCK_SIZE = 4096
 
@@ -147,6 +154,7 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
     'OGL-3.0': (STATIC_URL + 'metashare/licences/OGL-3.0.pdf', MEMBER_TYPES.NON),
     'NCGL-1.0': (STATIC_URL + 'metashare/licences/NCGL-1.0.pdf', MEMBER_TYPES.GOD),
     'openUnder-PSI': ('', MEMBER_TYPES.NON),
+    'publicDomain': ('', MEMBER_TYPES.NON),
     'non-standard/Other_Licence/Terms': ('', MEMBER_TYPES.NON),
     'underReview': ('', MEMBER_TYPES.GOD),
 }
@@ -202,7 +210,10 @@ def _get_licences(resource, user_membership):
     return result
 
 
-@user_passes_test(lambda u: u.is_superuser or u.groups.filter(name="ecmembers").exists())
+
+# @user_passes_test(lambda u: u.is_superuser or u.groups.filter(name="ecmembers").exists())
+# MDEL: temporary implementation to provide download for specific resources
+@resource_downloadable
 def download(request, object_id):
     """
     Renders the resource download/purchase view including license selection,
@@ -210,14 +221,16 @@ def download(request, object_id):
     """
     user_membership = _get_user_membership(request.user)
     bypass_licence = False
-    if request.user.is_superuser or request.user.groups.filter(name="ecmembers").exists():
+    if request.user.is_superuser \
+            or request.user.groups.filter(name="ecmembers").exists()\
+            or request.user.groups.filter(name="elrcReviewers").exists():
         bypass_licence = True
 
     # here we are only interested in licenses (or their names) of the specified
     # resource that allow the current user a download/purchase
     resource = get_object_or_404(resourceInfoType_model,
                                  storage_object__identifier=object_id,
-                                 storage_object__publication_status=PUBLISHED)
+                                 storage_object__deleted=False)
     # Get a dictionary, where the values are triplets:
     # (licenceInfo instance, download location, access)
     licences = _get_licences(resource, user_membership)
@@ -440,14 +453,39 @@ def download_contact(request, object_id):
                               dictionary, context_instance=RequestContext(request))
 
 
+def has_view_permission(request, res_obj):
+    """
+    Returns `True` if the given request has permission to view the description
+    of the current resource, `False` otherwise.
+    """
+    if res_obj.storage_object.publication_status == PUBLISHED:
+        return True
+    else:
+        if request.user.is_superuser \
+                or request.user.groups.filter(name='ecmembers').exists() \
+                or request.user.groups.filter(name='elrcReviewers').exists():
+            return True
+
+        return False
+
+# MDEL: temporary implementation to provide download for specific resources
+@resource_downloadable_view
 def view(request, resource_name=None, object_id=None):
     """
     Render browse or detail view for the repository application.
     """
-    # only published resources may be viewed
+    # only published resources may be viewed. Ingested LRs can be viewed only
+    # by EC members and technical reviewers
     resource = get_object_or_404(resourceInfoType_model,
                                  storage_object__identifier=object_id,
-                                 storage_object__publication_status=PUBLISHED)
+                                 storage_object__publication_status__in=[INGESTED, PUBLISHED])
+
+    xml = open("{}/processing/services-ELRC.xml".format(ROOT_PATH), 'r').read()
+    dict_xml = xmltodict.parse(xml, encoding='utf-8')
+
+    if not has_view_permission(request, resource):
+        raise PermissionDenied
+
     if request.path_info != resource.get_absolute_url():
         return redirect(resource.get_absolute_url())
 
@@ -685,7 +723,9 @@ def view(request, resource_name=None, object_id=None):
 
     # Render and return template with the defined context.
     ctx = RequestContext(request)
-    return render_to_response(template, context, context_instance=ctx)
+    context['processing_info'] = json.loads(json.dumps(dict_xml).replace("@", "").replace("#", ""))
+    return render_to_response(template,
+                              context, context_instance=ctx)
 
 
 def tuple2dict(_tuple):
@@ -765,6 +805,11 @@ class MetashareFacetedSearchView(FacetedSearchView):
 
     def get_results(self):
         sqs = super(MetashareFacetedSearchView, self).get_results()
+
+        if not is_member(self.request.user, 'ecmembers') \
+                and not is_member(self.request.user, 'elrcReviewers') \
+                and not self.request.user.is_superuser:
+            sqs = sqs.filter_and(publicationStatusFilter__exact='published')
 
         # Sort the results (on only one sorting value)
         if 'sort' in self.request.GET:
@@ -1607,7 +1652,6 @@ def repo_report(request):
         date_format = workbook.add_format({'num_format': 'yyyy, mmmm d'})
         title = "ELRC-SHARE_OVERVIEW_{}".format(
             datetime.datetime.now().strftime("%d-%m-%y"))
-        print title
         worksheet = workbook.add_worksheet(name=title)
 
         worksheet.write('A1', 'Resource ID', heading)
@@ -1633,6 +1677,11 @@ def repo_report(request):
         worksheet.write('S1', 'Validated', heading)
         worksheet.write('T1', 'Mimetypes', heading)
         worksheet.write('U1', 'Processed', heading)
+        worksheet.write('V1', 'Related To', heading)
+        worksheet.write('W1', 'Views', heading)
+        worksheet.write('X1', 'Downloads', heading)
+        if not email_to == u'true':
+            worksheet.write('Y1', 'Funding Projects', heading)
         link = True
 
         j = 1
@@ -1647,6 +1696,12 @@ def repo_report(request):
             # is it processed?
             relations = [relation.relationType.startswith('is') for relation in res.relationinfotype_model_set.all()]
             processed = "YES" if any(relations) else "NO"
+
+            #related_ids
+            related_ids=""
+            if res.relationinfotype_model_set.all():
+                related_ids = ", ".join(set([rel.relatedResource.targetResourceNameURI
+                                             for rel in res.relationinfotype_model_set.all()]))
             country = _get_country(res)
             contacts = []
             licences = []
@@ -1685,6 +1740,21 @@ def repo_report(request):
 
             # date
             date = datetime.datetime.strptime(unicode(res.storage_object.created).split(" ")[0], "%Y-%m-%d")
+
+            # stats
+            num_downloads = model_utils.get_lr_stat_action_count(res.storage_object.identifier, DOWNLOAD_STAT)
+            num_views = model_utils.get_lr_stat_action_count(res.storage_object.identifier, VIEW_STAT)
+
+            # Funding projects
+            try:
+                rc = res.resourceCreationInfo
+                try:
+                    fundingProjects = [fp.projectShortName['en'] for fp in rc.fundingProject.all()]
+                except KeyError:
+                    fundingProjects = [fp.projectName['en'] for fp in rc.fundingProject.all()]
+            except AttributeError:
+                fundingProjects = []
+
             worksheet.write(j, 0, res.id)
             worksheet.write(j, 1, res_name.decode('utf-8'), bold)
             worksheet.write(j, 2, res.resource_type())
@@ -1761,6 +1831,11 @@ def repo_report(request):
             else:
                 worksheet.write(j, 19, "N/A")
             worksheet.write(j, 20, processed)
+            worksheet.write(j, 21, related_ids)
+            worksheet.write(j, 22, num_views)
+            worksheet.write(j, 23, num_downloads)
+            if not email_to == u'true':
+                worksheet.write(j, 24, ", ".join(fundingProjects))
             j += 1
             # worksheet.write(i + 1, 3, _get_resource_size_info(res))
         # worksheet.write(len(resources)+2, 3, "Total Resources", bold)
@@ -1817,10 +1892,9 @@ def _get_preferred_size(resource):
                         return terms
                     else:
                         try:
-			    return size_infos[0]
-			except IndexError:
-			    return None
-			    
+                            return size_infos[0]
+                        except IndexError:
+                            return None
 
 
 def _get_country(res):
@@ -2043,12 +2117,12 @@ def _get_resource_size_infos(resource):
         lcr_media_type = media.lexicalConceptualResourceMediaType
         if lcr_media_type.lexicalConceptualResourceTextInfo:
             result.extend([s for s in lcr_media_type \
-                    .lexicalConceptualResourceTextInfo.sizeinfotype_model_set.all()])
+                          .lexicalConceptualResourceTextInfo.sizeinfotype_model_set.all()])
     elif isinstance(media, languageDescriptionInfoType_model):
         ld_media_type = media.languageDescriptionMediaType
         if ld_media_type.languageDescriptionTextInfo:
             result.extend([s for s in ld_media_type \
-                    .languageDescriptionTextInfo.sizeinfotype_model_set.all()])
+                          .languageDescriptionTextInfo.sizeinfotype_model_set.all()])
     return result
 
 

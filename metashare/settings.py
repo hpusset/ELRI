@@ -179,11 +179,12 @@ INSTALLED_APPS = (
 
     'metashare.accounts',
     'metashare.storage',
-    'metashare.sync',
+    # 'metashare.sync',
     'metashare.stats',
     'metashare.recommendations',
     'metashare.repository',
     'metashare.bcp47',
+    'metashare.processing',
     'progressbarupload',
     'metashare.edelivery',
 )
@@ -286,3 +287,10 @@ if 'test' in sys.argv[1:]:
     TEMPLATE_DEBUG = DEBUG
     TESTS_IN_PROGRESS = True
     MIGRATION_MODULES = DisableMigrations()
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}

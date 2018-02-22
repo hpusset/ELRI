@@ -2,63 +2,68 @@
 {% load analytical %}
 {% load static from staticfiles %}
 {% spaceless %}
-<html lang="en">
-  <head>
-    {% analytical_head_top %}
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>{% spaceless %}{% block title %}ELRC-SHARE{% endblock %}{% endspaceless %}</title>
-    <meta name="description" content="{% spaceless %}{% block description %}META-SHARE: a sustainable network of repositories of language resources documented with high-quality metadata, allowing for uniform search and access to resources.{% endblock %}{% endspaceless %}" />
-    <meta name="keywords" content="{% spaceless %}{% block keywords %}META-SHARE, language resources, language tools, META-NET{% endblock %}{% endspaceless %}" />
-    <link rel="shortcut icon" href="{% static "metashare/images/favicon.ico" %}" />
-    <link rel="stylesheet" href="{% static "metashare/css/blueprint/screen.css" %}" type="text/css" media="screen, projection">
-    <link rel="stylesheet" href="{% static "metashare/css/blueprint/print.css" %}" type="text/css" media="print">
-    <!--[if lt IE 8]><link rel="stylesheet" href="{% static "metashare/css/blueprint/ie.css" %}" type="text/css" media="screen, projection"><![endif]-->
-    <link rel="stylesheet" href="{% static "metashare/css/sexybuttons/sexybuttons.css" %}" type="text/css" media="screen">
-    <link rel="stylesheet" href="{% static "metashare/css/screen.css" %}" type="text/css" media="screen">
-    <link rel="stylesheet" href="{% static "metashare/css/typo.css" %}" type="text/css" media="screen">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-    <script type="text/javascript" src="{% static "metashare/js/jquery-1.7.1.min.js" %}"></script>
-    <script type="text/javascript" src="{% static "metashare/js/metashare.js" %}"></script>
-    <script src="https://use.fontawesome.com/92573ad434.js"></script>
-    {% block links %}{% endblock %}{% analytical_head_bottom %}
-    <script type="text/javascript">
-    var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-36199711-1']); _gaq.push(['_gat._anonymizeIp']);
-    _gaq.push(['_setDomainName', 'none']); _gaq.push(['_setAllowLinker', true]); _gaq.push(['_trackPageview']);
-    (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })();
-    </script>
-    <style>
-        .menu_fontawesome{
-            font-size: 1.4em;
-            color: #058dbe;
-        }
-    </style>
-  </head>
-  <body>
+    <html lang="en">
+    <head>
+        {% analytical_head_top %}
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>{% spaceless %}{% block title %}ELRC-SHARE{% endblock %}{% endspaceless %}</title>
+        <meta name="description" content="
+                {% spaceless %}{% block description %}ELRC-SHARE: a repository used for documenting, storing, browsing and accessing Language Resources.{% endblock %}{% endspaceless %}"/>
+        <meta name="keywords" content="
+                {% spaceless %}{% block keywords %}ELRC-SHARE, language resources, language tools, ELRC, European Language Resource Coordination{% endblock %}{% endspaceless %}"/>
+        <link rel="shortcut icon" href="{% static "metashare/images/favicon.ico" %}"/>
+        <link rel="stylesheet" href="{% static "metashare/css/blueprint/screen.css" %}" type="text/css"
+              media="screen, projection">
+        <link rel="stylesheet" href="{% static "metashare/css/blueprint/print.css" %}" type="text/css" media="print">
+        <!--[if lt IE 8]><link rel="stylesheet" href="{% static "metashare/css/blueprint/ie.css" %}" type="text/css" media="screen, projection">
+        <![endif]-->
+        <link rel="stylesheet" href="{% static "metashare/css/sexybuttons/sexybuttons.css" %}" type="text/css"
+              media="screen">
+        <link rel="stylesheet" href="{% static "metashare/css/screen.css" %}" type="text/css" media="screen">
+        <link rel="stylesheet" href="{% static "metashare/css/typo.css" %}" type="text/css" media="screen">
+        <script type="text/javascript" src="{% static "metashare/js/jquery-1.7.1.min.js" %}"></script>
+        <script type="text/javascript" src="{% static "metashare/js/metashare.js" %}"></script>
+        <script src="https://use.fontawesome.com/92573ad434.js"></script>
+        {% block links %}{% endblock %}{% analytical_head_bottom %}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107199557-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments)
+            };
+            gtag('js', new Date());
+            gtag('config', 'UA-107199557-1');
+        </script>
+        <style>
+            .menu_fontawesome {
+                font-size: 1.4em;
+                color: #058dbe;
+            }
+        </style>
+        {% block extra_head %}{% endblock %}
+    </head>
+    <body>
     {% analytical_body_top %}
     {% block header %}
-    {% include "header.html" with page="frontpage" %}
+        {% include "header.html" with page="frontpage" %}
     {% endblock %}
     {% block back %}{% endblock %}
-   <div class="container">
-    <div id="content">
-      <div id="messages">
-        {% block messages %}{% endblock %}
-        {% if messages %}
-        {% for message in messages %}
-        <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|safe }}</p>
-        {% endfor %}
-        {% endif %}
-      </div>
-      {% block content %}{% endblock %}
+    <div class="container">
+        <div id="content">
+            <div id="messages">
+                {% block messages %}{% endblock %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|safe }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            {% block content %}{% endblock %}
+        </div>
     </div>
-  </div>
-  {% include "footer.html" %}
-  <script type="text/javascript">addFormHelper()</script>
-  {% analytical_body_bottom %}
-  </body>
-</html>
+    {% include "footer.html" %}
+    <script type="text/javascript">addFormHelper()</script>
+    {% analytical_body_bottom %}
+    </body>
+    </html>
 {% endspaceless %}

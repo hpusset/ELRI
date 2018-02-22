@@ -112,7 +112,7 @@ EDELIVERY_APPLICATIONS_STATUS = [
 
 class AccessPointEdeliveryApplication(models.Model):
     """
-    Contains user data related to a user application for being an editor.
+    Contains user data related to a user application for being a data provider through eDelivery.
     """
 
     # def _get_upload_dest(self, filename):
