@@ -19,7 +19,7 @@ class Command(BaseCommand):
                 send_mail("New contributions through eDelivery",
                           "You have new unmanaged contributed resources on elrc-share.eu, through eDelivery.",
                           recipient_list=CONTRIBUTIONS_ALERT_EMAILS,
-                          from_email='mdel@windowslive.com', \
+                          from_email='no-reply@elrc-share.eu', \
                           fail_silently=False)
             except:
                 LOGGER.error("An error has occurred while trying to send email to contributions "
