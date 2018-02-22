@@ -8,7 +8,8 @@ from django.utils.translation import ugettext as _
 
 from metashare.accounts.models import UserProfile, EditorGroupApplication, \
     OrganizationApplication, Organization, OrganizationManagers, EditorGroup, \
-    EditorGroupManagers
+    EditorGroupManagers, AccessPointEdeliveryApplication
+from metashare.accounts.validators import validate_wsdl_url
 
 
 class ModelForm(forms.ModelForm):
@@ -129,6 +130,20 @@ class RegistrationRequestForm(Form):
 
         # cfedermann: possible extensions for future improvements.
         # - add validation for shortname for forbidden characters
+
+
+class EdeliveryApplicationForm(Form):
+    # class Meta:
+    #     """
+    #     Meta class connecting to UserProfile object model.
+    #     """
+    #     model = AccessPointEdeliveryApplication
+    #     exclude = ('user', 'status', 'created', 'rejection_reason')
+
+    endpoint = forms.URLField(validators=[validate_wsdl_url], required=True)
+    gateway_party_name = forms.CharField(max_length=100, required=True)
+    gateway_party_id = forms.CharField(max_length=100, required=True)
+    public_key = forms.FileField(required=True)
 
 
 class ContactForm(Form):

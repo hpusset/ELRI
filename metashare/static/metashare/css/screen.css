@@ -96,32 +96,32 @@ a:hover span.desc {
 }
 
 .middle_button {
-	background-color: #058dbe;
-	border: none;
-	display: block;
-	margin-top: 7px;
-	height: 26px;
-	width: auto;
-	color: white;
-	font-size: 16px !important;
-	text-decoration: none;
+    background-color: #058dbe;
+    border: none;
+    display: block;
+    margin-top: 7px;
+    height: 26px;
+    width: auto;
+    color: white;
+    font-size: 16px !important;
+    text-decoration: none;
 }
 
 .euLogin {
-	background-color: #ffd500;
-	border: none;
-	display: block;
-	margin-top: 7px;
-	height: 26px;
-	color: #000;
-	font-size: 16px !important;
-	text-decoration: none;
+    background-color: #ffd500;
+    border: none;
+    display: block;
+    margin-top: 7px;
+    height: 26px;
+    color: #000;
+    font-size: 16px !important;
+    text-decoration: none;
     width: 18%;
 }
 
 .euLogin:hover {
-	background-color: #058dbe;
-	color: #fff;
+    background-color: #058dbe;
+    color: #fff;
     transition: background 200ms linear;
 }
 
@@ -158,9 +158,9 @@ a:hover span.desc {
     color: #fff;
     border: none;
     display: block;
-    -webkit-border-radius:8px;
-    -moz-border-radius:8px;
-    border-radius:8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
     margin-top: 2px;
     padding-top: 4px;
     height: 49px;
@@ -169,13 +169,13 @@ a:hover span.desc {
 }
 
 .big_button:hover {
-	background-color: #ffd500;
-	color: #333333 !important;
-	-webkit-transition: background 200ms linear;
-	-moz-transition: background 200ms linear;
-	-ms-transition: background 200ms linear;
-	-o-transition: background 200ms linear;
-	transition: background 200ms linear;
+    background-color: #ffd500;
+    color: #333333 !important;
+    -webkit-transition: background 200ms linear;
+    -moz-transition: background 200ms linear;
+    -ms-transition: background 200ms linear;
+    -o-transition: background 200ms linear;
+    transition: background 200ms linear;
 }
 
 button.search_hover {
@@ -242,11 +242,22 @@ div.content_box table tbody tr td {
     max-width: 1000px;
 }
 
+#content #messages {
+    text-align: center;
+}
+
 #content #messages p {
-    font-size: 10pt;
-    padding: 2px;
-    padding-left: 4px;
-    margin-bottom: 2px;
+    font-size: 1.2em;
+    padding: 5px;
+    /*padding-left: 4px;*/
+    display: inline-block;
+    margin-top: -70px;
+}
+
+.warning {
+    border: 2px solid;
+    border-color: #c8bd00;
+    background-color: #f8ea9f;
 }
 
 .help_text {
@@ -346,25 +357,25 @@ form.form_helper label.missing {
 }
 
 form.form_helper label {
-	margin-top: 5px;
-	height: 18px;
-	padding-left: 10px;
-	min-width: 100px;
-	font-size: 14px;
-	background-color: #fff;
-	color: #000;
-	text-align: right;
-	padding-right: 10px;
-	padding-top: 0px;
-	padding-bottom: 4px;
-	float: right;
-	font-weight: 600;
-	border-top-left-radius: 1em;
-	-moz-border-radius-topleft: 1em;
-	-webkit-border-top-left-radius: 1em;
-	border-bottom-left-radius: 1em;
-	-moz-border-radius-bottomleft: 1em;
-	-webkit-border-bottom-left-radius: 1em;
+    margin-top: 5px;
+    height: 18px;
+    padding-left: 10px;
+    min-width: 100px;
+    font-size: 14px;
+    background-color: #fff;
+    color: #000;
+    text-align: right;
+    padding-right: 10px;
+    padding-top: 0px;
+    padding-bottom: 4px;
+    float: right;
+    font-weight: 600;
+    border-top-left-radius: 1em;
+    -moz-border-radius-topleft: 1em;
+    -webkit-border-top-left-radius: 1em;
+    border-bottom-left-radius: 1em;
+    -moz-border-radius-bottomleft: 1em;
+    -webkit-border-bottom-left-radius: 1em;
 }
 
 /* cfedermann patches end */
@@ -379,16 +390,16 @@ form.form_helper tr.error th label {
 }
 
 form.form_helper > label {
-	width: 40%;
-	float: left;
-	text-align: right;
-	margin-top: 3px;
+    width: 40%;
+    float: left;
+    text-align: right;
+    margin-top: 3px;
 }
 
 form.form_helper > label + input {
-	width: 56%;
-	float: right;
-	margin: 0;
+    width: 56%;
+    float: right;
+    margin: 0;
 }
 
 form.form_helper > input[type=checkbox] {
@@ -677,13 +688,13 @@ div.split {
 }
 
 div.attribution {
-	display: block;
-	font-size: 12px;
-	background: #cde8f2;
-	color: #000;
-	font-weight: normal;
-	padding: 1%;
-	margin-bottom: 21px;
+    display: block;
+    font-size: 12px;
+    background: #cde8f2;
+    color: #000;
+    font-weight: normal;
+    padding: 1%;
+    margin-bottom: 21px;
 }
 
 div.citation {
@@ -858,28 +869,28 @@ div.jsddm {
 }
 
 .big_button_search {
-	font-size: 2.3em;
-	background-color: #fff;
-	color: #000;
-	border: none;
-	display: block;
-	-webkit-border-radius: 100px;
-	-moz-border-radius: 100px;
-	border-radius: 100px;
-	padding-top: 12px;
-	text-decoration: none;
+    font-size: 2.3em;
+    background-color: #fff;
+    color: #000;
+    border: none;
+    display: block;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+    padding-top: 12px;
+    text-decoration: none;
 }
 
 .big_button_search:hover {
     cursor: pointer;
-	margin-top: -4px;
+    margin-top: -4px;
     font-size: 2.8em;
-	color: #058dbe !important;
-	-webkit-transition: background 200ms linear;
-	-moz-transition: background 200ms linear;
-	-ms-transition: background 200ms linear;
-	-o-transition: background 200ms linear;
-	transition: background 200ms linear;
+    color: #058dbe !important;
+    -webkit-transition: background 200ms linear;
+    -moz-transition: background 200ms linear;
+    -ms-transition: background 200ms linear;
+    -o-transition: background 200ms linear;
+    transition: background 200ms linear;
 }
 
 #messages {

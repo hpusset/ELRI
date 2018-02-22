@@ -305,8 +305,3 @@ def get_lr_master_url(resource):
     """
     return "{0}/{1}".format(resource.storage_object.source_url,
                             resource.get_relative_url())
-
-
-def lr_is_processable(resource):
-    #dataformats = get_resource_dataformats(resource)
-    pass

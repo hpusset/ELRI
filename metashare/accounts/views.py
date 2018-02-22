@@ -4,7 +4,8 @@ from smtplib import SMTPException
 from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import send_mail
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
@@ -14,12 +15,11 @@ from django.utils.translation import ugettext as _
 
 from metashare.accounts.forms import RegistrationRequestForm, ResetRequestForm, \
     UserProfileForm, EditorGroupApplicationForm, UpdateDefaultEditorGroupForm, \
-    OrganizationApplicationForm, ContactForm
+    OrganizationApplicationForm, ContactForm, EdeliveryApplicationForm
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
     EditorGroupApplication, EditorGroupManagers, EditorGroup, \
-    OrganizationApplication, OrganizationManagers, Organization, UserProfile
+    OrganizationApplication, OrganizationManagers, Organization, UserProfile, AccessPointEdeliveryApplication
 from metashare.settings import DJANGO_URL, LOG_HANDLER
-
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -492,6 +492,7 @@ def organization_application(request):
     return render_to_response('accounts/organization_application.html',
                         dictionary, context_instance=RequestContext(request))
 
+
 def reset(request, uuid=None):
     """
     Resets the password for the given reset id.
@@ -589,3 +590,46 @@ def reset(request, uuid=None):
     
     # Redirect the user to the front page.
     return redirect('metashare.views.frontpage')
+
+
+@login_required
+def edelivery_application(request):
+    if request.method == "POST":
+        form = EdeliveryApplicationForm(request.POST, request.FILES)
+        if form.is_valid():
+            # check if user has already applied for edelivery membership
+            try:
+                appl = AccessPointEdeliveryApplication.objects.get(user=request.user)
+                if appl.status == "PENDING":
+                    messages.warning(request, "There is already an eDelivery application for your account,"
+                                              " pending for approval.")
+                elif appl.status == "ACCEPTED":
+                    messages.warning(request, "You have already joined the ELRC-SHARE eDelivery network.")
+            except ObjectDoesNotExist:
+                application = AccessPointEdeliveryApplication(
+                    user=request.user,
+                    endpoint=form.cleaned_data['endpoint'],
+                    gateway_party_name=form.cleaned_data['gateway_party_name'],
+                    gateway_party_id=form.cleaned_data['gateway_party_id'],
+                    public_key=request.FILES['public_key'],
+                    status='PENDING',
+                )
+                application.save()
+                messages.success(request, "Your application has been successfully submitted!")
+                send_mail(subject="New eDelivery application from user " + request.user.username + ".",
+                          message="User '{}' has applied for membership in the ELRC_SHARE eDelivery "
+                                  "Network. Please review the application at "
+                                  "https://elrc-share.eu/admin/accounts/accesspointedeliveryapplication/ and "
+                                  "accept or reject the application.".format(request.user.username), from_email="elrc-share@ilsp.gr",
+                          recipient_list=["edelivery@elrc-share.eu"], fail_silently=False
+                      )
+            # TODO: email admin??
+            return redirect('metashare.views.frontpage')
+    else:
+        form = EdeliveryApplicationForm()
+    # return render_to_response(
+    #     'accounts/apply_for_edelivery.html',
+    #     {'form': form})
+    dictionary = {'title': _('Apply for eDelivery membership'), 'form': form}
+    return render_to_response('accounts/apply_for_edelivery.html', dictionary,
+                                  context_instance=RequestContext(request))

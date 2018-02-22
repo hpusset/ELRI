@@ -18,10 +18,10 @@ urlpatterns = patterns('',
   url(r'^{0}logout/$'.format(DJANGO_BASE),
     'metashare.views.logout', {'next_page': '/{0}'.format(DJANGO_BASE)}, name='logout'),
 
-  url(r'^{0}ecas-login/$'.format(DJANGO_BASE),
-     'cas.views.login', name='ecas-login'),
-  url(r'^{0}ecas-logout/$'.format(DJANGO_BASE),
-     'cas.views.logout', {'next_page': '/{0}'.format(DJANGO_BASE)}, name='ecas-logout'),
+  # url(r'^{0}ecas-login/$'.format(DJANGO_BASE),
+  #    'cas.views.login', name='ecas-login'),
+  # url(r'^{0}ecas-logout/$'.format(DJANGO_BASE),
+  #    'cas.views.logout', {'next_page': '/{0}'.format(DJANGO_BASE)}, name='ecas-logout'),
 
   url(r'^{0}admin/'.format(DJANGO_BASE),
     include(admin.site.urls)),
@@ -51,9 +51,9 @@ urlpatterns += patterns('metashare.bcp47.xhr',
   (r'^{0}bcp47/'.format(DJANGO_BASE), include('metashare.bcp47.urls')),
 )
 
-urlpatterns += patterns('metashare.tmx_management.views',
-  (r'^{0}tmx/'.format(DJANGO_BASE), include('metashare.tmx_management.urls')),
-)
+# urlpatterns += patterns('metashare.tmx_management.views',
+#   (r'^{0}tmx/'.format(DJANGO_BASE), include('metashare.tmx_management.urls')),
+# )
 
 urlpatterns += patterns('metashare.bcp47.xhr',
   (r'^{0}bcp47/'.format(DJANGO_BASE), include('metashare.bcp47.urls')),

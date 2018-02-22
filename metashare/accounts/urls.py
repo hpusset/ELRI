@@ -18,6 +18,8 @@ urlpatterns = patterns('metashare.accounts.views',
     'organization_application', name='organization_application'),
   url(r'update_default_editor_groups/$',
     'update_default_editor_groups', name='update_default_editor_groups'),
+  url(r'edelivery_membership_application/$',
+    'edelivery_application', name='edelivery_application'),
 )
 
 urlpatterns += patterns('django.contrib.auth.views',

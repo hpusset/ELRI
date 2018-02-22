@@ -1,9 +1,11 @@
+from distutils import util
 import json
 import logging
 import os
 import shutil
 import uuid
 
+import xmltodict
 from django.core.exceptions import PermissionDenied
 
 from metashare.repository.templatetags.is_member import is_member
@@ -58,7 +60,8 @@ from metashare.repository.models import resourceInfoType_model, identificationIn
     licenceInfoType_model, resourceCreationInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex, \
     update_lr_index_entry
-from metashare.settings import LOG_HANDLER, STATIC_URL, DJANGO_URL, MAXIMUM_UPLOAD_SIZE, CONTRIBUTION_FORM_DATA
+from metashare.settings import LOG_HANDLER, STATIC_URL, DJANGO_URL, MAXIMUM_UPLOAD_SIZE, CONTRIBUTION_FORM_DATA, \
+    ROOT_PATH
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
 from metashare.storage.models import PUBLISHED, INGESTED
@@ -1066,7 +1069,8 @@ def contribute(request):
                 'shortDescription': request.POST['shortDescription'],
             },
             'administration': {
-                'processed': 'false'
+                'processed': 'false',
+                'edelivery': 'false'
             }
         }
 
@@ -1207,7 +1211,9 @@ def manage_contributed_data(request):
 
             },
             "resource_file": doc.xpath("//resource/administration/resource_file/text()"),
-            "dataset": dataset
+            "dataset": dataset,
+            'edelivery':  util.strtobool(doc.xpath("//resource/administration/edelivery/text()")[0]),
+            'msg_id': doc.xpath("//resource/administration/edelivery/@msg_id")
 
         })
     context = {

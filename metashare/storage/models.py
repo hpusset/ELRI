@@ -149,7 +149,7 @@ class StorageObject(models.Model):
 
     legacy_resource = models.BooleanField(
         help_text='Specifies whether the resource is collected by ELRC 1',
-        default=None)
+        default=False)
 
     def _get_master_copy(self):
         return self.copy_status == MASTER
@@ -263,14 +263,17 @@ class StorageObject(models.Model):
         import re
 
         pattern = re.compile("ELRC_VALREP.*\.pdf")
-        for f in os.listdir(self._storage_folder()):
-            if pattern.match(f):
-                _path = '{0}/{1}'.format(self._storage_folder(), pattern.match(f).group())
-                for _ext in ALLOWED_VALIDATION_EXTENSIONS:
-                    _binary_data = '{0}.{1}'.format(_path[:-4], _ext)
-                    if exists(_binary_data):
-                        return _binary_data
-                break
+        try:
+            for f in os.listdir(self._storage_folder()):
+                if pattern.match(f):
+                    _path = '{0}/{1}'.format(self._storage_folder(), pattern.match(f).group())
+                    for _ext in ALLOWED_VALIDATION_EXTENSIONS:
+                        _binary_data = '{0}.{1}'.format(_path[:-4], _ext)
+                        if exists(_binary_data):
+                            return _binary_data
+                    break
+        except:
+            pass
         return None
 
     # LEGAL DOCUMENTATION

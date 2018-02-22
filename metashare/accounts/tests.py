@@ -657,3 +657,107 @@ class EditorGroupApplicationTest(django.test.TestCase):
         response = self.client.get(
             EditorGroupApplicationTest.manage_url, follow=True)
         self.assertContains(response, '1 editor group application')
+
+# TODO: TEST EDELIVERY APPLICATION
+# class EdeliveryApplicationTest(django.test.TestCase):
+#     """
+#     A test case for `EditorGroupApplication`-related functionality.
+#     """
+#     app_url = "/{}accounts/edelivery_membership_application/".format(DJANGO_BASE)
+#     manage_url = "/{}admin/accounts/accesspointedeliveryapplication/".format(DJANGO_BASE)
+#
+#     @classmethod
+#     def setUpClass(cls):
+#         LOGGER.info("running '{}' tests...".format(cls.__name__))
+#
+#     @classmethod
+#     def tearDownClass(cls):
+#         test_utils.clean_user_db()
+#         LOGGER.info("finished '{}' tests".format(cls.__name__))
+#
+#     def setUp(self):
+#         """
+#         Sets up a test user and a `Client` with which to test.
+#         """
+#         # AccessPointEdeliveryApplication
+#         self.normal_user = User.objects.create_user(
+#             'normaluser', 'normal@example.com', 'secret')
+#         self.client = Client()
+#
+#     def tearDown(self):
+#         """
+#         Clean up the test
+#         """
+#         self.normal_user.delete()
+#         EdeliveryApplicationTest.objects.all().delete()
+#
+#     def test_user_application(self):
+#         """
+#         Verifies that a registered user can apply for edelivery.
+#         """
+#         # create an editor group application as a normal user:
+#         self.client.login(username=self.normal_user.username, password='secret')
+#         response = self.client.post(EdeliveryApplicationTest.app_url,
+#             {'editor_group': EditorGroupApplicationTest.editor_group_1.pk},
+#             follow=True)
+#         self.assertContains(response,
+#             'You have successfully applied for editor group')
+#         self.assertContains(response,
+#             EditorGroupApplicationTest.editor_group_1.name)
+#         eg_applications = EditorGroupApplication.objects.all()
+#         self.assertEqual(eg_applications.count(), 1)
+#         # accept the application from a manager account:
+#         self.client.logout()
+#         self.client.login(
+#             username=EditorGroupApplicationTest.superuser.username,
+#             password='secret')
+#         response = self.client.post(EditorGroupApplicationTest.manage_url,
+#             {"action": "accept_selected",
+#              ACTION_CHECKBOX_NAME: eg_applications[0].pk}, follow=True)
+#         self.assertContains(response, 'You have successfully accepted')
+#         self.assertContains(response, '0 editor group applications')
+#         # verify that the normal user has all required permissions for editing
+#         # language resources:
+#         self.normal_user.has_perms(['{}.{}'.format(app, name) for app, name
+#             in Group.objects.get(name=GROUP_GLOBAL_EDITORS).permissions \
+#                 .values_list('content_type__app_label', 'codename')])
+#
+#
+#     def test_only_superuser_and_manager_can_see_group_applications(self):
+#         """
+#         Verifies that only superusers and managing editor users can see editor
+#         group applications.
+#         """
+#         # create a test editor group application:
+#         EditorGroupApplication.objects.create(user=self.normal_user,
+#             editor_group=EditorGroupApplicationTest.editor_group_1)
+#         # make sure that a normal user cannot see the editor group applications
+#         # list:
+#         self.client.login(
+#             username=self.normal_user.username, password='secret')
+#         response = self.client.get(
+#             EditorGroupApplicationTest.manage_url, follow=True)
+#         if response.status_code == 200:
+#             self.assertNotContains(response, "editor group application")
+#         else:
+#             self.assertEqual(response.status_code, 403)
+#         # make sure that non-authorized manager user cannot see "foreign" editor
+#         # group applications; they must still be able to see the list:
+#         self.client.login(
+#             username=self.manager_user_2.username, password='secret')
+#         response = self.client.get(
+#             EditorGroupApplicationTest.manage_url, follow=True)
+#         self.assertContains(response, '0 editor group applications')
+#         # make sure that an authorized manager user can see his editor group
+#         # applications:
+#         self.client.login(
+#             username=self.manager_user_1.username, password='secret')
+#         response = self.client.get(
+#             EditorGroupApplicationTest.manage_url, follow=True)
+#         self.assertContains(response, '1 editor group application')
+#         # make sure that a superuser can see all editor group applications:
+#         self.client.login(
+#             username=self.superuser.username, password='secret')
+#         response = self.client.get(
+#             EditorGroupApplicationTest.manage_url, follow=True)
+#         self.assertContains(response, '1 editor group application')

@@ -4,6 +4,8 @@ Call the external program xdiff to compare two XML files
 
 """
 import logging
+from lxml import etree
+
 import os
 import re
 import sys
@@ -22,6 +24,8 @@ from xml.etree import ElementTree
 
 
 # Setup logging support.
+from metashare.storage.models import PUBLISHED, MASTER
+
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
@@ -203,7 +207,7 @@ html_escape_table = {
     ">": "&gt;",
     "<": "&lt;",
     }
-    
+
 def html_escape(text):
     """
     Produce entities within text.
