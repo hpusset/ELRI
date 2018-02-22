@@ -184,7 +184,7 @@ INSTALLED_APPS = (
     'metashare.recommendations',
     'metashare.repository',
     'metashare.bcp47',
-    'metashare.processing',
+    # 'metashare.processing',
     'progressbarupload',
     'metashare.edelivery',
 )
