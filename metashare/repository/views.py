@@ -720,7 +720,9 @@ def view(request, resource_name=None, object_id=None):
 
     # Render and return template with the defined context.
     ctx = RequestContext(request)
-    return render_to_response(template, context, context_instance=ctx)
+    # context['processing_info'] = json.loads(json.dumps(dict_xml).replace("@", "").replace("#", ""))
+    return render_to_response(template,
+                              context, context_instance=ctx)
 
 
 def tuple2dict(_tuple):
