@@ -1,3 +1,4 @@
+from distutils import util
 import json
 import logging
 import os
@@ -58,7 +59,8 @@ from metashare.repository.models import resourceInfoType_model, identificationIn
     licenceInfoType_model, resourceCreationInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex, \
     update_lr_index_entry
-from metashare.settings import LOG_HANDLER, STATIC_URL, DJANGO_URL, MAXIMUM_UPLOAD_SIZE, CONTRIBUTION_FORM_DATA
+from metashare.settings import LOG_HANDLER, STATIC_URL, DJANGO_URL, MAXIMUM_UPLOAD_SIZE, CONTRIBUTION_FORM_DATA, \
+    ROOT_PATH
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
 from metashare.storage.models import PUBLISHED, INGESTED
@@ -477,6 +479,7 @@ def view(request, resource_name=None, object_id=None):
                                  storage_object__identifier=object_id,
                                  storage_object__publication_status__in=[INGESTED, PUBLISHED])
 
+
     if not has_view_permission(request, resource):
         raise PermissionDenied
 
@@ -717,7 +720,9 @@ def view(request, resource_name=None, object_id=None):
 
     # Render and return template with the defined context.
     ctx = RequestContext(request)
-    return render_to_response(template, context, context_instance=ctx)
+    context['processing_info'] = json.loads(json.dumps(dict_xml).replace("@", "").replace("#", ""))
+    return render_to_response(template,
+                              context, context_instance=ctx)
 
 
 def tuple2dict(_tuple):
@@ -1066,7 +1071,8 @@ def contribute(request):
                 'shortDescription': request.POST['shortDescription'],
             },
             'administration': {
-                'processed': 'false'
+                'processed': 'false',
+                'edelivery': 'false'
             }
         }
 
@@ -1207,7 +1213,9 @@ def manage_contributed_data(request):
 
             },
             "resource_file": doc.xpath("//resource/administration/resource_file/text()"),
-            "dataset": dataset
+            "dataset": dataset,
+            'edelivery':  util.strtobool(doc.xpath("//resource/administration/edelivery/text()")[0]),
+            'msg_id': doc.xpath("//resource/administration/edelivery/@msg_id")
 
         })
     context = {

@@ -14,6 +14,9 @@
     title="{{ object.identificationInfo.get_default_description|escape }}"{% endifnotequal %}>{{ object }}</a>
 
 <div class="accessStats">
+  {% if object.is_processable %}
+    <span class="process_icon"><i class="fa fa-cog fa-lg"></i>&nbsp;</span>
+  {% endif %}
   <img src="{% static "stats/img/download_icon.gif" %}" alt="Number of downloads" title="Number of downloads" />&nbsp;{{ object.storage_object.identifier|get_download_count }}
   <img src="{% static "stats/img/view_icon.gif" %}" alt="Number of views" title="Number of views" />&nbsp;{{ object.storage_object.identifier|get_view_count }}
 </div>

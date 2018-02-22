@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import patterns, url, include
 
 from haystack.views import search_view_factory
 from haystack.query import SearchQuerySet
@@ -10,7 +10,6 @@ sqs = SearchQuerySet() \
     .facet("languageNameFilter") \
     .facet("resourceTypeFilter") \
     .facet("mediaTypeFilter") \
-    .facet("availabilityFilter") \
     .facet("licenceFilter") \
     .facet("restrictionsOfUseFilter") \
     .facet("validatedFilter") \
@@ -19,7 +18,6 @@ sqs = SearchQuerySet() \
     .facet("multilingualityTypeFilter") \
     .facet("modalityTypeFilter") \
     .facet("dataFormatFilter") \
-    .facet("bestPracticesFilter") \
     .facet("domainFilter") \
     .facet("corpusAnnotationTypeFilter") \
     .facet("languageDescriptionLDTypeFilter") \
@@ -34,13 +32,14 @@ sqs = SearchQuerySet() \
     .facet("toolServiceInputOutputResourceTypeFilter") \
     .facet("toolServiceInputOutputMediaTypeFilter") \
     .facet("toolServiceAnnotationTypeFilter") \
-    .facet("toolServiceAnnotationFormatFilter") \
-    .facet("toolServiceEvaluatedFilter") \
     .facet("textTextGenreFilter") \
     .facet("textTextTypeFilter") \
-    .facet("languageVarietyFilter") \
     .facet("appropriatenessForDSIFilter") \
-    .facet("publicationStatusFilter")
+    # .facet("publicationStatusFilter")
+    # .facet("availabilityFilter") \
+    # .facet("bestPracticesFilter") \
+    # .facet("languageVarietyFilter") \
+
 
 urlpatterns = patterns('metashare.repository.views',
                        url(r'^browse/(?P<resource_name>[\w\-]*)/(?P<object_id>\w+)/$',
@@ -61,5 +60,6 @@ urlpatterns = patterns('metashare.repository.views',
                        url(r'contributions', 'manage_contributed_data', name='manage_contributed_data'),
                        url(r'repo_report', 'repo_report'),
                        url(r'addtodb/$', 'addtodb', name='addtodb'),
-                       url(r'get_data/(?P<filename>.+\.zip)', 'get_data', name='get_data')
+                       url(r'get_data/(?P<filename>.+\.zip)', 'get_data', name='get_data'),
+                       url(r'^processing/', include('metashare.processing.urls')),
                        )

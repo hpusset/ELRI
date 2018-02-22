@@ -7,7 +7,6 @@
 {% block title %}
   {{ resourceName }} &ndash; ELRC-SHARE
 {% endblock %}
-
 {% block links %}
 <link rel="stylesheet" type="text/css" href="{% static "metashare/css/resource_view.css" %}" />
 <link type="text/css" rel="stylesheet" href="{% static "metashare/js/jquery.hoverscroll-0.2.4/jquery.hoverscroll.css" %}" />
@@ -18,6 +17,7 @@
 {% block keywords %}{{ resourceType }}, {{ mediaTypes|join:", " }}, {{ linguality_infos|join:", " }}, {{ resource.distributionInfo.get_availability_display }}, {{ license_types|join:", " }}{% endblock %}
 
 {% block content %}
+    {{ resource.is_processable }}
 {% spaceless %}
 	<script type="text/javascript" src="{% static "metashare/js/jquery.hoverscroll-0.2.4/jquery.hoverscroll.js" %}"></script>
 	<script type="text/javascript" src="{% static "metashare/js/jquery.expander.min.js" %}"></script>
@@ -228,6 +228,8 @@
                 <strong>DSI Relevance: </strong>{{ dsi|join:", " }}
             </div>
         {% endif %}
+
+        {% include "repository/resource_view/process_lr.html" with processing_info=processing_info %}
         <hr class="actions"/>
 		<div style="clear: both;">
 			<a href="javascript:history.back();"><button class="span-12 button middle_button">
