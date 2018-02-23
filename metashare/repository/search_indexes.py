@@ -173,6 +173,7 @@ class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
     appropriatenessForDSIFilter = LabeledMultiValueField(
         label=_('Appropriateness For DSI'), facet_id=56, parent_id=0,
         faceted=True)
+
     publicationStatusFilter = LabeledCharField(
         label=_('Publication Status'), facet_id=57, parent_id=0,
         faceted=True)
