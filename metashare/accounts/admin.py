@@ -17,8 +17,7 @@ from metashare.accounts.forms import EditorGroupForm, OrganizationForm, \
     OrganizationManagersForm, EditorGroupManagersForm
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
     UserProfile, EditorGroup, EditorGroupApplication, EditorGroupManagers, \
-    Organization, OrganizationApplication, OrganizationManagers
-    # AccessPointEdeliveryApplication
+    Organization, OrganizationApplication, OrganizationManagers, AccessPointEdeliveryApplication
 from metashare.utils import create_breadcrumb_template_params
 from ..edelivery.update_ap_files import update_pmode, update_truststore
 
@@ -1187,4 +1186,4 @@ admin.site.register(EditorGroupManagers, EditorGroupManagersAdmin)
 admin.site.register(Organization, OrganizationAdmin)
 admin.site.register(OrganizationApplication, OrganizationApplicationAdmin)
 admin.site.register(OrganizationManagers, OrganizationManagersAdmin)
-# admin.site.register(AccessPointEdeliveryApplication, EdeliveryApplicationAdmin)
+admin.site.register(AccessPointEdeliveryApplication, EdeliveryApplicationAdmin)
