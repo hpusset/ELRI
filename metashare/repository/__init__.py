@@ -144,21 +144,21 @@ def check_settings():
         fail(u"Based on DJANGO_URL '{}', expected DJANGO_BASE '{}/', but was '{}'".format(DJANGO_URL, url_path, DJANGO_BASE))
 
 
-def objectify_xmlfile(_file):
-    from metashare.settings import ROOT_PATH
-    from lxml import objectify
-    try:
-        _f = open("{}/../metashare/processing/{}".format(ROOT_PATH, _file))
-    except Exception, exc:
-        try:
-            _f = open("{}/../misc/tools/processingChains/{}".format(ROOT_PATH, _file))
-        except Exception, exc:
-            raise exc
-    _objectified_xml = objectify.parse(_f)
-    _f.close()
-    return _objectified_xml
-
-
-objectified_xml = objectify_xmlfile('annotationLevels.xml')
-services_chains_xml = objectify_xmlfile('processingChains.xml')
-processing_services_xml = objectify_xmlfile('processingServices.xml')
+# def objectify_xmlfile(_file):
+#     from metashare.settings import ROOT_PATH
+#     from lxml import objectify
+#     try:
+#         _f = open("{}/../metashare/processing/{}".format(ROOT_PATH, _file))
+#     except Exception, exc:
+#         try:
+#             _f = open("{}/../misc/tools/processingChains/{}".format(ROOT_PATH, _file))
+#         except Exception, exc:
+#             raise exc
+#     _objectified_xml = objectify.parse(_f)
+#     _f.close()
+#     return _objectified_xml
+#
+#
+# objectified_xml = objectify_xmlfile('annotationLevels.xml')
+# services_chains_xml = objectify_xmlfile('processingChains.xml')
+# processing_services_xml = objectify_xmlfile('processingServices.xml')
