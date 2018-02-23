@@ -110,38 +110,38 @@ EDELIVERY_APPLICATIONS_STATUS = [
 ]
 
 
-class AccessPointEdeliveryApplication(models.Model):
-    """
-    Contains user data related to a user application for being a data provider through eDelivery.
-    """
-
-    # def _get_upload_dest(self, filename):
-    #     path = os.path.join(AP_CERTS_DIR, "pending", self.user.username)
-    #     try:
-    #         os.makedirs(path)
-    #         return os.path.join(path, filename)
-    #     except OSError, e:
-    #         err = "Could not create directory {} for user's {} new eDelivery application!" \
-    #             .format(path, self.user.username)
-    #         LOGGER.error(err, e)
-    #         return os.path.join(AP_CERTS_DIR, "pending", filename)
-
-    user = models.ForeignKey(User)
-    # Accept only valid WSDL urls
-    endpoint = models.URLField('MSH Endpoint', max_length=150, validators=[validate_wsdl_url])
-    gateway_party_name = models.CharField('Gateway Party Name', max_length=100)
-    gateway_party_id = models.CharField('Gateway Party ID', max_length=100)
-    public_key = models.FileField('Public Cetificate', upload_to=AP_CERTS_DIR)
-    status = models.CharField('Application Status', max_length=10,
-                              choices=_make_choices_from_list(EDELIVERY_APPLICATIONS_STATUS)['choices'])
-    rejection_reason = models.TextField('Rejection Reason', max_length=1000, null=True, blank=True)
-    created = models.DateTimeField('Date Created', auto_now_add=True)
-
-    def __unicode__(self):
-        """
-        Return Unicode representation for this instance.
-        """
-        return u'eDelivery Application for user: "{0}"'.format(self.user.username)
+# class AccessPointEdeliveryApplication(models.Model):
+#     """
+#     Contains user data related to a user application for being a data provider through eDelivery.
+#     """
+#
+#     # def _get_upload_dest(self, filename):
+#     #     path = os.path.join(AP_CERTS_DIR, "pending", self.user.username)
+#     #     try:
+#     #         os.makedirs(path)
+#     #         return os.path.join(path, filename)
+#     #     except OSError, e:
+#     #         err = "Could not create directory {} for user's {} new eDelivery application!" \
+#     #             .format(path, self.user.username)
+#     #         LOGGER.error(err, e)
+#     #         return os.path.join(AP_CERTS_DIR, "pending", filename)
+#
+#     user = models.ForeignKey(User)
+#     # Accept only valid WSDL urls
+#     endpoint = models.URLField('MSH Endpoint', max_length=150, validators=[validate_wsdl_url])
+#     gateway_party_name = models.CharField('Gateway Party Name', max_length=100)
+#     gateway_party_id = models.CharField('Gateway Party ID', max_length=100)
+#     public_key = models.FileField('Public Cetificate', upload_to=AP_CERTS_DIR)
+#     status = models.CharField('Application Status', max_length=10,
+#                               choices=_make_choices_from_list(EDELIVERY_APPLICATIONS_STATUS)['choices'])
+#     rejection_reason = models.TextField('Rejection Reason', max_length=1000, null=True, blank=True)
+#     created = models.DateTimeField('Date Created', auto_now_add=True)
+#
+#     def __unicode__(self):
+#         """
+#         Return Unicode representation for this instance.
+#         """
+#         return u'eDelivery Application for user: "{0}"'.format(self.user.username)
 
 
 class EditorGroup(Group):
