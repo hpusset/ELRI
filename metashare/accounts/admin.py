@@ -10,7 +10,7 @@ from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext as _
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage
 from django.template.loader import render_to_string
 
 from metashare.accounts.forms import EditorGroupForm, OrganizationForm, \
@@ -18,6 +18,7 @@ from metashare.accounts.forms import EditorGroupForm, OrganizationForm, \
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
     UserProfile, EditorGroup, EditorGroupApplication, EditorGroupManagers, \
     Organization, OrganizationApplication, OrganizationManagers, AccessPointEdeliveryApplication
+from metashare.settings import ELRC_CERT
 from metashare.utils import create_breadcrumb_template_params
 from ..edelivery.update_ap_files import update_pmode, update_truststore
 
@@ -1059,6 +1060,25 @@ class EdeliveryApplicationAdmin(admin.ModelAdmin):
                 req.status = "ACTIVE"
                 req.save()
                 messages.success(request, "All selected eDelivery applications have been accepted")
+
+                # build reply email with required info and attachemnts
+                msg_body ="Dear {}, \n" \
+                          "Your eDelivery application has been approved.\n\n" \
+                          "You can add the following information to your Access Point " \
+                          "configuration in order for trust establishment to " \
+                          "be completed:\n\n" \
+                          "1. MSH Endpoint: https://edelivery.elrc-share.eu/\n" \
+                          "2. Gateway Party Name: elrc_ap\n" \
+                          "3. Gateway Party ID: domibus-elrc-share\n" \
+                          "4. Public Certificate: attached\n\n" \
+                          "Please consult your Access Point administrator for more " \
+                          "information on how to configure your Access Point.\n\n" \
+                          "Thank you for your contributions!\n\n" \
+                          "The ELRC-SHARE Team".format(req.user.username),
+                msg = EmailMessage("[ELRC] Your ELRC-SHARE eDelivery application", msg_body,
+                               from_email='edelivery@elrc-share.eu', to=[req.user.email])
+                msg.attach_file(ELRC_CERT)
+                msg.send()
             else:
                 messages.error(request, truststore_result['msg'])
         except:
@@ -1079,11 +1099,6 @@ class EdeliveryApplicationAdmin(admin.ModelAdmin):
             # set status to "accepted"
             if req.status == "PENDING":
                 self._accept_application(request, req)
-                # TODO: FIX THIS, ADD ATTACHMENTS AND AP INFO
-                send_mail("ELRC-SHARE eDelivery application",
-                          "Dear {}, \n"
-                          "Your eDelivery application has been approved".format(req.user.username),
-                          "edelivery@elrc-share.eu", [req.user.email])
             else:
                 messages.error(request, "{} with status '{}' is not eligible for approval. "
                                         "'PENDING' status is required for this operation.".format(req, req.status))
