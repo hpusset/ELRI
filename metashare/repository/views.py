@@ -31,7 +31,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.files import File
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
 from django.template.loader import render_to_string
@@ -1093,7 +1093,7 @@ def contribute(request):
         # file_data = form_data['filebutton'].value
         filename = '{}_{}'.format(profile.country, id)
 
-        zipped = ""
+        zipped = None
         # for chunk in request.FILES['filebutton'].chunks():
         #     destination.write(chunk)
         response = {}
@@ -1119,9 +1119,18 @@ def contribute(request):
                     destination.write(chunk)
                 destination.close()
                 import zipfile
-                file = '{}/{}'.format(dir1, zipped)
-                if not zipfile.is_zipfile(file) or not str(request.FILES['filebutton']).endswith(".zip"):
-                    os.remove(file)
+                zfile_path = '{}/{}'.format(dir1, zipped)
+                zfile = zipfile.ZipFile(zfile_path)
+                zip_ok = True
+                try:
+                    if zfile.testzip() is not None:
+                        zip_ok = False
+                except:
+                    zip_ok = False
+                if not zipfile.is_zipfile(zfile_path) or \
+                        not zip_ok or \
+                        not str(request.FILES['filebutton']).endswith(".zip"):
+                    os.remove(zfile_path)
                     response['status'] = "failed"
                     response['message'] = "Your request could not be completed. " \
                                           "The file you tried to upload is corrupted or it is not a valid '.zip' file." \
@@ -1143,10 +1152,23 @@ def contribute(request):
                 data['administration']['dataset'] = {"url": data['resourceInfo']['resourceUrl']}
             except KeyError:
                 data['administration']['dataset'] = "None"
-
+        if request.POST['mode'] == 'eDelivery':
+            data['administration']['edelivery'] = 'true'
+            del data['administration']
+        # create the form data xml file
         xml = dicttoxml.dicttoxml(data, custom_root='resource', attr_type=False)
         xml_file = filename + ".xml"
-        with open('{}/{}'.format(dir1, xml_file), 'w') as f:
+        # download file if mode is "eDelivery"
+        if request.POST['mode'] == 'eDelivery':
+            try:
+                response = HttpResponse(xml, content_type='text/xml')
+                response['Content-Disposition'] = 'attachment; filename={}-contribution-info.xml'.format(request.user)
+                return response
+            except Exception:
+                return HttpResponseNotFound(_('Could not generate eDelivery metadata XML'))
+
+        xml_file_path = "{}/{}".format(dir1, xml_file)
+        with open(xml_file_path, 'w') as f:
             xml_file = File(f)
             xml_file.write(xml)
             xml_file.closed

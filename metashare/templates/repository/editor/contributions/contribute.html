@@ -1,26 +1,37 @@
 {% load static from staticfiles %}
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>{% spaceless %}{% block title %}ELRC-SHARE Repository{% endblock %}{% endspaceless %}</title>
-    <meta name="description" content="{% spaceless %}{% block description %}ELRC-SHARE: a repository used for documenting, storing, browsing and accessing Language Resources.{% endblock %}{% endspaceless %}" />
-    <meta name="keywords" content="{% spaceless %}{% block keywords %}ELRC-SHARE, language resources, language tools, ELRC, European Language Resource Coordination{% endblock %}{% endspaceless %}" />
+    <meta name="description" content="
+
+
+
+
+
+            {% spaceless %}{% block description %}ELRC-SHARE: a repository used for documenting, storing, browsing and accessing Language Resources.{% endblock %}{% endspaceless %}"/>
+    <meta name="keywords" content="
+
+
+
+
+
+            {% spaceless %}{% block keywords %}ELRC-SHARE, language resources, language tools, ELRC, European Language Resource Coordination{% endblock %}{% endspaceless %}"/>
     <link rel="shortcut icon" href="{{ STATIC_URL }}metashare/images/favicon.ico"/>
     <link rel="stylesheet" href="{{ STATIC_URL }}metashare/css/blueprint/screen.css" type="text/css"
           media="screen, projection">
     <link rel="stylesheet" href="{{ STATIC_URL }}metashare/css/blueprint/print.css" type="text/css" media="print">
-
     <!--[if lt IE 8]><link rel="stylesheet" href="/site_media/css/blueprint/ie.css" type="text/css" media="screen, projection">
     <![endif]-->
     <link rel="stylesheet" href="{{ STATIC_URL }}metashare/css/upload.css" type="text/css">
     <link rel="stylesheet" href="{{ STATIC_URL }}metashare/css/screen.css" type="text/css" media="screen">
     <link rel="stylesheet" href="{{ STATIC_URL }}metashare/css/typo.css" type="text/css" media="screen">
-
     <script src="https://use.fontawesome.com/92573ad434.js"></script>
-    <script src="{{ STATIC_URL }}metashare/js/jquery-1.7.1.min.js"></script>
+    <script src="{{ STATIC_URL }}metashare/js/jquery-1.9.1.min.js"></script>
     <script src="{{ STATIC_URL }}metashare/js/jquery.form.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="{{ STATIC_URL }}metashare/js/upload.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}metashare/js/metashare.js"></script>
     <style>
@@ -28,35 +39,21 @@
             font-size: 1.4em;
             color: #058dbe;
         }
+
+        #edelivery_modal p, li {
+            font-family: Arial, serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #474747;
+        }
     </style>
     {% block links %}{% endblock %}
-{#    <script>#}
-{#        (function (i, s, o, g, r, a, m) {#}
-{#            i['GoogleAnalyticsObject'] = r;#}
-{#            i[r] = i[r] || function () {#}
-{#                        (i[r].q = i[r].q || []).push(arguments)#}
-{#                    }, i[r].l = 1 * new Date();#}
-{#            a = s.createElement(o),#}
-{#                    m = s.getElementsByTagName(o)[0];#}
-{#            a.async = 1;#}
-{#            a.src = g;#}
-{#            m.parentNode.insertBefore(a, m)#}
-{#        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');#}
-{##}
-{#        ga('create', 'UA-92969495-1', 'auto');#}
-{#        ga('create', 'UA-93176831-1', 'auto', 'spip');#}
-{#        ga('send', 'pageview');#}
-{#        ga('spip.send', 'pageview');#}
-{#    </script>#}
-
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
           integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-
     <!-- Latest compiled and minified JavaScript -->
     {#    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"#}
     {#            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"#}
@@ -85,41 +82,36 @@
         contribution.
     </div>
 </noscript>
-<form id="simple_form" name="simple_form" class="form-horizontal" action="{% url 'contribute' %}" method="post"
-      data-toggle="validator" enctype="multipart/form-data" encoding="multipart/form-data">
-    <fieldset>
+<div class="row">
+    <div class="col-md-8">
+        <form id="simple_form" name="simple_form" style="margin-left: 15%" class="col-md-7"
+              action="{% url 'contribute' %}" method="post"
+              data-toggle="validator" enctype="multipart/form-data" encoding="multipart/form-data">
+            <!-- Form Name -->
+            <legend style="padding:20px">New Resource</legend>
+            <!-- Text input-->
+            <div class="form-group required">
+                <label class="control-label" for="resourceTitle">Resource Title</label>
 
-        <!-- Form Name -->
-        <legend style="padding:20px">New Resource</legend>
-
-        <!-- Text input-->
-        <div class="form-group required">
-            <label class="col-md-4 control-label" for="resourceTitle">Resource Title</label>
-
-            <div class="col-md-4">
-                <input id="resourceTitle" name="resourceTitle" placeholder="" class="form-control input-md" required=""
+                <input id="resourceTitle" name="resourceTitle" placeholder="" class="form-control input-md"
+                       required=""
                        type="text">
                 <span class="help-block contrib-help">The name by which the resource is already known or by which you would like it to be known; e.g. "The GSRT bilingual corpus of Greek-English bulletins"</span>
+
             </div>
-        </div>
-
-        <!-- Textarea -->
-        <div class="form-group required">
-            <label class="col-md-4 control-label" for="shortDescription">Resource short description</label>
-
-            <div class="col-md-4">
-                <textarea class="form-control" id="shortDescription" name="shortDescription" required=""></textarea>
+            <!-- Textarea -->
+            <div class="form-group required">
+                <label class="control-label" for="shortDescription">Resource short description</label>
+                        <textarea class="form-control" id="shortDescription" name="shortDescription"
+                                  required=""></textarea>
                 <span class="help-block contrib-help">A short description, including any information considered useful about the resource, e.g. whether it's a dataset (collection of documents) or a lexicon, glossary, terminological resource, etc., its size, language(s), classification information (e.g. health reports, news bulletins, lexicon of sports terminology etc.)</span>
             </div>
-        </div>
-
-        <!-- Text input-->
-        <div class="form-group required">
-            <label class="col-md-4 control-label" for="languages">Language(s)</label>
-
-            <div class="col-md-4">
+            <!-- Text input-->
+            <div class="form-group required">
+                <label class="control-label" for="languages">Language(s)</label>
                 <div class="language">
-                    <select required class="form-control" multiple style="padding: 6px; height:200px" name="languages[]"
+                    <select required class="form-control" multiple style="padding: 6px; height:200px"
+                            name="languages[]"
                             id="languages">
                         <option value="Bulgarian">Bulgarian</option>
                         <option value="Czech">Czech</option>
@@ -150,64 +142,67 @@
                         <option value="Swedish">Swedish</option>
                     </select>
                     <span class="help-block contrib-help">The language(s) of the resource; for resources with multiple languages, hold down CTRL key to select multiple values</span>
-
                 </div>
             </div>
-        </div>
-
-        <div class="form-group required" id="contributionmode">
-            <label class="col-md-4 control-label" for="contributionmode">Contribution Mode</label>
-
-            <div class="col-md-4">
+            <div class="form-group required" id="contributionmode">
+                <label class="control-label" for="contributionmode">Contribution Mode</label><br>
                 <input type="radio" name="mode" value="uploadzip" checked> Upload ZIP archive<br>
                 <input type="radio" name="mode" value="url"> Provide URL of resources<br>
+                <input type="radio" name="mode" value="eDelivery"> eDelivery (Generate XML file to attach to your
+                eDelivery contribution)<br>
                 <span class="help-block contrib-help">Please select the way you wish to contribute your data. Uploading a ZIP archive is recommended.</span>
             </div>
-        </div>
-
-
-        <!-- File Button -->
-        <div class="form-group required" id="fileupload">
-            <label class="col-md-4 control-label" for="filebutton">Upload Resource</label>
-
-            <div class="col-md-4">
-                <input accept=".zip" id="filebutton" name="filebutton" class="input-file" type="file" required="">
+            <!-- File Button -->
+            <div class="form-group required" id="fileupload">
+                <label class="control-label" for="filebutton">Upload Resource</label>
+                <input accept=".zip" id="filebutton" name="filebutton" class="input-file" type="file"
+                       required="">
                 <span class="help-block contrib-help">Please upload a <strong>.zip file</strong> up to 100MB.
                     </br>
                     In case the <strong>.zip file</strong> file you wish to upload is larger than 100MB, please contact
                     <a href="mailto:elrc-share@ilsp.gr">elrc-share@ilsp.gr</a>
                 </span>
             </div>
-        </div>
-
-        <div class="form-group required" id="resourceurl" style="display: none">
-            <label class="col-md-4 control-label" for="resourceUrl">Resource URL</label>
-
-            <div class="col-md-4">
-                <input id="resourceUrl" name="resourceUrl" placeholder="" class="form-control input-md" required=""
+            <div class="form-group required" id="resourceurl" style="display: none">
+                <label class="control-label" for="resourceUrl">Resource URL</label>
+                <input id="resourceUrl" name="resourceUrl" placeholder="" class="form-control input-md"
+                       required=""
                        type="text">
                 <span class="help-block contrib-help">Please provide a URL containing the files you wish to contribute</span>
             </div>
-        </div>
-
-        <!-- Button (Double) -->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="submit"></label>
+            <!-- Button (Double) -->
+            <div class="form-group">
+                <label class="control-label" for="submit"></label>
+                <div>
+                    {#                <button#}
+                    {#                        onclick="$('#simple_form').trigger('submit');"#}
+                    {#                        name="submit_form" value="submit"#}
+                    {#                        id="submit" type="submit"#}
+                    {#                        class="btn btn-success">Submit</button>#}
+                    <input type="submit" value="Submit" name="submit" class="btn btn-success"/>
+                    <button id="reset" type="reset" class="btn btn-warning">Reset</button>
+                </div>
+            </div>
+            {% csrf_token %}
+        </form>
+    </div>
+    <div class="col-md-4" style="margin-top: 90px; margin-left: -10%;">
+        <div class="row">
             <div class="col-md-8">
-                {#                <button#}
-                {#                        onclick="$('#simple_form').trigger('submit');"#}
-                {#                        name="submit_form" value="submit"#}
-                {#                        id="submit" type="submit"#}
-                {#                        class="btn btn-success">Submit</button>#}
-
-                <input type="submit" value="Submit" name="submit" class="btn btn-success"/>
-                <button id="reset" type="reset" class="btn btn-warning">Reset</button>
+                <img src="{{ STATIC_URL }}metashare/images/cef_digital.svg" alt="">
+            </div>
+            <div class="col-md-10" style="margin: 0 10% 0 0;">
+                {#            <img src="{{ STATIC_URL }}metashare/images/cef_digital.svg" alt="">#}
+                <h4>Contribute Your Data Through eDelivery</h4>
+                <div>
+                    As an alternative channel for sharing encrypted data in an enhanced
+                    security mode, you can use the ELRC-SHARE CEF eDelivery Access Point.
+                    For more information click <a data-toggle="modal" href="#edelivery_modal">here</a>.
+                </div>
             </div>
         </div>
-        {% csrf_token %}
-    </fieldset>
-</form>
-
+    </div>
+</div>
 <div class="uploadWin">
     <div id="status" style="padding: 3px;"></div>
     <div class="progress">
@@ -215,8 +210,78 @@
         <div class="percent">0%</div>
     </div>
     <div id="okbtn">
-        <button class="btn btn-success btn-sm" id="ok" onclick="$('.uploadWin').hide();$('.overlay').hide();">OK
+        <button class="btn btn-success btn-sm" id="ok" onclick="resetMessages()">OK
         </button>
+    </div>
+</div>
+<div class="modal fade" id="edelivery_modal" role="dialog">
+    <div class="modal-dialog" style="width:50%; font-size: 16px">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: rgba(15, 141, 187, 0.62)">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">ELRC-SHARE eDelivery Help</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    The ELRC-SHARE repository adopts the
+                    <a href="https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/Domibus+-+v3.3"
+                       target="_blank">Domibus</a> implementation
+                    of the eDelivery Building Block and it is available to accept payloads from your existing eDelivery
+                    Access Point.
+                </p>
+                <p>
+                    The ELRC-SHARE Access Point accepts messages containing <strong>two files as attachments</strong>:
+                <ol>
+                    <li>an xml description of your dataset<b>*</b></li>
+                    <li>the actual dataset in zip format, up to 400MB</li>
+                </ol>
+                </p>
+                <p>
+                    Before you can use the service, we need to add your Access Point to the ELRC-SHARE eDelivery trusted
+                    network. For trust to be established the following information is required:
+                <table class="table-striped">
+                    <tr>
+                        <td><strong>MSH Endpoint</strong></td>
+                        <td>The endpoint of your Access Point</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gateway Party Name</strong></td>
+                        <td>The name of your Access Point's Gateway</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gateway Party ID</strong></td>
+                        <td>The identifier of your Access Point's Gateway</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Public Certificate</strong></td>
+                        <td>Your Access Point's X.509 public certificate (.crt, .cert, .cer)</td>
+                    </tr>
+                </table>
+                </p>
+                <p>
+                    Once your application to join the ELRC-SHARE eDelivery trusted network is approved,
+                    the required ELRC-SHARE Access Point information will be emailed to you.
+                    Include this information in your Access Point configuration and complete the
+                    process of trust establishment. From this point onwards, you can send your
+                    data to the ELRC-SHARE Access Point using your implementation specific software.
+                </p>
+                <p>
+                    Apply for eDelivery <a href="/accounts/edelivery_membership_application/">here</a>.
+                </p>
+                <p>
+                    <strong>*</strong><em>The xml file is automatically generated and downloaded on your computer,
+                    once you fill in the required fields on the contribution form  and select the
+                    <strong>eDelivery</strong> contribution mode.</em>
+                </p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
     </div>
 </div>
 {% include "footer.html" %}

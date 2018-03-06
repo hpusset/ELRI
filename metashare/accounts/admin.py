@@ -1079,6 +1079,11 @@ class EdeliveryApplicationAdmin(admin.ModelAdmin):
             # set status to "accepted"
             if req.status == "PENDING":
                 self._accept_application(request, req)
+                # TODO: FIX THIS, ADD ATTACHMENTS AND AP INFO
+                send_mail("ELRC-SHARE eDelivery application",
+                          "Dear {}, \n"
+                          "Your eDelivery application has been approved".format(req.user.username),
+                          "edelivery@elrc-share.eu", [req.user.email])
             else:
                 messages.error(request, "{} with status '{}' is not eligible for approval. "
                                         "'PENDING' status is required for this operation.".format(req, req.status))
@@ -1098,8 +1103,13 @@ class EdeliveryApplicationAdmin(admin.ModelAdmin):
             if req.status == "PENDING":
                 if req.rejection_reason:
                     req.status = "REJECTED"
-                    # TODO: email user
                     req.save()
+                    send_mail("ELRC-SHARE eDelivery application",
+                              "Dear {}, \n"
+                              "Your eDelivery application has been rejected due to the"
+                              "following reasons:\n"
+                              "{}.".format(req.user.username, req.rejection_reason),
+                              "edelivery@elrc-share.eu", [req.user.email])
                     messages.success(request, "The selected applications have been rejected. "
                                               "The requesting users have been notified via email.")
                 else:
@@ -1142,7 +1152,12 @@ class EdeliveryApplicationAdmin(admin.ModelAdmin):
 
                     req.status = "REVOKED"
                     # TODO: remove pmode and certificate from access point
-                    # TODO: email user
+                    send_mail("ELRC-SHARE eDelivery application",
+                              "Dear {}, \n"
+                              "Your eDelivery application has been revoked due to the"
+                              "following reasons:\n"
+                              "{}.".format(req.user.username, req.rejection_reason),
+                              "edelivery@elrc-share.eu", [req.user.email])
                     req.save()
                     messages.success(request, "The selected applications have been revoked. "
                                               "The requesting users have been notified via email.")

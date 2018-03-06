@@ -1,3 +1,21 @@
+@media screen and (max-width: 991px) {
+    .cef-image img {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .cef-image img {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 1414px) {
+    #jsddm li a i {
+        display: none;
+    }
+}
+
 div.container {
     margin-top: 80px;
     width: 100%;
@@ -895,5 +913,5 @@ div.jsddm {
 
 #messages {
     position: relative;
-	top: 71px;
+    top: 71px;
 }
