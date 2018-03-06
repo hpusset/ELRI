@@ -5,20 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>{% spaceless %}{% block title %}ELRC-SHARE Repository{% endblock %}{% endspaceless %}</title>
-    <meta name="description" content="
-
-
-
-
-
-            {% spaceless %}{% block description %}ELRC-SHARE: a repository used for documenting, storing, browsing and accessing Language Resources.{% endblock %}{% endspaceless %}"/>
-    <meta name="keywords" content="
-
-
-
-
-
-            {% spaceless %}{% block keywords %}ELRC-SHARE, language resources, language tools, ELRC, European Language Resource Coordination{% endblock %}{% endspaceless %}"/>
+    <meta name="description" content="{% spaceless %}{% block description %}ELRC-SHARE: a repository used for documenting, storing, browsing and accessing Language Resources.{% endblock %}{% endspaceless %}"/>
+    <meta name="keywords" content="{% spaceless %}{% block keywords %}ELRC-SHARE, language resources, language tools, ELRC, European Language Resource Coordination{% endblock %}{% endspaceless %}"/>
     <link rel="shortcut icon" href="{{ STATIC_URL }}metashare/images/favicon.ico"/>
     <link rel="stylesheet" href="{{ STATIC_URL }}metashare/css/blueprint/screen.css" type="text/css"
           media="screen, projection">
@@ -144,6 +132,26 @@
                     <span class="help-block contrib-help">The language(s) of the resource; for resources with multiple languages, hold down CTRL key to select multiple values</span>
                 </div>
             </div>
+{#            <div class="form-group required">#}
+{#                <label class="control-label" for="sensitive-info">Data contains sensitive information</label><br>#}
+{#                <select required class="form-control" style="width: 75px"#}
+{#                            name="sensitiveInfo"#}
+{#                            id="sensitiveInfo">#}
+{#                    <option value="">----</option>#}
+{#                    <option value="true">YES</option>#}
+{#                    <option value="false">NO</option>#}
+{#                </select>#}
+{#            </div>#}
+{#            <div class="form-group required">#}
+{#                <label class="control-label" for="personal-info">Data contains personal information</label><br>#}
+{#                <select required class="form-control" style="width: 75px"#}
+{#                            name="personalInfo"#}
+{#                            id="personalInfo">#}
+{#                    <option value="">----</option>#}
+{#                    <option value="true">YES</option>#}
+{#                    <option value="false">NO</option>#}
+{#                </select>#}
+{#            </div>#}
             <div class="form-group required" id="contributionmode">
                 <label class="control-label" for="contributionmode">Contribution Mode</label><br>
                 <input type="radio" name="mode" value="uploadzip" checked> Upload ZIP archive<br>
@@ -195,9 +203,14 @@
                 {#            <img src="{{ STATIC_URL }}metashare/images/cef_digital.svg" alt="">#}
                 <h4>Contribute Your Data Through eDelivery</h4>
                 <div>
-                    As an alternative channel for sharing encrypted data in an enhanced
-                    security mode, you can use the ELRC-SHARE CEF eDelivery Access Point.
+                    If you wish to share your data through
+                    <a href="https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/eDelivery" target="_blank">
+                        eDelivery
+                    </a>, you can use the ELRC-SHARE CEF eDelivery Access Point.
                     For more information click <a data-toggle="modal" href="#edelivery_modal">here</a>.
+                    <p>In such a case, please fill in the form on the left
+                        and choose eDelivery in the Contribution mode.
+                    </p>
                 </div>
             </div>
         </div>
