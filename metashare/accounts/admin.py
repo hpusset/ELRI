@@ -1054,40 +1054,38 @@ class EdeliveryApplicationAdmin(admin.ModelAdmin):
         if not pmode_result['success']:
             messages.error(request, pmode_result['msg'])
         truststore_result = update_truststore(req.gateway_party_name, certificate=req.public_key.path)
-        # try:
-        if truststore_result['success']:
-            # TODO: email user
-            req.status = "ACTIVE"
-            req.save()
-            messages.success(request, "All selected eDelivery applications have been accepted")
+        try:
+            if truststore_result['success']:
+                # TODO: email user
+                req.status = "ACTIVE"
+                req.save()
+                messages.success(request, "All selected eDelivery applications have been accepted")
 
-            # build reply email with required info and attachemnts
-            msg_body = "Dear {}, \n" \
-                       "Your eDelivery application has been approved.\n\n" \
-                       "You can add the following information to your Access Point configuration " \
-                       "in order for trust establishment to be completed:\n\n" \
-                       "1. MSH Endpoint: https://edelivery.elrc-share.eu/\n" \
-                       "2. Gateway Party Name: elrc_ap\n" \
-                       "3. Gateway Party ID: domibus-elrc-share\n" \
-                       "4. Public Certificate: attached\n\n" \
-                       "Please consult your Access Point administrator for more information on " \
-                       "how to configure your Access Point.\n\n" \
-                       "Thank you for your contributions!\n\n" \
-                       "The ELRC-SHARE Team".format(req.user.username)
-            email = EmailMessage(
-                '[ELRC] Your ELRC-SHARE eDelivery application',
-                 msg_body,
-                'edelivery@elrc-share.eu',
-                [req.user.email],
-            )
-            email.attach_file(ELRC_CERT)
-            email.send()
-        else:
+                # build reply email with required info and attachemnts
+                msg_body = "Dear {}, \n" \
+                           "Your eDelivery application has been approved.\n\n" \
+                           "You can add the following information to your Access Point configuration " \
+                           "in order for trust establishment to be completed:\n\n" \
+                           "1. MSH Endpoint: https://edelivery.elrc-share.eu/\n" \
+                           "2. Gateway Party Name: elrc_ap\n" \
+                           "3. Gateway Party ID: domibus-elrc-share\n" \
+                           "4. Public Certificate: attached\n\n" \
+                           "Please consult your Access Point administrator for more information on " \
+                           "how to configure your Access Point.\n\n" \
+                           "Thank you for your contributions!\n\n" \
+                           "The ELRC-SHARE Team".format(req.user.username)
+                email = EmailMessage(
+                    '[ELRC] Your ELRC-SHARE eDelivery application',
+                     msg_body,
+                    'edelivery@elrc-share.eu',
+                    [req.user.email],
+                )
+                email.attach_file(ELRC_CERT)
+                email.send()
+            else:
+                messages.error(request, truststore_result['msg'])
+        except:
             messages.error(request, truststore_result['msg'])
-        # except Exception, e:
-        #     print e.message
-        #     print str(e)
-        #     messages.error(request, truststore_result['msg'])
 
     def accept_selected(self, request, queryset):
         """
