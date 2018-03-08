@@ -1074,7 +1074,7 @@ class EdeliveryApplicationAdmin(admin.ModelAdmin):
                        u"how to configure your Access Point.\n\n" \
                        u"Thank you for your contributions!\n\n" \
                        u"The ELRC-SHARE Team".format(req.user.username),
-            msg = EmailMessage(u"[ELRC] Your ELRC-SHARE eDelivery application", msg_body,
+            msg = EmailMessage(subject=u"[ELRC] Your ELRC-SHARE eDelivery application", body=msg_body,
                                from_email='edelivery@elrc-share.eu', to=[req.user.email])
             msg.attach_file(ELRC_CERT)
             print req.user.email
