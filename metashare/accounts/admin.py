@@ -1081,7 +1081,9 @@ class EdeliveryApplicationAdmin(admin.ModelAdmin):
                 msg.send()
             else:
                 messages.error(request, truststore_result['msg'])
-        except:
+        except Exception, e:
+            print e.message
+            print str(e)
             messages.error(request, truststore_result['msg'])
 
     def accept_selected(self, request, queryset):
