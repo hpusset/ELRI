@@ -1073,10 +1073,7 @@ class EdeliveryApplicationAdmin(admin.ModelAdmin):
                        "Please consult your Access Point administrator for more information on " \
                        "how to configure your Access Point.\n\n" \
                        "Thank you for your contributions!\n\n" \
-                       "The ELRC-SHARE Team".format(req.user.username),
-            # msg = EmailMessage(subject=u"[ELRC] Your ELRC-SHARE eDelivery application", body=msg_body,
-            #                    from_email='edelivery@elrc-share.eu', to=[req.user.email])
-            print type(msg_body)
+                       "The ELRC-SHARE Team".format(req.user.username)
             email = EmailMessage(
                 '[ELRC] Your ELRC-SHARE eDelivery application',
                  msg_body.encode("utf-8"),
