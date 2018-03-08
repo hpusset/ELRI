@@ -1082,7 +1082,7 @@ class EdeliveryApplicationAdmin(admin.ModelAdmin):
                 'edelivery@elrc-share.eu',
                 [req.user.email],
             )
-            # msg.attach_file(ELRC_CERT)
+            email.attach_file(ELRC_CERT)
             print ELRC_CERT
             # print msg_body
             print req.user.email
