@@ -1062,23 +1062,23 @@ class EdeliveryApplicationAdmin(admin.ModelAdmin):
             messages.success(request, "All selected eDelivery applications have been accepted")
 
             # build reply email with required info and attachemnts
-            msg_body = u"Dear {}, \n" \
-                       u"Your eDelivery application has been approved.\n\n" \
-                       u"You can add the following information to your Access Point configuration " \
-                       u"in order for trust establishment to be completed:\n\n" \
-                       u"1. MSH Endpoint: https://edelivery.elrc-share.eu/\n" \
-                       u"2. Gateway Party Name: elrc_ap\n" \
-                       u"3. Gateway Party ID: domibus-elrc-share\n" \
-                       u"4. Public Certificate: attached\n\n" \
-                       u"Please consult your Access Point administrator for more information on " \
-                       u"how to configure your Access Point.\n\n" \
-                       u"Thank you for your contributions!\n\n" \
-                       u"The ELRC-SHARE Team".format(req.user.username),
+            msg_body = "Dear {}, \n" \
+                       "Your eDelivery application has been approved.\n\n" \
+                       "You can add the following information to your Access Point configuration " \
+                       "in order for trust establishment to be completed:\n\n" \
+                       "1. MSH Endpoint: https://edelivery.elrc-share.eu/\n" \
+                       "2. Gateway Party Name: elrc_ap\n" \
+                       "3. Gateway Party ID: domibus-elrc-share\n" \
+                       "4. Public Certificate: attached\n\n" \
+                       "Please consult your Access Point administrator for more information on " \
+                       "how to configure your Access Point.\n\n" \
+                       "Thank you for your contributions!\n\n" \
+                       "The ELRC-SHARE Team".format(req.user.username),
             # msg = EmailMessage(subject=u"[ELRC] Your ELRC-SHARE eDelivery application", body=msg_body,
             #                    from_email='edelivery@elrc-share.eu', to=[req.user.email])
             email = EmailMessage(
                 '[ELRC] Your ELRC-SHARE eDelivery application',
-                 msg_body,
+                 msg_body.encode("utf-8"),
                 'edelivery@elrc-share.eu',
                 [req.user.email],
             )
