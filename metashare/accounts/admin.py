@@ -1076,6 +1076,7 @@ class EdeliveryApplicationAdmin(admin.ModelAdmin):
                        "The ELRC-SHARE Team".format(req.user.username),
             # msg = EmailMessage(subject=u"[ELRC] Your ELRC-SHARE eDelivery application", body=msg_body,
             #                    from_email='edelivery@elrc-share.eu', to=[req.user.email])
+            print type(msg_body)
             email = EmailMessage(
                 '[ELRC] Your ELRC-SHARE eDelivery application',
                  msg_body.encode("utf-8"),
