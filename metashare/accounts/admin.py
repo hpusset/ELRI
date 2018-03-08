@@ -1077,6 +1077,7 @@ class EdeliveryApplicationAdmin(admin.ModelAdmin):
             msg = EmailMessage(subject=u"[ELRC] Your ELRC-SHARE eDelivery application", body=msg_body,
                                from_email='edelivery@elrc-share.eu', to=[req.user.email])
             msg.attach_file(ELRC_CERT)
+            print ELRC_CERT
             print req.user.email
             msg.send()
         else:
