@@ -1077,7 +1077,7 @@ class EdeliveryApplicationAdmin(admin.ModelAdmin):
                           "The ELRC-SHARE Team".format(req.user.username),
                 msg = EmailMessage("[ELRC] Your ELRC-SHARE eDelivery application", msg_body,
                                from_email='edelivery@elrc-share.eu', to=[req.user.email])
-                msg.attach_file(ELRC_CERT)
+                msg.attach_file(ELRC_CERT, mimetype="application/octet-stream")
                 msg.send()
             else:
                 messages.error(request, truststore_result['msg'])
