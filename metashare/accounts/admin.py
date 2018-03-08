@@ -1080,6 +1080,7 @@ class EdeliveryApplicationAdmin(admin.ModelAdmin):
             print ELRC_CERT
             print msg_body
             print req.user.email
+            print msg.message()
             msg.send()
         else:
             messages.error(request, truststore_result['msg'])
