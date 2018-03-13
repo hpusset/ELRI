@@ -65,7 +65,6 @@ def create_management_object(sender, instance, created, **kwargs):
     try:
         ManagementObject.objects.get(resource=instance)
     except ObjectDoesNotExist:
-        print instance.id
         ManagementObject.objects.create(resource=instance, id=instance.id)
 
 
