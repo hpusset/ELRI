@@ -154,7 +154,6 @@ class ManagementObjectAdmin(admin.ModelAdmin):
 
     @csrf_protect_m
     def restore_rejected(self, request, queryset):
-
         for obj in queryset:
             if obj.rejected:
                 obj.rejected = False
