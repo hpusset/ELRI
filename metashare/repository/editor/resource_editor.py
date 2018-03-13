@@ -7,7 +7,7 @@ from django.contrib import admin, messages
 from django.contrib.admin.utils import unquote
 from django.contrib.admin.views.main import ChangeList
 from django.contrib.auth.decorators import permission_required
-from django.core.exceptions import ValidationError, PermissionDenied
+from django.core.exceptions import ValidationError, PermissionDenied, ObjectDoesNotExist
 from django.db.models import Q
 from django.http import Http404, HttpResponseNotFound, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
@@ -448,8 +448,16 @@ class ResourceModelAdmin(SchemaModelAdmin):
         if 'delete' in request.POST:
             form = self.ConfirmDeleteForm(request.POST)
             if form.is_valid():
+                from project_management.models import ManagementObject
                 for resource in can_be_deleted:
                     self.delete_model(request, resource)
+                    # PROJECT MANAGEMENT
+                    # also delete related management object completely
+                    try:
+                        mng_obj = ManagementObject.objects.get(resource=resource)
+                        mng_obj.delete()
+                    except ObjectDoesNotExist:
+                        pass
                 count = len(can_be_deleted)
                 messages.success(request,
                     ungettext('Successfully deleted %d resource.',
