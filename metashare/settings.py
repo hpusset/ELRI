@@ -187,6 +187,8 @@ INSTALLED_APPS = (
     # 'metashare.processing',
     'progressbarupload',
     'metashare.edelivery',
+    # PROJECT MANAGEMENT
+    'project_management',
 )
 
 FILE_UPLOAD_HANDLERS = (
