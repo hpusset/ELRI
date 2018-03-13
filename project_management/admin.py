@@ -162,14 +162,13 @@ class ManagementObjectAdmin(admin.ModelAdmin):
 
     restore_rejected.short_description = "Restore Selected Rejected Resources"
 
-
-def save_model(self, request, obj, form, change):
-    print form.cleaned_data.get('rejection_reason')
-    if form.cleaned_data.get('rejected') and (not form.cleaned_data.get('rejection_reason')):
-        messages.set_level(request, messages.ERROR)
-        messages.error(request,
-                       "The object coud not be saved. You cannot reject a resource without providing a reason.")
-    else:
-        super(ManagementObjectAdmin, self).save_model(request, obj, form, change)
+    def save_model(self, request, obj, form, change):
+        print form.cleaned_data.get('rejected')
+        if form.cleaned_data.get('rejected') and (not form.cleaned_data.get('rejection_reason')):
+            messages.set_level(request, messages.ERROR)
+            messages.error(request,
+                           "The object could not be saved. You cannot reject a resource without providing a reason.")
+        else:
+            super(ManagementObjectAdmin, self).save_model(request, obj, form, change)
 
 
