@@ -22,7 +22,7 @@ from django.views.decorators.csrf import csrf_protect
 from metashare import settings
 from metashare.accounts.models import EditorGroup, EditorGroupManagers
 from metashare.repository.editor.editorutils import FilteredChangeList, AllChangeList
-from metashare.repository.editor.filters import ValidatedFilter
+from metashare.repository.editor.filters import ValidatedFilter, ResourceTypeFilter
 from metashare.repository.editor.forms import StorageObjectUploadForm, ValidationUploadForm, LegalDocumetationUploadForm
 from metashare.repository.editor.inlines import ReverseInlineFormSet, \
     ReverseInlineModelAdmin
@@ -273,7 +273,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
     content_fields = ('resourceComponentType',)
     # list_display = ('__unicode__', 'id', 'resource_type', 'publication_status', 'resource_Owners', 'editor_Groups',)
     list_display = ('__unicode__', 'id', 'resource_type', 'publication_status', 'resource_Owners', 'validated')
-    list_filter = ('storage_object__publication_status', ValidatedFilter)
+    list_filter = ('storage_object__publication_status', ResourceTypeFilter, ValidatedFilter)
     actions = ('publish_action', 'unpublish_action', 'ingest_action',
         'export_xml_action', 'delete', 'add_group', 'remove_group',
         'add_owner', 'remove_owner')
@@ -1553,10 +1553,12 @@ class ResourceModelAdmin(SchemaModelAdmin):
         _extra_context.update(_structures)
         return super(ResourceModelAdmin, self).change_view(request, object_id, form_url, _extra_context)
 
+
 class LicenceForm(forms.ModelForm):
     class Meta:
         model = licenceInfoType_model
         exclude = ()
+
 
 class LicenceModelAdmin(SchemaModelAdmin):
     form = LicenceForm
