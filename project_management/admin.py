@@ -161,6 +161,14 @@ class ManagementObjectAdmin(admin.ModelAdmin):
 
     restore_rejected.short_description = "Restore Selected Rejected Resources"
 
+    def get_actions(self, request):
+        result = super(ManagementObjectAdmin, self).get_actions(request)
+
+        if 'delete_selected' in result:
+            del result['delete_selected']
+
+        return result
+
     def save_model(self, request, obj, form, change):
         print form.cleaned_data.get('rejected')
         if form.cleaned_data.get('rejected') and (not form.cleaned_data.get('rejection_reason')):
