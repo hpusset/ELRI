@@ -57,13 +57,30 @@ class ManagementObjectAdmin(admin.ModelAdmin):
     # ACTIONS
     @csrf_protect_m
     def to_be_delivered(self, request, queryset):
+        # first check if the selected resources are eligible (not rejected or already delivered)
+        # for this action before intermediate page
+        if request.POST.get("action") == "to_be_delivered":
+            action_eligible = True
+            for item in queryset:
+                if item.rejected:
+                    action_eligible = False
+                    messages.add_message(request, messages.ERROR,
+                                         "ERROR: You cannot specify a deliverable on rejected resource \"{}\".".format(
+                                             item))
+                elif item.delivered:
+                    messages.add_message(request, messages.WARNING,
+                                         "Specify a \"to be\" deliverable on delivered resource \"{}\".".format(
+                                             item))
+            if not action_eligible:
+                messages.add_message(request, messages.WARNING, "Please correct all errors and try again.")
+                return
+
         if 'cancel' in request.POST:
-            self.message_user(request, 'Cancelled setting deliverable.')
+            messages.add_message(request, messages.SUCCESS, "Cancelled setting deliverable.")
             return
 
         if 'to_be_delivered' in request.POST:
             form = IntermediateDeliverableSelectForm(request.POST)
-
             if form.is_valid():
                 deliverable = form.cleaned_data['deliverable']
                 for item in queryset:
@@ -81,6 +98,7 @@ class ManagementObjectAdmin(admin.ModelAdmin):
             'path': request.get_full_path(),
             'action': 'to_be_delivered'
         }
+
         return render_to_response('project_management/set_deliverable.html',
                                   dictionary,
                                   context_instance=RequestContext(request))
@@ -89,6 +107,19 @@ class ManagementObjectAdmin(admin.ModelAdmin):
 
     @csrf_protect_m
     def delivered(self, request, queryset):
+        # first check if the selected resources are eligible (not rejected) for this action before intermediate page
+        if request.POST.get("action") == "delivered":
+            action_eligible = True
+            for item in queryset:
+                if item.rejected:
+                    action_eligible = False
+                    messages.add_message(request, messages.ERROR,
+                                         "ERROR: You cannot specify a deliverable on rejected resource \"{}\".".format(
+                                             item))
+            if not action_eligible:
+                messages.add_message(request, messages.WARNING, "Please correct all errors and try again.")
+                return
+
         if 'cancel' in request.POST:
             self.message_user(request, 'Cancelled setting deliverable.')
             return
@@ -121,16 +152,36 @@ class ManagementObjectAdmin(admin.ModelAdmin):
 
     @csrf_protect_m
     def reject(self, request, queryset):
+        # first check if the selected resources are eligible (not rejected) for this action before intermediate page
+        if request.POST.get("action") == "reject":
+            action_eligible = True
+            for item in queryset:
+                if item.delivered:
+                    action_eligible = False
+                    messages.add_message(request, messages.ERROR,
+                                         "ERROR: You cannot reject the delivered resource \"{}\".".format(item))
+                elif item.rejected:
+                    action_eligible = False
+                    messages.add_message(request, messages.ERROR,
+                                         "ERROR: Resource \"{}\" is already rejected due "
+                                         "to the following reason: {}.".format(item, item.rejection_reason))
+            if not action_eligible:
+                messages.add_message(request, messages.WARNING, "Please correct all errors and try again.")
+                return
+
         if 'cancel' in request.POST:
             self.message_user(request, 'Cancelled setting deliverable.')
             return
 
         if 'reject' in request.POST:
             form = IntermediateDeliverableRejectForm(request.POST)
+            final_to_reject = list()
 
             if form.is_valid():
                 rejection_reason = form.cleaned_data['rejection_reason']
                 for item in queryset:
+                    if not item.rejected:
+                        final_to_reject.append(item)
                     item.rejection_reason = rejection_reason
                     item.rejected = True
                     item.save()
@@ -170,12 +221,50 @@ class ManagementObjectAdmin(admin.ModelAdmin):
         return result
 
     def save_model(self, request, obj, form, change):
-        print form.cleaned_data.get('rejected')
-        if form.cleaned_data.get('rejected') and (not form.cleaned_data.get('rejection_reason')):
-            messages.set_level(request, messages.ERROR)
-            messages.error(request,
-                           "The object could not be saved. You cannot reject a resource without providing a reason.")
-        else:
+        validation = self.validate_form(obj, form)
+        is_valid = validation[0]
+        message = validation[1]
+        warning = None
+        try:
+            warning = validation[2]
+        except IndexError:
+            pass
+        if is_valid:
+            if warning:
+                messages.warning(request, message)
             super(ManagementObjectAdmin, self).save_model(request, obj, form, change)
+        else:
+            messages.set_level(request, messages.ERROR)
+            messages.error(request, message)
 
+    @staticmethod
+    def validate_form(obj, form):
+        """
+        Validates the management object form to be saved.
+        1. If object is delivered, it cannot be rejected or set to be delivered
+        2. If object is rejected, no action on deliverables can be performed until it is restored
+        3. We cannot reject a resource without specifying the rejection reason
+        :type obj: management object to check
+        :param form: the form to be validated
+        :param obj:
+        :return: tuple: (boolean, message)
+        """
+        # 1. If object is delivered, it cannot be rejected or set to be delivered
+        print obj.delivered
+        if obj.delivered:
+            if form.cleaned_data.get('rejected'):
+                return False, "You cannot reject the delivered resource \"{}\".".format(obj)
+            elif form.cleaned_data.get('to_be_delivered'):
+                return True, "Do you need to specify a \"to be\" deliverable on delivered resource \"{}\"?".format(
+                    obj), "Warning"
 
+        # 2. If object is rejected, no action on deliverables can be performed until it is restored
+        elif form.cleaned_data.get('rejected') and (
+                    form.cleaned_data.get('delivered') or form.cleaned_data.get('to_be_delivered')):
+            return False, "You cannot specify a deliverable on rejected resource \"{}\".".format(obj)
+
+        # 3. We cannot reject a resource without specifying the rejection reason
+        elif form.cleaned_data.get('rejected') and (not form.cleaned_data.get('rejection_reason')):
+            return False, "You cannot reject resource \"{}\" without providing a rejection reason.".format(obj)
+
+        return True, ""
