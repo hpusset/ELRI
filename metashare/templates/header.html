@@ -32,6 +32,12 @@
                                     all resources</a>
                                 </li>
                             {% endif %}
+                            {# PROJECT MANAGEMENT #}
+                            {% if user.is_superuser or user|is_member:"elrcReviewers" %}
+                                <li title="Manage LRs by ELRC deliverables"><a
+                                        href="/admin/project_management/managementobject/">Manage LRs by ELRC deliverables</a>
+                                </li>
+                            {% endif %}
                             {% if user.is_superuser %}
                                 <li title="Manage contributed resources">
                                     <a href="{% url 'manage_contributed_data' %}">Manage resources from contributors</a>

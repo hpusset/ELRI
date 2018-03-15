@@ -7,7 +7,7 @@ from django.contrib import admin, messages
 from django.contrib.admin.utils import unquote
 from django.contrib.admin.views.main import ChangeList
 from django.contrib.auth.decorators import permission_required
-from django.core.exceptions import ValidationError, PermissionDenied
+from django.core.exceptions import ValidationError, PermissionDenied, ObjectDoesNotExist
 from django.db.models import Q
 from django.http import Http404, HttpResponseNotFound, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
@@ -22,6 +22,7 @@ from django.views.decorators.csrf import csrf_protect
 from metashare import settings
 from metashare.accounts.models import EditorGroup, EditorGroupManagers
 from metashare.repository.editor.editorutils import FilteredChangeList, AllChangeList
+from metashare.repository.editor.filters import ValidatedFilter, ResourceTypeFilter
 from metashare.repository.editor.forms import StorageObjectUploadForm, ValidationUploadForm, LegalDocumetationUploadForm
 from metashare.repository.editor.inlines import ReverseInlineFormSet, \
     ReverseInlineModelAdmin
@@ -272,7 +273,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
     content_fields = ('resourceComponentType',)
     # list_display = ('__unicode__', 'id', 'resource_type', 'publication_status', 'resource_Owners', 'editor_Groups',)
     list_display = ('__unicode__', 'id', 'resource_type', 'publication_status', 'resource_Owners', 'validated')
-    list_filter = ('storage_object__publication_status',)
+    list_filter = ('storage_object__publication_status', ResourceTypeFilter, ValidatedFilter)
     actions = ('publish_action', 'unpublish_action', 'ingest_action',
         'export_xml_action', 'delete', 'add_group', 'remove_group',
         'add_owner', 'remove_owner')
@@ -448,8 +449,16 @@ class ResourceModelAdmin(SchemaModelAdmin):
         if 'delete' in request.POST:
             form = self.ConfirmDeleteForm(request.POST)
             if form.is_valid():
+                from project_management.models import ManagementObject
                 for resource in can_be_deleted:
                     self.delete_model(request, resource)
+                    # PROJECT MANAGEMENT
+                    # also delete related management object completely
+                    try:
+                        mng_obj = ManagementObject.objects.get(resource=resource)
+                        mng_obj.delete()
+                    except ObjectDoesNotExist:
+                        pass
                 count = len(can_be_deleted)
                 messages.success(request,
                     ungettext('Successfully deleted %d resource.',
@@ -1544,10 +1553,12 @@ class ResourceModelAdmin(SchemaModelAdmin):
         _extra_context.update(_structures)
         return super(ResourceModelAdmin, self).change_view(request, object_id, form_url, _extra_context)
 
+
 class LicenceForm(forms.ModelForm):
     class Meta:
         model = licenceInfoType_model
         exclude = ()
+
 
 class LicenceModelAdmin(SchemaModelAdmin):
     form = LicenceForm

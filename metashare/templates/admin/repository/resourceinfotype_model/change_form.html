@@ -2,6 +2,8 @@
 {% load i18n admin_modify %}
 {% load url from future %}
 {% load static from staticfiles %}
+{# PROJECT MANAGEMENT #}
+{% load is_member %}
 
 {% block extrahead %}{{ block.super }}
     {% url 'admin:jsi18n' as jsi18nurl %}
@@ -51,6 +53,13 @@
                                     Upload Resource (.ZIP)
                                 {% endif %}
                                 </option>
+                                {# PROJECT MANAGEMENT #}
+                                {% if user.is_superuser or user|is_member:"elrcReviewers" %}
+                                    <option label="Manage in Project"
+                                            value="/admin/project_management/managementobject/{{ original.id }}/">Manage
+                                        in Project
+                                    </option>
+                                {% endif %}
                             </optgroup>
                             <optgroup label="Resource Metadata">
                                 <option label="Export Resource Metadata to XML"
