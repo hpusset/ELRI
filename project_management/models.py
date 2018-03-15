@@ -4,7 +4,13 @@ from metashare.repository.models import resourceInfoType_model
 from metashare.repository.supermodel import _make_choices_from_list
 
 DELIVERABLES = _make_choices_from_list(
-    ["CEF-ELRC", "ELRC+ LOT2", "LOT3 D2.1", "LOT3 D2.2", "LOT3 D2.3", "LOT3 D2.4", "LOT3 D3.1", "LOT3 D3.2", "LOT3 D3.3", ])
+    ["CEF-ELRC", "ELRC+ LOT2",
+     "LOT3 D2.1", "LOT3 D2.2",
+     "LOT3 D2.3", "LOT3 D2.4",
+     "LOT3 D3.1", "LOT3 D3.2",
+     "LOT3 D3.3"
+     ]
+)
 
 
 class ManagementObject(models.Model):
