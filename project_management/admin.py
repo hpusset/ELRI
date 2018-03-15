@@ -34,11 +34,11 @@ class ManagementObjectAdmin(admin.ModelAdmin):
 
     def has_change_permission(self, request, obj=None):
         return request.user.is_superuser or \
-               request.user.groups.filter(name='technicalReviewers').exists()
+               request.user.groups.filter(name='elrcReviewers').exists()
 
     def has_delete_permission(self, request, obj=None):
         return request.user.is_superuser or \
-               request.user.groups.filter(name='technicalReviewers').exists()
+               request.user.groups.filter(name='elrcReviewers').exists()
 
     @staticmethod
     def related_resource(obj):

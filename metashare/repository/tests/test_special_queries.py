@@ -44,7 +44,7 @@ class SpecialQueryTest(django.test.TestCase):
 
         # create an groups used to get the proper results
         Group.objects.create(name='ecmembers')
-        Group.objects.create(name='technicalReviewers')
+        Group.objects.create(name='elrcReviewers')
     
     def tearDown(self):
         """

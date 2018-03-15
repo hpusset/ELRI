@@ -33,7 +33,7 @@
                                 </li>
                             {% endif %}
                             {# PROJECT MANAGEMENT #}
-                            {% if user.is_superuser or user|is_member:"technicalReviewers" %}
+                            {% if user.is_superuser or user|is_member:"elrcReviewers" %}
                                 <li title="Manage LRs by ELRC deliverables"><a
                                         href="/admin/project_management/managementobject/">Manage LRs by ELRC deliverables</a>
                                 </li>
