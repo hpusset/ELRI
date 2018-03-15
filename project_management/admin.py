@@ -250,7 +250,6 @@ class ManagementObjectAdmin(admin.ModelAdmin):
         :return: tuple: (boolean, message)
         """
         # 1. If object is delivered, it cannot be rejected or set to be delivered
-        print obj.delivered
         if obj.delivered:
             if form.cleaned_data.get('rejected'):
                 return False, "You cannot reject the delivered resource \"{}\".".format(obj)
