@@ -29,9 +29,6 @@ class ManagementObjectAdmin(admin.ModelAdmin):
     # Set \"To be Delivered\"
     # form = ManagementObjectForm
 
-    def has_add_permission(self, request):
-        return
-
     def has_change_permission(self, request, obj=None):
         return request.user.is_superuser or \
                request.user.groups.filter(name='elrcReviewers').exists()

@@ -1,0 +1,7 @@
+{% extends "admin/change_form.html" %}
+{% load i18n admin_urls %}
+{% block object-tools-items %}
+    <li>
+        <a href="/editor/repository/resourceinfotype_model/{{ original.pk }}/" class="historylink">Go to Resource</a>
+    </li>
+{% endblock %}
