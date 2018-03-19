@@ -6,6 +6,7 @@ import shutil
 import uuid
 
 from django.core.exceptions import PermissionDenied
+from metashare.repository.dataformat_choices import MIMETYPEVALUE_TO_MIMETYPELABEL
 
 from metashare.repository.templatetags.is_member import is_member
 
@@ -209,7 +210,6 @@ def _get_licences(resource, user_membership):
     return result
 
 
-
 # @user_passes_test(lambda u: u.is_superuser or u.groups.filter(name="ecmembers").exists())
 # MDEL: temporary implementation to provide download for specific resources
 @resource_downloadable
@@ -221,7 +221,7 @@ def download(request, object_id):
     user_membership = _get_user_membership(request.user)
     bypass_licence = False
     if request.user.is_superuser \
-            or request.user.groups.filter(name="ecmembers").exists()\
+            or request.user.groups.filter(name="ecmembers").exists() \
             or request.user.groups.filter(name="elrcReviewers").exists():
         bypass_licence = True
 
@@ -467,6 +467,7 @@ def has_view_permission(request, res_obj):
 
         return False
 
+
 # MDEL: temporary implementation to provide download for specific resources
 @resource_downloadable_view
 def view(request, resource_name=None, object_id=None):
@@ -478,7 +479,6 @@ def view(request, resource_name=None, object_id=None):
     resource = get_object_or_404(resourceInfoType_model,
                                  storage_object__identifier=object_id,
                                  storage_object__publication_status__in=[INGESTED, PUBLISHED])
-
 
     if not has_view_permission(request, resource):
         raise PermissionDenied
@@ -1236,7 +1236,7 @@ def manage_contributed_data(request):
             },
             "resource_file": doc.xpath("//resource/administration/resource_file/text()"),
             "dataset": dataset,
-            'edelivery':  util.strtobool(doc.xpath("//resource/administration/edelivery/text()")[0]),
+            'edelivery': util.strtobool(doc.xpath("//resource/administration/edelivery/text()")[0]),
             'msg_id': doc.xpath("//resource/administration/edelivery/@msg_id")
 
         })
@@ -1676,31 +1676,31 @@ def repo_report(request):
         worksheet.write('A1', 'Resource ID', heading)
         worksheet.write('B1', 'Resource Name', heading)
         worksheet.write('C1', 'Type', heading)
-        worksheet.write('D1', 'Linguality', heading)
-        worksheet.write('E1', 'Language(s)', heading)
-        worksheet.write('F1', 'Size per Language', heading)
-        worksheet.write_comment('E1', 'Delimited by "|" as per language')
+        worksheet.write('D1', 'Mimetypes', heading)
+        worksheet.write('E1', 'Linguality', heading)
+        worksheet.write('F1', 'Language(s)', heading)
+        worksheet.write_comment('F1', 'Delimited by "|" as per language')
         worksheet.write('G1', 'Resource Size', heading)
-        worksheet.write('H1', 'Resource Size Unit(s)', heading)
         worksheet.write_comment('G1', 'Delimited by "|" as per size')
+        worksheet.write('H1', 'Resource Size Unit(s)', heading)
         worksheet.write('I1', 'Domain(s)', heading)
         worksheet.write('J1', 'DSI Relevance', heading)
-        worksheet.write('K1', 'Date', heading)
-        worksheet.write('L1', 'Status', heading)
-        worksheet.write('M1', 'Editors', heading)
-        worksheet.write('N1', 'Countries', heading)
-        worksheet.write('O1', 'Legal Status', heading)
-        worksheet.write('P1', 'Contacts', heading)
-        worksheet.write('Q1', 'ELRC Services', heading)
-        worksheet.write('R1', 'PSI', heading)
+        worksheet.write('K1', 'Legal Status', heading)
+        worksheet.write('L1', 'PSI', heading)
+        worksheet.write('M1', 'Countries', heading)
+        worksheet.write('N1', 'Contacts', heading)
+        worksheet.write('O1', 'Partner', heading)
+        worksheet.write('P1', 'Project', heading)
+        worksheet.write('Q1', 'Processed', heading)
+        worksheet.write('R1', 'Related To', heading)
         worksheet.write('S1', 'Validated', heading)
-        worksheet.write('T1', 'Mimetypes', heading)
-        worksheet.write('U1', 'Processed', heading)
-        worksheet.write('V1', 'Related To', heading)
-        worksheet.write('W1', 'Views', heading)
-        worksheet.write('X1', 'Downloads', heading)
-        if not email_to == u'true':
-            worksheet.write('Y1', 'Funding Projects', heading)
+        worksheet.write('T1', 'To be delivered', heading)
+        worksheet.write('U1', 'Delivered', heading)
+        worksheet.write('V1', 'Status', heading)
+        worksheet.write('W1', 'Date', heading)
+        worksheet.write('X1', 'Views', heading)
+        worksheet.write('Y1', 'Downloads', heading)
+
         link = True
 
         j = 1
@@ -1710,17 +1710,7 @@ def repo_report(request):
             crawled = "YES" if res.resourceCreationInfo and res.resourceCreationInfo.createdUsingELRCServices else "NO"
             psi_list = [d.PSI for d in res.distributioninfotype_model_set.all()]
             psi = "YES" if any(psi_list) else "NO"
-            validated = "YES" if res.storage_object.get_validation() else "NO"
 
-            # is it processed?
-            relations = [relation.relationType.startswith('is') for relation in res.relationinfotype_model_set.all()]
-            processed = "YES" if any(relations) else "NO"
-
-            #related_ids
-            related_ids=""
-            if res.relationinfotype_model_set.all():
-                related_ids = ", ".join(set([rel.relatedResource.targetResourceNameURI
-                                             for rel in res.relationinfotype_model_set.all()]))
             country = _get_country(res)
             contacts = []
             licences = []
@@ -1764,43 +1754,34 @@ def repo_report(request):
             num_downloads = model_utils.get_lr_stat_action_count(res.storage_object.identifier, DOWNLOAD_STAT)
             num_views = model_utils.get_lr_stat_action_count(res.storage_object.identifier, VIEW_STAT)
 
-            # Funding projects
-            try:
-                rc = res.resourceCreationInfo
-                try:
-                    fundingProjects = [fp.projectShortName['en'] for fp in rc.fundingProject.all()]
-                except KeyError:
-                    fundingProjects = [fp.projectName['en'] for fp in rc.fundingProject.all()]
-            except AttributeError:
-                fundingProjects = []
-
+            # A1
             worksheet.write(j, 0, res.id)
+            # B1
             worksheet.write(j, 1, res_name.decode('utf-8'), bold)
+            # C1
             worksheet.write(j, 2, res.resource_type())
+            # D1
+            mimetypes = _get_resource_mimetypes(res)
+            if mimetypes:
+                mim = []
+                for d in mimetypes:
+                    mim.append(d)
+                worksheet.write(j, 3, " | ".join(mim))
+            else:
+                worksheet.write(j, 3, "N/A")
+            # E1
             linguality = _get_resource_linguality(res)
-            worksheet.write(j, 3, ", ".join(linguality))
+            worksheet.write(j, 4, ", ".join(linguality))
+            # F1
             lang_info = _get_resource_lang_info(res)
             size_info = _get_resource_sizes(res)
-            mimetypes = _get_resource_mimetypes(res)
-            domain_info = _get_resource_domain_info(res)
-            dsis = "N/A"
-            if res.identificationInfo.appropriatenessForDSI:
-                dsis = ", ".join(res.identificationInfo.appropriatenessForDSI)
-
             langs = []
             lang_sizes = []
             for l in lang_info:
                 langs.append(l)
                 lang_sizes.extend(_get_resource_lang_sizes(res, l))
-            worksheet.write(j, 4, " | ".join(langs))
-
-            worksheet.write(j, 5, " | ".join(lang_sizes))
-            # sizes = []
-            # size_units = []
-            # for s in size_info:
-            #     sizes.append(s)
-            #     size_units.extend(_get_resource_size_units(res, s))
-
+            worksheet.write(j, 5, " | ".join(langs))
+            # G1, H1
             preferred_size = _get_preferred_size(res)
             if preferred_size:
                 if float(preferred_size.size).is_integer():
@@ -1813,6 +1794,12 @@ def repo_report(request):
                 worksheet.write(j, 6, "")
                 worksheet.write(j, 7, "")
 
+
+            domain_info = _get_resource_domain_info(res)
+            dsis = "N/A"
+            if res.identificationInfo.appropriatenessForDSI:
+                dsis = ", ".join(res.identificationInfo.appropriatenessForDSI)
+            # I1
             if domain_info:
                 domains = []
                 for d in domain_info:
@@ -1820,41 +1807,62 @@ def repo_report(request):
                 worksheet.write(j, 8, " | ".join(domains))
             else:
                 worksheet.write(j, 8, "N/A")
-
+            # J1
             worksheet.write(j, 9, dsis)
-            worksheet.write_datetime(j, 10, date, date_format)
-            worksheet.write(j, 11, status[res.storage_object.publication_status])
-            owners = []
-            for o in res.owners.all():
-                owners.append(o.username)
-            worksheet.write(j, 12, ", ".join(owners))
-
+            # K1
+            worksheet.write(j, 10, ", ".join(licences))
+            # L1
+            worksheet.write(j, 11, psi)
+            # M1
             if country:
-                worksheet.write(j, 13, country)
+                worksheet.write(j, 12, country)
+            else:
+                worksheet.write(j, 12, "N/A")
+            # N1
+            if contacts:
+                worksheet.write(j, 13, " | ".join(contacts))
             else:
                 worksheet.write(j, 13, "N/A")
-            worksheet.write(j, 14, ", ".join(licences))
-            if contacts:
-                worksheet.write(j, 15, " | ".join(contacts))
-            else:
-                worksheet.write(j, 15, "N/A")
-            worksheet.write(j, 16, crawled)
-            worksheet.write(j, 17, psi)
+            # O1
+            partner = res.management_object.partner_responsible
+            worksheet.write(j, 14, partner)
+            # P1
+            # Funding projects
+            try:
+                rc = res.resourceCreationInfo
+                try:
+                    funding_projects = [fp.projectShortName['en'] for fp in rc.fundingProject.all()]
+                except KeyError:
+                    funding_projects = [fp.projectName['en'] for fp in rc.fundingProject.all()]
+            except AttributeError:
+                funding_projects = []
+            worksheet.write(j, 15, ", ".join(funding_projects))
+            # Q1
+            is_processed = "YES" if res.management_object.is_processed_version else "NO"
+            worksheet.write(j, 16, is_processed)
+            # R1
+            # related_ids
+            related_ids = ""
+            if res.relationinfotype_model_set.all():
+                related_ids = ", ".join(set([rel.relatedResource.targetResourceNameURI
+                                             for rel in res.relationinfotype_model_set.all()]))
+            worksheet.write(j, 17, related_ids)
+            # S1
+            validated = "YES" if res.storage_object.get_validation() else "NO"
             worksheet.write(j, 18, validated)
+            # T1
+            to_be_delivered = "" if not res.management_object.to_be_delivered else res.management_object.to_be_delivered
+            worksheet.write(j, 19, to_be_delivered)
+            # U1
+            delivered = "" if not res.management_object.delivered else res.management_object.delivered
+            worksheet.write(j, 20, delivered)
+            # V1
+            worksheet.write(j, 21, status[res.storage_object.publication_status])
+            # W1
+            worksheet.write_datetime(j, 22, date, date_format)
+            worksheet.write(j, 23, num_views)
+            worksheet.write(j, 24, num_downloads)
 
-            if mimetypes:
-                mim = []
-                for d in mimetypes:
-                    mim.append(d)
-                worksheet.write(j, 19, " | ".join(mim))
-            else:
-                worksheet.write(j, 19, "N/A")
-            worksheet.write(j, 20, processed)
-            worksheet.write(j, 21, related_ids)
-            worksheet.write(j, 22, num_views)
-            worksheet.write(j, 23, num_downloads)
-            if not email_to == u'true':
-                worksheet.write(j, 24, ", ".join(fundingProjects))
             j += 1
             # worksheet.write(i + 1, 3, _get_resource_size_info(res))
         # worksheet.write(len(resources)+2, 3, "Total Resources", bold)
@@ -2072,18 +2080,18 @@ def _get_resource_mimetypes(resource):
     if isinstance(media, corpusInfoType_model):
         media_type = media.corpusMediaType
         for corpus_info in media_type.corpustextinfotype_model_set.all():
-            result.extend([prettify_camel_case_string(d.dataFormat) for d in
+            result.extend([MIMETYPEVALUE_TO_MIMETYPELABEL.get(d.dataFormat) for d in
                            corpus_info.textformatinfotype_model_set.all()])
 
     elif isinstance(media, lexicalConceptualResourceInfoType_model):
         lcr_media_type = media.lexicalConceptualResourceMediaType
-        result.extend([prettify_camel_case_string(d.dataFormat) for d in lcr_media_type \
+        result.extend([MIMETYPEVALUE_TO_MIMETYPELABEL.get(d.dataFormat) for d in lcr_media_type \
                       .lexicalConceptualResourceTextInfo.textformatinfotype_model_set.all()])
 
     elif isinstance(media, languageDescriptionInfoType_model):
         ld_media_type = media.languageDescriptionMediaType
         if ld_media_type.languageDescriptionTextInfo:
-            result.extend([prettify_camel_case_string(d.dataFormat) for d in ld_media_type \
+            result.extend([MIMETYPEVALUE_TO_MIMETYPELABEL.get(d.dataFormat) for d in ld_media_type \
                           .languageDescriptionTextInfo.textformatinfotype_model_set.all()])
     result = list(set(result))
     result.sort()
