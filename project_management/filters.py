@@ -78,24 +78,24 @@ class ToBeDeliveredFilter(SimpleListFilter):
 
     def queryset(self, request, queryset):
         if self.value() == 'CEF-ELRC':
-            return queryset.filter(delivered='CEF-ELRC')
+            return queryset.filter(to_be_delivered='CEF-ELRC')
         elif self.value() == 'ELRC Network':
-            return queryset.filter(delivered='ELRC Network')
+            return queryset.filter(to_be_delivered='ELRC Network')
         elif self.value() == 'ELRC Data D2.1':
-            return queryset.filter(delivered='ELRC Data D2.1')
+            return queryset.filter(to_be_delivered='ELRC Data D2.1')
         elif self.value() == 'ELRC Data D2.2':
-            return queryset.filter(delivered='ELRC Data D2.2')
+            return queryset.filter(to_be_delivered='ELRC Data D2.2')
         elif self.value() == 'ELRC Data D2.3':
-            return queryset.filter(delivered='ELRC Data D2.3')
+            return queryset.filter(to_be_delivered='ELRC Data D2.3')
         elif self.value() == 'ELRC Data D2.4':
-            return queryset.filter(delivered='ELRC Data D2.4')
+            return queryset.filter(to_be_delivered='ELRC Data D2.4')
         elif self.value() == 'ELRC Data D3.1':
-            return queryset.filter(delivered='ELRC Data D3.1')
+            return queryset.filter(to_be_delivered='ELRC Data D3.1')
         elif self.value() == 'ELRC Data D3.2':
-            return queryset.filter(delivered='ELRC Data D3.2')
+            return queryset.filter(to_be_delivered='ELRC Data D3.2')
         elif self.value() == 'ELRC Data D3.3':
-            return queryset.filter(delivered='ELRC Data D3.3')
+            return queryset.filter(to_be_delivered='ELRC Data D3.3')
         elif self.value() == "None":
-            return queryset.filter(delivered=None)
+            return queryset.filter(to_be_delivered=None)
         else:
             return queryset
