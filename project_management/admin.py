@@ -18,11 +18,15 @@ class ManagementObjectAdmin(admin.ModelAdmin):
     # class Media:
     #     js = ("admin/js/management_actions.js",)
 
-    list_display = ('resource', 'id', 'to_be_delivered', 'delivered', 'is_rejected', 'publication_status',)
-    list_filter = (PublicationStatusFilter, 'delivered', 'to_be_delivered', 'rejected')
-    fields = ('related_resource', 'delivered', 'to_be_delivered', 'rejected', 'rejection_reason',)
+    list_display = ('resource', 'id', 'partner_responsible', 'to_be_delivered', 'delivered',
+                    'is_processed_version', 'is_rejected', 'publication_status',)
+    list_filter = (PublicationStatusFilter, 'partner_responsible', 'delivered',
+                   'to_be_delivered', 'is_processed_version', 'rejected')
+    fields = (
+        'related_resource', 'partner_responsible', 'delivered', 'to_be_delivered', 'is_processed_version', 'rejected',
+        'rejection_reason',)
     # search_fields = ('resource',)
-    readonly_fields = ('related_resource',)
+    readonly_fields = ('related_resource', 'is_processed_version', 'partner_responsible')
 
     actions = ('to_be_delivered', 'delivered', 'reject', 'restore_rejected')
 
