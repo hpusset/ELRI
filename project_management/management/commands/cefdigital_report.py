@@ -165,7 +165,7 @@ def _cefdigital_report():
                    "Best regards,\n\n" \
                    "The ELRC-SHARE group".format(datetime.datetime.now().strftime("%d, %b %Y"))
         msg = EmailMessage("[ELRC] ERLC-SHARE CEF-Digital report", msg_body,
-                           from_email='elrc-share@ilsp.gr', to=rp)
+                           from_email='elrc-share@ilsp.gr', to=ILSP_ADMINS)
         msg.attach("{}.xlsx".format(title), output.getvalue(),
                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
         msg.send()
