@@ -1666,7 +1666,7 @@ def repo_report(request):
 
         ## formating
         heading = workbook.add_format(
-            {'font_size': 13, 'font_color': 'white', 'bold': True, 'bg_color': "#058DBE", 'border': 1})
+            {'font_size': 11, 'font_color': 'white', 'bold': True, 'bg_color': "#058DBE", 'border': 1})
         bold = workbook.add_format({'bold': True})
         date_format = workbook.add_format({'num_format': 'yyyy, mmmm d'})
         title = "ELRC-SHARE_OVERVIEW_{}".format(
@@ -1714,7 +1714,6 @@ def repo_report(request):
             country = _get_country(res)
             contacts = []
             licences = []
-            affiliations = []
             try:
                 for dist in res.distributioninfotype_model_set.all():
                     for licence_info in dist.licenceInfo.all():
@@ -1728,18 +1727,15 @@ def repo_report(request):
                         org_name = afl.organizationName['en']
                     except KeyError:
                         org_name = afl.organizationName[afl.organizationName.keys()[0]]
-                    affiliations.append(org_name)
                 # country.append(cp.communicationInfo.country)
 
                 # try to get first and last name otherwise get only last name which is mandatory
                 try:
-                    contacts.append(u"{} {} ({}) {}".format(cp.surname.values()[0], cp.givenName.values()[0],
-                                                            ", ".join(cp.communicationInfo.email),
-                                                            ", ".join(affiliations)))
+                    contacts.append(u"{} {} ({})".format(cp.surname.values()[0], cp.givenName.values()[0],
+                                                         ", ".join(cp.communicationInfo.email)))
                 except IndexError:
-                    contacts.append(u"{} ({}) {}".format(cp.surname.values()[0],
-                                                         ", ".join(cp.communicationInfo.email),
-                                                         ", ".join(affiliations)))
+                    contacts.append(u"{} ({})".format(cp.surname.values()[0],
+                                                         ", ".join(cp.communicationInfo.email)))
                     # data to be reported
                     # resource name
             try:
@@ -1944,7 +1940,7 @@ def _get_resource_lang_info(resource):
         media_type = media.corpusMediaType
         for corpus_info in media_type.corpustextinfotype_model_set.all():
             for lang in corpus_info.languageinfotype_model_set.all():
-                l = [lang.languageName]
+                l = [lang.languageId]
                 result.extend(l)
 
     elif isinstance(media, lexicalConceptualResourceInfoType_model):
@@ -1952,7 +1948,7 @@ def _get_resource_lang_info(resource):
         if lcr_media_type.lexicalConceptualResourceTextInfo:
             for lang in lcr_media_type \
                     .lexicalConceptualResourceTextInfo.languageinfotype_model_set.all():
-                l = [lang.languageName]
+                l = [lang.languageId]
                 result.extend(l)
 
     elif isinstance(media, languageDescriptionInfoType_model):
@@ -1960,7 +1956,7 @@ def _get_resource_lang_info(resource):
         if ld_media_type.languageDescriptionTextInfo:
             for lang in ld_media_type \
                     .languageDescriptionTextInfo.languageinfotype_model_set.all():
-                l = [lang.languageName]
+                l = [lang.languageId]
                 result.extend(l)
     result = list(set(result))
     result.sort()
