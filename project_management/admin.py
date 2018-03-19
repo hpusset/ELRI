@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.safestring import mark_safe
-from project_management.filters import PublicationStatusFilter
+from project_management.filters import PublicationStatusFilter, DeliveredFilter, ToBeDeliveredFilter
 from project_management.forms import IntermediateDeliverableSelectForm, IntermediateDeliverableRejectForm
 from project_management.models import ManagementObject
 from django.views.decorators.csrf import csrf_protect
@@ -20,8 +20,8 @@ class ManagementObjectAdmin(admin.ModelAdmin):
 
     list_display = ('resource', 'id', 'partner_responsible', 'to_be_delivered', 'delivered',
                     'is_processed_version', 'is_rejected', 'publication_status',)
-    list_filter = (PublicationStatusFilter, 'partner_responsible', 'delivered',
-                   'to_be_delivered', 'is_processed_version', 'rejected')
+    list_filter = (PublicationStatusFilter, 'partner_responsible', DeliveredFilter,
+                   ToBeDeliveredFilter, 'is_processed_version', 'rejected')
     fields = (
         'related_resource', 'partner_responsible', 'delivered', 'to_be_delivered', 'is_processed_version', 'rejected',
         'rejection_reason',)
