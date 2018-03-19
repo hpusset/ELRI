@@ -157,11 +157,11 @@ class ManagementObjectAdmin(admin.ModelAdmin):
         if request.POST.get("action") == "reject":
             action_eligible = True
             for item in queryset:
-                if item.delivered:
-                    action_eligible = False
-                    messages.add_message(request, messages.ERROR,
-                                         "ERROR: You cannot reject the delivered resource \"{}\".".format(item))
-                elif item.rejected:
+                # if item.delivered:
+                #     action_eligible = False
+                #     messages.add_message(request, messages.ERROR,
+                #                          "ERROR: You cannot reject the delivered resource \"{}\".".format(item))
+                if item.rejected:
                     action_eligible = False
                     messages.add_message(request, messages.ERROR,
                                          "ERROR: Resource \"{}\" is already rejected due "
@@ -242,7 +242,7 @@ class ManagementObjectAdmin(admin.ModelAdmin):
     def validate_form(obj, form):
         """
         Validates the management object form to be saved.
-        1. If object is delivered, it cannot be rejected or set to be delivered
+        1. If object is delivered, it cannot be rejected or set to be delivered (disabled)
         2. If object is rejected, no action on deliverables can be performed until it is restored
         3. We cannot reject a resource without specifying the rejection reason
         :type obj: management object to check
@@ -250,21 +250,21 @@ class ManagementObjectAdmin(admin.ModelAdmin):
         :param obj:
         :return: tuple: (boolean, message)
         """
-        # 1. If object is delivered, it cannot be rejected or set to be delivered
-        if obj.delivered:
-            if form.cleaned_data.get('rejected'):
-                return False, "You cannot reject the delivered resource \"{}\".".format(obj)
-            elif form.cleaned_data.get('to_be_delivered'):
-                return True, "Do you need to specify a \"to be\" deliverable on delivered resource \"{}\"?".format(
-                    obj), "Warning"
+        # 1. If object is delivered, it cannot be rejected or set to be delivered (disable that)
+        # if obj.delivered:
+        #     # if form.cleaned_data.get('rejected'):
+        #     #     return False, "You cannot reject the delivered resource \"{}\".".format(obj)
+        #     if form.cleaned_data.get('to_be_delivered'):
+        #         return True, "Do you need to specify a \"to be\" deliverable on delivered resource \"{}\"?".format(
+        #             obj), "Warning"
 
         # 2. If object is rejected, no action on deliverables can be performed until it is restored
-        elif form.cleaned_data.get('rejected') and (
-                    form.cleaned_data.get('delivered') or form.cleaned_data.get('to_be_delivered')):
-            return False, "You cannot specify a deliverable on rejected resource \"{}\".".format(obj)
+        # if form.cleaned_data.get('rejected') and (
+        #             form.cleaned_data.get('delivered') or form.cleaned_data.get('to_be_delivered')):
+        #     return False, "You cannot specify a deliverable on rejected resource \"{}\".".format(obj)
 
         # 3. We cannot reject a resource without specifying the rejection reason
-        elif form.cleaned_data.get('rejected') and (not form.cleaned_data.get('rejection_reason')):
+        if form.cleaned_data.get('rejected') and (not form.cleaned_data.get('rejection_reason')):
             return False, "You cannot reject resource \"{}\" without providing a rejection reason.".format(obj)
 
         return True, ""
