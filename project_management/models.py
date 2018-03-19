@@ -19,12 +19,12 @@ class ManagementObject(models.Model):
     delivered = models.CharField(
         verbose_name='Delivered',
         choices=sorted(DELIVERABLES['choices']),
-        max_length=10, blank=True, null=True)
+        max_length=15, blank=True, null=True)
 
     to_be_delivered = models.CharField(
         verbose_name='To be delivered',
         choices=sorted(DELIVERABLES['choices']),
-        max_length=10, blank=True, null=True)
+        max_length=15, blank=True, null=True)
 
     is_processed_version = models.BooleanField(verbose_name="Is Processed Version", default=False, editable=False)
 
