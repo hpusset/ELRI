@@ -63,7 +63,8 @@ class PatchedSignalProcessor(BaseSignalProcessor):
 @receiver(post_save, sender=resourceInfoType_model)
 def create_management_object(sender, instance, created, **kwargs):
     try:
-        ManagementObject.objects.get(resource=instance)
+        mo = ManagementObject.objects.get(resource=instance)
+        mo.save()
     except ObjectDoesNotExist:
         ManagementObject.objects.create(resource=instance, id=instance.id)
 
