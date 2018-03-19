@@ -19,7 +19,7 @@ country_to_partner_map = {
     "Latvia": "TILDE", "Lithuania": "TILDE", "Luxembourg": "DFKI", "Malta": "ELDA", "Netherlands": "DFKI",
     "Norway": "TILDE",
     "Poland": "ILSP", "Portugal": "ELDA", "Romania": "ILSP", "Slovakia": "ILSP", "Slovenia": "ILSP", "Spain": "ELDA",
-    "Sweden": "TILDE", "United Kingdom": "ELDA"
+    "Sweden": "TILDE", "United Kingdom": "ELDA", None: "N/A"
 }
 
 
@@ -28,10 +28,13 @@ def _get_country(res):
     for cp in res.contactPerson.all():
         res_countries.append(cp.communicationInfo.country)
         # now try to get the correct coutry
-    if len(set(res_countries)) > 1 and res_countries[1]:
-        res_country = res_countries[1]
-    else:
-        res_country = res_countries[0]
+    try:
+        if len(set(res_countries)) > 1 and res_countries[1]:
+            res_country = res_countries[1]
+        else:
+            res_country = res_countries[0]
+    except IndexError:
+            res_country = None
     return res_country
 
 
