@@ -19,7 +19,7 @@ country_to_partner_map = {
     "Latvia": "TILDE", "Lithuania": "TILDE", "Luxembourg": "DFKI", "Malta": "ELDA", "Netherlands": "DFKI",
     "Norway": "TILDE",
     "Poland": "ILSP", "Portugal": "ELDA", "Romania": "ILSP", "Slovakia": "ILSP", "Slovenia": "ILSP", "Spain": "ELDA",
-    "Sweden": "TILDE", "United Kingdom": "ELDA", None: "N/A"
+    "Sweden": "TILDE", "United Kingdom": "ELDA", None: ""
 }
 
 
