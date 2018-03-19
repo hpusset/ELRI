@@ -79,12 +79,9 @@ def _cefdigital_report():
         link = True
 
         j = 1
-        for i in range(len(resources)):
+        for i in range(len(unique_resources)):
 
-            res = resources[i]
-            psi_list = [d.PSI for d in res.distributioninfotype_model_set.all()]
-            psi = "YES" if any(psi_list) else "NO"
-
+            res = unique_resources[i]
             country = _get_country(res)
             licences = []
             try:
