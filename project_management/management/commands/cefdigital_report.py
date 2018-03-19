@@ -156,12 +156,8 @@ def _cefdigital_report():
         workbook.close()
 
         # Send email
-        msg_body = "Dear all,\n" \
-                   "Please find attached an overview of the resources available in the ELRC-SHARE " \
-                   "repository and their status today, {}.\n" \
-                   "Best regards,\n\n" \
-                   "The ELRC-SHARE group".format(datetime.datetime.now().strftime("%d, %b %Y"))
-        msg = EmailMessage("[ELRC] ERLC-SHARE CEF-Digital report", msg_body,
+        msg_body = "Check generated CEF-DIGITAL report"
+        msg = EmailMessage("[ELRC] ERLC-SHARE CEF-Digital report (DRAFT)", msg_body,
                            from_email='elrc-share@ilsp.gr', to=ILSP_ADMINS)
         msg.attach("{}.xlsx".format(title), output.getvalue(),
                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
