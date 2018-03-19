@@ -192,9 +192,9 @@ INSTALLED_APPS = (
 )
 
 FILE_UPLOAD_HANDLERS = (
-    "progressbarupload.uploadhandler.ProgressBarUploadHandler",
     "django.core.files.uploadhandler.MemoryFileUploadHandler",
     "django.core.files.uploadhandler.TemporaryFileUploadHandler",
+    "progressbarupload.uploadhandler.ProgressBarUploadHandler",
 )
 
 # add Kronos to installed apps if not running on Windows
