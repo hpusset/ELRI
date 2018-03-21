@@ -18,7 +18,8 @@ class ManagementObjectAdmin(admin.ModelAdmin):
     # class Media:
     #     js = ("admin/js/management_actions.js",)
     list_display = ('resource', 'id', 'partner_responsible', 'to_be_delivered_to_EC', 'delivered_to_EC',
-                    'is_processed_version', 'is_rejected', 'publication_status', 'to_be_delivered_odp', 'delivered_odp',)
+                    'is_processed_version', 'is_rejected', 'publication_status', 'to_be_delivered_odp',
+                    'delivered_odp',)
     list_filter = (PublicationStatusFilter, 'partner_responsible', DeliveredFilter,
                    ToBeDeliveredFilter, 'is_processed_version', 'rejected', 'to_be_delivered_odp', 'delivered_odp',)
 
@@ -36,7 +37,8 @@ class ManagementObjectAdmin(admin.ModelAdmin):
 
     readonly_fields = ('related_resource', 'is_processed_version', 'partner_responsible')
 
-    actions = ('to_be_delivered_to_EC', 'delivered_to_EC', 'reject', 'restore_rejected')
+    actions = ('to_be_delivered_to_ec', 'delivered_to_ec', 'reject', 'restore_rejected', 'to_be_delivered_to_odp',
+               'delivered_to_odp')
 
     # Set \"To be Delivered\"
     # form = ManagementObjectForm
@@ -65,7 +67,7 @@ class ManagementObjectAdmin(admin.ModelAdmin):
 
     # ACTIONS
     @csrf_protect_m
-    def to_be_delivered_to_EC(self, request, queryset):
+    def to_be_delivered_to_ec(self, request, queryset):
         # first check if the selected resources are eligible (not rejected or already delivered)
         # for this action before intermediate page
         if request.POST.get("action") == "to_be_delivered_to_EC":
@@ -112,10 +114,10 @@ class ManagementObjectAdmin(admin.ModelAdmin):
                                   dictionary,
                                   context_instance=RequestContext(request))
 
-    to_be_delivered_to_EC.short_description = "Mark Selected Resources as \"To be Delivered\""
+    to_be_delivered_to_ec.short_description = "Mark Selected Resources as \"To be Delivered to EC\""
 
     @csrf_protect_m
-    def delivered_to_EC(self, request, queryset):
+    def delivered_to_ec(self, request, queryset):
         # first check if the selected resources are eligible (not rejected) for this action before intermediate page
         if request.POST.get("action") == "delivered_to_EC":
             action_eligible = True
@@ -157,7 +159,7 @@ class ManagementObjectAdmin(admin.ModelAdmin):
                                   dictionary,
                                   context_instance=RequestContext(request))
 
-    delivered_to_EC.short_description = "Mark Selected Resources as \"Delivered\""
+    delivered_to_ec.short_description = "Mark Selected Resources as \"Delivered to EC\""
 
     @csrf_protect_m
     def reject(self, request, queryset):
@@ -228,6 +230,52 @@ class ManagementObjectAdmin(admin.ModelAdmin):
             del result['delete_selected']
 
         return result
+
+    # ACTIONS
+    @csrf_protect_m
+    def to_be_delivered_to_odp(self, request, queryset):
+        if self.has_change_permission(request, queryset):
+            successful = 0
+            for obj in queryset:
+                if not obj.to_be_delivered_odp:
+                    obj.to_be_delivered_odp = True
+                    obj.save()
+                    successful += 1
+            if successful > 0:
+                messages.info(request,
+                              'Successfully marked {} resources as \"To be delivered to ODP\".'.format(successful))
+            else:
+                messages.warning(request, 'No resources have been marked as \"To be delivered to ODP\"')
+        else:
+            messages.error(request, 'You do not have the permission to '
+                                    'perform this action for all selected resources.')
+
+    to_be_delivered_to_odp.short_description = "Mark Selected Resources as \"To be Delivered to ODP\""
+
+    @csrf_protect_m
+    def delivered_to_odp(self, request, queryset):
+        if self.has_change_permission(request, queryset):
+            successful = 0
+            for obj in queryset:
+                if not obj.to_be_delivered_odp and not obj.delivered_odp:
+                    obj.to_be_delivered_odp = True
+                    obj.delivered_odp = True
+                    obj.save()
+                    successful += 1
+                elif obj.to_be_delivered_odp and not obj.delivered_odp:
+                    obj.delivered_odp = True
+                    obj.save()
+                    successful += 1
+            if successful > 0:
+                messages.info(request,
+                              'Successfully marked {} resources as \"Delivered to ODP\".'.format(successful))
+            else:
+                messages.warning(request, 'No resources have been marked as \"Delivered to ODP\"')
+        else:
+            messages.error(request, 'You do not have the permission to '
+                                    'perform this action for all selected resources.')
+
+    delivered_to_odp.short_description = "Mark Selected Resources as \"Delivered to ODP\""
 
     def save_model(self, request, obj, form, change):
         validation = self.validate_form(obj, form)
