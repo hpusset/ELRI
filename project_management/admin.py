@@ -34,11 +34,6 @@ class ManagementObjectAdmin(admin.ModelAdmin):
         }),
     )
 
-    # fields = (
-    #     'related_resource', 'partner_responsible', 'delivered_to_EC', 'to_be_delivered_to_EC', 'is_processed_version',
-    #     'rejected',
-    #     'rejection_reason',)
-    search_fields = ('resource',)
     readonly_fields = ('related_resource', 'is_processed_version', 'partner_responsible')
 
     actions = ('to_be_delivered_to_EC', 'delivered_to_EC', 'reject', 'restore_rejected')
