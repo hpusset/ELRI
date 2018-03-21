@@ -70,7 +70,7 @@ class ManagementObjectAdmin(admin.ModelAdmin):
     def to_be_delivered_to_ec(self, request, queryset):
         # first check if the selected resources are eligible (not rejected or already delivered)
         # for this action before intermediate page
-        if request.POST.get("action") == "to_be_delivered_to_EC":
+        if request.POST.get("action") == "to_be_delivered_to_ec":
             action_eligible = True
             for item in queryset:
                 if item.rejected:
@@ -107,7 +107,7 @@ class ManagementObjectAdmin(admin.ModelAdmin):
             'selected_resources': queryset,
             'form': form,
             'path': request.get_full_path(),
-            'action': 'to_be_delivered_to_EC'
+            'action': 'to_be_delivered_to_ec'
         }
 
         return render_to_response('project_management/set_deliverable.html',
@@ -119,7 +119,7 @@ class ManagementObjectAdmin(admin.ModelAdmin):
     @csrf_protect_m
     def delivered_to_ec(self, request, queryset):
         # first check if the selected resources are eligible (not rejected) for this action before intermediate page
-        if request.POST.get("action") == "delivered_to_EC":
+        if request.POST.get("action") == "delivered_to_ec":
             action_eligible = True
             for item in queryset:
                 if item.rejected:
@@ -153,7 +153,7 @@ class ManagementObjectAdmin(admin.ModelAdmin):
             'selected_resources': queryset,
             'form': form,
             'path': request.get_full_path(),
-            'action': 'delivered_to_EC'
+            'action': 'delivered_to_ec'
         }
         return render_to_response('project_management/set_deliverable.html',
                                   dictionary,
