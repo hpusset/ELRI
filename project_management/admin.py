@@ -90,7 +90,7 @@ class ManagementObjectAdmin(admin.ModelAdmin):
             messages.add_message(request, messages.SUCCESS, "Cancelled setting deliverable.")
             return
 
-        if 'to_be_delivered_to_EC' in request.POST:
+        if 'to_be_delivered_to_ec' in request.POST:
             form = IntermediateDeliverableSelectForm(request.POST)
             if form.is_valid():
                 deliverable = form.cleaned_data['deliverable']
@@ -135,7 +135,7 @@ class ManagementObjectAdmin(admin.ModelAdmin):
             self.message_user(request, 'Cancelled setting deliverable.')
             return
 
-        if 'delivered_to_EC' in request.POST:
+        if 'delivered_to_ec' in request.POST:
             form = IntermediateDeliverableSelectForm(request.POST)
 
             if form.is_valid():
