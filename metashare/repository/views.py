@@ -5,7 +5,7 @@ import os
 import shutil
 import uuid
 
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
 from metashare.repository.dataformat_choices import MIMETYPEVALUE_TO_MIMETYPELABEL
 
 from metashare.repository.templatetags.is_member import is_member
@@ -1700,6 +1700,7 @@ def repo_report(request):
         worksheet.write('W1', 'Date', heading)
         worksheet.write('X1', 'Views', heading)
         worksheet.write('Y1', 'Downloads', heading)
+        worksheet.write('Z1', 'Delivered to ODP', heading)
 
         link = True
 
@@ -1847,10 +1848,10 @@ def repo_report(request):
             validated = "YES" if res.storage_object.get_validation() else "NO"
             worksheet.write(j, 18, validated)
             # T1
-            to_be_delivered = "" if not res.management_object.to_be_delivered else res.management_object.to_be_delivered
+            to_be_delivered = "" if not res.management_object.to_be_delivered_to_EC else res.management_object.to_be_delivered_to_EC
             worksheet.write(j, 19, to_be_delivered)
             # U1
-            delivered = "" if not res.management_object.delivered else res.management_object.delivered
+            delivered = "" if not res.management_object.delivered_to_EC else res.management_object.delivered_to_EC
             worksheet.write(j, 20, delivered)
             # V1
             worksheet.write(j, 21, status[res.storage_object.publication_status])
@@ -1858,7 +1859,11 @@ def repo_report(request):
             worksheet.write_datetime(j, 22, date, date_format)
             worksheet.write(j, 23, num_views)
             worksheet.write(j, 24, num_downloads)
-
+            try:
+                odp = "YES" if res.management_object.delivered_odp else "NO"
+            except ObjectDoesNotExist:
+                odp = "NO"
+            worksheet.write(j, 25, odp)
             j += 1
             # worksheet.write(i + 1, 3, _get_resource_size_info(res))
         # worksheet.write(len(resources)+2, 3, "Total Resources", bold)
