@@ -17,18 +17,31 @@ csrf_protect_m = method_decorator(csrf_protect)
 class ManagementObjectAdmin(admin.ModelAdmin):
     # class Media:
     #     js = ("admin/js/management_actions.js",)
-
-    list_display = ('resource', 'id', 'partner_responsible', 'to_be_delivered', 'delivered',
-                    'is_processed_version', 'is_rejected', 'publication_status',)
+    list_display = ('resource', 'id', 'partner_responsible', 'to_be_delivered_to_EC', 'delivered_to_EC',
+                    'is_processed_version', 'is_rejected', 'publication_status', 'to_be_delivered_odp', 'delivered_odp',)
     list_filter = (PublicationStatusFilter, 'partner_responsible', DeliveredFilter,
-                   ToBeDeliveredFilter, 'is_processed_version', 'rejected')
-    fields = (
-        'related_resource', 'partner_responsible', 'delivered', 'to_be_delivered', 'is_processed_version', 'rejected',
-        'rejection_reason',)
-    # search_fields = ('resource',)
+                   ToBeDeliveredFilter, 'is_processed_version', 'rejected', 'to_be_delivered_odp', 'delivered_odp',)
+
+    fieldsets = (
+        ('EC Project', {
+            'fields': (
+                'related_resource', 'partner_responsible', 'delivered_to_EC', 'to_be_delivered_to_EC',
+                'is_processed_version', 'rejected',
+                'rejection_reason',)
+        }),
+        ('EU Open Data Portal', {
+            'fields': ('to_be_delivered_odp', 'delivered_odp'),
+        }),
+    )
+
+    # fields = (
+    #     'related_resource', 'partner_responsible', 'delivered_to_EC', 'to_be_delivered_to_EC', 'is_processed_version',
+    #     'rejected',
+    #     'rejection_reason',)
+    search_fields = ('resource',)
     readonly_fields = ('related_resource', 'is_processed_version', 'partner_responsible')
 
-    actions = ('to_be_delivered', 'delivered', 'reject', 'restore_rejected')
+    actions = ('to_be_delivered_to_EC', 'delivered_to_EC', 'reject', 'restore_rejected')
 
     # Set \"To be Delivered\"
     # form = ManagementObjectForm
@@ -57,10 +70,10 @@ class ManagementObjectAdmin(admin.ModelAdmin):
 
     # ACTIONS
     @csrf_protect_m
-    def to_be_delivered(self, request, queryset):
+    def to_be_delivered_to_EC(self, request, queryset):
         # first check if the selected resources are eligible (not rejected or already delivered)
         # for this action before intermediate page
-        if request.POST.get("action") == "to_be_delivered":
+        if request.POST.get("action") == "to_be_delivered_to_EC":
             action_eligible = True
             for item in queryset:
                 if item.rejected:
@@ -68,7 +81,7 @@ class ManagementObjectAdmin(admin.ModelAdmin):
                     messages.add_message(request, messages.ERROR,
                                          "ERROR: You cannot specify a deliverable on rejected resource \"{}\".".format(
                                              item))
-                elif item.delivered:
+                elif item.delivered_to_EC:
                     messages.add_message(request, messages.WARNING,
                                          "Specify a \"to be\" deliverable on delivered resource \"{}\".".format(
                                              item))
@@ -80,12 +93,12 @@ class ManagementObjectAdmin(admin.ModelAdmin):
             messages.add_message(request, messages.SUCCESS, "Cancelled setting deliverable.")
             return
 
-        if 'to_be_delivered' in request.POST:
+        if 'to_be_delivered_to_EC' in request.POST:
             form = IntermediateDeliverableSelectForm(request.POST)
             if form.is_valid():
                 deliverable = form.cleaned_data['deliverable']
                 for item in queryset:
-                    item.to_be_delivered = deliverable
+                    item.to_be_delivered_to_EC = deliverable
                     item.save()
                 self.message_user(request, "Deliverable %s added to selected resources" % deliverable)
                 return HttpResponseRedirect(request.get_full_path())
@@ -97,19 +110,19 @@ class ManagementObjectAdmin(admin.ModelAdmin):
             'selected_resources': queryset,
             'form': form,
             'path': request.get_full_path(),
-            'action': 'to_be_delivered'
+            'action': 'to_be_delivered_to_EC'
         }
 
         return render_to_response('project_management/set_deliverable.html',
                                   dictionary,
                                   context_instance=RequestContext(request))
 
-    to_be_delivered.short_description = "Mark Selected Resources as \"To be Delivered\""
+    to_be_delivered_to_EC.short_description = "Mark Selected Resources as \"To be Delivered\""
 
     @csrf_protect_m
-    def delivered(self, request, queryset):
+    def delivered_to_EC(self, request, queryset):
         # first check if the selected resources are eligible (not rejected) for this action before intermediate page
-        if request.POST.get("action") == "delivered":
+        if request.POST.get("action") == "delivered_to_EC":
             action_eligible = True
             for item in queryset:
                 if item.rejected:
@@ -125,13 +138,13 @@ class ManagementObjectAdmin(admin.ModelAdmin):
             self.message_user(request, 'Cancelled setting deliverable.')
             return
 
-        if 'delivered' in request.POST:
+        if 'delivered_to_EC' in request.POST:
             form = IntermediateDeliverableSelectForm(request.POST)
 
             if form.is_valid():
                 deliverable = form.cleaned_data['deliverable']
                 for item in queryset:
-                    item.delivered = deliverable
+                    item.delivered_to_EC = deliverable
                     item.save()
                 self.message_user(request, "Deliverable %s added to selected resources" % deliverable)
                 return HttpResponseRedirect(request.get_full_path())
@@ -143,13 +156,13 @@ class ManagementObjectAdmin(admin.ModelAdmin):
             'selected_resources': queryset,
             'form': form,
             'path': request.get_full_path(),
-            'action': 'delivered'
+            'action': 'delivered_to_EC'
         }
         return render_to_response('project_management/set_deliverable.html',
                                   dictionary,
                                   context_instance=RequestContext(request))
 
-    delivered.short_description = "Mark Selected Resources as \"Delivered\""
+    delivered_to_EC.short_description = "Mark Selected Resources as \"Delivered\""
 
     @csrf_protect_m
     def reject(self, request, queryset):
@@ -157,7 +170,7 @@ class ManagementObjectAdmin(admin.ModelAdmin):
         if request.POST.get("action") == "reject":
             action_eligible = True
             for item in queryset:
-                # if item.delivered:
+                # if item.delivered_to_EC:
                 #     action_eligible = False
                 #     messages.add_message(request, messages.ERROR,
                 #                          "ERROR: You cannot reject the delivered resource \"{}\".".format(item))
@@ -251,16 +264,16 @@ class ManagementObjectAdmin(admin.ModelAdmin):
         :return: tuple: (boolean, message)
         """
         # 1. If object is delivered, it cannot be rejected or set to be delivered (disable that)
-        # if obj.delivered:
+        # if obj.delivered_to_EC:
         #     # if form.cleaned_data.get('rejected'):
         #     #     return False, "You cannot reject the delivered resource \"{}\".".format(obj)
-        #     if form.cleaned_data.get('to_be_delivered'):
+        #     if form.cleaned_data.get('to_be_delivered_to_EC'):
         #         return True, "Do you need to specify a \"to be\" deliverable on delivered resource \"{}\"?".format(
         #             obj), "Warning"
 
         # 2. If object is rejected, no action on deliverables can be performed until it is restored
         # if form.cleaned_data.get('rejected') and (
-        #             form.cleaned_data.get('delivered') or form.cleaned_data.get('to_be_delivered')):
+        #             form.cleaned_data.get('delivered') or form.cleaned_data.get('to_be_delivered_to_EC')):
         #     return False, "You cannot specify a deliverable on rejected resource \"{}\".".format(obj)
 
         # 3. We cannot reject a resource without specifying the rejection reason

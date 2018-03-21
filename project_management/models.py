@@ -41,19 +41,19 @@ def _get_country(res):
 class ManagementObject(models.Model):
     resource = models.OneToOneField(resourceInfoType_model, blank=True, null=True, related_name="management_object")
 
-    delivered = models.CharField(
-        verbose_name='Delivered',
+    delivered_to_EC = models.CharField(
+        verbose_name='Delivered to EC',
         choices=sorted(DELIVERABLES['choices']),
         max_length=15, blank=True, null=True)
 
-    to_be_delivered = models.CharField(
-        verbose_name='To be delivered',
+    to_be_delivered_to_EC = models.CharField(
+        verbose_name='To be delivered to EC',
         choices=sorted(DELIVERABLES['choices']),
         max_length=15, blank=True, null=True)
 
     is_processed_version = models.BooleanField(verbose_name="Is Processed Version", default=False, editable=False)
 
-    partner_responsible = models.CharField(verbose_name="Partner Responsible", max_length=6,
+    partner_responsible = models.CharField(verbose_name="Partner", max_length=6,
                                            choices=_make_choices_from_list(PARTNERS)['choices'],
                                            editable=False,
                                            blank=True, null=True)
@@ -61,6 +61,10 @@ class ManagementObject(models.Model):
     rejected = models.BooleanField(verbose_name="Rejected", default=False)
 
     rejection_reason = models.TextField(max_length=1000, blank=True, null=True)
+
+    # ODP
+    to_be_delivered_odp = models.NullBooleanField(verbose_name="To be delivered to ODP", null=True, blank=True)
+    delivered_odp = models.BooleanField(verbose_name="Delivered to ODP", default=False)
 
     unique_together = ("rejected", "rejection_reason")
 

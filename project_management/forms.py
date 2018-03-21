@@ -5,7 +5,7 @@ from project_management.models import ManagementObject, DELIVERABLES
 class ManagementObjectForm(forms.ModelForm):
     class Meta:
         model = ManagementObject
-        fields = ['delivered', 'to_be_delivered', 'rejected', 'rejection_reason']
+        fields = ['delivered_to_EC', 'to_be_delivered_to_EC', 'rejected', 'rejection_reason']
 
 
 class IntermediateDeliverableSelectForm(forms.Form):
