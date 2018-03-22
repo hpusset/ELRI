@@ -1695,7 +1695,7 @@ def repo_report(request):
         worksheet.write('R1', 'Related To', heading)
         worksheet.write('S1', 'Validated', heading)
         worksheet.write('T1', 'To be delivered to EC', heading)
-        worksheet.write('U1', 'Delivered EC', heading)
+        worksheet.write('U1', 'Delivered to EC', heading)
         worksheet.write('V1', 'Status', heading)
         worksheet.write('W1', 'Date', heading)
         worksheet.write('X1', 'Views', heading)
