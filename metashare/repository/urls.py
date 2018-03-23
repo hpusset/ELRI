@@ -16,7 +16,6 @@ sqs = SearchQuerySet() \
     .facet("useNlpSpecificFilter") \
     .facet("lingualityTypeFilter") \
     .facet("multilingualityTypeFilter") \
-    .facet("modalityTypeFilter") \
     .facet("dataFormatFilter") \
     .facet("domainFilter") \
     .facet("corpusAnnotationTypeFilter") \
@@ -35,7 +34,8 @@ sqs = SearchQuerySet() \
     .facet("textTextGenreFilter") \
     .facet("textTextTypeFilter") \
     .facet("appropriatenessForDSIFilter") \
-    # .facet("publicationStatusFilter")
+    .facet("publicationStatusFilter") \
+    .facet("processabilityFilter")
     # .facet("availabilityFilter") \
     # .facet("bestPracticesFilter") \
     # .facet("languageVarietyFilter") \
