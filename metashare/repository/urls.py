@@ -35,7 +35,7 @@ sqs = SearchQuerySet() \
     .facet("textTextGenreFilter") \
     .facet("textTextTypeFilter") \
     .facet("appropriatenessForDSIFilter") \
-    # .facet("publicationStatusFilter")
+    .facet("publicationStatusFilter")
     # .facet("availabilityFilter") \
     # .facet("bestPracticesFilter") \
     # .facet("languageVarietyFilter") \
