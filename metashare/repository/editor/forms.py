@@ -21,7 +21,7 @@ def _validate_resource_data(value):
     Validates that the uploaded resource data is valid.
     """
     if value.size > MAXIMUM_UPLOAD_SIZE:
-        raise ValidationError('The maximum upload file size is {:.3} ' \
+        raise ValidationError('The maximum upload file size is {:.0f} ' \
           'MB!'.format(float(MAXIMUM_UPLOAD_SIZE)/(1024*1024)))
     
     _valid_extension = False
@@ -110,7 +110,7 @@ class StorageObjectUploadForm(forms.Form):
     Form to upload resource data into a StorageObject instance.
     """
     resource = forms.FileField(label="Resource",
-      help_text="You can upload resource data (<{:.3} MB) using this " \
+      help_text="You can upload resource data (<{:.0f} MB) using this " \
       "widget. Note that this will overwrite the current data!".format(
         float(MAXIMUM_UPLOAD_SIZE/(1024*1024))),
       validators=[_validate_resource_data])
