@@ -6,6 +6,7 @@ import shutil
 import uuid
 
 from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
+from metashare.report_utils.report_utils import _is_processed, _is_not_processed_or_related
 from metashare.repository.dataformat_choices import MIMETYPEVALUE_TO_MIMETYPELABEL
 
 from metashare.repository.templatetags.is_member import is_member
@@ -1701,6 +1702,7 @@ def repo_report(request):
         worksheet.write('X1', 'Views', heading)
         worksheet.write('Y1', 'Downloads', heading)
         worksheet.write('Z1', 'Delivered to ODP', heading)
+        worksheet.write('AA', 'Unique', heading)
 
         link = True
 
@@ -1864,6 +1866,8 @@ def repo_report(request):
             except ObjectDoesNotExist:
                 odp = "NO"
             worksheet.write(j, 25, odp)
+            is_unique = "YES" if (_is_processed(res) or _is_not_processed_or_related(res)) else "NO"
+            worksheet.write(j, 26, is_unique)
             j += 1
             # worksheet.write(i + 1, 3, _get_resource_size_info(res))
         # worksheet.write(len(resources)+2, 3, "Total Resources", bold)
