@@ -326,3 +326,20 @@ def make_excel(data, filename):
                                     excel_matrix["dsi_col"][dsi], data["countries"][country]["dsis"][dsi])
 
     workbook.close()
+
+
+def _is_processed(r):
+    relations = [relation.relationType for relation in r.relationinfotype_model_set.all() if
+                 relation.relationType.startswith('is')]
+    if (len(relations) > 1 and u"isPartOf" in relations) or len(relations) == 1:
+        return True
+    return False
+
+
+def _is_not_processed_or_related(r):
+    related_ids = set()
+    if r.relationinfotype_model_set.all():
+        related_ids = set([rel.relatedResource.targetResourceNameURI for rel in r.relationinfotype_model_set.all()])
+    if related_ids:
+        return False
+    return True

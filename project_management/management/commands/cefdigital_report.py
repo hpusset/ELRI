@@ -8,28 +8,12 @@ from django.core.management import BaseCommand
 from django.http import HttpResponse
 from django.utils.encoding import smart_str
 from metashare.local_settings import ILSP_ADMINS
+from metashare.report_utils.report_utils import _is_processed, _is_not_processed_or_related
 from metashare.repository.models import resourceInfoType_model
 from metashare.repository.views import _get_resource_linguality, _get_resource_lang_info, _get_resource_sizes, \
     _get_preferred_size, _get_resource_domain_info
 from metashare.utils import prettify_camel_case_string
 from project_management.models import _get_country
-
-
-def _is_processed(r):
-    relations = [relation.relationType for relation in r.relationinfotype_model_set.all() if
-                 relation.relationType.startswith('is')]
-    if (len(relations) > 1 and u"isPartOf" in relations) or len(relations) == 1:
-        return True
-    return False
-
-
-def _is_not_processed_or_related(r):
-    related_ids = set()
-    if r.relationinfotype_model_set.all():
-        related_ids = set([rel.relatedResource.targetResourceNameURI for rel in r.relationinfotype_model_set.all()])
-    if related_ids:
-        return False
-    return True
 
 
 def _cefdigital_report():
