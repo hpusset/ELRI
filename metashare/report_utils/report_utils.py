@@ -3,6 +3,7 @@ from collections import OrderedDict
 
 from datetime import datetime
 
+from metashare.repository.dataformat_choices import MIMETYPEVALUE_TO_MIMETYPELABEL
 from metashare.repository.models import resourceInfoType_model as rm, corpusInfoType_model, \
     lexicalConceptualResourceInfoType_model, languageDescriptionInfoType_model, toolServiceInfoType_model
 from metashare.utils import prettify_camel_case_string
@@ -24,128 +25,13 @@ def get_resources():
             resources.append(r)
     return resources
 
+
 all_dsi = {
     u'OnlineDisputeResolution': 0, u'Europeana': 0, u'OpenDataPortal': 0, u'eJustice': 0,
     u'ElectronicExchangeOfSocialSecurityInformation': 0, u'saferInternet': 0,
     u'Cybersecurity': 0, u'eHealth': 0, u'eProcurement': 0,
     u'BusinessRegistersInterconnectionSystem': 0,
 }
-
-
-def count_by_domain():
-    domains = ["BUSINESS & COMPETITION", "INTERNATIONAL RELATIONS", "EDUCATION & COMMUNICATIONS",
-               "PRODUCTION, TECHNOLOGY & RESEARCH", "LAW", "POLITICS", "EMPLOYMENT & WORKING CONDITIONS",
-               "EUROPEAN UNION", "SOCIAL QUESTIONS", "FINANCE", "TRANSPORT", "ECONOMICS", "INDUSTRY",
-               "AGRICULTURE, FORESTRY & FISHERIES", "GEOGRAPHY", "Other", "SCIENCE", "TRADE", "ENVIRONMENT",
-               "AGRI-FOODSTUFFS", "INTERNATIONAL ORGANISATIONS", "ENERGY"]
-    result = []
-    for d in domains:
-        count = 0
-        for res in get_resources():
-            if d in _get_resource_domain_info(res):
-                count += 1
-        result.append((d, count))
-    return result
-
-
-def _get_resource_domain_info(resource):
-    result = []
-    media = resource.resourceComponentType.as_subclass()
-
-    if isinstance(media, corpusInfoType_model):
-        media_type = media.corpusMediaType
-        for corpus_info in media_type.corpustextinfotype_model_set.all():
-            result.extend([prettify_camel_case_string(d.domain)
-                           if d.subdomain else prettify_camel_case_string(d.domain) for d in
-                           corpus_info.domaininfotype_model_set.all()])
-
-    elif isinstance(media, lexicalConceptualResourceInfoType_model):
-        lcr_media_type = media.lexicalConceptualResourceMediaType
-        if lcr_media_type.lexicalConceptualResourceTextInfo:
-            result.extend([prettify_camel_case_string(d.domain)
-                           if d.subdomain else prettify_camel_case_string(d.domain) for d in lcr_media_type \
-                          .lexicalConceptualResourceTextInfo.domaininfotype_model_set.all()])
-
-    elif isinstance(media, languageDescriptionInfoType_model):
-        ld_media_type = media.languageDescriptionMediaType
-        if ld_media_type.languageDescriptionTextInfo:
-            result.extend([prettify_camel_case_string(d.domain)
-                           if d.subdomain else prettify_camel_case_string(d.domain) for d in ld_media_type \
-                          .languageDescriptionTextInfo.domaininfotype_model_set.all()])
-    result = list(set(result))
-    result.sort()
-
-    return result
-
-
-def _get_media_type(resource):
-    linguality = []
-    lr_type = None
-    corpus_media = resource.resourceComponentType.as_subclass()
-    if isinstance(corpus_media, corpusInfoType_model):
-        media_type = corpus_media.corpusMediaType
-        lr_type = "Corpus"
-        for corpus_info in media_type.corpustextinfotype_model_set.all():
-            linguality.append(corpus_info.lingualityInfo.lingualityType.title())
-    elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
-        media_type = corpus_media.lexicalConceptualResourceMediaType
-        lr_type = "Lexical"
-        if media_type.lexicalConceptualResourceTextInfo:
-            linguality.append(media_type.lexicalConceptualResourceTextInfo.
-                              lingualityInfo.lingualityType.title())
-    elif isinstance(corpus_media, languageDescriptionInfoType_model):
-        media_type = corpus_media.languageDescriptionMediaType
-        lr_type = "Language Description"
-        if media_type.languageDescriptionTextInfo:
-            linguality.append("Monolingual")
-    elif isinstance(corpus_media, toolServiceInfoType_model):
-        pass
-
-    return media_type, lr_type, linguality[0]
-
-
-def _get_resource_lang_info(resource):
-    """
-    Collect the data to filter the resources on Language Name
-    """
-    result = []
-    corpus_media = resource.resourceComponentType.as_subclass()
-    linguality = []
-    if isinstance(corpus_media, corpusInfoType_model):
-        media_type = corpus_media.corpusMediaType
-        for corpus_info in media_type.corpustextinfotype_model_set.all():
-            result.extend([lang.languageName for lang in
-                           corpus_info.languageinfotype_model_set.all()])
-
-    elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
-        lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
-        if lcr_media_type.lexicalConceptualResourceTextInfo:
-            result.extend([lang.languageName for lang in lcr_media_type \
-                          .lexicalConceptualResourceTextInfo.languageinfotype_model_set.all()])
-
-    elif isinstance(corpus_media, languageDescriptionInfoType_model):
-        ld_media_type = corpus_media.languageDescriptionMediaType
-        if ld_media_type.languageDescriptionTextInfo:
-            result.extend([lang.languageName for lang in ld_media_type \
-                          .languageDescriptionTextInfo.languageinfotype_model_set.all()])
-
-    elif isinstance(corpus_media, toolServiceInfoType_model):
-        pass
-
-    return result
-
-
-def get_country(res):
-    res_countries = []
-    for cp in res.contactPerson.all():
-        res_countries.append(cp.communicationInfo.country)
-        # now try to get the correct coutry
-    if len(set(res_countries)) > 1 and res_countries[1]:
-        res_country = res_countries[1]
-    else:
-        res_country = res_countries[0]
-    return res_country
-
 
 result_dict = {
     "countries": dict(),
@@ -343,3 +229,361 @@ def _is_not_processed_or_related(r):
     if related_ids:
         return False
     return True
+
+
+def get_licenses(obj):
+    """
+    Returns a list of license under which the given language resource is
+    available.
+    """
+    result = []
+    for dist in obj.distributioninfotype_model_set.all():
+        for licence_info in dist.licenceInfo.all():
+            result.append(licence_info.licence)
+    return result
+
+
+def _get_preferred_size(resource):
+    size_infos = _get_resource_size_infos(resource)
+    tu = next((size_info for size_info in size_infos if size_info.sizeUnit == u"translationUnits"), None)
+    if tu:
+        return tu
+    else:
+        tokens = next((size_info for size_info in size_infos if size_info.sizeUnit == u"tokens"), None)
+        if tokens:
+            return tokens
+        else:
+            words = next((size_info for size_info in size_infos if size_info.sizeUnit == u"words"), None)
+            if words:
+                return words
+            else:
+                entries = next((size_info for size_info in size_infos if size_info.sizeUnit == u"entries"), None)
+                if entries:
+                    return entries
+                else:
+                    terms = next((size_info for size_info in size_infos if size_info.sizeUnit == u"terms"), None)
+                    if terms:
+                        return terms
+                    else:
+                        try:
+                            return size_infos[0]
+                        except IndexError:
+                            return None
+
+
+def _get_country(res):
+    res_countries = []
+    for cp in res.contactPerson.all():
+        res_countries.append(cp.communicationInfo.country)
+        # now try to get the correct coutry
+    if len(set(res_countries)) > 1 and res_countries[1]:
+        res_country = res_countries[1]
+    else:
+        res_country = res_countries[0]
+    return res_country
+
+
+def _get_resource_linguality(resource):
+    result = []
+    media = resource.resourceComponentType.as_subclass()
+
+    if isinstance(media, corpusInfoType_model):
+        media_type = media.corpusMediaType
+        for corpus_info in media_type.corpustextinfotype_model_set.all():
+            result.append(corpus_info.lingualityInfo.lingualityType.title())
+
+    elif isinstance(media, lexicalConceptualResourceInfoType_model):
+        lcr_media_type = media.lexicalConceptualResourceMediaType
+        if lcr_media_type.lexicalConceptualResourceTextInfo:
+            result.append(lcr_media_type \
+                          .lexicalConceptualResourceTextInfo.lingualityInfo.lingualityType.title())
+
+    elif isinstance(media, languageDescriptionInfoType_model):
+        ld_media_type = media.languageDescriptionMediaType
+        if ld_media_type.languageDescriptionTextInfo:
+            result.append(ld_media_type \
+                          .languageDescriptionTextInfo.lingualityInfo.lingualityType.title())
+    result = list(set(result))
+    result.sort()
+    return result
+
+
+def _get_resource_lang_sizes(resource, language):
+    result = []
+    media = resource.resourceComponentType.as_subclass()
+
+    if isinstance(media, corpusInfoType_model):
+        media_type = media.corpusMediaType
+        for corpus_info in media_type.corpustextinfotype_model_set.all():
+            for lang in corpus_info.languageinfotype_model_set.all():
+                l = []
+                if lang.languageName == language:
+                    if _get_lang_sizes(lang):
+                        l = [" - ".join(_get_lang_sizes(lang))]
+                    else:
+                        l = ["N/A"]
+                result.extend(l)
+
+    elif isinstance(media, lexicalConceptualResourceInfoType_model):
+        lcr_media_type = media.lexicalConceptualResourceMediaType
+        if lcr_media_type.lexicalConceptualResourceTextInfo:
+            for lang in lcr_media_type \
+                    .lexicalConceptualResourceTextInfo.languageinfotype_model_set.all():
+                l = []
+                if lang.languageName == language:
+                    if _get_lang_sizes(lang):
+                        l = [" - ".join(_get_lang_sizes(lang))]
+                    else:
+                        l = ["N/A"]
+                result.extend(l)
+
+    elif isinstance(media, languageDescriptionInfoType_model):
+        ld_media_type = media.languageDescriptionMediaType
+        if ld_media_type.languageDescriptionTextInfo:
+            for lang in ld_media_type \
+                    .languageDescriptionTextInfo.languageinfotype_model_set.all():
+                l = []
+                if lang.languageName == language:
+                    if _get_lang_sizes(lang):
+                        l = [" - ".join(_get_lang_sizes(lang))]
+                    else:
+                        l = ["N/A"]
+                result.extend(l)
+    result = list(set(result))
+    result.sort()
+    return result
+
+
+def _get_lang_sizes(lang):
+    return ['{:,}'.format(int(sp.size)) + " " + prettify_camel_case_string(sp.sizeUnit) for sp in
+            lang.sizePerLanguage.all()]
+
+
+def _get_resource_mimetypes(resource):
+    result = []
+    media = resource.resourceComponentType.as_subclass()
+
+    if isinstance(media, corpusInfoType_model):
+        media_type = media.corpusMediaType
+        for corpus_info in media_type.corpustextinfotype_model_set.all():
+            result.extend([MIMETYPEVALUE_TO_MIMETYPELABEL.get(d.dataFormat) for d in
+                           corpus_info.textformatinfotype_model_set.all()])
+
+    elif isinstance(media, lexicalConceptualResourceInfoType_model):
+        lcr_media_type = media.lexicalConceptualResourceMediaType
+        result.extend([MIMETYPEVALUE_TO_MIMETYPELABEL.get(d.dataFormat) for d in lcr_media_type \
+                      .lexicalConceptualResourceTextInfo.textformatinfotype_model_set.all()])
+
+    elif isinstance(media, languageDescriptionInfoType_model):
+        ld_media_type = media.languageDescriptionMediaType
+        if ld_media_type.languageDescriptionTextInfo:
+            result.extend([MIMETYPEVALUE_TO_MIMETYPELABEL.get(d.dataFormat) for d in ld_media_type \
+                          .languageDescriptionTextInfo.textformatinfotype_model_set.all()])
+    result = list(set(result))
+    result.sort()
+
+    return result
+
+
+def _get_resource_sizes(resource):
+    result = []
+    media = resource.resourceComponentType.as_subclass()
+
+    if isinstance(media, corpusInfoType_model):
+        media_type = media.corpusMediaType
+        for corpus_info in media_type.corpustextinfotype_model_set.all():
+            try:
+                result.extend(
+                    ["{}".format('{:,}'.format(int(s.size) if float(s.size).is_integer() else float(s.size))) for s in
+                     corpus_info.sizeinfotype_model_set.all()])
+            except ValueError:
+                print ValueError.message, resource
+
+    elif isinstance(media, lexicalConceptualResourceInfoType_model):
+        lcr_media_type = media.lexicalConceptualResourceMediaType
+        if lcr_media_type.lexicalConceptualResourceTextInfo:
+            result.extend(["{}".format('{:,}'.format(int(s.size) if float(s.size).is_integer() else float(s.size)))
+                           for s in lcr_media_type \
+                          .lexicalConceptualResourceTextInfo.sizeinfotype_model_set.all()])
+
+    elif isinstance(media, languageDescriptionInfoType_model):
+        ld_media_type = media.languageDescriptionMediaType
+        if ld_media_type.languageDescriptionTextInfo:
+            result.extend(["{}".format('{:,}'.format(int(s.size) if float(s.size).is_integer() else float(s.size)))
+                           for s in ld_media_type \
+                          .languageDescriptionTextInfo.sizeinfotype_model_set.all()])
+    result = list(set(result))
+    result.sort()
+    return result
+
+
+def _get_resource_size_infos(resource):
+    result = []
+    media = resource.resourceComponentType.as_subclass()
+
+    if isinstance(media, corpusInfoType_model):
+        media_type = media.corpusMediaType
+        for corpus_info in media_type.corpustextinfotype_model_set.all():
+            result.extend([s for s in corpus_info.sizeinfotype_model_set.all()])
+
+    elif isinstance(media, lexicalConceptualResourceInfoType_model):
+        lcr_media_type = media.lexicalConceptualResourceMediaType
+        if lcr_media_type.lexicalConceptualResourceTextInfo:
+            result.extend([s for s in lcr_media_type \
+                          .lexicalConceptualResourceTextInfo.sizeinfotype_model_set.all()])
+    elif isinstance(media, languageDescriptionInfoType_model):
+        ld_media_type = media.languageDescriptionMediaType
+        if ld_media_type.languageDescriptionTextInfo:
+            result.extend([s for s in ld_media_type \
+                          .languageDescriptionTextInfo.sizeinfotype_model_set.all()])
+    return result
+
+
+def _get_resource_size_units(resource, size):
+    result = []
+    media = resource.resourceComponentType.as_subclass()
+
+    if isinstance(media, corpusInfoType_model):
+        media_type = media.corpusMediaType
+        for corpus_info in media_type.corpustextinfotype_model_set.all():
+            for s in corpus_info.sizeinfotype_model_set.all():
+                this_size = "{}".format('{:,}'.format(int(s.size) if float(s.size).is_integer() else float(s.size)))
+                if this_size == size:
+                    result.extend(["{}".format(prettify_camel_case_string(s.sizeUnit))])
+
+    elif isinstance(media, lexicalConceptualResourceInfoType_model):
+        lcr_media_type = media.lexicalConceptualResourceMediaType
+        if lcr_media_type.lexicalConceptualResourceTextInfo:
+            for s in lcr_media_type \
+                    .lexicalConceptualResourceTextInfo.sizeinfotype_model_set.all():
+                this_size = "{}".format('{:,}'.format(int(s.size) if float(s.size).is_integer() else float(s.size)))
+                if this_size == size:
+                    result.extend(["{}".format(prettify_camel_case_string(s.sizeUnit))])
+
+    elif isinstance(media, languageDescriptionInfoType_model):
+        ld_media_type = media.languageDescriptionMediaType
+        if ld_media_type.languageDescriptionTextInfo:
+            for s in ld_media_type \
+                    .languageDescriptionTextInfo.sizeinfotype_model_set.all():
+                this_size = "{}".format('{:,}'.format(int(s.size) if float(s.size).is_integer() else float(s.size)))
+                if this_size == size:
+                    result.extend(["{}".format(prettify_camel_case_string(s.sizeUnit))])
+    result = list(set(result))
+    result.sort()
+
+    return result
+
+
+def count_by_domain():
+    domains = ["BUSINESS & COMPETITION", "INTERNATIONAL RELATIONS", "EDUCATION & COMMUNICATIONS",
+               "PRODUCTION, TECHNOLOGY & RESEARCH", "LAW", "POLITICS", "EMPLOYMENT & WORKING CONDITIONS",
+               "EUROPEAN UNION", "SOCIAL QUESTIONS", "FINANCE", "TRANSPORT", "ECONOMICS", "INDUSTRY",
+               "AGRICULTURE, FORESTRY & FISHERIES", "GEOGRAPHY", "Other", "SCIENCE", "TRADE", "ENVIRONMENT",
+               "AGRI-FOODSTUFFS", "INTERNATIONAL ORGANISATIONS", "ENERGY"]
+    result = []
+    for d in domains:
+        count = 0
+        for res in get_resources():
+            if d in _get_resource_domain_info(res):
+                count += 1
+        result.append((d, count))
+    return result
+
+
+def _get_resource_domain_info(resource):
+    result = []
+    media = resource.resourceComponentType.as_subclass()
+
+    if isinstance(media, corpusInfoType_model):
+        media_type = media.corpusMediaType
+        for corpus_info in media_type.corpustextinfotype_model_set.all():
+            result.extend([prettify_camel_case_string(d.domain)
+                           if d.subdomain else prettify_camel_case_string(d.domain) for d in
+                           corpus_info.domaininfotype_model_set.all()])
+
+    elif isinstance(media, lexicalConceptualResourceInfoType_model):
+        lcr_media_type = media.lexicalConceptualResourceMediaType
+        if lcr_media_type.lexicalConceptualResourceTextInfo:
+            result.extend([prettify_camel_case_string(d.domain)
+                           if d.subdomain else prettify_camel_case_string(d.domain) for d in lcr_media_type \
+                          .lexicalConceptualResourceTextInfo.domaininfotype_model_set.all()])
+
+    elif isinstance(media, languageDescriptionInfoType_model):
+        ld_media_type = media.languageDescriptionMediaType
+        if ld_media_type.languageDescriptionTextInfo:
+            result.extend([prettify_camel_case_string(d.domain)
+                           if d.subdomain else prettify_camel_case_string(d.domain) for d in ld_media_type \
+                          .languageDescriptionTextInfo.domaininfotype_model_set.all()])
+    result = list(set(result))
+    result.sort()
+
+    return result
+
+
+def _get_media_type(resource):
+    linguality = []
+    lr_type = None
+    corpus_media = resource.resourceComponentType.as_subclass()
+    if isinstance(corpus_media, corpusInfoType_model):
+        media_type = corpus_media.corpusMediaType
+        lr_type = "Corpus"
+        for corpus_info in media_type.corpustextinfotype_model_set.all():
+            linguality.append(corpus_info.lingualityInfo.lingualityType.title())
+    elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
+        media_type = corpus_media.lexicalConceptualResourceMediaType
+        lr_type = "Lexical"
+        if media_type.lexicalConceptualResourceTextInfo:
+            linguality.append(media_type.lexicalConceptualResourceTextInfo.
+                              lingualityInfo.lingualityType.title())
+    elif isinstance(corpus_media, languageDescriptionInfoType_model):
+        media_type = corpus_media.languageDescriptionMediaType
+        lr_type = "Language Description"
+        if media_type.languageDescriptionTextInfo:
+            linguality.append("Monolingual")
+    elif isinstance(corpus_media, toolServiceInfoType_model):
+        pass
+
+    return media_type, lr_type, linguality[0]
+
+
+def _get_resource_lang_info(resource):
+    """
+    Collect the data to filter the resources on Language Name
+    """
+    result = []
+    corpus_media = resource.resourceComponentType.as_subclass()
+    linguality = []
+    if isinstance(corpus_media, corpusInfoType_model):
+        media_type = corpus_media.corpusMediaType
+        for corpus_info in media_type.corpustextinfotype_model_set.all():
+            result.extend([lang.languageName for lang in
+                           corpus_info.languageinfotype_model_set.all()])
+
+    elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
+        lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
+        if lcr_media_type.lexicalConceptualResourceTextInfo:
+            result.extend([lang.languageName for lang in lcr_media_type \
+                          .lexicalConceptualResourceTextInfo.languageinfotype_model_set.all()])
+
+    elif isinstance(corpus_media, languageDescriptionInfoType_model):
+        ld_media_type = corpus_media.languageDescriptionMediaType
+        if ld_media_type.languageDescriptionTextInfo:
+            result.extend([lang.languageName for lang in ld_media_type \
+                          .languageDescriptionTextInfo.languageinfotype_model_set.all()])
+
+    elif isinstance(corpus_media, toolServiceInfoType_model):
+        pass
+
+    return result
+
+
+def get_country(res):
+    res_countries = []
+    for cp in res.contactPerson.all():
+        res_countries.append(cp.communicationInfo.country)
+        # now try to get the correct coutry
+    if len(set(res_countries)) > 1 and res_countries[1]:
+        res_country = res_countries[1]
+    else:
+        res_country = res_countries[0]
+    return res_country
