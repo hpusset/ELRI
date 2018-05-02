@@ -1702,7 +1702,7 @@ def repo_report(request):
         worksheet.write('X1', 'Views', heading)
         worksheet.write('Y1', 'Downloads', heading)
         worksheet.write('Z1', 'Delivered to ODP', heading)
-        worksheet.write('AA', 'Unique', heading)
+        worksheet.write('AA1', 'Unique', heading)
 
         link = True
 
