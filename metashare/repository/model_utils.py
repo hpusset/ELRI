@@ -196,10 +196,10 @@ def get_resource_media_types(res_obj):
 
     elif isinstance(corpus_media, toolServiceInfoType_model):
         if corpus_media.inputInfo:
-            result.extend(corpus_media.inputInfo \
+            result.append(corpus_media.inputInfo \
                           .get_mediaType_display())
         if corpus_media.outputInfo:
-            result.extend(corpus_media.outputInfo \
+            result.append(corpus_media.outputInfo \
                           .get_mediaType_display())
 
     result_lower = []
