@@ -25,17 +25,16 @@
             </label>
         </div>
     {% endif %}
-    {% if data %}
-    <div class="dataline indented">
-         <strong>Languages: </strong>
-        {% for k, v in data.items %}
-            {% if v.Language_name %}
-                {{ v.Language_name }} <em>({{ v.Language_identifier }})</em>{% if not forloop.last %}, {% else %}{% endif %}
-            {% endif %}
-        {% endfor %}
-    </div>
+    {% if data.Language_Set %}
+        <div class="dataline indented">
+             <strong>Languages: </strong>
+            {% for k, v in data.items %}
+                {% if v.Language_name %}
+                    {{ v.Language_name }} <em>({{ v.Language_identifier }})</em>{% if not forloop.last %}, {% else %}{% endif %}
+                {% endif %}
+            {% endfor %}
+        </div>
     {% endif %}
-
     {% if data.Mime_type %}
         <div class="dataline indented">
             <label>
