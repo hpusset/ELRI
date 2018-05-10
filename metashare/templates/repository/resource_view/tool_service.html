@@ -29,13 +29,12 @@
 				</label>
 			</div>
 		{% endif %}
-		
-		{% if tool_service.Tool___Service_operation.Running_environment %}
-			 {% if "Required_software" in tool_service.Tool___Service_operation.Running_environment %}
+		{% if tool_service.Tool___Service_operation.Dependencies %}
+			 {% if "Required_software" in tool_service.Tool___Service_operation.Dependencies %}
 			 	<label class='subtitle'>Required Software</label>
 			 	<div class="dataline indented">			 		
 			 		<ul>					 	
-						 {% for key, value in tool_service.Tool___Service_operation.Running_environment.items %}
+						 {% for key, value in tool_service.Tool___Service_operation.Dependencies.items %}
 						 	{% if "Required_software" in key %}
 						 		{% include "repository/resource_view/target_resource.html" with target=value title="Required Software" level="list" %}
 						 	{% endif %}
