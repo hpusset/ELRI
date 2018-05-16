@@ -12,6 +12,10 @@ DELIVERABLES = _make_choices_from_list(
      ]
 )
 
+IPR_CLEARING = _make_choices_from_list(
+    ["underClearing", "cleared", "notClearable"]
+)
+
 country_to_partner_map = {
     "Austria": "DFKI", "Belgium": "ELDA", "Bulgaria": "ILSP", "Croatia": "ILSP", "Cyprus": "ILSP",
     "Czech Republic": "DFKI", "Denmark": "TILDE", "Estonia": "TILDE", "Finland": "TILDE", "France": "ELDA",
@@ -34,7 +38,7 @@ def _get_country(res):
         else:
             res_country = res_countries[0]
     except IndexError:
-            res_country = None
+        res_country = None
     return res_country
 
 
@@ -58,13 +62,23 @@ class ManagementObject(models.Model):
                                            editable=False,
                                            blank=True, null=True)
 
-    rejected = models.BooleanField(verbose_name="Rejected", default=False)
+    rejected = models.BooleanField(verbose_name="Rejected from Processing", default=False)
 
     rejection_reason = models.TextField(max_length=1000, blank=True, null=True)
 
     # ODP
     to_be_delivered_odp = models.NullBooleanField(verbose_name="To be delivered to ODP", null=True, blank=True)
     delivered_odp = models.BooleanField(verbose_name="Delivered to ODP", default=False)
+
+    ipr_clearing = models.CharField(verbose_name="IPR Clearing", max_length=13,
+                                    choices=IPR_CLEARING['choices'],
+                                    blank=True, null=True)
+
+    comments = models.TextField(
+        verbose_name="Comments",
+        max_length=1000,
+        blank=True,
+        null=True)
 
     unique_together = ("rejected", "rejection_reason")
 
