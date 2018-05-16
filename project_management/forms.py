@@ -1,5 +1,5 @@
 from django import forms
-from project_management.models import ManagementObject, DELIVERABLES
+from project_management.models import ManagementObject, DELIVERABLES, IPR_CLEARING
 
 
 class ManagementObjectForm(forms.ModelForm):
@@ -15,4 +15,14 @@ class IntermediateDeliverableSelectForm(forms.Form):
 
 class IntermediateDeliverableRejectForm(forms.Form):
     _selected_action = forms.CharField(widget=forms.MultipleHiddenInput)
-    rejection_reason = forms.CharField(widget=forms.Textarea, required=True )
+    rejection_reason = forms.CharField(widget=forms.Textarea, required=True)
+
+
+_choices = list(IPR_CLEARING['choices'])
+_choices.insert(0, (None, "-------"))
+
+
+class IntermediateIPRSelectForm(forms.Form):
+    _selected_action = forms.CharField(widget=forms.MultipleHiddenInput)
+    ipr_status = forms.ChoiceField(choices=tuple(_choices),
+                                   required=False)

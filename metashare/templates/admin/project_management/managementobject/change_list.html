@@ -1,7 +1,21 @@
 {% extends "admin/change_list.html" %}
 {% load i18n admin_urls %}
-{% block object-tools-items %}
-    <li>
-        <a href="/repository/repo_report?email_to=false" class="historylink">Generate Report</a>
-    </li>
+{% block object-tools %}
+    <ul class="object-tools">
+        {% block object-tools-items %}
+            {% if is_legal_reviewer %}
+                <li>
+                    <a href="/repository/report_extended" class="historylink">Generate Legal Report</a>
+                </li>
+            {% endif %}
+            {% if has_add_permission %}
+                <li>
+                    {% url cl.opts|admin_urlname:'add' as add_url %}
+                    <a href="{% add_preserved_filters add_url is_popup to_field %}" class="addlink">
+                        {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
+                    </a>
+                </li>
+            {% endif %}
+        {% endblock %}
+    </ul>
 {% endblock %}

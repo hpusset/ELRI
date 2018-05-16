@@ -4,8 +4,10 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.safestring import mark_safe
+from metashare.local_settings import LEGAL_REVIEWERS
 from project_management.filters import PublicationStatusFilter, DeliveredFilter, ToBeDeliveredFilter
-from project_management.forms import IntermediateDeliverableSelectForm, IntermediateDeliverableRejectForm
+from project_management.forms import IntermediateDeliverableSelectForm, IntermediateDeliverableRejectForm, \
+    IntermediateIPRSelectForm
 from project_management.models import ManagementObject
 from django.views.decorators.csrf import csrf_protect
 from django.utils.decorators import method_decorator
@@ -18,10 +20,13 @@ class ManagementObjectAdmin(admin.ModelAdmin):
     # class Media:
     #     js = ("admin/js/management_actions.js",)
     list_display = ('resource', 'id', 'partner_responsible', 'to_be_delivered_to_EC', 'delivered_to_EC',
-                    'is_processed_version', 'is_rejected', 'publication_status', 'to_be_delivered_odp',
-                    'delivered_odp',)
+                    'is_processed_version', 'is_rejected',
+                    'publication_status', 'to_be_delivered_odp',
+                    'delivered_odp', 'ipr_clearing')
+
     list_filter = (PublicationStatusFilter, 'partner_responsible', DeliveredFilter,
-                   ToBeDeliveredFilter, 'is_processed_version', 'rejected', 'to_be_delivered_odp', 'delivered_odp',)
+                   ToBeDeliveredFilter, 'is_processed_version', 'rejected', 'to_be_delivered_odp',
+                   'delivered_odp', 'ipr_clearing')
 
     fieldsets = (
         ('EC Project', {
@@ -29,6 +34,9 @@ class ManagementObjectAdmin(admin.ModelAdmin):
                 'related_resource', 'partner_responsible', 'delivered_to_EC', 'to_be_delivered_to_EC',
                 'is_processed_version', 'rejected',
                 'rejection_reason',)
+        }),
+        ('IPR Clearing Process', {
+            'fields': ('ipr_clearing', 'comments'),
         }),
         ('EU Open Data Portal', {
             'fields': ('to_be_delivered_odp', 'delivered_odp'),
@@ -38,7 +46,7 @@ class ManagementObjectAdmin(admin.ModelAdmin):
     readonly_fields = ('related_resource', 'is_processed_version', 'partner_responsible')
 
     actions = ('to_be_delivered_to_ec', 'delivered_to_ec', 'reject', 'restore_rejected', 'to_be_delivered_to_odp',
-               'delivered_to_odp')
+               'delivered_to_odp', 'set_ipr_clearing')
 
     # Set \"To be Delivered\"
     # form = ManagementObjectForm
@@ -50,6 +58,20 @@ class ManagementObjectAdmin(admin.ModelAdmin):
     def has_delete_permission(self, request, obj=None):
         return request.user.is_superuser or \
                request.user.groups.filter(name='elrcReviewers').exists()
+
+    def get_fieldsets(self, request, obj=None):
+        fieldsets = super(ManagementObjectAdmin, self).get_fieldsets(request, obj=obj)
+        if request.user.id in LEGAL_REVIEWERS:
+            return fieldsets
+        else:
+            trimmed_fieldset = sorted(list(fieldsets))
+            del(trimmed_fieldset[-1])
+            return tuple(trimmed_fieldset)
+
+    def changelist_view(self, request, extra_context=None):
+        extra_context = extra_context or {}
+        extra_context['is_legal_reviewer'] = request.user.id in LEGAL_REVIEWERS
+        return super(ManagementObjectAdmin, self).changelist_view(request, extra_context=extra_context)
 
     @staticmethod
     def related_resource(obj):
@@ -223,8 +245,43 @@ class ManagementObjectAdmin(admin.ModelAdmin):
 
     restore_rejected.short_description = "Restore Selected Rejected Resources"
 
+    @csrf_protect_m
+    def set_ipr_clearing(self, request, queryset):
+
+        if 'cancel' in request.POST:
+            self.message_user(request, 'Cancelled setting deliverable.')
+            return
+
+        if 'set_ipr_clearing' in request.POST:
+            form = IntermediateIPRSelectForm(request.POST)
+
+            if form.is_valid():
+                ipr_status = form.cleaned_data['ipr_status']
+                for item in queryset:
+                    item.ipr_clearing = ipr_status
+                    item.save()
+                self.message_user(request, "IPR Clearing Status %s set to selected resources" % ipr_status)
+                return HttpResponseRedirect(request.get_full_path())
+        else:
+            form = IntermediateIPRSelectForm(
+                initial={'_selected_action': request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
+        dictionary = {
+            'selected_resources': queryset,
+            'form': form,
+            'path': request.get_full_path(),
+            'action': 'set_ipr_clearing'
+        }
+        return render_to_response('project_management/set_ipr_clearing.html',
+                                  dictionary,
+                                  context_instance=RequestContext(request))
+
+    set_ipr_clearing.short_description = "Set IPR Clearing Status"
+
     def get_actions(self, request):
         result = super(ManagementObjectAdmin, self).get_actions(request)
+
+        if request.user.id not in LEGAL_REVIEWERS:
+            del result['set_ipr_clearing']
 
         if 'delete_selected' in result:
             del result['delete_selected']
