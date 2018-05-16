@@ -5,6 +5,7 @@ import xlsxwriter
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from django.utils.encoding import smart_str
+from metashare.report_utils.report_utils import _is_processed, _is_not_processed_or_related
 from metashare.repository import model_utils
 from metashare.repository.dataformat_choices import MIMETYPEVALUE_TO_MIMETYPELABEL
 from metashare.repository.fields import best_lang_value_retriever
@@ -80,6 +81,8 @@ def enh_report():
         worksheet.write('AH1', 'Legal Documentation', heading)
         worksheet.write('AI1', 'Allows Uses Besides DGT', heading)
         worksheet.write('AJ1', 'IPR Clearing Status', heading)
+        worksheet.write('AK1', 'Unique', heading)
+
         j = 1
         for i in range(len(resources)):
 
@@ -301,7 +304,8 @@ def enh_report():
                 res.management_object.ipr_clearing else ""
             worksheet.write(j, 34, dgt)
             worksheet.write(j, 35, ipr_status)
-
+            is_unique = "YES" if (_is_processed(res) or _is_not_processed_or_related(res)) else "NO"
+            worksheet.write(j, 36, is_unique)
             j += 1
             # worksheet.write(i + 1, 3, _get_resource_size_info(res))
         # worksheet.write(len(resources)+2, 3, "Total Resources", bold)
