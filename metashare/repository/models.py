@@ -1810,6 +1810,9 @@ LICENCEINFOTYPE_LICENCE_CHOICES = _make_choices_from_list([
     u'BSD-3-Clause',
     u'BSD-2-Clause',
     u'EPL-1.0',
+    u'EUPL-1.0',
+    u'EUPL-1.1',
+    u'EUPL-1.2',
     u'GFDL-1.3',
     u'GPL-3.0',
     u'LGPL-3.0',
@@ -1828,8 +1831,8 @@ def licenceinfotype_licence_optgroup_choices():
     """
     indl = ('International/National Data Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][:18])
     ndl = ('National Data Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][18:24])
-    isl = ('International Software Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][24:34])
-    other = ('Other', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][34:])
+    isl = ('International Software Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][24:37])
+    other = ('Other', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][37:])
     optgroup = [indl, ndl, isl, other]
     return optgroup
 
@@ -1872,6 +1875,9 @@ LICENCES_DETAILS = {
     u'LGPL-3.0': {"url": "http://www.gnu.org/licenses/lgpl-3.0-standalone.html"},
     u'MIT': {"url": "http://www.opensource.org/licenses/MIT", "version": ""},
     u'EPL-1.0': {"url": "http://www.eclipse.org/legal/epl-v10.html", "version": "1.0"},
+    u'EUPL-1.0': {"url": "http://ec.europa.eu/idabc/servlets/Doc027f.pdf?id=31096", "version": "1.0"},
+    u'EUPL-1.1': {"url": "https://joinup.ec.europa.eu/sites/default/files/custom-page/attachment/eupl1.1.-licence-en_0.pdf", "version": "1.1"},
+    u'EUPL-1.2': {"url": "https://joinup.ec.europa.eu/sites/default/files/custom-page/attachment/eupl_v1.2_en.pdf", "version": "1.2"},
     u'LO-OL-v2': {"url": "https://wiki.data.gouv.fr/images/9/9d/Licence_Ouverte.pdf", "version": "1.0"},
 }
 

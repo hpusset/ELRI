@@ -468,6 +468,36 @@
 								</xs:appinfo>
 							</xs:annotation>
 						</xs:enumeration>
+						<xs:enumeration value="EUPL-1.0">
+							<xs:annotation>
+								<xs:documentation>European Union Public Licence v1.0; cf. http://ec.europa.eu/idabc/servlets/Doc027f.pdf?id=31096</xs:documentation>
+								<xs:appinfo>
+									<label>European Union Public Licence v1.0</label>
+									<recomUsage>software</recomUsage>
+                                    <recomUsage>data</recomUsage>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="EUPL-1.1">
+							<xs:annotation>
+								<xs:documentation>European Union Public Licence v1.1; cf. https://joinup.ec.europa.eu/sites/default/files/custom-page/attachment/eupl1.1.-licence-en_0.pdf</xs:documentation>
+								<xs:appinfo>
+									<label>European Union Public Licence v1.1</label>
+									<recomUsage>software</recomUsage>
+                                    <recomUsage>data</recomUsage>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="EUPL-1.2">
+							<xs:annotation>
+								<xs:documentation>European Union Public Licence v1.1; cf. https://joinup.ec.europa.eu/sites/default/files/custom-page/attachment/eupl_v1.2_en.pdf</xs:documentation>
+								<xs:appinfo>
+									<label>European Union Public Licence v1.2</label>
+									<recomUsage>software</recomUsage>
+                                    <recomUsage>data</recomUsage>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:enumeration>
 						<xs:enumeration value="LO-OL-v2">
 							<xs:annotation>
 								<xs:documentation>Licence Ouverte / Open licence – version 2.0, cf. https://www.etalab.gouv.fr/wp-content/uploads/2017/04/ETALAB-Licence-Ouverte-v2.0.pdf</xs:documentation>
