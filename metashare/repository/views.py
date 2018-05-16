@@ -1903,6 +1903,7 @@ def repo_report(request):
         return HttpResponse("No Language Resources published within the last two weeks\n")
 
 
+@login_required
 def report_extended(request):
     from metashare.repository_reports.legal_report import enh_report
     data = enh_report()
