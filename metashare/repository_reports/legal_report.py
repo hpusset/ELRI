@@ -297,7 +297,8 @@ def enh_report():
 
             dgt = "YES" if True in set(
                 [d.allowsUsesBesidesDGT for d in res.distributioninfotype_model_set.all()]) else "NO"
-            ipr_status = prettify_camel_case_string(res.management_object.ipr_clearing)
+            ipr_status = prettify_camel_case_string(res.management_object.ipr_clearing) if \
+                res.management_object.ipr_clearing else ""
             worksheet.write(j, 34, dgt)
             worksheet.write(j, 35, ipr_status)
 
