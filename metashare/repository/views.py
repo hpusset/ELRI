@@ -1901,3 +1901,13 @@ def repo_report(request):
                                 .format(datetime.datetime.now().strftime("%a, %d %b %Y"), ", ".join(rp)))
     else:
         return HttpResponse("No Language Resources published within the last two weeks\n")
+
+
+def report_extended(request):
+    from metashare.repository_reports.legal_report import enh_report
+    data = enh_report()
+    response = HttpResponse(data['output'].read(),
+                                content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    response['Content-Disposition'] = "attachment; filename={}.xlsx".format(data['title'])
+
+    return response
