@@ -1739,7 +1739,7 @@ def repo_report(request):
                                                          ", ".join(cp.communicationInfo.email)))
                 except IndexError:
                     contacts.append(u"{} ({})".format(cp.surname.values()[0],
-                                                         ", ".join(cp.communicationInfo.email)))
+                                                      ", ".join(cp.communicationInfo.email)))
                     # data to be reported
                     # resource name
             try:
@@ -1793,7 +1793,6 @@ def repo_report(request):
             else:
                 worksheet.write(j, 6, "")
                 worksheet.write(j, 7, "")
-
 
             domain_info = _get_resource_domain_info(res)
             dsis = "N/A"
@@ -1898,6 +1897,17 @@ def repo_report(request):
                                 .format(datetime.datetime.now().strftime("%a, %d %b %Y"), ", ".join(rp)))
     else:
         return HttpResponse("No Language Resources published within the last two weeks\n")
+
+
+def report_extended(request):
+    from metashare.repository_reports.legal_report import enh_report
+    data = enh_report()
+    response = HttpResponse(data['output'].read(),
+                                content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    response['Content-Disposition'] = "attachment; filename={}.xlsx".format(data['title'])
+
+    return response
+
 
 
 def _get_preferred_size(resource):
