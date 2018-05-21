@@ -3,7 +3,7 @@
 {% block object-tools %}
     <ul class="object-tools">
         {% block object-tools-items %}
-            {% if user_is_elrcreviewer %}
+            {% if user_is_elrcreviewer or user.is_superuser %}
                 <li>
                     <a href="/repository/report_extended" class="historylink">Generate Extended Report</a>
                 </li>
