@@ -1,5 +1,6 @@
 {% extends "admin/change_list.html" %}
 {% load admin_list i18n %}
+{% load is_member %}
 
 	{% block content_title %}
       <h1>{% if myresources %}My Resources{% else %}Editable Resources{% endif %}</h1>
@@ -11,7 +12,7 @@
       {% if has_add_permission %}
         <ul class="object-tools">
           {% block object-tools-items %}
-            {% if user.is_superuser %}
+            {% if user.is_superuser or user|is_member:"elrcReviewers" %}
                 <li>
                     <a href="/repository/repo_report?email_to=false">Generate Report</a>
                 </li>
