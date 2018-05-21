@@ -1905,8 +1905,8 @@ def repo_report(request):
 
 @login_required
 def report_extended(request):
-    from metashare.repository_reports.legal_report import enh_report
-    data = enh_report()
+    from metashare.repository_reports.extended_report import extended_report
+    data = extended_report()
     response = HttpResponse(data['output'].read(),
                                 content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
     response['Content-Disposition'] = "attachment; filename={}.xlsx".format(data['title'])

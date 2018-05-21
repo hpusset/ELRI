@@ -18,7 +18,7 @@ from metashare.stats.model_utils import DOWNLOAD_STAT, VIEW_STAT
 from metashare.utils import prettify_camel_case_string
 
 
-def enh_report():
+def extended_report():
     '''
     Returns all resources in the repository as an excel file with
     predefined data to include.

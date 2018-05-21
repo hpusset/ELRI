@@ -62,16 +62,16 @@ class ManagementObjectAdmin(admin.ModelAdmin):
 
     def get_fieldsets(self, request, obj=None):
         fieldsets = super(ManagementObjectAdmin, self).get_fieldsets(request, obj=obj)
-        if request.user.id in LEGAL_REVIEWERS:
+        if request.user.id in LEGAL_REVIEWERS or request.user.is_superuser:
             return fieldsets
         else:
-            trimmed_fieldset = sorted(list(fieldsets))
-            del(trimmed_fieldset[-1])
-            return tuple(trimmed_fieldset)
+            pruned_fieldset = sorted(list(fieldsets))
+            del(pruned_fieldset[-1])
+            return tuple(pruned_fieldset)
 
     def changelist_view(self, request, extra_context=None):
         extra_context = extra_context or {}
-        extra_context['user_is_elrcreviewer'] = is_member(self.request.user, 'elrcReviewers')
+        extra_context['user_is_elrcreviewer'] = is_member(request.user, 'elrcReviewers')
         return super(ManagementObjectAdmin, self).changelist_view(request, extra_context=extra_context)
 
     @staticmethod
