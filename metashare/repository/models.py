@@ -1835,7 +1835,7 @@ def licenceinfotype_licence_optgroup_choices():
     isl = ('International Software Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][24:34])
     isdl = ('International Software & Data Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][34:37])
     other = ('Other', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][37:])
-    optgroup = [indl, ndl, isl, other]
+    optgroup = [indl, ndl, isl, isdl, other]
     return optgroup
 
 LICENCES_DETAILS = {
