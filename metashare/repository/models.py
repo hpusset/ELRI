@@ -1810,13 +1810,14 @@ LICENCEINFOTYPE_LICENCE_CHOICES = _make_choices_from_list([
     u'BSD-3-Clause',
     u'BSD-2-Clause',
     u'EPL-1.0',
-    u'EUPL-1.0',
-    u'EUPL-1.1',
-    u'EUPL-1.2',
     u'GFDL-1.3',
     u'GPL-3.0',
     u'LGPL-3.0',
     u'MIT',
+
+    u'EUPL-1.0',
+    u'EUPL-1.1',
+    u'EUPL-1.2',
     # Other
     u'publicDomain',
     u'underReview',
@@ -1831,7 +1832,8 @@ def licenceinfotype_licence_optgroup_choices():
     """
     indl = ('International/National Data Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][:18])
     ndl = ('National Data Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][18:24])
-    isl = ('International Software Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][24:37])
+    isl = ('International Software Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][24:34])
+    isdl = ('International Software & Data Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][34:37])
     other = ('Other', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][37:])
     optgroup = [indl, ndl, isl, other]
     return optgroup
