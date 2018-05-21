@@ -1833,7 +1833,7 @@ def licenceinfotype_licence_optgroup_choices():
     indl = ('International/National Data Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][:18])
     ndl = ('National Data Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][18:24])
     isl = ('International Software Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][24:34])
-    isdl = ('International Software & Data Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][34:37])
+    isdl = ('International Software and Data Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][34:37])
     other = ('Other', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][37:])
     optgroup = [indl, ndl, isl, isdl, other]
     return optgroup
