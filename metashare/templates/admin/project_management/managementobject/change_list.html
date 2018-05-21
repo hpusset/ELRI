@@ -3,9 +3,9 @@
 {% block object-tools %}
     <ul class="object-tools">
         {% block object-tools-items %}
-            {% if is_legal_reviewer %}
+            {% if user_is_elrcreviewer %}
                 <li>
-                    <a href="/repository/report_extended" class="historylink">Generate Legal Report</a>
+                    <a href="/repository/report_extended" class="historylink">Generate Extended Report</a>
                 </li>
             {% endif %}
             {% if has_add_permission %}

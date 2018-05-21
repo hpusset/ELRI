@@ -5,6 +5,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.safestring import mark_safe
 from metashare.local_settings import LEGAL_REVIEWERS
+from metashare.repository.templatetags.is_member import is_member
 from project_management.filters import PublicationStatusFilter, DeliveredFilter, ToBeDeliveredFilter
 from project_management.forms import IntermediateDeliverableSelectForm, IntermediateDeliverableRejectForm, \
     IntermediateIPRSelectForm
@@ -70,7 +71,7 @@ class ManagementObjectAdmin(admin.ModelAdmin):
 
     def changelist_view(self, request, extra_context=None):
         extra_context = extra_context or {}
-        extra_context['is_legal_reviewer'] = request.user.id in LEGAL_REVIEWERS
+        extra_context['user_is_elrcreviewer'] = is_member(self.request.user, 'elrcReviewers')
         return super(ManagementObjectAdmin, self).changelist_view(request, extra_context=extra_context)
 
     @staticmethod
