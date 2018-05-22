@@ -171,7 +171,8 @@ def get_stats_dict(date1=None, date2=None):
                 aggregate['languages'][lang][1] += 1
                 aggregate['languages'][lang][2] = aggregate['languages'][lang][1] - aggregate['languages'][lang][0]
             except KeyError:
-                print resource['id']
+                # just ignore non eu languages
+                print resource['id'], lang
 
         for licence in licence_list:
             aggregate['licences'][licence][1] += 1
