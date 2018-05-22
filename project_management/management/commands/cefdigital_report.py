@@ -157,4 +157,4 @@ def _cefdigital_report():
 class Command(BaseCommand):
     def handle(self, *args, **options):
         self.stdout.write("Creating CEF Digital report\n")
-        _cefdigital_report()
+        self.stdout.write(_cefdigital_report())
