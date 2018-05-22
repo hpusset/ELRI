@@ -4,6 +4,7 @@ import StringIO
 
 import xlsxwriter
 from django.core.mail import EmailMessage
+from smtplib import SMTPException
 from django.core.management import BaseCommand
 from django.http import HttpResponse
 from django.utils.encoding import smart_str
@@ -145,7 +146,10 @@ def _cefdigital_report():
                            from_email='elrc-share@ilsp.gr', to=ILSP_ADMINS)
         msg.attach("{}.xlsx".format(title), output.getvalue(),
                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-        msg.send()
+        try:
+            msg.send()
+        except SMTPException as e:
+            print('There was an error sending an email: ', e)
         return HttpResponse("{}: CEF Digital repository report sent to: {}\n"
                             .format(datetime.datetime.now().strftime("%a, %d %b %Y"), ", ".join(ILSP_ADMINS)))
 
