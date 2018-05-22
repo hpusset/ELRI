@@ -235,7 +235,7 @@ def create_pivot_report():
     msg_body = "Check generated CEF-DIGITAL report"
     msg = EmailMessage("[ELRC] ERLC-SHARE CEF-Digital report (DRAFT)", msg_body,
                        from_email='elrc-share@ilsp.gr', to=ILSP_ADMINS)
-    msg.attach("'ELRC-SHARE_monthly_progress.xlsx'", output.getvalue(),
+    msg.attach("ELRC-SHARE_monthly_progress.xlsx", output.getvalue(),
                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
     try:
         msg.send()
