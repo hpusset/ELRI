@@ -87,7 +87,7 @@ def get_timespan(date1=None, date2=None):
     elif date2 and not date1:
         return date2
     else:
-        return datetime.datetime.today() - datetime.timedelta(days=30)
+        return datetime.datetime.today() - relativedelta(months=1)
 
 
 def _get_lr_type(resource):
