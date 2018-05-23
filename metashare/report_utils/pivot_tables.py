@@ -8,7 +8,7 @@ import xlsxwriter
 from dateutil.relativedelta import relativedelta
 from django.core.mail import EmailMessage
 from django.http import HttpResponse
-from metashare.local_settings import ILSP_ADMINS
+from metashare.settings import ILSP_ADMINS, UNIQUE_RESOURCES_SNAPSHOTS
 from metashare.report_utils.extract_db_snapshot import create_snapshot
 from metashare.report_utils.report_utils import _is_processed, _is_not_processed_or_related, get_licenses, \
     _get_resource_lang_info, _get_resource_domain_info, _get_resource_linguality
@@ -134,7 +134,7 @@ def get_stats_dict(date1=None, date2=None):
 
     unique_resources = json.load(open(create_snapshot()))
 
-    previous_unique_resources = json.load(open('unique_resources/{}'.format(previous_month_data_file)))
+    previous_unique_resources = json.load(open('{}/{}'.format(UNIQUE_RESOURCES_SNAPSHOTS, previous_month_data_file)))
 
     try:
         aggregate['info']['timespan']['low'] = timespan.strftime("%d-%m-%yyyy")

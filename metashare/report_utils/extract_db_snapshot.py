@@ -2,6 +2,7 @@ import json
 
 import datetime
 
+from metashare.settings import UNIQUE_RESOURCES_SNAPSHOTS
 from metashare.report_utils.report_utils import _is_processed, _is_not_processed_or_related, _get_resource_mimetypes, \
     _get_resource_linguality, _get_resource_lang_info, _get_resource_domain_info, get_licenses, _get_country
 from metashare.repository import model_utils
@@ -65,7 +66,7 @@ def create_snapshot():
 
         json_output['unique_resources']['metadata'].append(output)
 
-    out_file_path = "unique_resources/unique_resources_{}.json".format(datetime.datetime.today().strftime("%d-%m-%Y"))
+    out_file_path = "{}/unique_resources_{}.json".format(UNIQUE_RESOURCES_SNAPSHOTS, datetime.datetime.today().strftime("%d-%m-%Y"))
     out_file = open(out_file_path, "w")
     out_file.write(json.dumps(json_output, indent=4, sort_keys=True))
     out_file.close()
