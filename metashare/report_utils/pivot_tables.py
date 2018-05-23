@@ -5,9 +5,11 @@ import json
 from smtplib import SMTPException
 
 import xlsxwriter
+from dateutil.relativedelta import relativedelta
 from django.core.mail import EmailMessage
 from django.http import HttpResponse
 from metashare.local_settings import ILSP_ADMINS
+from metashare.report_utils.extract_db_snapshot import create_snapshot
 from metashare.report_utils.report_utils import _is_processed, _is_not_processed_or_related, get_licenses, \
     _get_resource_lang_info, _get_resource_domain_info, _get_resource_linguality
 from metashare.repository.models import resourceInfoType_model
@@ -54,7 +56,7 @@ licences = {
     u'BSD-4-Clause': [0, 0, 0],
     u'BSD-3-Clause': [0, 0, 0],
     u'BSD-2-Clause': [0, 0, 0], u'EPL-1.0': [0, 0, 0], u'GFDL-1.3': [0, 0, 0], u'GPL-3.0': [0, 0, 0],
-    u'LGPL-3.0': [0, 0, 0],
+    u'LGPL-3.0': [0, 0, 0], u'EUPL-1.0': [0, 0, 0], u'EUPL-1.1': [0, 0, 0], u'EUPL-1.2': [0, 0, 0],
     u'MIT': [0, 0, 0], u'publicDomain': [0, 0, 0],
     u'underReview': [0, 0, 0], u'non-standard/Other_Licence/Terms': [0, 0, 0]}
 
@@ -117,14 +119,22 @@ def get_stats_dict(date1=None, date2=None):
 
     # 30 days back
     timespan = get_timespan(date1, date2)
-
+    # assuming that this script will run on the 1st day of every month, we get the previous month
+    today = datetime.date.today()
+    previous_month = today - relativedelta(months=1)
+    previous_month_data_file = "unique_resources_{}-{}-{}.json".format(
+        previous_month.strftime('%d'),
+        previous_month.strftime('%m'),
+        previous_month.strftime('%Y'),
+    )
+    # return previous_month_data_file
     # get unique resources
-    unique_resources = [r for r in resourceInfoType_model.objects.filter(
-        storage_object__deleted=False) if (_is_processed(r) or _is_not_processed_or_related(r))]
+    # unique_resources = [r for r in resourceInfoType_model.objects.filter(
+    #     storage_object__deleted=False) if (_is_processed(r) or _is_not_processed_or_related(r))]
 
-    unique_resources = json.load(open('unique_resources/unique_resources_01-05-2018.json'))
+    unique_resources = json.load(open(create_snapshot()))
 
-    previous_unique_resources = json.load(open('unique_resources/unique_resources_01-04-2018.json'))
+    previous_unique_resources = json.load(open('unique_resources/{}'.format(previous_month_data_file)))
 
     try:
         aggregate['info']['timespan']['low'] = timespan.strftime("%d-%m-%yyyy")
@@ -148,7 +158,8 @@ def get_stats_dict(date1=None, date2=None):
             try:
                 aggregate['languages'][lang][0] += 1
             except KeyError:
-                print resource['id']
+                # just ignore non eu languages
+                pass
         for licence in licence_list:
             aggregate['licences'][licence][0] += 1
         for domain in domain_list:
@@ -172,7 +183,7 @@ def get_stats_dict(date1=None, date2=None):
                 aggregate['languages'][lang][2] = aggregate['languages'][lang][1] - aggregate['languages'][lang][0]
             except KeyError:
                 # just ignore non eu languages
-                print resource['id'], lang
+                pass
 
         for licence in licence_list:
             aggregate['licences'][licence][1] += 1
