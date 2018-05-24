@@ -82,8 +82,8 @@ def extended_report():
         worksheet.write('AI1', 'Allows Uses Besides DGT', heading)
         worksheet.write('AJ1', 'IPR Clearing Status', heading)
         worksheet.write('AK1', 'IPR Comments', heading)
-        worksheet.write('AL1', 'Resource Description', heading)
-        worksheet.write('AM1', 'Unique', heading)
+        worksheet.write('AL1', 'Unique', heading)
+        # worksheet.write('AM1', 'Unique', heading)
 
         j = 1
         for i in range(len(resources)):
@@ -308,11 +308,11 @@ def extended_report():
             worksheet.write(j, 35, ipr_status)
             ipr_comments = res.management_object.comments
             worksheet.write(j, 36, ipr_comments)
-            resource_description = best_lang_value_retriever(res.identificationInfo.description)
-            worksheet.write(j, 37, resource_description)
+            # resource_description = best_lang_value_retriever(res.identificationInfo.description)
+            # worksheet.write(j, 37, resource_description)
             is_unique = "YES" if (_is_processed(res) or _is_not_processed_or_related(res)) else "NO"
 
-            worksheet.write(j, 38, is_unique)
+            worksheet.write(j, 37, is_unique)
             j += 1
             # worksheet.write(i + 1, 3, _get_resource_size_info(res))
         # worksheet.write(len(resources)+2, 3, "Total Resources", bold)
