@@ -98,7 +98,7 @@ def _get_lr_type(resource):
             return u"Bi-Multilingual Corpus"
     elif resource['resourceType'] == "Lexical conceptual resource":
         return u"Lexical resource"
-    else:
+    elif resource['resourceType'] == "Language description":
         return u"Language description"
 
 
