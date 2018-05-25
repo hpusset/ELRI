@@ -251,16 +251,16 @@ def create_pivot_report():
 
     workbook.close()
     # Send email
-    # rp = open('{}/report_recipients.dat'.format(TMP)).read().splitlines()
+    rp = open('{}/report_recipients.dat'.format(TMP)).read().splitlines()
     msg_body = "Dear all,\n" \
                "Please find attached the monthly progress report on the total number of " \
                "unique LRs hosted on ELRC-SHARE on {}.\n" \
                "Kind regards,\n\n" \
                "The ELRC-SHARE team".format(datetime.datetime.now().strftime("%d, %b %Y"))
-    # msg = EmailMessage("[ELRC] ELRC-SHARE monthly progress report", msg_body,
-    #                    from_email='elrc-share@ilsp.gr', bcc=rp)
     msg = EmailMessage("[ELRC] ELRC-SHARE monthly progress report", msg_body,
-                       from_email='elrc-share@ilsp.gr', bcc=ILSP_ADMINS)
+                       from_email='elrc-share@ilsp.gr', bcc=rp)
+    # msg = EmailMessage("[ELRC] ELRC-SHARE monthly progress report", msg_body,
+    #                    from_email='elrc-share@ilsp.gr', bcc=ILSP_ADMINS)
     msg.attach("ELRC-SHARE_monthly_progress_{}.xlsx".format(datetime.datetime.now().strftime("%Y-%m-%d")),
                output.getvalue(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
     try:
