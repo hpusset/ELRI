@@ -1893,7 +1893,7 @@ def repo_report(request):
                        "Best regards,\n\n" \
                        "The ELRC-SHARE group".format(datetime.datetime.now().strftime("%d, %b %Y"))
             msg = EmailMessage("[ELRC] ERLC-SHARE weekly report", msg_body,
-                               from_email='elrc-share@ilsp.gr', to=rp)
+                               from_email='elrc-share@ilsp.gr', bcc=rp)
             msg.attach("{}.xlsx".format(title), output.getvalue(),
                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
             msg.send()
