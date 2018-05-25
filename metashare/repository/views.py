@@ -1674,7 +1674,7 @@ def repo_report(request):
         bold = workbook.add_format({'bold': True})
         date_format = workbook.add_format({'num_format': 'yyyy, mmmm d'})
         title = "ELRC-SHARE_OVERVIEW_{}".format(
-            datetime.datetime.now().strftime("%d-%m-%y"))
+            datetime.datetime.now().strftime("%Y-%m-%d"))
         worksheet = workbook.add_worksheet(name=title)
 
         worksheet.write('A1', 'Resource ID', heading)

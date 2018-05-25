@@ -261,7 +261,7 @@ def create_pivot_report():
     #                    from_email='elrc-share@ilsp.gr', bcc=rp)
     msg = EmailMessage("[ELRC] ELRC-SHARE monthly progress report", msg_body,
                        from_email='elrc-share@ilsp.gr', bcc=ILSP_ADMINS)
-    msg.attach("ELRC-SHARE_monthly_progress_{}.xlsx".format(datetime.datetime.now().strftime("%d-%m-%Y")),
+    msg.attach("ELRC-SHARE_monthly_progress_{}.xlsx".format(datetime.datetime.now().strftime("%Y-%m-%d")),
                output.getvalue(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
     try:
         msg.send()
