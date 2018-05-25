@@ -8,7 +8,7 @@ import xlsxwriter
 from dateutil.relativedelta import relativedelta
 from django.core.mail import EmailMessage
 from django.http import HttpResponse
-from metashare.settings import ILSP_ADMINS, UNIQUE_RESOURCES_SNAPSHOTS
+from metashare.settings import ILSP_ADMINS, UNIQUE_RESOURCES_SNAPSHOTS, TMP
 from metashare.report_utils.extract_db_snapshot import create_snapshot
 from metashare.report_utils.report_utils import _is_processed, _is_not_processed_or_related, get_licenses, \
     _get_resource_lang_info, _get_resource_domain_info, _get_resource_linguality
@@ -146,57 +146,64 @@ def get_stats_dict(date1=None, date2=None):
         aggregate['info']['timespan']['upper'] = datetime.datetime.today().strftime("%d-%m-%yyyy")
 
     for resource in previous_unique_resources['unique_resources']['metadata']:
-        lr_type = _get_lr_type(resource)
-        lang_list = set(resource['languages'])
-        licence_list = set(resource['licences'])
-        domain_list = set(resource['domains'])
-        dsi_list = resource['dsis']
+        try:
+            lr_type = _get_lr_type(resource)
+            lang_list = set(resource['languages'])
+            licence_list = set(resource['licences'])
+            domain_list = set(resource['domains'])
+            dsi_list = resource['dsis']
 
-        aggregate["lr_types"][lr_type][0] += 1
+            aggregate["lr_types"][lr_type][0] += 1
 
-        for lang in lang_list:
-            try:
-                aggregate['languages'][lang][0] += 1
-            except KeyError:
-                # just ignore non eu languages
-                pass
-        for licence in licence_list:
-            aggregate['licences'][licence][0] += 1
-        for domain in domain_list:
-            aggregate['domains'][domain][0] += 1
-        for dsi in dsi_list:
-            aggregate['dsis'][dsi][1] += 1
+            for lang in lang_list:
+                try:
+                    aggregate['languages'][lang][0] += 1
+                except KeyError:
+                    # just ignore non eu languages
+                    pass
+            for licence in licence_list:
+                aggregate['licences'][licence][0] += 1
+            for domain in domain_list:
+                aggregate['domains'][domain][0] += 1
+            for dsi in dsi_list:
+                aggregate['dsis'][dsi][1] += 1
+        except KeyError:
+            # The resource is a tool/service and we don't count it
+            pass
 
     for resource in unique_resources['unique_resources']['metadata']:
-        lr_type = _get_lr_type(resource)
-        lang_list = set(resource['languages'])
-        licence_list = set(resource['licences'])
-        domain_list = set(resource['domains'])
-        dsi_list = resource['dsis']
+        try:
+            lr_type = _get_lr_type(resource)
+            lang_list = set(resource['languages'])
+            licence_list = set(resource['licences'])
+            domain_list = set(resource['domains'])
+            dsi_list = resource['dsis']
 
-        aggregate["lr_types"][lr_type][1] += 1
-        aggregate["lr_types"][lr_type][2] = aggregate["lr_types"][lr_type][1] - aggregate["lr_types"][lr_type][0]
-        # populate languages count
-        for lang in lang_list:
-            try:
-                aggregate['languages'][lang][1] += 1
-                aggregate['languages'][lang][2] = aggregate['languages'][lang][1] - aggregate['languages'][lang][0]
-            except KeyError:
-                # just ignore non eu languages
-                pass
+            aggregate["lr_types"][lr_type][1] += 1
+            aggregate["lr_types"][lr_type][2] = aggregate["lr_types"][lr_type][1] - aggregate["lr_types"][lr_type][0]
+            # populate languages count
+            for lang in lang_list:
+                try:
+                    aggregate['languages'][lang][1] += 1
+                    aggregate['languages'][lang][2] = aggregate['languages'][lang][1] - aggregate['languages'][lang][0]
+                except KeyError:
+                    # just ignore non eu languages
+                    pass
 
-        for licence in licence_list:
-            aggregate['licences'][licence][1] += 1
-            aggregate['licences'][licence][2] = aggregate['licences'][licence][1] - aggregate['licences'][licence][0]
+            for licence in licence_list:
+                aggregate['licences'][licence][1] += 1
+                aggregate['licences'][licence][2] = aggregate['licences'][licence][1] - aggregate['licences'][licence][0]
 
-        for domain in domain_list:
-            aggregate['domains'][domain][1] += 1
-            aggregate['domains'][domain][2] = aggregate['domains'][domain][1] - aggregate['domains'][domain][0]
+            for domain in domain_list:
+                aggregate['domains'][domain][1] += 1
+                aggregate['domains'][domain][2] = aggregate['domains'][domain][1] - aggregate['domains'][domain][0]
 
-        for dsi in dsi_list:
-            aggregate['dsis'][dsi][2] += 1
-            aggregate['dsis'][dsi][3] = aggregate['dsis'][dsi][2] - aggregate['dsis'][dsi][1]
-
+            for dsi in dsi_list:
+                aggregate['dsis'][dsi][2] += 1
+                aggregate['dsis'][dsi][3] = aggregate['dsis'][dsi][2] - aggregate['dsis'][dsi][1]
+        except KeyError:
+            # The resource is a tool/service and we don't count it
+            pass
     return aggregate
 
 
@@ -244,11 +251,18 @@ def create_pivot_report():
 
     workbook.close()
     # Send email
-    msg_body = "Check generated CEF-DIGITAL report"
-    msg = EmailMessage("[ELRC] ERLC-SHARE CEF-Digital report (DRAFT)", msg_body,
-                       from_email='elrc-share@ilsp.gr', to=ILSP_ADMINS)
-    msg.attach("ELRC-SHARE_monthly_progress.xlsx", output.getvalue(),
-               "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    # rp = open('{}/report_recipients.dat'.format(TMP)).read().splitlines()
+    msg_body = "Dear all,\n" \
+               "Please find attached the monthly progress report on the total number of " \
+               "unique LRs hosted on ELRC-SHARE on {}.\n" \
+               "Kind regards,\n\n" \
+               "The ELRC-SHARE team".format(datetime.datetime.now().strftime("%d, %b %Y"))
+    # msg = EmailMessage("[ELRC] ELRC-SHARE monthly progress report", msg_body,
+    #                    from_email='elrc-share@ilsp.gr', bcc=rp)
+    msg = EmailMessage("[ELRC] ELRC-SHARE monthly progress report", msg_body,
+                       from_email='elrc-share@ilsp.gr', bcc=ILSP_ADMINS)
+    msg.attach("ELRC-SHARE_monthly_progress_{}.xlsx".format(datetime.datetime.now().strftime("%d-%m-%Y")),
+               output.getvalue(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
     try:
         msg.send()
     except SMTPException as e:
