@@ -268,4 +268,4 @@ def create_pivot_report():
     except SMTPException as e:
         print('There was an error sending an email: ', e)
     return HttpResponse("{}: CEF Digital repository report sent to: {}\n"
-                        .format(datetime.datetime.now().strftime("%a, %d %b %Y"), ", ".join(ILSP_ADMINS)))
+                        .format(datetime.datetime.now().strftime("%a, %d %b %Y"), ", ".join(rp)))
