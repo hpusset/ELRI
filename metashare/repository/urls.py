@@ -55,6 +55,7 @@ urlpatterns = patterns('metashare.repository.views',
                                                form_class=FacetedBrowseForm,
                                                template='repository/search.html',
                                                searchqueryset=sqs)),
+                       url(r'api_search/$', 'api_search'),
 
                        url(r'contribute', 'contribute', name='contribute'),
                        url(r'contributions', 'manage_contributed_data', name='manage_contributed_data'),

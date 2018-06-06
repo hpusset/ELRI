@@ -6,10 +6,14 @@ import shutil
 import uuid
 
 from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
+from haystack.query import SearchQuerySet
 from metashare.report_utils.report_utils import _is_processed, _is_not_processed_or_related, _get_country, \
     _get_resource_mimetypes, _get_resource_linguality, _get_resource_lang_info, _get_resource_sizes, \
     _get_resource_lang_sizes, _get_preferred_size, _get_resource_domain_info
+from metashare.repository.export_utils import xml_to_json
 from metashare.repository.templatetags.is_member import is_member
+from django.http import JsonResponse
+from collections import OrderedDict
 
 try:
     import cStringIO as StringIO
@@ -1051,6 +1055,30 @@ class MetashareFacetedSearchView(FacetedSearchView):
                                     'addable': addable})
 
         return results
+
+
+# @login_required
+@user_passes_test(lambda u: u.is_superuser or u.groups.filter(name="ecmembers").exists())
+def api_search(request):
+    sqs = SearchQuerySet()
+    query = request.GET.getlist("q")
+
+    if query:
+        query_dict = {}
+        for q in query:
+            try:
+                query_dict[q.split(':')[0].replace('_', '__')] = q.split(':')[1]
+                sqs = sqs.filter(**query_dict)
+            except IndexError:
+                sqs = sqs.filter(content=q)
+
+    resource_ids = [r.pk for r in sqs]
+    resources = resourceInfoType_model.objects.filter(id__in=resource_ids)
+    json_output = dict(resources={"count": len(resources), "metadata": []})
+
+    for r in resources:
+        json_output["resources"]["metadata"].append(json.loads(xml_to_json(r), object_pairs_hook=OrderedDict))
+    return JsonResponse(json_output)
 
 
 @login_required

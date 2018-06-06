@@ -8,5 +8,6 @@ Disallow: /accounts/
 Disallow: /storage/
 Disallow: /sync/
 Disallow: /selectable/
+Disallow: /repository/api_search/
 
 Sitemap: {{ sitemap_url }}
