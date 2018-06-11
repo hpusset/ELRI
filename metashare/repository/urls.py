@@ -6,6 +6,9 @@ from haystack.query import SearchQuerySet
 from metashare.repository.forms import FacetedBrowseForm
 from metashare.repository.views import MetashareFacetedSearchView
 
+from tastypie.api import Api
+from metashare.repository.api.resources import LrResource, MetadataInfoResource
+
 sqs = SearchQuerySet() \
     .facet("languageNameFilter") \
     .facet("resourceTypeFilter") \
@@ -40,6 +43,9 @@ sqs = SearchQuerySet() \
     # .facet("bestPracticesFilter") \
     # .facet("languageVarietyFilter") \
 
+v1_api = Api(api_name='v1')
+v1_api.register(LrResource())
+v1_api.register(MetadataInfoResource())
 
 urlpatterns = patterns('metashare.repository.views',
                        url(r'^browse/(?P<resource_name>[\w\-]*)/(?P<object_id>\w+)/$',
@@ -55,8 +61,7 @@ urlpatterns = patterns('metashare.repository.views',
                                                form_class=FacetedBrowseForm,
                                                template='repository/search.html',
                                                searchqueryset=sqs)),
-                       url(r'api_search/$', 'api_search'),
-
+                       url(r'api/', include(v1_api.urls)),
                        url(r'contribute', 'contribute', name='contribute'),
                        url(r'contributions', 'manage_contributed_data', name='manage_contributed_data'),
                        url(r'repo_report', 'repo_report'),

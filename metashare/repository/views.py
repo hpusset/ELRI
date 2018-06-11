@@ -1057,30 +1057,6 @@ class MetashareFacetedSearchView(FacetedSearchView):
         return results
 
 
-# @login_required
-@user_passes_test(lambda u: u.is_superuser or u.groups.filter(name="ecmembers").exists())
-def api_search(request):
-    sqs = SearchQuerySet()
-    query = request.GET.getlist("q")
-
-    if query:
-        query_dict = {}
-        for q in query:
-            try:
-                query_dict[q.split(':')[0].replace('_', '__')] = q.split(':')[1]
-                sqs = sqs.filter(**query_dict)
-            except IndexError:
-                sqs = sqs.filter(content=q)
-
-    resource_ids = [r.pk for r in sqs]
-    resources = resourceInfoType_model.objects.filter(id__in=resource_ids)
-    json_output = dict(resources={"count": len(resources), "metadata": []})
-
-    for r in resources:
-        json_output["resources"]["metadata"].append(json.loads(xml_to_json(r), object_pairs_hook=OrderedDict))
-    return JsonResponse(json_output)
-
-
 @login_required
 def contribute(request):
     tmp_dir = '{}/tmp'.format(CONTRIBUTION_FORM_DATA)  # temp dir for resources downloaded from user provided url
