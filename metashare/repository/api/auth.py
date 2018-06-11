@@ -2,7 +2,7 @@ from tastypie.authorization import ReadOnlyAuthorization, DjangoAuthorization
 from tastypie.exceptions import Unauthorized
 
 
-class ApiDjangoAuthorization(ReadOnlyAuthorization):
+class ApiDjangoAuthorization(DjangoAuthorization):
     READ_PERM_CODE = 'access'  # matching respective Permission.codename
 
     def read_list(self, object_list, bundle):
