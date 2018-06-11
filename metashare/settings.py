@@ -176,6 +176,7 @@ INSTALLED_APPS = (
     'selectable',
     'haystack',
     'analytical',
+    'tastypie',
 
     'metashare.accounts',
     'metashare.storage',
