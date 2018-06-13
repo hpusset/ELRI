@@ -36,6 +36,7 @@ class LicenceResource(ModelResource):
         queryset = lr.licenceInfoType_model.objects.all()
         resource_name = "licence"
         allowed_methods = ['get']
+        excludes = ['id']
         include_resource_uri = False
 
     licence = fields.CharField(attribute='licence')
@@ -50,6 +51,7 @@ class DistributionResource(ModelResource):
         queryset = lr.distributionInfoType_model.objects.all()
         resource_name = "distribution"
         allowed_methods = ['get']
+        excludes = ['id']
         include_resource_uri = False
 
     licenceInfo = fields.ToManyField(LicenceResource, 'licenceInfo', full=True)
