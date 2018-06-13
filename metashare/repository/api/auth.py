@@ -1,9 +1,13 @@
-from tastypie.authorization import ReadOnlyAuthorization, DjangoAuthorization
+from tastypie.authorization import Authorization
 from tastypie.exceptions import Unauthorized
 
 
-class ApiDjangoAuthorization(DjangoAuthorization):
+class ApiDjangoAuthorization(Authorization):
+
     READ_PERM_CODE = 'access'  # matching respective Permission.codename
+
+    def create_list(self, object_list, bundle):
+        pass
 
     def read_list(self, object_list, bundle):
         # now we check here for specific permission
