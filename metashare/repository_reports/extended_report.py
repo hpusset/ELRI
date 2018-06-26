@@ -286,13 +286,14 @@ def extended_report():
                 for ip in dist.iprHolder.all():
                     subclass = ip.as_subclass()
                     if isinstance(ip.as_subclass(), organizationInfoType_model):
-                        print ", ".join(subclass.communicationInfo.email)
+                        print best_lang_value_retriever(subclass.organizationName).decode('utf-8')
                         ipr_holders.append(
-                            u"{}".format(smart_str(best_lang_value_retriever(subclass.organizationName))))
+                            u"{} ({})".format(best_lang_value_retriever(subclass.organizationName).decode('utf-8'),
+                                              ", ".join(subclass.communicationInfo.email)))
                     else:
                         ipr_holders.append(
-                            u"{} {} ({})".format(smart_str(best_lang_value_retriever(subclass.givenName)),
-                                                 smart_str(best_lang_value_retriever(subclass.surname)),
+                            u"{} {} ({})".format(best_lang_value_retriever(subclass.givenName).decode('utf-8'),
+                                                 best_lang_value_retriever(subclass.surname).decode('utf-8'),
                                                  ", ".join(subclass.communicationInfo.email)))
             worksheet.write(j, 32, u", ".join(ipr_holders))
 
