@@ -288,8 +288,7 @@ def extended_report():
                     if isinstance(ip.as_subclass(), organizationInfoType_model):
                         print ", ".join(subclass.communicationInfo.email)
                         ipr_holders.append(
-                            u"{} ({})".format(smart_str(best_lang_value_retriever(subclass.organizationName)),
-                                              ", ".join(subclass.communicationInfo.email)))
+                            u"{}".format(smart_str(best_lang_value_retriever(subclass.organizationName))))
                     else:
                         ipr_holders.append(
                             u"{} {} ({})".format(smart_str(best_lang_value_retriever(subclass.givenName)),
