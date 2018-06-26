@@ -290,7 +290,7 @@ def extended_report():
                     subclass = ip.as_subclass()
                     if isinstance(ip.as_subclass(), organizationInfoType_model):
                         ipr_holders.append(u"{} ({})".format(smart_str(best_lang_value_retriever(subclass.organizationName)),
-                                                            smart_str(subclass.communicationInfo.email)))
+                                                            subclass.communicationInfo.email))
                     else:
                         ipr_holders.append(u"{} {} ({})".format(smart_str(best_lang_value_retriever(subclass.givenName)),
                                                                best_lang_value_retriever(subclass.surname),
