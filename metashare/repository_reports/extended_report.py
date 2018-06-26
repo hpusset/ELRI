@@ -286,7 +286,6 @@ def extended_report():
                 for ip in dist.iprHolder.all():
                     subclass = ip.as_subclass()
                     if isinstance(ip.as_subclass(), organizationInfoType_model):
-                        print best_lang_value_retriever(subclass.organizationName).encode('utf-8')
                         ipr_holders.append(
                             u"{} ({})".format(best_lang_value_retriever(subclass.organizationName).encode('utf-8'),
                                               ", ".join(subclass.communicationInfo.email)))
