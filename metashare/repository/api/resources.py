@@ -1,16 +1,17 @@
-import datetime
-from metashare.repository.api.auth import ApiDjangoAuthorization
+from django.conf.urls import url
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+from haystack.query import SearchQuerySet
+from metashare.repository import models as lr
+from metashare.repository.api.haystack_filters import haystack_filters
 from metashare.settings import DJANGO_URL
 from metashare.storage.models import StorageObject
+from tastypie import fields
+from tastypie.authentication import ApiKeyAuthentication
 from tastypie.constants import ALL_WITH_RELATIONS, ALL
 from tastypie.paginator import Paginator
 from tastypie.resources import ModelResource
-from tastypie.authentication import BasicAuthentication
-from tastypie import fields
 from tastypie.utils import trailing_slash
-from haystack.query import SearchQuerySet
-from django.conf.urls import url, include
-from metashare.repository import models as lr
 
 
 class IdentificationResource(ModelResource):
@@ -26,9 +27,6 @@ class IdentificationResource(ModelResource):
     appropriatenessForDSI = fields.ListField(attribute='appropriatenessForDSI')
     identifier = fields.ListField(attribute='identifier')
     url = fields.ListField(attribute='url')
-
-    def determine_format(self, request):
-        return 'application/json'
 
 
 class LicenceResource(ModelResource):
@@ -74,9 +72,6 @@ class MetadataInfoResource(ModelResource):
 
     metadataCreationDate = fields.DateField(attribute='metadataCreationDate', verbose_name='created')
 
-    def determine_format(self, request):
-        return 'application/json'
-
 
 pub_status = dict(p='published', g='ingested', i='internal')
 
@@ -101,10 +96,7 @@ class LrResource(ModelResource):
             .exclude(storage_object__publication_status='i')
         allowed_methods = ['get']
         resource_name = 'lr'
-        authentication = BasicAuthentication()
-        authorization = ApiDjangoAuthorization()
-        # fields = ('identification', 'storage')
-        # field_order = ('id', 'identification', 'storage')
+        authentication = ApiKeyAuthentication()
         ordering = ['metadataInfo']
         filtering = {
             'metadataInfo': ALL_WITH_RELATIONS
@@ -116,13 +108,11 @@ class LrResource(ModelResource):
     distribution = fields.ToManyField(DistributionResource, 'distributioninfotype_model_set', full=True)
     storage = fields.ToOneField(StorageResource, 'storage_object', full=True, null=True)
 
-    def determine_format(self, request):
-        return 'application/json'
-
     def prepend_urls(self):
         return [
             url(r"^(?P<resource_name>%s)/search%s$" % (self._meta.resource_name, trailing_slash()),
                 self.wrap_view('get_search'), name="api_get_search"),
+            url(r"^help", self.wrap_view('api_help'), name="api_help")
         ]
 
     def get_search(self, request, **kwargs):
@@ -138,7 +128,15 @@ class LrResource(ModelResource):
             query_dict = {}
         for q in query:
             try:
-                query_dict[q.split(':')[0]] = q.split(':')[1]
+                # look for key mapping
+                try:
+                    key = "{}Filter_exact".format(haystack_filters[q.split(':')[0]])
+                except KeyError:
+                    key = "{}Filter_exact".format(q.split(':')[0])
+                value = q.split(':')[1]
+                if ' ' in value:
+                    key = key.replace('_', '__')
+                query_dict[key] = value
                 sqs = sqs.filter(**query_dict)
             except IndexError:
                 sqs = sqs.filter(content=q)
@@ -162,6 +160,9 @@ class LrResource(ModelResource):
         to_be_serialized['objects'] = [self.full_dehydrate(bundle) for bundle in bundles]
         to_be_serialized = self.alter_list_data_to_serialize(request, to_be_serialized)
         return self.create_response(request, to_be_serialized)
+
+    def api_help(self, request, **kwargs):
+        return render_to_response('repository/api/help.html', context_instance=RequestContext(request))
 
     def apply_filters(self, request, applicable_filters):
         base_object_list = super(LrResource, self).apply_filters(request, applicable_filters)
