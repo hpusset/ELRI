@@ -3,11 +3,11 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from haystack.query import SearchQuerySet
 from metashare.repository import models as lr
+from metashare.repository.api.auth import RepositoryApiKeyAuthentication
 from metashare.repository.api.haystack_filters import haystack_filters
 from metashare.settings import DJANGO_URL
 from metashare.storage.models import StorageObject
 from tastypie import fields
-from tastypie.authentication import ApiKeyAuthentication
 from tastypie.constants import ALL_WITH_RELATIONS, ALL
 from tastypie.paginator import Paginator
 from tastypie.resources import ModelResource
@@ -96,7 +96,7 @@ class LrResource(ModelResource):
             .exclude(storage_object__publication_status='i')
         allowed_methods = ['get']
         resource_name = 'lr'
-        authentication = ApiKeyAuthentication()
+        authentication = RepositoryApiKeyAuthentication()
         ordering = ['metadataInfo']
         filtering = {
             'metadataInfo': ALL_WITH_RELATIONS
