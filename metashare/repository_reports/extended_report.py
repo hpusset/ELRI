@@ -3,14 +3,11 @@ import datetime
 
 import xlsxwriter
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponse
 from django.utils.encoding import smart_str
 from metashare.report_utils.report_utils import _is_processed, _is_not_processed_or_related
 from metashare.repository import model_utils
-from metashare.repository.dataformat_choices import MIMETYPEVALUE_TO_MIMETYPELABEL
 from metashare.repository.fields import best_lang_value_retriever
-from metashare.repository.models import resourceInfoType_model, corpusInfoType_model, \
-    lexicalConceptualResourceInfoType_model, languageDescriptionInfoType_model, organizationInfoType_model
+from metashare.repository.models import resourceInfoType_model, organizationInfoType_model
 from metashare.repository.views import _get_resource_lang_info, _get_resource_sizes, _get_resource_lang_sizes, \
     _get_preferred_size, _get_resource_domain_info, status, _get_country, _get_resource_mimetypes, \
     _get_resource_linguality
@@ -289,13 +286,14 @@ def extended_report():
                 for ip in dist.iprHolder.all():
                     subclass = ip.as_subclass()
                     if isinstance(ip.as_subclass(), organizationInfoType_model):
-                        print type(subclass.communicationInfo.email), subclass.communicationInfo.email
-                        ipr_holders.append(u"{} ({})".format(smart_str(best_lang_value_retriever(subclass.organizationName)),
-                                                            subclass.communicationInfo.email.decode('utf-8')))
+                        ipr_holders.append(
+                            u"{} ({})".format(smart_str(best_lang_value_retriever(subclass.organizationName)),
+                                              ", ".join(subclass.communicationInfo.email.decode('utf-8'))))
                     else:
-                        ipr_holders.append(u"{} {} ({})".format(smart_str(best_lang_value_retriever(subclass.givenName)),
-                                                               smart_str(best_lang_value_retriever(subclass.surname)),
-                                                               subclass.communicationInfo.email.decode('utf-8')))
+                        ipr_holders.append(
+                            u"{} {} ({})".format(smart_str(best_lang_value_retriever(subclass.givenName)),
+                                                 smart_str(best_lang_value_retriever(subclass.surname)),
+                                                 ", ".join(subclass.communicationInfo.email.decode('utf-8'))))
             worksheet.write(j, 32, u", ".join(ipr_holders))
 
             worksheet.write(j, 33, "YES" if res.storage_object.get_legal_documentation() else "NO")
