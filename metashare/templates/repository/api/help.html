@@ -35,14 +35,38 @@
             </div>
         </div>
         <div class="row">
+            <h3>API ACCESS</h3>
+            <div class="col-md-10">
+                <p>The API can be accessed through the <strong>SEARCH_API_URL</strong>:<br />
+                    <code>https://elrc-share.eu/repository/api/v1/lr/</code>
+                    <br />OR<br />
+                    <code>https://elrc-share.eu/repository/api/v1/lr/<strong>search</strong>/</code> to enable
+                    advanced search features.
+                </p>
+                <p>Access is granted by default to all superusers and EC members registered
+                and <strong>logged in</strong> the ELRC-SHARE repository.</p>
+                <p>
+                    External access, for example through a <code>cURL</code> request, requires an
+                    <strong>API key</strong>, given either in the request url as an <code>auth</code>
+                    param, or in the request header:
+                    <br />
+                    <em>As url param</em><br />
+                    <code>SEARCH_API_URL/?auth=<strong>API_KEY</strong></code>
+                    <br />
+                    <em>As header (cURL)</em><br />
+                    <code>curl SEARCH_API_URL --header 'Authorization:<strong>API_KEY</strong>'</code>
+                </p>
+                <p>
+                    The <strong>API_KEY</strong> is available in the profile page of all EC members.
+                </p>
+            </div>
+        </div>
+        <div class="row">
             <h3>Haystack Filters</h3>
             <!-- List group -->
             <div class="col-md-12">
                 <p>The API leverages the existing ELRC-SHARE repository search functionality using a condensed version the preconfigured
                     Haystack filters.
-                </p>
-                <p>Access to the search API is provided through the <strong>SEARCH_API_URL</strong>:
-                    <code>https://elrc-share.eu/repository/api/v1/lr/<strong>search</strong>/</code>.
                 </p>
                 <p>
                     All filters are passed as key-value pairs in the <code>q</code> dictionary
