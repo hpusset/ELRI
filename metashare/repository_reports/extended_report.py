@@ -293,8 +293,8 @@ def extended_report():
                                                             smart_str(subclass.communicationInfo.email)))
                     else:
                         ipr_holders.append("{} {} ({})".format(smart_str(best_lang_value_retriever(subclass.givenName)),
-                                                               smart_str(best_lang_value_retriever(subclass.surname),
-                                                               subclass.communicationInfo.email)))
+                                                               smart_str(best_lang_value_retriever(subclass.surname)),
+                                                               subclass.communicationInfo.email))
             worksheet.write(j, 32, ", ".join(ipr_holders))
 
             worksheet.write(j, 33, "YES" if res.storage_object.get_legal_documentation() else "NO")
