@@ -297,3 +297,6 @@ CACHES = {
         'LOCATION': '127.0.0.1:11211',
     }
 }
+
+TASTYPIE_DEFAULT_FORMATS = ['json']
+
