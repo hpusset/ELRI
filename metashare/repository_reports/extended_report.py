@@ -289,12 +289,12 @@ def extended_report():
                         print ", ".join(subclass.communicationInfo.email)
                         ipr_holders.append(
                             u"{} ({})".format(smart_str(best_lang_value_retriever(subclass.organizationName)),
-                                              u", ".join(subclass.communicationInfo.email).decode('utf-8')))
+                                              ", ".join(subclass.communicationInfo.email)))
                     else:
                         ipr_holders.append(
                             u"{} {} ({})".format(smart_str(best_lang_value_retriever(subclass.givenName)),
                                                  smart_str(best_lang_value_retriever(subclass.surname)),
-                                                 u", ".join(subclass.communicationInfo.email).decode('utf-8')))
+                                                 ", ".join(subclass.communicationInfo.email)))
             worksheet.write(j, 32, u", ".join(ipr_holders))
 
             worksheet.write(j, 33, "YES" if res.storage_object.get_legal_documentation() else "NO")
