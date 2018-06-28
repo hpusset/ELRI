@@ -2,11 +2,13 @@ from django.conf.urls import url
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from haystack.query import SearchQuerySet
+from metashare.report_utils.report_utils import _is_processed
 from metashare.repository import models as lr
 from metashare.repository.api.auth import RepositoryApiKeyAuthentication
 from metashare.repository.api.haystack_filters import haystack_filters
 from metashare.settings import DJANGO_URL
 from metashare.storage.models import StorageObject
+from project_management import models as pm
 from tastypie import fields
 from tastypie.constants import ALL_WITH_RELATIONS, ALL
 from tastypie.paginator import Paginator
@@ -90,6 +92,14 @@ class StorageResource(ModelResource):
         return bundle
 
 
+class ManagementResource(ModelResource):
+    class Meta:
+        queryset = pm.ManagementObject.objects.all()
+        allowed_methods = ['get']
+        resource_name = 'pm'
+        include_resource_uri = False
+
+
 class LrResource(ModelResource):
     class Meta:
         queryset = lr.resourceInfoType_model.objects.filter(storage_object__deleted=False) \
@@ -103,6 +113,7 @@ class LrResource(ModelResource):
         }
         # max_limit = None
 
+    management = fields.ToOneField(ManagementResource, 'management_object', null=False, full=True)
     metadataInfo = fields.ToOneField(MetadataInfoResource, 'metadataInfo', null=True, full=True)
     identification = fields.ToOneField(IdentificationResource, 'identificationInfo', full=True)
     distribution = fields.ToManyField(DistributionResource, 'distributioninfotype_model_set', full=True)
@@ -202,3 +213,8 @@ class LrResource(ModelResource):
             elif 'earliest' in options.get('sort', ''):
                 return obj_list.order_by('metadataInfo__metadataCreationDate')
         return super(LrResource, self).apply_sorting(obj_list, options)
+
+    def dehydrate(self, bundle):
+        bundle.data['processed'] = _is_processed(bundle.obj)
+        bundle.data['validated'] = True if bundle.obj.storage_object.get_validation() else False
+        return bundle
