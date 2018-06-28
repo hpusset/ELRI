@@ -123,7 +123,7 @@ class LrResource(ModelResource):
         # Do the query.
         sqs = SearchQuerySet()
         query = request.GET.getlist("q")
-
+        OR = request.GET.getlist("or")
         if query:
             query_dict = {}
         for q in query:
@@ -137,7 +137,11 @@ class LrResource(ModelResource):
                 if ' ' in value:
                     key = key.replace('_', '__')
                 query_dict[key] = value
-                sqs = sqs.filter(**query_dict)
+                if OR:
+                    print OR
+                    sqs = sqs.filter_or(**query_dict)
+                else:
+                    sqs = sqs.filter(**query_dict)
             except IndexError:
                 sqs = sqs.filter(content=q)
         # Apply tastypie filters if any whatsoever
