@@ -125,25 +125,24 @@ class LrResource(ModelResource):
         query = request.GET.getlist("q")
         OR = request.GET.getlist("or")
         if query:
-            query_dict = {}
-        for q in query:
-            try:
-                # look for key mapping
+            for q in query:
+                query_dict = {}
                 try:
-                    key = "{}Filter_exact".format(haystack_filters[q.split(':')[0]])
-                except KeyError:
-                    key = "{}Filter_exact".format(q.split(':')[0])
-                value = q.split(':')[1]
-                if ' ' in value:
-                    key = key.replace('_', '__')
-                query_dict[key] = value
-                if OR:
-                    print OR
-                    sqs = sqs.filter_or(**query_dict)
-                else:
-                    sqs = sqs.filter(**query_dict)
-            except IndexError:
-                sqs = sqs.filter(content=q)
+                    # look for key mapping
+                    try:
+                        key = "{}Filter_exact".format(haystack_filters[q.split(':')[0]])
+                    except KeyError:
+                        key = "{}Filter_exact".format(q.split(':')[0])
+                    value = q.split(':')[1]
+                    if ' ' in value:
+                        key = key.replace('_', '__')
+                    query_dict[key] = value
+                    if OR:
+                        sqs = sqs.filter_or(**query_dict)
+                    else:
+                        sqs = sqs.filter(**query_dict)
+                except IndexError:
+                    sqs = sqs.filter(content=q)
         # Apply tastypie filters if any whatsoever
         sqs_objects = [sq.object for sq in sqs]
         filtered = self.apply_filters(request, applicable_filters={})
