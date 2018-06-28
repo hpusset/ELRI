@@ -221,7 +221,7 @@ def _get_licences(resource, user_membership):
 # @user_passes_test(lambda u: u.is_superuser or u.groups.filter(name="ecmembers").exists())
 # MDEL: temporary implementation to provide download for specific resources
 @resource_downloadable
-def download(request, object_id):
+def download(request, object_id, **kwargs):
     """
     Renders the resource download/purchase view including license selection,
     etc.
@@ -230,7 +230,8 @@ def download(request, object_id):
     bypass_licence = False
     if request.user.is_superuser \
             or request.user.groups.filter(name="ecmembers").exists() \
-            or request.user.groups.filter(name="elrcReviewers").exists():
+            or request.user.groups.filter(name="elrcReviewers").exists()\
+            or kwargs['api_auth']:
         bypass_licence = True
 
     # here we are only interested in licenses (or their names) of the specified
