@@ -37,28 +37,32 @@
         <div class="row">
             <h3>API ACCESS</h3>
             <div class="col-md-10">
+                <p>Access is granted by default to repository administrators and to EC members registered
+                and <strong>logged in</strong> the ELRC-SHARE repository.</p>
+
                 <p>The API can be accessed through the <strong>SEARCH_API_URL</strong>:<br />
                     <code>https://elrc-share.eu/repository/api/v1/lr/</code>
                     <br />OR<br />
                     <code>https://elrc-share.eu/repository/api/v1/lr/<strong>search</strong>/</code> to enable
                     advanced search features.
                 </p>
-                <p>Access is granted by default to all superusers and EC members registered
-                and <strong>logged in</strong> the ELRC-SHARE repository.</p>
                 <p>
-                    External access, for example through a <code>cURL</code> request, requires an
-                    <strong>API key</strong>, given either in the request url as an <code>auth</code>
-                    param, or in the request header:
+                    <strong>External access</strong>, for example through a <code>cURL</code> request, requires an
+                    <strong>API key</strong>, given either in the request url as an authorization (<code>auth</code>)
+                    parameter, or in the request header:
                     <br />
-                    <em>As url param</em><br />
+                    <em>As url parameter</em><br />
                     <code>SEARCH_API_URL/?auth=<strong>API_KEY</strong></code>
                     <br />
                     <em>As header (cURL)</em><br />
                     <code>curl SEARCH_API_URL --header 'Authorization:<strong>API_KEY</strong>'</code>
                 </p>
-                <p>
-                    The <strong>API_KEY</strong> is available in the profile page of all EC members.
-                </p>
+                <blockquote class="blockquote">
+                    <p>
+                        The <strong>API_KEY</strong> is available in the profile page of all EC members
+                        (<em>on the main menu: Your profile > Edit your profile</em>).
+                    </p>
+                </blockquote>
             </div>
         </div>
         <div class="row">
@@ -86,8 +90,7 @@
                     <div id="cond" class="sublinks collapse">
                         <div class="list-group-item small">
                             <div>Applied Filter: <code>conditionOfUse</code>.</div>
-                            <div>Haystack filter: <code>restrictionsOfUseFilter</code>.
-                            </div>
+{#                                <div>Haystack filter: <code>restrictionsOfUseFilter</code>.</div>#}
                             <h5>Values</h5>
                             <div>
                                 <ul class="list-group list-group-flush">
@@ -116,8 +119,7 @@
                     <div id="domain" class="sublinks collapse">
                         <div class="list-group-item small">
                             <div>Applied Filter: <code>domain</code>.</div>
-                            <div>Haystack filter: <code>domainFilter</code>.
-                            </div>
+{#                            <div>Haystack filter: <code>domainFilter</code>.</div>#}
                             <h5>Values</h5>
                             <div>
                                 <ul class="list-group list-group-flush">
@@ -158,8 +160,7 @@
                     <div id="dsi" class="sublinks collapse">
                         <div class="list-group-item small">
                             <div>Applied Filter: <code>dsi</code>.</div>
-                            <div>Haystack filter: <code>appropriatenessForDSIFilter</code>.
-                            </div>
+{#                            <div>Haystack filter: <code>appropriatenessForDSIFilter</code>.</div>#}
                             <h5>Values</h5>
                             <div>
                                 <ul class="list-group list-group-flush">
@@ -188,8 +189,7 @@
                     <div id="lang" class="sublinks collapse">
                         <div class="list-group-item small">
                             <div>Applied Filter: <code>language</code>.</div>
-                            <div>Haystack filter: <code>languageNameFilter</code>.
-                            </div>
+{#                            <div>Haystack filter: <code>languageNameFilter</code>.</div>#}
                             <h5>Values</h5>
                             <div>
                                 Any language name as defined by
@@ -217,8 +217,7 @@
                     <div id="ling" class="sublinks collapse">
                         <div class="list-group-item small">
                             <div>Applied Filter: <code>linguality</code>.</div>
-                            <div>Haystack filter: <code>lingualityTypeFilter</code>.
-                            </div>
+{#                            <div>Haystack filter: <code>lingualityTypeFilter</code>.</div>#}
                             <h5>Values</h5>
                             <div>
                                 <ul class="list-group list-group-flush">
@@ -240,8 +239,7 @@
                     <div id="mime" class="sublinks collapse">
                         <div class="list-group-item small">
                             <div>Applied Filter: <code>mimetype</code>.</div>
-                            <div>Haystack filter: <code>dataFormatFilter</code>.
-                            </div>
+{#                            <div>Haystack filter: <code>dataFormatFilter</code>.</div>#}
                             <h5>Values</h5>
                             <p>
                                 <ul class="list-group list-group-flush">
@@ -286,8 +284,7 @@
                     <div id="mling" class="sublinks collapse">
                         <div class="list-group-item small">
                             <div>Applied Filter: <code>multilinguality</code>.</div>
-                            <div>Haystack filter: <code>multilingualityTypeFilter</code>.
-                            </div>
+{#                            <div>Haystack filter: <code>multilingualityTypeFilter</code>.</div>#}
                             <h5>Values</h5>
                             <div>
                                 <ul class="list-group list-group-flush">
@@ -311,8 +308,7 @@
                     <div id="rtype" class="sublinks collapse">
                         <div class="list-group-item small">
                             <div>Applied Filter: <code>resourceType</code>.</div>
-                            <div>Haystack filter: <code>resourceTypeFilter</code>.
-                            </div>
+{#                            <div>Haystack filter: <code>resourceTypeFilter</code>.</div>#}
                             <h5>Values</h5>
                             <div>
                                 <ul class="list-group list-group-flush">
@@ -335,8 +331,7 @@
                     <div id="status" class="sublinks collapse">
                         <div class="list-group-item small">
                             <div>Applied Filter: <code>status</code>.</div>
-                            <div>Haystack filter: <code>publicationStatusFilter</code>.
-                            </div>
+{#                            <div>Haystack filter: <code>publicationStatusFilter</code>.</div>#}
                             <h5>Values</h5>
                             <div>
                                 <ul class="list-group list-group-flush">
@@ -358,8 +353,7 @@
                     <div id="genre" class="sublinks collapse">
                         <div class="list-group-item small">
                             <div>Applied Filter: <code>textGenre</code>.</div>
-                            <div>Haystack filter: <code>textTextGenreFilter</code>.
-                            </div>
+{#                            <div>Haystack filter: <code>textTextGenreFilter</code>.</div>#}
                             <h5>Values</h5>
                             <div>
                                 <ul class="list-group list-group-flush">
@@ -389,8 +383,7 @@
                     <div id="ttype" class="sublinks collapse">
                         <div class="list-group-item small">
                             <div>Applied Filter: <code>textType</code>.</div>
-                            <div>Haystack filter: <code>textTextTypeFilter</code>.
-                            </div>
+{#                            <div>Haystack filter: <code>textTextTypeFilter</code>.</div>#}
                             <h5>Values</h5>
                             <div>
                                 <ul class="list-group list-group-flush">
@@ -424,13 +417,59 @@
                     </div>
                 </div>
             </div>
+            <h5>Union Queries</h5>
+            <div class="col-md-12">
+                <p>
+                    The API performs <em>AND</em> search operations by default. For example, the following query <br />
+                    <code>SEARCH_API_URL/?q=language:Norwegian&q=language:Norwegian Nynorsk</code><br >
+                    will search for resources that contain both Norwegian <strong>and</strong> Norwegian Nynorsk languages.
+                    In order to return all resources that meet either of the specified criteria, we can use the parameter
+                    <code>or</code>. <br >
+                    <code>SEARCH_API_URL/?q=language:Norwegian&q=language:Norwegian Nynorsk<strong>&or</strong></code><br >
+                </p>
+            </div>
         </div>
         <div class="row">
             <h3>Post search filters</h3>
             <div class="col-md-12">
                 <p>
-                    Search results can be further filtered, in order to narrow down the results based on the creation
-                    date of the resource metadata.
+                    Search results can be further narrowed down using custom filters.
+                    <ul>
+                        <li>
+                            <code>on</code>: Filters resources created on the specified date formatted as
+                            <code>yyyy-mm-dd</code>. e.g. <code>&on=2017-03-01</code>
+                        </li>
+                        <li>
+                            <code>before</code>: Filters resources created before the specified date.
+                            e.g. <code>&before=2017-03-01</code>
+                        </li>
+                        <li>
+                            <code>on_before</code>: Filters resources created before the specified date (inclusive).
+                            e.g. <code>&on_before=2017-03-01</code>
+                        </li>
+
+                        <li>
+                            <code>after</code>: Filters resources created after the specified date.
+                            e.g. <code>&after=2017-03-01</code>
+                        </li>
+                        <li>
+                            <code>on_after</code>: Filters resources created after the specified date (inclusive).
+                            e.g. <code>&on_after=2017-03-01</code>
+                        </li>
+                        <li>
+                            <code>span</code>: Filters resources created within the specified timespan (comma seperated).
+                            e.g. <code>&span=2016-03-01,2016-09-01</code>
+                        </li>
+                        <li>
+                            <code>limit</code>: The API paginates results for faster responses. Each page
+                            limits results to 20 by default, unless stated otherwise using the <code>limit</code> filter.
+                            e.g. <code>&limit=15</code><br />
+                            Setting the value of <code>limit</code> to 0, the API will return all results
+                            (if less than 1000) in one page which might take longer to respond.
+                        </li>
+                    </ul>
+                    The results returned by the API can also be sorted by creation date, using the <code>latest</code>
+                    and <code>earliest</code> parameters. e.g <code>&latest</code>
                 </p>
             </div>
         </div>
