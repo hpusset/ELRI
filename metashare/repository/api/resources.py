@@ -189,6 +189,7 @@ class LrResource(ModelResource):
         before = request.GET.get('before', None)
         after = request.GET.get('after', None)
         processed = request.GET.getlist('processed')
+        validated = request.GET.getlist('validated')
 
         filters = {}
 
@@ -207,6 +208,8 @@ class LrResource(ModelResource):
 
         if processed:
             filters.update(dict(management_object__is_processed_version=True))
+        if validated:
+            filters.update(dict(management_object__validated=True))
         return base_object_list.filter(**filters).distinct()
 
     def apply_sorting(self, obj_list, options=None):
@@ -217,7 +220,7 @@ class LrResource(ModelResource):
                 return obj_list.order_by('metadataInfo__metadataCreationDate')
         return super(LrResource, self).apply_sorting(obj_list, options)
 
-    def dehydrate(self, bundle):
-        bundle.data['processed'] = _is_processed(bundle.obj)
-        bundle.data['validated'] = True if bundle.obj.storage_object.get_validation() else False
-        return bundle
+    # def dehydrate(self, bundle):
+    #     bundle.data['processed'] = _is_processed(bundle.obj)
+    #     bundle.data['validated'] = True if bundle.obj.storage_object.get_validation() else False
+    #     return bundle
