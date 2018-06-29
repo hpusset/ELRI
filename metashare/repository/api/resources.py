@@ -188,6 +188,7 @@ class LrResource(ModelResource):
         on_after = request.GET.get('on_after', None)
         before = request.GET.get('before', None)
         after = request.GET.get('after', None)
+        processed = request.GET.get('processed', None)
 
         filters = {}
 
@@ -203,6 +204,9 @@ class LrResource(ModelResource):
             filters.update(dict(metadataInfo__metadataCreationDate__lt=before))
         elif after:
             filters.update(dict(metadataInfo__metadataCreationDate__gt=after))
+
+        if processed:
+            filters.update(dict(management_object__is_processed_version__exact=True))
 
         return base_object_list.filter(**filters).distinct()
 
