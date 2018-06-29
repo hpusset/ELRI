@@ -206,7 +206,7 @@ class LrResource(ModelResource):
             filters.update(dict(metadataInfo__metadataCreationDate__gt=after))
 
         if processed:
-            filters.update(dict(management_object__is_processed_version__exact=True))
+            filters.update(dict(management_object__is_processed_version__exact='true'))
 
         return base_object_list.filter(**filters).distinct()
 
