@@ -57,6 +57,8 @@ class ManagementObject(models.Model):
 
     is_processed_version = models.BooleanField(verbose_name="Is Processed Version", default=False, editable=False)
 
+    validated = models.BooleanField(verbose_name="Validated", default=False, editable=False)
+
     partner_responsible = models.CharField(verbose_name="Partner", max_length=6,
                                            choices=_make_choices_from_list(PARTNERS)['choices'],
                                            editable=False,
@@ -87,6 +89,9 @@ class ManagementObject(models.Model):
                      self.resource.relationinfotype_model_set.all()]
         self.is_processed_version = any(relations)
 
+    def _set_validated(self):
+        self.validated = True if self.resource.storage_object.get_validation() else False
+
     def _set_partner(self):
         resource_country = _get_country(self.resource)
         self.partner_responsible = country_to_partner_map.get(resource_country)
@@ -97,6 +102,7 @@ class ManagementObject(models.Model):
 
     def save(self, *args, **kwargs):
         self._set_is_processed_version()
+        self._set_validated()
         self._set_partner()
         if not self.resource:
             self.resource = self.get_related_resource().__unicode__()
