@@ -192,7 +192,7 @@ class LrResource(ModelResource):
         filters = {}
 
         if span:
-            filters.update(dict(metadataInfo__metadataCreationDate__range=span.split(',')))
+            filters.update(dict(metadataInfo__metadataCreationDate__range=[x.strip() for x in span.split(',')]))
         elif on:
             filters.update(dict(metadataInfo__metadataCreationDate__exact=on))
         elif on_before:
