@@ -21,7 +21,7 @@ class ManagementObjectAdmin(admin.ModelAdmin):
     # class Media:
     #     js = ("admin/js/management_actions.js",)
     list_display = ('resource', 'id', 'partner_responsible', 'to_be_delivered_to_EC', 'delivered_to_EC',
-                    'is_processed_version', 'is_rejected',
+                    'is_processed_version', 'validated', 'is_rejected',
                     'publication_status', 'to_be_delivered_odp',
                     'delivered_odp', 'ipr_clearing')
 
@@ -33,7 +33,7 @@ class ManagementObjectAdmin(admin.ModelAdmin):
         ('EC Project', {
             'fields': (
                 'related_resource', 'partner_responsible', 'delivered_to_EC', 'to_be_delivered_to_EC',
-                'is_processed_version', 'rejected',
+                'is_processed_version', 'validated', 'rejected',
                 'rejection_reason',)
         }),
         ('IPR Clearing Process', {
@@ -44,7 +44,7 @@ class ManagementObjectAdmin(admin.ModelAdmin):
         }),
     )
 
-    readonly_fields = ('related_resource', 'is_processed_version', 'partner_responsible')
+    readonly_fields = ('related_resource', 'is_processed_version', 'validated', 'partner_responsible')
 
     actions = ('to_be_delivered_to_ec', 'delivered_to_ec', 'reject', 'restore_rejected', 'to_be_delivered_to_odp',
                'delivered_to_odp', 'set_ipr_clearing')
