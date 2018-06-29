@@ -19,7 +19,7 @@
   {% if API_KEY %}
       <tr><th><label>API KEY</label></th><td class="readonly">{{ API_KEY }}</td></tr>
   {% endif %}
-  { form.as_table }}
+  {{ form.as_table }}
   {% if editor_group_managers_member_of %}
   <tr>
     <th> <label>Editor Group Manager Group{{ editor_group_managers_member_of|pluralize }}</label></th>
