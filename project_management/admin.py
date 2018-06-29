@@ -26,7 +26,7 @@ class ManagementObjectAdmin(admin.ModelAdmin):
                     'delivered_odp', 'ipr_clearing')
 
     list_filter = (PublicationStatusFilter, 'partner_responsible', DeliveredFilter,
-                   ToBeDeliveredFilter, 'is_processed_version', 'rejected', 'to_be_delivered_odp',
+                   ToBeDeliveredFilter, 'is_processed_version', 'validated', 'rejected', 'to_be_delivered_odp',
                    'delivered_odp', 'ipr_clearing')
 
     fieldsets = (
