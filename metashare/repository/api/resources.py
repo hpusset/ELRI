@@ -2,10 +2,9 @@ from django.conf.urls import url
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from haystack.query import SearchQuerySet
-from metashare.report_utils.report_utils import _is_processed
 from metashare.repository import models as lr
 from metashare.repository.api.auth import RepositoryApiKeyAuthentication
-from metashare.repository.api.haystack_filters import haystack_filters
+from metashare.repository.api.haystack_filters import encode_filter
 from metashare.settings import DJANGO_URL
 from metashare.storage.models import StorageObject
 from project_management import models as pm
@@ -138,13 +137,10 @@ class LrResource(ModelResource):
         if query:
             for q in query:
                 query_dict = {}
+                encoded_q = encode_filter(q.split(':')[0], q.split(':')[1])
                 try:
-                    # look for key mapping
-                    try:
-                        key = "{}Filter_exact".format(haystack_filters[q.split(':')[0]])
-                    except KeyError:
-                        key = "{}Filter_exact".format(q.split(':')[0])
-                    value = q.split(':')[1]
+                    key = "{}Filter_exact".format(encoded_q.get('filter'))
+                    value = encoded_q.get('value')
                     if ' ' in value:
                         key = key.replace('_', '__')
                     query_dict[key] = value
