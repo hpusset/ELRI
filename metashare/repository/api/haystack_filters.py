@@ -57,7 +57,7 @@ def encode_filter(key, value):
     except KeyError:
         in_filter = key
 
-    if key == 'lang':
+    if key == 'lang' or key == 'language':
         value = get_language_by_subtag(value) or value
     elif key == 'domain':
         value = get_domain_by_id(value) or value
