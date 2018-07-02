@@ -3,6 +3,7 @@ from metashare.eurovoc.eurovoc import get_domain_by_id
 
 haystack_filters = {
     "filters": {
+        "language": "languageName",
         "lang": "languageName", "textGenre": "textTextGenre", "textType": "textTextType",
         "conditionOfUse": "restrictionsOfUse", "linguality": "lingualityType", "multilinguality": "multilingualityType",
         "mimetype": "dataFormat", "dsi": "appropriatenessForDSI", "status": "publicationStatus"
