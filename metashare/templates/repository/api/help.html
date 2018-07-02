@@ -16,7 +16,7 @@
         }
 
         .filters, .filters ul, .filters p {
-            font-size: inherit!important;
+            font-size: inherit !important;
         }
     </style>
 {% endblock %}
@@ -38,13 +38,13 @@
             <h3>API ACCESS</h3>
             <div class="col-md-10">
                 <p>Access is granted by default to repository administrators and to EC members registered
-                and <strong>logged in</strong> the ELRC-SHARE repository.</p>
+                    and <strong>logged in</strong> the ELRC-SHARE repository.</p>
 
-                <p>The API can be accessed through the <strong>SEARCH_API_URL</strong>:<br />
+                <p>The API can be accessed through the <strong>SEARCH_API_URL</strong>:<br/>
                     <a href="https://elrc-share.eu/repository/api/v1/lr/" target="_blank">
                         <code>https://elrc-share.eu/repository/api/v1/lr/</code>
                     </a>
-                    <br />OR<br />
+                    <br/>OR<br/>
                     <a href="https://elrc-share.eu/repository/api/v1/lr/search/" target="_blank">
                         <code>https://elrc-share.eu/repository/api/v1/lr/<strong>search</strong>/</code>
                     </a> to enable advanced search features.
@@ -53,11 +53,11 @@
                     <strong>External access</strong>, for example through a <code>cURL</code> request, requires an
                     <strong>API key</strong>, given either in the request url as an authorization (<code>auth</code>)
                     parameter, or in the request header:
-                    <br />
-                    <em>As url parameter</em><br />
+                    <br/>
+                    <em>As url parameter</em><br/>
                     <code>SEARCH_API_URL/?auth=<strong>API_KEY</strong></code>
-                    <br />
-                    <em>As header (cURL)</em><br />
+                    <br/>
+                    <em>As header (cURL)</em><br/>
                     <code>curl SEARCH_API_URL --header 'Authorization:<strong>API_KEY</strong>'</code>
                 </p>
                 <blockquote class="blockquote">
@@ -88,114 +88,128 @@
             <h4>Available Filters</h4>
             <div class="col-md-12 filters" id="haystack">
                 <div class="panel list-group">
-                    <a href="#" class="list-group-item" data-toggle="collapse" data-target="#cond" data-parent="#haystack">
+                    <a href="#" class="list-group-item" data-toggle="collapse" data-target="#cond"
+                       data-parent="#haystack">
                         Conditions of Use</a>
                     <div id="cond" class="sublinks collapse">
                         <div class="list-group-item small">
                             <div>Applied Filter: <code>conditionOfUse</code>.</div>
-{#                                <div>Haystack filter: <code>restrictionsOfUseFilter</code>.</div>#}
+                            {#                                <div>Haystack filter: <code>restrictionsOfUseFilter</code>.</div>#}
                             <h5>Values</h5>
                             <div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Attribution</li>
-                                    <li class="list-group-item">Commercial Use</li>
-                                    <li class="list-group-item">Compensate</li>
-                                    <li class="list-group-item">Education</li>
-                                    <li class="list-group-item">No Derivatives</li>
-                                    <li class="list-group-item">Non Commercial Use</li>
-                                    <li class="list-group-item">Research</li>
-                                    <li class="list-group-item">Share Alike</li>
-                                    <li class="list-group-item">Other</li>
+                                    <li class="list-group-item"><em>by</em> or <em>Attribution</em></li>
+                                    <li class="list-group-item"><em>cu</em> or <em>Commercial Use</em></li>
+                                    <li class="list-group-item"><em>comp</em> or <em>Compensate</em></li>
+                                    <li class="list-group-item"><em>edu</em> or <em>Education</em></li>
+                                    <li class="list-group-item"><em>nd</em> or <em>No Derivatives</em></li>
+                                    <li class="list-group-item"><em>nc</em> or <em>Non Commercial Use</em></li>
+                                    <li class="list-group-item"><em>res</em> or <em>Research</em></li>
+                                    <li class="list-group-item"><em>sa</em> or <em>Share Alike</em></li>
                                 </ul>
                             </div>
                             <div>Examples:</div>
                             <p>
                                 <em>Get all resources restricted for non commercial use</em>
-                                <br />
-                                <code>SEARCH_API_URL/?<strongb>q</strongb>=conditionOfUse<b>:</b>Non Commercial Use</code>
+                                <br/>
+                                <code>SEARCH_API_URL/?
+                                    <strongb>q</strongb>
+                                    =conditionOfUse<b>:</b>nc</code>
                             </p>
                         </div>
                     </div>
                     <!------------------------------------------->
-                    <a href="#" class="list-group-item" data-toggle="collapse" data-target="#domain" data-parent="#haystack">
+                    <a href="#" class="list-group-item" data-toggle="collapse" data-target="#domain"
+                       data-parent="#haystack">
                         Domain</a>
                     <div id="domain" class="sublinks collapse">
                         <div class="list-group-item small">
                             <div>Applied Filter: <code>domain</code>.</div>
-{#                            <div>Haystack filter: <code>domainFilter</code>.</div>#}
+                            {#                            <div>Haystack filter: <code>domainFilter</code>.</div>#}
                             <h5>Values</h5>
                             <div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">AGRI-FOODSTUFFS</li>
-                                    <li class="list-group-item">AGRICULTURE, FORESTRY & FISHERIES</li>
-                                    <li class="list-group-item">BUSINESS & COMPETITION</li>
-                                    <li class="list-group-item">ECONOMICS</li>
-                                    <li class="list-group-item">EDUCATION & COMMUNICATIONS</li>
-                                    <li class="list-group-item">EMPLOYMENT & WORKING CONDITIONS</li>
-                                    <li class="list-group-item">ENERGY</li>
-                                    <li class="list-group-item">ENVIRONMENT</li>
-                                    <li class="list-group-item">EUROPEAN UNION</li>
-                                    <li class="list-group-item">FINANCE</li>
-                                    <li class="list-group-item">GEOGRAPHY</li>
-                                    <li class="list-group-item">INDUSTRY</li>
-                                    <li class="list-group-item">INTERNATIONAL ORGANISATIONS</li>
-                                    <li class="list-group-item">INTERNATIONAL RELATIONS</li>
-                                    <li class="list-group-item">LAW</li>
-                                    <li class="list-group-item">POLITICS</li>
-                                    <li class="list-group-item">PRODUCTION, TECHNOLOGY & RESEARCH</li>
-                                    <li class="list-group-item">SCIENCE</li>
-                                    <li class="list-group-item">SOCIAL QUESTIONS</li>
-                                    <li class="list-group-item">TRADE</li>
-                                    <li class="list-group-item">TRANSPORT</li>
+                                    <li class="list-group-item"><em>60</em> or <em>AGRI-FOODSTUFFS</em></li>
+                                    <li class="list-group-item"><em>56</em> or <em>AGRICULTURE, FORESTRY &
+                                        FISHERIES</em></li>
+                                    <li class="list-group-item"><em>40</em> or <em>BUSINESS & COMPETITION</em></li>
+                                    <li class="list-group-item"><em>16</em> or <em>ECONOMICS</em></li>
+                                    <li class="list-group-item"><em>32</em> or <em>EDUCATION & COMMUNICATIONS</em></li>
+                                    <li class="list-group-item"><em>44</em> or <em>EMPLOYMENT & WORKING CONDITIONS</em>
+                                    </li>
+                                    <li class="list-group-item"><em>66</em> or <em>ENERGY</em></li>
+                                    <li class="list-group-item"><em>52</em> or <em>ENVIRONMENT</em></li>
+                                    <li class="list-group-item"><em>10</em> or <em>EUROPEAN UNION</em></li>
+                                    <li class="list-group-item"><em>24</em> or <em>FINANCE</em></li>
+                                    <li class="list-group-item"><em>72</em> or <em>GEOGRAPHY</em></li>
+                                    <li class="list-group-item"><em>68</em> or <em>INDUSTRY</em></li>
+                                    <li class="list-group-item"><em>76</em> or <em>INTERNATIONAL ORGANISATIONS</em></li>
+                                    <li class="list-group-item"><em>08</em> or <em>INTERNATIONAL RELATIONS</em></li>
+                                    <li class="list-group-item"><em>12</em> or <em>LAW</em></li>
+                                    <li class="list-group-item"><em>04</em> or <em>POLITICS</em></li>
+                                    <li class="list-group-item"><em>64</em> or <em>PRODUCTION, TECHNOLOGY &
+                                        RESEARCH</em></li>
+                                    <li class="list-group-item"><em>36</em> or <em>SCIENCE</em></li>
+                                    <li class="list-group-item"><em>28</em> or <em>SOCIAL QUESTIONS</em></li>
+                                    <li class="list-group-item"><em>20</em> or <em>TRADE</em></li>
+                                    <li class="list-group-item"><em>48</em> or <em>TRANSPORT</em></li>
                                 </ul>
                             </div>
                             <div>Examples:</div>
                             <p>
                                 <em>Get all resources from the science domain</em>
-                                <br />
-                                <code>SEARCH_API_URL/?<strongb>q</strongb>=domain<b>:</b>SCIENCE</code>
+                                <br/>
+                                <code>SEARCH_API_URL/?
+                                    <strongb>q</strongb>
+                                    =domain<b>:</b>36</code>
                             </p>
                         </div>
                     </div>
                     <!------------------------------------------->
-                    <a href="#" class="list-group-item" data-toggle="collapse" data-target="#dsi" data-parent="#haystack">
+                    <a href="#" class="list-group-item" data-toggle="collapse" data-target="#dsi"
+                       data-parent="#haystack">
                         DSI</a>
                     <div id="dsi" class="sublinks collapse">
                         <div class="list-group-item small">
                             <div>Applied Filter: <code>dsi</code>.</div>
-{#                            <div>Haystack filter: <code>appropriatenessForDSIFilter</code>.</div>#}
+                            {#                            <div>Haystack filter: <code>appropriatenessForDSIFilter</code>.</div>#}
                             <h5>Values</h5>
                             <div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Business Registers Interconnection System</li>
-                                    <li class="list-group-item">Cybersecurity</li>
-                                    <li class="list-group-item">Electronic Exchange Of Social Security Information</li>
+                                    <li class="list-group-item"><em>bris</em> or <em>Business Registers Interconnection
+                                        System</em></li>
+                                    <li class="list-group-item"><em>cs</em> or <em>Cybersecurity</em></li>
+                                    <li class="list-group-item"><em>eessi</em> or <em>Electronic Exchange Of Social
+                                        Security Information</em></li>
                                     <li class="list-group-item">Europeana</li>
-                                    <li class="list-group-item">Online Dispute Resolution</li>
-                                    <li class="list-group-item">Open Data Portal</li>
-                                    <li class="list-group-item">E Health</li>
-                                    <li class="list-group-item">E Justice</li>
-                                    <li class="list-group-item">E Procurement</li>
-                                    <li class="list-group-item">Safer Internet</li>
+                                    <li class="list-group-item"><em>odr</em> or <em>Online Dispute Resolution</em></li>
+                                    <li class="list-group-item"><em>odp</em> or <em>Open Data Portal</em></li>
+                                    <li class="list-group-item"><em>eh</em> or <em>E Health</em></li>
+                                    <li class="list-group-item"><em>ej</em> or <em>E Justice</em></li>
+                                    <li class="list-group-item"><em>ep</em> or <em>E Procurement</em></li>
+                                    <li class="list-group-item"><em>si</em> or <em>Safer Internet</em></li>
                                 </ul>
                             </div>
                             <div>Examples:</div>
                             <p>
                                 <em>Get all resources appropriate for use in the Europeana DSI</em>
-                                <br />
-                                <code>SEARCH_API_URL/?<strongb>q</strongb>=dsi<b>:</b>Europeana</code>
+                                <br/>
+                                <code>SEARCH_API_URL/?
+                                    <strongb>q</strongb>
+                                    =dsi<b>:</b>Europeana</code>
                             </p>
                         </div>
                     </div>
                     <!------------------------------------------->
-                    <a href="#" class="list-group-item" data-toggle="collapse" data-target="#lang" data-parent="#haystack">Language</a>
+                    <a href="#" class="list-group-item" data-toggle="collapse" data-target="#lang"
+                       data-parent="#haystack">Language</a>
                     <div id="lang" class="sublinks collapse">
                         <div class="list-group-item small">
-                            <div>Applied Filter: <code>language</code>.</div>
-{#                            <div>Haystack filter: <code>languageNameFilter</code>.</div>#}
+                            <div>Applied Filter: <code>lang</code>.</div>
+                            {#                            <div>Haystack filter: <code>languageNameFilter</code>.</div>#}
                             <h5>Values</h5>
                             <div>
-                                Any language name as defined by
+                                Any language name or language code as defined by
                                 the <a
                                     href="https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry"
                                     target="_blank">IANA Language Subtag Registry</a> in the <em>Description</em>
@@ -204,137 +218,156 @@
                             <div>Examples:</div>
                             <p>
                                 <em>Get all resources that contain English</em>
-                                <br />
-                                <code>SEARCH_API_URL/?<strongb>q</strongb>=language<b>:</b>English</code>
+                                <br/>
+                                <code>SEARCH_API_URL/?
+                                    <strongb>q</strongb>
+                                    =lang<b>:</b>English</code>
+                                <br/>
+                                <code>SEARCH_API_URL/?
+                                    <strongb>q</strongb>
+                                    =lang<b>:</b>en</code>
                             </p>
                             <p>
                                 <em>Get all resources that contain English and Italian</em>
-                                <br />
-                                <code>SEARCH_API_URL/?<strongb>q</strongb>=language<b>:</b>English<strong>&q</strong>=language:Italian</code>
+                                <br/>
+                                <code>SEARCH_API_URL/?
+                                    <strongb>q</strongb>
+                                    =lang<b>:</b>en<strong>&q</strong>=lang:it</code>
                             </p>
                         </div>
                     </div>
                     <!------------------------------------------->
-                    <a href="#" class="list-group-item" data-toggle="collapse" data-target="#ling" data-parent="#haystack">
+                    <a href="#" class="list-group-item" data-toggle="collapse" data-target="#ling"
+                       data-parent="#haystack">
                         Linguality</a>
                     <div id="ling" class="sublinks collapse">
                         <div class="list-group-item small">
                             <div>Applied Filter: <code>linguality</code>.</div>
-{#                            <div>Haystack filter: <code>lingualityTypeFilter</code>.</div>#}
+                            {#                            <div>Haystack filter: <code>lingualityTypeFilter</code>.</div>#}
                             <h5>Values</h5>
                             <div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Bilingual</li>
-                                    <li class="list-group-item">Multilingual</li>
-                                    <li class="list-group-item">Monolingual</li>
+                                    <li class="list-group-item"><em>bi</em> or <em>Bilingual</em></li>
+                                    <li class="list-group-item"><em>multi</em> or <em>Multilingual</em></li>
+                                    <li class="list-group-item"><em>mono</em> or <em>Monolingual</em></li>
                                 </ul>
                             </div>
                             <div>Examples:</div>
                             <p>
                                 <em>Get all bilingual resources</em>
-                                <br />
-                                <code>SEARCH_API_URL/?<strongb>q</strongb>=linguality<b>:</b>Bilingual</code>
+                                <br/>
+                                <code>SEARCH_API_URL/?
+                                    <strongb>q</strongb>
+                                    =linguality<b>:</b>bi</code>
                             </p>
                         </div>
                     </div>
                     <!------------------------------------------->
-                    <a href="#" class="list-group-item" data-toggle="collapse" data-target="#mime" data-parent="#haystack">Mimetype</a>
+                    <a href="#" class="list-group-item" data-toggle="collapse" data-target="#mime"
+                       data-parent="#haystack">Mimetype</a>
                     <div id="mime" class="sublinks collapse">
                         <div class="list-group-item small">
                             <div>Applied Filter: <code>mimetype</code>.</div>
-{#                            <div>Haystack filter: <code>dataFormatFilter</code>.</div>#}
+                            {#                            <div>Haystack filter: <code>dataFormatFilter</code>.</div>#}
                             <h5>Values</h5>
                             <p>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">CSV</li>
-                                    <li class="list-group-item">HTML</li>
-                                    <li class="list-group-item">JSON</li>
-                                    <li class="list-group-item">LATEX</li>
-                                    <li class="list-group-item">MS-Access database</li>
-                                    <li class="list-group-item">MS-Excel xls</li>
-                                    <li class="list-group-item">MS-Excel xlsx</li>
-                                    <li class="list-group-item">MS-Word doc</li>
-                                    <li class="list-group-item">MS-Word docx</li>
-                                    <li class="list-group-item">PDF</li>
-                                    <li class="list-group-item">Plain text</li>
-                                    <li class="list-group-item">RDF</li>
-                                    <li class="list-group-item">RTF</li>
-                                    <li class="list-group-item">SGML</li>
-                                    <li class="list-group-item">TEI</li>
-                                    <li class="list-group-item">TEX</li>
-                                    <li class="list-group-item">TM format of the SDL alignment tool</li>
-                                    <li class="list-group-item">TMX</li>
-                                    <li class="list-group-item">Term Base eXchange</li>
-                                    <li class="list-group-item">XCES</li>
-                                    <li class="list-group-item">XHTML</li>
-                                    <li class="list-group-item">XMI</li>
-                                    <li class="list-group-item">XML</li>
-                                    <li class="list-group-item">text with tab-separated-values</li>
-                                    <li class="list-group-item">other</li>
-                                </ul>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><em>csv</em> or <em>CSV</em></li>
+                                <li class="list-group-item"><em>html</em> or <em>HTML</em></li>
+                                <li class="list-group-item"><em>json</em> or <em>JSON</em></li>
+                                <li class="list-group-item"><em>latex</em> or <em>LATEX</em></li>
+                                <li class="list-group-item"><em>accessdb</em> or <em>MS-Access database</em></li>
+                                <li class="list-group-item"><em>xls</em> or <em>MS-Excel xls</em></li>
+                                <li class="list-group-item"><em>xlsx</em> or <em>MS-Excel xlsx</em></li>
+                                <li class="list-group-item"><em>doc</em> or <em>MS-Word doc</em></li>
+                                <li class="list-group-item"><em>docx</em> or <em>MS-Word docx</em></li>
+                                <li class="list-group-item"><em>pdf</em> or <em>PDF</em></li>
+                                <li class="list-group-item"><em>txt</em> or <em>Plain text</em></li>
+                                <li class="list-group-item"><em>rdf</em> or <em>RDF</em></li>
+                                <li class="list-group-item"><em>rtf</em> or <em>RTF</em></li>
+                                <li class="list-group-item"><em>sgml</em> or <em>SGML</em></li>
+                                <li class="list-group-item"><em>tei</em> or <em>TEI</em></li>
+                                <li class="list-group-item"><em>tex</em> or <em>TEX</em></li>
+                                <li class="list-group-item"><em>tsv</em> or <em>text with tab-separated-values</em></li>
+                                <li class="list-group-item"><em>sdl</em> or <em>TM format of the SDL alignment tool</em></li>
+                                <li class="list-group-item"><em>tmx</em> or <em>TMX</em></li>
+                                <li class="list-group-item"><em>tbx</em> or <em>Term Base eXchange</em></li>
+                                <li class="list-group-item"><em>xces</em> or <em>XCES</em></li>
+                                <li class="list-group-item"><em>xhtml</em> or <em>XHTML</em></li>
+                                <li class="list-group-item"><em>xmi</em> or <em>XMI</em></li>
+                                <li class="list-group-item"><em>xml</em> or <em>XML</em></li>
+                            </ul>
                             </p>
                             <div>Examples:</div>
                             <p>
                                 <em>Get all resources that contain tmx files</em>
-                                <br />
-                                <code>SEARCH_API_URL/?<strongb>q</strongb>=mimetype<b>:</b>TMX</code>
+                                <br/>
+                                <code>SEARCH_API_URL/?
+                                    <strongb>q</strongb>
+                                    =mimetype<b>:</b>tmx</code>
                             </p>
                         </div>
                     </div>
                     <!------------------------------------------->
-                    <a href="#" class="list-group-item" data-toggle="collapse" data-target="#mling" data-parent="#haystack">
+                    <a href="#" class="list-group-item" data-toggle="collapse" data-target="#mling"
+                       data-parent="#haystack">
                         Multi-linguality</a>
                     <div id="mling" class="sublinks collapse">
                         <div class="list-group-item small">
                             <div>Applied Filter: <code>multilinguality</code>.</div>
-{#                            <div>Haystack filter: <code>multilingualityTypeFilter</code>.</div>#}
+                            {#                            <div>Haystack filter: <code>multilingualityTypeFilter</code>.</div>#}
                             <h5>Values</h5>
                             <div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Parallel</li>
-                                    <li class="list-group-item">Comparable</li>
-                                    <li class="list-group-item">Multilingual Single Text</li>
-                                    <li class="list-group-item">Other</li>
+                                    <li class="list-group-item"><em>prl</em> or <em>Parallel</em></li>
+                                    <li class="list-group-item"><em>comp</em> or <em>Comparable</em></li>
+                                    <li class="list-group-item"><em>mst</em> or <em>Multilingual Single Text</em></li>
                                 </ul>
                             </div>
                             <div>Examples:</div>
                             <p>
                                 <em>Get all Parallel resources</em>
-                                <br />
-                                <code>SEARCH_API_URL/?<strongb>q</strongb>=multilinguality<b>:</b>Parallel</code>
+                                <br/>
+                                <code>SEARCH_API_URL/?
+                                    <strongb>q</strongb>
+                                    =multilinguality<b>:</b>Parallel</code>
                             </p>
                         </div>
                     </div>
                     <!------------------------------------------->
-                    <a href="#" class="list-group-item" data-toggle="collapse" data-target="#rtype" data-parent="#haystack">
+                    <a href="#" class="list-group-item" data-toggle="collapse" data-target="#rtype"
+                       data-parent="#haystack">
                         Resource Type</a>
                     <div id="rtype" class="sublinks collapse">
                         <div class="list-group-item small">
                             <div>Applied Filter: <code>resourceType</code>.</div>
-{#                            <div>Haystack filter: <code>resourceTypeFilter</code>.</div>#}
+                            {#                            <div>Haystack filter: <code>resourceTypeFilter</code>.</div>#}
                             <h5>Values</h5>
                             <div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">corpus</li>
-                                    <li class="list-group-item">lexicalConceptualResource</li>
-                                    <li class="list-group-item">languageDescription</li>
+                                    <li class="list-group-item"><em>crp</em> or <em>corpus</em></li>
+                                    <li class="list-group-item"><em>lcr</em> or <em>lexicalConceptualResource</em></li>
+                                    <li class="list-group-item"><em>ld</em> or <em>languageDescription</em></li>
                                 </ul>
                             </div>
                             <div>Examples:</div>
                             <p>
                                 <em>Get all corpora</em>
-                                <br />
-                                <code>SEARCH_API_URL/?<strongb>q</strongb>=resourceType<b>:</b>corpus</code>
+                                <br/>
+                                <code>SEARCH_API_URL/?
+                                    <strongb>q</strongb>
+                                    =resourceType<b>:</b>corpus</code>
                             </p>
                         </div>
                     </div>
                     <!------------------------------------------->
-                    <a href="#" class="list-group-item" data-toggle="collapse" data-target="#status" data-parent="#haystack">
+                    <a href="#" class="list-group-item" data-toggle="collapse" data-target="#status"
+                       data-parent="#haystack">
                         Publication Status</a>
                     <div id="status" class="sublinks collapse">
                         <div class="list-group-item small">
                             <div>Applied Filter: <code>status</code>.</div>
-{#                            <div>Haystack filter: <code>publicationStatusFilter</code>.</div>#}
+                            {#                            <div>Haystack filter: <code>publicationStatusFilter</code>.</div>#}
                             <h5>Values</h5>
                             <div>
                                 <ul class="list-group list-group-flush">
@@ -345,18 +378,21 @@
                             <div>Examples:</div>
                             <p>
                                 <em>Get all corpora</em>
-                                <br />
-                                <code>SEARCH_API_URL/?<strongb>q</strongb>=resourceType<b>:</b>corpus</code>
+                                <br/>
+                                <code>SEARCH_API_URL/?
+                                    <strongb>q</strongb>
+                                    =resourceType<b>:</b>published</code>
                             </p>
                         </div>
                     </div>
                     <!------------------------------------------->
-                    <a href="#" class="list-group-item" data-toggle="collapse" data-target="#genre" data-parent="#haystack">
+                    <a href="#" class="list-group-item" data-toggle="collapse" data-target="#genre"
+                       data-parent="#haystack">
                         Text Genre</a>
                     <div id="genre" class="sublinks collapse">
                         <div class="list-group-item small">
                             <div>Applied Filter: <code>textGenre</code>.</div>
-{#                            <div>Haystack filter: <code>textTextGenreFilter</code>.</div>#}
+                            {#                            <div>Haystack filter: <code>textTextGenreFilter</code>.</div>#}
                             <h5>Values</h5>
                             <div>
                                 <ul class="list-group list-group-flush">
@@ -375,46 +411,50 @@
                             <div>Examples:</div>
                             <p>
                                 <em>Get all resources of fiction genre</em>
-                                <br />
-                                <code>SEARCH_API_URL/?<strongb>q</strongb>=textGenre<b>:</b>fiction</code>
+                                <br/>
+                                <code>SEARCH_API_URL/?
+                                    <strongb>q</strongb>
+                                    =textGenre<b>:</b>fiction</code>
                             </p>
                         </div>
                     </div>
                     <!------------------------------------------->
-                    <a href="#" class="list-group-item" data-toggle="collapse" data-target="#ttype" data-parent="#haystack">
+                    <a href="#" class="list-group-item" data-toggle="collapse" data-target="#ttype"
+                       data-parent="#haystack">
                         Text Type</a>
                     <div id="ttype" class="sublinks collapse">
                         <div class="list-group-item small">
                             <div>Applied Filter: <code>textType</code>.</div>
-{#                            <div>Haystack filter: <code>textTextTypeFilter</code>.</div>#}
+                            {#                            <div>Haystack filter: <code>textTextTypeFilter</code>.</div>#}
                             <h5>Values</h5>
                             <div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">academicTexts</li>
-                                    <li class="list-group-item">administrativeTexts</li>
-                                    <li class="list-group-item">blogTexts</li>
-                                    <li class="list-group-item">chatTexts</li>
+                                    <li class="list-group-item"><em>aca</em> or <em>academicTexts</em></li>
+                                    <li class="list-group-item"><em>admin</em> or <em>administrativeTexts</em></li>
+                                    <li class="list-group-item"><em>blog</em> or <em>blogTexts</em></li>
+                                    <li class="list-group-item"><em>chat</em> or <em>chatTexts</em></li>
                                     <li class="list-group-item">emails</li>
-                                    <li class="list-group-item">encyclopaedicTexts</li>
-                                    <li class="list-group-item">faceToFaceConversationsDiscussions</li>
-                                    <li class="list-group-item">journalisticTexts</li>
+                                    <li class="list-group-item"><em>encycl</em> or <em>encyclopaedicTexts</em></li>
+                                    <li class="list-group-item"><em>ffcd</em> or <em>faceToFaceConversationsDiscussions</em></li>
+                                    <li class="list-group-item"><em>journal</em> or <em>journalisticTexts</em></li>
                                     <li class="list-group-item">letters</li>
-                                    <li class="list-group-item">literaryTexts</li>
-                                    <li class="list-group-item">meetingProceedings</li>
+                                    <li class="list-group-item"><em>literar</em> or <em>literaryTexts</em></li>
+                                    <li class="list-group-item"><em>meeting</em> or <em>meetingProceedings</em></li>
                                     <li class="list-group-item">reviews</li>
                                     <li class="list-group-item">scripts</li>
                                     <li class="list-group-item">subtitles</li>
-                                    <li class="list-group-item">technicalTexts</li>
-                                    <li class="list-group-item">telephoneConversations</li>
+                                    <li class="list-group-item"><em>tech</em> or <em>technicalTexts</em></li>
+                                    <li class="list-group-item"><em>telephone</em> or <em>telephoneConversations</em></li>
                                     <li class="list-group-item">tweets</li>
-                                    <li class="list-group-item">other</li>
                                 </ul>
                             </div>
                             <div>Examples:</div>
                             <p>
                                 <em>Get all resources that contain tweets</em>
-                                <br />
-                                <code>SEARCH_API_URL/?<strongb>q</strongb>=textType<b>:</b>tweets</code>
+                                <br/>
+                                <code>SEARCH_API_URL/?
+                                    <strongb>q</strongb>
+                                    =textType<b>:</b>tweets</code>
                             </p>
                         </div>
                     </div>
@@ -423,12 +463,14 @@
             <h5>Union Queries</h5>
             <div class="col-md-12">
                 <p>
-                    The API performs <em>AND</em> search operations by default. For example, the following query <br />
-                    <code>SEARCH_API_URL/?q=language:Norwegian&q=language:Norwegian Nynorsk</code><br >
-                    will search for resources that contain both Norwegian <strong>and</strong> Norwegian Nynorsk languages.
-                    In order to return all resources that meet either of the specified criteria, we can use the parameter
-                    <code>or</code>. <br >
-                    <code>SEARCH_API_URL/?q=language:Norwegian&q=language:Norwegian Nynorsk<strong>&or</strong></code><br >
+                    The API performs <em>AND</em> search operations by default. For example, the following query <br/>
+                    <code>SEARCH_API_URL/?q=language:Norwegian&q=language:Norwegian Nynorsk</code><br>
+                    will search for resources that contain both Norwegian <strong>and</strong> Norwegian Nynorsk
+                    languages.
+                    In order to return all resources that meet either of the specified criteria, we can use the
+                    parameter
+                    <code>or</code>. <br>
+                    <code>SEARCH_API_URL/?q=lang:no&q=lang:nn<strong>&or</strong></code><br>
                 </p>
             </div>
         </div>
@@ -437,55 +479,55 @@
             <div class="col-md-12">
                 <p>
                     Search results can be further narrowed down using custom filters.
-                    <ul>
-                        <li>
-                            <code>on</code>: Filters resources created on the specified date formatted as
-                            <code>yyyy-mm-dd</code>. e.g. <code>&on=2017-03-01</code>
-                        </li>
-                        <li>
-                            <code>before</code>: Filters resources created before the specified date.
-                            e.g. <code>&before=2017-03-01</code>
-                        </li>
-                        <li>
-                            <code>on_before</code>: Filters resources created before the specified date (inclusive).
-                            e.g. <code>&on_before=2017-03-01</code>
-                        </li>
+                <ul>
+                    <li>
+                        <code>on</code>: Filters resources created on the specified date formatted as
+                        <code>yyyy-mm-dd</code>. e.g. <code>&on=2017-03-01</code>
+                    </li>
+                    <li>
+                        <code>before</code>: Filters resources created before the specified date.
+                        e.g. <code>&before=2017-03-01</code>
+                    </li>
+                    <li>
+                        <code>on_before</code>: Filters resources created before the specified date (inclusive).
+                        e.g. <code>&on_before=2017-03-01</code>
+                    </li>
 
-                        <li>
-                            <code>after</code>: Filters resources created after the specified date.
-                            e.g. <code>&after=2017-03-01</code>
-                        </li>
-                        <li>
-                            <code>on_after</code>: Filters resources created after the specified date (inclusive).
-                            e.g. <code>&on_after=2017-03-01</code>
-                        </li>
-                        <li>
-                            <code>span</code>: Filters resources created within the specified timespan (comma seperated).
-                            e.g. <code>&span=2016-03-01,2016-09-01</code>
-                        </li>
-                        <li>
-                            <code>processed</code>: Filters resources that are products of processing.
-                            e.g. <code>&processed</code>
-                        </li>
-                        <li>
-                            <code>validated</code>: Filters resources that have been validated (contain a validation
-                            report).
-                            e.g. <code>&validated</code>
-                        </li>
-                        <li>
-                            <code>cleared</code>: Filters resources for which legal clearance is finalized.
-                            e.g. <code>&cleared</code>
-                        </li>
-                        <li>
-                            <code>limit</code>: The API paginates results for faster responses. Each page
-                            limits results to 20 by default, unless stated otherwise using the <code>limit</code> filter.
-                            e.g. <code>&limit=15</code><br />
-                            Setting the value of <code>limit</code> to 0, the API will return all results
-                            (if less than 1000) in one page which might take longer to respond.
-                        </li>
-                    </ul>
-                    The results returned by the API can also be sorted by creation date, using the <code>sort</code>
-                     parameter with values <em>latest</em> or <em>earliest</em>. e.g <code>&sort=latest</code>
+                    <li>
+                        <code>after</code>: Filters resources created after the specified date.
+                        e.g. <code>&after=2017-03-01</code>
+                    </li>
+                    <li>
+                        <code>on_after</code>: Filters resources created after the specified date (inclusive).
+                        e.g. <code>&on_after=2017-03-01</code>
+                    </li>
+                    <li>
+                        <code>span</code>: Filters resources created within the specified timespan (comma seperated).
+                        e.g. <code>&span=2016-03-01,2016-09-01</code>
+                    </li>
+                    <li>
+                        <code>processed</code>: Filters resources that are products of processing.
+                        e.g. <code>&processed</code>
+                    </li>
+                    <li>
+                        <code>validated</code>: Filters resources that have been validated (contain a validation
+                        report).
+                        e.g. <code>&validated</code>
+                    </li>
+                    <li>
+                        <code>cleared</code>: Filters resources for which legal clearance is finalized.
+                        e.g. <code>&cleared</code>
+                    </li>
+                    <li>
+                        <code>limit</code>: The API paginates results for faster responses. Each page
+                        limits results to 20 by default, unless stated otherwise using the <code>limit</code> filter.
+                        e.g. <code>&limit=15</code><br/>
+                        Setting the value of <code>limit</code> to 0, the API will return all results
+                        (if less than 1000) in one page which might take longer to respond.
+                    </li>
+                </ul>
+                The results returned by the API can also be sorted by creation date, using the <code>sort</code>
+                parameter with values <em>latest</em> or <em>earliest</em>. e.g <code>&sort=latest</code>
                 </p>
             </div>
         </div>
