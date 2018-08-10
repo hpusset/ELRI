@@ -71,7 +71,6 @@ from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
 from metashare.storage.models import PUBLISHED, INGESTED
 from metashare.utils import prettify_camel_case_string
-from decorators import resource_downloadable, resource_downloadable_view
 
 MAXIMUM_READ_BLOCK_SIZE = 4096
 
@@ -218,9 +217,6 @@ def _get_licences(resource, user_membership):
     return result
 
 
-# @user_passes_test(lambda u: u.is_superuser or u.groups.filter(name="ecmembers").exists())
-# MDEL: temporary implementation to provide download for specific resources
-@resource_downloadable
 def download(request, object_id, **kwargs):
     """
     Renders the resource download/purchase view including license selection,
@@ -477,8 +473,6 @@ def has_view_permission(request, res_obj):
         return False
 
 
-# MDEL: temporary implementation to provide download for specific resources
-@resource_downloadable_view
 def view(request, resource_name=None, object_id=None):
     """
     Render browse or detail view for the repository application.
