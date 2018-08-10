@@ -186,3 +186,41 @@ PROXIED_NODES = {
 # code; see the Installation Manual for more information on this.
 # For the integration of other web analytics services' options, see
 # <http://packages.python.org/django-analytical/>.
+#
+CONTRIBUTIONS_ALERT_EMAILS = ["elri@example.com"]
+
+TMP = "/tmp"
+
+CONTRIBUTION_FORM_DATA = ""
+DOCUMENTATION_ROOT=""
+
+# Immaterial for launching the application
+AP_CERTS_DIR = "/path/to/app/certs/dir"
+
+PARTNERS = ["partner_1", "partner_2"]
+
+# Immaterial for launching the application
+ELRC_CERT = AP_CERTS_DIR + "cert_file.txt"
+
+#XXX Just for honoring the code needs. To remove or update if needed
+# To get a working instance of the basic app, they can be left as such.
+ADD_COMMAND = "{0}{1}{2}{3}"
+REMOVE_COMMAND = "{0}{1}{2}"
+
+TRUSTORE_FILE = ""
+TRUSTSTORE_PASSWORD = ""
+
+AP_URL = ""
+REST_PASSWORD = ""
+REST_USERNAME = ""
+REST_LOGIN_URL = ""
+REST_AUTH_URL = ""
+PMODE_POST_URL = ""
+TRUSTSTORE_POST_URL = ""
+PMODE_FILE = ""
+
+LEGAL_REVIEWERS = ("1",)
+
+REST_API_KEY = ""
+
+
