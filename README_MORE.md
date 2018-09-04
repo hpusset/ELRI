@@ -2,7 +2,7 @@
 
 `ELRC-SHARE SOFTWARE` project: [https://github.com/JuliBakagianni/CEF-ELRC](https://github.com/JuliBakagianni/CEF-ELRC)
 
-`ELDA` webapp project: (https://github.com/ELDAELRA/ELRI)[https://github.com/ELDAELRA/ELRI]
+`ELDA` webapp project: [https://github.com/ELDAELRA/ELRI](https://github.com/ELDAELRA/ELRI)
 
 
 ## Pull last changes from ELDA
