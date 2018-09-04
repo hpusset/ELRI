@@ -13,14 +13,17 @@ To pull last changes it is necessary to add `ELDA` webapp repository as a new re
 ```
 git clone git@gitlab.vicomtech.es:ELRI_EU2377_2016/ELRI.git
 ```
+
 2. Add `ELDA` webapp project `URL` as remote:
 ```
 git remote add elda https://github.com/ELDAELRA/ELRI.git
 ```
+
 3. Pull last changes:
 ```
 git pull elda master
 ```
+
 4. Push last changes to `GitLab`:
 ```
 git add .
