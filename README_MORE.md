@@ -28,5 +28,5 @@ git pull elda master
 ```
 git add .
 git commit -m "some commentary"
-git pull origin master
+git push origin master
 ```
