@@ -1,5 +1,5 @@
 {% extends "admin/repository/change_form.html" %}
-
+{% load i18n %}
 
 {% block content %}
     <div id="content-main">
@@ -9,14 +9,14 @@
             <div>
 
                 <div>
-                    <label for="id_resourceType" class="required">Resource type:</label>
+                    <label for="id_resourceType" class="required">{% trans 'Resource type' %}:</label>
 
                     <select name="resourceType" id="id_resourceType">
                         <option value="" selected="selected">---------</option>
-                        <option value="corpus">Corpus</option>
-                        <option value="langdesc">Language description</option>
-                        <option value="lexicon">Lexical conceptual resource</option>
-                        <option value="toolservice">Tool / Service</option>
+                        <option value="corpus">{% trans 'Corpus' %}</option>
+                        <option value="langdesc">{% trans 'Language description' %}</option>
+                        <option value="lexicon">{% trans 'Lexical conceptual resource' %}</option>
+                        <option value="toolservice">{% trans 'Tool / Service' %}</option>
                     </select>
                 </div>
                 <div id="id_corpusInfo" style="display: none;">
@@ -38,51 +38,45 @@
                 <input id="id_submit" type="submit" value="Proceed" style="display: none;"/>
                 <p>
                 <div class="resourceTypeExplanation">
-                    <span>Please, use one of the values:</span>
+                    <span>{% trans 'Please, use one of the values' %}:</span>
                     <ul>
                         <li>
-                            <span class="resourceTypeTitle">corpus:</span> for sets of documents in one or more
-                            languages, including, for instance,
+                            <span class="resourceTypeTitle">{% trans 'corpus' %}:</span> {% blocktrans %}for sets of documents in one or more
+                            languages, including, for instance,{% endblocktrans %}
                             <ul>
-                                <li>sets of public administration official documents (e.g. ministerial decisions, legal
-                                    acts, Board decisions etc.),
-                                </li>
-                                <li>sets of journal, newspaper, bulletin, blog articles, etc.</li>
-                                <li>parallel corpora, i.e. sets of original document with its translations (without any
-                                    processing)
-                                </li>
-                                <li>translation memories, i.e. translated documents aligned with their originals.</li>
+                                <li>{% trans 'sets of public administration official documents (e.g. ministerial decisions, legal acts, Board decisions etc.),' %}</li>
+                                <li>{% trans 'sets of journal, newspaper, bulletin, blog articles, etc.' %}</li>
+                                <li>{% trans 'parallel corpora, i.e. sets of original document with its translations (without any processing)' %}</li>
+                                <li>{% trans 'translation memories, i.e. translated documents aligned with their originals.' %}</li>
                             </ul>
                         </li>
                         <li>
-                            <span class="resourceTypeTitle">language description:</span> for resources such as:
+                            <span class="resourceTypeTitle">{% trans 'language description' %}:</span> {% blocktrans %}for resources such as:{% endblocktrans %}
                             <ul>
-                                <li>grammars, i.e. sets of rules that formalize a language</li>
-                                <li>language and translation models, which contain statistical information that assigns
-                                    a probability to a piece of unseen text (based on some training data).
-                                </li>
+                                <li>{% trans 'grammars, i.e. sets of rules that formalize a language' %}</li>
+                                <li>{% trans 'language and translation models, which contain statistical information that assigns a probability to a piece of unseen text (based on some training data).' %}</li>
                             </ul>
                         </li>
                         <li>
-                            <span class="resourceTypeTitle">lexical/conceptual resource:</span> for resources such as:
+                            <span class="resourceTypeTitle">{% trans 'lexical/conceptual resource' %}:</span> {% blocktrans %}for resources such as:{% endblocktrans %}
                             <ul>
-                                <li>terminological lexica, glossaries etc., i.e. including lists of terms, with or
+                                <li>{% blocktrans %}terminological lexica, glossaries etc., i.e. including lists of terms, with or
                                     without any other information (e.g. definition, examples, translation equivalents,
-                                    linguistic information etc.)
+                                    linguistic information etc.){% endblocktrans %}
                                 </li>
-                                <li>lists of words, such as person names, names of places, names of products etc.</li>
-                                <li>lexica and dictionaries containing words with linguistic information (e.g. part of
-                                    speech, inflectional information, etc.).
+                                <li>{% blocktrans %}lists of words, such as person names, names of places, names of products etc.{% endblocktrans %}</li>
+                                <li>{% blocktrans %}lexica and dictionaries containing words with linguistic information (e.g. part of
+                                    speech, inflectional information, etc.).{% endblocktrans %}
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <span class="resourceTypeTitle">Tool/Service</span>
+                            <span class="resourceTypeTitle">{% trans 'Tool/Service' %}</span>
                             <ul>
                                 <li>
-                                    language processing tools, web services, applications such as linguistic annotators
+                                    {% blocktrans %}language processing tools, web services, applications such as linguistic annotators
                                     (e.g. Part-of-speech taggers, parsers, etc.), semantic annotators (e.g. Named Entity
-                                    Recognisers), aligners, etc.
+                                    Recognisers), aligners, etc.{% endblocktrans %}
                                 </li>
                             </ul>
                         </li>

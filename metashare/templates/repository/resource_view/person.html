@@ -1,18 +1,20 @@
 {% load email_protection %}
 {% load get_icon %}
 {% load static from staticfiles %}
+{% load 18n %}
+
 {% spaceless %}
 
 <div class="dataline" style="margin-bottom:3px;">
 	{% if level == "sub" %}
-		<label class='subtitle'>{{type}}</label>
+		<label class='subtitle'>{% trans type %}</label>
 	{% else %}	
 		{% if type != "Contact Person" and type != "Metadata Creator" and type != "Resource Creator" and type != "IPR Holder" and type != "Evaluator" and type != "Validator" and type != "Annotator" and type != "Licensor" and type != "Distribution_rights_holder" and type != "Validator" and type != "Recorder" %}
-			<span class='title'>{{type}}</span>
+			<span class='title'>{% trans type %}</span>
 		{% endif %}
 	{% endif %}
 	
-	<a href='#' class="contactcard" title="Click to view contact card">
+	<a href='#' class="contactcard" title="{% trans 'Click to view contact card' %}">
 		<label class="dataline indented" style="float:left;">
 			{{ person_dict.Given_name }}
 			{{ person_dict.Surname }}
@@ -138,14 +140,14 @@
 		{% if person_dict.Communication.Telephone_number %}
 		<div>
 			<label class="dataline">
-				Tel.: {{ person_dict.Communication.Telephone_number }}
+				{% trans 'Tel.' %}: {{ person_dict.Communication.Telephone_number }}
 			</label>
 		</div>
 		{% endif %}
 		{% if person_dict.Communication.Fax_number %}
 		<div>
 			<label class="dataline">
-				Fax: {{ person_dict.Communication.Fax_number }}
+				{% trans 'Fax' %}: {{ person_dict.Communication.Fax_number }}
 			</label>
 		</div>
 		{% endif %}
@@ -220,14 +222,14 @@
 		{% if person_dict.Affiliation.Communication.Telephone_number %}
 		<div>
 			<label class="dataline">
-				Tel.: {{ person_dict.Affiliation.Communication.Telephone_number }}
+				{% trans 'Tel.' %}: {{ person_dict.Affiliation.Communication.Telephone_number }}
 			</label>
 		</div>
 		{% endif %}
 		{% if person_dict.Affiliation.Communication.Fax_number %}
 		<div>
 			<label class="dataline">
-				Fax: {{ person_dict.Affiliation.Communication.Fax_number }}
+				{% trans 'Fax' %}: {{ person_dict.Affiliation.Communication.Fax_number }}
 			</label>
 		</div>
 		{% endif %}	

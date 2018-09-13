@@ -1,15 +1,15 @@
 {% extends "admin/base_site.html" %}
-
+{% load i18n %}
 {% block breadcrumbs %}
 {% include "breadcrumbs.html" %}
 {% endblock %}
 
 {% block content %}
-<h3>Remove a user from the following organization manager group{{ selected_organizationmanagers|pluralize }}:</h3>
+<h3>{% blocktrans %}Remove a user from the following organization manager group{{ selected_organizationmanagers|pluralize }}:{% endblocktrans %}</h3>
 
 <div class="content_box">
 <table class='organizationmanagers-group'>
-  <tr><th>Organization Manager Group{{ selected_organizationmanagers|pluralize }}</th><th>Members</th></tr>
+  <tr><th>{% blocktrans %}Organization Manager Group{{ selected_organizationmanagers|pluralize }}{% endblocktrans %}</th><th>{% blocktrans %}Members{% endblocktrans %}</th></tr>
   {% for organization_managers in selected_organizationmanagers %}
   <tr><td>{{ organization_managers }}</td><td>{{ organization_managers.get_members|join:", "}}</td></tr>
   {% endfor %}
@@ -23,8 +23,8 @@
 </table>
 
 <input type="hidden" name="action" value="remove_user_from_organization_managers"/>
-<input type="submit" name="remove_user_profile_from_organization_managers" value="Remove"/>
-<input type="submit" name="cancel" value="Cancel"/>
+<input type="submit" name="remove_user_profile_from_organization_managers" value="{% trans 'Remove' %}"/>
+<input type="submit" name="cancel" value="{% trans 'Cancel' %}"/>
 </form>
 </div>
 {% endblock content %}

@@ -1,15 +1,14 @@
 {% extends "base.html" %}
-
-{% block title %}{% if title %}{{ title }}{% else %}Log in{% endif %} &ndash; ELRC-SHARE{% endblock %}
+{% load i18n %}
 
 {% block messages %}
     {% if form.errors %}
-        <p class="error">Your username and password didn't match. Please try again.</p>
+        <p class="error">{% trans "Your username and password didn't match. Please try again." %}</p>
     {% endif %}
 {% endblock %}
 
 {% block content %}
-    <h2>User Authentication</h2>
+    <h2>{% trans "User Authentication" %}</h2>
     <div class="content_box">
         <form class="form_helper" method="post" action="{% url 'login' %}">
             {% csrf_token %}
@@ -19,16 +18,16 @@
                     <td></td>
                     <td>
                         <button class="span-4 button middle_button" style="margin-left: 43%;">
-                            <i class="fa fa-sign-in" aria-hidden="true"></i> Login
+                            <i class="fa fa-sign-in" aria-hidden="true"></i> {% trans "Login" %}
                         </button>
                     </td>
                 </tr>
             </table>
             <input type="hidden" name="next" value="{{ next }}"/>
         </form>
-        <span><a href="{% url 'reset' %}">Forgotten your username or password? Click here to reset your password.</a></span>
+        <span><a href="{% url 'reset' %}">{% blocktrans %} Forgotten your username or password? Click here to reset your password. {% endblocktrans %}</a></span>
         <br />
-        <span><a href="{% url 'create' %}">Don&rsquo;t have an account, yet? Click here to create one.</a></span>
+        <span><a href="{% url 'create' %}">{% trans "Don&rsquo;t have an account, yet? Click here to create one." %}</a></span>
         <p><hr /></p>
 {#        <p><a href="/ecas-login">#}
 {#            <button class="button euLogin">#}

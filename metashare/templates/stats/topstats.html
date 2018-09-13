@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 {% load static from staticfiles %}
+{%load i18n %}
 {% block content %}
-    <noscript><b>It seems JavaScript is either disabled or not supported by your browser.</b>
-        JavaScript should be enabled in order to support all functionalities.
-        Enable JavaScript by changing your browser options, and then try again.
+    <noscript><b>{% trans 'It seems JavaScript is either disabled or not supported by your browser.' %}</b>
+        {% blocktrans %}JavaScript should be enabled in order to support all functionalities.
+        Enable JavaScript by changing your browser options, and then try again.{% endblocktrans %}
     </noscript>
     {% if geovisits|length > 0 %}
         <script type="text/javascript" src="http://www.google.com/jsapi"></script>
@@ -109,10 +110,10 @@
 
     <div class='tab-container'>
         <ul class='etabs'>
-            <li class='tab tab-nobr'>ELRC-SHARE visits statistics</li>
-            <li class='tab'><a href="{% url 'frontpage' %}stats/usage/">Statistics on resource metadata</a></li>
+            <li class='tab tab-nobr'>{% trans 'ELRC-SHARE visits statistics' %}</li>
+            <li class='tab'><a href="{% url 'frontpage' %}stats/usage/">{% trans 'Statistics on resource metadata' %}</a></li>
             {% if user.username and myres %}
-                <li class='tab'><a href="{% url 'frontpage' %}stats/mystats/">My resources</a></li>
+                <li class='tab'><a href="{% url 'frontpage' %}stats/mystats/">{% trans 'My resources' %}</a></li>
             {% endif %}
         </ul>
     </div>
@@ -120,11 +121,11 @@
     <div class="content_tab">
         <div style="margin-left: 0px; padding-top: 1px;">
             <form class="form_helper" name="topform" id="topform" action="{% url 'frontpage' %}stats/top/" method="get">
-                <h4>Show the <select style="color: #000; background: #eee" name='view' onchange="topform.submit();">
+                <h4>{% trans 'Show the' %} <select style="color: #000; background: #eee" name='view' onchange="topform.submit();">
 
                     <option value='topviewed'
                             style="background-image: url({% static "stats/img/view_icon.gif" %}); background-repeat: no-repeat; padding-left: 20px;">
-                        Most Viewed Resources
+                        {% trans 'Most Viewed Resources' %}
                     </option>
 
                     <option value='topqueries'
@@ -132,7 +133,7 @@
                             {% ifequal view "topqueries" %}
                             selected
                             {% endifequal %}>
-                        Top Queries
+                        {% trans 'Top Queries' %}
                     </option>
 
                     <option value='latestqueries'
@@ -140,7 +141,7 @@
                             {% ifequal view "latestqueries" %}
                             selected
                             {% endifequal %}>
-                        Latest Queries
+                        {% trans 'Latest Queries' %}
                     </option>
 
                     <option value='topdownloaded'
@@ -148,7 +149,7 @@
                             {% ifequal view "topdownloaded" %}
                             selected
                             {% endifequal %}>
-                        Top Downloaded Resources
+                        {% trans 'Top Downloaded Resources' %}
                     </option>
 
                     <option value='latestupdated'
@@ -156,7 +157,7 @@
                             {% ifequal view "latestupdated" %}
                             selected
                             {% endifequal %}>
-                        Latest Updated Resources
+                        {% trans 'Latest Updated Resources' %}
                     </option>
                 </select>
                 </h4>
@@ -164,15 +165,15 @@
         </div>
         <div class="content">
             {% if topdata|length <= 0 and countrycode == '' and last == '' %}
-                <ul class=errorlist>No data found</ul>
+                <ul class=errorlist>{% trans 'No data found' %}</ul>
             {% else %}
                 {% if not "late" in view or geovisits|length > 0 %}
                     <div class="left_box">
                         <div class="filters">
-                            <h4>Filter by:</h4>
+                            <h4>{% trans 'Filter by:' %}</h4>
                             <div id="searchFilters">
                                 {% if not "late" in view %}
-                                    <div class="accordion"><a href="#" onclick="return false">Date</a></div>
+                                    <div class="accordion"><a href="#" onclick="return false">{% trans 'Date' %}</a></div>
                                     <div class="filter">
                                         {% with "day week month year" as list %}
                                             {% for date in list.split %}
@@ -193,7 +194,7 @@
                                 {% endif %}
 
                                 {% if geovisits|length > 0 %}
-                                    <div class="accordion"><a href="#" onclick="return false">Provenance
+                                    <div class="accordion"><a href="#" onclick="return false">{% trans 'Provenance' %}
                                         of {{ visitstitle }}</a></div>
                                     <div class="filter">
                                         {% for geoinfo in geovisits %}
@@ -216,8 +217,8 @@
                                         {% endfor %}
                                     </div>
                                     <div id="googlemap" style="margin-left: -20px"></div>
-                                    <div style="font-size:7pt;text-align:left">* This product includes GeoLite data
-                                        created by MaxMind, available from http://maxmind.com/ and a Google Maps chart.
+                                    <div style="font-size:7pt;text-align:left">{% blocktrans %}* This product includes GeoLite data
+                                        created by MaxMind, available from http://maxmind.com/ and a Google Maps chart.{% endblocktrans %}
                                     </div>
                                 {% endif %}
                             </div>
@@ -227,7 +228,7 @@
                     </div>{# end left_box #}
 
                     {% if topdata|length <= 0 %}
-                        <ul class=errorlist>No data matched</ul>
+                        <ul class=errorlist>{% trans 'No data matched' %}</ul>
                     {% endif %}
                 {% endif %}
 
@@ -236,15 +237,15 @@
                         {% if offset != 0 or has_next %}
                             <p>
                                 {% if offset != 0 %}
-                                    <a href="?view={{ view }}&offset={{ offset|add:-10 }}&last={{ last }}&country={{ countrycode }}">&laquo;&nbsp;Previous</a>
+                                    <a href="?view={{ view }}&offset={{ offset|add:-10 }}&last={{ last }}&country={{ countrycode }}">&laquo;&nbsp;{% trans 'Previous' %}</a>
                                 {% else %}
-                                    &laquo;&nbsp;Previous
+                                    &laquo;&nbsp;{% trans 'Previous' %}
                                 {% endif %}
                                 |
                                 {% if has_next %}
-                                    <a href="?view={{ view }}&offset={{ offset|add:10 }}&last={{ last }}&country={{ countrycode }}">Next&nbsp;&raquo;</a>
+                                    <a href="?view={{ view }}&offset={{ offset|add:10 }}&last={{ last }}&country={{ countrycode }}">{% trans 'Next' %}&nbsp;&raquo;</a>
                                 {% else %}
-                                    Next&nbsp;&raquo;
+                                    {% trans 'Next' %}&nbsp;&raquo;
                                 {% endif %}
                             </p>
                         {% endif %}
@@ -275,10 +276,10 @@
                                                 <div style="display: inline; font-size: 12pt; color: #000">
                                                     &nbsp;{{ object.3 }}</div>
                                                 {% ifequal view "latestqueries" %}
-                                                    result{{ object.3|pluralize }}
+                                                    {% blocktrans %}result{{ object.3|pluralize }}{% endblocktrans %}
                                                 {% endifequal %}
                                                 {% ifequal view "topqueries" %}
-                                                    time{{ object.3|pluralize }}
+                                                    {% blocktrans %}time{{ object.3|pluralize }}{% endblocktrans %}
                                                 {% endifequal %}
                                             </div>
                                         </div>
@@ -298,10 +299,10 @@
 
                                             <div class="accessStats">
                                                 <img src="{% static "stats/img/download_icon.gif" %}"
-                                                     alt="Number of downloads"
-                                                     title="Number of downloads"/>&nbsp;{{ object.0.storage_object.identifier|get_download_count }}
-                                                <img src="{% static "stats/img/view_icon.gif" %}" alt="Number of views"
-                                                     title="Number of views"/>&nbsp;{{ object.0.storage_object.identifier|get_view_count }}
+                                                     alt="{% trans 'Number of downloads' %}"
+                                                     title="{% trans 'Number of downloads' %}"/>&nbsp;{{ object.0.storage_object.identifier|get_download_count }}
+                                                <img src="{% static "stats/img/view_icon.gif" %}" alt="{% trans 'Number of views' %}"
+                                                     title="{% trans 'Number of views' %}"/>&nbsp;{{ object.0.storage_object.identifier|get_view_count }}
                                             </div>
                                             <ul>
                                                 {% resource_languages object.0.resourceComponentType.as_subclass %}

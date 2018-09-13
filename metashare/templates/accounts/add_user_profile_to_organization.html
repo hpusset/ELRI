@@ -1,15 +1,17 @@
 {% extends "admin/base_site.html" %}
-
+{% load i18n %}
 {% block breadcrumbs %}
 {% include "breadcrumbs.html" %}
 {% endblock %}
 
 {% block content %}
-<h3>Add a user to the following organization{{ selected_organizations|pluralize }}:</h3>
+<h3>{% blocktrans %}Add a user to the following organization{{ selected_organizations|pluralize }}:{% endblocktrans %}</h3>
 
 <div class="content_box">
 <table class='organization-group'>
-  <tr><th>Organization{{ selected_organizations|pluralize }}</th><th>Members</th><th>Organization Managers</th></tr>
+  <tr><th>{% blocktrans %}Organization{{ selected_organizations|pluralize }}{% endblocktrans %}</th>
+      <th>{% blocktrans %}Members{% endblocktrans %}</th>
+      <th>{% blocktrans %}Organization Managers{% endblocktrans %}</th></tr>
   {% for organization in selected_organizations %}
   <tr><td>{{ organization }}</td><td>{{ organization.get_members|join:", "}}</td><td>{{ organization.get_managers|join:", "}}</td></tr>
   {% endfor %}

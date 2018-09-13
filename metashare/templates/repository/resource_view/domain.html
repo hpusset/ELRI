@@ -1,6 +1,7 @@
 {% spaceless %}
+{% load i18n %}
 
-    <label class='title'>Domains</label>
+    <label class='title'>{% trans 'Domains' %}</label>
     <div class="dataline">
         {% for key, value in domains.items %}
             {% if "Domain" in key %}

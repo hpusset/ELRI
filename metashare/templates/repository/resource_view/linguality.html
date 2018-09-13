@@ -1,10 +1,10 @@
 {% spaceless %}
-
-<label class='title'>Linguality</label>
+{% load i18n %}
+<label class='title'>{% trans 'Linguality' %}</label>
 {% if linguality.Linguality_type %}
 	 <div class="dataline indented">
 		<label>
-			<strong>Linguality type:</strong> {{ linguality.Linguality_type }}
+			<strong>{% trans 'Linguality type' }:</strong> {{ linguality.Linguality_type }}
 		</label>
 	</div>
 {% endif %}
@@ -12,7 +12,7 @@
 {% if linguality.Multilinguality_type %}
 	 <div class="dataline indented">
 		<label>
-			<strong>Multi-linguality type:</strong> {{ linguality.Multilinguality_type }} {% if linguality.Multilinguality_type_details %} ({{ linguality.Multilinguality_type_details }}) {% endif %}
+			<strong>{% trans 'Multi-linguality type' %}:</strong> {{ linguality.Multilinguality_type }} {% if linguality.Multilinguality_type_details %} ({{ linguality.Multilinguality_type_details }}) {% endif %}
 		</label>
 	</div>
 {% endif %}

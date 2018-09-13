@@ -1,12 +1,13 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
-<h2>Permission Denied (403)</h2>
+<h2>{% blocktrans %}Permission Denied (403){% endblocktrans %}</h2>
 <div class="content_box">
 {% if request.msg %}
   <p>{{ request.msg }}</p>
 {% else %}
-  <p>You don't have the sufficient rights to access this resource.</p>
+  <p>{% blocktrans %}You don't have the sufficient rights to access this resource.{% endblocktrans %}</p>
 {% endif %}
 </div>
 {% endblock %}

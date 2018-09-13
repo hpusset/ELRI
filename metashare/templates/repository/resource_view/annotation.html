@@ -1,3 +1,5 @@
+{% load i18n %}
+
 {% spaceless %}
 
 <label class="subtitle"><strong>{{ annotations.Annotation_type }}</strong></label>
@@ -5,21 +7,21 @@
 	{% if annotations.Tagset %}
 		<div>
 			<label class="dataline indented">
-				<strong>Tagset: </strong> {{ annotations.Tagset }} {% if annotations.Tagset_language %} <label {% if annotations.Tagset_language_identifier %}title="{{annotations.Tagset_language_identifier}}" {% endif %} class="dataline">({{ annotations.Tagset_language }})</label> {% endif %}
+				<strong>{% trans 'Tagset' %}: </strong> {{ annotations.Tagset }} {% if annotations.Tagset_language %} <label {% if annotations.Tagset_language_identifier %}title="{{annotations.Tagset_language_identifier}}" {% endif %} class="dataline">({{ annotations.Tagset_language }})</label> {% endif %}
 			</label>
 		</div>
 	{% endif %}
 	{% if annotations.Annotated_elements %}		
 		<div>
 			<label class="dataline indented">
-				<strong>Annotated elements: </strong>{{ annotations.Annotated_elements }}
+				<strong>{% trans 'Annotated elements' %}: </strong>{{ annotations.Annotated_elements }}
 			</label>
 		</div>
 	{% endif %}
 	{% if annotations.Annotation_standoff %}
 		<div>
 			<label class="dataline indented">
-				<strong>StandOff: </strong>{{ annotations.Annotation_standoff }}
+				<strong>{% trans 'StandOff' %}: </strong>{{ annotations.Annotation_standoff }}
 			</label>
 		</div>
 	{% endif %}
@@ -27,28 +29,28 @@
 	{% if annotations.Segmentation_level %}
 		<div>
 			<label class="dataline indented">
-				<strong>Segmentation level: </strong>{{ annotations.Segmentation_level }}
+				<strong>{% trans 'Segmentation level' %}: </strong>{{ annotations.Segmentation_level }}
 			</label>
 		</div>
 	{% endif %}
 	{% if annotations.Annotation_format %}
 		<div>
 			<label class="dataline indented">
-				<strong>Format: </strong>{{ annotations.Annotation_format }}
+				<strong>{% trans 'Format' %}: </strong>{{ annotations.Annotation_format }}
 			</label>
 		</div>
 	{% endif %}
 	{% if annotations.Conformance_to_standards___best_practices %}
 		<div>
 			<label class="dataline indented">
-				<strong>Standard practices conformance: </strong> {{ annotations.Conformance_to_standards___best_practices }}
+				<strong>{% trans 'Standard practices conformance' %}: </strong> {{ annotations.Conformance_to_standards___best_practices }}
 			</label>
 		</div>
 	{% endif %}
 	{% if annotations.Theoretic_model %}
 		<div>
 			<label class="dataline indented">
-				<strong>Theoretic Model: </strong> {{ annotations.Theoretic_model }}
+				<strong>{% trans 'Theoretic Model' %}: </strong> {{ annotations.Theoretic_model }}
 			</label>
 		</div>
 	{% endif %}
@@ -56,14 +58,14 @@
 	{% if annotations.Annotation_mode %}
 		<div>
 			<label class="dataline indented">
-				<strong>Annotation Mode: </strong> {{ annotations.Annotation_mode }} {% if annotations.Annotation_mode_details %} ({{ annotations.Annotation_mode_details }}) {% endif %}
+				<strong>{% trans 'Annotation Mode' %}: </strong> {{ annotations.Annotation_mode }} {% if annotations.Annotation_mode_details %} ({{ annotations.Annotation_mode_details }}) {% endif %}
 			</label>
 		</div>
 	{% endif %}
 	
 	{% if "Annotation_tool" in annotations %}
 		<div class="dataline indented">
-		<label><strong>Annotation Tools:</strong></label>
+		<label><strong>{% trans 'Annotation Tools' %}:</strong></label>
 			<ul>
 				{% for key1, value1 in annotations.items %}
 					{% if "Annotation_tool" in key1 %}
@@ -77,7 +79,7 @@
 	{% if annotations.Annotation_start_date %}
 		<div>
 			<label class="dataline indented">
-				<strong>Start date:</strong> {{ annotations.Annotation_start_date|date:"SHORT_DATE_FORMAT" }}
+				<strong>{% trans 'Start date' %}:</strong> {{ annotations.Annotation_start_date|date:"SHORT_DATE_FORMAT" }}
 			</label>
 		</div>
 	{% endif %}
@@ -85,7 +87,7 @@
 	{% if annotations.Annotation_end_date %}
 		<div>
 			<label class="dataline indented">
-				<strong>End date:</strong> {{ annotations.Annotation_end_date|date:"SHORT_DATE_FORMAT" }}
+				<strong>{% trans 'End date' %}:</strong> {{ annotations.Annotation_end_date|date:"SHORT_DATE_FORMAT" }}
 			</label>
 		</div>
 	{% endif %}
@@ -97,7 +99,7 @@
 	{% if "Annotation_manual" in annotations %}
 		<div>
 			<label class="dataline indented">
-				<strong>Annotation Manual</strong>
+				<strong>{% trans 'Annotation Manual' %}</strong>
 			</label>
 		</div>
 {#        <div class="subtitle"></div>#}
@@ -122,7 +124,7 @@
 	{% if annotations.Interannotator_agreement %}
 		<div>
 			<label class="dataline indented">
-				<strong>Interannotator Agreement:</strong> {{ annotations.Interannotator_agreement }}
+				<strong>{% trans 'Interannotator Agreement' %}:</strong> {{ annotations.Interannotator_agreement }}
 			</label>
 		</div>
 	{% endif %}
@@ -130,7 +132,7 @@
 	{% if annotations.Intraannotator_agreement %}
 		<div>
 			<label class="dataline indented">
-				<strong>Intraannotator Agreement:</strong> {{ annotations.Intraannotator_agreement }}
+				<strong>{% trans 'Intraannotator Agreement' %}:</strong> {{ annotations.Intraannotator_agreement }}
 			</label>
 		</div>
 	{% endif %}
@@ -138,7 +140,7 @@
 		
 	<div class="dataline">
 		{% if "Annotator" in value %}
-			<label class="dataline indented"><strong>Annotators:</strong></label>
+			<label class="dataline indented"><strong>{% trans 'Annotators' %}:</strong></label>
 		{% endif %}
 		{% for key, value in annotations.items %}
 			{% for key1, value1 in value.items %}

@@ -1,8 +1,9 @@
 {% load replace %}
+{% load i18n %}
 
 {% spaceless %}
 
-<label class='title'>Link to Other Media</label>
+<label class='title'>{% trans 'Link to Other Media' %}</label>
 {% for key, value in link.items %}
 		 <div class="dataline indented">
 			<label>

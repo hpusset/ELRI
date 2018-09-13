@@ -1,10 +1,10 @@
 {% load replace %}
-
+{% load i18n %}
 {% spaceless %}
 
-<label class='title'>Recording</label>
+<label class='title'>{% trans 'Recording' %}</label>
 {% if "Recorder" in recording %}
-	<label class='subtitle'>Recorders</label>
+	<label class='subtitle'>{% trans 'Recorders' %}</label>
 	{% for key, value in recording.items %}
 		{% if "Recorder" in key %}
 			{% include "repository/resource_view/person.html" with person_dict=value.Recorder type="Recorder" %}

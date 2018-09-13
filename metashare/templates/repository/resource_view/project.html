@@ -1,5 +1,5 @@
 {% spaceless %}
-
+{% laod i18n %}
 <div class="dataline">
 	{% if level == "sub" %}
 		<div class='dataline indented'>
@@ -27,14 +27,14 @@
 	
 	<div class="dataline indented">
 		<label>
-			<strong>Funding Type{% if ", " in project.Funding_type%}s{% endif %}: </strong>{{ project.Funding_type }}
+			<strong>{% trans 'Funding Type' %}{% if ", " in project.Funding_type%}s{% endif %}: </strong>{{ project.Funding_type }}
 		</label>
 	</div>
 
 	{% if project.Funder %}
 	<div class="dataline indented">
 		<label>
-			<strong>Funder{% if ", " in project.Funder%}s{% endif %}: </strong>{{ project.Funder }}
+			<strong>{% trans 'Funder' %}{% if ", " in project.Funder%}s{% endif %}: </strong>{{ project.Funder }}
 		</label>
 	</div>
 	{% endif %}
@@ -42,7 +42,13 @@
 	<div class="dataline indented">
 		<label>
 			{% if project.Funding_country %}
-			<strong>Funding {% if "," in project.Funding_country%}Countries{% else %}Country{% endif %}: </strong>{{ project.Funding_country }}
+			<strong>
+				{% if "," in project.Funding_country%}
+					{% blocktrans %}Funding Countries{% endblocktrans %}
+				{% else %}
+					{% blocktrans %}Funding Country{% endblocktrans %}
+				{% endif %}: </strong>
+			{{ project.Funding_country }}
                 {% if project.Funding_country_identifier%}({{ project.Funding_country_identifier }}){% endif %}
 			{% endif %}
 		</label>
@@ -51,14 +57,14 @@
 	{% if project.Project_start_date and project.Project_end_date %}
 		<div class="dataline indented">
 			<label>
-				<strong>Project duration:</strong> {{ project.Project_start_date|date:"SHORT_DATE_FORMAT" }} - {{ project.Project_end_date|date:"SHORT_DATE_FORMAT" }}
+				<strong>{% trans 'Project duration' %}:</strong> {{ project.Project_start_date|date:"SHORT_DATE_FORMAT" }} - {{ project.Project_end_date|date:"SHORT_DATE_FORMAT" }}
 			</label>
 		</div>
 	{% else %}
 		{% if project.Project_start_date %}
 			<div class="dataline indented">
 				<label>					
-					<strong>Project started: </strong>{{ project.Project_start_date|date:"SHORT_DATE_FORMAT" }}					
+					<strong>{% trans 'Project started' %}:</strong> {{ project.Project_start_date|date:"SHORT_DATE_FORMAT" }}					
 				</label>
 			</div>
 		{% endif %}
@@ -66,7 +72,7 @@
 		{% if project.Project_end_date %}
 			<div class="dataline indented">
 				<label>				
-					<strong>Project ended: </strong>{{ project.Project_end_date|date:"SHORT_DATE_FORMAT" }}
+					<strong>{% trans 'Project ended' %}:</strong> {{ project.Project_end_date|date:"SHORT_DATE_FORMAT" }}
 				</label>
 			</div>
 		{% endif %}

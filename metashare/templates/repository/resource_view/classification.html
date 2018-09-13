@@ -1,8 +1,10 @@
 {% load replace %}
 {% load humanize %}
+{% load i18n %}
+
 {% spaceless %}
 
-    <label class='title'>Eurovoc Classification</label>
+    <label class='title'>{% trans 'Eurovoc Classification' %}</label>
     <div class="dataline">
         {% for key, value in classifications.items %}
             {% if "classification" in key %}
@@ -10,7 +12,7 @@
                     {% if "Size_per" in key1 %}
                         <div class="indented">
                             <label>
-                                <strong>Size: </strong>{{ value1.Size|intcomma }} {{ value1.Size_unit }}
+                                <strong>{% trans 'Size' %}: </strong>{{ value1.Size|intcomma }} {{ value1.Size_unit }}
                             </label>
                         </div>
                     {% else %}

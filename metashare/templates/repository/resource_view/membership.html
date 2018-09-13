@@ -1,8 +1,14 @@
+{% load i18n %}
+
 {% spaceless %}
 	
 <div class="dataline indented">
 	<label>
-		<strong><i>For {% if membership.Member == "False" %}Non{% endif %} Members of {{membership.Membership_institution}}</i></strong>
+		<strong><i>{% if membership.Member == "False" %}
+                   {% blocktrans with institution=membership.Membership_institution %}For Non Members of {{ institution }}{% endblocktrans %}
+                {% else %}
+                   {% blocktrans with institution=membership.Membership_institution %}For Members of {{ institution }}{% endblocktrans %}
+                {% endif %}</i></strong>
 	</label>
 </div>		
 
