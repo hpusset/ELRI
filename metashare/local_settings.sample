@@ -17,7 +17,24 @@ DJANGO_BASE = 'path/to/metashare/'
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 USE_L10N = True
-LANGUAGE_CODE = 'en-us'
+USE_I18N = True
+
+# Supported languages
+LANGUAGES = (
+    ('es-es', _('Spanish')),
+    ('en-ie', _('English')),
+    ('fr-fr', _('French')),
+    ('ga-ie', _('Gaelic')),
+    ('pt-pt', _("Portuguese")),
+)
+
+# Directories containing the translations
+LOCALE_PATHS = tuple([
+    join(directory, dn)
+    for directory, dns, _ in walk(abspath(dirname(__file__)))
+    for dn in dns
+    if dn == "locale"
+])
 
 # Path to the local storage layer path used for persistent object storage.
 STORAGE_PATH = '/path/to/storage/path'
