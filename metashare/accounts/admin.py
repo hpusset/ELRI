@@ -299,8 +299,8 @@ class EditorGroupApplicationAdmin(admin.ModelAdmin):
                                               "out an application acceptance e-mail."))
                 else:
                     messages.success(request, _('You have successfully ' \
-                                                'accepted "%s" as member of the editor group "%s".')
-                                     % (req.user.get_full_name(), req.editor_group,))
+                                                'accepted "%(user)s" as member of the editor group "%(group)s".')
+                                     % {"user":req.user.get_full_name(), "group":req.editor_group,})
 
         if _total_groups != _accepted_groups:
             messages.warning(request, _('Successfully accepted %(accepted)d of '
@@ -358,9 +358,9 @@ class EditorGroupApplicationAdmin(admin.ModelAdmin):
             messages.error(request, _("There was an error sending out an "
                                       "e-mail about turning down the application."))
         else:
-            messages.success(request, _('You have successfully turned down "%s" ' \
-                                        'from the editor group "%s".') % (obj.user.get_full_name(),
-                                                                          obj.editor_group,))
+            messages.success(request, _('You have successfully turned down "%(user)s" ' \
+                                        'from the editor group "%(group)s".') % {"user": obj.user.get_full_name(),
+                                                                          "group":obj.editor_group,})
 
         super(EditorGroupApplicationAdmin, self).log_deletion(request, obj, object_repr)
 
@@ -767,8 +767,8 @@ class OrganizationApplicationAdmin(admin.ModelAdmin):
                                               "out an application acceptance e-mail."))
                 else:
                     messages.success(request, _('You have successfully ' \
-                                                'accepted "%s" as member of the organization "%s".')
-                                     % (req.user.get_full_name(), req.organization,))
+                                                'accepted "%(user)s" as member of the organization "%(group)s".')
+                                     % {"user": req.user.get_full_name(), "group":req.organization,})
 
         if _total_groups != _accepted_groups:
             messages.warning(request, _('Successfully accepted %(accepted)d of '
@@ -819,8 +819,8 @@ class OrganizationApplicationAdmin(admin.ModelAdmin):
                                       "e-mail about turning down the application."))
         else:
             messages.success(request, _('You have turned down the application' \
-                                        ' of "%s" for membership in the organization "%s".')
-                             % (obj.user.get_full_name(), obj.organization,))
+                                        ' of "%(user)s" for membership in the organization "%(group)s".')
+                             % {"user":obj.user.get_full_name(), "group":obj.organization,})
 
         super(OrganizationApplicationAdmin, self).log_deletion(request, obj, object_repr)
 

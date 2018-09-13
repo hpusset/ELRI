@@ -515,9 +515,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 _failures = queryset.count() - _successes
                 if _failures:
                     messages.warning(request, _('Successfully added editor ' \
-                        'groups to %i of the selected resources. %i resource ' \
+                        'groups to %(success)i of the selected resources. %(failure)i resource ' \
                         'editor groups were left unchanged due to missing ' \
-                        'permissions.') % (_successes, _failures))
+                        'permissions.') % {"success":_successes, "failure":_failures})
                 else:
                     messages.success(request, _('Successfully added editor ' \
                                         'groups to all selected resources.'))
@@ -629,9 +629,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 _failures = queryset.count() - _successes
                 if _failures:
                     messages.warning(request, _('Successfully added owners ' \
-                        'to %i of the selected resources. %i resource owners ' \
+                        'to %(success)i of the selected resources. %(failure)i resource owners ' \
                         'were left unchanged due to missing permissions.')
-                        % (_successes, _failures))
+                        % {"success":_successes, "failure":_failures})
                 else:
                     messages.success(request, _('Successfully added owners ' \
                                                 'to all selected resources.'))
