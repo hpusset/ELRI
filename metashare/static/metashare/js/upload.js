@@ -67,9 +67,9 @@ $(function () {
         else {
             var file = $('#filebutton')[0].files[0];
             if (file !== undefined && file.size > 104857600) {
-                alert("The file you are trying to upload is larger " +
+                alert(gettext("The file you are trying to upload is larger " +
                     "than the maximum upload file size (100mb).\n" +
-                    "Please contact elrc-share@ilsp.gr");
+                    "Please contact elrc-share@ilsp.gr"));
                 return false;
             }
             return true;
@@ -91,24 +91,24 @@ if (!isIE) {
             beforeSend: function (xhr, opts) {
                 if (mode == undefined) {
                     xhr.abort();
-                    alert("Please select a contribution mode!");
+                    alert(gettext("Please select a contribution mode!"));
                     return false
                 }
                 if (mode == "uploadzip") {
                     var fileName = $('input[type=file]').val().split('/').pop().split('\\').pop();
                     if (!endsWith(fileName, ".zip")) {
                         xhr.abort();
-                        alert("The file you are trying to upload does not have a .zip extension.\n" +
-                            "Please make sure that you properly compress your data into a valid .zip file before uploading.");
+                        alert(gettext("The file you are trying to upload does not have a .zip extension.\n" +
+                            "Please make sure that you properly compress your data into a valid .zip file before uploading."));
                         return false
                     }
-                    status.html("<i class='fa fa-spinner fa-pulse' aria-hidden='true'></i> Uploading file: \"" + fileName + "\".\nPlease wait...");
+                    status.html("<i class='fa fa-spinner fa-pulse' aria-hidden='true'></i>"+gettext(" Uploading file: \"" + fileName + "\".\nPlease wait..."));
                 }
                 status.removeClass("success");
                 if (mode == "url") {
                     var url = $('input[id=resourceUrl]').val();
                     if (validateURL(url)) {
-                        status.html("<i class='fa fa-spinner fa-pulse' aria-hidden='true'></i> Submitting your contribution: \nPlease wait...");
+                        status.html("<i class='fa fa-spinner fa-pulse' aria-hidden='true'></i>" + gettext( "Submitting your contribution: \nPlease wait..."));
                     } else {
                         alert("Please enter a valid URL!");
                         xhr.abort();
@@ -133,9 +133,9 @@ if (!isIE) {
             error: function () {
                 $('.uploadWin').hide();
                 $('.overlay').hide();
-                alert("There was an error uploading this file.\n" +
+                alert(gettext("There was an error uploading this file.\n" +
                     "Please make sure that you are trying to upload a valid '.zip' file.\n" +
-                    "If the problem persists please try again later.");
+                    "If the problem persists please try again later."));
             },
             complete: function (response) {
                 if (mode != "eDelivery") {
@@ -180,28 +180,28 @@ else {
                     beforeSend: function (xhr, opts) {
                         if (mode == undefined) {
                             xhr.abort();
-                            alert("Please select a contribution mode!")
+                            alert(gettext("Please select a contribution mode!"))
                             return false
                         }
                         var fileName = $('input[type=file]').val().split('/').pop().split('\\').pop();
                         if (!endsWith(fileName, ".zip")) {
                             xhr.abort();
-                            alert("The file you are trying to upload does not have a .zip extension.\n" +
-                                "Please make sure that you properly compress your data into a valid .zip file before uploading.");
+                            alert(gettext("The file you are trying to upload does not have a .zip extension.\n" +
+                                "Please make sure that you properly compress your data into a valid .zip file before uploading."));
                             return false
                         }
                         status.removeClass("success");
                         if (mode == "url") {
                             var url = $('input[id=resourceUrl]').val();
                             if (validateURL(url)) {
-                                status.html("<i class='fa fa-spinner' aria-hidden='true'></i> Submitting your contribution: \nPlease wait...");
+                                status.html("<i class='fa fa-spinner' aria-hidden='true'></i>" + gettext("Submitting your contribution: \nPlease wait..."));
                             } else {
-                                alert("Please enter a valid URL!");
+                                alert(gettext("Please enter a valid URL!"));
                                 xhr.abort();
                                 return false;
                             }
                         } else {
-                            status.html("<i class='fa fa-spinner fa-pulse' aria-hidden='true'></i> Uploading file: \"" + fileName + "\".\nPlease wait...");
+                            status.html("<i class='fa fa-spinner fa-pulse' aria-hidden='true'></i>" + gettext("Uploading file: \"" + fileName + "\".\nPlease wait..."));
                         }
                         ok.hide();
                         donotclose();
