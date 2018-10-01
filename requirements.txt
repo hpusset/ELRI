@@ -17,7 +17,7 @@ psycopg2==2.5.4
 pycountry==1.12
 pygeoip==0.3.2
 pyparsing==1.5.7
-pysolr==2.1.0b
+pysolr==2.1.0
 python-dateutil==2.4.2
 requests==2.7.0
 selenium==2.52.0
