@@ -274,12 +274,15 @@ def _get_preferred_size(resource):
 def _get_country(res):
     res_countries = []
     for cp in res.contactPerson.all():
-        res_countries.append(cp.communicationInfo.country)
+        if cp.communicationInfo.country is not None:
+            res_countries.append(cp.communicationInfo.country)
         # now try to get the correct coutry
     if len(set(res_countries)) > 1 and res_countries[1]:
         res_country = res_countries[1]
-    else:
+    elif len(res_countries) > 0:
         res_country = res_countries[0]
+    else:
+        res_country = "N/A"
     return res_country
 
 
