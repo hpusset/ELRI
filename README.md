@@ -60,7 +60,7 @@ following steps need to be undertaken:
 
 07. Create the directories `metashare/unprocessed` and `metashare/processed`.
 
-08. Create file metashare/maintainers.dat, which should have the following
+08. Create the file `metashare/maintainers.dat`, which should have the following
     format:
     
     Country_name:maintainer_user_name_1,user_name_2,...
