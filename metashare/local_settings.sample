@@ -1,5 +1,9 @@
+from os import walk
 from os.path import abspath, dirname, join
 import tempfile
+
+from django.utils.translation import ugettext_lazy as _
+
 ROOT_PATH = abspath(dirname(__file__))
 
 # The URL for this META-SHARE node django application.  Do not use trailing /.
