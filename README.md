@@ -8,7 +8,6 @@ This code base is a fork of the [ELRC-SHARE](http://elrc-share.eu)
 [software](https://github.com/MiltosD/ELRC2), itself a fork of the
 [META-SHARE](http://www.meta-share.org/)
 [software](https://github.com/metashare/META-SHARE).
-software.
 
 
 With respect to the ELRC-SHARE, the ELRI National Relay Station (NRS) software
