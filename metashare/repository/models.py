@@ -1359,8 +1359,8 @@ class communicationInfoType_model(SchemaModel):
       blank=True, )
 
     address = XmlCharField(
-      verbose_name=_('Address',
-      help_text='The street and the number of the postal address of a pe' \
+      verbose_name=_('Address'),
+      help_text=_('The street and the number of the postal address of a pe' \
       'rson or organization'),
       blank=True, max_length=200, )
 
@@ -3233,8 +3233,8 @@ class inputInfoType_model(SchemaModel):
       blank=True, validators=[validate_matches_xml_char_production], )
 
     characterEncoding = MultiSelectField(
-      verbose_name=_('Character encoding',
-      help_text='The name of the character encoding used in the resource' \
+      verbose_name=_('Character encoding'),
+      help_text=_('The name of the character encoding used in the resource' \
       ' or accepted by the tool/service'),
       blank=True,
       max_length=1 + len(INPUTINFOTYPE_CHARACTERENCODING_CHOICES['choices']) / 4,
