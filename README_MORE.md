@@ -143,5 +143,18 @@ Password:
 ```
 7.7. List all the databases in the `pqsl` service:
 ```
-psql -U postgres -l 
+psql -U postgres -l
 ```
+or from the inside of psql:
+```
+$ psql -U postgres
+postgres-# \list
+```
+
+7.8. Change database owner:
+```
+$ psql -U postgres
+alter database elri_metashare owner to elri;
+alter database elri owner to elri;
+```
+Note that this can only be done when logged as the user original owner of the database.
