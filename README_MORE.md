@@ -51,7 +51,6 @@ deactivate
 
 7. Set a  `PostgreSQL` database:
 
-
 7.1.  install `postgresql`
 ```
 sudo apt install postgresql postgresql-contrib
@@ -158,3 +157,14 @@ alter database elri_metashare owner to elri;
 alter database elri owner to elri;
 ```
 Note that this can only be done when logged as the user original owner of the database.
+
+8. Change `metashare/local_settings.py` accordingly:
+
+8.1. Check postgresql service port
+```
+sudo netstat -nl | grep postgres
+unix  2      [ ACC ]     STREAM     LISTENING     186337   /var/run/postgresql/.s.PGSQL.5433
+```
+and update `DATABASES = { 'PORT': '5433',}`
+
+9. Set `ALLOWED_HOSTS = ['127.0.0.1','localhost']` in local_settings.py
