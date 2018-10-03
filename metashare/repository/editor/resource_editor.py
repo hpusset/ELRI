@@ -1269,7 +1269,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 # And now put the field where it belongs:
                 if _is_visible:
                     _relevant_fields.append(_fieldname_to_append)
-                    _verbose_names.append(self.model.get_verbose_name(_field_name))
+                    _verbose_names.append(self.model.get_verbose_name(_field_name).title())
             
             if len(_visible_fields) > 0:
                 _detail = ', '.join(_visible_fields_verbose_names)
