@@ -1,89 +1,89 @@
 {% extends "base.html" %}
-{% load email_protection %}
+{% load email_protection i18n %}
 
 {% block content %}
 
     <div id="LR_Provision" class="anchor"></div>
-    <h2>Provision of LRs in the ELRC-SHARE repository</h2>
+    <h2>{% blocktrans %}Provision of LRs in the ELRC-SHARE repository{% endblocktrans %}</h2>
     <div class="content_box">
-        <p>The ELRC-SHARE repository is intended for documenting, storing, browsing and accessing LRs that are
-            considered useful for feeding the CEF.AT platform.</p>
-        <p>You are welcome to document and upload any LRs that you have identified as useful for this purpose. The <a
+        <p>{% blocktrans %}The ELRC-SHARE repository is intended for documenting, storing, browsing and accessing LRs that are
+            considered useful for feeding the CEF.AT platform.{% endblocktrans %}</p>
+        <p>{% blocktrans %}You are welcome to document and upload any LRs that you have identified as useful for this purpose. The <a
                 href="http://www.lr-coordination.eu" target="_blank">ELRC action</a> is looking for open data that can
-            be made available for re-use through open data initiatives, but also for commercially available datasets.
+            be made available for re-use through open data initiatives, but also for commercially available datasets.{% endblocktrans %}
         </p>
-        <p>The LR descriptions (metadata) are licensed under the Creative Commons Attribution (CC-BY) version 4.0 or
-            higher. All LR providers are obliged to allow the harvesting of their metadata.</p>
-        <p>Anyone can browse the inventory and view the resource descriptions; in addition, they may download resources
-            in accordance to the licensing terms under which they are provided.</p>
+        <p>{% blocktrans %}The LR descriptions (metadata) are licensed under the Creative Commons Attribution (CC-BY) version 4.0 or
+            higher. All LR providers are obliged to allow the harvesting of their metadata.{% endblocktrans %}</p>
+        <p>{% blocktrans %}Anyone can browse the inventory and view the resource descriptions; in addition, they may download resources
+            in accordance to the licensing terms under which they are provided.{% endblocktrans %}</p>
 
         <div id="Procedure_for_LR_provision" class="anchor"></div>
-        <h2>Steps to follow for providing LRs</h2>
+        <h2>{% blocktrans %}Steps to follow for providing LRs{% endblocktrans %}</h2>
         <div class="content_box">
-            <p>All registered users can contribute LRs via the ELRC-SHARE repository according to the following
-                procedure:</p>
+            <p>{% blocktrans %}All registered users can contribute LRs via the ELRC-SHARE repository according to the following
+                procedure:{% endblocktrans %}</p>
             <ul>
-                <li>First register <a href="../accounts/create/">here</a>; a valid email address is required for this
+                <li>{% blocktrans %}First register <a href="../accounts/create/">here</a>; a valid email address is required for this
                     process. Once you obtain the account credentials, you can log in and use a simple form (cf. menu
-                    item: "Contribute resources") to describe and upload LRs.
+                    item: "Contribute resources") to describe and upload LRs.{% endblocktrans %}
                 </li>
-                <li>For each LR, you must provide at least a short description and a title in English and upload it in
-                    zipped format.
+                <li>{% blocktrans %}For each LR, you must provide at least a short description and a title in English and upload it in
+                    zipped format.{% endblocktrans %}
                 </li>
-                <li>Following this submission, you will soon be contacted by an ELRC responsible who may ask for further
+                <li>{% blocktrans %}Following this submission, you will soon be contacted by an ELRC responsible who may ask for further
                     information about the resource and its licensing conditions. During the documentation process, the
                     resource descriptions are considered "internal" and can be viewed only by authorised editors of
                     the ELRC consortium. When the documentation and the licensing conditions under
                     which the resource is provided are finalised, the resource description (metadata record) will be
                     made public through the inventory and the resource itself will be downloadable by users, in
-                    accordance to its licensing conditions.
+                    accordance to its licensing conditions.{% endblocktrans %}
                 </li>
-                <li>Authorised users from the ELRC consortium ("editors") are assigned the task of enriching the
+                <li>{% blocktrans %}Authorised users from the ELRC consortium ("editors") are assigned the task of enriching the
                     descriptions of the resources provided by contributors according to the ELRC-SHARE metadata schema
                     (adapted from the META-SHARE schema) and publishing them at the ELRC-SHARE inventory (cf. menu
                     item:"Manage resources"). Each LR description must include the licensing terms under which the LR is
-                    provided - cf. <a href="#Licensing_LRs">below</a>.
+                    provided - cf. <a href="#Licensing_LRs">below{% endblocktrans %}</a>.
                 </li>
             </ul>
         </div>
 
         <div id="Licensing_LRs" class="anchor"></div>
-        <h2>Licensing LRs for the ELRC action</h2>
+        <h2>{% blocktrans %}Licensing LRs for the ELRC action{% endblocktrans %}</h2>
         <div class="content_box">
-            <p>Any grant of access to LRs through the ELRC-SHARE repository should include not only the right to read
+            <p>{% blocktrans %}Any grant of access to LRs through the ELRC-SHARE repository should include not only the right to read
                 the relevant content but also to allow transformative uses, dissemination and distribution of such
                 resources
-                and their derivatives, according to the needs and policies of LR owners and users.</p>
-            <p>To limit the complexity of licensing, we strongly advise LR providers to use one of the standard
+                and their derivatives, according to the needs and policies of LR owners and users.{% endblocktrans %}</p>
+            <p>{% blocktrans %}To limit the complexity of licensing, we strongly advise LR providers to use one of the standard
                 licences, i.e. <b>Creative Commons</b> and open national licences (- cf. <a href="#Licences">table</a>
                 below). If, however, the LR comes with another licence, the licensing terms and conditions must be
-                documented in the metadata so that they are clearly available to all repository users.</p>
-            <p>
+                documented in the metadata so that they are clearly available to all repository users.{% endblocktrans %}</p>
+            <p>{% blocktrans %}
                 A <a href="http://www.lr-coordination.eu/helpdesk" target="_blank">helpdesk facility</a> has been set up
                 for assistance in understanding, choosing and using any of these licences and other legal tools, as well
-                as the metadata required for the documentation of the licence.</p>
-            <p>The rights of use of the resource, any possible restrictions, as well as rights and restrictions on the
+                as the metadata required for the documentation of the licence.{% endblocktrans %}</p>
+            <p>{% blocktrans %}The rights of use of the resource, any possible restrictions, as well as rights and restrictions on the
                 original raw data are under the control and responsibility of the resource owners. The repository
                 acts mainly as a facilitator for the search-and-get procedure while providing
-                guidelines and metadata curation activities.</p>
-            <p>Metadata elements regarding rights of use, availability and distribution are among the mandatory elements
+                guidelines and metadata curation activities.{% endblocktrans %}</p>
+            <p>{% blocktrans %}Metadata elements regarding rights of use, availability and distribution are among the mandatory elements
                 of the metadata schema and are shown to users so that they can promptly understand what they are allowed
                 to do with a specific resource. Users are asked to always refer to these metadata before using any of
-                the resources in this repository.</p>
+                the resources in this repository.{% endblocktrans %}</p>
             <div id="Standard_and_National_Open_Licences" class="anchor"></div>
-            <h3>Licences</h3>
+            <h3>{% blocktrans %}Licences{% endblocktrans %}</h3>
             <table id="Licences">
                 <thead>
                 <tr>
-                    <th>Value</th>
-                    <th>Full name with link to licence text or Definition</th>
+                    <th>{% blocktrans %}Value{% endblocktrans %}</th>
+                    <th>{% blocktrans %}Full name with link to licence text or Definition{% endblocktrans %}</th>
                 </tr>
                 </thead>
                 <tbody>
                 <!-- International/National Data Licences -->
                 <tr>
                     <td colspan="2">
-                        <div style="font-size:1.2em; color: #4d4d4d;;">International/National Data Licences</div>
+                        <div style="font-size:1.2em; color: #4d4d4d;;">{% blocktrans %}International/National Data Licences{% endblocktrans %}</div>
                         <hr/>
                     </td>
                 </tr>
@@ -155,7 +155,7 @@
                 </tr>
                 <tr>
                     <td>openUnder_PSI</td>
-                    <td>Used for resources that are PSI-compliant and no further information is required or available
+                    <td>{% blocktrans %}Used for resources that are PSI-compliant and no further information is required or available{% endblocktrans %}
                     </td>
                     </td>
                 </tr>
@@ -198,7 +198,7 @@
                 <!-- National Data Licences -->
                 <tr>
                     <td colspan="2">
-                        <div style="font-size:1.2em; color: #4d4d4d;;">National Data Licences</div>
+                        <div style="font-size:1.2em; color: #4d4d4d;;">{% blocktrans %}National Data Licences{% endblocktrans %}</div>
                         <hr/>
                     </td>
                 </tr>
@@ -248,7 +248,7 @@
                 <!-- International Software Licences -->
                 <tr>
                     <td colspan="2">
-                        <div style="font-size:1.2em; color: #4d4d4d;;">International Software Licences</div>
+                        <div style="font-size:1.2em; color: #4d4d4d;;">{% blocktrans %}International Software Licences{% endblocktrans %}</div>
                         <hr/>
                     </td>
                 </tr>
@@ -315,7 +315,7 @@
                 <!-- International Software & Data Licences -->
                 <tr>
                     <td colspan="2">
-                        <div style="font-size:1.2em; color: #4d4d4d;;">International Software & Data Licences</div>
+                        <div style="font-size:1.2em; color: #4d4d4d;;">{% blocktrans %}International Software & Data Licences{% endblocktrans %}</div>
                         <hr/>
                     </td>
                 </tr>
@@ -340,27 +340,27 @@
                 <!-- Other -->
                 <tr>
                     <td colspan="2">
-                        <div style="font-size:1.2em; color: #4d4d4d;;">Other</div>
+                        <div style="font-size:1.2em; color: #4d4d4d;;">{% blocktrans %}Other{% endblocktrans %}</div>
                         <hr/>
                     </td>
                 </tr>
                 <tr>
                     <td>publicDomain</td>
-                    <td>Used for resources that are free of all known legal restrictions
+                    <td>{% blocktrans %}Used for resources that are free of all known legal restrictions{% endblocktrans %}
                     </td>
                     </td>
                 </tr>
                 <tr>
                     <td>non-standard/Other_licence/Terms</td>
-                    <td>Resources with this value are distributed with a non-standard or proprietary licence. Resource
+                    <td>{% blocktrans %}Resources with this value are distributed with a non-standard or proprietary licence. Resource
                         providers are prompted to provide the licence text or url of the resource for further details
-                        about the restrictions and/or conditions of use and other obligations.
+                        about the restrictions and/or conditions of use and other obligations.{% endblocktrans %}
                     </td>
                     </td>
                 </tr>
                 <tr>
                     <td>underReview</td>
-                    <td>Used for resources whose licence value is pending</td>
+                    <td>{% blocktrans %}Used for resources whose licence value is pending{% endblocktrans %}</td>
                     </td>
                 </tr>
                 <tbody>
@@ -368,76 +368,77 @@
         </div>
 
         <div id="Notice_and_Take_Down_Policy" class="anchor"></div>
-        <h2>Notice and Take Down Policy</h2>
+        <h2>{% blocktrans %}Notice and Take Down Policy{% endblocktrans %}</h2>
         <div class="content_box">
-            <p>If a rights holder is concerned that s/he has found Language Resources (LRs) on the ELRC-SHARE
+		
+            <p>{% blocktrans %}If a rights holder is concerned that s/he has found Language Resources (LRs) on the ELRC-SHARE
                 repository, for which s/he has not given permission, granted a licence or is not covered by a limitation
                 or
                 exception in national law, such rights holder is asked to contact ELRC-SHARE
-                ({% encrypt_email 'elrc-share@ilsp.gr' %}) in writing, stating the following:</p>
+                (<a href="mailto:elrc-share@ilsp.gr" >elrc-share@ilsp.gr</a>) in writing, stating the following:{% endblocktrans %}</p>
             <ol>
-                <li>His/Her contact details;</li>
-                <li>The full bibliographic details of the LR;</li>
-                <li>The exact and full URL where s/he found the LR;</li>
-                <li>Proof that s/he is the rights holder and a statement that, under penalty of perjury, s/he is the
-                    rights holder or an authorised representative.
+                <li>{% blocktrans %}His/Her contact details;{% endblocktrans %}</li>
+                <li>{% blocktrans %}The full bibliographic details of the LR;{% endblocktrans %}</li>
+                <li>{% blocktrans %}The exact and full URL where s/he found the LR;{% endblocktrans %}</li>
+                <li>{% blocktrans %}Proof that s/he is the rights holder and a statement that, under penalty of perjury, s/he is the
+                    rights holder or an authorised representative.{% endblocktrans %}
                 </li>
             </ol>
-            <p>Upon receipt of notification the <b>Notice and Takedown</b> procedure is then invoked as follows:</p>
+            <p>{% blocktrans %}Upon receipt of notification the <b>Notice and Takedown</b> procedure is then invoked as follows:{% endblocktrans %}</p>
             <ol>
-                <li>ELRC-SHARE will acknowledge receipt of the complaint by email or letter and will make an initial
-                    assessment of its validity and plausibility.
+                <li>{% blocktrans %}ELRC-SHARE will acknowledge receipt of the complaint by email or letter and will make an initial
+                    assessment of its validity and plausibility.{% endblocktrans %}
                 </li>
-                <li>Upon receipt of a valid complaint, the LR will be temporarily removed from the ELRC-SHARE inventory
-                    pending an agreed solution.
+                <li>{% blocktrans %}Upon receipt of a valid complaint, the LR will be temporarily removed from the ELRC-SHARE inventory
+                    pending an agreed solution.{% endblocktrans %}
                 </li>
-                <li>ELRC-SHARE will contact the individual or organisation who deposited the material within ten working
+                <li>{% blocktrans %}ELRC-SHARE will contact the individual or organisation who deposited the material within ten working
                     days from the reception of a valid complaint. The ELRC-SHARE depositor will be notified that the
                     material is subject to a complaint, under what allegations, and will be encouraged to assuage the
-                    complaints concerned.
+                    complaints concerned.{% endblocktrans %}
                 </li>
-                <li>The complainant and the ELRC-SHARE depositor will be encouraged to resolve the issue swiftly and
-                    amicably and to the satisfaction of both parties, with the following possible outcomes:
+                <li>{% blocktrans %}The complainant and the ELRC-SHARE depositor will be encouraged to resolve the issue swiftly and
+                    amicably and to the satisfaction of both parties, with the following possible outcomes:{% endblocktrans %}
                     <ul>
-                        <li>The LR is replaced on the ELRC-SHARE inventory unchanged.</li>
-                        <li>The LR is replaced on the ELRC-SHARE inventory with changes.</li>
-                        <li>The LR is permanently removed from the ELRC-SHARE inventory.</li>
+                        <li>{% blocktrans %}The LR is replaced on the ELRC-SHARE inventory unchanged.{% endblocktrans %}</li>
+                        <li>{% blocktrans %}The LR is replaced on the ELRC-SHARE inventory with changes.{% endblocktrans %}</li>
+                        <li>{% blocktrans %}The LR is permanently removed from the ELRC-SHARE inventory.{% endblocktrans %}</li>
                     </ul>
                 </li>
-                <li>If the ELRC-SHARE depositor and the complainant are unable to agree on a solution, the LR will
-                    remain unavailable through the ELRC-SHARE inventory until a time when a resolution has been reached.
+                <li>{% blocktrans %}If the ELRC-SHARE depositor and the complainant are unable to agree on a solution, the LR will
+                    remain unavailable through the ELRC-SHARE inventory until a time when a resolution has been reached.{% endblocktrans %}
                 </li>
             </ol>
         </div>
 
         <div id="Privacy" class="anchor"></div>
-        <h2>Privacy</h2>
+        <h2>{% blocktrans %}Privacy{% endblocktrans %}</h2>
         <div class="content_box">
-            <p>The ELRC-SHARE website and services log certain information about every request sent to them. This
+            <p>{% blocktrans %}The ELRC-SHARE website and services log certain information about every request sent to them. This
                 information is used for system administration and for producing usage statistics. Summary statistics are
                 extracted from this data and some of these may be made publicly available, but these do not include
                 information from which individuals could be identified. Relevant subsets of this data may be used as
                 part of investigations of computer misuse involving this site. Data may also on occasion be used to
                 enable investigation of technical problems on the website. Otherwise logged information is not passed to
-                any third party except if required by law.</p>
+                any third party except if required by law.{% endblocktrans %}</p>
         </div>
 
         <div id="Data_Protection" class="anchor"></div>
-        <h2>Data Protection</h2>
+        <h2>{% blocktrans %}Data Protection{% endblocktrans %}</h2>
         <div class="content_box">
-            <p>From time to time the ELRC-SHARE Service Providers may use electronic forms on this site to gather
+            <p>{% blocktrans %}From time to time the ELRC-SHARE Service Providers may use electronic forms on this site to gather
                 personal information for purposes directly related to a service, function or activity of the ELRC
                 services. When the Service Provider will do so it will let users know the purpose for which the
                 information is being collected (including if the information is to be published). Completion of and
-                submission of any form on this website is entirely at the discretion of the user.</p>
+                submission of any form on this website is entirely at the discretion of the user.{% endblocktrans %}</p>
         </div>
 
         <div id="Data_Protection_Statement" class="anchor"></div>
-        <h2>Data Protection Statement</h2>
+        <h2>{% blocktrans %}Data Protection Statement{% endblocktrans %}</h2>
         <div class="content_box">
-            <p>In using and submitting content on the ELRC-SHARE services, users agree that the Service Provider may use
+            <p>{% blocktrans %}In using and submitting content on the ELRC-SHARE services, users agree that the Service Provider may use
                 any personal data that users supply through contributing content or by filling in electronic forms. The
-                Service Providers respect users' privacy and seek to protect their personal data.</p>
+                Service Providers respect users' privacy and seek to protect their personal data.{% endblocktrans %}</p>
         </div>
     </div>
 {% endblock %}

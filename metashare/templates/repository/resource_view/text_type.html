@@ -1,7 +1,9 @@
 {% load mimetype_label %}
+{% load i18n %}
+
 {% spaceless %}
 
-<label class='title'>Text Format</label>
+<label class='title'>{% trans 'Text Format' %}</label>
 <div class="dataline">
 {% for key, value in text_types.items %}
 	{% if "Text_format" in key %}		

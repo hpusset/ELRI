@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
@@ -8,7 +9,7 @@ from metashare.repository.editor import admin_site as editor_site
 from metashare.repository.sitemap import RepositorySitemap
 from metashare.settings import DJANGO_BASE, SITEMAP_URL
 
-urlpatterns = patterns('',
+urlpatterns = i18n_patterns('',
   url(r'^{0}$'.format(DJANGO_BASE),
     'metashare.views.frontpage', name='frontpage'),
   url(r'^{0}info/$'.format(DJANGO_BASE), TemplateView.as_view(template_name='elrc-info.html'), name='info'),
@@ -31,23 +32,23 @@ urlpatterns = patterns('',
     'metashare.eurovoc.views.update_subdomains'),
 )
 
-urlpatterns += patterns('metashare.accounts.views',
+urlpatterns += i18n_patterns('metashare.accounts.views',
   (r'^{0}accounts/'.format(DJANGO_BASE), include('metashare.accounts.urls')),
 )
 
-urlpatterns += patterns('metashare.stats.views',
+urlpatterns += i18n_patterns('metashare.stats.views',
   (r'^{0}stats/'.format(DJANGO_BASE), include('metashare.stats.urls')),
 )
 
-urlpatterns += patterns('metashare.repository.views',
+urlpatterns += i18n_patterns('metashare.repository.views',
   (r'^{0}repository/'.format(DJANGO_BASE), include('metashare.repository.urls')),
 )
 
-urlpatterns += patterns('metashare.sync.views',
+urlpatterns += i18n_patterns('metashare.sync.views',
   (r'^{0}sync/'.format(DJANGO_BASE), include('metashare.sync.urls')),
 )
 
-urlpatterns += patterns('metashare.bcp47.xhr',
+urlpatterns += i18n_patterns('metashare.bcp47.xhr',
   (r'^{0}bcp47/'.format(DJANGO_BASE), include('metashare.bcp47.urls')),
 )
 
@@ -55,15 +56,15 @@ urlpatterns += patterns('metashare.bcp47.xhr',
 #   (r'^{0}tmx/'.format(DJANGO_BASE), include('metashare.tmx_management.urls')),
 # )
 
-urlpatterns += patterns('metashare.bcp47.xhr',
+urlpatterns += i18n_patterns('metashare.bcp47.xhr',
   (r'^{0}bcp47/'.format(DJANGO_BASE), include('metashare.bcp47.urls')),
 )
 
-urlpatterns += patterns('',
+urlpatterns += i18n_patterns('',
   (r'^{0}selectable/'.format(DJANGO_BASE), include('selectable.urls')),
 )
 
-urlpatterns += patterns('',
+urlpatterns += i18n_patterns('',
   (r'^{0}documentation/(?P<path>.*)$'.format(DJANGO_BASE), \
         'django.views.static.serve', {'document_root': DOCUMENTATION_ROOT})
 )
@@ -72,11 +73,11 @@ sitemaps = {
   'site': RepositorySitemap,
 }
 
-urlpatterns += patterns('',
+urlpatterns += i18n_patterns('',
   (r'^{}sitemap\.xml$'.format(DJANGO_BASE), 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
 )
 
-urlpatterns += patterns('',
+urlpatterns += i18n_patterns('',
   url(r'^{0}progressbarupload/'.format(DJANGO_BASE), include('progressbarupload.urls')),
 )
 
@@ -89,8 +90,16 @@ class RobotView(TemplateView):
         return context
 
 if DJANGO_BASE == "":
-    urlpatterns += patterns('',
+    urlpatterns += i18n_patterns('',
     (r'^{}robots\.txt$'.format(DJANGO_BASE), RobotView.as_view(template_name='robots.txt'))
     )
 
 urlpatterns += staticfiles_urlpatterns()
+
+js_info_dict = {
+    'packages': ('metashare',),
+}
+
+urlpatterns += patterns('',
+    (r'^jsi18n/$', 'django.views.i18n.javascript_catalog', js_info_dict),
+)

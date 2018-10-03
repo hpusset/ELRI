@@ -1,4 +1,5 @@
 {% extends "admin/base_site.html" %}
+{% load i18n %}
 
 {% block breadcrumbs %}
 {% include "breadcrumbs.html" %}
@@ -9,7 +10,7 @@
 
 <div class="content_box">
 <table class='editor-group'>
-  <tr><th>Editor Group{{ selected_editorgroups|pluralize }}</th><th>Members</th><th>Managers</th></tr>
+  <tr><th>{% blocktrans %}Editor Group{{ selected_editorgroups|pluralize }}{% endblocktrans %}</th><th>{% trans 'Members' %}</th><th>{% trans 'Managers' %}</th></tr>
   {% for editor_group in selected_editorgroups %}
   <tr><td>{{ editor_group }}</td><td>{{ editor_group.get_members|join:", "}}</td><td>{{ editor_group.get_managers|join:", "}}</td></tr>
   {% endfor %}

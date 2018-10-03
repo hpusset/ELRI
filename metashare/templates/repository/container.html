@@ -1,6 +1,7 @@
 {% load static from staticfiles %}
+{% load i18n %}
 <li class="container" id="container_{{widget_id}}_{{id}}">
-<a href="javascript:delete_container({{widget_id}}, {{id}});"><img src="{% static "admin/img/icon_deletelink.gif" %}" width="10" height="10" alt="Delete This" /></a>
+<a href="javascript:delete_container({{widget_id}}, {{id}});"><img src="{% static "admin/img/icon_deletelink.gif" %}" width="10" height="10" alt="{% trans 'Delete This' %}" /></a>
   {{field_widget}} <small>{{error_msg}}</small>
 {% if autocomp_name %}
   <script>autocomp_multi("name", "container_{{widget_id}}_{{id}}", "id_{{field_name}}", "id_{{linked_field_name}}");</script>

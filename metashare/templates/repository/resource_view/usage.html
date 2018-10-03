@@ -1,9 +1,9 @@
 {% spaceless %}
-
-<label class='component'>Usage</label>
+{% load i18n %}
+<label class='component'>{% trans 'Usage' %}</label>
 <div class="dataline">
 	{% if "Access_tool" in usage_dict.Usage %}
-		<label class='title'>Access tools</label>
+		<label class='title'>{% trans 'Access tools' %}</label>
 		<ul>
 			{% for key, value in usage_dict.Usage.items %}
 				{% if "Access_tool" in key %}
@@ -14,7 +14,7 @@
 	{% endif %}
 	
 	{% if "Resource_associated_with" in usage_dict.Usage %}
-		<label class='title'>Associated resources</label>
+		<label class='title'>{% trans 'Associated resources' %}</label>
 		<ul>
 			{% for key, value in usage_dict.Usage.items %}
 				{% if "Resource_associated_with" in key %}
@@ -26,14 +26,14 @@
 
 	{% for key, value in usage_dict.items %}
 		{% if "Foreseen_use" in value %}
-			<label class='title'>Foreseen Use</label>
+			<label class='title'>{% trans 'Foreseen Use' %}</label>
 			{% for key1, value1 in value.items %}
 				{% if "Foreseen_use" in key1 %}
 						<label class="subtitle">{{ value1.Foreseen_use }}</label>
 					{% if value1.Use_specific_to_NLP %}
 					     <div class="dataline indented">
 							<label>
-								<strong>Use specific to NLP:</strong> {{ value1.Use_specific_to_NLP }}
+								<strong>{% trans 'Use specific to NLP' %}:</strong> {{ value1.Use_specific_to_NLP }}
 							</label>
 						</div>
 					{% endif %}
@@ -46,25 +46,25 @@
 		{% if "Actual_use" in value %}
 			{% for key1, value1 in value.items %}
 				{% if "Actual_use" in key1 %}
-						<label class="title">Actual Use - {{ value1.Actual_use }}</label>							
+						<label class="title">{% trans 'Actual Use' %} - {{ value1.Actual_use }}</label>							
 					{% if value1.Use_specific_to_NLP %}
 					     <div class="dataline indented">
 							<label>
-								<strong>Use specific to NLP:</strong> {{ value1.Use_specific_to_NLP }}
+								<strong>{% trans 'Use specific to NLP' %}:</strong> {{ value1.Use_specific_to_NLP }}
 							</label>
 						</div>
 					{% endif %}
 					{% if value1.Actual_use_details %}
 					     <div class="dataline indented">
 							<label>
-								<strong>Details:</strong> {{ value1.Actual_use_details }}
+								<strong>{% trans 'Details' %}:</strong> {{ value1.Actual_use_details }}
 							</label>
 						</div>
 					{% endif %}
 				{% endif %}
 				
 				{% if "Usage_report" in value1 %}
-					<label class='subtitle'>Usage Report</label>
+					<label class='subtitle'>{% trans 'Usage Report' %}</label>
 					{% for key2, value2 in value1.items %}
 						{% if "Usage_report" in value2 %}
 							<div class="separation"><hr/></div>
@@ -82,7 +82,7 @@
 				{% endif %}
 			
 				{% if "Derived_resource" in value1 %}
-					<label class='subtitle'>Derived Resources</label>
+					<label class='subtitle'>{% trans 'Derived Resources' %}</label>
 					<div class="dataline indented">
 						<ul>
 							{% for key2, value2 in value1.items %}
@@ -95,7 +95,7 @@
 				{% endif %}
 				
 				{% if "Usage_project" in value1 %}
-					<label class='subtitle'>Used in</label>
+					<label class='subtitle'>{% trans 'Used in' %}</label>
 					{% for key2, value2 in value1.items %}
 						{% if "Usage_project" in key2 %}
 							<div class="separation"><hr/></div>

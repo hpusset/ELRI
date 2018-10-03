@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 {% load analytical %}
 {% load static from staticfiles %}
+{% load i18n %}
+
 {% spaceless %}
     <html lang="en">
     <head>
@@ -21,9 +23,11 @@
               media="screen">
         <link rel="stylesheet" href="{% static "metashare/css/screen.css" %}" type="text/css" media="screen">
         <link rel="stylesheet" href="{% static "metashare/css/typo.css" %}" type="text/css" media="screen">
+        <script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
         <script type="text/javascript" src="{% static "metashare/js/jquery-1.7.1.min.js" %}"></script>
         <script type="text/javascript" src="{% static "metashare/js/metashare.js" %}"></script>
         <script src="https://use.fontawesome.com/92573ad434.js"></script>
+
         {% block links %}{% endblock %}{% analytical_head_bottom %}
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107199557-1"></script>
         <script>

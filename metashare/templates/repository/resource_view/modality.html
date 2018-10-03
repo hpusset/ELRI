@@ -1,6 +1,6 @@
 {% spaceless %}
-
-<label class='title'>Modalities</label>
+{% load i18n %}
+<label class='title'>{% trans 'Modalities' %}</label>
 <div class="dataline">
 {% for key, value in modalities.items %}
 	{% for key1, value1 in value.items %}

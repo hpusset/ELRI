@@ -40,14 +40,13 @@
     {% endif %}
 
     <label {% if count > 1 %}style="cursor: pointer" onclick="$(this).next().filter('.collapse').slideToggle(300)"
-           class="title collapse">Distribution Details ...</label> {% else %} class="title collapse">Distribution
-               Details</label>{% endif %}
+           class="title collapse">{% trans 'Distribution Details' %} ...</label> {% else %} class="title collapse">{% trans 'Distribution Details' %}</label>{% endif %}
     <div {% if count > 1 %}class="collapse" style="display: none;"{% endif %}>
         {% for key1, value1 in distribution.Distribution.items %}
             {% if "Distribution_medium" in key1 %}
                 <div class="dataline indented">
                     <label>
-                        <strong>Distribution Medium: </strong>{{ value1 }}
+                        <strong>{% trans 'Distribution Medium' %}: </strong>{{ value1 }}
                     </label>
                 </div>
             {% endif %}
@@ -55,8 +54,8 @@
             {% if "Download_location" in key1 %}
                 <div class="dataline indented">
                     <label>
-                        <strong>Download location{% if ", " in value1 %}s{% endif %}
-                            : </strong>{{ value1|urlizetrunc:23 }}{# value1|urlizetrunc:23 #}
+                        <strong>{% if ", " in value1 %}{trans 'Download locations' %}{% else %}{%trans 'Download location' %}{% endif %}: </strong>
+                        {{ value1|urlizetrunc:23 }}
                     </label>
                 </div>
             {% endif %}
@@ -64,8 +63,8 @@
             {% if "Execution_location" in key1 %}
                 <div class="dataline indented">
                     <label>
-                        <strong>Execution location{% if ", " in value1 %}s{% endif %}
-                            : </strong>{{ value1|urlizetrunc:23 }}{# value1|urlizetrunc:23 #}
+                        <strong>{% if ", " in value1 %}{% trans 'Execution locations' %}{% else %}{% trans 'Execution location' %}{% endif %}: </strong>
+                        {{ value1|urlizetrunc:23 }}{# value1|urlizetrunc:23 #}
                     </label>
                 </div>
             {% endif %}
@@ -73,7 +72,7 @@
             {% if "Fee" in key1 %}
                 <div class="dataline indented">
                     <label>
-                        <strong>Fee: </strong>{{ value1|intcomma }}
+                        <strong>{% trans 'Fee' %}: </strong>{{ value1|intcomma }}
                     </label>
                 </div>
             {% endif %}
@@ -81,7 +80,7 @@
             {% if "Attribution" in key1 %}
                 <div class="dataline indented">
                     <label>
-                        <strong>Attribution Details: </strong>{{ value1 }}
+                        <strong>{% trans 'Attribution Details' %}: </strong>{{ value1 }}
                     </label>
                 </div>
             {% endif %}
@@ -89,7 +88,7 @@
         {% endfor %}
         {% if distribution.Distribution.Distribution_rights_holder %}
             <div class="dataline">
-                <label class="dataline indented"><strong>Distribution Rights Holders:</strong></label>
+                <label class="dataline indented"><strong>{% trans 'Distribution Rights Holders' %}:</strong></label>
                 {% for key, value in distribution.Distribution.items %}
                     {% if "Distribution_rights_holder" in key %}
                         {% include "repository/resource_view/person.html" with person_dict=value.Distribution_rights_holder type="Distribution_rights_holder" %}
@@ -99,7 +98,7 @@
         {% endif %}
         {% if distribution.Distribution.IPR_holder %}
             <div class="dataline">
-                <label class="dataline indented"><strong>IPR Holders</strong></label>
+                <label class="dataline indented"><strong>{% trans 'IPR Holders' %}</strong></label>
                 {% for key, value in distribution.Distribution.items %}
                     {% if "IPR_holder" in key %}
                         <div class="indented">
@@ -114,8 +113,8 @@
                 {% if distribution.Distribution.Personal_data_included  == "True" %}
 
                     <label class="dataline indented"><strong>
-                    Personal Data:
-                </strong> YES</label>
+                    {% trans 'Personal Data' %}:
+                </strong> {% trans 'YES' }</label>
                 {% endif %}
             </div>
         {% endif %}

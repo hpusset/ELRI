@@ -1,5 +1,6 @@
 {% load replace %}
 {% load humanize %}
+{% load i18n %}
 
 {% spaceless %}
 
@@ -19,7 +20,7 @@
 		{% if "Conditions_of_Use" in key1 %}
 			<div class="dataline indented">
 				<label>
-					<strong>Conditions: </strong>{{ value1 }}
+					<strong>{% trans 'Conditions' %}: </strong>{{ value1 }}
 				</label>
 			</div>
 		{% endif %}

@@ -1,3 +1,4 @@
+{% load i18n %}
 {% with baseurl='editor/repository/lexicalconceptualresourceinfotype_model/' node_pk=resourceComponentType.pk name='lexiconInfo' prettyname='Lexical Conceptual Resource General Info' node_lexical_conceptual_resource=resourceComponentType.lexicalConceptualResourceType %}
 
     <input type="hidden" id="id_{{name}}" name="{{prefix}}{{name}}" value="{{node_pk}}"/>
@@ -7,7 +8,7 @@
         proto-href="/{{DJANGO_BASE}}{{baseurl}}"
         href="/{{DJANGO_BASE}}{{baseurl}}{{node_pk}}/" 
         onclick="return showAddAnotherPopup(this);" 
-        style="font-weight:bold;">Edit {{prettyname}}
+        style="font-weight:bold;">{% trans 'Edit' %} {{prettyname}}
       </a>
     </h1>
   {% endwith %}

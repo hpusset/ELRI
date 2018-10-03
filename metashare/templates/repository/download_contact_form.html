@@ -1,31 +1,32 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block title %}
-    {{ resource }} &ndash; Contact Resource Maintainer &ndash; ELRC-SHARE
+    {% blocktrans %}{{ resource }} &ndash; Contact Resource Maintainer &ndash; ELRC-SHARE{% endblocktrans %}
 {% endblock %}
 {% block content %}
-    <h2>Contact Resource Maintainer</h2>
+    <h2>{% trans 'Contact Resource Maintainer' %}</h2>
     <div class="content_box">
         <form class="form_helper" action="{% url 'download_contact' resource.storage_object.identifier %}"
               method="post">
             <table>
                 <tr>
-                    <th><label>Resource name</label></th>
+                    <th><label>{% trans 'Resource name' %}</label></th>
                     <td class="readonly">{{ resource }}</td>
                 </tr>
                 <tr>
-                    <th><label>Resource contact name{{ resourceContactName|pluralize }}</label></th>
+                    <th><label>{% blocktrans %}Resource contact name{{ resourceContactName|pluralize }}{% endblocktrans %}</label></th>
                     <td class="readonly">{{ resourceContactName|join:", " }}</td>
                 </tr>
                 <tr>
-                    <th><label>Resource contact email{{ resourceContactEmail|pluralize }}</label></th>
+                    <th><label>{% blocktrans %}Resource contact email{{ resourceContactEmail|pluralize }}{% endblocktrans %}</label></th>
                     <td class="readonly">{{ resourceContactEmail|join:", " }}</td>
                 </tr>
                 <tr>
-                    <th><label>Your username</label></th>
+                    <th><label>{% blocktrans %}Your username{% endblocktrans %}</label></th>
                     <td class="readonly">{{ user.username }}</td>
                 </tr>
                 <tr>
-                    <th><label>Your name</label></th>
+                    <th><label>{% blocktrans %}Your name{% endblocktrans %}</label></th>
                     <td class="readonly">{{ user.first_name }} {{ user.last_name }}</td>
                 </tr>
                 {{ form.as_table }}
@@ -33,7 +34,7 @@
                     <th></th>
                     <td>
                         <button class="button middle_button">
-                            <i class="fa fa-envelope" aria-hidden="true"></i> Send
+                            <i class="fa fa-envelope" aria-hidden="true"></i> {% trans 'Send' %}
                         </button>
                     </td>
                 </tr>
@@ -42,7 +43,7 @@
         <div>
             <a href="javascript:history.back();">
                 <button class="span-4 button middle_button">
-                    <i class="fa fa-arrow-left" aria-hidden="true"></i> Resource Download
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i> {% trans 'Resource Download' %}
                 </button>
             </a>
         </div>

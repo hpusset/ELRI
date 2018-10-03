@@ -1,10 +1,11 @@
-
+{%load i18n %}
 {% load static from staticfiles %}
 {% load url_valid %}
+
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>{% spaceless %}{% block title %}ELRC-SHARE Repository{% endblock %}{% endspaceless %}</title>
+    <title>{% spaceless %}{% block title %}{% trans 'ELRC-SHARE Repository' %}{% endblock %}{% endspaceless %}</title>
     <meta name="description" content="{% spaceless %}{% block description %}ELRC-SHARE: a repository used for documenting, storing, browsing and accessing Language Resources.{% endblock %}{% endspaceless %}" />
     <meta name="keywords" content="{% spaceless %}{% block keywords %}ELRC-SHARE, language resources, language tools, ELRC, European Language Resource Coordination{% endblock %}{% endspaceless %}" />
     <link rel="shortcut icon" href="{{ STATIC_URL }}metashare/images/favicon.ico" />
@@ -14,7 +15,7 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}metashare/css/sexybuttons/sexybuttons.css" type="text/css" media="screen">
     <link rel="stylesheet" href="{{ STATIC_URL }}metashare/css/screen.css" type="text/css" media="screen">
     <link rel="stylesheet" href="{{ STATIC_URL }}metashare/css/typo.css" type="text/css" media="screen">
-
+    <script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
     <script src="https://use.fontawesome.com/92573ad434.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}metashare/js/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}metashare/js/metashare.js"></script>
@@ -56,9 +57,9 @@
 {% include 'header.html' %}
 <div style="display:block; margin-top:100px; padding:20px">
  {% if user.get_profile.is_superuser %}
-    <h3>Manage contributed resources</h3>
+    <h3>{% trans 'Manage contributed resources' %}</h3>
  {% else %}
-    <h3>Unmanaged Contributed Resources</h3>
+    <h3>{% trans 'Unmanaged Contributed Resources' %}</h3>
  {% endif %}
 {% for message in messages %}
 <div class="{{ message.tags }}">{{ message|linebreaksbr }}</div>
@@ -75,17 +76,17 @@
 <table class="table table-striped table-bordered">
     <thead>
          <tr>
-             <th class="sorting">Resource Title</th>
-             <th>Short Description</th>
-             <th class="sorting">Languages</th>
-             <th class="sorting">Contributor</th>
-             <th class="sorting">Country</th>
-             <th>Phone Number</th>
-             <th class="sorting">Organization</th>
-             <th class="sorting">eDelivery</th>
+             <th class="sorting">{% trans 'Resource Title' %}</th>
+             <th>{% trans 'Short Description' %}</th>
+             <th class="sorting">{% trans 'Languages' %}</th>
+             <th class="sorting">{% trans 'Contributor' %}</th>
+             <th class="sorting">{% trans 'Country' %}</th>
+             <th>{% trans 'Phone Number' %}</th>
+             <th class="sorting">{% trans 'Organization' %}</th>
+             <th class="sorting">{% trans 'eDelivery' %}</th>
              {% if user.is_superuser %}
-                 <th>Data</th>
-                 <th>Import as</th>
+                 <th>{% trans 'Data' %}</th>
+                 <th>{% trans 'Import as' %}</th>
                  <th></th>
              {% endif %}
          </tr>
@@ -109,7 +110,7 @@
             {% if file.edelivery %}
                 {{ file.msg_id|join:"" }}
             {% else %}
-                <span style="color:#ffa40e;">Not through eDelivery</span>
+                <span style="color:#ffa40e;">{% trans 'Not through eDelivery' %}</span>
             {% endif %}
         </td>
         {% if user.is_superuser %}
@@ -120,16 +121,16 @@
                         {% if file.dataset.url %}
                             <a href="{{ file.dataset.url|join:""|url_valid }}" target="_blank">{{ file.dataset.url|join:"" }}</a>
                             {% else %}
-                                No Data Available
+                                {% trans 'No Data Available' %}
                         {% endif %}
                 {%  endif %}
             </td>
             <td>
                 <select name="resourceType[]">
                     <option value="">------------</option>
-                    <option value="corpus">Corpus</option>
-                    <option value="langdesc">Language description</option>
-                    <option value="lexicon">Lexical conceptual resource</option>
+                    <option value="corpus">{% trans 'Corpus' %}</option>
+                    <option value="langdesc">{% trans 'Language description' %}</option>
+                    <option value="lexicon">{% trans 'Lexical conceptual resource' %}</option>
                 </select>
             </td>
 {#            <td><a class="btn btn-warning" style = "color:#FFF" href="remove/{{ file.resource_file|join:"" }}"#}
@@ -140,12 +141,12 @@
 {% endfor %}
 </table>
      {% if user.is_superuser %}
-        <button type="submit" class="btn btn-success" value="submit" style="float: right">Import Resources to Database</button>
+        <button type="submit" class="btn btn-success" value="submit" style="float: right">{% trans 'Import Resources to Database' %}</button>
      {% endif %}
 </form>
     {% else %}
 <div>
-    No New Resources
+    {% trans 'No New Resources' %}
 </div>
 {% endif %}
 </div>

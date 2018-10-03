@@ -1,30 +1,31 @@
 {% extends "base.html" %}
 {% load static from staticfiles %}
-
+{% load i18n %}
 {% block title %}{{ title }} &ndash; ELRC-SHARE{% endblock %}
 
 {% block messages %}
 {% if form.errors %}
-<p class="error">Please fill in all fields to create your account.</p>
+<p class="error">{% blocktrans %}Please fill in all fields to create your account.{% endblocktrans %}</p>
 {% endif %}
 {% endblock %}
 
 {% block content %}
 {% spaceless %}
-<h2>Create Account</h2>
+<h2>{% blocktrans %}Create Account{% endblocktrans %}</h2>
 <div class="content_box">
   <form class="form_helper" method="post" action="{% url 'metashare.accounts.views.create' %}">
     {% csrf_token %}
     {% for field in form %}
       {{ field.errors }}
       {% if field.html_name == "accepted_tos" %}
-        {{ field }} <label for="{{ field.auto_id }}">I accept the <a target="_blank" href="{% static "metashare/ELRC-SHARE_ToS.pdf" %}">ERLC-SHARE Terms of Service for registered users</a>.</label>
+        {% static "metashare/ELRC-SHARE_ToS.pdf" as elrcshare_tos %}
+        {{ field }} <label for="{{ field.auto_id }}">{% blocktrans %}I accept the <a target="_blank" href="{{ elrcshare_tos }}">ERLC-SHARE Terms of Service for registered users</a>.{% endblocktrans %}</label>
       {% else %}
         {{ field.label_tag }} {{ field }}
       {% endif %}
       <div>{# for spacing and for clearing the last float environments #}</div>
     {% endfor %}
-    <input class="button middle_button" style="margin-left:auto;margin-right:auto;" type="submit" value="Create Account" />
+    <input class="button middle_button" style="margin-left:auto;margin-right:auto;" type="submit" value="{% trans 'Create Account' %}" />
     <input type="hidden" name="next" value="{{ next }}" />
   </form>
 </div>

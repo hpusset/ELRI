@@ -6,6 +6,9 @@ import sys
 import logging
 from logging.handlers import RotatingFileHandler
 
+from django.core.urlresolvers import reverse_lazy
+
+
 # Import local settings, i.e., DEBUG, TEMPLATE_DEBUG, TIME_ZONE,
 # DATABASE_* settings, ADMINS, etc.
 from local_settings import *
@@ -79,6 +82,7 @@ STATS_SERVER_URL = "http://metastats.fbk.eu/"
 # The URL for GeoIP database.
 GEOIP_DATA_URL = "http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz"
 
+
 # If STORAGE_PATH does not exist, try to create it and halt if not
 # possible.
 try:
@@ -109,7 +113,7 @@ if DJANGO_BASE.strip().startswith('/'):
 PAGINATION_ITEMS_PER_PAGE = 50
 
 LOGIN_URL = '/{0}login/'.format(DJANGO_BASE)
-LOGIN_REDIRECT_URL = '/{0}'.format(DJANGO_BASE)
+LOGIN_REDIRECT_URL = reverse_lazy('frontpage') # reverse it to grab the i18n prefix
 LOGOUT_URL = '/{0}logout/'.format(DJANGO_BASE)
 
 MANAGERS = ADMINS
@@ -120,7 +124,6 @@ METASHARE_VERSION = '3.1.1'
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
-USE_I18N = True
 
 STATIC_URL = '/static/'
 
@@ -134,8 +137,9 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
 )

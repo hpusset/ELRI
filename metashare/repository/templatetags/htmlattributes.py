@@ -3,7 +3,7 @@ from django import template
 register = template.Library()
 
 def dq_to_sq(value):
-    rendered = str(value.replace("\"","'"))
+    rendered = unicode(value.replace("\"","'"))
     return rendered
 
 register.filter('dq_to_sq', dq_to_sq)

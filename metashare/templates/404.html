@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 {% load email_protection %}
+{% load i18n %}
 
 {% block content %}
-<h2>Page not Found (404)</h2>
+<h2>{% blocktrans %}Page not Found (404){% endblocktrans %}</h2>
 <div class="content_box">
-<p>We&rsquo;re sorry, but the URL you requested was not found.</p>
-<p>Please try again and, if the error persists, either contact <a href="{% url 'metashare.accounts.views.contact' %}">the node maintainers</a> or the the ELRC-SHARE Repository ({% encrypt_email 'elrc-share@ilsp.gr' %}).</p>
+<p>{% trans "We&rsquo;re sorry, but the URL you requested was not found." %}</p>
+{% url 'metashare.accounts.views.contact' as the_node_maintainers %}
+<p>{% blocktrans  %}Please try again and, if the error persists, either contact <a href="{{ the_node_maintainers }}">the node maintainers</a> or the the ELRC-SHARE Repository (<a href="mailto:elrc-share@ilsp.gr" >elrc-share@ilsp.gr</a>).{% endblocktrans %}</p>
 </div>
 {% endblock %}

@@ -1,9 +1,11 @@
+{% load i18n %}
+
 {% spaceless %}
 
 {% if type == "Citation" %}
 {% else %}
 	{% if level == "simple" %}
-		<label class='indented'><strong>{{type}}:</strong></label>
+		<label class='indented'><strong>{% trans type %}:</strong></label>
 	{% else %}
 		<label class={% if level == "sub" %}'subtitle'{% else %}'title'{% endif %}>{{type}}</label>
 	{% endif %}
@@ -25,13 +27,13 @@
 				{% endfor %}
 			{% endif %}
 			{% if documentation.Journal %}
-				. In: {{ documentation.Journal }}
+				. {% trans 'In' %}: {{ documentation.Journal }}
 			{% endif %}
 			{% if documentation.Volume %}
 				{{ documentation.Volume }}
 			{% endif %}
 			{% if documentation.Pages %}
-				, pp. {{ documentation.Pages }}
+				, {% trans 'pp' %}. {{ documentation.Pages }}
 			{% endif %}
 			
 			{% if documentation.Conference %}
@@ -48,7 +50,7 @@
 	{% if documentation.Editor %}
 		<div class="dataline">
 			<label>
-				<strong>Editor:</strong> {{ documentation.Editor }}
+				<strong>{% trans 'Editor' %}:</strong> {{ documentation.Editor }}
 			</label>
 		</div>
 	{% endif %}
@@ -56,7 +58,7 @@
 	{% if documentation.Publisher %}
 		 <div class="dataline">
 			<label>
-				<strong>Publisher:</strong> {{ documentation.Publisher }}
+				<strong>{% trans 'Publisher' %}:</strong> {{ documentation.Publisher }}
 			</label>
 		</div>
 	{% endif %}
@@ -64,7 +66,7 @@
 	{% if documentation.Book_title %}
 		 <div class="dataline">
 			<label>
-				<strong>Book Title:</strong> {{ documentation.Book_title }}
+				<strong>{% trans 'Book Title' %}:</strong> {{ documentation.Book_title }}
 			</label>
 		</div>
 	{% endif %}		
@@ -72,7 +74,7 @@
 	{% if documentation.Series %}
 		 <div class="dataline">
 			<label>
-				<strong>Series:</strong> {{ documentation.Series }}
+				<strong>{% trans 'Series' %}:</strong> {{ documentation.Series }}
 			</label>
 		</div>
 	{% endif %}		
@@ -80,7 +82,7 @@
 	{% if documentation.Edition %}
 		 <div class="dataline">
 			<label>
-				<strong>Edition:</strong> {{ documentation.Edition }}
+				<strong>{% trans 'Edition' %}:</strong> {{ documentation.Edition }}
 			</label>
 		</div>
 	{% endif %}	
@@ -89,7 +91,7 @@
 	{% if documentation.DOI %}
 		 <div class="dataline">
 			<label>
-				<strong>Digital Object Identifier - DOI:</strong> {{ documentation.DOI|urlizetrunc:23 }}
+				<strong>{% trans 'Digital Object Identifier - DOI' %}:</strong> {{ documentation.DOI|urlizetrunc:23 }}
 			</label>
 		</div>
 	{% endif %}
@@ -97,7 +99,7 @@
 	{% if documentation.ISSN %}
 		 <div class="dataline">
 			<label>
-				<strong>ISSN:</strong> {{ documentation.ISSN }}
+				<strong>{% trans 'ISSN' %}:</strong> {{ documentation.ISSN }}
 			</label>
 		</div>
 	{% endif %}
@@ -105,7 +107,7 @@
 	{% if documentation.ISBN %}
 		 <div class="dataline">
 			<label>
-				<strong>ISBN:</strong> {{ documentation.ISBN }}
+				<strong>{% trans 'ISBN' %}:</strong> {{ documentation.ISBN }}
 			</label>
 		</div>
 	{% endif %}
@@ -113,7 +115,7 @@
 	{% if documentation.Keywords %}
 		 <div class="dataline">
 			<label>
-				<strong>Keywords:</strong> {{ documentation.Keywords }}
+				<strong>{% trans 'Keywords' %}:</strong> {{ documentation.Keywords }}
 			</label>
 		</div>
 	{% endif %}
@@ -121,7 +123,7 @@
 {#		 <div class="dataline">#}
 {#			<label {% if documentation.Document_language_identifier %}#}
 {#                title="{{documentation.Document_language_identifier}}"{% endif %}>#}
-{#				<strong>Document Language:</strong>#}
+{#				<strong>{% trans 'Document Language' %}:</strong>#}
 {#				{{ documentation.Document_language }}#}
 {#			</label>#}
 {#		</div>#}

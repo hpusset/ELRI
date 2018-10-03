@@ -9,6 +9,7 @@ from django.core.validators import RegexValidator
 from django.db import models
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
+from django.utils.translation import ugettext_lazy as _
 
 from metashare.accounts.validators import validate_wsdl_url
 from metashare.repository.supermodel import _make_choices_from_list
@@ -128,20 +129,20 @@ class AccessPointEdeliveryApplication(models.Model):
 
     user = models.ForeignKey(User)
     # Accept only valid WSDL urls
-    endpoint = models.URLField('MSH Endpoint', max_length=150, validators=[validate_wsdl_url])
-    gateway_party_name = models.CharField('Gateway Party Name', max_length=100)
-    gateway_party_id = models.CharField('Gateway Party ID', max_length=100)
-    public_key = models.FileField('Public Cetificate', upload_to=AP_CERTS_DIR)
-    status = models.CharField('Application Status', max_length=10,
+    endpoint = models.URLField(_('MSH Endpoint'), max_length=150, validators=[validate_wsdl_url])
+    gateway_party_name = models.CharField(_('Gateway Party Name'), max_length=100)
+    gateway_party_id = models.CharField(_('Gateway Party ID'), max_length=100)
+    public_key = models.FileField(_('Public Cetificate'), upload_to=AP_CERTS_DIR)
+    status = models.CharField(_('Application Status'), max_length=10,
                               choices=_make_choices_from_list(EDELIVERY_APPLICATIONS_STATUS)['choices'])
-    rejection_reason = models.TextField('Rejection Reason', max_length=1000, null=True, blank=True)
-    created = models.DateTimeField('Date Created', auto_now_add=True)
+    rejection_reason = models.TextField(_('Rejection Reason'), max_length=1000, null=True, blank=True)
+    created = models.DateTimeField(_('Date Created'), auto_now_add=True)
 
     def __unicode__(self):
         """
         Return Unicode representation for this instance.
         """
-        return u'eDelivery Application for user: "{0}"'.format(self.user.username)
+        return _(u'eDelivery Application for user: "{0}"').format(self.user.username)
 
 
 class EditorGroup(Group):
@@ -202,7 +203,7 @@ class EditorGroupManagers(Group):
     managed_group = models.OneToOneField(EditorGroup)
 
     class Meta:
-        verbose_name = "editor group managers group"
+        verbose_name = _("editor group managers group")
 
     def get_members(self):
         return User.objects.filter(groups__name=self.name)
@@ -247,7 +248,7 @@ class OrganizationManagers(Group):
     managed_organization = models.OneToOneField(Organization)
 
     class Meta:
-        verbose_name = "organization managers group"
+        verbose_name = _("organization managers group")
 
     def get_members(self):
         return User.objects.filter(groups__name=self.name)
@@ -259,7 +260,7 @@ EUCOUNTRIES = ["Germany", "Austria", "Luxembourg", "Netherlands", "Hungary", "Cz
                "Bulgaria", "Poland", "Romania", "Croatia"]
 
 PHONENUMBER_VALIDATOR = RegexValidator(r'^\+(?:[0-9] ?){6,14}[0-9]$',
-                                       'Not a valid phone number', ValidationError)
+                                       _('Not a valid phone number'), ValidationError)
 
 
 class UserProfile(models.Model):
@@ -271,23 +272,23 @@ class UserProfile(models.Model):
         # global permissions for which there does not seem to be any better
         # place around ...
         permissions = (
-            ("ms_associate_member", "Is a META-SHARE associate member."),
-            ("ms_full_member", "Is a META-SHARE full member."),
+            ("ms_associate_member", _("Is a META-SHARE associate member.")),
+            ("ms_full_member", _("Is a META-SHARE full member.")),
         )
 
     user = models.OneToOneField(User)
     modified = models.DateTimeField(auto_now=True)
     uuid = models.CharField(max_length=32, verbose_name="UUID",
                             blank=True, null=True)
-    birthdate = models.DateField("Date of birth", blank=True,
+    birthdate = models.DateField(_("Date of birth"), blank=True,
                                  null=True)
 
-    phone_number = models.CharField("Phone Number", max_length=50, null=True, \
+    phone_number = models.CharField(_("Phone Number"), max_length=50, null=True, \
                                     blank=True, validators=[PHONENUMBER_VALIDATOR])
-    country = models.CharField('Country', choices=_make_choices_from_list(sorted(EUCOUNTRIES))['choices'],
+    country = models.CharField(_('Country'), choices=_make_choices_from_list(sorted(EUCOUNTRIES))['choices'],
                                max_length=100, null=True, blank=True)
 
-    affiliation = models.TextField("Affiliation(s)", blank=True)
+    affiliation = models.TextField(_("Affiliation(s)"), blank=True)
     position = models.CharField(max_length=50, blank=True)
     homepage = models.URLField(blank=True)
 

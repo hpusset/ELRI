@@ -1,5 +1,5 @@
 {% spaceless %}
-
+{% load i18n %}
 {% if type == "toolService" %}
 	{% include "repository/resource_view/tool_service.html" with tool_service=resource_component %}
 {% else %}
@@ -40,7 +40,7 @@
 
 	{# Character Encoding Information #}
 	{% if "Character_encoding" in resource_component %}
-		<label class='title'>Character encoding</label>
+		<label class='title'>{% trans 'Character encoding' %}</label>
 		{% for key, value in resource_component.items %}		
 			{% if "Character_encoding" in key %}
 				<div class="separation"><hr/></div>
@@ -66,7 +66,7 @@
 
 	{# Annotation Information #}
 	{% if "Annotation" in resource_component %}
-		<label class='title'>Annotation</label>
+		<label class='title'>{% trans 'Annotation' %}</label>
 		{% for key, value in resource_component.items %}
 			{% if "Annotation" in key %}
 				{% include "repository/resource_view/annotation.html" with annotations=value %}
@@ -86,7 +86,7 @@
 	
 	{# Audio Format Information #}
 	{% if "Audio_format" in resource_component %}
-		<label class='title'>Audio Formats</label>
+		<label class='title'>{% trans 'Audio Formats' %}</label>
 		{% for key, value in resource_component.items %}
 			{% if "Audio_format" in key %}
 				{% include "repository/resource_view/audio_format.html" with audio_format=value %}
@@ -95,7 +95,7 @@
 	{% endif %}
 	
 	{% if "Time_coverage" in resource_component %}
-		<label class='title'>Time Coverage</label>
+		<label class='title'>{% trans 'Time Coverage' %}</label>
 		{% for key, value in resource_component.items %}
 			{% if "Time_coverage" in key %}
 				{% include "repository/resource_view/time_coverage.html" with time_coverage=value %}
@@ -104,7 +104,7 @@
 	{% endif %}
 	
 	{% if "Geographic_coverage" in resource_component %}
-		<label class='title'>Geographic coverage</label>
+		<label class='title'>{% trans 'Geographic coverage' %}</label>
 		{% for key, value in resource_component.items %}
 			{% if "Geographic_coverage" in key %}
 				{% include "repository/resource_view/geographic_coverage.html" with geographic_coverage=value %}

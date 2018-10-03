@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.utils.translation import ugettext_lazy as _
 
 from metashare.eurovoc import eurovoc
 from metashare.bcp47 import iana
@@ -40,14 +41,14 @@ LOGGER.addHandler(LOG_HANDLER)
 # regular expressions as Python's regex engine otherwise always ignores a single
 # trailing newline
 EMAILADDRESS_VALIDATOR = RegexValidator(r'^[^@]+@[^\.]+\..+(?!\r?\n)$',
-  'Not a valid emailAddress value.', ValidationError)
+  _('Not a valid emailAddress value.'), ValidationError)
 HTTPURI_VALIDATOR = RegexValidator(r"^(?i)((http|ftp)s?):\/\/"
         r"(([a-z0-9.-]|%[0-9A-F]{2}){3,})(:(\d+))?"
         r"((\/([a-z0-9-._~!$&'()*+,;=:@]|%[0-9A-F]{2})*)*)"
         r"(\?(([a-z0-9-._~!$&'()*+,;=:\/?@]|%[0-9A-F]{2})*))?"
         r"(#(([a-z0-9-._~!$&'()*+,;=:\/?@]|%[0-9A-F]{2})*))?(?!\r?\n)$",
-    "Not a valid URL value (must not contain non-ASCII characters, for example;"
-        " see also RFC 2396).", ValidationError)
+    _("Not a valid URL value (must not contain non-ASCII characters, for example;" \
+        " see also RFC 2396)."), ValidationError)
 
 # namespace of the META-SHARE metadata XML Schema
 SCHEMA_NAMESPACE = 'http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/'
@@ -60,8 +61,8 @@ def country_optgroup_choices():
     Group the choices in groups. The first group the EU languages
     and the second group contains the rest.
     """
-    eu_choices = ('EU', _make_choices_from_list(iana.get_eu_regions())['choices'])
-    more_choices = ('More', _make_choices_from_list(sorted(iana.get_rest_of_regions()))['choices'])
+    eu_choices = (_('EU'), _make_choices_from_list(iana.get_eu_regions())['choices'])
+    more_choices = (_('More'), _make_choices_from_list(sorted(iana.get_rest_of_regions()))['choices'])
     optgroup = [eu_choices, more_choices]
     return optgroup
 
@@ -74,7 +75,7 @@ class resourceInfoType_model(SchemaModel):
     """
 
     class Meta:
-        verbose_name = "Resource"
+        verbose_name = _("Resource")
 
 
     __schema_name__ = 'resourceInfo'
@@ -110,40 +111,40 @@ class resourceInfoType_model(SchemaModel):
     }
 
     identificationInfo = models.OneToOneField("identificationInfoType_model",
-      verbose_name='Identification',
-      help_text='Groups together information needed to identify the reso' \
-      'urce',
+      verbose_name=_('Identification'),
+      help_text=_('Groups together information needed to identify the reso' \
+      'urce'),
       )
 
     # OneToMany field: distributionInfo
 
     contactPerson = models.ManyToManyField("personInfoType_model",
-      verbose_name='Contact person',
-      help_text='Groups information on the person(s) that is/are respons' \
-      'ible for providing further information regarding the resource',
+      verbose_name=_('Contact person'),
+      help_text=_('Groups information on the person(s) that is/are respons' \
+      'ible for providing further information regarding the resource'),
       related_name="contactPerson_%(class)s_related", )
 
     metadataInfo = models.OneToOneField("metadataInfoType_model",
-      verbose_name='Metadata',
-      help_text='Groups information on the metadata record itself',
+      verbose_name=_('Metadata'),
+      help_text=_('Groups information on the metadata record itself'),
       )
 
     versionInfo = models.OneToOneField("versionInfoType_model",
-      verbose_name='Version',
-      help_text='Groups information on a specific version or release of ' \
-      'the resource',
+      verbose_name=_('Version'),
+      help_text=_('Groups information on a specific version or release of ' \
+      'the resource'),
       blank=True, null=True, on_delete=models.SET_NULL, )
 
     resourceCreationInfo = models.OneToOneField("resourceCreationInfoType_model",
-      verbose_name='Resource creation',
-      help_text='Groups information on the creation procedure of a resou' \
-      'rce',
+      verbose_name=_('Resource creation'),
+      help_text=_('Groups information on the creation procedure of a resou' \
+      'rce'),
       blank=True, null=True, on_delete=models.SET_NULL, )
 
     resourceDocumentationInfo = models.OneToOneField("resourceDocumentationInfoType_model",
-      verbose_name='Resource documentation',
-      help_text='Groups together information on any document describing ' \
-      'the resource',
+      verbose_name=_('Resource documentation'),
+      help_text=_('Groups together information on any document describing ' \
+      'the resource'),
       blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: validationInfo
@@ -151,8 +152,8 @@ class resourceInfoType_model(SchemaModel):
     # OneToMany field: relationInfo
 
     resourceComponentType = models.OneToOneField("resourceComponentTypeType_model",
-      verbose_name='Resource component type',
-      help_text='Used for distinguishing between resource types',
+      verbose_name=_('Resource component type'),
+      help_text=_('Used for distinguishing between resource types'),
       )
 
     def real_unicode_(self):
@@ -280,15 +281,15 @@ class sizeInfoType_model(SchemaModel):
     )
 
     size = XmlCharField(
-      verbose_name='Size',
-      help_text='Specifies the size of the resource with regard to the S' \
-      'izeUnit measurement in form of a number',
+      verbose_name=_('Size'),
+      help_text=_('Specifies the size of the resource with regard to the S' \
+      'izeUnit measurement in form of a number'),
       max_length=100, validators=[validate_size_is_integer])
 
     sizeUnit = models.CharField(
-      verbose_name='Size unit',
-      help_text='Specifies the unit that is used when providing informat' \
-      'ion on the size of the resource or of resource parts',
+      verbose_name=_('Size unit'),
+      help_text=_('Specifies the unit that is used when providing informat' \
+      'ion on the size of the resource or of resource parts'),
 
       max_length=30,
       choices=sorted(SIZEINFOTYPE_SIZEUNIT_CHOICES['choices'],
@@ -321,7 +322,7 @@ class identificationInfoType_model(SchemaModel):
     """
 
     class Meta:
-        verbose_name = "Identification"
+        verbose_name = _("Identification")
 
 
     __schema_name__ = 'identificationInfoType'
@@ -338,63 +339,63 @@ class identificationInfoType_model(SchemaModel):
 
     resourceName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever,
-      verbose_name='Resource name',
+      verbose_name=_('Resource name'),
       max_val_length=500,
-      help_text='The full name by which the resource is known; the eleme' \
+      help_text=_('The full name by which the resource is known; the eleme' \
       'nt can be repeated for the different language versions using the ' \
-      '"lang" attribute to specify the language.',
+      '"lang" attribute to specify the language.'),
       )
 
     description = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever,
-      verbose_name='Description',
+      verbose_name=_('Description'),
       max_val_length=10000,
-      help_text='Provides the description of the resource in prose; the ' \
+      help_text=_('Provides the description of the resource in prose; the ' \
       'element can be repeated for the different language versions using' \
-      ' the "lang" attribute to specify the language.',
+      ' the "lang" attribute to specify the language.'),
       )
 
     resourceShortName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever,
-      verbose_name='Resource short name',
+      verbose_name=_('Resource short name'),
       max_val_length=500,
-      help_text='The short form (abbreviation, acronym etc.) used to ide' \
+      help_text=_('The short form (abbreviation, acronym etc.) used to ide' \
       'ntify the resource; the element can be repeated for the different' \
       ' language versions using the "lang" attribute to specify the lang' \
-      'uage.',
+      'uage.'),
       blank=True)
 
     url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=0, attrs={'size': '250'}),
-      verbose_name='Landing page (URL)', validators=[HTTPURI_VALIDATOR],
-      help_text='A Web page that can be navigated to in a Web browser to' \
+      verbose_name=_('Landing page (URL)'), validators=[HTTPURI_VALIDATOR],
+      help_text=_('A Web page that can be navigated to in a Web browser to' \
       ' gain access to the resource, its distributions and/or additional' \
-      ' information',
+      ' information'),
       blank=True, )
 
     metaShareId = XmlCharField(
-      verbose_name='Meta-Share ID',
-      help_text='An unambiguous referent to the resource within META-SHA' \
+      verbose_name=_('Meta-Share ID'),
+      help_text=_('An unambiguous referent to the resource within META-SHA' \
       'RE; it reflects to the unique system id provided automatically by' \
-      ' the MetaShare software',
+      ' the MetaShare software'),
       blank=True, max_length=100, default="NOT_DEFINED", )
 
     ISLRN = XmlCharField(
-      verbose_name='ISLRN',
-      help_text='Reference to the unique ISLRN number of the resource; i' \
+      verbose_name=_('ISLRN'),
+      help_text=_('Reference to the unique ISLRN number of the resource; i' \
       'f the resource has not been assigned an ISLRN yet, you may reques' \
-      't for one at: http://www.islrn.org/',
+      't for one at: http://www.islrn.org/'),
       blank=True, max_length=17, validators=[validate_matches_xml_char_production],)
 
     identifier = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=1, max_length=100),
-      verbose_name='Identifier',
-      help_text='Reference to a PID, DOI or an internal identifier used ' \
-      'by the resource provider for the resource',
+      verbose_name=_('Identifier'),
+      help_text=_('Reference to a PID, DOI or an internal identifier used ' \
+      'by the resource provider for the resource'),
       blank=True, validators=[validate_matches_xml_char_production], )
 
     appropriatenessForDSI = MultiSelectField(
-      verbose_name='Appropriateness for DSI',
-      help_text='Specifies whether the resource is appropriate for use i' \
-      'n one or more of the DSIs (Digital Service Infrastructures)',
+      verbose_name=_('Appropriateness for DSI'),
+      help_text=_('Specifies whether the resource is appropriate for use i' \
+      'n one or more of the DSIs (Digital Service Infrastructures)'),
       blank=True,
       max_length=1 + len(IDENTIFICATIONINFOTYPE_APPROPRIATENESSFORDSI_CHOICES['choices']) / 4,
       choices=IDENTIFICATIONINFOTYPE_APPROPRIATENESSFORDSI_CHOICES['choices'],
@@ -408,7 +409,7 @@ class identificationInfoType_model(SchemaModel):
 class versionInfoType_model(SchemaModel):
 
     class Meta:
-        verbose_name = "Version"
+        verbose_name = _("Version")
 
 
     __schema_name__ = 'versionInfoType'
@@ -418,14 +419,14 @@ class versionInfoType_model(SchemaModel):
     )
 
     version = XmlCharField(
-      verbose_name='Version',
-      help_text='Any string, usually a number, that identifies the versi' \
-      'on of a resource',
+      verbose_name=_('Version'),
+      help_text=_('Any string, usually a number, that identifies the versi' \
+      'on of a resource'),
       max_length=100, )
 
     lastDateUpdated = models.DateField(
-      verbose_name='Last date updated',
-      help_text='Date of the last update of the version of the resource',
+      verbose_name=_('Last date updated'),
+      help_text=_('Date of the last update of the version of the resource'),
       blank=True, null=True, )
 
     def real_unicode_(self):
@@ -438,7 +439,7 @@ class versionInfoType_model(SchemaModel):
 class validationInfoType_model(SchemaModel):
 
     class Meta:
-        verbose_name = "Validation"
+        verbose_name = _("Validation")
 
 
     __schema_name__ = 'validationInfoType'
@@ -457,22 +458,22 @@ class validationInfoType_model(SchemaModel):
     }
 
     validated = MetaBooleanField(
-      verbose_name='Validated',
-      help_text='Specifies the validation status of the resource',
+      verbose_name=_('Validated'),
+      help_text=_('Specifies the validation status of the resource'),
         default=False,
     )
 
     validationReport = models.ManyToManyField("documentationInfoType_model",
-      verbose_name='Validation report',
-      help_text='A short account of the validation details or a bibliogr' \
+      verbose_name=_('Validation report'),
+      help_text=_('A short account of the validation details or a bibliogr' \
       'aphic reference to a document with detailed information on the va' \
-      'lidation process and results',
+      'lidation process and results'),
       blank=True, null=True, related_name="validationReport_%(class)s_related", )
 
     validator = models.ManyToManyField("actorInfoType_model",
-      verbose_name='Validator',
-      help_text='Groups information on the person(s) or the organization' \
-      '(s) that validated the resource',
+      verbose_name=_('Validator'),
+      help_text=_('Groups information on the person(s) or the organization' \
+      '(s) that validated the resource'),
       blank=True, null=True, related_name="validator_%(class)s_related", )
 
     back_to_resourceinfotype_model = models.ForeignKey("resourceInfoType_model",  blank=True, null=True)
@@ -488,7 +489,7 @@ class resourceCreationInfoType_model(SchemaModel):
     """
 
     class Meta:
-        verbose_name = "Resource creation"
+        verbose_name = _("Resource creation")
 
 
     __schema_name__ = 'resourceCreationInfoType'
@@ -508,39 +509,39 @@ class resourceCreationInfoType_model(SchemaModel):
     }
 
     createdUsingELRCServices = MetaBooleanField(
-      verbose_name='Created using ELRC services',
-      help_text='Specifies whether ELRC services have been exploited in ' \
+      verbose_name=_('Created using ELRC services'),
+      help_text=_('Specifies whether ELRC services have been exploited in ' \
       'the creation process of the resource; if so, please specify the s' \
-      'ervices used in the description field of the metadata record',
+      'ervices used in the description field of the metadata record'),
       default=False,
     )
 
     anonymized = MetaBooleanField (
-        verbose_name= 'Anonymized',
-        help_text='Declares whether the resource has been anonymized',
+        verbose_name= _('Anonymized'),
+        help_text=_('Declares whether the resource has been anonymized'),
         default=False
     )
 
     resourceCreator = models.ManyToManyField("actorInfoType_model",
-      verbose_name='Resource creator',
-      help_text='Groups information on the person or the organization th' \
-      'at has created the resource',
+      verbose_name=_('Resource creator'),
+      help_text=_('Groups information on the person or the organization th' \
+      'at has created the resource'),
       blank=True, null=True, related_name="resourceCreator_%(class)s_related", )
 
     fundingProject = models.ManyToManyField("projectInfoType_model",
-      verbose_name='Funding project',
-      help_text='Groups information on the project that has funded the r' \
-      'esource',
+      verbose_name=_('Funding project'),
+      help_text=_('Groups information on the project that has funded the r' \
+      'esource'),
       blank=True, null=True, related_name="fundingProject_%(class)s_related", )
 
     creationStartDate = models.DateField(
-      verbose_name='Creation start date',
-      help_text='The date in which the creation process was started',
+      verbose_name=_('Creation start date'),
+      help_text=_('The date in which the creation process was started'),
       blank=True, null=True, )
 
     creationEndDate = models.DateField(
-      verbose_name='Creation end date',
-      help_text='The date in which the creation process was completed',
+      verbose_name=_('Creation end date'),
+      help_text=_('The date in which the creation process was completed'),
       blank=True, null=True, )
 
     def real_unicode_(self):
@@ -563,7 +564,7 @@ class creationInfoType_model(SchemaModel):
     """
 
     class Meta:
-        verbose_name = "Creation"
+        verbose_name = _("Creation")
 
 
     __schema_name__ = 'creationInfoType'
@@ -579,16 +580,16 @@ class creationInfoType_model(SchemaModel):
     }
 
     originalSource = models.ManyToManyField("targetResourceInfoType_model",
-      verbose_name='Original source',
-      help_text='The name, the identifier or the url of thethe original ' \
+      verbose_name=_('Original source'),
+      help_text=_('The name, the identifier or the url of thethe original ' \
       'resources that were at the base of the creation process of the re' \
-      'source',
+      'source'),
       blank=True, null=True, related_name="originalSource_%(class)s_related", )
 
     creationMode = models.CharField(
-      verbose_name='Creation mode',
-      help_text='Specifies whether the resource is created automatically' \
-      ' or in a manual or interactive mode',
+      verbose_name=_('Creation mode'),
+      help_text=_('Specifies whether the resource is created automatically' \
+      ' or in a manual or interactive mode'),
       blank=True,
       max_length=30,
       choices=sorted(CREATIONINFOTYPE_CREATIONMODE_CHOICES['choices'],
@@ -596,15 +597,15 @@ class creationInfoType_model(SchemaModel):
       )
 
     creationModeDetails = XmlCharField(
-      verbose_name='Creation mode details',
-      help_text='Provides further information on the creation methods an' \
-      'd processes',
+      verbose_name=_('Creation mode details'),
+      help_text=_('Provides further information on the creation methods an' \
+      'd processes'),
       blank=True, max_length=1750, )
 
     creationTool = models.ManyToManyField("targetResourceInfoType_model",
-      verbose_name='Creation tool',
-      help_text='The name, the identifier or the url of the tool used in' \
-      ' the creation process',
+      verbose_name=_('Creation tool'),
+      help_text=_('The name, the identifier or the url of the tool used in' \
+      ' the creation process'),
       blank=True, null=True, related_name="creationTool_%(class)s_related", )
 
     def __unicode__(self):
@@ -618,7 +619,7 @@ class metadataInfoType_model(SchemaModel):
     """
 
     class Meta:
-        verbose_name = "Metadata"
+        verbose_name = _("Metadata")
 
 
     __schema_name__ = 'metadataInfoType'
@@ -634,33 +635,33 @@ class metadataInfoType_model(SchemaModel):
     }
 
     metadataCreationDate = models.DateField(
-      verbose_name='Metadata creation date',
-      help_text='The date of creation of this metadata description (auto' \
-      'matically inserted by the MetaShare software)',
+      verbose_name=_('Metadata creation date'),
+      help_text=_('The date of creation of this metadata description (auto' \
+      'matically inserted by the MetaShare software)'),
       )
 
     metadataCreator = models.ManyToManyField("personInfoType_model",
-      verbose_name='Metadata creator',
-      help_text='Groups information on the person that has created the m' \
-      'etadata record',
+      verbose_name=_('Metadata creator'),
+      help_text=_('Groups information on the person that has created the m' \
+      'etadata record'),
       blank=True, null=True, related_name="metadataCreator_%(class)s_related", )
 
     metadataLanguageName = MultiTextField(max_length=100, widget=MultiChoiceWidget(widget_id=2, choices=_make_choices_from_list(sorted(iana.get_most_used_languages()))['choices']),
-      verbose_name='Metadata language',
-      help_text='The name of the language in which the metadata descript' \
-      'ion is written, according to IETF BCP47',
+      verbose_name=_('Metadata language'),
+      help_text=_('The name of the language in which the metadata descript' \
+      'ion is written, according to IETF BCP47'),
       editable=False, blank=True, validators=[validate_matches_xml_char_production], )
 
     metadataLanguageId = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=3, max_length=1000),
-      verbose_name='Metadata language identifier',
-      help_text='The identifier of the language in which the metadata de' \
-      'scription is written according to IETF BCP47',
+      verbose_name=_('Metadata language identifier'),
+      help_text=_('The identifier of the language in which the metadata de' \
+      'scription is written according to IETF BCP47'),
       editable=False, blank=True, validators=[validate_matches_xml_char_production], )
 
     metadataLastDateUpdated = models.DateField(
-      verbose_name='Metadata last date updated',
-      help_text='The date of the last updating of the metadata record (a' \
-      'utomatically inserted by the repo software)',
+      verbose_name=_('Metadata last date updated'),
+      help_text=_('The date of the last updating of the metadata record (a' \
+      'utomatically inserted by the repo software)'),
       blank=True, null=True, )
 
     def save(self, *args, **kwargs):
@@ -694,7 +695,7 @@ class documentationInfoType_model(SubclassableModel):
     __schema_name__ = 'SUBCLASSABLE'
 
     class Meta:
-        verbose_name = "Documentation"
+        verbose_name = _("Documentation")
 
 
 DOCUMENTINFOTYPE_DOCUMENTTYPE_CHOICES = _make_choices_from_list([
@@ -714,7 +715,7 @@ class documentInfoType_model(documentationInfoType_model):
     """
 
     class Meta:
-        verbose_name = "Document"
+        verbose_name = _("Document")
 
 
     __schema_name__ = 'documentInfoType'
@@ -742,9 +743,9 @@ class documentInfoType_model(documentationInfoType_model):
     )
 
     documentType = models.CharField(
-      verbose_name='Document type',
-      help_text='Specifies the type of the document provided with or rel' \
-      'ated to the resource',
+      verbose_name=_('Document type'),
+      help_text=_('Specifies the type of the document provided with or rel' \
+      'ated to the resource'),
 
       max_length=30,
       choices=sorted(DOCUMENTINFOTYPE_DOCUMENTTYPE_CHOICES['choices'],
@@ -753,122 +754,122 @@ class documentInfoType_model(documentationInfoType_model):
 
     title = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever,
-      verbose_name='Title',
+      verbose_name=_('Title'),
       max_val_length=500,
-      help_text='The title of the document reporting on the resource',
+      help_text=_('The title of the document reporting on the resource'),
       )
 
     author = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=4, max_length=1000),
-      verbose_name='Author',
-      help_text='The name(s) of the author(s), in the format described i' \
-      'n the document',
+      verbose_name=_('Author'),
+      help_text=_('The name(s) of the author(s), in the format described i' \
+      'n the document'),
       blank=True, validators=[validate_matches_xml_char_production], )
 
     editor = MultiTextField(max_length=200, widget=MultiFieldWidget(widget_id=5, max_length=200),
-      verbose_name='Editor',
-      help_text='The name of the editor as mentioned in the document',
+      verbose_name=_('Editor'),
+      help_text=_('The name of the editor as mentioned in the document'),
       blank=True, validators=[validate_matches_xml_char_production], )
 
     year = XmlCharField(
-      verbose_name='Year (of publication)',
-      help_text='The year of publication or, for an unpublished work, th' \
-      'e year it was written',
+      verbose_name=_('Year (of publication)'),
+      help_text=_('The year of publication or, for an unpublished work, th' \
+      'e year it was written'),
       blank=True, validators=[validate_xml_schema_year], max_length=1000, )
 
     publisher = MultiTextField(max_length=200, widget=MultiFieldWidget(widget_id=6, max_length=200),
-      verbose_name='Publisher',
-      help_text='The name of the publisher',
+      verbose_name=_('Publisher'),
+      help_text=_('The name of the publisher'),
       blank=True, validators=[validate_matches_xml_char_production], )
 
     bookTitle = XmlCharField(
-      verbose_name='Book title',
-      help_text='The title of a book, part of which is being cited',
+      verbose_name=_('Book title'),
+      help_text=_('The title of a book, part of which is being cited'),
       blank=True, max_length=200, )
 
     journal = XmlCharField(
-      verbose_name='Journal',
-      help_text='A journal name. Abbreviations could also be provided',
+      verbose_name=_('Journal'),
+      help_text=_('A journal name. Abbreviations could also be provided'),
       blank=True, max_length=200, )
 
     volume = XmlCharField(
-      verbose_name='Volume',
-      help_text='Specifies the volume of a journal or multivolume book',
+      verbose_name=_('Volume'),
+      help_text=_('Specifies the volume of a journal or multivolume book'),
       blank=True, max_length=1000, )
 
     series = XmlCharField(
-      verbose_name='Series',
-      help_text='The name of a series or set of books. When citing an en' \
+      verbose_name=_('Series'),
+      help_text=_('The name of a series or set of books. When citing an en' \
       'tire book, the title field gives its title and an optional series' \
       ' field gives the name of a series or multi-volume set in which th' \
-      'e book is published',
+      'e book is published'),
       blank=True, max_length=200, )
 
     pages = XmlCharField(
-      verbose_name='Pages',
-      help_text='One or more page numbers or range of page numbers',
+      verbose_name=_('Pages'),
+      help_text=_('One or more page numbers or range of page numbers'),
       blank=True, max_length=100, )
 
     edition = XmlCharField(
-      verbose_name='Edition',
-      help_text='The edition of a book',
+      verbose_name=_('Edition'),
+      help_text=_('The edition of a book'),
       blank=True, max_length=100, )
 
     conference = XmlCharField(
-      verbose_name='Conference',
-      help_text='The name of the conference in which the document has be' \
-      'en presented',
+      verbose_name=_('Conference'),
+      help_text=_('The name of the conference in which the document has be' \
+      'en presented'),
       blank=True, max_length=300, )
 
     doi = XmlCharField(
-      verbose_name='DOI',
-      help_text='A digital object identifier assigned to the document',
+      verbose_name=_('DOI'),
+      help_text=_('A digital object identifier assigned to the document'),
       blank=True, max_length=100, )
 
     url = XmlCharField(
-      verbose_name='URL (Landing page)', validators=[HTTPURI_VALIDATOR],
-      help_text='A URL used as homepage of an entity (e.g. of a person, ' \
+      verbose_name=_('URL (Landing page)'), validators=[HTTPURI_VALIDATOR],
+      help_text=_('A URL used as homepage of an entity (e.g. of a person, ' \
       'organization, resource etc.); it provides general information (fo' \
       'r instance in the case of a resource, it may present a descriptio' \
       'n of the resource, its creators and possibly include links to the' \
-      ' URL where it can be accessed from)',
+      ' URL where it can be accessed from)'),
       blank=True, max_length=1000, )
 
     ISSN = XmlCharField(
-      verbose_name='ISSN',
-      help_text='The International Standard Serial Number used to identi' \
-      'fy a journal',
+      verbose_name=_('ISSN'),
+      help_text=_('The International Standard Serial Number used to identi' \
+      'fy a journal'),
       blank=True, max_length=100, )
 
     ISBN = XmlCharField(
-      verbose_name='ISBN',
-      help_text='The International Standard Book Number',
+      verbose_name=_('ISBN'),
+      help_text=_('The International Standard Book Number'),
       blank=True, max_length=100, )
 
     keywords = MultiTextField(max_length=250, widget=MultiFieldWidget(widget_id=7, max_length=250),
-      verbose_name='Keywords',
-      help_text='The keyword(s) for indexing and classification of the d' \
-      'ocument',
+      verbose_name=_('Keywords'),
+      help_text=_('The keyword(s) for indexing and classification of the d' \
+      'ocument'),
       blank=True, validators=[validate_matches_xml_char_production], )
 
     documentLanguageName = models.CharField(
-      verbose_name='Document language',
-      help_text='The language the document is written in (according to t' \
-      'he IETF BCP47 guidelines)',
+      verbose_name=_('Document language'),
+      help_text=_('The language the document is written in (according to t' \
+      'he IETF BCP47 guidelines)'),
       blank=True, choices=_make_choices_from_list(sorted(iana.get_most_used_languages()))['choices'], max_length=150, )
 
     documentLanguageId = XmlCharField(
-      verbose_name='Document language identifier',
-      help_text='The id of the language the document is written in (acco' \
-      'rding to the IETF BCP47 guidelines)',
+      verbose_name=_('Document language identifier'),
+      help_text=_('The id of the language the document is written in (acco' \
+      'rding to the IETF BCP47 guidelines)'),
       editable=False, blank=True, max_length=20, )
 
 
     source_url = models.URLField(default=DJANGO_URL,
-      help_text="(Read-only) base URL for the server where the master copy of " \
-      "the associated entity instance is located.")
+      help_text=_("(Read-only) base URL for the server where the master copy of " \
+      "the associated entity instance is located."))
 
     copy_status = models.CharField(default=MASTER, max_length=1, choices=COPY_CHOICES,
-        help_text="Generalized copy status flag for this entity instance.")
+        help_text=_("Generalized copy status flag for this entity instance."))
 
     def save(self, *args, **kwargs):
         """
@@ -892,7 +893,7 @@ class resourceDocumentationInfoType_model(SchemaModel):
     """
 
     class Meta:
-        verbose_name = "Resource documentation"
+        verbose_name = _("Resource documentation")
 
 
     __schema_name__ = 'resourceDocumentationInfoType'
@@ -908,20 +909,20 @@ class resourceDocumentationInfoType_model(SchemaModel):
     }
 
     documentation = models.ManyToManyField("documentationInfoType_model",
-      verbose_name='Documentation',
-      help_text='Refers to papers, manuals, reports etc. describing the ' \
-      'resource',
+      verbose_name=_('Documentation'),
+      help_text=_('Refers to papers, manuals, reports etc. describing the ' \
+      'resource'),
       blank=True, null=True, related_name="documentation_%(class)s_related", )
 
     onLineHelpURL = XmlCharField(
-      verbose_name='On line help URL', validators=[HTTPURI_VALIDATOR],
-      help_text='URL link to an online manual or help pages',
+      verbose_name=_('On line help URL'), validators=[HTTPURI_VALIDATOR],
+      help_text=_('URL link to an online manual or help pages'),
       blank=True, max_length=1000, )
 
     samplesLocation = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=8, attrs={'size': '250'}),
-      verbose_name='Samples location', validators=[HTTPURI_VALIDATOR],
-      help_text='A url with samples of the resource or, in the case of t' \
-      'ools, of samples of the output',
+      verbose_name=_('Samples location'), validators=[HTTPURI_VALIDATOR],
+      help_text=_('A url with samples of the resource or, in the case of t' \
+      'ools, of samples of the output'),
       blank=True, )
 
     def real_unicode_(self):
@@ -939,7 +940,7 @@ class domainInfoType_model(SchemaModel):
     """
 
     class Meta:
-        verbose_name = "Domain"
+        verbose_name = _("Domain")
 
 
     __schema_name__ = 'domainInfoType'
@@ -956,20 +957,20 @@ class domainInfoType_model(SchemaModel):
     }
 
     domain = models.CharField(
-        verbose_name='Domain',
-        help_text='Specifies the application domain of the resource or the' \
-                  ' tool/service according to the EUROVOC thesaurus',
+        verbose_name=_('Domain'),
+        help_text=_('Specifies the application domain of the resource or the' \
+                  ' tool/service according to the EUROVOC thesaurus'),
 
         max_length=100,
         choices=_make_choices_from_list(sorted(eurovoc.get_all_domains()))['choices']
     )
 
     domainId = models.CharField(
-        verbose_name='Domain identifier',
-        help_text='The identifier of the application domain of the '
+        verbose_name=_('Domain identifier'),
+        help_text=_('The identifier of the application domain of the '
                   'resource or the tool/service, taken from the '
                   'EUROVOC domains: '
-                  'http://eurovoc.europa.eu/drupal',
+                  'http://eurovoc.europa.eu/drupal'),
         editable=False,
         max_length=3,
         null=True,
@@ -978,20 +979,20 @@ class domainInfoType_model(SchemaModel):
 
     subdomain = models.CharField(
         max_length=100,
-        verbose_name='Subdomain',
-        help_text='The name of the application subdomain of the '
+        verbose_name=_('Subdomain'),
+        help_text=_('The name of the application subdomain of the '
                   'resource or the tool/service, taken from the '
-                  'EUROVOC domains: http://eurovoc.europa.eu/drupal',
+                  'EUROVOC domains: http://eurovoc.europa.eu/drupal'),
         null=True,
         blank=True,
         choices=_make_choices_from_list \
             (sorted(eurovoc.get_all_subdomains()))['choices'])
 
     subdomainId = models.CharField(
-        verbose_name='Subdomain Identifier',
-        help_text='The identifier of the application subdomain of the '
+        verbose_name=_('Subdomain Identifier'),
+        help_text=_('The identifier of the application subdomain of the '
                   'resource or the tool/service, taken from the '
-                  'EUROVOC domains: http://eurovoc.europa.eu/drupal',
+                  'EUROVOC domains: http://eurovoc.europa.eu/drupal'),
         editable=False,
         max_length=6,
         null=True,
@@ -999,15 +1000,15 @@ class domainInfoType_model(SchemaModel):
     )
 
     conformanceToClassificationScheme = XmlCharField(
-        verbose_name='Conformance to classification scheme',
-        help_text='Specifies the external classification schemes',
+        verbose_name=_('Conformance to classification scheme'),
+        help_text=_('Specifies the external classification schemes'),
         editable=False,
         max_length=10,
         default="EUROVOC")
 
     sizePerDomain = models.OneToOneField("sizeInfoType_model",
-      verbose_name='Size per domain',
-      help_text='Specifies the size of resource parts per domain',
+      verbose_name=_('Size per domain'),
+      help_text=_('Specifies the size of resource parts per domain'),
       blank=True, null=True, on_delete=models.SET_NULL, )
 
     back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
@@ -1080,7 +1081,7 @@ class annotationInfoType_model(SchemaModel):
     """
 
     class Meta:
-        verbose_name = "Annotation"
+        verbose_name = _("Annotation")
 
 
     __schema_name__ = 'annotationInfoType'
@@ -1108,9 +1109,9 @@ class annotationInfoType_model(SchemaModel):
     }
 
     annotationType = models.CharField(
-      verbose_name='Annotation type',
-      help_text='Specifies the annotation level of the resource or the a' \
-      'nnotation type a tool/ service requires or produces as an output',
+      verbose_name=_('Annotation type'),
+      help_text=_('Specifies the annotation level of the resource or the a' \
+      'nnotation type a tool/ service requires or produces as an output'),
 
       max_length=150,
       choices=sorted(ANNOTATIONINFOTYPE_ANNOTATIONTYPE_CHOICES['choices'],
@@ -1118,67 +1119,67 @@ class annotationInfoType_model(SchemaModel):
       )
 
     annotationStandoff = MetaBooleanField(
-      verbose_name='Annotation standoff',
-      help_text='Indicates whether the annotation is created inline or i' \
-      'n a stand-off fashion',
+      verbose_name=_('Annotation standoff'),
+      help_text=_('Indicates whether the annotation is created inline or i' \
+      'n a stand-off fashion'),
       blank=True, )
 
     segmentationLevel = MultiSelectField(
-        verbose_name='Segmentation level',
-        help_text='Specifies the segmentation unit in terms of which the r' \
+        verbose_name=_('Segmentation level'),
+        help_text=_('Specifies the segmentation unit in terms of which the r' \
                   'esource has been segmented or the level of segmentation a tool/se' \
-                  'rvice requires/outputs',
+                  'rvice requires/outputs'),
         blank=True,
         max_length=1 + len(ANNOTATIONINFOTYPE_SEGMENTATIONLEVEL_CHOICES['choices']) / 4,
         choices=ANNOTATIONINFOTYPE_SEGMENTATIONLEVEL_CHOICES['choices'],
     )
 
     typesystem = XmlCharField(
-      verbose_name='Typesystem',
-      help_text='A name or a url reference to the typesystem used in the' \
-      ' annotation of the resource or used by the tool/service',
+      verbose_name=_('Typesystem'),
+      help_text=_('A name or a url reference to the typesystem used in the' \
+      ' annotation of the resource or used by the tool/service'),
       blank=True, max_length=500, )
 
     annotationSchema = XmlCharField(
-      verbose_name='Annotation schema',
-      help_text='A name or a url reference to the annotation schema used' \
-      ' in the annotation of the resource or used by the tool/service',
+      verbose_name=_('Annotation schema'),
+      help_text=_('A name or a url reference to the annotation schema used' \
+      ' in the annotation of the resource or used by the tool/service'),
       blank=True, max_length=500, )
 
     annotationResource = XmlCharField(
-      verbose_name='Annotation resource',
-      help_text='A name or a url reference to the resource (e.g. tagset,' \
+      verbose_name=_('Annotation resource'),
+      help_text=_('A name or a url reference to the resource (e.g. tagset,' \
       ' ontology, term lexicon etc.) used in the annotation of the resou' \
-      'rce or used by the tool/service',
+      'rce or used by the tool/service'),
       blank=True, max_length=500, )
 
     conformanceToStandardsBestPractices = MultiSelectField(
-      verbose_name='Conformance to standards / best practices',
-      help_text='Specifies the standards or the best practices to which ' \
-      'the tagset used for the annotation conforms',
+      verbose_name=_('Conformance to standards / best practices'),
+      help_text=_('Specifies the standards or the best practices to which ' \
+      'the tagset used for the annotation conforms'),
       blank=True,
       max_length=1 + len(ANNOTATIONINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES['choices']) / 4,
       choices=ANNOTATIONINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES['choices'],
       )
 
     theoreticModel = XmlCharField(
-      verbose_name='Theoretic model',
-      help_text='Name of the theoretic model applied for the creation or' \
+      verbose_name=_('Theoretic model'),
+      help_text=_('Name of the theoretic model applied for the creation or' \
       ' enrichment of the resource, and/or a reference (URL or bibliogra' \
       'phic reference) to informative material about the theoretic model' \
-      ' used',
+      ' used'),
       blank=True, max_length=500, )
 
     annotationManual = models.ManyToManyField("documentationInfoType_model",
-      verbose_name='Annotation manual',
-      help_text='A bibliographic reference or ms:httpURI link to the ann' \
-      'otation manual',
+      verbose_name=_('Annotation manual'),
+      help_text=_('A bibliographic reference or ms:httpURI link to the ann' \
+      'otation manual'),
       blank=True, null=True, related_name="annotationManual_%(class)s_related", )
 
     annotationMode = models.CharField(
-      verbose_name='Annotation mode',
-      help_text='Indicates whether the resource is annotated manually or' \
-      ' by automatic processes',
+      verbose_name=_('Annotation mode'),
+      help_text=_('Indicates whether the resource is annotated manually or' \
+      ' by automatic processes'),
       blank=True,
       max_length=100,
       choices=sorted(ANNOTATIONINFOTYPE_ANNOTATIONMODE_CHOICES['choices'],
@@ -1186,20 +1187,20 @@ class annotationInfoType_model(SchemaModel):
       )
 
     annotationModeDetails = XmlCharField(
-      verbose_name='Annotation mode details',
-      help_text='Provides further information on annotation process',
+      verbose_name=_('Annotation mode details'),
+      help_text=_('Provides further information on annotation process'),
       blank=True, max_length=1000, )
 
     annotationTool = models.ManyToManyField("targetResourceInfoType_model",
-      verbose_name='Annotation tool',
-      help_text='The name, the identifier or the url of the tool used fo' \
-      'r the annotation of the resource',
+      verbose_name=_('Annotation tool'),
+      help_text=_('The name, the identifier or the url of the tool used fo' \
+      'r the annotation of the resource'),
       blank=True, null=True, related_name="annotationTool_%(class)s_related", )
 
     sizePerAnnotation = models.OneToOneField("sizeInfoType_model",
-      verbose_name='Size per annotation',
-      help_text='Provides information on size for the annotated parts of' \
-      ' the resource',
+      verbose_name=_('Size per annotation'),
+      help_text=_('Provides information on size for the annotated parts of' \
+      ' the resource'),
       blank=True, null=True, on_delete=models.SET_NULL, )
 
     back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
@@ -1216,7 +1217,7 @@ class targetResourceInfoType_model(SchemaModel):
     """
 
     class Meta:
-        verbose_name = "Target resource"
+        verbose_name = _("Target resource")
 
 
     __schema_name__ = 'targetResourceInfoType'
@@ -1225,10 +1226,10 @@ class targetResourceInfoType_model(SchemaModel):
     )
 
     targetResourceNameURI = XmlCharField(
-      verbose_name='Target resource',
-      help_text='The full name or a url to a resource related to the one' \
+      verbose_name=_('Target resource'),
+      help_text=_('The full name or a url to a resource related to the one' \
       ' being described; to be used for identifiers also for this versio' \
-      'n',
+      'n'),
       max_length=4500, )
 
     def real_unicode_(self):
@@ -1247,7 +1248,7 @@ RELATIONINFOTYPE_RELATIONTYPE_CHOICES = _make_choices_from_list([
 class relationInfoType_model(SchemaModel):
 
     class Meta:
-        verbose_name = "Relation"
+        verbose_name = _("Relation")
 
 
     __schema_name__ = 'relationInfoType'
@@ -1260,18 +1261,18 @@ class relationInfoType_model(SchemaModel):
     }
 
     relationType = models.CharField(
-      verbose_name='Relation type',
-      help_text='Specifies the type of relation not covered by the ones ' \
-      'proposed by META-SHARE',
+      verbose_name=_('Relation type'),
+      help_text=_('Specifies the type of relation not covered by the ones ' \
+      'proposed by META-SHARE'),
 
       max_length=RELATIONINFOTYPE_RELATIONTYPE_CHOICES['max_length'],
       choices=RELATIONINFOTYPE_RELATIONTYPE_CHOICES['choices'],
       )
 
     relatedResource = models.ForeignKey("targetResourceInfoType_model",
-      verbose_name='Related resource',
-      help_text='The full name, the identifier or the url of the related' \
-      ' resource',
+      verbose_name=_('Related resource'),
+      help_text=_('The full name, the identifier or the url of the related' \
+      ' resource'),
       )
 
     back_to_resourceinfotype_model = models.ForeignKey("resourceInfoType_model",  blank=True, null=True)
@@ -1284,7 +1285,7 @@ class relationInfoType_model(SchemaModel):
 class dependenciesInfoType_model(SchemaModel):
 
     class Meta:
-        verbose_name = "Dependencies"
+        verbose_name = _("Dependencies")
 
 
     __schema_name__ = 'dependenciesInfoType'
@@ -1299,20 +1300,20 @@ class dependenciesInfoType_model(SchemaModel):
     }
 
     requiredSoftware = models.ManyToManyField("targetResourceInfoType_model",
-      verbose_name='Required software',
-      help_text='Additional software required for running a tool and/or ' \
-      'computational grammar',
+      verbose_name=_('Required software'),
+      help_text=_('Additional software required for running a tool and/or ' \
+      'computational grammar'),
       blank=True, null=True, related_name="requiredSoftware_%(class)s_related", )
 
     requiredLRs = models.ManyToManyField("targetResourceInfoType_model",
-      verbose_name='Required Language Resources',
-      help_text='If for running a tool and/or computational grammar, spe' \
-      'cific LRs (e.g. a grammar, a list of words etc.) are required',
+      verbose_name=_('Required Language Resources'),
+      help_text=_('If for running a tool and/or computational grammar, spe' \
+      'cific LRs (e.g. a grammar, a list of words etc.) are required'),
       blank=True, null=True, related_name="requiredLRs_%(class)s_related", )
 
     dependenciesDetails = XmlCharField(
-      verbose_name='Dependencies details',
-      help_text='Provides further information on the dependencies',
+      verbose_name=_('Dependencies details'),
+      help_text=_('Provides further information on the dependencies'),
       blank=True, max_length=500, )
 
     def __unicode__(self):
@@ -1327,7 +1328,7 @@ class communicationInfoType_model(SchemaModel):
     """
 
     class Meta:
-        verbose_name = "Communication"
+        verbose_name = _("Communication")
 
 
     __schema_name__ = 'communicationInfoType'
@@ -1344,61 +1345,61 @@ class communicationInfoType_model(SchemaModel):
     )
 
     email = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=11, max_length=100),
-      verbose_name='Email', validators=[EMAILADDRESS_VALIDATOR],
-      help_text='The email address of a person or an organization',
+      verbose_name=_('Email'), validators=[EMAILADDRESS_VALIDATOR],
+      help_text=_('The email address of a person or an organization'),
       )
 
     url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=12, max_length=150),
-      verbose_name='URL (Landing page)', validators=[HTTPURI_VALIDATOR],
-      help_text='A URL used as homepage of an entity (e.g. of a person, ' \
+      verbose_name=_('URL (Landing page)'), validators=[HTTPURI_VALIDATOR],
+      help_text=_('A URL used as homepage of an entity (e.g. of a person, ' \
       'organization, resource etc.); it provides general information (fo' \
       'r instance in the case of a resource, it may present a descriptio' \
       'n of the resource, its creators and possibly include links to the' \
-      ' URL where it can be accessed from)',
+      ' URL where it can be accessed from)'),
       blank=True, )
 
     address = XmlCharField(
-      verbose_name='Address',
+      verbose_name=_('Address',
       help_text='The street and the number of the postal address of a pe' \
-      'rson or organization',
+      'rson or organization'),
       blank=True, max_length=200, )
 
     zipCode = XmlCharField(
-      verbose_name='Zip code',
-      help_text='The zip code of the postal address of a person or organ' \
-      'ization',
+      verbose_name=_('Zip code'),
+      help_text=_('The zip code of the postal address of a person or organ' \
+      'ization'),
       blank=True, max_length=30, )
 
     city = XmlCharField(
-      verbose_name='City',
-      help_text='The name of the city, town or village as mentioned in t' \
-      'he postal address of a person or organization',
+      verbose_name=_('City'),
+      help_text=_('The name of the city, town or village as mentioned in t' \
+      'he postal address of a person or organization'),
       blank=True, max_length=50, )
 
     region = XmlCharField(
-      verbose_name='Region',
-      help_text='The name of the region, county or department as mention' \
-      'ed in the postal address of a person or organization',
+      verbose_name=_('Region'),
+      help_text=_('The name of the region, county or department as mention' \
+      'ed in the postal address of a person or organization'),
       blank=True, max_length=100, )
 
     country = models.CharField(
-      verbose_name='Country',
-      help_text='The name of the country mentioned in the postal address' \
+      verbose_name=_('Country'),
+      help_text=_('The name of the country mentioned in the postal address' \
       ' of a person or organization as defined in the list of values of ' \
-      'ISO 3166',
+      'ISO 3166'),
       blank=True, max_length=100, choices=country_optgroup_choices())
 
     countryId = XmlCharField(
-      verbose_name='Country identifier',
-      help_text='The identifier of the country mentioned in the postal a' \
+      verbose_name=_('Country identifier'),
+      help_text=_('The identifier of the country mentioned in the postal a' \
       'ddress of a person or organization as defined in the list of valu' \
-      'es of ISO 3166',
+      'es of ISO 3166'),
       editable=False, blank=True, max_length=1000, )
 
     telephoneNumber = MultiTextField(max_length=30, widget=MultiFieldWidget(widget_id=13, max_length=30),
-      verbose_name='Telephone number',
-      help_text='The telephone number of a person or an organization; re' \
-      'commended format: +_international code_city code_number',
+      verbose_name=_('Telephone number'),
+      help_text=_('The telephone number of a person or an organization; re' \
+      'commended format: +_international code_city code_number'),
       blank=True, validators=[validate_matches_xml_char_production], )
 
     def save(self, *args, **kwargs):
@@ -1424,7 +1425,7 @@ class actorInfoType_model(SubclassableModel):
     __schema_name__ = 'SUBCLASSABLE'
 
     class Meta:
-        verbose_name = "Actor"
+        verbose_name = _("Actor")
 
 
 # pylint: disable-msg=C0103
@@ -1434,7 +1435,7 @@ class organizationInfoType_model(actorInfoType_model):
     """
 
     class Meta:
-        verbose_name = "Organization"
+        verbose_name = _("Organization")
 
 
     __schema_name__ = 'organizationInfoType'
@@ -1450,40 +1451,40 @@ class organizationInfoType_model(actorInfoType_model):
 
     organizationName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever,
-      verbose_name='Organization name',
+      verbose_name=_('Organization name'),
       max_val_length=150,
-      help_text='The full name of an organization',
+      help_text=_('The full name of an organization'),
       )
 
     organizationShortName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever,
-      verbose_name='Organization short name',
+      verbose_name=_('Organization short name'),
       max_val_length=100,
-      help_text='The short name (abbreviation, acronym etc.) used for an' \
-      ' organization',
+      help_text=_('The short name (abbreviation, acronym etc.) used for an' \
+      ' organization'),
       blank=True)
 
     departmentName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever,
-      verbose_name='Department name',
-      help_text='The name of the department or unit (e.g. specific unive' \
+      verbose_name=_('Department name'),
+      help_text=_('The name of the department or unit (e.g. specific unive' \
       'rsity faculty/department, department/unit of a research organizat' \
-      'ion or private company etc.)',
+      'ion or private company etc.)'),
       blank=True)
 
     communicationInfo = models.OneToOneField("communicationInfoType_model",
-      verbose_name='Communication',
-      help_text='Groups information on communication details of a person' \
-      ' or an organization',
+      verbose_name=_('Communication'),
+      help_text=_('Groups information on communication details of a person' \
+      ' or an organization'),
       )
 
 
     source_url = models.URLField(default=DJANGO_URL,
-      help_text="(Read-only) base URL for the server where the master copy of " \
-      "the associated entity instance is located.")
+      help_text=_("(Read-only) base URL for the server where the master copy of " \
+      "the associated entity instance is located."))
 
     copy_status = models.CharField(default=MASTER, max_length=1, choices=COPY_CHOICES,
-        help_text="Generalized copy status flag for this entity instance.")
+        help_text=_("Generalized copy status flag for this entity instance."))
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
@@ -1505,7 +1506,7 @@ class personInfoType_model(actorInfoType_model):
     """
 
     class Meta:
-        verbose_name = "Person"
+        verbose_name = _("Person")
 
 
     __schema_name__ = 'personInfoType'
@@ -1524,24 +1525,24 @@ class personInfoType_model(actorInfoType_model):
 
     surname = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever,
-      verbose_name='Surname',
+      verbose_name=_('Surname'),
       max_val_length=100,
-      help_text='The surname (family name) of a person related to the re' \
-      'source',
+      help_text=_('The surname (family name) of a person related to the re' \
+      'source'),
       )
 
     givenName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever,
-      verbose_name='Given name',
+      verbose_name=_('Given name'),
       max_val_length=100,
-      help_text='The given name (first name) of a person related to the ' \
-      'resource; initials can also be used',
+      help_text=_('The given name (first name) of a person related to the ' \
+      'resource; initials can also be used'),
       blank=True)
 
     sex = models.CharField(
-      verbose_name='Sex',
-      help_text='The gender of a person related to or participating in t' \
-      'he resource',
+      verbose_name=_('Sex'),
+      help_text=_('The gender of a person related to or participating in t' \
+      'he resource'),
       blank=True,
       max_length=30,
       choices=sorted(PERSONINFOTYPE_SEX_CHOICES['choices'],
@@ -1549,30 +1550,30 @@ class personInfoType_model(actorInfoType_model):
       )
 
     communicationInfo = models.OneToOneField("communicationInfoType_model",
-      verbose_name='Communication',
-      help_text='Groups information on communication details of a person' \
-      ' or an organization',
+      verbose_name=_('Communication'),
+      help_text=_('Groups information on communication details of a person' \
+      ' or an organization'),
       )
 
     position = XmlCharField(
-      verbose_name='Position',
-      help_text='The position or the title of a person if affiliated to ' \
-      'an organization',
+      verbose_name=_('Position'),
+      help_text=_('The position or the title of a person if affiliated to ' \
+      'an organization'),
       blank=True, max_length=100, )
 
     affiliation = models.ManyToManyField("organizationInfoType_model",
-      verbose_name='Affiliation',
-      help_text='Groups information on organization to whom the person i' \
-      's affiliated',
+      verbose_name=_('Affiliation'),
+      help_text=_('Groups information on organization to whom the person i' \
+      's affiliated'),
       blank=True, null=True, related_name="affiliation_%(class)s_related", )
 
 
     source_url = models.URLField(default=DJANGO_URL,
-      help_text="(Read-only) base URL for the server where the master copy of " \
-      "the associated entity instance is located.")
+      help_text=_("(Read-only) base URL for the server where the master copy of " \
+      "the associated entity instance is located."))
 
     copy_status = models.CharField(default=MASTER, max_length=1, choices=COPY_CHOICES,
-        help_text="Generalized copy status flag for this entity instance.")
+        help_text=_("Generalized copy status flag for this entity instance."))
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
@@ -1595,7 +1596,7 @@ class distributionInfoType_model(SchemaModel):
     """
 
     class Meta:
-        verbose_name = "Distribution"
+        verbose_name = _("Distribution")
 
 
     __schema_name__ = 'distributionInfoType'
@@ -1623,10 +1624,10 @@ class distributionInfoType_model(SchemaModel):
     }
 
     availability = models.CharField(
-      verbose_name='Availability',
-      help_text='Specifies the availability status of the resource; rest' \
+      verbose_name=_('Availability'),
+      help_text=_('Specifies the availability status of the resource; rest' \
       'rictionsOfUse can be further used to indicate the specific terms ' \
-      'of availability',
+      'of availability'),
       # editable=False,
       max_length=40,
       choices=sorted(DISTRIBUTIONINFOTYPE_AVAILABILITY_CHOICES['choices'],
@@ -1634,103 +1635,103 @@ class distributionInfoType_model(SchemaModel):
       )
 
     PSI = MetaBooleanField(
-      verbose_name='PSI',
-      help_text='Indicates that the resource falls under the Public Sect' \
-      'or Information regulations',
+      verbose_name=_('PSI'),
+      help_text=_('Indicates that the resource falls under the Public Sect' \
+      'or Information regulations'),
       )
 
     allowsUsesBesidesDGT = MetaBooleanField(
-      verbose_name='Allows uses besides DGT',
-      help_text='Whether the resource can be used for purposes other tha' \
-      'n those of the DGT',
+      verbose_name=_('Allows uses besides DGT'),
+      help_text=_('Whether the resource can be used for purposes other tha' \
+      'n those of the DGT'),
       default=False
       )
 
     licenceInfo = models.ManyToManyField("licenceInfoType_model",
-      verbose_name='Licences',
-      help_text='Groups information on licences for the resource; can be' \
+      verbose_name=_('Licences'),
+      help_text=_('Groups information on licences for the resource; can be' \
       ' repeated to allow for different modes of access and restrictions' \
       ' of use (e.g. free for academic use, on-a-fee basis for commercia' \
-      'l use, download of a sample for free use etc.)',
+      'l use, download of a sample for free use etc.)'),
       related_name="licenceInfo_%(class)s_related", )
 
     distributionMedium = MultiSelectField(
-      verbose_name='Distribution medium',
-      help_text='Specifies the medium (channel) used for delivery or pro' \
-      'viding access to the resource',
+      verbose_name=_('Distribution medium'),
+      help_text=_('Specifies the medium (channel) used for delivery or pro' \
+      'viding access to the resource'),
       blank=True,
       max_length=1 + len(DISTRIBUTIONINFOTYPE_DISTRIBUTIONMEDIUM_CHOICES['choices']) / 4,
       choices=DISTRIBUTIONINFOTYPE_DISTRIBUTIONMEDIUM_CHOICES['choices'],
       )
 
     downloadLocation = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=14, attrs={'size': '250'}),
-                                      verbose_name='Download location', validators=[HTTPURI_VALIDATOR],
-                                      help_text='Any url where the resource can be downloaded from; plea' \
+                                      verbose_name=_('Download location'), validators=[HTTPURI_VALIDATOR],
+                                      help_text=_('Any url where the resource can be downloaded from; plea' \
                                                 'se, use if the resource is "downloadable" and you have not upload' \
-                                                'ed the resource in the repository',
+                                                'ed the resource in the repository'),
                                       blank=True, )
 
     executionLocation = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=15, attrs={'size': '250'}),
-                                       verbose_name='Execution location', validators=[HTTPURI_VALIDATOR],
-                                       help_text=' Any url where the service providing access to a resour' \
+                                       verbose_name=_('Execution location'), validators=[HTTPURI_VALIDATOR],
+                                       help_text=_(' Any url where the service providing access to a resour' \
                                                  'ce is being executed; please use for resources that are "accessib' \
-                                                 'leThroughInterface" or "webExecutable" ',
+                                                 'leThroughInterface" or "webExecutable" '),
                                        blank=True, )
 
     attributionText = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever,
-      verbose_name='Attribution text',
+      verbose_name=_('Attribution text'),
       max_val_length=1000,
-      help_text=' The text that must be quoted for attribution purposes ' \
+      help_text=_(' The text that must be quoted for attribution purposes ' \
       'when using a resource - for cases where a resource is provided wi' \
       'th a request for attribution; you can use a standard text such as' \
-      ' "Resource X by Resource Creator Y used under licence Z" ',
+      ' "Resource X by Resource Creator Y used under licence Z" '),
       blank=True)
 
     personalDataIncluded = MetaBooleanField(
-      verbose_name='Personal data included',
-      help_text='Specifies whether the resource contains or not personal' \
+      verbose_name=_('Personal data included'),
+      help_text=_('Specifies whether the resource contains or not personal' \
       ' data; this might mean that special handling of the resource is r' \
-      'equired (e.g. anonymisation)', default=False
+      'equired (e.g. anonymisation)'), default=False
       )
 
     personalDataAdditionalInfo = XmlCharField(
-      verbose_name='Personal data additional',
-      help_text='If the resource includes personal data, this field can ' \
+      verbose_name=_('Personal data additional'),
+      help_text=_('If the resource includes personal data, this field can ' \
       'be used for entering more information, e.g. whether special handl' \
       'ing of the resource is required (e.g. anonymisation, further requ' \
-      'est for use etc.)',
+      'est for use etc.)'),
       blank=True, max_length=1000, )
 
     sensitiveDataIncluded = MetaBooleanField(
-      verbose_name='Sensitive data included',
-      help_text='Specifies whether the resource contains or not sensitiv' \
+      verbose_name=_('Sensitive data included'),
+      help_text=_('Specifies whether the resource contains or not sensitiv' \
       'e data; this might mean that special handling of the resource is ' \
-      'required (e.g. anonymisation)', default=False
+      'required (e.g. anonymisation)'), default=False
       )
 
     sensitiveDataAdditionalInfo = XmlCharField(
-      verbose_name='Sensitive data additional',
-      help_text='If the resource includes sensitive data, this field can' \
+      verbose_name=_('Sensitive data additional'),
+      help_text=_('If the resource includes sensitive data, this field can' \
       ' be used for entering more information, e.g. whether special hand' \
-      'ling of the resource is required (e.g. anonymisation)',
+      'ling of the resource is required (e.g. anonymisation)'),
       blank=True, max_length=1000, )
 
     fee = XmlCharField(
-      verbose_name='Fee',
-      help_text='Specifies the costs that are required to access the res' \
-      'ource, a fragment of the resource or to use a tool or service',
+      verbose_name=_('Fee'),
+      help_text=_('Specifies the costs that are required to access the res' \
+      'ource, a fragment of the resource or to use a tool or service'),
       blank=True, max_length=100, )
 
     iprHolder = models.ManyToManyField("actorInfoType_model",
-      verbose_name='IPR holder',
-      help_text='Groups information on a person or an organization who h' \
+      verbose_name=_('IPR holder'),
+      help_text=_('Groups information on a person or an organization who h' \
       'olds the full Intellectual Property Rights (Copyright, trademark ' \
       'etc.) that subsist in the resource. The IPR holder could be diffe' \
       'rent from the creator that may have assigned the rights to the IP' \
       'R holder (e.g. an author as a creator assigns her rights to the p' \
       'ublisher who is the IPR holder) and the distributor that holds a ' \
-      'specific licence (i.e. a permission) to distribute the work',
+      'specific licence (i.e. a permission) to distribute the work'),
       blank=True, null=True, related_name="iprHolder_%(class)s_related", )
 
     back_to_resourceinfotype_model = models.ForeignKey("resourceInfoType_model",  blank=True, null=True)
@@ -1830,11 +1831,11 @@ def licenceinfotype_licence_optgroup_choices():
     Group the choices in groups. The first group is the most used choices
     and the second group is the rest.
     """
-    indl = ('International/National Data Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][:18])
-    ndl = ('National Data Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][18:24])
-    isl = ('International Software Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][24:34])
-    isdl = ('International Software & Data Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][34:37])
-    other = ('Other', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][37:])
+    indl = (_('International/National Data Licences'), LICENCEINFOTYPE_LICENCE_CHOICES['choices'][:18])
+    ndl = (_('National Data Licences'), LICENCEINFOTYPE_LICENCE_CHOICES['choices'][18:24])
+    isl = (_('International Software Licences'), LICENCEINFOTYPE_LICENCE_CHOICES['choices'][24:34])
+    isdl = (_('International Software & Data Licences'), LICENCEINFOTYPE_LICENCE_CHOICES['choices'][34:37])
+    other = (_('Other'), LICENCEINFOTYPE_LICENCE_CHOICES['choices'][37:])
     optgroup = [indl, ndl, isl, isdl, other]
     return optgroup
 
@@ -1933,7 +1934,7 @@ class licenceInfoType_model(SchemaModel):
     """
 
     class Meta:
-        verbose_name = "Licence"
+        verbose_name = _("Licence")
 
 
     __schema_name__ = 'licenceInfoType'
@@ -1946,42 +1947,42 @@ class licenceInfoType_model(SchemaModel):
     )
 
     licence = models.CharField(
-      verbose_name='Licence',
-      help_text='The licence of use for the resource; for an overview of' \
+      verbose_name=_('Licence'),
+      help_text=_('The licence of use for the resource; for an overview of' \
       ' licences, please visit: https://www.elrc-share.eu/info/#Licensi' \
-      'ng_LRs',
+      'ng_LRs'),
 
       max_length=100,
       choices=licenceinfotype_licence_optgroup_choices()
       )
 
     otherLicenceName = XmlCharField(
-      verbose_name='Other Licence Name',
-      help_text='The name with which a licence is known; to be used for ' \
+      verbose_name=_('Other Licence Name'),
+      help_text=_('The name with which a licence is known; to be used for ' \
       'licences not included in the pre-defined list of recommended lice' \
-      'nces',
+      'nces'),
       blank=True, null=True, max_length=1500, )
 
     otherLicence_TermsText = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever,
-      verbose_name='Other licence terms text',
+      verbose_name=_('Other licence terms text'),
       max_val_length=10000,
-      help_text='Used for inputting the text of licences that are not in' \
+      help_text=_('Used for inputting the text of licences that are not in' \
       'cluded in the pre-defined list or terms of use statements associa' \
-      'ted with a resource',
+      'ted with a resource'),
       blank=True)
 
     otherLicence_TermsURL = models.URLField(
-      verbose_name='Other licence terms URL',
-      help_text='Used to provide a hyperlink to a url containing the tex' \
+      verbose_name=_('Other licence terms URL'),
+      help_text=_('Used to provide a hyperlink to a url containing the tex' \
       't of a licence not included in the predefined list or describing ' \
-      'the terms of use for a language resource',
+      'the terms of use for a language resource'),
       blank=True, max_length=1000, )
 
     restrictionsOfUse = MultiSelectField(
-      verbose_name='Conditions of Use',
-      help_text='Specifies terms and conditions of use (e.g. attribution' \
-      ', payment etc.) imposed by the licence',
+      verbose_name=_('Conditions of Use'),
+      help_text=_('Specifies terms and conditions of use (e.g. attribution' \
+      ', payment etc.) imposed by the licence'),
       blank=True,
       max_length=1 + len(LICENCEINFOTYPE_CONDITIONSOFUSE_CHOICES['choices']) / 4,
       choices=LICENCEINFOTYPE_CONDITIONSOFUSE_CHOICES['choices'],
@@ -2004,16 +2005,16 @@ class licenceInfoType_model(SchemaModel):
 
         # If licence is openUnder-PSI
         if self.licence == u"publicDomain":
-            self.otherLicenceName = u"Terms for Public Domain resources"
-            self.otherLicence_TermsText["en"]= u"The resource is free of all known legal restrictions."
+            self.otherLicenceName = _(u"Terms for Public Domain resources")
+            self.otherLicence_TermsText["en"]= _(u"The resource is free of all known legal restrictions.")
         elif self.licence == u"openUnder-PSI":
-            self.otherLicenceName = u"Terms for PSI-compliant resources"
-            self.otherLicence_TermsText["en"]= u"Used for resources that fall under the " \
+            self.otherLicenceName = _(u"Terms for PSI-compliant resources")
+            self.otherLicence_TermsText["en"]= _(u"Used for resources that fall under the " \
                                           u"scope of PSI (Public Sector Information) " \
                                           u"regulations, and for which no further information " \
                                           u"is required or available. For more information on the EU " \
                                           u"legislation on the reuse of Public Sector Information, " \
-                                          u"see here: https://ec.europa.eu/digital-single-market/en/european-legislation-reuse-public-sector-information."
+                                          u"see here: https://ec.europa.eu/digital-single-market/en/european-legislation-reuse-public-sector-information.")
         # Call save() method from super class with all arguments.
         super(licenceInfoType_model, self).save(*args, **kwargs)
 
@@ -2056,7 +2057,7 @@ def characterencodinginfotype_characterencoding_optgroup_choices():
     and the second group is the rest.
     """
     most_used_choices = ('', CHARACTERENCODINGINFOTYPE_CHARACTERENCODING_CHOICES['choices'][:21])
-    more_choices = ('More', CHARACTERENCODINGINFOTYPE_CHARACTERENCODING_CHOICES['choices'][21:])
+    more_choices = (_('More'), CHARACTERENCODINGINFOTYPE_CHARACTERENCODING_CHOICES['choices'][21:])
     optgroup = [most_used_choices, more_choices]
     return optgroup
 
@@ -2068,7 +2069,7 @@ class characterEncodingInfoType_model(SchemaModel):
     """
 
     class Meta:
-        verbose_name = "Character encoding"
+        verbose_name = _("Character encoding")
 
 
     __schema_name__ = 'characterEncodingInfoType'
@@ -2081,17 +2082,17 @@ class characterEncodingInfoType_model(SchemaModel):
     }
 
     characterEncoding = models.CharField(
-      verbose_name='Character encoding',
-      help_text='The name of the character encoding used in the resource' \
-      ' or accepted by the tool/service',
+      verbose_name=_('Character encoding'),
+      help_text=_('The name of the character encoding used in the resource' \
+      ' or accepted by the tool/service'),
       max_length=100,
       choices=characterencodinginfotype_characterencoding_optgroup_choices(),
       )
 
     sizePerCharacterEncoding = models.OneToOneField("sizeInfoType_model",
-      verbose_name='Size per character encoding',
-      help_text='Provides information on the size of the resource parts ' \
-      'with different character encoding',
+      verbose_name=_('Size per character encoding'),
+      help_text=_('Provides information on the size of the resource parts ' \
+      'with different character encoding'),
       blank=True, null=True, on_delete=models.SET_NULL, )
 
     back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
@@ -2120,7 +2121,7 @@ class lingualityInfoType_model(SchemaModel):
     """
 
     class Meta:
-        verbose_name = "Linguality"
+        verbose_name = _("Linguality")
 
 
     __schema_name__ = 'lingualityInfoType'
@@ -2131,9 +2132,9 @@ class lingualityInfoType_model(SchemaModel):
     )
 
     lingualityType = models.CharField(
-      verbose_name='Linguality type',
-      help_text='Indicates whether the resource includes one, two or mor' \
-      'e languages',
+      verbose_name=_('Linguality type'),
+      help_text=_('Indicates whether the resource includes one, two or mor' \
+      'e languages'),
 
       max_length=20,
       choices=sorted(LINGUALITYINFOTYPE_LINGUALITYTYPE_CHOICES['choices'],
@@ -2141,9 +2142,9 @@ class lingualityInfoType_model(SchemaModel):
       )
 
     multilingualityType = models.CharField(
-      verbose_name='Multilinguality type',
-      help_text='Indicates whether the corpus is parallel, comparable or' \
-      ' mixed',
+      verbose_name=_('Multilinguality type'),
+      help_text=_('Indicates whether the corpus is parallel, comparable or' \
+      ' mixed'),
       blank=True,
       max_length=30,
       choices=sorted(LINGUALITYINFOTYPE_MULTILINGUALITYTYPE_CHOICES['choices'],
@@ -2151,9 +2152,9 @@ class lingualityInfoType_model(SchemaModel):
       )
 
     multilingualityTypeDetails = XmlCharField(
-      verbose_name='Multilinguality type details',
-      help_text='Provides further information on multilinguality of a re' \
-      'source in free text',
+      verbose_name=_('Multilinguality type details'),
+      help_text=_('Provides further information on multilinguality of a re' \
+      'source in free text'),
       blank=True, max_length=512, )
 
     def save(self, *args, **kwargs):
@@ -2182,7 +2183,7 @@ class languageVarietyInfoType_model(SchemaModel):
     """
 
     class Meta:
-        verbose_name = "Language variety"
+        verbose_name = _("Language variety")
 
 
     __schema_name__ = 'languageVarietyInfoType'
@@ -2196,9 +2197,9 @@ class languageVarietyInfoType_model(SchemaModel):
     }
 
     languageVarietyType = models.CharField(
-      verbose_name='Language variety type',
-      help_text='Specifies the type of the language variety that occurs ' \
-      'in the resource or is supported by a tool/service',
+      verbose_name=_('Language variety type'),
+      help_text=_('Specifies the type of the language variety that occurs ' \
+      'in the resource or is supported by a tool/service'),
 
       max_length=20,
       choices=sorted(LANGUAGEVARIETYINFOTYPE_LANGUAGEVARIETYTYPE_CHOICES['choices'],
@@ -2206,15 +2207,15 @@ class languageVarietyInfoType_model(SchemaModel):
       )
 
     languageVarietyName = XmlCharField(
-      verbose_name='Language variety name',
-      help_text='The name of the language variety that occurs in the res' \
-      'ource or is supported by a tool/service',
+      verbose_name=_('Language variety name'),
+      help_text=_('The name of the language variety that occurs in the res' \
+      'ource or is supported by a tool/service'),
       max_length=100, )
 
     sizePerLanguageVariety = models.OneToOneField("sizeInfoType_model",
-      verbose_name='Size per language variety',
-      help_text='Provides information on the size per language variety c' \
-      'omponent',
+      verbose_name=_('Size per language variety'),
+      help_text=_('Provides information on the size per language variety c' \
+      'omponent'),
       blank=True, null=True, on_delete=models.SET_NULL, )
 
     def real_unicode_(self):
@@ -2230,7 +2231,7 @@ def languageinfotype_languagename_optgroup_choices():
     and the second group contains the rest.
     """
     most_used_choices = ('', _make_choices_from_list(iana.get_most_used_languages())['choices'])
-    more_choices = ('More', _make_choices_from_list(sorted(iana.get_rest_of_languages()))['choices'])
+    more_choices = (_('More'), _make_choices_from_list(sorted(iana.get_rest_of_languages()))['choices'])
     optgroup = [most_used_choices, more_choices]
     return optgroup
 
@@ -2242,7 +2243,7 @@ class languageInfoType_model(SchemaModel):
     """
 
     class Meta:
-        verbose_name = "Language"
+        verbose_name = _("Language")
 
 
     __schema_name__ = 'languageInfoType'
@@ -2261,51 +2262,51 @@ class languageInfoType_model(SchemaModel):
     }
 
     languageId = XmlCharField(
-      verbose_name='Language identifier',
-      help_text='The identifier of the language that is included in the ' \
+      verbose_name=_('Language identifier'),
+      help_text=_('The identifier of the language that is included in the ' \
       'resource or supported by the tool/service, according to the IETF ' \
-      'BCP47 guidelines',
+      'BCP47 guidelines'),
       editable=False, max_length=100, )
 
     languageName = models.CharField(
-      verbose_name='Language name',
-      help_text='A human understandable name of the language that is use' \
+      verbose_name=_('Language name'),
+      help_text=_('A human understandable name of the language that is use' \
       'd in the resource; the name is selected according to the IETF BCP' \
-      '47 specifications',
+      '47 specifications'),
       choices=languageinfotype_languagename_optgroup_choices(), max_length=100, )
 
     languageScript = models.CharField(
-      verbose_name='Language script',
-      help_text='A human understandable name of the script used for the ' \
+      verbose_name=_('Language script'),
+      help_text=_('A human understandable name of the script used for the ' \
       'resource, according to the IETF BCP47 specifications; the element' \
       ' is optional and should only be used for extraordinary cases (e.g' \
-      '. transcribed text in IPA etc.)',
+      '. transcribed text in IPA etc.)'),
       blank=True, null=True, choices =_make_choices_from_list(sorted(iana.get_all_scripts()))['choices'], max_length=100, )
 
     region = XmlCharField(
-      verbose_name='Region',
-      help_text='Name of the region where the language of the resource i' \
-      's spoken (e.g. for English as spoken in the US or the UK etc.)',
+      verbose_name=_('Region'),
+      help_text=_('Name of the region where the language of the resource i' \
+      's spoken (e.g. for English as spoken in the US or the UK etc.)'),
       blank=True, null=True, choices =_make_choices_from_list(sorted(iana.get_all_regions()))['choices'], max_length=100, )
 
     variant = MultiTextField(max_length=1000, widget=MultiChoiceWidget(widget_id=16, choices=
     _make_choices_from_list(sorted(iana.get_all_variants()))['choices']),
-                             verbose_name='Variants',
-                             help_text='Name of the variant of the language of the resource is ' \
-                                       'spoken (according to IETF BCP47)',
+                             verbose_name=_('Variants'),
+                             help_text=_('Name of the variant of the language of the resource is ' \
+                                       'spoken (according to IETF BCP47)'),
                              blank=True,
                              null=True,
                              validators=[validate_matches_xml_char_production], )
 
     sizePerLanguage = models.ManyToManyField("sizeInfoType_model",
-      verbose_name='Size per language',
-      help_text='Provides information on the size per language component',
+      verbose_name=_('Size per language'),
+      help_text=_('Provides information on the size per language component'),
       blank=True, null=True, related_name="sizePerLanguage_%(class)s_related", )
 
     languageVarietyInfo = models.ManyToManyField("languageVarietyInfoType_model",
-      verbose_name='Language variety',
-      help_text='Groups information on language varieties occurred in th' \
-      'e resource (e.g. dialects)',
+      verbose_name=_('Language variety'),
+      help_text=_('Groups information on language varieties occurred in th' \
+      'e resource (e.g. dialects)'),
       blank=True, null=True, related_name="languageVarietyInfo_%(class)s_related", )
 
     back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
@@ -2338,7 +2339,7 @@ class languageSetInfoType_model(SchemaModel):
     """
 
     class Meta:
-        verbose_name = "Language Set"
+        verbose_name = _("Language Set")
 
 
     __schema_name__ = 'languageSetInfo'
@@ -2351,37 +2352,37 @@ class languageSetInfoType_model(SchemaModel):
     )
 
     languageId = XmlCharField(
-      verbose_name='Language identifier',
-      help_text='The identifier of the language that is included in the ' \
+      verbose_name=_('Language identifier'),
+      help_text=_('The identifier of the language that is included in the ' \
       'resource or supported by the tool/service, according to the IETF ' \
-      'BCP47 guidelines',
+      'BCP47 guidelines'),
       editable=False, max_length=100, )
 
     languageName = XmlCharField(
-      verbose_name='Language name',
-      help_text='A human understandable name of the language that is use' \
+      verbose_name=_('Language name'),
+      help_text=_('A human understandable name of the language that is use' \
       'd in the resource; the name is selected according to the IETF BCP' \
-      '47 specifications',choices=languageinfotype_languagename_optgroup_choices(), max_length=100, )
+      '47 specifications'),choices=languageinfotype_languagename_optgroup_choices(), max_length=100, )
 
     languageScript = XmlCharField(
-      verbose_name='Language script',
-      help_text='A human understandable name of the script used for the ' \
+      verbose_name=_('Language script'),
+      help_text=_('A human understandable name of the script used for the ' \
       'resource, according to the IETF BCP47 specifications; the element' \
       ' is optional and should only be used for extraordinary cases (e.g' \
-      '. transcribed text in IPA etc.)',
+      '. transcribed text in IPA etc.)'),
       blank=True, choices =_make_choices_from_list(sorted(iana.get_all_scripts()))['choices'], max_length=100, )
 
     region = XmlCharField(
-        verbose_name='Region',
-        help_text='Name of the region where the language of the resource i' \
-                  's spoken (e.g. for English as spoken in the US or the UK etc.)',
+        verbose_name=_('Region'),
+        help_text=_('Name of the region where the language of the resource i' \
+                  's spoken (e.g. for English as spoken in the US or the UK etc.)'),
         blank=True, choices=_make_choices_from_list(sorted(iana.get_all_regions()))['choices'], max_length=100, )
 
     variant = MultiTextField(max_length=1000, widget=MultiChoiceWidget(widget_id=17, choices=
     _make_choices_from_list(sorted(iana.get_all_variants()))['choices']),
-                             verbose_name='Variants',
-                             help_text='Name of the variant of the language of the resource is ' \
-                                       'spoken (according to IETF BCP47)',
+                             verbose_name=_('Variants'),
+                             help_text=_('Name of the variant of the language of the resource is ' \
+                                       'spoken (according to IETF BCP47)'),
                              blank=True, validators=[validate_matches_xml_char_production], )
 
     back_to_inputinfotype_model = models.ForeignKey("inputInfoType_model",  blank=True, null=True)
@@ -2418,7 +2419,7 @@ class projectInfoType_model(SchemaModel):
     """
 
     class Meta:
-        verbose_name = "Project"
+        verbose_name = _("Project")
 
 
     __schema_name__ = 'projectInfoType'
@@ -2437,74 +2438,74 @@ class projectInfoType_model(SchemaModel):
 
     projectName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever,
-      verbose_name='Project name',
+      verbose_name=_('Project name'),
       max_val_length=500,
-      help_text='The full name of a project related to the resource',
+      help_text=_('The full name of a project related to the resource'),
       )
 
     projectShortName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever,
-      verbose_name='Project short name',
+      verbose_name=_('Project short name'),
       max_val_length=500,
-      help_text='A short name or abbreviation of a project related to th' \
-      'e resource',
+      help_text=_('A short name or abbreviation of a project related to th' \
+      'e resource'),
       blank=True)
 
     projectID = XmlCharField(
-      verbose_name='Project id',
-      help_text='An unambiguous referent to a project related to the res' \
-      'ource',
+      verbose_name=_('Project id'),
+      help_text=_('An unambiguous referent to a project related to the res' \
+      'ource'),
       blank=True, max_length=100, )
 
     url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=18, attrs={'size': '250'}),
-      verbose_name='URL (Landing page)', validators=[HTTPURI_VALIDATOR],
-      help_text='A URL used as homepage of an entity (e.g. of a person, ' \
+      verbose_name=_('URL (Landing page)'), validators=[HTTPURI_VALIDATOR],
+      help_text=_('A URL used as homepage of an entity (e.g. of a person, ' \
       'organization, resource etc.) and/or where an entity (e.g.LR, docu' \
-      'ment etc.) is located',
+      'ment etc.) is located'),
       blank=True, )
 
     fundingType = MultiSelectField(
-      verbose_name='Funding type',
-      help_text='Specifies the type of funding of the project',
+      verbose_name=_('Funding type'),
+      help_text=_('Specifies the type of funding of the project'),
 
       max_length=1 + len(PROJECTINFOTYPE_FUNDINGTYPE_CHOICES['choices']) / 4,
       choices=PROJECTINFOTYPE_FUNDINGTYPE_CHOICES['choices'],
       )
 
     funder = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=19, max_length=100),
-      verbose_name='Funder',
-      help_text='The full name of the funder of the project',
+      verbose_name=_('Funder'),
+      help_text=_('The full name of the funder of the project'),
       blank=True, validators=[validate_matches_xml_char_production], )
 
     fundingCountry = MultiTextField(max_length=100, widget=MultiChoiceWidget(widget_id=20, choices =country_optgroup_choices()),
-      verbose_name='Funding country',
-      help_text='The name of the funding country, in case of national fu' \
-      'nding as mentioned in ISO3166',
+      verbose_name=_('Funding country'),
+      help_text=_('The name of the funding country, in case of national fu' \
+      'nding as mentioned in ISO3166'),
       blank=True, validators=[validate_matches_xml_char_production], )
 
     fundingCountryId = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=21, max_length=1000),
-      verbose_name='Funding country identifier',
-      help_text='The identifier of the funding country, in case of natio' \
-      'nal funding as mentioned in ISO3166',
+      verbose_name=_('Funding country identifier'),
+      help_text=_('The identifier of the funding country, in case of natio' \
+      'nal funding as mentioned in ISO3166'),
       editable=False, blank=True, validators=[validate_matches_xml_char_production], )
 
     projectStartDate = models.DateField(
-      verbose_name='Project start date',
-      help_text='The starting date of a project related to the resource',
+      verbose_name=_('Project start date'),
+      help_text=_('The starting date of a project related to the resource'),
       blank=True, null=True, )
 
     projectEndDate = models.DateField(
-      verbose_name='Project end date',
-      help_text='The end date of a project related to the resource',
+      verbose_name=_('Project end date'),
+      help_text=_('The end date of a project related to the resource'),
       blank=True, null=True, )
 
 
     source_url = models.URLField(default=DJANGO_URL,
-      help_text="(Read-only) base URL for the server where the master copy of " \
-      "the associated entity instance is located.")
+      help_text=_("(Read-only) base URL for the server where the master copy of " \
+      "the associated entity instance is located."))
 
     copy_status = models.CharField(default=MASTER, max_length=1, choices=COPY_CHOICES,
-        help_text="Generalized copy status flag for this entity instance.")
+        help_text=_("Generalized copy status flag for this entity instance."))
 
     def save(self, *args, **kwargs):
         if self.fundingCountry:
@@ -2531,7 +2532,7 @@ class corpusTextInfoType_model(SchemaModel):
     """
 
     class Meta:
-        verbose_name = "Corpus text"
+        verbose_name = _("Corpus text")
 
 
     __schema_name__ = 'corpusTextInfoType'
@@ -2560,19 +2561,19 @@ class corpusTextInfoType_model(SchemaModel):
     }
 
     mediaType = XmlCharField(
-      verbose_name='Media type',
-      help_text='Specifies the media type of the resource and basically ' \
+      verbose_name=_('Media type'),
+      help_text=_('Specifies the media type of the resource and basically ' \
       'corresponds to the physical medium of the content representation.' \
       ' Each media type is described through a distinctive set of featur' \
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
-      'different media types.',
+      'different media types.'),
       default="text", editable=False, max_length=1000, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model",
-      verbose_name='Linguality',
-      help_text='Groups information on the number of languages of the re' \
-      'source part and of the way they are combined to each other',
+      verbose_name=_('Linguality'),
+      help_text=_('Groups information on the number of languages of the re' \
+      'source part and of the way they are combined to each other'),
       null=True, blank=True)
 
     # OneToMany field: languageInfo
@@ -2590,11 +2591,11 @@ class corpusTextInfoType_model(SchemaModel):
     # OneToMany field: textClassificationInfo
 
     creationInfo = models.OneToOneField("creationInfoType_model",
-      verbose_name='Creation',
-      help_text='Groups together information on the resource creation (e' \
+      verbose_name=_('Creation'),
+      help_text=_('Groups together information on the resource creation (e' \
       '.g. for corpora, selection of texts/audio files/ video files etc.' \
       ' and structural encoding thereof; for lexica, construction of lem' \
-      'ma list etc.)',
+      'ma list etc.)'),
       blank=True, null=True, on_delete=models.SET_NULL, )
 
     back_to_corpusmediatypetype_model = models.ForeignKey("corpusMediaTypeType_model",  blank=True, null=True)
@@ -2613,7 +2614,7 @@ class textFormatInfoType_model(SchemaModel):
     """
 
     class Meta:
-        verbose_name = "Text format"
+        verbose_name = _("Text format")
 
 
     __schema_name__ = 'textFormatInfoType'
@@ -2626,15 +2627,15 @@ class textFormatInfoType_model(SchemaModel):
     }
 
     dataFormat = models.CharField(
-      verbose_name='Data format',
-      help_text='The data format (usually corresponding to the mime-type' \
+      verbose_name=_('Data format'),
+      help_text=_('The data format (usually corresponding to the mime-type' \
       ') of the resource which is a formalized specifier for the format ' \
       'included or a data format (mime-type) that the tool/service accep' \
       'ts, preferrably in conformance with the values of the IANA (Inter' \
       'net Assigned Numbers Authority); you can select one of the pre-de' \
       'fined values or add a value, PREFERABLY FROM THE IANA MEDIA MIMET' \
       'YPE RECOMMENDED VALUES (http://www.iana.org/assignments/media-typ' \
-      'es/media-types.xhtml)',
+      'es/media-types.xhtml)'),
 
       max_length=100,
       choices=sorted(TEXTFORMATINFOTYPE_DATAFORMAT_CHOICES['choices'],
@@ -2642,9 +2643,9 @@ class textFormatInfoType_model(SchemaModel):
       )
 
     sizePerTextFormat = models.OneToOneField("sizeInfoType_model",
-      verbose_name='Size per text format',
-      help_text='Provides information on the size of the resource parts ' \
-      'with different format',
+      verbose_name=_('Size per text format'),
+      help_text=_('Provides information on the size of the resource parts ' \
+      'with different format'),
       blank=True, null=True, on_delete=models.SET_NULL, )
 
     back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
@@ -2686,7 +2687,7 @@ class textClassificationInfoType_model(SchemaModel):
     """
 
     class Meta:
-        verbose_name = "Text classification"
+        verbose_name = _("Text classification")
 
 
     __schema_name__ = 'textClassificationInfoType'
@@ -2701,10 +2702,10 @@ class textClassificationInfoType_model(SchemaModel):
     }
 
     textGenre = models.CharField(
-      verbose_name='Text genre',
-      help_text='Genre: The conventionalized discourse or text types of ' \
+      verbose_name=_('Text genre'),
+      help_text=_('Genre: The conventionalized discourse or text types of ' \
       'the content of the resource, based on extra-linguistic and intern' \
-      'al linguistic criteria',
+      'al linguistic criteria'),
       blank=True,
       max_length=50,
       choices=sorted(TEXTCLASSIFICATIONINFOTYPE_TEXTGENRE_CHOICES['choices'],
@@ -2712,9 +2713,9 @@ class textClassificationInfoType_model(SchemaModel):
       )
 
     textType = models.CharField(
-      verbose_name='Text type',
-      help_text='Specifies the type of the text according to a text type' \
-      ' classification',
+      verbose_name=_('Text type'),
+      help_text=_('Specifies the type of the text according to a text type' \
+      ' classification'),
       blank=True,
       max_length=50,
       choices=sorted(TEXTCLASSIFICATIONINFOTYPE_TEXTTYPE_CHOICES['choices'],
@@ -2722,8 +2723,8 @@ class textClassificationInfoType_model(SchemaModel):
       )
 
     conformanceToClassificationScheme = models.CharField(
-        verbose_name='Conformance to classification scheme',
-        help_text='Specifies the external classification schemes',
+        verbose_name=_('Conformance to classification scheme'),
+        help_text=_('Specifies the external classification schemes'),
         blank=True,
         max_length=100,
         choices=sorted(TEXTCLASSIFICATIONINFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES['choices'],
@@ -2731,9 +2732,9 @@ class textClassificationInfoType_model(SchemaModel):
     )
 
     sizePerTextClassification = models.OneToOneField("sizeInfoType_model",
-      verbose_name='Size per text classification',
-      help_text='Provides information on size of resource parts with dif' \
-      'ferent text classification',
+      verbose_name=_('Size per text classification'),
+      help_text=_('Provides information on size of resource parts with dif' \
+      'ferent text classification'),
       blank=True, null=True, on_delete=models.SET_NULL, )
 
     back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
@@ -2772,7 +2773,7 @@ class languageDescriptionEncodingInfoType_model(SchemaModel):
     """
 
     class Meta:
-        verbose_name = "Language description encoding"
+        verbose_name = _("Language description encoding")
 
 
     __schema_name__ = 'languageDescriptionEncodingInfoType'
@@ -2785,41 +2786,41 @@ class languageDescriptionEncodingInfoType_model(SchemaModel):
     )
 
     encodingLevel = MultiSelectField(
-      verbose_name='Encoding level',
-      help_text='Information on the linguistic levels covered by the res' \
-      'ource (grammar or lexical/conceptual resource)',
+      verbose_name=_('Encoding level'),
+      help_text=_('Information on the linguistic levels covered by the res' \
+      'ource (grammar or lexical/conceptual resource)'),
 
       max_length=1 + len(LANGUAGEDESCRIPTIONENCODINGINFOTYPE_ENCODINGLEVEL_CHOICES['choices']) / 4,
       choices=LANGUAGEDESCRIPTIONENCODINGINFOTYPE_ENCODINGLEVEL_CHOICES['choices'],
       )
 
     conformanceToStandardsBestPractices = MultiSelectField(
-      verbose_name='Conformance to standards / best practices',
-      help_text='Specifies the standards or the best practices to which ' \
-      'the tagset used for the annotation conforms',
+      verbose_name=_('Conformance to standards / best practices'),
+      help_text=_('Specifies the standards or the best practices to which ' \
+      'the tagset used for the annotation conforms'),
       blank=True,
       max_length=1 + len(LANGUAGEDESCRIPTIONENCODINGINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES['choices']) / 4,
       choices=LANGUAGEDESCRIPTIONENCODINGINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES['choices'],
       )
 
     theoreticModel = MultiTextField(max_length=500, widget=MultiFieldWidget(widget_id=22, max_length=500),
-      verbose_name='Theoretic model',
-      help_text='Name of the theoretic model applied for the creation/en' \
+      verbose_name=_('Theoretic model'),
+      help_text=_('Name of the theoretic model applied for the creation/en' \
       'richment of the resource, and/or reference (URL or bibliographic ' \
       'reference) to informative material about the theoretic model used' \
-      '',
+      ''),
       blank=True, validators=[validate_matches_xml_char_production], )
 
     formalism = XmlCharField(
-      verbose_name='Formalism',
-      help_text='Reference (name, bibliographic reference or link to url' \
+      verbose_name=_('Formalism'),
+      help_text=_('Reference (name, bibliographic reference or link to url' \
       ') for the formalism used for the creation/enrichment of the resou' \
-      'rce (grammar or tool/service)',
+      'rce (grammar or tool/service)'),
       blank=True, max_length=1000, )
 
     task = MultiSelectField(
-      verbose_name='Task',
-      help_text='An indication of the task performed by the grammar',
+      verbose_name=_('Task'),
+      help_text=_('An indication of the task performed by the grammar'),
       blank=True,
       max_length=1 + len(LANGUAGEDESCRIPTIONENCODINGINFOTYPE_TASK_CHOICES['choices']) / 4,
       choices=LANGUAGEDESCRIPTIONENCODINGINFOTYPE_TASK_CHOICES['choices'],
@@ -2838,7 +2839,7 @@ class languageDescriptionTextInfoType_model(SchemaModel):
     """
 
     class Meta:
-        verbose_name = "Language description text"
+        verbose_name = _("Language description text")
 
 
     __schema_name__ = 'languageDescriptionTextInfoType'
@@ -2863,19 +2864,19 @@ class languageDescriptionTextInfoType_model(SchemaModel):
     }
 
     mediaType = XmlCharField(
-      verbose_name='Media type',
-      help_text='Specifies the media type of the resource and basically ' \
+      verbose_name=_('Media type'),
+      help_text=_('Specifies the media type of the resource and basically ' \
       'corresponds to the physical medium of the content representation.' \
       ' Each media type is described through a distinctive set of featur' \
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
-      'different media types.',
+      'different media types.'),
       default="text", editable=False, max_length=1000, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model",
-      verbose_name='Linguality',
-      help_text='Groups information on the number of languages of the re' \
-      'source part and of the way they are combined to each other',
+      verbose_name=_('Linguality'),
+      help_text=_('Groups information on the number of languages of the re' \
+      'source part and of the way they are combined to each other'),
       null=True, blank=True)
 
     # OneToMany field: languageInfo
@@ -2945,7 +2946,7 @@ class lexicalConceptualResourceEncodingInfoType_model(SchemaModel):
     """
 
     class Meta:
-        verbose_name = "Lexical conceptual resource encoding"
+        verbose_name = _("Lexical conceptual resource encoding")
 
 
     __schema_name__ = 'lexicalConceptualResourceEncodingInfoType'
@@ -2960,61 +2961,61 @@ class lexicalConceptualResourceEncodingInfoType_model(SchemaModel):
     )
 
     encodingLevel = MultiSelectField(
-      verbose_name='Encoding level',
-      help_text='Information on the contents of the lexicalConceptualRes' \
-      'ource as regards the linguistic level of analysis',
+      verbose_name=_('Encoding level'),
+      help_text=_('Information on the contents of the lexicalConceptualRes' \
+      'ource as regards the linguistic level of analysis'),
 
       max_length=1 + len(LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_ENCODINGLEVEL_CHOICES['choices']) / 4,
       choices=LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_ENCODINGLEVEL_CHOICES['choices'],
       )
 
     linguisticInformation = MultiSelectField(
-      verbose_name='Linguistic information',
-      help_text='A more detailed account of the linguistic information c' \
-      'ontained in the lexicalConceptualResource',
+      verbose_name=_('Linguistic information'),
+      help_text=_('A more detailed account of the linguistic information c' \
+      'ontained in the lexicalConceptualResource'),
       blank=True,
       max_length=1 + len(LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_LINGUISTICINFORMATION_CHOICES['choices']) / 4,
       choices=LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_LINGUISTICINFORMATION_CHOICES['choices'],
       )
 
     conformanceToStandardsBestPractices = MultiSelectField(
-      verbose_name='Conformance to standards / best practices',
-      help_text='Specifies the standards or the best practices to which ' \
-      'the tagset used for the annotation conforms',
+      verbose_name=_('Conformance to standards / best practices'),
+      help_text=_('Specifies the standards or the best practices to which ' \
+      'the tagset used for the annotation conforms'),
       blank=True,
       max_length=1 + len(LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES['choices']) / 4,
       choices=LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES['choices'],
       )
 
     theoreticModel = MultiTextField(max_length=500, widget=MultiFieldWidget(widget_id=23, max_length=500),
-      verbose_name='Theoretic model',
-      help_text='Name of the theoretic model applied for the creation or' \
+      verbose_name=_('Theoretic model'),
+      help_text=_('Name of the theoretic model applied for the creation or' \
       ' enrichment of the resource, and/or a reference (URL or bibliogra' \
       'phic reference) to informative material about the theoretic model' \
-      ' used',
+      ' used'),
       blank=True, validators=[validate_matches_xml_char_production], )
 
     externalRef = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=24, max_length=100),
-      verbose_name='External reference',
-      help_text='Another resource to which the lexicalConceptualResource' \
-      ' is linked (e.g. link to a wordnet or ontology)',
+      verbose_name=_('External reference'),
+      help_text=_('Another resource to which the lexicalConceptualResource' \
+      ' is linked (e.g. link to a wordnet or ontology)'),
       blank=True, validators=[validate_matches_xml_char_production], )
 
     extratextualInformation = MultiSelectField(
-      verbose_name='Extratextual information',
-      help_text='An indication of the extratextual information contained' \
+      verbose_name=_('Extratextual information'),
+      help_text=_('An indication of the extratextual information contained' \
       ' in the lexicalConceptualResouce; can be used as an alternative t' \
       'o audio, image, videos etc. for cases where these are not conside' \
-      'red an important part of the lcr',
+      'red an important part of the lcr'),
       blank=True,
       max_length=1 + len(LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_EXTRATEXTUALINFORMATION_CHOICES['choices']) / 4,
       choices=LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_EXTRATEXTUALINFORMATION_CHOICES['choices'],
       )
 
     extraTextualInformationUnit = MultiSelectField(
-      verbose_name='Extratextual information unit',
-      help_text='The unit of the extratextual information contained in t' \
-      'he lexical conceptual resource',
+      verbose_name=_('Extratextual information unit'),
+      help_text=_('The unit of the extratextual information contained in t' \
+      'he lexical conceptual resource'),
       blank=True,
       max_length=1 + len(LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_EXTRATEXTUALINFORMATIONUNIT_CHOICES['choices']) / 4,
       choices=LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_EXTRATEXTUALINFORMATIONUNIT_CHOICES['choices'],
@@ -3032,7 +3033,7 @@ class lexicalConceptualResourceTextInfoType_model(SchemaModel):
     """
 
     class Meta:
-        verbose_name = "Lexical conceptual resource text"
+        verbose_name = _("Lexical conceptual resource text")
 
 
     __schema_name__ = 'lexicalConceptualResourceTextInfoType'
@@ -3055,19 +3056,19 @@ class lexicalConceptualResourceTextInfoType_model(SchemaModel):
     }
 
     mediaType = XmlCharField(
-      verbose_name='Media type',
-      help_text='Specifies the media type of the resource and basically ' \
+      verbose_name=_('Media type'),
+      help_text=_('Specifies the media type of the resource and basically ' \
       'corresponds to the physical medium of the content representation.' \
       ' Each media type is described through a distinctive set of featur' \
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
-      'different media types.',
+      'different media types.'),
       default="text", editable=False, max_length=1000, )
 
     lingualityInfo = models.OneToOneField("lingualityInfoType_model",
-      verbose_name='Linguality',
-      help_text='Groups information on the number of languages of the re' \
-      'source part and of the way they are combined to each other',
+      verbose_name=_('Linguality'),
+      help_text=_('Groups information on the number of languages of the re' \
+      'source part and of the way they are combined to each other'),
       null=True, blank=True)
 
     # OneToMany field: languageInfo
@@ -3162,7 +3163,7 @@ INPUTINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES = _make_choices_from_l
 class inputInfoType_model(SchemaModel):
 
     class Meta:
-        verbose_name = "Input"
+        verbose_name = _("Input")
 
 
     __schema_name__ = 'inputInfoType'
@@ -3186,13 +3187,13 @@ class inputInfoType_model(SchemaModel):
     }
 
     mediaType = models.CharField(
-      verbose_name='Media type',
-      help_text='Specifies the media type of the resource and basically ' \
+      verbose_name=_('Media type'),
+      help_text=_('Specifies the media type of the resource and basically ' \
       'corresponds to the physical medium of the content representation.' \
       ' Each media type is described through a distinctive set of featur' \
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
-      'different media types.',
+      'different media types.'),
       default="text", editable=False,
       max_length=30,
       choices=sorted(INPUTINFOTYPE_MEDIATYPE_CHOICES['choices'],
@@ -3200,24 +3201,24 @@ class inputInfoType_model(SchemaModel):
       )
 
     resourceType = MultiSelectField(
-      verbose_name='Resource type',
-      help_text='The type of the resource that a tool or service takes a' \
-      's input or produces as output',
+      verbose_name=_('Resource type'),
+      help_text=_('The type of the resource that a tool or service takes a' \
+      's input or produces as output'),
       blank=True,
       max_length=1 + len(INPUTINFOTYPE_RESOURCETYPE_CHOICES['choices']) / 4,
       choices=INPUTINFOTYPE_RESOURCETYPE_CHOICES['choices'],
       )
 
     dataFormat = MultiSelectField(
-      verbose_name='Data format',
-      help_text='The data format (usually corresponding to the mime-type' \
+      verbose_name=_('Data format'),
+      help_text=_('The data format (usually corresponding to the mime-type' \
       ') of the resource which is a formalized specifier for the format ' \
       'included or a data format (mime-type) that the tool/service accep' \
       'ts, preferrably in conformance with the values of the IANA (Inter' \
       'net Assigned Numbers Authority); you can select one of the pre-de' \
       'fined values or add a value, PREFERABLY FROM THE IANA MEDIA MIMET' \
       'YPE RECOMMENDED VALUES (http://www.iana.org/assignments/media-typ' \
-      'es/media-types.xhtml)',
+      'es/media-types.xhtml)'),
       blank=True,
       max_length=1 + len(INPUTINFOTYPE_DATAFORMAT_CHOICES['choices']) / 4,
       choices=INPUTINFOTYPE_DATAFORMAT_CHOICES['choices'],
@@ -3226,55 +3227,55 @@ class inputInfoType_model(SchemaModel):
     # OneToMany field: languageSetInfo
 
     languageVarietyName = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=25, max_length=100),
-      verbose_name='Language variety name',
-      help_text='The name of the language variety that occurs in the res' \
-      'ource or is supported by a tool/service',
+      verbose_name=_('Language variety name'),
+      help_text=_('The name of the language variety that occurs in the res' \
+      'ource or is supported by a tool/service'),
       blank=True, validators=[validate_matches_xml_char_production], )
 
     characterEncoding = MultiSelectField(
-      verbose_name='Character encoding',
+      verbose_name=_('Character encoding',
       help_text='The name of the character encoding used in the resource' \
-      ' or accepted by the tool/service',
+      ' or accepted by the tool/service'),
       blank=True,
       max_length=1 + len(INPUTINFOTYPE_CHARACTERENCODING_CHOICES['choices']) / 4,
       choices=INPUTINFOTYPE_CHARACTERENCODING_CHOICES['choices'],
       )
 
     domainSetInfo = models.ManyToManyField("domainSetInfoType_model",
-      verbose_name='Domain set', blank=True, null=True, related_name="domainSetInfo_%(class)s_related", )
+      verbose_name=_('Domain set'), blank=True, null=True, related_name="domainSetInfo_%(class)s_related", )
 
     annotationType = MultiSelectField(
-      verbose_name='Annotation type',
-      help_text='Specifies the annotation level of the resource or the a' \
-      'nnotation type a tool/ service requires or produces as an output',
+      verbose_name=_('Annotation type'),
+      help_text=_('Specifies the annotation level of the resource or the a' \
+      'nnotation type a tool/ service requires or produces as an output'),
       blank=True,
       max_length=1 + len(INPUTINFOTYPE_ANNOTATIONTYPE_CHOICES['choices']) / 4,
       choices=INPUTINFOTYPE_ANNOTATIONTYPE_CHOICES['choices'],
       )
 
     typesystem = XmlCharField(
-      verbose_name='Typesystem',
-      help_text='A name or a url reference to the typesystem used in the' \
-      ' annotation of the resource or used by the tool/service',
+      verbose_name=_('Typesystem'),
+      help_text=_('A name or a url reference to the typesystem used in the' \
+      ' annotation of the resource or used by the tool/service'),
       blank=True, max_length=500, )
 
     annotationSchema = XmlCharField(
-      verbose_name='Annotation schema',
-      help_text='A name or a url reference to the annotation schema used' \
-      ' in the annotation of the resource or used by the tool/service',
+      verbose_name=_('Annotation schema'),
+      help_text=_('A name or a url reference to the annotation schema used' \
+      ' in the annotation of the resource or used by the tool/service'),
       blank=True, max_length=500, )
 
     annotationResource = XmlCharField(
-      verbose_name='Annotation resource',
-      help_text='A name or a url reference to the resource (ontology, ta' \
+      verbose_name=_('Annotation resource'),
+      help_text=_('A name or a url reference to the resource (ontology, ta' \
       'gset, term lexicon etc.) used in the annotation of the resource o' \
-      'r used by the tool/service',
+      'r used by the tool/service'),
       blank=True, max_length=500, )
 
     conformanceToStandardsBestPractices = MultiSelectField(
-      verbose_name='Conformance to standards / best practices',
-      help_text='Specifies the standards or the best practices to which ' \
-      'the resource used for the annotation conforms',
+      verbose_name=_('Conformance to standards / best practices'),
+      help_text=_('Specifies the standards or the best practices to which ' \
+      'the resource used for the annotation conforms'),
       blank=True,
       max_length=1 + len(INPUTINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES['choices']) / 4,
       choices=INPUTINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES['choices'],
@@ -3362,7 +3363,7 @@ OUTPUTINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES = _make_choices_from_
 class outputInfoType_model(SchemaModel):
 
     class Meta:
-        verbose_name = "Output"
+        verbose_name = _("Output")
 
 
     __schema_name__ = 'outputInfoType'
@@ -3384,37 +3385,37 @@ class outputInfoType_model(SchemaModel):
     }
 
     mediaType = MultiSelectField(
-      verbose_name='Media type',
-      help_text='Specifies the media type of the resource and basically ' \
+      verbose_name=_('Media type'),
+      help_text=_('Specifies the media type of the resource and basically ' \
       'corresponds to the physical medium of the content representation.' \
       ' Each media type is described through a distinctive set of featur' \
       'es. A resource may consist of parts attributed to different types' \
       ' of media. A tool/service may take as input/output more than one ' \
-      'different media types.',
+      'different media types.'),
 
       max_length=1 + len(OUTPUTINFOTYPE_MEDIATYPE_CHOICES['choices']) / 4,
       choices=OUTPUTINFOTYPE_MEDIATYPE_CHOICES['choices'],
       )
 
     resourceType = MultiSelectField(
-      verbose_name='Resource type',
-      help_text='The type of the resource that a tool or service takes a' \
-      's input or produces as output',
+      verbose_name=_('Resource type'),
+      help_text=_('The type of the resource that a tool or service takes a' \
+      's input or produces as output'),
       blank=True,
       max_length=1 + len(OUTPUTINFOTYPE_RESOURCETYPE_CHOICES['choices']) / 4,
       choices=OUTPUTINFOTYPE_RESOURCETYPE_CHOICES['choices'],
       )
 
     dataFormat = MultiSelectField(
-      verbose_name='Data format',
-      help_text='The data format (usually corresponding to the mime-type' \
+      verbose_name=_('Data format'),
+      help_text=_('The data format (usually corresponding to the mime-type' \
       ') of the resource which is a formalized specifier for the format ' \
       'included or a data format (mime-type) that the tool/service accep' \
       'ts, preferrably in conformance with the values of the IANA (Inter' \
       'net Assigned Numbers Authority); you can select one of the pre-de' \
       'fined values or add a value, PREFERABLY FROM THE IANA MEDIA MIMET' \
       'YPE RECOMMENDED VALUES (http://www.iana.org/assignments/media-typ' \
-      'es/media-types.xhtml)',
+      'es/media-types.xhtml)'),
       blank=True,
       max_length=1 + len(OUTPUTINFOTYPE_DATAFORMAT_CHOICES['choices']) / 4,
       choices=OUTPUTINFOTYPE_DATAFORMAT_CHOICES['choices'],
@@ -3423,52 +3424,52 @@ class outputInfoType_model(SchemaModel):
     # OneToMany field: languageSetInfo
 
     languageVarietyName = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=26, max_length=100),
-      verbose_name='Language variety name',
-      help_text='The name of the language variety that occurs in the res' \
-      'ource or is supported by a tool/service',
+      verbose_name=_('Language variety name'),
+      help_text=_('The name of the language variety that occurs in the res' \
+      'ource or is supported by a tool/service'),
       blank=True, validators=[validate_matches_xml_char_production], )
 
     characterEncoding = MultiSelectField(
-      verbose_name='Character encoding',
-      help_text='The name of the character encoding used in the resource' \
-      ' or accepted by the tool/service',
+      verbose_name=_('Character encoding'),
+      help_text=_('The name of the character encoding used in the resource' \
+      ' or accepted by the tool/service'),
       blank=True,
       max_length=1 + len(OUTPUTINFOTYPE_CHARACTERENCODING_CHOICES['choices']) / 4,
       choices=OUTPUTINFOTYPE_CHARACTERENCODING_CHOICES['choices'],
       )
 
     annotationType = MultiSelectField(
-      verbose_name='Annotation type',
-      help_text='Specifies the annotation level of the resource or the a' \
-      'nnotation type a tool/ service requires or produces as an output',
+      verbose_name=_('Annotation type'),
+      help_text=_('Specifies the annotation level of the resource or the a' \
+      'nnotation type a tool/ service requires or produces as an output'),
       blank=True,
       max_length=1 + len(OUTPUTINFOTYPE_ANNOTATIONTYPE_CHOICES['choices']) / 4,
       choices=OUTPUTINFOTYPE_ANNOTATIONTYPE_CHOICES['choices'],
       )
 
     typesystem = XmlCharField(
-      verbose_name='Typesystem',
-      help_text='A name or a url reference to the typesystem used in the' \
-      ' annotation of the resource or used by the tool/service',
+      verbose_name=_('Typesystem'),
+      help_text=_('A name or a url reference to the typesystem used in the' \
+      ' annotation of the resource or used by the tool/service'),
       blank=True, max_length=500, )
 
     annotationSchema = XmlCharField(
-      verbose_name='Annotation schema',
-      help_text='A name or a url reference to the annotation schema used' \
-      ' in the annotation of the resource or used by the tool/service',
+      verbose_name=_('Annotation schema'),
+      help_text=_('A name or a url reference to the annotation schema used' \
+      ' in the annotation of the resource or used by the tool/service'),
       blank=True, max_length=500, )
 
     annotationResource = XmlCharField(
-      verbose_name='Annotation resource',
-      help_text='A name or a url reference to the resource (ontology, ta' \
+      verbose_name=_('Annotation resource'),
+      help_text=_('A name or a url reference to the resource (ontology, ta' \
       'gset, term lexicon etc.) used in the annotation of the resource o' \
-      'r used by the tool/service',
+      'r used by the tool/service'),
       blank=True, max_length=500, )
 
     conformanceToStandardsBestPractices = MultiSelectField(
-      verbose_name='Conformance to standards / best practices',
-      help_text='Specifies the standards or the best practices to which ' \
-      'the resource used for the annotation conforms',
+      verbose_name=_('Conformance to standards / best practices'),
+      help_text=_('Specifies the standards or the best practices to which ' \
+      'the resource used for the annotation conforms'),
       blank=True,
       max_length=1 + len(OUTPUTINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES['choices']) / 4,
       choices=OUTPUTINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES['choices'],
@@ -3500,7 +3501,7 @@ TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONMEASURE_CHOICES = _make_choices_from_lis
 class toolServiceEvaluationInfoType_model(SchemaModel):
 
     class Meta:
-        verbose_name = "Tool service evaluation"
+        verbose_name = _("Tool service evaluation")
 
 
     __schema_name__ = 'toolServiceEvaluationInfoType'
@@ -3525,59 +3526,59 @@ class toolServiceEvaluationInfoType_model(SchemaModel):
     }
 
     evaluated = MetaBooleanField(
-      verbose_name='Evaluated',
-      help_text='Indicates whether the tool or service has been evaluate' \
-      'd',
+      verbose_name=_('Evaluated'),
+      help_text=_('Indicates whether the tool or service has been evaluate' \
+      'd'),
       )
 
     evaluationLevel = MultiSelectField(
-      verbose_name='Evaluation level',
-      help_text='Indicates the evaluation level',
+      verbose_name=_('Evaluation level'),
+      help_text=_('Indicates the evaluation level'),
       blank=True,
       max_length=1 + len(TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONLEVEL_CHOICES['choices']) / 4,
       choices=TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONLEVEL_CHOICES['choices'],
       )
 
     evaluationCriteria = MultiSelectField(
-      verbose_name='Evaluation criteria',
-      help_text='Defines the criteria of the evaluation of a tool',
+      verbose_name=_('Evaluation criteria'),
+      help_text=_('Defines the criteria of the evaluation of a tool'),
       blank=True,
       max_length=1 + len(TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONCRITERIA_CHOICES['choices']) / 4,
       choices=TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONCRITERIA_CHOICES['choices'],
       )
 
     evaluationMeasure = MultiSelectField(
-      verbose_name='Evaluation measure',
-      help_text='Defines whether the evaluation measure is human or auto' \
-      'matic',
+      verbose_name=_('Evaluation measure'),
+      help_text=_('Defines whether the evaluation measure is human or auto' \
+      'matic'),
       blank=True,
       max_length=1 + len(TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONMEASURE_CHOICES['choices']) / 4,
       choices=TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONMEASURE_CHOICES['choices'],
       )
 
     evaluationReport = models.ManyToManyField("documentationInfoType_model",
-      verbose_name='Evaluation report',
-      help_text='A bibliographical record of or link to a report describ' \
+      verbose_name=_('Evaluation report'),
+      help_text=_('A bibliographical record of or link to a report describ' \
       'ing the evaluation process, tool, method etc. of the tool or serv' \
-      'ice',
+      'ice'),
       blank=True, null=True, related_name="evaluationReport_%(class)s_related", )
 
     evaluationTool = models.ManyToManyField("targetResourceInfoType_model",
-      verbose_name='Evaluation tool',
-      help_text='The name or id or url of the tool used for the evaluati' \
-      'on of the tool or service',
+      verbose_name=_('Evaluation tool'),
+      help_text=_('The name or id or url of the tool used for the evaluati' \
+      'on of the tool or service'),
       blank=True, null=True, related_name="evaluationTool_%(class)s_related", )
 
     evaluationDetails = XmlCharField(
-      verbose_name='Evaluation details',
-      help_text='Provides further information on the evaluation process ' \
-      'of a tool or service',
+      verbose_name=_('Evaluation details'),
+      help_text=_('Provides further information on the evaluation process ' \
+      'of a tool or service'),
       blank=True, max_length=500, )
 
     evaluator = models.ManyToManyField("actorInfoType_model",
-      verbose_name='Evaluator',
-      help_text='Groups information on person or organization that evalu' \
-      'ated the tool or service',
+      verbose_name=_('Evaluator'),
+      help_text=_('Groups information on person or organization that evalu' \
+      'ated the tool or service'),
       blank=True, null=True, related_name="evaluator_%(class)s_related", )
 
     def __unicode__(self):
@@ -3593,7 +3594,7 @@ TOOLSERVICEOPERATIONINFOTYPE_OPERATINGSYSTEM_CHOICES = _make_choices_from_list([
 class toolServiceOperationInfoType_model(SchemaModel):
 
     class Meta:
-        verbose_name = "Tool service operation"
+        verbose_name = _("Tool service operation")
 
 
     __schema_name__ = 'toolServiceOperationInfoType'
@@ -3606,17 +3607,17 @@ class toolServiceOperationInfoType_model(SchemaModel):
     }
 
     operatingSystem = MultiSelectField(
-      verbose_name='Operating system',
-      help_text='The operating system on which the tool will be running',
+      verbose_name=_('Operating system'),
+      help_text=_('The operating system on which the tool will be running'),
       blank=True,
       max_length=1 + len(TOOLSERVICEOPERATIONINFOTYPE_OPERATINGSYSTEM_CHOICES['choices']) / 4,
       choices=TOOLSERVICEOPERATIONINFOTYPE_OPERATINGSYSTEM_CHOICES['choices'],
       )
 
     dependenciesInfo = models.OneToOneField("dependenciesInfoType_model",
-      verbose_name='Dependencies',
-      help_text='Groups together information on the dependencies (requir' \
-      'ements) of a tool or a language description',
+      verbose_name=_('Dependencies'),
+      help_text=_('Groups together information on the dependencies (requir' \
+      'ements) of a tool or a language description'),
       blank=True, null=True, on_delete=models.SET_NULL, )
 
     def __unicode__(self):
@@ -3627,7 +3628,7 @@ class toolServiceOperationInfoType_model(SchemaModel):
 class toolServiceCreationInfoType_model(SchemaModel):
 
     class Meta:
-        verbose_name = "Tool service creation"
+        verbose_name = _("Tool service creation")
 
 
     __schema_name__ = 'toolServiceCreationInfoType'
@@ -3642,30 +3643,30 @@ class toolServiceCreationInfoType_model(SchemaModel):
     }
 
     implementationLanguage = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=27, max_length=100),
-      verbose_name='Implementation language',
-      help_text='The programming languages needed for allowing user cont' \
+      verbose_name=_('Implementation language'),
+      help_text=_('The programming languages needed for allowing user cont' \
       'ributions, or for running the tools, in case no executables are a' \
-      'vailable',
+      'vailable'),
       blank=True, validators=[validate_matches_xml_char_production], )
 
     formalism = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=28, max_length=100),
-      verbose_name='Formalism',
-      help_text='Reference (name, bibliographic reference or link to url' \
+      verbose_name=_('Formalism'),
+      help_text=_('Reference (name, bibliographic reference or link to url' \
       ') for the formalism used for the creation/enrichment of the resou' \
-      'rce (grammar or tool/service)',
+      'rce (grammar or tool/service)'),
       blank=True, validators=[validate_matches_xml_char_production], )
 
     originalSource = models.ManyToManyField("targetResourceInfoType_model",
-      verbose_name='Original source',
-      help_text='The name, the identifier or the url of thethe original ' \
+      verbose_name=_('Original source'),
+      help_text=_('The name, the identifier or the url of thethe original ' \
       'resources that were at the base of the creation process of the re' \
-      'source',
+      'source'),
       blank=True, null=True, related_name="originalSource_%(class)s_related", )
 
     creationDetails = XmlCharField(
-      verbose_name='Creation details',
-      help_text='Provides additional information on the creation of a to' \
-      'ol or service',
+      verbose_name=_('Creation details'),
+      help_text=_('Provides additional information on the creation of a to' \
+      'ol or service'),
       blank=True, max_length=500, )
 
     def __unicode__(self):
@@ -3678,7 +3679,7 @@ class resourceComponentTypeType_model(SubclassableModel):
     __schema_name__ = 'SUBCLASSABLE'
 
     class Meta:
-        verbose_name = "Resource component"
+        verbose_name = _("Resource component")
 
 
 LEXICALCONCEPTUALRESOURCEINFOTYPE_LEXICALCONCEPTUALRESOURCETYPE_CHOICES = _make_choices_from_list([
@@ -3694,7 +3695,7 @@ class lexicalConceptualResourceInfoType_model(resourceComponentTypeType_model):
     """
 
     class Meta:
-        verbose_name = "Lexical conceptual resource"
+        verbose_name = _("Lexical conceptual resource")
 
 
     __schema_name__ = 'lexicalConceptualResourceInfoType'
@@ -3710,28 +3711,28 @@ class lexicalConceptualResourceInfoType_model(resourceComponentTypeType_model):
     }
 
     resourceType = XmlCharField(
-      verbose_name='Resource type',
-      help_text='Specifies the type of the resource being described',
+      verbose_name=_('Resource type'),
+      help_text=_('Specifies the type of the resource being described'),
       default="lexicalConceptualResource", editable=False, max_length=1000, )
 
     lexicalConceptualResourceType = models.CharField(
-      verbose_name='Lexical conceptual resource type',
-      help_text='Specifies the subtype of lexicalConceptualResource',
+      verbose_name=_('Lexical conceptual resource type'),
+      help_text=_('Specifies the subtype of lexicalConceptualResource'),
 
       max_length=LEXICALCONCEPTUALRESOURCEINFOTYPE_LEXICALCONCEPTUALRESOURCETYPE_CHOICES['max_length'],
       choices=LEXICALCONCEPTUALRESOURCEINFOTYPE_LEXICALCONCEPTUALRESOURCETYPE_CHOICES['choices'],
       )
 
     lexicalConceptualResourceEncodingInfo = models.OneToOneField("lexicalConceptualResourceEncodingInfoType_model",
-      verbose_name='Lexical / Conceptual resource encoding',
-      help_text='Groups all information regarding the contents of lexica' \
-      'l/conceptual resources',
+      verbose_name=_('Lexical / Conceptual resource encoding'),
+      help_text=_('Groups all information regarding the contents of lexica' \
+      'l/conceptual resources'),
       blank=True, null=True, on_delete=models.SET_NULL, )
 
     lexicalConceptualResourceMediaType = models.OneToOneField("lexicalConceptualResourceMediaTypeType_model",
-      verbose_name='Media type component of lexical / conceptual resource',
-      help_text='Restriction of mediaType for lexicalConceptualResources' \
-      '',
+      verbose_name=_('Media type component of lexical / conceptual resource'),
+      help_text=_('Restriction of mediaType for lexicalConceptualResources' \
+      ''),
       )
 
     def real_unicode_(self):
@@ -3751,7 +3752,7 @@ class languageDescriptionInfoType_model(resourceComponentTypeType_model):
     """
 
     class Meta:
-        verbose_name = "Language description"
+        verbose_name = _("Language description")
 
 
     __schema_name__ = 'languageDescriptionInfoType'
@@ -3767,28 +3768,28 @@ class languageDescriptionInfoType_model(resourceComponentTypeType_model):
     }
 
     resourceType = XmlCharField(
-      verbose_name='Resource type',
-      help_text='Specifies the type of the resource being described',
+      verbose_name=_('Resource type'),
+      help_text=_('Specifies the type of the resource being described'),
       default="languageDescription", editable=False, max_length=30, )
 
     languageDescriptionType = models.CharField(
-      verbose_name='Language description type',
-      help_text='The type of the language description',
+      verbose_name=_('Language description type'),
+      help_text=_('The type of the language description'),
       max_length=30,
       choices=sorted(LANGUAGEDESCRIPTIONINFOTYPE_LANGUAGEDESCRIPTIONTYPE_CHOICES['choices'],
                      key=lambda choice: choice[1].lower()),
       )
 
     languageDescriptionEncodingInfo = models.OneToOneField("languageDescriptionEncodingInfoType_model",
-      verbose_name='Language description encoding',
-      help_text='Groups together information on the contents of the Lang' \
-      'uageDescriptions',
+      verbose_name=_('Language description encoding'),
+      help_text=_('Groups together information on the contents of the Lang' \
+      'uageDescriptions'),
       blank=True, null=True, on_delete=models.SET_NULL, )
 
     languageDescriptionMediaType = models.OneToOneField("languageDescriptionMediaTypeType_model",
-      verbose_name='Media type component of language description',
-      help_text='Groups information on the media type-specific component' \
-      's for language descriptions',
+      verbose_name=_('Media type component of language description'),
+      help_text=_('Groups information on the media type-specific component' \
+      's for language descriptions'),
       )
 
     def real_unicode_(self):
@@ -3825,7 +3826,7 @@ TOOLSERVICEINFOTYPE_FUNCTION_CHOICES = _make_choices_from_list([
 class toolServiceInfoType_model(resourceComponentTypeType_model):
 
     class Meta:
-        verbose_name = "Tool service"
+        verbose_name = _("Tool service")
 
 
     __schema_name__ = 'toolServiceInfoType'
@@ -3849,14 +3850,14 @@ class toolServiceInfoType_model(resourceComponentTypeType_model):
     }
 
     resourceType = XmlCharField(
-      verbose_name='Resource type',
-      help_text='The type of the resource that a tool or service takes a' \
-      's input or produces as output',
+      verbose_name=_('Resource type'),
+      help_text=_('The type of the resource that a tool or service takes a' \
+      's input or produces as output'),
       default="toolService", editable=False, max_length=1000, )
 
     toolServiceType = models.CharField(
-      verbose_name='Tool / Service type',
-      help_text='Specifies the type of the tool or service',
+      verbose_name=_('Tool / Service type'),
+      help_text=_('Specifies the type of the tool or service'),
 
       max_length=100,
       choices=sorted(TOOLSERVICEINFOTYPE_TOOLSERVICETYPE_CHOICES['choices'],
@@ -3864,48 +3865,48 @@ class toolServiceInfoType_model(resourceComponentTypeType_model):
       )
 
     function = MultiSelectField(
-      verbose_name='Function',
-      help_text='Specifies the function/operation/task that a tool or we' \
-      'b service performs',
+      verbose_name=_('Function'),
+      help_text=_('Specifies the function/operation/task that a tool or we' \
+      'b service performs'),
 
       max_length=1 + len(TOOLSERVICEINFOTYPE_FUNCTION_CHOICES['choices']) / 4,
       choices=TOOLSERVICEINFOTYPE_FUNCTION_CHOICES['choices'],
       )
 
     languageDependent = MetaBooleanField(
-      verbose_name='Language dependent',
-      help_text='Indicates whether the operation of the tool or service ' \
-      'is language dependent or not',
+      verbose_name=_('Language dependent'),
+      help_text=_('Indicates whether the operation of the tool or service ' \
+      'is language dependent or not'),
       )
 
     inputInfo = models.OneToOneField("inputInfoType_model",
-      verbose_name='Input',
-      help_text='Groups together information on the requirements set on ' \
-      'the input resource of a tool or service',
+      verbose_name=_('Input'),
+      help_text=_('Groups together information on the requirements set on ' \
+      'the input resource of a tool or service'),
       blank=True, null=True, on_delete=models.SET_NULL, )
 
     outputInfo = models.OneToOneField("outputInfoType_model",
-      verbose_name='Output',
-      help_text='Groups together information on the requirements set on ' \
-      'the output of a tool or service',
+      verbose_name=_('Output'),
+      help_text=_('Groups together information on the requirements set on ' \
+      'the output of a tool or service'),
       blank=True, null=True, on_delete=models.SET_NULL, )
 
     toolServiceOperationInfo = models.OneToOneField("toolServiceOperationInfoType_model",
-      verbose_name='Tool / Service operation',
-      help_text='Groups together information on the operation of a tool ' \
-      'or service',
+      verbose_name=_('Tool / Service operation'),
+      help_text=_('Groups together information on the operation of a tool ' \
+      'or service'),
       blank=True, null=True, on_delete=models.SET_NULL, )
 
     toolServiceEvaluationInfo = models.OneToOneField("toolServiceEvaluationInfoType_model",
-      verbose_name='Tool / Service evaluation',
-      help_text='Groups together information on the evaluation status of' \
-      ' a tool or service',
+      verbose_name=_('Tool / Service evaluation'),
+      help_text=_('Groups together information on the evaluation status of' \
+      ' a tool or service'),
       blank=True, null=True, on_delete=models.SET_NULL, )
 
     toolServiceCreationInfo = models.OneToOneField("toolServiceCreationInfoType_model",
-      verbose_name='Tool / Service creation',
-      help_text='Groups together information on the creation of a tool o' \
-      'r service',
+      verbose_name=_('Tool / Service creation'),
+      help_text=_('Groups together information on the creation of a tool o' \
+      'r service'),
       blank=True, null=True, on_delete=models.SET_NULL, )
 
     def real_unicode_(self):
@@ -3921,7 +3922,7 @@ class corpusInfoType_model(resourceComponentTypeType_model):
     """
 
     class Meta:
-        verbose_name = "Corpus"
+        verbose_name = _("Corpus")
 
 
     __schema_name__ = 'corpusInfoType'
@@ -3934,14 +3935,14 @@ class corpusInfoType_model(resourceComponentTypeType_model):
     }
 
     resourceType = XmlCharField(
-      verbose_name='Resource type',
-      help_text='Specifies the type of the resource being described',
+      verbose_name=_('Resource type'),
+      help_text=_('Specifies the type of the resource being described'),
       default="corpus", editable=False, max_length=1000, )
 
     corpusMediaType = models.OneToOneField("corpusMediaTypeType_model",
-      verbose_name='Media type component of corpus',
-      help_text='Used to specify the media type specific to corpora and ' \
-      'group together the relevant information',
+      verbose_name=_('Media type component of corpus'),
+      help_text=_('Used to specify the media type specific to corpora and ' \
+      'group together the relevant information'),
       )
 
     def real_unicode_(self):
@@ -3954,7 +3955,7 @@ class corpusInfoType_model(resourceComponentTypeType_model):
 class corpusMediaTypeType_model(SchemaModel):
 
     class Meta:
-        verbose_name = "Media type component of corpus"
+        verbose_name = _("Media type component of corpus")
 
 
     __schema_name__ = 'corpusMediaTypeType'
@@ -3975,7 +3976,7 @@ class corpusMediaTypeType_model(SchemaModel):
 class languageDescriptionMediaTypeType_model(SchemaModel):
 
     class Meta:
-        verbose_name = "Language description media"
+        verbose_name = _("Language description media")
 
 
     __schema_name__ = 'languageDescriptionMediaTypeType'
@@ -3987,10 +3988,10 @@ class languageDescriptionMediaTypeType_model(SchemaModel):
     }
 
     languageDescriptionTextInfo = models.OneToOneField("languageDescriptionTextInfoType_model",
-      verbose_name='Language description text component',
-      help_text='Groups together all information relevant to the text mo' \
+      verbose_name=_('Language description text component'),
+      help_text=_('Groups together all information relevant to the text mo' \
       'dule of a language description (e.g. format, languages, size etc.' \
-      '); it is obligatory for all language descriptions',
+      '); it is obligatory for all language descriptions'),
       blank=True, null=True, on_delete=models.SET_NULL, )
 
     def __unicode__(self):
@@ -4001,7 +4002,7 @@ class languageDescriptionMediaTypeType_model(SchemaModel):
 class lexicalConceptualResourceMediaTypeType_model(SchemaModel):
 
     class Meta:
-        verbose_name = "Lexical conceptual resource media"
+        verbose_name = _("Lexical conceptual resource media")
 
 
     __schema_name__ = 'lexicalConceptualResourceMediaTypeType'
@@ -4013,9 +4014,9 @@ class lexicalConceptualResourceMediaTypeType_model(SchemaModel):
     }
 
     lexicalConceptualResourceTextInfo = models.OneToOneField("lexicalConceptualResourceTextInfoType_model",
-      verbose_name='Lexical / Conceptual resource text component',
-      help_text='Groups information on the textual part of the lexical/c' \
-      'onceptual resource',
+      verbose_name=_('Lexical / Conceptual resource text component'),
+      help_text=_('Groups information on the textual part of the lexical/c' \
+      'onceptual resource'),
       blank=True, null=True, on_delete=models.SET_NULL, )
 
     def __unicode__(self):
@@ -4042,7 +4043,7 @@ DOMAINSETINFOTYPE_DOMAINID_CHOICES = _make_choices_from_list([
 class domainSetInfoType_model(SchemaModel):
 
     class Meta:
-        verbose_name = "Domain set"
+        verbose_name = _("Domain set")
 
 
     __schema_name__ = 'domainSetInfoType'
@@ -4055,40 +4056,40 @@ class domainSetInfoType_model(SchemaModel):
     )
 
     domain = MultiSelectField(
-      verbose_name='Domain',
-      help_text='Specifies the application domain of the resource or the' \
-      ' tool/service',
+      verbose_name=_('Domain'),
+      help_text=_('Specifies the application domain of the resource or the' \
+      ' tool/service'),
 
       max_length=1 + len(DOMAINSETINFOTYPE_DOMAIN_CHOICES['choices']) / 4,
       choices=DOMAINSETINFOTYPE_DOMAIN_CHOICES['choices'],
       )
 
     domainId = MultiSelectField(
-      verbose_name='Domain identifier',
-      help_text='Specifies the application domain of the resource or the' \
-      ' tool/service',
+      verbose_name=_('Domain identifier'),
+      help_text=_('Specifies the application domain of the resource or the' \
+      ' tool/service'),
 
       max_length=1 + len(DOMAINSETINFOTYPE_DOMAINID_CHOICES['choices']) / 4,
       choices=DOMAINSETINFOTYPE_DOMAINID_CHOICES['choices'],
       )
 
     subdomain = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=29, max_length=1000),
-      verbose_name='Subdomain',
-      help_text='The name of the application subdomain of the resource o' \
+      verbose_name=_('Subdomain'),
+      help_text=_('The name of the application subdomain of the resource o' \
       'r the tool/service, taken from the EUROVOC domains: http://eurovo' \
-      'c.europa.eu/drupal',
+      'c.europa.eu/drupal'),
       blank=True, validators=[validate_matches_xml_char_production], )
 
     subdomainId = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=30, max_length=1000),
-      verbose_name='Subdomain identifier',
-      help_text='The identifier of the application subdomain of the reso' \
+      verbose_name=_('Subdomain identifier'),
+      help_text=_('The identifier of the application subdomain of the reso' \
       'urce or the tool/service, taken from the EUROVOC domains: http://' \
-      'eurovoc.europa.eu/drupal',
+      'eurovoc.europa.eu/drupal'),
       blank=True, validators=[validate_matches_xml_char_production], )
 
     conformanceToClassificationScheme = XmlCharField(
-      verbose_name='Conformance to classification scheme',
-      help_text='Specifies the external classification schemes',
+      verbose_name=_('Conformance to classification scheme'),
+      help_text=_('Specifies the external classification schemes'),
       blank=True, max_length=1000, )
 
     def __unicode__(self):

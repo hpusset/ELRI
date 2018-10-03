@@ -22,95 +22,90 @@
 {% endblock %}
 
 {% block title %}
-    API help &ndash; ELRC-SHARE
+    {% trans 'API help' %} &ndash; ELRC-SHARE
 {% endblock %}
 
 {% block content %}
     <div class="container">
         <div class="row">
-            <h2>ELRC-SHARE RESTful API</h2>
+            <h2>{% trans 'ELRC-SHARE RESTful API' %}</h2>
             <div class="col-md-10">
-                ELRC-SHARE provides a RESTful API which returns Language Resource Metadata in
-                JSON format.
+                {% trans 'ELRC-SHARE provides a RESTful API which returns Language Resource Metadata in JSON format.' %}
             </div>
         </div>
         <div class="row">
-            <h3>API ACCESS</h3>
+            <h3>{% trans 'API ACCESS' %}</h3>
             <div class="col-md-10">
-                <p>Access is granted by default to repository administrators and to EC members registered
-                    and <strong>logged in</strong> the ELRC-SHARE repository.</p>
+                <p>{% trans 'Access is granted by default to repository administrators and to EC members registered and <strong>logged in</strong> the ELRC-SHARE repository.' %}</p>
 
-                <p>The API can be accessed through the <strong>SEARCH_API_URL</strong>:<br/>
+                <p>{% blocktrans %}The API can be accessed through the <strong>SEARCH_API_URL</strong>:{% endblocktrans %}<br/>
                     <a href="https://elrc-share.eu/repository/api/v1/lr/" target="_blank">
                         <code>https://elrc-share.eu/repository/api/v1/lr/</code>
                     </a>
-                    <br/>OR<br/>
+                    <br/>{% trans 'OR' %}<br/>
                     <a href="https://elrc-share.eu/repository/api/v1/lr/search/" target="_blank">
                         <code>https://elrc-share.eu/repository/api/v1/lr/<strong>search</strong>/</code>
-                    </a> to enable advanced search features.
+                    </a>{% blocktrans %} to enable advanced search features.{% endblocktrans %}
                 </p>
                 <p>
-                    <strong>External access</strong>, for example through a <code>cURL</code> request, requires an
+                    {% blocktrans %}<strong>External access</strong>, for example through a <code>cURL</code> request, requires an
                     <strong>API key</strong>, given either in the request url as an authorization (<code>auth</code>)
-                    parameter, or in the request header:
+                    parameter, or in the request header:{% endblocktrans %}
                     <br/>
-                    <em>As url parameter</em><br/>
+                    <em>{% trans 'As url parameter' %}</em><br/>
                     <code>SEARCH_API_URL/?auth=<strong>API_KEY</strong></code>
                     <br/>
-                    <em>As header (cURL)</em><br/>
+                    <em>{% trans 'As header (cURL)' %}</em><br/>
                     <code>curl SEARCH_API_URL --header 'Authorization:<strong>API_KEY</strong>'</code>
                 </p>
                 <blockquote class="blockquote">
                     <p>
-                        The <strong>API_KEY</strong> is available in the profile page of all EC members
-                        (<em>on the main menu: Your profile > Edit your profile</em>).
+                        {% trans 'The <strong>API_KEY</strong> is available in the profile page of all EC members (<em>on the main menu: Your profile > Edit your profile</em>).' %}
                     </p>
                 </blockquote>
             </div>
         </div>
         <div class="row">
-            <h3>Haystack Filters</h3>
+            <h3>{% trans 'Haystack Filters' %}</h3>
             <!-- List group -->
             <div class="col-md-12">
-                <p>The API leverages the existing ELRC-SHARE repository search functionality using a condensed version
-                    of the preconfigured
-                    Haystack filters.
+                <p>{% blocktrans %}The API leverages the existing ELRC-SHARE repository search functionality using a condensed version of the preconfigured Haystack filters.{% endblocktrans %}
                 </p>
                 <p>
-                    All filters are passed as key-value pairs in the <code>q</code> dictionary
+                    {% blocktrans %}All filters are passed as key-value pairs in the <code>q</code> dictionary{% endblocktrans %}
                     <code>SEARCH_API_URL/<strong>?q=key:value</strong></code>.
                 </p>
                 <p>
-                    Additional filters can be added to the dictionary like:
+                    {% blocktrans %}Additional filters can be added to the dictionary like:{% endblocktrans %}
                     <code>SEARCH_API_URL/?q=key1:value1<strong>&q</strong>=key2:value2</code>.
                 </p>
             </div>
-            <h4>Available Filters</h4>
+            <h4>{% trans 'Available Filters' %}</h4>
             <div class="col-md-12 filters" id="haystack">
                 <div class="panel list-group">
                     <a href="#" class="list-group-item" data-toggle="collapse" data-target="#cond"
                        data-parent="#haystack">
-                        Conditions of Use</a>
+                        {% trans 'Conditions of Use' %}</a>
                     <div id="cond" class="sublinks collapse">
                         <div class="list-group-item small">
-                            <div>Applied Filter: <code>conditionOfUse</code>.</div>
+                            <div>{% trans 'Applied Filter' %}: <code>conditionOfUse</code>.</div>
                             {#                                <div>Haystack filter: <code>restrictionsOfUseFilter</code>.</div>#}
-                            <h5>Values</h5>
+                            <h5>{% trans 'Values' %}</h5>
                             <div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><em>by</em> or <em>Attribution</em></li>
-                                    <li class="list-group-item"><em>cu</em> or <em>Commercial Use</em></li>
-                                    <li class="list-group-item"><em>comp</em> or <em>Compensate</em></li>
-                                    <li class="list-group-item"><em>edu</em> or <em>Education</em></li>
-                                    <li class="list-group-item"><em>nd</em> or <em>No Derivatives</em></li>
-                                    <li class="list-group-item"><em>nc</em> or <em>Non Commercial Use</em></li>
-                                    <li class="list-group-item"><em>res</em> or <em>Research</em></li>
-                                    <li class="list-group-item"><em>sa</em> or <em>Share Alike</em></li>
+                                    <li class="list-group-item"><em>by</em> {% trans 'or' %} <em>Attribution</em></li>
+                                    <li class="list-group-item"><em>cu</em> {% trans 'or' %} <em>Commercial Use</em></li>
+                                    <li class="list-group-item"><em>comp</em> {% trans 'or' %} <em>Compensate</em></li>
+                                    <li class="list-group-item"><em>edu</em> {% trans 'or' %} <em>Education</em></li>
+                                    <li class="list-group-item"><em>nd</em> {% trans 'or' %} <em>No Derivatives</em></li>
+                                    <li class="list-group-item"><em>nc</em> {% trans 'or' %} <em>Non Commercial Use</em></li>
+                                    <li class="list-group-item"><em>res</em> {% trans 'or' %} <em>Research</em></li>
+                                    <li class="list-group-item"><em>sa</em> {% trans 'or' %} <em>Share Alike</em></li>
                                 </ul>
                             </div>
-                            <div>Examples:</div>
+                            <div>{% trans 'Examples' %}:</div>
                             <p>
-                                <em>Get all resources restricted for non commercial use</em>
+                                <em>{% trans 'Get all resources restricted for non commercial use' %}</em>
                                 <br/>
                                 <code>SEARCH_API_URL/?<strong>q</strong>=conditionOfUse<b>:</b>nc</code>
                             </p>
@@ -119,43 +114,43 @@
                     <!------------------------------------------->
                     <a href="#" class="list-group-item" data-toggle="collapse" data-target="#domain"
                        data-parent="#haystack">
-                        Domain</a>
+                        {%trans 'Domain' %}</a>
                     <div id="domain" class="sublinks collapse">
                         <div class="list-group-item small">
-                            <div>Applied Filter: <code>domain</code>.</div>
+                            <div>{% trans 'Applied Filter' %}: <code>domain</code>.</div>
                             {#                            <div>Haystack filter: <code>domainFilter</code>.</div>#}
-                            <h5>Values</h5>
+                            <h5>{% trans 'Values' %}</h5>
                             <div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><em>60</em> or <em>AGRI-FOODSTUFFS</em></li>
-                                    <li class="list-group-item"><em>56</em> or <em>AGRICULTURE, FORESTRY &
+                                    <li class="list-group-item"><em>60</em> {% trans 'or' %} <em>AGRI-FOODSTUFFS</em></li>
+                                    <li class="list-group-item"><em>56</em> {% trans 'or' %} <em>AGRICULTURE, FORESTRY &
                                         FISHERIES</em></li>
-                                    <li class="list-group-item"><em>40</em> or <em>BUSINESS & COMPETITION</em></li>
-                                    <li class="list-group-item"><em>16</em> or <em>ECONOMICS</em></li>
-                                    <li class="list-group-item"><em>32</em> or <em>EDUCATION & COMMUNICATIONS</em></li>
-                                    <li class="list-group-item"><em>44</em> or <em>EMPLOYMENT & WORKING CONDITIONS</em>
+                                    <li class="list-group-item"><em>40</em> {% trans 'or' %} <em>BUSINESS & COMPETITION</em></li>
+                                    <li class="list-group-item"><em>16</em> {% trans 'or' %} <em>ECONOMICS</em></li>
+                                    <li class="list-group-item"><em>32</em> {% trans 'or' %} <em>EDUCATION & COMMUNICATIONS</em></li>
+                                    <li class="list-group-item"><em>44</em> {% trans 'or' %} <em>EMPLOYMENT & WORKING CONDITIONS</em>
                                     </li>
-                                    <li class="list-group-item"><em>66</em> or <em>ENERGY</em></li>
-                                    <li class="list-group-item"><em>52</em> or <em>ENVIRONMENT</em></li>
-                                    <li class="list-group-item"><em>10</em> or <em>EUROPEAN UNION</em></li>
-                                    <li class="list-group-item"><em>24</em> or <em>FINANCE</em></li>
-                                    <li class="list-group-item"><em>72</em> or <em>GEOGRAPHY</em></li>
-                                    <li class="list-group-item"><em>68</em> or <em>INDUSTRY</em></li>
-                                    <li class="list-group-item"><em>76</em> or <em>INTERNATIONAL ORGANISATIONS</em></li>
-                                    <li class="list-group-item"><em>08</em> or <em>INTERNATIONAL RELATIONS</em></li>
-                                    <li class="list-group-item"><em>12</em> or <em>LAW</em></li>
-                                    <li class="list-group-item"><em>04</em> or <em>POLITICS</em></li>
-                                    <li class="list-group-item"><em>64</em> or <em>PRODUCTION, TECHNOLOGY &
+                                    <li class="list-group-item"><em>66</em> {% trans 'or' %} <em>ENERGY</em></li>
+                                    <li class="list-group-item"><em>52</em> {% trans 'or' %} <em>ENVIRONMENT</em></li>
+                                    <li class="list-group-item"><em>10</em> {% trans 'or' %} <em>EUROPEAN UNION</em></li>
+                                    <li class="list-group-item"><em>24</em> {% trans 'or' %} <em>FINANCE</em></li>
+                                    <li class="list-group-item"><em>72</em> {% trans 'or' %} <em>GEOGRAPHY</em></li>
+                                    <li class="list-group-item"><em>68</em> {% trans 'or' %} <em>INDUSTRY</em></li>
+                                    <li class="list-group-item"><em>76</em> {% trans 'or' %} <em>INTERNATIONAL ORGANISATIONS</em></li>
+                                    <li class="list-group-item"><em>08</em> {% trans 'or' %} <em>INTERNATIONAL RELATIONS</em></li>
+                                    <li class="list-group-item"><em>12</em> {% trans 'or' %} <em>LAW</em></li>
+                                    <li class="list-group-item"><em>04</em> {% trans 'or' %} <em>POLITICS</em></li>
+                                    <li class="list-group-item"><em>64</em> {% trans 'or' %} <em>PRODUCTION, TECHNOLOGY &
                                         RESEARCH</em></li>
-                                    <li class="list-group-item"><em>36</em> or <em>SCIENCE</em></li>
-                                    <li class="list-group-item"><em>28</em> or <em>SOCIAL QUESTIONS</em></li>
-                                    <li class="list-group-item"><em>20</em> or <em>TRADE</em></li>
-                                    <li class="list-group-item"><em>48</em> or <em>TRANSPORT</em></li>
+                                    <li class="list-group-item"><em>36</em> {% trans 'or' %} <em>SCIENCE</em></li>
+                                    <li class="list-group-item"><em>28</em> {% trans 'or' %} <em>SOCIAL QUESTIONS</em></li>
+                                    <li class="list-group-item"><em>20</em> {% trans 'or' %} <em>TRADE</em></li>
+                                    <li class="list-group-item"><em>48</em> {% trans 'or' %} <em>TRANSPORT</em></li>
                                 </ul>
                             </div>
-                            <div>Examples:</div>
+                            <div>{% trans 'Examples' %}:</div>
                             <p>
-                                <em>Get all resources from the science domain</em>
+                                <em>{% trans 'Get all resources from the science domain' %}</em>
                                 <br/>
                                 <code>SEARCH_API_URL/?<strong>q</strong>=domain<b>:</b>36</code>
                             </p>
@@ -164,31 +159,31 @@
                     <!------------------------------------------->
                     <a href="#" class="list-group-item" data-toggle="collapse" data-target="#dsi"
                        data-parent="#haystack">
-                        DSI</a>
+                        {% trans 'DSI' %}</a>
                     <div id="dsi" class="sublinks collapse">
                         <div class="list-group-item small">
-                            <div>Applied Filter: <code>dsi</code>.</div>
+                            <div>{% trans 'Applied Filter' %}: <code>dsi</code>.</div>
                             {#                            <div>Haystack filter: <code>appropriatenessForDSIFilter</code>.</div>#}
-                            <h5>Values</h5>
+                            <h5>{% trans 'Values' %}</h5>
                             <div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><em>bris</em> or <em>Business Registers Interconnection
+                                    <li class="list-group-item"><em>bris</em> {% trans 'or' %} <em>Business Registers Interconnection
                                         System</em></li>
-                                    <li class="list-group-item"><em>cs</em> or <em>Cybersecurity</em></li>
-                                    <li class="list-group-item"><em>eessi</em> or <em>Electronic Exchange Of Social
+                                    <li class="list-group-item"><em>cs</em> {% trans 'or' %} <em>Cybersecurity</em></li>
+                                    <li class="list-group-item"><em>eessi</em> {% trans 'or' %} <em>Electronic Exchange Of Social
                                         Security Information</em></li>
                                     <li class="list-group-item">Europeana</li>
-                                    <li class="list-group-item"><em>odr</em> or <em>Online Dispute Resolution</em></li>
-                                    <li class="list-group-item"><em>odp</em> or <em>Open Data Portal</em></li>
-                                    <li class="list-group-item"><em>eh</em> or <em>E Health</em></li>
-                                    <li class="list-group-item"><em>ej</em> or <em>E Justice</em></li>
-                                    <li class="list-group-item"><em>ep</em> or <em>E Procurement</em></li>
-                                    <li class="list-group-item"><em>si</em> or <em>Safer Internet</em></li>
+                                    <li class="list-group-item"><em>odr</em> {% trans 'or' %} <em>Online Dispute Resolution</em></li>
+                                    <li class="list-group-item"><em>odp</em> {% trans 'or' %} <em>Open Data Portal</em></li>
+                                    <li class="list-group-item"><em>eh</em> {% trans 'or' %} <em>E Health</em></li>
+                                    <li class="list-group-item"><em>ej</em> {% trans 'or' %} <em>E Justice</em></li>
+                                    <li class="list-group-item"><em>ep</em> {% trans 'or' %} <em>E Procurement</em></li>
+                                    <li class="list-group-item"><em>si</em> {% trans 'or' %} <em>Safer Internet</em></li>
                                 </ul>
                             </div>
-                            <div>Examples:</div>
+                            <div>{% trans 'Examples' %}:</div>
                             <p>
-                                <em>Get all resources appropriate for use in the Europeana DSI</em>
+                                <em>{% trans 'Get all resources appropriate for use in the Europeana DSI' %}</em>
                                 <br/>
                                 <code>SEARCH_API_URL/?<strong>q</strong>=dsi<b>:</b>Europeana</code>
                             </p>
@@ -196,29 +191,29 @@
                     </div>
                     <!------------------------------------------->
                     <a href="#" class="list-group-item" data-toggle="collapse" data-target="#lang"
-                       data-parent="#haystack">Language</a>
+                       data-parent="#haystack">{% trans 'Language' %}</a>
                     <div id="lang" class="sublinks collapse">
                         <div class="list-group-item small">
-                            <div>Applied Filter: <code>lang</code>.</div>
+                            <div>{% trans 'Applied Filter' %}: <code>lang</code>.</div>
                             {#                            <div>Haystack filter: <code>languageNameFilter</code>.</div>#}
                             <h5>Values</h5>
                             <div>
-                                Any language name or language code as defined by
+                                {% blocktrans %}Any language name or language code as defined by
                                 the <a
                                     href="https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry"
                                     target="_blank">IANA Language Subtag Registry</a> in the <em>Description</em>
-                                property, is a valid value for this filter.
+                                property, is a valid value for this filter.{% endblocktrans %}
                             </div>
-                            <div>Examples:</div>
+                            <div>{% trans 'Examples' %}:</div>
                             <p>
-                                <em>Get all resources that contain English</em>
+                                <em>{% trans 'Get all resources that contain English' %}</em>
                                 <br/>
                                 <code>SEARCH_API_URL/?<strong>q</strong>=lang<b>:</b>English</code>
                                 <br/>
                                 <code>SEARCH_API_URL/?<strong>q</strong>=lang<b>:</b>en</code>
                             </p>
                             <p>
-                                <em>Get all resources that contain English and Italian</em>
+                                <em>{% trans 'Get all resources that contain English and Italian' %}</em>
                                 <br/>
                                 <code>SEARCH_API_URL/?<strong>q</strong>=lang<b>:</b>en<strong>&q</strong>=lang:it</code>
                             </p>
@@ -227,22 +222,22 @@
                     <!------------------------------------------->
                     <a href="#" class="list-group-item" data-toggle="collapse" data-target="#ling"
                        data-parent="#haystack">
-                        Linguality</a>
+                        {% trans 'Linguality' %}</a>
                     <div id="ling" class="sublinks collapse">
                         <div class="list-group-item small">
-                            <div>Applied Filter: <code>linguality</code>.</div>
+                            <div>{% trans 'Applied Filter' %}: <code>linguality</code>.</div>
                             {#                            <div>Haystack filter: <code>lingualityTypeFilter</code>.</div>#}
-                            <h5>Values</h5>
+                            <h5>{% trans 'Values' %}</h5>
                             <div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><em>bi</em> or <em>Bilingual</em></li>
-                                    <li class="list-group-item"><em>multi</em> or <em>Multilingual</em></li>
-                                    <li class="list-group-item"><em>mono</em> or <em>Monolingual</em></li>
+                                    <li class="list-group-item"><em>bi</em> {% trans 'or' %} <em>Bilingual</em></li>
+                                    <li class="list-group-item"><em>multi</em> {% trans 'or' %} <em>Multilingual</em></li>
+                                    <li class="list-group-item"><em>mono</em> {% trans 'or' %} <em>Monolingual</em></li>
                                 </ul>
                             </div>
-                            <div>Examples:</div>
+                            <div>{% trans 'Examples' %}:</div>
                             <p>
-                                <em>Get all bilingual resources</em>
+                                <em>{% trans 'Get all bilingual resources' %}</em>
                                 <br/>
                                 <code>SEARCH_API_URL/?<strong>q</strong>=linguality<b>:</b>bi</code>
                             </p>
@@ -250,43 +245,43 @@
                     </div>
                     <!------------------------------------------->
                     <a href="#" class="list-group-item" data-toggle="collapse" data-target="#mime"
-                       data-parent="#haystack">Mimetype</a>
+                       data-parent="#haystack">{% trans 'Mimetype' %}</a>
                     <div id="mime" class="sublinks collapse">
                         <div class="list-group-item small">
-                            <div>Applied Filter: <code>mimetype</code>.</div>
+                            <div>{% trans 'Applied Filter' %}: <code>mimetype</code>.</div>
                             {#                            <div>Haystack filter: <code>dataFormatFilter</code>.</div>#}
-                            <h5>Values</h5>
+                            <h5>{% trans 'Values' %}</h5>
                             <p>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><em>csv</em> or <em>CSV</em></li>
-                                <li class="list-group-item"><em>html</em> or <em>HTML</em></li>
-                                <li class="list-group-item"><em>json</em> or <em>JSON</em></li>
-                                <li class="list-group-item"><em>latex</em> or <em>LATEX</em></li>
-                                <li class="list-group-item"><em>accessdb</em> or <em>MS-Access database</em></li>
-                                <li class="list-group-item"><em>xls</em> or <em>MS-Excel xls</em></li>
-                                <li class="list-group-item"><em>xlsx</em> or <em>MS-Excel xlsx</em></li>
-                                <li class="list-group-item"><em>doc</em> or <em>MS-Word doc</em></li>
-                                <li class="list-group-item"><em>docx</em> or <em>MS-Word docx</em></li>
-                                <li class="list-group-item"><em>pdf</em> or <em>PDF</em></li>
-                                <li class="list-group-item"><em>txt</em> or <em>Plain text</em></li>
-                                <li class="list-group-item"><em>rdf</em> or <em>RDF</em></li>
-                                <li class="list-group-item"><em>rtf</em> or <em>RTF</em></li>
-                                <li class="list-group-item"><em>sgml</em> or <em>SGML</em></li>
-                                <li class="list-group-item"><em>tei</em> or <em>TEI</em></li>
-                                <li class="list-group-item"><em>tex</em> or <em>TEX</em></li>
-                                <li class="list-group-item"><em>tsv</em> or <em>text with tab-separated-values</em></li>
-                                <li class="list-group-item"><em>sdl</em> or <em>TM format of the SDL alignment tool</em></li>
-                                <li class="list-group-item"><em>tmx</em> or <em>TMX</em></li>
-                                <li class="list-group-item"><em>tbx</em> or <em>Term Base eXchange</em></li>
-                                <li class="list-group-item"><em>xces</em> or <em>XCES</em></li>
-                                <li class="list-group-item"><em>xhtml</em> or <em>XHTML</em></li>
-                                <li class="list-group-item"><em>xmi</em> or <em>XMI</em></li>
-                                <li class="list-group-item"><em>xml</em> or <em>XML</em></li>
+                                <li class="list-group-item"><em>csv</em> {% trans 'or' %} <em>CSV</em></li>
+                                <li class="list-group-item"><em>html</em> {% trans 'or' %} <em>HTML</em></li>
+                                <li class="list-group-item"><em>json</em> {% trans 'or' %} <em>JSON</em></li>
+                                <li class="list-group-item"><em>latex</em> {% trans 'or' %} <em>LATEX</em></li>
+                                <li class="list-group-item"><em>accessdb</em> {% trans 'or' %} <em>MS-Access database</em></li>
+                                <li class="list-group-item"><em>xls</em> {% trans 'or' %} <em>MS-Excel xls</em></li>
+                                <li class="list-group-item"><em>xlsx</em> {% trans 'or' %} <em>MS-Excel xlsx</em></li>
+                                <li class="list-group-item"><em>doc</em> {% trans 'or' %} <em>MS-Word doc</em></li>
+                                <li class="list-group-item"><em>docx</em> {% trans 'or' %} <em>MS-Word docx</em></li>
+                                <li class="list-group-item"><em>pdf</em> {% trans 'or' %} <em>PDF</em></li>
+                                <li class="list-group-item"><em>txt</em> {% trans 'or' %} <em>Plain text</em></li>
+                                <li class="list-group-item"><em>rdf</em> {% trans 'or' %} <em>RDF</em></li>
+                                <li class="list-group-item"><em>rtf</em> {% trans 'or' %} <em>RTF</em></li>
+                                <li class="list-group-item"><em>sgml</em> {% trans 'or' %} <em>SGML</em></li>
+                                <li class="list-group-item"><em>tei</em> {% trans 'or' %} <em>TEI</em></li>
+                                <li class="list-group-item"><em>tex</em> {% trans 'or' %} <em>TEX</em></li>
+                                <li class="list-group-item"><em>tsv</em> {% trans 'or' %} <em>text with tab-separated-values</em></li>
+                                <li class="list-group-item"><em>sdl</em> {% trans 'or' %} <em>TM format of the SDL alignment tool</em></li>
+                                <li class="list-group-item"><em>tmx</em> {% trans 'or' %} <em>TMX</em></li>
+                                <li class="list-group-item"><em>tbx</em> {% trans 'or' %} <em>Term Base eXchange</em></li>
+                                <li class="list-group-item"><em>xces</em> {% trans 'or' %} <em>XCES</em></li>
+                                <li class="list-group-item"><em>xhtml</em> {% trans 'or' %} <em>XHTML</em></li>
+                                <li class="list-group-item"><em>xmi</em> {% trans 'or' %} <em>XMI</em></li>
+                                <li class="list-group-item"><em>xml</em> {% trans 'or' %} <em>XML</em></li>
                             </ul>
                             </p>
-                            <div>Examples:</div>
+                            <div>{% trans 'Examples' %}:</div>
                             <p>
-                                <em>Get all resources that contain tmx files</em>
+                                <em>{% trans 'Get all resources that contain tmx files' %}</em>
                                 <br/>
                                 <code>SEARCH_API_URL/?<strong>q</strong>=mimetype<b>:</b>tmx</code>
                             </p>
@@ -295,22 +290,22 @@
                     <!------------------------------------------->
                     <a href="#" class="list-group-item" data-toggle="collapse" data-target="#mling"
                        data-parent="#haystack">
-                        Multi-linguality</a>
+                        {% trans 'Multi-linguality' %}</a>
                     <div id="mling" class="sublinks collapse">
                         <div class="list-group-item small">
-                            <div>Applied Filter: <code>multilinguality</code>.</div>
+                            <div>{% trans 'Applied Filter' %}: <code>multilinguality</code>.</div>
                             {#                            <div>Haystack filter: <code>multilingualityTypeFilter</code>.</div>#}
-                            <h5>Values</h5>
+                            <h5>{% trans 'Values' %}</h5>
                             <div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><em>prl</em> or <em>Parallel</em></li>
-                                    <li class="list-group-item"><em>comp</em> or <em>Comparable</em></li>
-                                    <li class="list-group-item"><em>mst</em> or <em>Multilingual Single Text</em></li>
+                                    <li class="list-group-item"><em>prl</em> {% trans 'or' %} <em>Parallel</em></li>
+                                    <li class="list-group-item"><em>comp</em> {% trans 'or' %} <em>Comparable</em></li>
+                                    <li class="list-group-item"><em>mst</em> {% trans 'or' %} <em>Multilingual Single Text</em></li>
                                 </ul>
                             </div>
-                            <div>Examples:</div>
+                            <div>{% trans 'Examples' %}:</div>
                             <p>
-                                <em>Get all Parallel resources</em>
+                                <em>{% trans 'Get all Parallel resources' %}</em>
                                 <br/>
                                 <code>SEARCH_API_URL/?<strong>q</strong>=multilinguality<b>:</b>Parallel</code>
                             </p>
@@ -319,22 +314,22 @@
                     <!------------------------------------------->
                     <a href="#" class="list-group-item" data-toggle="collapse" data-target="#rtype"
                        data-parent="#haystack">
-                        Resource Type</a>
+                        {% trans 'Resource Type' %}</a>
                     <div id="rtype" class="sublinks collapse">
                         <div class="list-group-item small">
-                            <div>Applied Filter: <code>resourceType</code>.</div>
+                            <div>{% trans 'Applied Filter' %}: <code>resourceType</code>.</div>
                             {#                            <div>Haystack filter: <code>resourceTypeFilter</code>.</div>#}
-                            <h5>Values</h5>
+                            <h5>{% trans 'Values' %}</h5>
                             <div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><em>crp</em> or <em>corpus</em></li>
-                                    <li class="list-group-item"><em>lcr</em> or <em>lexicalConceptualResource</em></li>
-                                    <li class="list-group-item"><em>ld</em> or <em>languageDescription</em></li>
+                                    <li class="list-group-item"><em>crp</em> {% trans 'or' %} <em>corpus</em></li>
+                                    <li class="list-group-item"><em>lcr</em> {% trans 'or' %} <em>lexicalConceptualResource</em></li>
+                                    <li class="list-group-item"><em>ld</em> {% trans 'or' %} <em>languageDescription</em></li>
                                 </ul>
                             </div>
-                            <div>Examples:</div>
+                            <div>{% trans 'Examples' %}:</div>
                             <p>
-                                <em>Get all corpora</em>
+                                <em>{% trans 'Get all corpora' %}</em>
                                 <br/>
                                 <code>SEARCH_API_URL/?<strong>q</strong>=resourceType<b>:</b>corpus</code>
                             </p>
@@ -343,21 +338,21 @@
                     <!------------------------------------------->
                     <a href="#" class="list-group-item" data-toggle="collapse" data-target="#status"
                        data-parent="#haystack">
-                        Publication Status</a>
+                        {% trans 'Publication Status' %}</a>
                     <div id="status" class="sublinks collapse">
                         <div class="list-group-item small">
-                            <div>Applied Filter: <code>status</code>.</div>
+                            <div>{% trans 'Applied Filter' %}: <code>status</code>.</div>
                             {#                            <div>Haystack filter: <code>publicationStatusFilter</code>.</div>#}
-                            <h5>Values</h5>
+                            <h5>{% trans 'Values' %}</h5>
                             <div>
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item">published</li>
                                     <li class="list-group-item">ingested</li>
                                 </ul>
                             </div>
-                            <div>Examples:</div>
+                            <div>{% trans 'Examples' %}:</div>
                             <p>
-                                <em>Get all corpora</em>
+                                <em>{% trans 'Get all corpora' %}</em>
                                 <br/>
                                 <code>SEARCH_API_URL/?<strong>q</strong>=status<b>:</b>published</code>
                             </p>
@@ -366,12 +361,12 @@
                     <!------------------------------------------->
                     <a href="#" class="list-group-item" data-toggle="collapse" data-target="#genre"
                        data-parent="#haystack">
-                        Text Genre</a>
+                        {% trans 'Text Genre' %}</a>
                     <div id="genre" class="sublinks collapse">
                         <div class="list-group-item small">
-                            <div>Applied Filter: <code>textGenre</code>.</div>
+                            <div>{% trans 'Applied Filter' %}: <code>textGenre</code>.</div>
                             {#                            <div>Haystack filter: <code>textTextGenreFilter</code>.</div>#}
-                            <h5>Values</h5>
+                            <h5>{% trans 'Values' %}</h5>
                             <div>
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item">advertising</li>
@@ -386,9 +381,9 @@
                                     <li class="list-group-item">other</li>
                                 </ul>
                             </div>
-                            <div>Examples:</div>
+                            <div>{% trans 'Examples' %}:</div>
                             <p>
-                                <em>Get all resources of fiction genre</em>
+                                <em>{% trans 'Get all resources of fiction genre' %}</em>
                                 <br/>
                                 <code>SEARCH_API_URL/?<strong>q</strong>=textGenre<b>:</b>fiction</code>
                             </p>
@@ -397,36 +392,36 @@
                     <!------------------------------------------->
                     <a href="#" class="list-group-item" data-toggle="collapse" data-target="#ttype"
                        data-parent="#haystack">
-                        Text Type</a>
+                        {% trans 'Text Type' %}</a>
                     <div id="ttype" class="sublinks collapse">
                         <div class="list-group-item small">
-                            <div>Applied Filter: <code>textType</code>.</div>
+                            <div>{% trans 'Applied Filter' %}: <code>textType</code>.</div>
                             {#                            <div>Haystack filter: <code>textTextTypeFilter</code>.</div>#}
-                            <h5>Values</h5>
+                            <h5>{% trans 'Values' %}</h5>
                             <div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><em>aca</em> or <em>academicTexts</em></li>
-                                    <li class="list-group-item"><em>admin</em> or <em>administrativeTexts</em></li>
-                                    <li class="list-group-item"><em>blog</em> or <em>blogTexts</em></li>
-                                    <li class="list-group-item"><em>chat</em> or <em>chatTexts</em></li>
+                                    <li class="list-group-item"><em>aca</em> {% trans 'or' %} <em>academicTexts</em></li>
+                                    <li class="list-group-item"><em>admin</em> {% trans 'or' %} <em>administrativeTexts</em></li>
+                                    <li class="list-group-item"><em>blog</em> {% trans 'or' %} <em>blogTexts</em></li>
+                                    <li class="list-group-item"><em>chat</em> {% trans 'or' %} <em>chatTexts</em></li>
                                     <li class="list-group-item">emails</li>
-                                    <li class="list-group-item"><em>encycl</em> or <em>encyclopaedicTexts</em></li>
-                                    <li class="list-group-item"><em>ffcd</em> or <em>faceToFaceConversationsDiscussions</em></li>
-                                    <li class="list-group-item"><em>journal</em> or <em>journalisticTexts</em></li>
+                                    <li class="list-group-item"><em>encycl</em> {% trans 'or' %} <em>encyclopaedicTexts</em></li>
+                                    <li class="list-group-item"><em>ffcd</em> {% trans 'or' %} <em>faceToFaceConversationsDiscussions</em></li>
+                                    <li class="list-group-item"><em>journal</em> {% trans 'or' %} <em>journalisticTexts</em></li>
                                     <li class="list-group-item">letters</li>
-                                    <li class="list-group-item"><em>literar</em> or <em>literaryTexts</em></li>
-                                    <li class="list-group-item"><em>meeting</em> or <em>meetingProceedings</em></li>
+                                    <li class="list-group-item"><em>literar</em> {% trans 'or' %} <em>literaryTexts</em></li>
+                                    <li class="list-group-item"><em>meeting</em> {% trans 'or' %} <em>meetingProceedings</em></li>
                                     <li class="list-group-item">reviews</li>
                                     <li class="list-group-item">scripts</li>
                                     <li class="list-group-item">subtitles</li>
-                                    <li class="list-group-item"><em>tech</em> or <em>technicalTexts</em></li>
-                                    <li class="list-group-item"><em>telephone</em> or <em>telephoneConversations</em></li>
+                                    <li class="list-group-item"><em>tech</em> {% trans 'or' %} <em>technicalTexts</em></li>
+                                    <li class="list-group-item"><em>telephone</em> {% trans 'or' %} <em>telephoneConversations</em></li>
                                     <li class="list-group-item">tweets</li>
                                 </ul>
                             </div>
-                            <div>Examples:</div>
+                            <div>{% trans 'Examples' %}:</div>
                             <p>
-                                <em>Get all resources that contain tweets</em>
+                                <em>{% trans 'Get all resources that contain tweets' %}</em>
                                 <br/>
                                 <code>SEARCH_API_URL/?<strong>q</strong>=textType<b>:</b>tweets</code>
                             </p>
@@ -434,74 +429,71 @@
                     </div>
                 </div>
             </div>
-            <h5>Union Queries</h5>
+            <h5>{% trans 'Union Queries' %}</h5>
             <div class="col-md-12">
                 <p>
-                    The API performs <em>AND</em> search operations by default. For example, the following query <br/>
+                    {% blocktrans %}The API performs <em>AND</em> search operations by default. For example, the following query <br/>
                     <code>SEARCH_API_URL/?q=language:Norwegian&q=language:Norwegian Nynorsk</code><br>
                     will search for resources that contain both Norwegian <strong>and</strong> Norwegian Nynorsk
                     languages.
                     In order to return all resources that meet either of the specified criteria, we can use the
                     parameter
-                    <code>or</code>. <br>
+                    <code>or</code>.{% endblocktrans %} <br>
                     <code>SEARCH_API_URL/?q=lang:no&q=lang:nn<strong>&or</strong></code><br>
                 </p>
             </div>
         </div>
         <div class="row">
-            <h3>Post search filters</h3>
+            <h3>{% trans 'Post search filters' %}</h3>
             <div class="col-md-12">
                 <p>
-                    Search results can be further narrowed down using custom filters.
+                    {% trans 'Search results can be further narrowed down using custom filters.' %}
                 <ul>
                     <li>
-                        <code>on</code>: Filters resources created on the specified date formatted as
-                        <code>yyyy-mm-dd</code>. e.g. <code>&on=2017-03-01</code>
+                        <code>on</code>: {% trans 'Filters resources created on the specified date formatted as <code>yyyy-mm-dd</code>.' %}
+                        {% trans 'e.g.' %} <code>&on=2017-03-01</code>
                     </li>
                     <li>
-                        <code>before</code>: Filters resources created before the specified date.
-                        e.g. <code>&before=2017-03-01</code>
+                        <code>before</code>: {% trans 'Filters resources created before the specified date.' %}
+                        {% trans 'e.g.' %} <code>&before=2017-03-01</code>
                     </li>
                     <li>
-                        <code>on_before</code>: Filters resources created before the specified date (inclusive).
-                        e.g. <code>&on_before=2017-03-01</code>
+                        <code>on_before</code>: {% trans 'Filters resources created before the specified date (inclusive).' %}
+                        {% trans 'e.g.' %} <code>&on_before=2017-03-01</code>
                     </li>
 
                     <li>
-                        <code>after</code>: Filters resources created after the specified date.
-                        e.g. <code>&after=2017-03-01</code>
+                        <code>after</code>: {% trans 'Filters resources created after the specified date.' %}
+                        {% trans 'e.g.' %} <code>&after=2017-03-01</code>
                     </li>
                     <li>
-                        <code>on_after</code>: Filters resources created after the specified date (inclusive).
-                        e.g. <code>&on_after=2017-03-01</code>
+                        <code>on_after</code>: {% trans 'Filters resources created after the specified date (inclusive).' %}
+                        {% trans 'e.g.' %} <code>&on_after=2017-03-01</code>
                     </li>
                     <li>
-                        <code>span</code>: Filters resources created within the specified timespan (comma seperated).
-                        e.g. <code>&span=2016-03-01,2016-09-01</code>
+                        <code>span</code>: {% trans 'Filters resources created within the specified timespan (comma seperated).' %}
+                        {% trans 'e.g.' %} <code>&span=2016-03-01,2016-09-01</code>
                     </li>
                     <li>
-                        <code>processed</code>: Filters resources that are products of processing.
-                        e.g. <code>&processed</code>
+                        <code>processed</code>: {% trans 'Filters resources that are products of processing.' %}
+                        {% trans 'e.g.' %} <code>&processed</code>
                     </li>
                     <li>
-                        <code>validated</code>: Filters resources that have been validated (contain a validation
-                        report).
-                        e.g. <code>&validated</code>
+                        <code>validated</code>: {% trans 'Filters resources that have been validated (contain a validation report).' %}
+                        {% trans 'e.g.' %} <code>&validated</code>
                     </li>
                     <li>
-                        <code>cleared</code>: Filters resources for which legal clearance is finalized.
-                        e.g. <code>&cleared</code>
+                        <code>cleared</code>: {% trans 'Filters resources for which legal clearance is finalized.' %}
+                        {% trans 'e.g.' %} <code>&cleared</code>
                     </li>
                     <li>
-                        <code>limit</code>: The API paginates results for faster responses. Each page
-                        limits results to 20 by default, unless stated otherwise using the <code>limit</code> filter.
-                        e.g. <code>&limit=15</code><br/>
-                        Setting the value of <code>limit</code> to 0, the API will return all results
-                        (if less than 1000) in one page which might take longer to respond.
+                        <code>limit</code>: {% trans 'The API paginates results for faster responses. Each page limits results to 20 by default, unless stated otherwise using the <code>limit</code> filter.' %}
+                        {% trans 'e.g.' %} <code>&limit=15</code><br/>
+                        {% trans' Setting the value of <code>limit</code> to 0, the API will return all results (if less than 1000) in one page which might take longer to respond.' %}
                     </li>
                 </ul>
-                The results returned by the API can also be sorted by creation date, using the <code>sort</code>
-                parameter with values <em>latest</em> or <em>earliest</em>. e.g <code>&sort=latest</code>
+                {% blocktrans %}The results returned by the API can also be sorted by creation date, using the <code>sort</code>
+                parameter with values <em>latest</em> or <em>earliest</em>. e.g <code>&sort=latest</code>{% endblocktrans %}
                 </p>
             </div>
         </div>

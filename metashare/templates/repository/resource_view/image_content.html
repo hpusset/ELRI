@@ -1,14 +1,15 @@
 {% load replace %}
+{% load i18n %}
 
 {% spaceless %}
 
-<label class='title'>Content</label>
+<label class='title'>{% trans 'Content' %}</label>
 
 {% for key, value in image.items %}
 	{% if "Type_of_image_content" in key %}
 			 <div class="dataline indented">
 				<label>
-					<strong>Content Type: </strong> {{ value }}
+					<strong>{% trans 'Content Type' %}: </strong> {{ value }}
 				</label>
 			</div>
 	{% endif %}
@@ -16,7 +17,7 @@
 	{% if "Text_included_in_image" in key %}
 			 <div class="dataline indented">
 				<label>
-					<strong>Text included: </strong> {{ value }}
+					<strong>{% trans 'Text included' %}: </strong> {{ value }}
 				</label>
 			</div>
 	{% endif %}	
@@ -24,7 +25,7 @@
 
 {% for key, value in image.items %}
 		{% if key == "Static_element" %}
-			<label class='subtitle'>Static Element</label>
+			<label class='subtitle'>{% trans 'Static Element' %}</label>
 			{% for key1, value1 in value.items %}
 				<div class="dataline indented">
 					<label>

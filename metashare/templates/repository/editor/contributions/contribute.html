@@ -1,10 +1,12 @@
+{% load i18n %}
 {% load static from staticfiles %}
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>{% spaceless %}{% block title %}ELRC-SHARE Repository{% endblock %}{% endspaceless %}</title>
+    <title>{% spaceless %}{% block title %}{% trans 'ELRC-SHARE Repository' %}{% endblock %}{% endspaceless %}</title>
     <meta name="description" content="{% spaceless %}{% block description %}ELRC-SHARE: a repository used for documenting, storing, browsing and accessing Language Resources.{% endblock %}{% endspaceless %}"/>
     <meta name="keywords" content="{% spaceless %}{% block keywords %}ELRC-SHARE, language resources, language tools, ELRC, European Language Resource Coordination{% endblock %}{% endspaceless %}"/>
     <link rel="shortcut icon" href="{{ STATIC_URL }}metashare/images/favicon.ico"/>
@@ -16,6 +18,7 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}metashare/css/upload.css" type="text/css">
     <link rel="stylesheet" href="{{ STATIC_URL }}metashare/css/screen.css" type="text/css" media="screen">
     <link rel="stylesheet" href="{{ STATIC_URL }}metashare/css/typo.css" type="text/css" media="screen">
+    <script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
     <script src="https://use.fontawesome.com/92573ad434.js"></script>
     <script src="{{ STATIC_URL }}metashare/js/jquery-1.9.1.min.js"></script>
     <script src="{{ STATIC_URL }}metashare/js/jquery.form.js"></script>
@@ -53,7 +56,7 @@
 <div class="back" style="margin-top: 20px">
     <div style="width: 100% !important; height:450px; text-align: center; background-image: url('{{ STATIC_URL }}metashare/images/iStock_000055931356_XXXLarge_web.jpg'); background-position: center; background-repeat: no-repeat; border-bottom: 1px solid; ">
         <h2 style=" text-align: left; left: 10%; color: white;  font-size: 45px;position:relative;top:170px; text-shadow: 1px 1px #000;">
-            Data Contribution</h2></div>
+            {% trans 'Data Contribution' %}</h2></div>
 </div>
 <div class="overlay"></div>
 {% if message %}
@@ -64,10 +67,9 @@
 {% endfor %}
 <noscript>
     <div class="failure">
-        Your browser does not support JavaScript!
+        {% trans 'Your browser does not support JavaScript!' %}
         <br/>
-        Please make sure that you have javascript enabled and refresh the page before proceeding with your
-        contribution.
+        {% trans 'Please make sure that you have javascript enabled and refresh the page before proceeding with your contribution.' %}
     </div>
 </noscript>
 <div class="row">
@@ -76,60 +78,60 @@
               action="{% url 'contribute' %}" method="post"
               data-toggle="validator" enctype="multipart/form-data" encoding="multipart/form-data">
             <!-- Form Name -->
-            <legend style="padding:20px">New Resource</legend>
+            <legend style="padding:20px">{% trans 'New Resource' %}</legend>
             <!-- Text input-->
             <div class="form-group required">
-                <label class="control-label" for="resourceTitle">Resource Title</label>
+                <label class="control-label" for="resourceTitle">{% trans 'Resource Title' %}</label>
 
                 <input id="resourceTitle" name="resourceTitle" placeholder="" class="form-control input-md"
                        required=""
                        type="text">
-                <span class="help-block contrib-help">The name by which the resource is already known or by which you would like it to be known; e.g. "The GSRT bilingual corpus of Greek-English bulletins"</span>
+                <span class="help-block contrib-help">{% trans 'The name by which the resource is already known or by which you would like it to be known; e.g. "The GSRT bilingual corpus of Greek-English bulletins"' %}</span>
 
             </div>
             <!-- Textarea -->
             <div class="form-group required">
-                <label class="control-label" for="shortDescription">Resource short description</label>
+                <label class="control-label" for="shortDescription">{% trans 'Resource short description' %}</label>
                         <textarea class="form-control" id="shortDescription" name="shortDescription"
                                   required=""></textarea>
-                <span class="help-block contrib-help">A short description, including any information considered useful about the resource, e.g. whether it's a dataset (collection of documents) or a lexicon, glossary, terminological resource, etc., its size, language(s), classification information (e.g. health reports, news bulletins, lexicon of sports terminology etc.)</span>
+                <span class="help-block contrib-help">{% blocktrans %}A short description, including any information considered useful about the resource, e.g. whether it's a dataset (collection of documents) or a lexicon, glossary, terminological resource, etc., its size, language(s), classification information (e.g. health reports, news bulletins, lexicon of sports terminology etc.){% endblocktrans %}</span>
             </div>
             <!-- Text input-->
             <div class="form-group required">
-                <label class="control-label" for="languages">Language(s)</label>
+                <label class="control-label" for="languages">{% trans 'Language(s)' %}</label>
                 <div class="language">
                     <select required class="form-control" multiple style="padding: 6px; height:200px"
                             name="languages[]"
                             id="languages">
-                        <option value="Bulgarian">Bulgarian</option>
-                        <option value="Czech">Czech</option>
-                        <option value="Croatian">Croatian</option>
-                        <option value="Danish">Danish</option>
-                        <option value="Dutch; Flemish">Dutch; Flemish</option>
-                        <option value="English">English</option>
-                        <option value="Estonian">Estonian</option>
-                        <option value="Finnish">Finnish</option>
-                        <option value="French">French</option>
-                        <option value="German">German</option>
-                        <option value="Hungarian">Hungarian</option>
-                        <option value="Icelandic">Icelandic</option>
-                        <option value="Irish">Irish</option>
-                        <option value="Italian">Italian</option>
-                        <option value="Latvian">Latvian</option>
-                        <option value="Lithuanian">Lithuanian</option>
-                        <option value="Maltese">Maltese</option>
-                        <option value="Modern Greek (1453-)">Modern Greek (1453-)</option>
-                        <option value="Norwegian Bokmål">Norwegian Bokmål (nb)</option>
-                        <option value="Norwegian Nynorsk">Norwegian Nynorsk (nn)</option>
-                        <option value="Polish">Polish</option>
-                        <option value="Portuguese">Portuguese</option>
-                        <option value="Romanian; Moldavian; Moldovan">Romanian; Moldavian; Moldovan</option>
-                        <option value="Slovak">Slovak</option>
-                        <option value="Slovenian">Slovenian</option>
-                        <option value="Spanish; Castilian">Spanish; Castilian</option>
-                        <option value="Swedish">Swedish</option>
+                        <option value="Bulgarian">{% trans 'Bulgarian' %}</option>
+                        <option value="Czech">{% trans 'Czech' %}</option>
+                        <option value="Croatian">{% trans 'Croatian' %}</option>
+                        <option value="Danish">{% trans 'Danish' %}</option>
+                        <option value="Dutch; Flemish">{% trans 'Dutch; Flemish' %}</option>
+                        <option value="English">{% trans 'English' %}</option>
+                        <option value="Estonian">{% trans 'Estonian' %}</option>
+                        <option value="Finnish">{% trans 'Finnish' %}</option>
+                        <option value="French">{% trans 'French' %}</option>
+                        <option value="German">{% trans 'German' %}</option>
+                        <option value="Hungarian">{% trans 'Hungarian' %}</option>
+                        <option value="Icelandic">{% trans 'Icelandic' %}</option>
+                        <option value="Irish">{% trans 'Irish' %}</option>
+                        <option value="Italian">{% trans 'Italian' %}</option>
+                        <option value="Latvian">{% trans 'Latvian' %}</option>
+                        <option value="Lithuanian">{% trans 'Lithuanian' %}</option>
+                        <option value="Maltese">{% trans 'Maltese' %}</option>
+                        <option value="Modern Greek (1453-)">{% trans 'Modern Greek (1453-)' %}</option>
+                        <option value="Norwegian Bokmål">{% trans 'Norwegian Bokmål (nb)' %}</option>
+                        <option value="Norwegian Nynorsk">{% trans 'Norwegian Nynorsk (nn)' %}</option>
+                        <option value="Polish">{% trans 'Polish' %}</option>
+                        <option value="Portuguese">{% trans 'Portuguese' %}</option>
+                        <option value="Romanian; Moldavian; Moldovan">{% trans 'Romanian; Moldavian; Moldovan' %}</option>
+                        <option value="Slovak">{% trans 'Slovak' %}</option>
+                        <option value="Slovenian">{% trans 'Slovenian' %}</option>
+                        <option value="Spanish; Castilian">{% trans 'Spanish; Castilian' %}</option>
+                        <option value="Swedish">{% trans 'Swedish' %}</option>
                     </select>
-                    <span class="help-block contrib-help">The language(s) of the resource; for resources with multiple languages, hold down CTRL key to select multiple values</span>
+                    <span class="help-block contrib-help">{% trans 'The language(s) of the resource; for resources with multiple languages, hold down CTRL key to select multiple values' %}</span>
                 </div>
             </div>
 {#            <div class="form-group required">#}
@@ -153,30 +155,28 @@
 {#                </select>#}
 {#            </div>#}
             <div class="form-group required" id="contributionmode">
-                <label class="control-label" for="contributionmode">Contribution Mode</label><br>
-                <input type="radio" name="mode" value="uploadzip" checked> Upload ZIP archive<br>
-                <input type="radio" name="mode" value="url"> Provide URL of resources<br>
-                <input type="radio" name="mode" value="eDelivery"> eDelivery (Generate XML file to attach to your
-                eDelivery contribution)<br>
-                <span class="help-block contrib-help">Please select the way you wish to contribute your data. Uploading a ZIP archive is recommended.</span>
+                <label class="control-label" for="contributionmode">{% trans 'Contribution Mode' %}</label><br>
+                <input type="radio" name="mode" value="uploadzip" checked> {% trans 'Upload ZIP archive' %}<br>
+                <input type="radio" name="mode" value="url"> {% trans 'Provide URL of resources' %}<br>
+                <input type="radio" name="mode" value="eDelivery"> {% trans 'eDelivery (Generate XML file to attach to your eDelivery contribution)' %}<br>
+                <span class="help-block contrib-help">{% trans 'Please select the way you wish to contribute your data. Uploading a ZIP archive is recommended.' %}</span>
             </div>
             <!-- File Button -->
             <div class="form-group required" id="fileupload">
-                <label class="control-label" for="filebutton">Upload Resource</label>
+                <label class="control-label" for="filebutton">{% trans 'Upload Resource' %}</label>
                 <input accept=".zip" id="filebutton" name="filebutton" class="input-file" type="file"
                        required="">
-                <span class="help-block contrib-help">Please upload a <strong>.zip file</strong> up to 100MB.
+                <span class="help-block contrib-help">{% trans 'Please upload a <strong>.zip file</strong> up to 100MB.' %}
                     </br>
-                    In case the <strong>.zip file</strong> file you wish to upload is larger than 100MB, please contact
-                    <a href="mailto:elrc-share@ilsp.gr">elrc-share@ilsp.gr</a>
+                    {% trans 'In case the <strong>.zip file</strong> file you wish to upload is larger than 100MB, please contact <a href="mailto:elrc-share@ilsp.gr">elrc-share@ilsp.gr</a>.' %}
                 </span>
             </div>
             <div class="form-group required" id="resourceurl" style="display: none">
-                <label class="control-label" for="resourceUrl">Resource URL</label>
+                <label class="control-label" for="resourceUrl">{% trans 'Resource URL' %}</label>
                 <input id="resourceUrl" name="resourceUrl" placeholder="" class="form-control input-md"
                        required=""
                        type="text">
-                <span class="help-block contrib-help">Please provide a URL containing the files you wish to contribute</span>
+                <span class="help-block contrib-help">{% trans 'Please provide a URL containing the files you wish to contribute' %}</span>
             </div>
             <!-- Button (Double) -->
             <div class="form-group">
@@ -187,8 +187,8 @@
                     {#                        name="submit_form" value="submit"#}
                     {#                        id="submit" type="submit"#}
                     {#                        class="btn btn-success">Submit</button>#}
-                    <input type="submit" value="Submit" name="submit" class="btn btn-success"/>
-                    <button id="reset" type="reset" class="btn btn-warning">Reset</button>
+                    <input type="submit" value="{% trans 'Submit' %}" name="submit" class="btn btn-success"/>
+                    <button id="reset" type="reset" class="btn btn-warning">{% trans 'Reset' %}</button>
                 </div>
             </div>
             {% csrf_token %}
@@ -201,15 +201,15 @@
             </div>
             <div class="col-md-10" style="margin: 0 10% 0 0;">
                 {#            <img src="{{ STATIC_URL }}metashare/images/cef_digital.svg" alt="">#}
-                <h4>Contribute Your Data Through eDelivery</h4>
+                <h4>{% trans 'Contribute Your Data Through eDelivery' %}</h4>
                 <div>
-                    If you wish to share your data through
+                    {% blocktrans %}If you wish to share your data through
                     <a href="https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/eDelivery" target="_blank">
                         eDelivery
                     </a>, you can use the ELRC-SHARE CEF eDelivery Access Point.
                     For more information click <a data-toggle="modal" href="#edelivery_modal">here</a>.
                     <br>In such a case, please fill in the form on the left
-                        and choose eDelivery in the Contribution mode.
+                        and choose eDelivery in the Contribution mode.{% endblocktrans %}
                 </div>
             </div>
         </div>
@@ -233,64 +233,64 @@
         <div class="modal-content">
             <div class="modal-header" style="background-color: rgba(15, 141, 187, 0.62)">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">ELRC-SHARE eDelivery Help</h4>
+                <h4 class="modal-title">{% trans 'ELRC-SHARE eDelivery Help' %}</h4>
             </div>
             <div class="modal-body">
                 <p>
-                    The ELRC-SHARE repository adopts the
+                    {% blocktrans %}The ELRC-SHARE repository adopts the
                     <a href="https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/Domibus+-+v3.3"
                        target="_blank">Domibus</a> implementation
                     of the eDelivery Building Block and it is available to accept payloads from your existing eDelivery
-                    Access Point.
+                    Access Point.{% endblocktrans %}
                 </p>
                 <p>
-                    The ELRC-SHARE Access Point accepts messages containing <strong>two files as attachments</strong>:
+                    {% trans 'The ELRC-SHARE Access Point accepts messages containing <strong>two files as attachments</strong>:' %}
                 <ol>
-                    <li>an xml description of your dataset<b>*</b></li>
-                    <li>the actual dataset in zip format, up to 400MB</li>
+                    <li>{% trans 'an xml description of your dataset' %}<b>*</b></li>
+                    <li>{% trans 'the actual dataset in zip format, up to 400MB' %}</li>
                 </ol>
                 </p>
                 <p>
-                    Before you can use the service, we need to add your Access Point to the ELRC-SHARE eDelivery trusted
-                    network. For trust to be established the following information is required:
+                    {% blocktrans %}Before you can use the service, we need to add your Access Point to the ELRC-SHARE eDelivery trusted
+                    network. For trust to be established the following information is required:{% endblocktrans %}
                 <table class="table-striped">
                     <tr>
-                        <td><strong>MSH Endpoint</strong></td>
-                        <td>The endpoint of your Access Point</td>
+                        <td><strong>{% trans 'MSH Endpoint' %}</strong></td>
+                        <td>{% trans 'The endpoint of your Access Point' %}</td>
                     </tr>
                     <tr>
-                        <td><strong>Gateway Party Name</strong></td>
-                        <td>The name of your Access Point's Gateway</td>
+                        <td><strong>{% trans 'Gateway Party Name' %}</strong></td>
+                        <td>{% trans "The name of your Access Point's Gateway" %}</td>
                     </tr>
                     <tr>
-                        <td><strong>Gateway Party ID</strong></td>
-                        <td>The identifier of your Access Point's Gateway</td>
+                        <td><strong>{% trans 'Gateway Party ID' %}</strong></td>
+                        <td>{% trans "The identifier of your Access Point's Gateway" %}</td>
                     </tr>
                     <tr>
-                        <td><strong>Public Certificate</strong></td>
-                        <td>Your Access Point's X.509 public certificate (.crt, .cert, .cer)</td>
+                        <td><strong>{% trans 'Public Certificate' %}</strong></td>
+                        <td>{% trans "Your Access Point's X.509 public certificate (.crt, .cert, .cer)" %}</td>
                     </tr>
                 </table>
                 </p>
                 <p>
-                    Once your application to join the ELRC-SHARE eDelivery trusted network is approved,
+                    {% blocktrans %}Once your application to join the ELRC-SHARE eDelivery trusted network is approved,
                     the required ELRC-SHARE Access Point information will be emailed to you.
                     Include this information in your Access Point configuration and complete the
                     process of trust establishment. From this point onwards, you can send your
-                    data to the ELRC-SHARE Access Point using your implementation specific software.
+                    data to the ELRC-SHARE Access Point using your implementation specific software.{% endblocktrans %}
                 </p>
                 <p>
-                    Apply for eDelivery <a href="/accounts/edelivery_membership_application/">here</a>.
+                    {% blocktrans %}Apply for eDelivery <a href="/accounts/edelivery_membership_application/">here</a>.{% endblocktrans %}
                 </p>
                 <p>
-                    <strong>*</strong><em>The xml file is automatically generated and downloaded on your computer,
+                    <strong>*</strong><em>{% blocktrans %}The xml file is automatically generated and downloaded on your computer,
                     once you fill in the required fields on the contribution form  and select the
-                    <strong>eDelivery</strong> contribution mode.</em>
+                    <strong>eDelivery</strong> contribution mode</em>.{% endblocktrans %}
                 </p>
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Close' %}</button>
             </div>
         </div>
 

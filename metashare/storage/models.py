@@ -17,6 +17,7 @@ from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 from django.db.models.query_utils import Q
+from django.utils.translation import gettext_lazy as _
 
 from metashare.settings import LOG_HANDLER
 from metashare import settings
@@ -104,51 +105,51 @@ class StorageObject(models.Model):
 
     class Meta:
         permissions = (
-            ('can_sync', 'Can synchronize'),
+            ('can_sync', _('Can synchronize')),
         )
 
     source_url = models.URLField(editable=False,
                                  default=settings.DJANGO_URL,
-                                 help_text="(Read-only) base URL for the server where the master copy of " \
-                                           "the associated language resource is located.")
+                                 help_text=_("(Read-only) base URL for the server where the master copy of " \
+                                           "the associated language resource is located."))
 
     identifier = models.CharField(max_length=64, null=True, blank=True,
-                                  editable=False, help_text="(Read-only) unique " \
-                                                            "identifier for this storage object instance.")
+                                  editable=False, help_text=_("(Read-only) unique " \
+                                                            "identifier for this storage object instance."))
 
     created = models.DateTimeField(auto_now_add=True, editable=False,
-                                   help_text="(Read-only) creation date for this storage object instance.")
+                                   help_text=_("(Read-only) creation date for this storage object instance."))
 
     modified = models.DateTimeField(editable=False, auto_now=True,
-                                    help_text="(Read-only) last modification date of the metadata XML " \
-                                              "for this storage object instance.")
+                                    help_text=_("(Read-only) last modification date of the metadata XML " \
+                                              "for this storage object instance."))
 
     checksum = models.CharField(blank=True, null=True, max_length=32,
-                                help_text="(Read-only) MD5 checksum of the binary data for this " \
-                                          "storage object instance.")
+                                help_text=_("(Read-only) MD5 checksum of the binary data for this " \
+                                          "storage object instance."))
 
     digest_checksum = models.CharField(blank=True, null=True, max_length=32,
-                                       help_text="(Read-only) MD5 checksum of the digest zip file containing the " \
+                                       help_text=_("(Read-only) MD5 checksum of the digest zip file containing the " \
                                                  "global serialized storage object and the metadata XML for this " \
-                                                 "storage object instance.")
+                                                 "storage object instance."))
 
     digest_modified = models.DateTimeField(editable=False, null=True, blank=True,
-                                           help_text="(Read-only) last modification date of digest zip " \
-                                                     "for this storage object instance.")
+                                           help_text=_("(Read-only) last modification date of digest zip " \
+                                                     "for this storage object instance."))
 
     digest_last_checked = models.DateTimeField(editable=False, null=True, blank=True,
-                                               help_text="(Read-only) last update check date of digest zip " \
-                                                         "for this storage object instance.")
+                                               help_text=_("(Read-only) last update check date of digest zip " \
+                                                         "for this storage object instance."))
 
-    revision = models.PositiveIntegerField(default=1, help_text="Revision " \
-                                                                "or version information for this storage object instance.")
+    revision = models.PositiveIntegerField(default=1, help_text=_("Revision " \
+                                                                "or version information for this storage object instance."))
 
     metashare_version = models.CharField(max_length=32, editable=False,
                                          default=settings.METASHARE_VERSION,
-                                         help_text="(Read-only) META-SHARE version used with the storage object instance.")
+                                         help_text=_("(Read-only) META-SHARE version used with the storage object instance."))
 
     legacy_resource = models.BooleanField(
-        help_text='Specifies whether the resource is collected by ELRC 1',
+        help_text=_('Specifies whether the resource is collected by ELRC 1'),
         default=False)
 
     def _get_master_copy(self):
@@ -163,7 +164,7 @@ class StorageObject(models.Model):
     master_copy = property(_get_master_copy, _set_master_copy)
 
     copy_status = models.CharField(default=MASTER, max_length=1, editable=False, choices=COPY_CHOICES,
-                                   help_text="Generalized copy status flag for this storage object instance.")
+                                   help_text=_("Generalized copy status flag for this storage object instance."))
 
     def _get_published(self):
         return self.publication_status == PUBLISHED
@@ -181,28 +182,28 @@ class StorageObject(models.Model):
     published = property(_get_published, _set_published)
 
     publication_status = models.CharField(default=INTERNAL, max_length=1, choices=STATUS_CHOICES,
-                                          help_text="Generalized publication status flag for this " \
-                                                    "storage object instance.")
+                                          help_text=_("Generalized publication status flag for this " \
+                                                    "storage object instance."))
 
     source_node = models.CharField(blank=True, null=True, max_length=32, editable=False,
-                                   help_text="(Read-only) id of source node from which the resource " \
+                                   help_text=_("(Read-only) id of source node from which the resource " \
                                              "originally stems as set in local_settings.py in CORE_NODES and " \
-                                             "PROXIED_NODES; empty if resource stems from this local node")
+                                             "PROXIED_NODES; empty if resource stems from this local node"))
 
-    deleted = models.BooleanField(default=False, help_text="Deletion " \
-                                                           "status flag for this storage object instance.")
+    deleted = models.BooleanField(default=False, help_text=_("Deletion " \
+                                                           "status flag for this storage object instance."))
 
     metadata = models.TextField(validators=[_validate_valid_xml],
-                                help_text="XML containing the metadata description for this storage " \
-                                          "object instance.")
+                                help_text=_("XML containing the metadata description for this storage " \
+                                          "object instance."))
 
     global_storage = models.TextField(default='not set yet',
-                                      help_text="text containing the JSON serialization of global attributes " \
-                                                "for this storage object instance.")
+                                      help_text=_("text containing the JSON serialization of global attributes " \
+                                                "for this storage object instance."))
 
     local_storage = models.TextField(default='not set yet',
-                                     help_text="text containing the JSON serialization of local attributes " \
-                                               "for this storage object instance.")
+                                     help_text=_("text containing the JSON serialization of local attributes " \
+                                               "for this storage object instance."))
 
     def get_digest_checksum(self):
         """

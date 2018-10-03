@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-
+{% load i18n %}
 {% block title %}
-  Redirecting to Download Node&nbsp;&hellip; &ndash; ELRC-SHARE
+  {% trans 'Redirecting to Download Node' %}&nbsp;&hellip; &ndash; ELRC-SHARE
 {% endblock %}
 
 {% block content %}
@@ -10,22 +10,26 @@
   setTimeout('window.location.replace("{{ redirection_url }}")', 6000);
 </script>
 
-<h2>Redirecting to Download Node&nbsp;&hellip;</h2>
+<h2>{% trans 'Redirecting to Download Node' %}&nbsp;&hellip;</h2>
 <div class="content_box">
   <p>
-    You cannot download the selected resource on the current META-SHARE node as
-    it has originally been provided
     {% if resource.storage_object.source %}
-      by {{ resource.storage_object.source }}.
+      {% blocktrans with storage_source=resource.storage_object.source %}You cannot download the selected resource on the current META-SHARE node as
+        it has originally been provided
+        by {{ storage_source }}.
+      You will now be redirected to the META-SHARE Node where the resource data is
+      available.{% endblocktrans %}
     {% else %}
-      at {{ resource.storage_object.source_url }}.
+
+        {% blocktrans with storage_url=resource.storage_object.source_url %}You cannot download the selected resource on the current META-SHARE node as
+        it has originally been provided at {{ storage_url }}. You will now be redirected to the META-SHARE Node where the resource data is
+      available.{% endblocktrans %}
+
     {% endif %}
-    You will now be redirected to the META-SHARE Node where the resource data is
-    available.
   </p>
   <p>
-    <a href="{{ redirection_url }}">Click here</a> to immediately go to the
-    other node.
+    {% blocktrans %}<a href="{{ redirection_url }}">Click here</a> to immediately go to the
+    other node.{% endblocktrans %}
   </p>
 </div>
 {% endspaceless %}

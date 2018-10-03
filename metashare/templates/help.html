@@ -1,30 +1,28 @@
 {% extends "base.html" %}
-{% load email_protection %}
+{% load email_protection i18n %}
 {% load static %}
 {% block content %}
-    <h2>Help</h2>
+    <h2>{% trans 'Help' %}</h2>
     <div class="content_box">
-        <h2>Documentation on the ELRC-SHARE editor</h2>
+        <h2>{% trans 'Documentation on the ELRC-SHARE editor' %}</h2>
 
-        <p>The following guidelines provide detailed information on how to use the editing facility for documenting and
-            uploading LRs:
+        <p>{% trans "The following guidelines provide detailed information on how to use the editing facility for documenting and uploading LRs:" %}
         <ul>
-            <li><a href="{{ STATIC_URL }}metashare/Walkthrough_for_Contributors.pdf" target="_blank">Walkthrough for contributors</a></li>
-            <li><a href="{{ STATIC_URL }}metashare/Walkthrough_for_Editors.pdf" target="_blank">Walkthrough for editors</a> </li>
+            <li><a href="{{ STATIC_URL }}metashare/Walkthrough_for_Contributors.pdf" target="_blank">{% trans 'Walkthrough for contributors' %}</a></li>
+            <li><a href="{{ STATIC_URL }}metashare/Walkthrough_for_Editors.pdf" target="_blank">{% trans 'Walkthrough for editors' %}</a> </li>
         </ul>
 
-        <h2>ELRC-SHARE schema</h2>
+        <h2>{% trans 'ELRC-SHARE schema' %}</h2>
         <ul>
-            <li><a href="https://elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" target="_blank">ELRC-SHARE schema XSD</a>
-            (based on the META-SHARE Schema)</li>
-            <li><a href="/documentation/elrcShareSchema.html" target="_blank">Documentation about the schema</a></li>
+            <li><a href="https://elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" target="_blank">{% trans 'ELRC-SHARE schema XSD' %}</a>
+            {% trans '(based on the META-SHARE Schema)' %}</li>
+            <li><a href="/documentation/elrcShareSchema.html" target="_blank">{% trans 'Documentation about the schema' %}</a></li>
         </ul>
         </p>
-        <h2>Contact details</h2>
+        <h2>{% trans 'Contact details' %}</h2>
         <ul>
-            <li><a href="http://www.lr-coordination.eu/helpdesk" target="_blank">Helpdesk</a></li>
-            <li>Only for technical help about the ELRC-SHARE repository, you can contact us
-            at {% encrypt_email 'elrc-share@ilsp.gr' %}.</li>
+            <li><a href="http://www.lr-coordination.eu/helpdesk" target="_blank">{% trans 'Helpdesk' %}</a></li>
+            <li>{% trans 'Only for technical help about the ELRC-SHARE repository, you can contact us at <a href="mailto:elrc-share@ilsp.gr" >elrc-share@ilsp.gr</a>.' %}</li>
         </ul>
     </div>
 {% endblock %}

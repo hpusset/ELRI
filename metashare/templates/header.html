@@ -1,5 +1,5 @@
 {% load static from staticfiles %}
-{% load is_member %}
+{% load is_member i18n %}
 {% spaceless %}
     <div id="header">
         <a href="http://lr-coordination.eu/" title="Languages - the heart of Multilingual Europe | ELRC"
@@ -8,64 +8,61 @@
         <div class="jsddm">
             {# drop-down menu created with http://javascript-array.com/scripts/jquery_simple_drop_down_menu/ #}
             <ul id="jsddm">
-                <li title="Home"><a href="{% url 'frontpage' %}" %}>
-                    <i class="fa fa-home menu_fontawesome" aria-hidden="true"></i> Home</a></li>
-                <li title="Browse the resources of the META-SHARE catalogue"><a
+                <li title="{% trans 'Home' %}"><a href="{% url 'frontpage' %}" %}>
+                    <i class="fa fa-home menu_fontawesome" aria-hidden="true"></i> {% trans 'Home' %}</a></li>
+                <li title="{% trans 'Browse the resources of the META-SHARE catalogue' %}"><a
                         href="{% url 'frontpage' %}repository/search/">
-                    <i class="fa fa-list-ul menu_fontawesome" aria-hidden="true"></i> Browse Resources</a></li>
+                    <i class="fa fa-list-ul menu_fontawesome" aria-hidden="true"></i> {% trans 'Browse Resources' %}</a></li>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'contribute' %}">
-                        <i class="fa fa-share-square-o menu_fontawesome" aria-hidden="true"></i> Contribute
-                        Resources</a></li>
+                        <i class="fa fa-share-square-o menu_fontawesome" aria-hidden="true"></i> {% trans 'Contribute Resources' %}</a></li>
                 {% endif %}
                 {% if user.userprofile.has_editor_permission %}
-                    <li title="Create/edit resource metadata or upload resource data"><a>
-                        <i class="fa fa-pencil-square-o menu_fontawesome" aria-hidden="true"></i> Manage Resources</a>
+                    <li title="{% trans 'Create/edit resource metadata or upload resource data' %}"><a>
+                        <i class="fa fa-pencil-square-o menu_fontawesome" aria-hidden="true"></i> {% trans 'Manage Resources' %}</a>
                         <ul>
-                            <li title="Create/edit your own resource metadata or upload resource data"><a
-                                    href="{% url 'editor:repository_resourceinfotype_model_myresources' %}">Manage your
-                                own resources</a></li>
+                            <li title="{% trans 'Create/edit your own resource metadata or upload resource data' %}"><a
+                                    href="{% url 'editor:repository_resourceinfotype_model_myresources' %}">
+                                    {% trans 'Manage your own resources' %}</a></li>
 {#                            {% if user.is_superuser or user|is_member:"legalReviewers" or user|is_member:"technicalReviewers" %}#}
                             {% if user.is_superuser or user|is_member:"elrcReviewers" %}
-                                <li title="Create/edit resource metadata or upload resource data"><a
-                                        href="{% url 'editor:repository_resourceinfotype_model_changelist' %}">Manage
-                                    all resources</a>
+                                <li title="{% trans 'Create/edit resource metadata or upload resource data' %}"><a
+                                        href="{% url 'editor:repository_resourceinfotype_model_changelist' %}">
+                                    {% trans 'Manage all resources' %}</a>
                                 </li>
                             {% endif %}
                             {# PROJECT MANAGEMENT #}
                             {% if user.is_superuser or user|is_member:"elrcReviewers" %}
-                                <li title="Manage LRs by ELRC deliverables"><a
-                                        href="/admin/project_management/managementobject/">Manage LRs by ELRC deliverables</a>
+                                <li title="{% trans 'Manage LRs by ELRC deliverables' %}"><a
+                                        href="/admin/project_management/managementobject/"> {% trans 'Manage LRs by ELRC deliverables' %}</a>
                                 </li>
                             {% endif %}
                             {% if user.is_superuser %}
-                                <li title="Manage contributed resources">
-                                    <a href="{% url 'manage_contributed_data' %}">Manage resources from contributors</a>
+                                <li title="{% trans 'Manage contributed resources' %}">
+                                    <a href="{% url 'manage_contributed_data' %}"> {% trans 'Manage resources from contributors' %}</a>
                                 </li>
-                                <li title="Create/edit person object metadata"><a
-                                        href="{% url 'editor:repository_personinfotype_model_changelist' %}">Manage
-                                    person
-                                    objects</a></li>
-                                <li title="Create/edit organization object metadata"><a
-                                        href="{% url 'editor:repository_organizationinfotype_model_changelist' %}">Manage
-                                    organization objects</a></li>
-                                <li title="Create/edit project object metadata"><a
-                                        href="{% url 'editor:repository_projectinfotype_model_changelist' %}">Manage
-                                    project
-                                    objects</a></li>
-                                <li title="Create/edit document/paper object metadata"><a
-                                        href="{% url 'editor:repository_documentinfotype_model_changelist' %}">Manage
-                                    document objects</a></li>
+                                <li title="{% trans 'Create/edit person object metadata' %}"><a
+                                        href="{% url 'editor:repository_personinfotype_model_changelist' %}">
+                                    {% trans 'Manage person objects' %}</a></li>
+                                <li title="{% trans 'Create/edit organization object metadata' %}"><a
+                                        href="{% url 'editor:repository_organizationinfotype_model_changelist' %}">
+                                    {% trans 'Manage organization objects' %}</a></li>
+                                <li title="{% trans 'Create/edit project object metadata' %}"><a
+                                        href="{% url 'editor:repository_projectinfotype_model_changelist' %}">
+                                    {% trans 'Manage project objects' %}</a></li>
+                                <li title="{% trans 'Create/edit document/paper object metadata' %}"><a
+                                        href="{% url 'editor:repository_documentinfotype_model_changelist' %}">
+                                    {% trans 'Manage document objects' %}</a></li>
                             {% endif %}
-                            <li title="Upload XML resource descriptions"><a href="{% url 'editor:upload_xml' %}">Upload
-                                resource descriptions</a></li>
+                            <li title="{% trans 'Upload XML resource descriptions' %}"><a href="{% url 'editor:upload_xml' %}">
+                                {% trans 'Upload resource descriptions' %}</a></li>
                         </ul>
                     </li>
                 {% endif %}
 {#                {% if user.is_superuser or user.userprofile.has_organization_manager_permission or user.userprofile.has_manager_permission %}#}
                 {% if user.is_superuser %}
-                    <li title="Manage users and applications"><a>
-                        <i class="fa fa-wrench menu_fontawesome" aria-hidden="true"></i> Administration</a>
+                    <li title="{% trans 'Manage users and applications' %}"><a>
+                        <i class="fa fa-wrench menu_fontawesome" aria-hidden="true"></i> {% trans 'Administration' %}</a>
                         <ul>
                             {% if user.is_superuser %}
                                 <li><a href="{% url 'admin:auth_user_changelist' %}">Users</a></li>
@@ -75,7 +72,7 @@
 {#                                <li><a href="{% url 'editor:accounts_organization_changelist' %}">Organizations</a></li>#}
 {#                                <li><a href="{% url 'editor:accounts_organizationmanagers_changelist' %}">Organization#}
 {#                                    managers</a></li>#}
-                                <li><a href="{% url 'admin:accounts_accesspointedeliveryapplication_changelist' %}">eDelivery membership applications</a></li>
+                                <li><a href="{% url 'admin:accounts_accesspointedeliveryapplication_changelist' %}"> {% trans 'eDelivery membership applications' %}</a></li>
                             {% endif %}
 {#                            {% if user.userprofile.has_manager_permission %}#}
 {#                                <li><a href="{% url 'admin:accounts_editorgroupapplication_changelist' %}">Editor group#}
@@ -89,34 +86,34 @@
                     </li>
                 {% endif %}
                 {% if user.is_superuser %}
-                <li title="View various statistics for this META-SHARE Node"><a
+                <li title="{% trans 'View various statistics for this META-SHARE Node' %}"><a
                         href="{% url 'metashare.views.frontpage' %}stats/top/">
-                    <i class="fa fa-bar-chart menu_fontawesome" aria-hidden="true"></i> Statistics</a></li>
+                    <i class="fa fa-bar-chart menu_fontawesome" aria-hidden="true"></i> {% trans 'Statistics' %}</a></li>
                 {% endif %}
-                <li title="Help"><a href="{% url 'help' %}">
-                    <i class="fa fa-question-circle menu_fontawesome" aria-hidden="true"></i> Help</a></li>
+                <li title="{% trans 'Help' %}"><a href="{% url 'help' %}">
+                    <i class="fa fa-question-circle menu_fontawesome" aria-hidden="true"></i> {% trans 'Help' %}</a></li>
                 <li><a href="{% url 'info' %}">
-                    <i class="fa fa-info-circle menu_fontawesome" aria-hidden="true"></i> About</a>
+                    <i class="fa fa-info-circle menu_fontawesome" aria-hidden="true"></i> {% trans 'About' %}</a>
                     <ul>
-                        <li><a href="{% url 'info' %}#LR_Provision">LR Provision</a></li>
-                        <li><a href="{% url 'info' %}#Licensing_LRs">Licensing LRs for the ELRC action</a></li>
-                        <li><a href="{% url 'info' %}#Notice_and_Take_Down_Policy">Notice and Takedown Policy</a></li>
-                        <li><a href="{% url 'info' %}#Privacy">Privacy</a></li>
-                        <li><a href="{% url 'info' %}#Data_Protection">Data Protection</a></li>
-                        <li><a href="{% url 'info' %}#Data_Protection_Statement">Data Protection Statement</a></li>
+                        <li><a href="{% url 'info' %}#LR_Provision">{% trans 'LR Provision' %}</a></li>
+                        <li><a href="{% url 'info' %}#Licensing_LRs">{% trans 'Licensing LRs for the ELRC action' %}</a></li>
+                        <li><a href="{% url 'info' %}#Notice_and_Take_Down_Policy">{% trans 'Notice and Takedown Policy' %}</a></li>
+                        <li><a href="{% url 'info' %}#Privacy">{% trans 'Privacy' %}</a></li>
+                        <li><a href="{% url 'info' %}#Data_Protection">{% trans 'Data Protection' %}</a></li>
+                        <li><a href="{% url 'info' %}#Data_Protection_Statement">{% trans 'Data Protection Statement' %}</a></li>
                     </ul>
                 </li>
                 {% if user.is_active %}
-                    <li title="Profile settings and actions"><a href="{% url 'edit_profile' %}">
-                        <i class="fa fa-user menu_fontawesome" aria-hidden="true"></i> Your Profile,
+                    <li title="{% trans 'Profile settings and actions' %}"><a href="{% url 'edit_profile' %}">
+                        <i class="fa fa-user menu_fontawesome" aria-hidden="true"></i> {% trans 'Your Profile,' %}
                         {% load firstof from future %}{% filter force_escape %}
                             {% firstof user.first_name user.username %}{% endfilter %}</a>
                         <ul>
                             {% if user.is_staff %}
-                                <li><a href="{% url 'editor:index' %}">View your recent actions</a></li>{% endif %}
-                            <li><a href="{% url 'edit_profile' %}" title='View or edit your personal details'>Edit your
-                                profile</a></li>
-                            <li><a href="{% url 'password_change' %}">Change your password</a></li>
+                                <li><a href="{% url 'editor:index' %}">{% trans 'View your recent actions' %}</a></li>{% endif %}
+                            <li><a href="{% url 'edit_profile' %}" title="{% trans 'View or edit your personal details' %}">
+                                {% trans 'Edit your profile'%}</a></li>
+                            <li><a href="{% url 'password_change' %}">{% trans 'Change your password' %}</a></li>
 {#                            <li><a href="{% url 'editor_group_application' %}"#}
 {#                                   title="Apply for membership in editor groups">Apply for editor group membership</a>#}
 {#                            </li>#}
@@ -127,11 +124,11 @@
 {#                                   title="Apply for membership in organizations">Apply for organization membership</a>#}
 {#                            </li>#}
                             <li><a href="{% url 'edelivery_application' %}"
-                                   title="Apply for eDelivery membership">Apply for ELRC-SHARE eDelivery membership</a>
+                                   title="{% trans 'Apply for eDelivery membership' %}">{% trans 'Apply for ELRC-SHARE eDelivery membership' %}</a>
                             </li>
                             {% if user.is_superuser or user|is_member:"ecmembers" %}
-                                <li title="ELRC-SHARE RESTful API"><a
-                                        href="/repository/api/v1/help/">ELRC-SHARE RESTful API</a>
+                                <li title="{% trans 'ELRC-SHARE RESTful API' %}"><a
+                                        href="/repository/api/v1/help/"> {% trans 'ELRC-SHARE RESTful API' %}</a>
                                 </li>
                             {% endif %}
                         </ul>
@@ -139,12 +136,12 @@
                 {% endif %}
                 {% if user.username %}
                     <li><a href="{% url 'logout' %}?next={{ request.path }}">
-                        <i class="fa fa-sign-out menu_fontawesome" aria-hidden="true"></i> Logout</a></li>
+                        <i class="fa fa-sign-out menu_fontawesome" aria-hidden="true"></i> {% trans 'Logout' %}</a></li>
                 {% else %}
                     <li><a href="{% url 'create' %}">
-                        <i class="fa fa-user-plus menu_fontawesome" aria-hidden="true"></i> Register</a></li>
+                        <i class="fa fa-user-plus menu_fontawesome" aria-hidden="true"></i> {% trans 'Register' %}</a></li>
                     <li><a href="{% url 'login' %}">
-                        <i class="fa fa-sign-in menu_fontawesome" aria-hidden="true"></i> Login</a></li>
+                        <i class="fa fa-sign-in menu_fontawesome" aria-hidden="true"></i> {% trans 'Login' %}</a></li>
                 {% endif %}
             </ul>
         </div>

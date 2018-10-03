@@ -1,12 +1,12 @@
 {% load humanize %}
 {% spaceless %}
-
+{% load i18n %}
 {% if type == "component" %}
-	<label class='indented'><strong>Size:</strong></label>
+	<label class='indented'><strong>{% trans 'Size' %}:</strong></label>
 {% else %}
 	{% if type == "sub" %}
 	{% else %}
-		<label class='title'>Size </label>
+		<label class='title'>{% trans 'Size' %} </label>
 	{% endif %}
 {% endif %}
 
@@ -47,7 +47,7 @@
 {% endif %}
 
 {% if "Duration_of_effective_speech" in size %}
-	<label class='subtitle'>Effective speech duration</label>
+	<label class='subtitle'>{% trans 'Effective speech duration' %}</label>
 	{% for key, value in size.items %}
 		{% if "Duration_of_effective_speech" in key %}
 			<div class='dataline indented'>
@@ -60,7 +60,7 @@
 {% endif %}
 
 {% if "Duration_of_audio" in size %}
-	<label class='subtitle'>Audio duration</label>
+	<label class='subtitle'>{% trans 'Audio duration' %}</label>
 	{% for key, value in size.items %}
 		{% if "Duration_of_audio" in key %}
 			<div class='dataline indented'>

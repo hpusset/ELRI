@@ -4,7 +4,7 @@ from django.contrib.admin import widgets
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.safestring import mark_safe
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 from metashare.accounts.models import UserProfile, EditorGroupApplication, \
     OrganizationApplication, Organization, OrganizationManagers, EditorGroup, \
@@ -65,26 +65,26 @@ class RegistrationRequestForm(Form):
     Form used to create user account requests from new users.
     """
     shortname = forms.CharField(User._meta.get_field('username').max_length,
-                                label=mark_safe(_("Desired account name<span style='color:red'>*</span>")))
+                                label=mark_safe("%s<span style='color:red'>*</span>" % _("Desired account name")))
     first_name = forms.CharField(User._meta.get_field('first_name').max_length,
-                                 label=mark_safe(_("First name<span style='color:red'>*</span>")))
+                                 label=mark_safe("%s<span style='color:red'>*</span>" % _("First name")))
     last_name = forms.CharField(User._meta.get_field('last_name').max_length,
-                                label=mark_safe(_("Last name<span style='color:red'>*</span>")))
-    email = forms.EmailField(label=mark_safe(_("E-mail<span style='color:red'>*</span>")))
+                                label=mark_safe("%s<span style='color:red'>*</span>" % _("Last name")))
+    email = forms.EmailField(label=mark_safe("%s<span style='color:red'>*</span>" % _("E-mail")))
     country = forms.ChoiceField(UserProfile._meta.get_field('country').choices,
                                 UserProfile._meta.get_field('country').max_length,
-                                label=mark_safe(_("Country<span style='color:red'>*</span>")))
+                                label=mark_safe("%s<span style='color:red'>*</span>" % _("Country")))
 
     organization = forms.CharField(UserProfile._meta.get_field('affiliation').max_length,
-                                   label=mark_safe(_("Organization<span style='color:red'>*</span>")))
+                                   label=mark_safe("%s<span style='color:red'>*</span>" % _("Organization")))
     phone_number = forms.CharField(UserProfile._meta.get_field('phone_number').max_length,
-                                   label=mark_safe(_("<span style='color:grey'>Phone number</span>")), required=False)
+                                   label=mark_safe("<span style='color:grey'>%s</span>" % _("Phone number")), required=False)
     password = forms.CharField(User._meta.get_field('password').max_length,
-                               label=mark_safe(_("Password<span style='color:red'>*</span>")),
+                               label=mark_safe("%s<span style='color:red'>*</span>" % _("Password")),
                                widget=forms.PasswordInput())
     confirm_password = forms.CharField(
         User._meta.get_field('password').max_length,
-        label=mark_safe(_("Password confirmation<span style='color:red'>*</span>")), widget=forms.PasswordInput())
+        label=mark_safe("%s<span style='color:red'>*</span>" % _("Password confirmation")), widget=forms.PasswordInput())
     accepted_tos = forms.BooleanField()
 
     def clean_shortname(self):
@@ -125,7 +125,7 @@ class RegistrationRequestForm(Form):
         pswrd = self.cleaned_data.get('password', None)
         pswrd_conf = self.cleaned_data['confirm_password']
         if pswrd != pswrd_conf:
-            raise ValidationError('The two password fields did not match.')
+            raise ValidationError(_('The two password fields did not match.'))
         return pswrd
 
         # cfedermann: possible extensions for future improvements.
@@ -176,7 +176,7 @@ class ResetRequestForm(Form):
             # Only do something if both fields are valid so far.
             user = User.objects.filter(username=username, email=email)
             if not user:
-                raise forms.ValidationError('Not a valid username-email combination.')
+                raise forms.ValidationError(_('Not a valid username-email combination.'))
 
         return cleaned_data
 

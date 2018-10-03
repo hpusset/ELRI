@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static from staticfiles %}
-
+{% load i18n %}
 {% block content %}
 
 <link rel="stylesheet" href="{% static "metashare/css/view_stats.css" %}" type="text/css" media="screen" />
@@ -121,10 +121,10 @@ function addStatus(filter){
 
 <div class='tab-container'>
  <ul class='etabs'>
-   <li class='tab'><a href="{% url 'frontpage' %}stats/top/">ELRC-SHARE visits statistics</a></li>
-   <li class='tab tab-nobr'>Statistics on resource metadata</li>
+   <li class='tab'><a href="{% url 'frontpage' %}stats/top/">{% trans 'ELRC-SHARE visits statistics' %}</a></li>
+   <li class='tab tab-nobr'>{% trans 'Statistics on resource metadata' %}</li>
    {% if user.username and myres %}
-        <li class='tab'><a href="{% url 'frontpage' %}stats/mystats/">My resources</a></li>
+        <li class='tab'><a href="{% url 'frontpage' %}stats/mystats/">{% trans 'My resources' %}</a></li>
    {% endif %}
  </ul>
 </div>
@@ -138,19 +138,19 @@ function addStatus(filter){
       <div id="subtab">
         <div id="section">
           <div id="colsubtab">
-            <h4>Filter by: <img src="{% static "metashare/css/sexybuttons/images/icons/silk/help.png" %}" class=pointer onclick="showdiv('filtershelp')"></h4>
+            <h4>{% trans 'Filter by:' %} <img src="{% static "metashare/css/sexybuttons/images/icons/silk/help.png" %}" class=pointer onclick="showdiv('filtershelp')"></h4>
           </div>  
           <div id="filtershelp" class="warning" style="visibility: hidden; display: none">
-                This panel shows which metadata have been used to describe the ELRC-SHARE linguistic resources.
+                {% blocktrans %}This panel shows which metadata have been used to describe the ELRC-SHARE linguistic resources.
                 Each metadata defined in the <a href="http://www.meta-share.org/knowledgebase/DetailedPresentationOfTheModel" target="metamodel">ELRC-SHARE model</a> can be either "required", "recommended" or "optional".
                 The metadata usage statistics reports two counters. The first counter says how many times a metadata has been 
                 filled in with a certain value, while the second counter says the number of resources for which the metadata has been used.
                 For instance <div class="coverage required"> 28/12 </div> means that the corresponding required metadata has been filled in 28 times (possibly with 
                 redundant values), and that 12 different resources have been described with that metadata.
-                You can click on a metadata name to see a table with all the actual values used to fill in that metadata.
+                You can click on a metadata name to see a table with all the actual values used to fill in that metadata.{% endblocktrans %}
           </div>
           
-          <div id="colsubtab"><div class="accordion">Metadata status</div>
+          <div id="colsubtab"><div class="accordion">{% blocktrans %}Metadata status{% endblocktrans %}</div>
           {% for filter, counter in usage_filter.items %}
             {% if filter in "required optional recommended" %}
                 <div class=indent>
@@ -161,7 +161,7 @@ function addStatus(filter){
             {% endif %}
           {% endfor %}
           </div>
-          <div id="colsubtab"><div class="accordion">Metadata usage in {{ lr_count }} resource{{ lr_count|pluralize }}</div>
+          <div id="colsubtab"><div class="accordion">{% blocktrans %}Metadata usage in {{ lr_count }} resource{{ lr_count|pluralize }}{% endblocktrans %}</div>
           {% for filter, counter in usage_filter.items %}
             {% if filter in "never used at least one" %}
                 <div class=indent>
@@ -180,17 +180,17 @@ function addStatus(filter){
       </div>{# and subtab #}
   </form>  
  
-      <h3>Found {{ fields_count }} metadata</h3>
+      <h3>{% blocktrans %}Found {{ fields_count }} metadata{% endblocktrans %}</h3>
       {% if errors != None %}
        <ul class=errorlist>
             &nbsp; <img src="{% static "metashare/css/sexybuttons/images/icons/silk/error.png" %}"> &nbsp; {{ errors }} &nbsp;
        </ul>
       {% endif %}
 
-      (the following lines are the metadata components and elements included in the <a href="http://www.meta-share.org/portal/knowledgebase/DetailedPresentationOfTheModel" target="metamodel">ELRC-SHARE model</a> grouped by different roles and alphabetically sorted)
+      {% blocktrans %}(the following lines are the metadata components and elements included in the <a href="http://www.meta-share.org/portal/knowledgebase/DetailedPresentationOfTheModel" target="metamodel">ELRC-SHARE model</a> grouped by different roles and alphabetically sorted){% endblocktrans %}
          
-<div style="float: right; padding: 5px; margin: 0px">[ <a href="javascript:expandAll();">Expand all</a>
-            | <a href="javascript:collapseAll();">Collapse all</a> ]</div>
+<div style="float: right; padding: 5px; margin: 0px">[ <a href="javascript:expandAll();">{% blocktrans %}Expand all{% endblocktrans %}</a>
+            | <a href="javascript:collapseAll();">{% blocktrans %}Collapse all{% endblocktrans %}</a> ]</div>
 </div>
 
 {% if usage_fields != None %}
@@ -204,9 +204,9 @@ function addStatus(filter){
              <a name="fieldvalues"></a>
              <table cellspacing=0 cellpadding=0 border=0 valign=top>
                 <tr bgcolor=lightgray>
-                    <td width=100%><div style="display: inline; border: solid 1px #999; padding-top: 5px;"><a href="javascript:closetabvals('fieldvalues');" title="Close"><img src="{% static "metashare/css/sexybuttons/images/icons/silk/cross.png" %}"></a></div> used values for <h4>{{ selected_class }}/{{ selected_field }}</h4></td>
-                    <td style="text-align: right">value counter</td>
-                    <td style="text-align: right">resources counter</td>                    
+                    <td width=100%><div style="display: inline; border: solid 1px #999; padding-top: 5px;"><a href="javascript:closetabvals('fieldvalues');" title="{% trans 'Close' %}"><img src="{% static "metashare/css/sexybuttons/images/icons/silk/cross.png" %}"></a></div>{% blocktrans %} used values for <h4>{{ selected_class }}/{{ selected_field }}</h4>{% endblocktrans %}</td>
+                    <td style="text-align: right">{% blocktrans %}value counter{% endblocktrans %}</td>
+                    <td style="text-align: right">{% blocktrans %}resources counter{% endblocktrans %}</td>                    
                 </tr>
                  
             {% for field in textvalues %}
@@ -270,7 +270,7 @@ function addStatus(filter){
                     {% endif %}
                 {% endif %}
                 {% if field.4 == 0 %}
-                    <i>never used</i>
+                    <i>{% blocktrans %}never used{% endblocktrans %}</i>
                 {% else %}
                     {{ field.4 }}/{{ field.5 }}
                 {% endif %}
@@ -304,7 +304,7 @@ function addStatus(filter){
     
     </script>
 {% else %}
-    <ul class=errorlist>No data found</ul>
+    <ul class=errorlist>{% blocktrans %}No data found{% endblocktrans %}</ul>
 {% endif %}
 </div>{# end content_tab #}
 {% endblock %}

@@ -1,37 +1,46 @@
 {% extends "admin/base_site.html" %}
-
+{% load i18n %}
 {% block content %}
 {% spaceless %}
 <div id="content-main">
   <p>
-    You cannot edit the metadata for the
-    {% if resource %}
-      resource &ldquo;{{ resource }}&rdquo;
-    {% else %}
-      entity &ldquo;{{ original }}&rdquo;
-    {% endif %}.
-    {% if resource %}
-      It was originally created
-      {% if resource.storage_object.source %}
-        by {{ resource.storage_object.source }}.
-      {% else %}
-        at {{ resource.storage_object.source_url }}.
-      {% endif %}
-    {% endif %}
+{% if resource %}
+	{% if resource.storage_object.source %}
+		{% blocktrans with source=resource.storage_object.source %}
+    			You cannot edit the metadata for the
+			resource &ldquo;{{ resource }}&rdquo;.
+			It was originally created
+        		by {{ source }}.
+                {% endblocktrans %}
+        {% else %}
+		{% blocktrans with source_url=resource.storage_object.source_url %}
+			You cannot edit the metadata for the
+			resource &ldquo;{{ resource }}&rdquo;.
+			It was originally created
+			at {{ source_url }}.
+		{% endblocktrans %}        
+	{% endif %}
+{% else %}
+	{% blocktrans %}
+		You cannot edit the metadata for the entity &ldquo;{{ original }}&rdquo;.
+	{% endblocktrans %}
+{% endif %}
+
   </p>
   {% if resource %}
-    <p>You will now be redirected to the META-SHARE node where the resource
-    metadata was originally created&nbsp;&hellip;</p>
+    <p>{% trans 'You will now be redirected to the META-SHARE node where the resource metadata was originally created' %}&nbsp;&hellip;</p>
     <script>
       setTimeout('window.location.replace("{{ redirection_url }}")', 6000); 
     </script>
     <p>
+      {% blocktrans %}
       <a href="{{ redirection_url }}">Click here</a> to immediately go to the
-      other node.
+      other node. {% endblocktrans %}
     </p>
   {% else %}
-    <p>The metadata for this entity was originally created
-    <a href="{{ url }}">here</a>.</p>
+    <p>
+      {% blocktrans %}The metadata for this entity was originally created
+      <a href="{{ url }}">here</a>.{% endblocktrans %}</p>
   {% endif %}
 </div>
 {% endspaceless %}
