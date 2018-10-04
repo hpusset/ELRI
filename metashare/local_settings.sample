@@ -23,6 +23,8 @@ DJANGO_BASE = 'path/to/metashare/'
 USE_L10N = True
 USE_I18N = True
 
+LANGUAGE_CODE = "..." # one of the LANGUAGES language codes
+
 # Supported languages
 LANGUAGES = (
     ('es-es', _('Spanish')),

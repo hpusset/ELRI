@@ -3,12 +3,13 @@ import os
 import re
 from unidecode import unidecode
 
-from haystack.indexes import CharField, IntegerField, SearchIndex
+from haystack.indexes import CharField as VanillaCharField, \
+        IntegerField as VanillaIntegerField, SearchIndex
 from haystack import indexes, connections as haystack_connections, \
     connection_router as haystack_connection_router
 
 from django.db.models import signals
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext as _, activate as i18n_activate
 
 from metashare.repository import model_utils
 from metashare.repository.dataformat_choices import MIMETYPEVALUE_TO_MIMETYPELABEL
@@ -17,7 +18,7 @@ from metashare.repository.models import resourceInfoType_model, \
     toolServiceInfoType_model, lexicalConceptualResourceInfoType_model, \
     languageDescriptionInfoType_model
 from metashare.repository.search_fields import LabeledMultiValueField, LabeledCharField
-from metashare.settings import LOG_HANDLER
+from metashare.settings import LOG_HANDLER, LANGUAGE_CODE
 from metashare.storage.models import StorageObject, INGESTED, PUBLISHED, INTERNAL
 from metashare.stats.model_utils import DOWNLOAD_STAT, VIEW_STAT
 
@@ -25,6 +26,22 @@ from metashare.stats.model_utils import DOWNLOAD_STAT, VIEW_STAT
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
+
+class I18NSearchFieldMixIn(object):
+    """
+    Make *_index Haystack commands desired language code-aware.
+    """
+    def prepare_template(self, obj):
+        i18n_activate(LANGUAGE_CODE)
+        return super(I18NSearchFieldMixIn, self).prepare_template(obj)
+
+
+class CharField(I18NSearchFieldMixIn, VanillaCharField):
+    pass
+
+
+class IntegerField(I18NSearchFieldMixIn, VanillaIntegerField):
+    pass
 
 
 def update_lr_index_entry(res_obj):
