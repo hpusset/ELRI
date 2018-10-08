@@ -15,9 +15,9 @@ function createNewSubInstance(select, proto_name, proto_href) {
             win.focus();
         }
         else {
-            alert('Could not open popup window!\nMaybe there\'s a popup '
-              + 'blocker runnning?');
-        }
+            alert(gettext('Could not open popup window!\nMaybe there\'s a popup '
+              + 'blocker runnning?'));
+        }²
         // Salvatore: reset the empty value so that the 'onchange' event
         // is correctly triggered (see comment in SingleChoiceTypeWidget.render in
         // file 'metashare/repository/editor/widgets.py').
