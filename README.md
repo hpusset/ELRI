@@ -45,35 +45,41 @@ following steps need to be undertaken:
         python manage.py makemigrations accounts repository stats \
         recommendations storage
 
-05. Do a
+06. Do a
 
         python manage.py migrate
 
     to set up the DB schema.
 
-06. Do a
+07. Do a
 
         python manage.py rebuild_index
 
     to set up the Solr index.
 
-07. Create the directories `metashare/unprocessed` and `metashare/processed`.
+08. Create the directories `metashare/unprocessed` and `metashare/processed`.
 
-08. Create the file `metashare/maintainers.dat`, which should have the following
+09. Create the file `metashare/maintainers.dat`, which should have the following
     format:
     
     Country_name:maintainer_user_name_1,user_name_2,...
   
     for each authorised country_name/maintainer_user_name in the system.
 
-09. Create the folder specified in the `STATIC_ROOT` `metashare/local_settings.py`
+10. Create the folder specified in the `STATIC_ROOT` `metashare/local_settings.py`
     environment variable and run
 
         python manage.py collectstatic
     
     to collect all static files to the STATIC_ROOT directory.
 
-10. Do a
+11. Create a superuser so that one can log in to the application:
+
+        python manage.py createsuperuser
+
+    and follow the instructions.
+
+12. Do a
 
         python manage.py runserver --insecure
     

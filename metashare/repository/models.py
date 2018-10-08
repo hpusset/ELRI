@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.db import models
 from django.template.defaultfilters import slugify
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import get_language, ugettext_lazy as _
 
 from metashare.eurovoc import eurovoc
 from metashare.bcp47 import iana
@@ -232,7 +232,7 @@ class resourceInfoType_model(SchemaModel):
         The returned part prepended with a '/' can be appended to `DJANGO_URL`
         in order to get the complete URL.
         """
-        return 'repository/browse/{}/{}/'.format(slugify(self.__unicode__()),
+        return '{}/repository/browse/{}/{}/'.format(get_language(), slugify(self.__unicode__()),
             self.storage_object.identifier)
 
     def publication_status(self):

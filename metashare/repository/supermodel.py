@@ -229,11 +229,11 @@ class SchemaModel(models.Model):
         #    return field.verbose_name
         try:
             field = cls._meta.get_field(fieldname)
-            return field.verbose_name
+            return field.verbose_name[:]
         except:
             remote = getattr(cls, fieldname, None)
             if isinstance(remote, ForeignRelatedObjectsDescriptor):
-                return remote.related.model._meta.verbose_name
+                return remote.related.model._meta.verbose_name[:]
             return fieldname
 
     @classmethod

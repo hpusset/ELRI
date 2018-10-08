@@ -161,10 +161,10 @@ def usagestats(request):
                 _field = items[1]
                 verbose_name = model_name + "/" + _component
                 if _component in _classes:
-                    verbose_name = model_name + "/" + eval(u'{0}._meta.verbose_name'.format(_classes[_component]))
+                    verbose_name = model_name + "/" + globals()[_classes[_component]]._meta.verbose_name[:]
                 verbose_name = verbose_name.replace("string_model", "")
 
-            component_name = eval(u'{0}._meta.verbose_name'.format(_model))
+            component_name = globals()[_model]._meta.verbose_name[:]
             metaname = model_name + " " + _component
             if _component in _classes and _field != "documentUnstructured":
                 style = "component"
