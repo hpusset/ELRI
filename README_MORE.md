@@ -31,10 +31,11 @@ git commit -m "some commentary"
 git push origin master
 ```
 
-5. Change in `metashare/requirements.txt`, resolve conflict with `postgreSQL10`:
+5. Change in `metashare/requirements.txt`, resolve conflict with `postgreSQL10` and install `flup`:
 ```
 #psycopg2==2.5.4
 psycopg2==2.7
+flup
 ```
 6. Set a python2 virtualenv:
 ```
