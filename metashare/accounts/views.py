@@ -137,6 +137,8 @@ def create(request):
 
             _profile = UserProfile.objects.get(user_id= _user.id)
             _profile.affiliation = form.cleaned_data['organization']
+            _profile.affiliation_address = form.cleaned_data['organization_address']
+            _profile.affiliation_phone_number = form.cleaned_data['organization_phone_number']
             _profile.country = form.cleaned_data['country']
             _profile.phone_number = form.cleaned_data['phone_number']
             _profile.position = form.cleaned_data['position']

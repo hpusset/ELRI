@@ -289,6 +289,9 @@ class UserProfile(models.Model):
                                max_length=100, null=True, blank=True)
 
     affiliation = models.TextField(_("Affiliation(s)"), blank=True)
+    affiliation_address = models.TextField(_("Affiliation address"), blank=True)
+    affiliation_phone_number = models.TextField(_("Affiliation phone number"),
+                                                blank=True)
     position = models.CharField(max_length=50, blank=True)
     homepage = models.URLField(blank=True)
 
