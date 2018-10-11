@@ -139,6 +139,7 @@ def create(request):
             _profile.affiliation = form.cleaned_data['organization']
             _profile.country = form.cleaned_data['country']
             _profile.phone_number = form.cleaned_data['phone_number']
+            _profile.position = form.cleaned_data['position']
             _profile.save()
             # Create new RegistrationRequest instance.
             new_object = RegistrationRequest(user=_user)
