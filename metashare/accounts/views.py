@@ -118,10 +118,13 @@ def create(request):
     """
     Creates a new user account request from a new user.
     """
+    group_choices = Group.objects.exclude(
+            id__in=EditorGroup.objects.values_list('id', flat=True))\
+            .values_list('name', 'name')
     # Check if the creation form has been submitted.
     if request.method == "POST":
         # If so, bind the creation form to HTTP POST values.
-        form = RegistrationRequestForm(request.POST)
+        form = RegistrationRequestForm(request.POST, group_choices=group_choices)
         
         # Check if the form has validated successfully.
         if form.is_valid():
@@ -142,6 +145,8 @@ def create(request):
             _profile.country = form.cleaned_data['country']
             _profile.phone_number = form.cleaned_data['phone_number']
             _profile.position = form.cleaned_data['position']
+            _profile.user.groups.add(
+                    Group.objects.get(name=form.cleaned_data['contributor_group']))
             _profile.save()
             # Create new RegistrationRequest instance.
             new_object = RegistrationRequest(user=_user)
@@ -183,7 +188,7 @@ def create(request):
     
     # Otherwise, create an empty RegistrationRequestForm instance.
     else:
-        form = RegistrationRequestForm()
+        form = RegistrationRequestForm(group_choices=group_choices)
     
     dictionary = {'title': 'Create Account', 'form': form}
     return render_to_response('accounts/create_account.html', dictionary,

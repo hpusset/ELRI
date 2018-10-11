@@ -95,7 +95,16 @@ class RegistrationRequestForm(Form):
     confirm_password = forms.CharField(
         User._meta.get_field('password').max_length,
         label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Password confirmation")), widget=forms.PasswordInput())
+
+    contributor_group = forms.ChoiceField(
+        label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Contributor group"))
+        )
     accepted_tos = forms.BooleanField()
+
+    def __init__(self, *args, **kwargs):
+        group_choices = kwargs.pop("group_choices")
+        super(RegistrationRequestForm, self).__init__(*args, **kwargs)
+        self.fields["contributor_group"].choices = group_choices
 
     def clean_shortname(self):
         """
