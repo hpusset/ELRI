@@ -65,26 +65,26 @@ class RegistrationRequestForm(Form):
     Form used to create user account requests from new users.
     """
     shortname = forms.CharField(User._meta.get_field('username').max_length,
-                                label=mark_safe("%s<span style='color:red'>*</span>" % _("Desired account name")))
+                                label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Desired account name")))
     first_name = forms.CharField(User._meta.get_field('first_name').max_length,
-                                 label=mark_safe("%s<span style='color:red'>*</span>" % _("First name")))
+                                 label=mark_safe(u"%s<span style='color:red'>*</span>" % _("First name")))
     last_name = forms.CharField(User._meta.get_field('last_name').max_length,
-                                label=mark_safe("%s<span style='color:red'>*</span>" % _("Last name")))
-    email = forms.EmailField(label=mark_safe("%s<span style='color:red'>*</span>" % _("E-mail")))
+                                label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Last name")))
+    email = forms.EmailField(label=mark_safe(u"%s<span style='color:red'>*</span>" % _("E-mail")))
     country = forms.ChoiceField(UserProfile._meta.get_field('country').choices,
                                 UserProfile._meta.get_field('country').max_length,
-                                label=mark_safe("%s<span style='color:red'>*</span>" % _("Country")))
+                                label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Country")))
 
     organization = forms.CharField(UserProfile._meta.get_field('affiliation').max_length,
-                                   label=mark_safe("%s<span style='color:red'>*</span>" % _("Organization")))
+                                   label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Organization")))
     phone_number = forms.CharField(UserProfile._meta.get_field('phone_number').max_length,
-                                   label=mark_safe("<span style='color:grey'>%s</span>" % _("Phone number")), required=False)
+                                   label=mark_safe(u"<span style='color:grey'>%s</span>" % _("Phone number")), required=False)
     password = forms.CharField(User._meta.get_field('password').max_length,
-                               label=mark_safe("%s<span style='color:red'>*</span>" % _("Password")),
+                               label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Password")),
                                widget=forms.PasswordInput())
     confirm_password = forms.CharField(
         User._meta.get_field('password').max_length,
-        label=mark_safe("%s<span style='color:red'>*</span>" % _("Password confirmation")), widget=forms.PasswordInput())
+        label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Password confirmation")), widget=forms.PasswordInput())
     accepted_tos = forms.BooleanField()
 
     def clean_shortname(self):
