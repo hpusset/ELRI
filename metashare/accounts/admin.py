@@ -5,6 +5,7 @@ from django import forms
 from django.contrib import admin, messages
 from django.contrib.admin.options import csrf_protect_m
 from django.contrib.auth.models import Permission, Group, User
+from django.contrib.auth.admin import UserAdmin
 from django.db import transaction
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
@@ -18,10 +19,29 @@ from metashare.accounts.forms import EditorGroupForm, OrganizationForm, \
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
     UserProfile, EditorGroup, EditorGroupApplication, EditorGroupManagers, \
     Organization, OrganizationApplication, OrganizationManagers, AccessPointEdeliveryApplication
+from metashare.accounts.views import confirm
 from metashare.settings import ELRC_CERT
 from metashare.utils import create_breadcrumb_template_params
 from ..edelivery.update_ap_files import update_pmode, update_truststore
 
+class EUserAdmin(UserAdmin):
+    """
+    Overridden class to supply activation notification e-mail when activation is
+    done from the back-office.
+    """
+    def save_model(self, request, obj, form, change):
+        """
+        Same behaviour as vanilla method, except for the confirmation e-mail and
+        RegistrationRequest object deletion upon successful activation.
+        """
+        super(EUserAdmin, self).save_model(request, obj, form, change)
+        if obj.is_active and change:
+            registration_request = RegistrationRequest.objects.filter(user=obj)\
+                .first()
+            if registration_request is not None:
+                # send confirmation only if there is a pending Registration
+                # Request for this user.
+                confirm(request, registration_request.uuid)
 
 class RegistrationRequestAdmin(admin.ModelAdmin):
     """
@@ -1209,7 +1229,8 @@ class EdeliveryApplicationAdmin(admin.ModelAdmin):
     reactivate_selected.short_description = \
         _("Reactivate selected eDelivery applications")
 
-
+admin.site.unregister(User)
+admin.site.register(User, EUserAdmin)
 admin.site.register(RegistrationRequest, RegistrationRequestAdmin)
 admin.site.register(ResetRequest, ResetRequestAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)
