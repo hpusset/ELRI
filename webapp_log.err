@@ -1,0 +1,5 @@
+[10/11/2018 @ 10:09:04] pysolr::INFO Finished 'http://127.0.0.1:8983/solr/main/select/?fq=django_ct%3A%28repository.resourceinfotype_model%29&rows=1&q=%2A%3A%2A&start=0&wt=json&fl=%2A+score' (GET) with body 'None' in 0.071 seconds.
+[10/11/2018 @ 10:09:05] pysolr::INFO Finished 'http://127.0.0.1:8983/solr/main/select/?fq=django_ct%3A%28repository.resourceinfotype_model%29&rows=1&q=%2A%3A%2A&start=0&wt=json&fl=%2A+score' (GET) with body 'None' in 0.006 seconds.
+[10/11/2018 @ 10:09:07] metashare.views::INFO Rendering frontpage view for user "Anonymous".
+[11/Oct/2018 10:09:07] "GET /en/metashare/ HTTP/1.1" 200 6918
+[11/Oct/2018 10:09:07] "GET /jsi18n/ HTTP/1.1" 200 2372
