@@ -4,6 +4,7 @@ import logging
 import os
 import shutil
 import uuid
+import zipfile
 
 from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
 from haystack.query import SearchQuerySet
@@ -1054,9 +1055,8 @@ class MetashareFacetedSearchView(FacetedSearchView):
 
 @login_required
 def contribute(request):
-    tmp_dir = '{}/tmp'.format(CONTRIBUTION_FORM_DATA)  # temp dir for resources downloaded from user provided url
     if request.method == "POST":
-        id = str(uuid.uuid4())
+        uid = str(uuid.uuid4())
         profile = UserProfile.objects.get(user=request.user)
         data = {
             'userInfo': {
@@ -1082,119 +1082,64 @@ def contribute(request):
         if 'languages[]' in request.POST:
             data['resourceInfo']['languages'] = request.POST.getlist('languages[]')
 
-        try:
-            data['resourceInfo']['resourceUrl'] = request.POST['resourceUrl']
-        except:
-            pass
+        unprocessed_dir = os.path.sep.join((CONTRIBUTION_FORM_DATA,
+                                            "unprocessed"))
 
-        dir1 = '{}/unprocessed'.format(CONTRIBUTION_FORM_DATA)
-        # dir2 = '{}/{}'.format(dir1, id)
-
-        import cgi
-
-        form_data = cgi.FieldStorage()
-        # file_data = form_data['filebutton'].value
-        filename = '{}_{}'.format(profile.country, id)
-
-        zipped = None
-        # for chunk in request.FILES['filebutton'].chunks():
-        #     destination.write(chunk)
+        filename = '{}_{}'.format(profile.country, uid)
         response = {}
+        zip_filename = filename + ".zip"
+        file_object = request.FILES['filebutton']
+        if file_object.size <= MAXIMUM_UPLOAD_SIZE:
+            try:
+                if not os.path.isdir(unprocessed_dir):
+                    os.makedirs(unprocessed_dir)
+            except:
+                raise OSError, "Could not write to CONTRIBUTION_FORM_DATA path"
 
-        # if not request.POST['mode']:
-        #     response['status'] = "failed"
-        #     response['message'] = "Your request could not be completed. " \
-        #                           "An unexpected error has occured. " \
-        #                           "Please check your contribution mode and try again in a few minutes."
-        #     return HttpResponse(json.dumps(response), mimetype="application/json")
-
-        if request.POST['mode'] == 'uploadzip':
-            zipped = filename + ".zip"
-            if not request.FILES['filebutton'].size > MAXIMUM_UPLOAD_SIZE:
-                try:
-                    if not os.path.isdir(dir1):
-                        os.makedirs(dir1)
-                except:
-                    raise OSError, "Could not write to CONTRIBUTION_FORM_DATA path"
-
-                destination = open('{}/{}'.format(dir1, zipped), 'wb+')
-                for chunk in request.FILES['filebutton'].chunks():
+            zfile_path = os.path.sep.join((unprocessed_dir, zip_filename))
+            with open(zfile_path, 'wb+') as destination:
+                for chunk in file_object.chunks():
                     destination.write(chunk)
-                destination.close()
-                import zipfile
-                zfile_path = '{}/{}'.format(dir1, zipped)
-                zfile = zipfile.ZipFile(zfile_path)
-                zip_ok = True
-                try:
-                    if zfile.testzip() is not None:
-                        zip_ok = False
-                except:
-                    zip_ok = False
-                if not zipfile.is_zipfile(zfile_path) or \
-                        not zip_ok or \
-                        not str(request.FILES['filebutton']).endswith(".zip"):
-                    os.remove(zfile_path)
-                    response['status'] = "failed"
-                    response['message'] = "Your request could not be completed. " \
-                                          "The file you tried to upload is corrupted or it is not a valid '.zip' file." \
-                                          "Please make sure that you have compressed your data properly."
-                    return HttpResponse(json.dumps(response), content_type="text/plain")
-
-            else:
+            zfile = zipfile.ZipFile(zfile_path)
+            if not (zipfile.is_zipfile(zfile_path) and
+                    file_object.name.endswith(".zip") and
+                    zfile.testzip() is None):
+                os.remove(zfile_path)
                 response['status'] = "failed"
-                response['message'] = "The file you are trying to upload " \
-                                      "is larger than the maximum upload file size ({:.10} MB)!".format(
-                    float(MAXIMUM_UPLOAD_SIZE) / (1024 * 1024))
+                response['message'] = "Your request could not be completed. " \
+                                      "The file you tried to upload is corrupted or it is not a valid '.zip' file." \
+                                      "Please make sure that you have compressed your data properly."
                 return HttpResponse(json.dumps(response), content_type="text/plain")
+            xml_filename = filename + ".xml"
+            data['administration']['dataset'] = {"zip": zip_filename}
+            data['administration']['resource_file'] = xml_filename
+            # create the form data xml file
+            xml = dicttoxml.dicttoxml(data, custom_root='resource', attr_type=False)
+            xml_file_path = os.path.sep.join((unprocessed_dir, xml_filename))
+            with open(xml_file_path, 'w') as f:
+                xml_file = File(f)
+                xml_file.write(xml)
+            try:
+                send_mail("New unmanaged contributions",
+                          "You have new unmanaged contributed resources on elrc-share.eu",
+                          # 'no-reply@elrc-share.ilsp.gr', ["mdel@ilsp.gr"],
+                          'no-reply@elrc-share.ilsp.gr', CONTRIBUTIONS_ALERT_EMAILS, \
+                          # 'no-reply@elrc-share.ilsp.gr', ["mdel@ilsp.gr"], \
+                          fail_silently=False)
+            except:
+                LOGGER.error("An error has occurred while trying to send email to contributions"
+                             "alert recipients.")
 
-        data['administration']['resource_file'] = filename + '.xml'
-        if zipped:
-            data['administration']['dataset'] = {"zip": zipped}
+            response['status'] = "succeded"
+            response['message'] = "Thank you for sharing! Your data have been successfully submitted. " \
+                                  "You can now go on and contribute more data."
+            return HttpResponse(json.dumps(response), content_type="text/plain")
         else:
-            try:
-                data['administration']['dataset'] = {"url": data['resourceInfo']['resourceUrl']}
-            except KeyError:
-                data['administration']['dataset'] = "None"
-        if request.POST['mode'] == 'eDelivery':
-            data['administration']['edelivery'] = 'true'
-            del data['administration']
-        # create the form data xml file
-        xml = dicttoxml.dicttoxml(data, custom_root='resource', attr_type=False)
-        xml_file = filename + ".xml"
-        # download file if mode is "eDelivery"
-        if request.POST['mode'] == 'eDelivery':
-            try:
-                response = HttpResponse(xml, content_type='text/xml')
-                response['Content-Disposition'] = 'attachment; filename={}-contribution-info.xml'.format(request.user)
-                return response
-            except Exception:
-                return HttpResponseNotFound(_('Could not generate eDelivery metadata XML'))
-
-        xml_file_path = "{}/{}".format(dir1, xml_file)
-        with open(xml_file_path, 'w') as f:
-            xml_file = File(f)
-            xml_file.write(xml)
-            xml_file.closed
-            f.closed
-        try:
-            send_mail("New unmanaged contributions",
-                      "You have new unmanaged contributed resources on elrc-share.eu",
-                      # 'no-reply@elrc-share.ilsp.gr', ["mdel@ilsp.gr"],
-                      'no-reply@elrc-share.ilsp.gr', CONTRIBUTIONS_ALERT_EMAILS, \
-                      # 'no-reply@elrc-share.ilsp.gr', ["mdel@ilsp.gr"], \
-                      fail_silently=False)
-        except:
-            LOGGER.error("An error has occurred while trying to send email to contributions"
-                         "alert recipients.")
-
-        response['status'] = "succeded"
-        response['message'] = "Thank you for sharing! Your data have been successfully submitted. " \
-                              "You can now go on and contribute more data."
-        # if request.POST['mode'] == 'uploadzip':
-        return HttpResponse(json.dumps(response), content_type="text/plain")
-        # else:
-        #     return render_to_response('repository/editor/contributions/contribute.html', \
-        #                               response, context_instance=RequestContext(request))
+            response['status'] = "failed"
+            response['message'] = "The file you are trying to upload " \
+                                  "is larger than the maximum upload file size ({:.10} MB)!".format(
+                float(MAXIMUM_UPLOAD_SIZE) / (1024 * 1024))
+            return HttpResponse(json.dumps(response), content_type="text/plain")
 
     return render_to_response('repository/editor/contributions/contribute.html', \
                               context_instance=RequestContext(request))

@@ -30,13 +30,6 @@
             font-size: 1.4em;
             color: #058dbe;
         }
-
-        #edelivery_modal p, li {
-            font-family: Arial, serif;
-            font-size: 16px;
-            line-height: 1.5;
-            color: #474747;
-        }
     </style>
     {% block links %}{% endblock %}
     <!-- Latest compiled and minified CSS -->
@@ -154,13 +147,6 @@
 {#                    <option value="false">NO</option>#}
 {#                </select>#}
 {#            </div>#}
-            <div class="form-group required" id="contributionmode">
-                <label class="control-label" for="contributionmode">{% trans 'Contribution Mode' %}</label><br>
-                <input type="radio" name="mode" value="uploadzip" checked> {% trans 'Upload ZIP archive' %}<br>
-                <input type="radio" name="mode" value="url"> {% trans 'Provide URL of resources' %}<br>
-                <input type="radio" name="mode" value="eDelivery"> {% trans 'eDelivery (Generate XML file to attach to your eDelivery contribution)' %}<br>
-                <span class="help-block contrib-help">{% trans 'Please select the way you wish to contribute your data. Uploading a ZIP archive is recommended.' %}</span>
-            </div>
             <!-- File Button -->
             <div class="form-group required" id="fileupload">
                 <label class="control-label" for="filebutton">{% trans 'Upload Resource' %}</label>
@@ -170,13 +156,6 @@
                     </br>
                     {% trans 'In case the <strong>.zip file</strong> file you wish to upload is larger than 100MB, please contact <a href="mailto:elrc-share@ilsp.gr">elrc-share@ilsp.gr</a>.' %}
                 </span>
-            </div>
-            <div class="form-group required" id="resourceurl" style="display: none">
-                <label class="control-label" for="resourceUrl">{% trans 'Resource URL' %}</label>
-                <input id="resourceUrl" name="resourceUrl" placeholder="" class="form-control input-md"
-                       required=""
-                       type="text">
-                <span class="help-block contrib-help">{% trans 'Please provide a URL containing the files you wish to contribute' %}</span>
             </div>
             <!-- Button (Double) -->
             <div class="form-group">
@@ -194,26 +173,6 @@
             {% csrf_token %}
         </form>
     </div>
-    <div class="col-md-4" style="margin-top: 90px; margin-left: -10%;">
-        <div class="row">
-            <div class="col-md-8">
-                <img src="{{ STATIC_URL }}metashare/images/eDelivery.png" alt="">
-            </div>
-            <div class="col-md-10" style="margin: 0 10% 0 0;">
-                {#            <img src="{{ STATIC_URL }}metashare/images/cef_digital.svg" alt="">#}
-                <h4>{% trans 'Contribute Your Data Through eDelivery' %}</h4>
-                <div>
-                    {% blocktrans %}If you wish to share your data through
-                    <a href="https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/eDelivery" target="_blank">
-                        eDelivery
-                    </a>, you can use the ELRC-SHARE CEF eDelivery Access Point.
-                    For more information click <a data-toggle="modal" href="#edelivery_modal">here</a>.
-                    <br>In such a case, please fill in the form on the left
-                        and choose eDelivery in the Contribution mode.{% endblocktrans %}
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 <div class="uploadWin">
     <div id="status" style="padding: 3px;"></div>
@@ -224,76 +183,6 @@
     <div id="okbtn">
         <button class="btn btn-success btn-sm" id="ok" onclick="resetMessages()">OK
         </button>
-    </div>
-</div>
-<div class="modal fade" id="edelivery_modal" role="dialog">
-    <div class="modal-dialog" style="width:50%; font-size: 16px">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header" style="background-color: rgba(15, 141, 187, 0.62)">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">{% trans 'ELRC-SHARE eDelivery Help' %}</h4>
-            </div>
-            <div class="modal-body">
-                <p>
-                    {% blocktrans %}The ELRC-SHARE repository adopts the
-                    <a href="https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/Domibus+-+v3.3"
-                       target="_blank">Domibus</a> implementation
-                    of the eDelivery Building Block and it is available to accept payloads from your existing eDelivery
-                    Access Point.{% endblocktrans %}
-                </p>
-                <p>
-                    {% trans 'The ELRC-SHARE Access Point accepts messages containing <strong>two files as attachments</strong>:' %}
-                <ol>
-                    <li>{% trans 'an xml description of your dataset' %}<b>*</b></li>
-                    <li>{% trans 'the actual dataset in zip format, up to 400MB' %}</li>
-                </ol>
-                </p>
-                <p>
-                    {% blocktrans %}Before you can use the service, we need to add your Access Point to the ELRC-SHARE eDelivery trusted
-                    network. For trust to be established the following information is required:{% endblocktrans %}
-                <table class="table-striped">
-                    <tr>
-                        <td><strong>{% trans 'MSH Endpoint' %}</strong></td>
-                        <td>{% trans 'The endpoint of your Access Point' %}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>{% trans 'Gateway Party Name' %}</strong></td>
-                        <td>{% trans "The name of your Access Point's Gateway" %}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>{% trans 'Gateway Party ID' %}</strong></td>
-                        <td>{% trans "The identifier of your Access Point's Gateway" %}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>{% trans 'Public Certificate' %}</strong></td>
-                        <td>{% trans "Your Access Point's X.509 public certificate (.crt, .cert, .cer)" %}</td>
-                    </tr>
-                </table>
-                </p>
-                <p>
-                    {% blocktrans %}Once your application to join the ELRC-SHARE eDelivery trusted network is approved,
-                    the required ELRC-SHARE Access Point information will be emailed to you.
-                    Include this information in your Access Point configuration and complete the
-                    process of trust establishment. From this point onwards, you can send your
-                    data to the ELRC-SHARE Access Point using your implementation specific software.{% endblocktrans %}
-                </p>
-                <p>
-                    {% blocktrans %}Apply for eDelivery <a href="/accounts/edelivery_membership_application/">here</a>.{% endblocktrans %}
-                </p>
-                <p>
-                    <strong>*</strong><em>{% blocktrans %}The xml file is automatically generated and downloaded on your computer,
-                    once you fill in the required fields on the contribution form  and select the
-                    <strong>eDelivery</strong> contribution mode</em>.{% endblocktrans %}
-                </p>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Close' %}</button>
-            </div>
-        </div>
-
     </div>
 </div>
 {% include "footer.html" %}
