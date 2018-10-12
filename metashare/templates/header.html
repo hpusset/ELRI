@@ -38,9 +38,6 @@
                                 </li>
                             {% endif %}
                             {% if user.is_superuser %}
-                                <li title="{% trans 'Manage contributed resources' %}">
-                                    <a href="{% url 'manage_contributed_data' %}"> {% trans 'Manage resources from contributors' %}</a>
-                                </li>
                                 <li title="{% trans 'Create/edit person object metadata' %}"><a
                                         href="{% url 'editor:repository_personinfotype_model_changelist' %}">
                                     {% trans 'Manage person objects' %}</a></li>
