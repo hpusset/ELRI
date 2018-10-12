@@ -10,10 +10,10 @@
             <ul id="jsddm">
                 <li title="{% trans 'Home' %}"><a href="{% url 'frontpage' %}" %}>
                     <i class="fa fa-home menu_fontawesome" aria-hidden="true"></i> {% trans 'Home' %}</a></li>
-                <li title="{% trans 'Browse the resources of the META-SHARE catalogue' %}"><a
-                        href="{% url 'frontpage' %}repository/search/">
-                    <i class="fa fa-list-ul menu_fontawesome" aria-hidden="true"></i> {% trans 'Browse Resources' %}</a></li>
                 {% if user.is_authenticated %}
+                    <li title="{% trans 'Browse the resources of the META-SHARE catalogue' %}"><a
+                            href="{% url 'frontpage' %}repository/search/">
+                        <i class="fa fa-list-ul menu_fontawesome" aria-hidden="true"></i> {% trans 'Browse Resources' %}</a></li>
                     <li><a href="{% url 'contribute' %}">
                         <i class="fa fa-share-square-o menu_fontawesome" aria-hidden="true"></i> {% trans 'Contribute Resources' %}</a></li>
                 {% endif %}
