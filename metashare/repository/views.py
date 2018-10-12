@@ -1119,6 +1119,13 @@ def contribute(request):
             with open(xml_file_path, 'w') as f:
                 xml_file = File(f)
                 xml_file.write(xml)
+            # add the relevant entry to the DB
+            resource_type = request.POST["resourceType"] or "corpus"
+            d = create_description(os.path.basename(xml_file.name),
+                                   resource_type, unprocessed_dir,
+                                   request.user)
+            d[0].owners.add(request.user.id)
+
             try:
                 send_mail("New unmanaged contributions",
                           "You have new unmanaged contributed resources on elrc-share.eu",
