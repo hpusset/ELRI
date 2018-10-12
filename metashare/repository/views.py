@@ -1127,11 +1127,9 @@ def contribute(request):
             d[0].owners.add(request.user.id)
 
             try:
-                send_mail("New unmanaged contributions",
-                          "You have new unmanaged contributed resources on elrc-share.eu",
-                          # 'no-reply@elrc-share.ilsp.gr', ["mdel@ilsp.gr"],
+                send_mail(_("New submitted contributions"),
+                          _("You have new submitted contributed resources on elrc-share.eu"),
                           'no-reply@elrc-share.ilsp.gr', CONTRIBUTIONS_ALERT_EMAILS, \
-                          # 'no-reply@elrc-share.ilsp.gr', ["mdel@ilsp.gr"], \
                           fail_silently=False)
             except:
                 LOGGER.error("An error has occurred while trying to send email to contributions"
