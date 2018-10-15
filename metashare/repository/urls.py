@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, url, include
+from django.contrib.auth.decorators import login_required
 
 from haystack.views import search_view_factory
 from haystack.query import SearchQuerySet
@@ -57,10 +58,12 @@ urlpatterns = patterns('metashare.repository.views',
                        url(r'^download_contact/(?P<object_id>\w+)/$',
                            'download_contact', name='download_contact'),
                        url(r'^search/$',
-                           search_view_factory(view_class=MetashareFacetedSearchView,
-                                               form_class=FacetedBrowseForm,
-                                               template='repository/search.html',
-                                               searchqueryset=sqs)),
+                           login_required(
+                               search_view_factory(
+                                   view_class=MetashareFacetedSearchView,
+                                   form_class=FacetedBrowseForm,
+                                   template='repository/search.html',
+                                   searchqueryset=sqs))),
                        url(r'api/', include(v1_api.urls)),
                        url(r'contribute', 'contribute', name='contribute'),
                        url(r'repo_report', 'repo_report'),
