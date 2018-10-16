@@ -158,6 +158,25 @@
                     </span>
                 </div>
             </div>
+            <div class="form-group" id="licence">
+                <label class="control-label required" for="licence">{% trans 'Licensing conditions' %}</label>
+                <select required name="licence">
+                    <option value="publicDomain">{% trans 'License-free' %}</option>
+                    <option value="CC-BY-4.0">{% trans 'Creative Commons - Attribution 4.0' %}</option>
+                    <option value="CC-BY-SA-4.0">{% trans 'Creative Commons - Attribution - ShareAlike 4.0' %}</option>
+                    <option value="CC-BY-NC-4.0">{% trans 'Creative Commons - Attribution - NonCommercial 4.0' %}</option>
+                    <option value="CC-BY-NC-SA-4.0">{% trans 'Creative Commons - Attribution - NonCommercial - ShareAlike 4.0' %}</option>
+                    <option value="non-standard/Other_Licence/Terms">{% trans 'Use External License' %}</option>
+                </select>
+                <span class="help-block contrib-help">{% blocktrans %}The licensing conditions for the resource.{% endblocktrans %}</span>
+            </div>
+            <div class="form-group required" id="licencefile" style="display:none">
+                <label class="control-label" for="licenceFile">{% trans 'License file' %}</label>
+                <input id="licenceFile" name="licenceFile"
+                       class="input-file" required=""
+                       type="file" accept=".pdf">
+                <span class="help-block contrib-help">{% trans 'Please upload license file in the <b>.pdf format</b>.' %}</span>
+            </div>
 
 {#            <div class="form-group required">#}
 {#                <label class="control-label" for="sensitive-info">Data contains sensitive information</label><br>#}

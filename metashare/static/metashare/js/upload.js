@@ -25,6 +25,30 @@ function resetMessages() {
 }
 
 $(function () {
+    if ($("#licence").find("option:selected").val() ===
+        "non-standard/Other_Licence/Terms") {
+        enable_input($("#licencefile"));
+    }
+    else {
+        disable_input($("#licencefile"));
+    }
+});
+
+$(function () {
+    $("#licence").change(
+        function () {
+            licence = $(this).find("option:selected").val();
+            if (licence === "non-standard/Other_Licence/Terms") {
+                enable_input($("#licencefile"));
+            }
+            else {
+                disable_input($("#licencefile"));
+            }
+        }
+    );
+});
+
+$(function () {
     $("option[data-toggle='tooltip']").mouseenter(
         function () {
             $(this).tooltip('show');
@@ -67,7 +91,7 @@ if (!isIE) {
         var ok = $('#ok');
         $('form').ajaxForm({
             beforeSend: function (xhr, opts) {
-                var fileName = $('input[type=file]').val().split('/').pop().split('\\').pop();
+                var fileName = $('#filebutton').val().split('/').pop().split('\\').pop();
                 if (!endsWith(fileName, ".zip")) {
                     xhr.abort();
                     alert(gettext("The file you are trying to upload does not have a .zip extension.\n" +

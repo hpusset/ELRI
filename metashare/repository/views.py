@@ -1072,6 +1072,7 @@ def contribute(request):
             'resourceInfo': {
                 'resourceTitle': request.POST['resourceTitle'],
                 'shortDescription': request.POST['shortDescription'] or _("N/A"),
+                'licence': request.POST['licence'],
             },
             'administration': {
                 'processed': 'false',
@@ -1090,6 +1091,7 @@ def contribute(request):
 
         filename = '{}_{}'.format(profile.country, uid)
         response = {}
+
         zip_filename = filename + ".zip"
         file_object = request.FILES['filebutton']
         if file_object.size <= MAXIMUM_UPLOAD_SIZE:
@@ -1098,6 +1100,16 @@ def contribute(request):
                     os.makedirs(unprocessed_dir)
             except:
                 raise OSError, "Could not write to CONTRIBUTION_FORM_DATA path"
+
+            licence_file_object = request.FILES['licenceFile']
+            if licence_file_object:
+                # a licence file has been uploaded
+                licence_filename = filename + "_licence.pdf"
+                licence_filepath = os.path.sep.join((unprocessed_dir,
+                                                     licence_filename))
+                with open(licence_filepath, 'wb+') as licence_destination:
+                    for chunk in licence_file_object.chunks():
+                        licence_destination.write(chunk)
 
             zfile_path = os.path.sep.join((unprocessed_dir, zip_filename))
             with open(zfile_path, 'wb+') as destination:
@@ -1187,6 +1199,7 @@ def create_description(xml_file, type, base, user):
         "description": ''.join(doc.xpath("//shortDescription//text()")),
         "languages": doc.xpath("//languages/item/text()"),
         "domains": doc.xpath("//appropriatenessForDSI/item/text()"),
+        "licence": ''.join(doc.xpath("//licence//text()")),
         "userInfo": {
             "firstname": ''.join(doc.xpath("//userInfo/first_name/text()")),
             "lastname": ''.join(doc.xpath("//userInfo/last_name/text()")),
@@ -1354,7 +1367,8 @@ def create_description(xml_file, type, base, user):
     distribution = distributionInfoType_model.objects.create(
         availability=u"underReview",
         PSI=False)
-    licence_obj = licenceInfoType_model.objects.create(licence=u"underReview")
+    licence_obj, _ = licenceInfoType_model.objects.get_or_create(
+        licence=info['licence'])
     distribution.licenceInfo.add(licence_obj)
     resource.distributioninfotype_model_set.add(distribution)
     resource.save()
