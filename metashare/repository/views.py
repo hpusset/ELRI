@@ -1082,6 +1082,9 @@ def contribute(request):
         if 'languages[]' in request.POST:
             data['resourceInfo']['languages'] = request.POST.getlist('languages[]')
 
+        if 'domains[]' in request.POST:
+            data['resourceInfo']['appropriatenessForDSI'] = request.POST.getlist('domains[]')
+
         unprocessed_dir = os.path.sep.join((CONTRIBUTION_FORM_DATA,
                                             "unprocessed"))
 
@@ -1183,6 +1186,7 @@ def create_description(xml_file, type, base, user):
         "title": ''.join(doc.xpath("//resourceTitle//text()")),
         "description": ''.join(doc.xpath("//shortDescription//text()")),
         "languages": doc.xpath("//languages/item/text()"),
+        "domains": doc.xpath("//appropriatenessForDSI/item/text()"),
         "userInfo": {
             "firstname": ''.join(doc.xpath("//userInfo/first_name/text()")),
             "lastname": ''.join(doc.xpath("//userInfo/last_name/text()")),
@@ -1199,7 +1203,8 @@ def create_description(xml_file, type, base, user):
     # Create a new Identification object
     identification = identificationInfoType_model.objects.create( \
         resourceName={'en': info['title'].encode('utf-8')},
-        description={'en': info['description'].encode('utf-8')}, )
+        description={'en': info['description'].encode('utf-8')},
+        appropriatenessForDSI=info['domains'])
     resource_creation = resourceCreationInfoType_model.objects.create(
         createdUsingELRCServices=False
     )

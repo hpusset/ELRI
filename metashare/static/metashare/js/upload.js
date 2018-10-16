@@ -25,6 +25,26 @@ function resetMessages() {
 }
 
 $(function () {
+    $("option[data-toggle='tooltip']").mouseenter(
+        function () {
+            $(this).tooltip('show');
+        }
+    );
+
+    $("option[data-toggle='tooltip']").mouseleave(
+        function () {
+            var that = $(this);
+            setTimeout(
+                function () {
+                    that.tooltip('hide');
+                },
+                2000
+            );
+        }
+    );
+});
+
+$(function () {
     $('form').submit(function (event) {
         var file = $('#filebutton')[0].files[0];
         if (file !== undefined && file.size > 104857600) {
