@@ -17,18 +17,20 @@
                 problem.{% endblocktrans %}</p>
             <p>{% trans 'Please contact the resource maintainer if this problem should persist.' %}</p>
         {% endif %}
-        <p>
-            <a href="{{ resource.get_absolute_url }}">
-                <button class="span-4 button middle_button">
-                    <i class="fa fa-arrow-left" aria-hidden="true"></i> {% trans 'Resource View' %}
-                </button>
-            </a>
-            <a href="{% url 'download_contact' resource.storage_object.identifier %}">
-                <button class="span-4 button middle_button">
-                    <i class="fa fa-envelope" aria-hidden="true"></i> {% trans 'Contact Resource Maintainer' %}
-                </button>
-            </a>
-        </p>
+        {% if resource %}
+            <p>
+                <a href="{{ resource.get_absolute_url }}">
+                    <button class="span-4 button middle_button">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i> {% trans 'Resource View' %}
+                    </button>
+                </a>
+                    <a href="{% url 'download_contact' resource.storage_object.identifier %}">
+                        <button class="span-4 button middle_button">
+                            <i class="fa fa-envelope" aria-hidden="true"></i> {% trans 'Contact Resource Maintainer' %}
+                        </button>
+                    </a>
+            </p>
+        {% endif %}
         <br />
         <br />
     </div>
