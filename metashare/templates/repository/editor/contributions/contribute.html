@@ -208,6 +208,10 @@
                     {% trans 'In case the <strong>.zip file</strong> file you wish to upload is larger than 100MB, please contact <a href="mailto:elrc-share@ilsp.gr">elrc-share@ilsp.gr</a>.' %}
                 </span>
             </div>
+            <div class="form-group required" id="accept_tos">
+                {% static "metashare/LR-Upload-ToS.pdf" as lr_upload_tos %}
+                <input type="checkbox" name="accepttos" value="true" required="">{% blocktrans %}I agree with the <a target="_blank" href="{{ lr_upload_tos }}">Language resource upload Terms of Service for Data Holders</a>{% endblocktrans %}<br>
+            </div>
             <!-- Button (Double) -->
             <div class="form-group">
                 <label class="control-label" for="submit"></label>
