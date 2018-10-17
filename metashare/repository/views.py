@@ -693,7 +693,9 @@ def view(request, resource_name=None, object_id=None):
         context['LR_EDIT'] = reverse(
             'admin:repository_resourceinfotype_model_change', \
             args=(resource.id,))
-
+        context['LR_DOWNLOAD'] = reverse(
+            'editor:repository_resourceinfotype_model_change',
+            args=(resource.id,)) + 'datadl/'
     # Update statistics:
     if saveLRStats(resource, VIEW_STAT, request):
         # update view count in the search index, too
