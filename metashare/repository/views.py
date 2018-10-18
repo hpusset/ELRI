@@ -1102,7 +1102,7 @@ def contribute(request):
             except:
                 raise OSError, "Could not write to CONTRIBUTION_FORM_DATA path"
 
-            licence_file_object = request.FILES['licenceFile']
+            licence_file_object = request.FILES.get('licenceFile')
             if licence_file_object:
                 # a licence file has been uploaded
                 licence_filename = filename + "_licence.pdf"
