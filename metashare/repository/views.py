@@ -5,6 +5,7 @@ import os
 import shutil
 import uuid
 import zipfile
+import re
 
 from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
 from haystack.query import SearchQuerySet
@@ -992,8 +993,6 @@ class MetashareFacetedSearchView(FacetedSearchView):
         Creates a second level for faceting. 
         Sub filters are included after the parent filters.
         """
-        import re
-
         name = facet[0]
         label = facet[1]
 
