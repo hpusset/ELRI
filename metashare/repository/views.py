@@ -1093,9 +1093,15 @@ def contribute(request):
         filename = '{}_{}'.format(profile.country, uid)
         response = {}
 
-        zip_filename = filename + ".zip"
         file_object = request.FILES['filebutton']
-        if file_object.size <= MAXIMUM_UPLOAD_SIZE:
+        out_filext = os.path.splitext(file_object.name)[-1]
+        out_filename = filename + out_filext
+        accepted_extensions = [".zip", ".pdf", ".doc", ".docx", ".tmx", ".txt",
+                               ".xls", ".xlsx", ".xml", ".sdltm", ".odt", ".tbx"]
+        acceptable_re = "(.*)({0})$".format(
+            "|".join("({0})".format(ext) for ext in accepted_extensions))
+        if (file_object.size <= MAXIMUM_UPLOAD_SIZE and
+            out_filext in accepted_extensions):
             try:
                 if not os.path.isdir(unprocessed_dir):
                     os.makedirs(unprocessed_dir)
@@ -1112,22 +1118,37 @@ def contribute(request):
                     for chunk in licence_file_object.chunks():
                         licence_destination.write(chunk)
 
-            zfile_path = os.path.sep.join((unprocessed_dir, zip_filename))
-            with open(zfile_path, 'wb+') as destination:
+            ofile_path = os.path.sep.join((unprocessed_dir, out_filename))
+            with open(ofile_path, 'wb+') as destination:
                 for chunk in file_object.chunks():
                     destination.write(chunk)
-            zfile = zipfile.ZipFile(zfile_path)
-            if not (zipfile.is_zipfile(zfile_path) and
-                    file_object.name.endswith(".zip") and
-                    zfile.testzip() is None):
-                os.remove(zfile_path)
-                response['status'] = "failed"
-                response['message'] = "Your request could not be completed. " \
-                                      "The file you tried to upload is corrupted or it is not a valid '.zip' file." \
-                                      "Please make sure that you have compressed your data properly."
-                return HttpResponse(json.dumps(response), content_type="text/plain")
+            if ofile_path.endswith(".zip"):
+                zfile = zipfile.ZipFile(ofile_path)
+                if (not zipfile.is_zipfile(ofile_path) or
+                    zfile.testzip() is not None):
+                    os.remove(ofile_path)
+                    response['status'] = "failed"
+                    response['message'] = "Your request could not be completed. " \
+                                          "The file you tried to upload is corrupted or it is not a valid '.zip' file."
+                if any(not (re.match(acceptable_re, fn) or
+                            fn.endswith(os.path.sep))
+                       for fn in zfile.namelist()):
+                    # the archive contains at least an entry which neither has
+                    # an accepted extension, nor is a directory:
+                    os.remove(ofile_path)
+                    response['status'] = "failed"
+                    response['message'] = \
+                        "Only files of type DOC(X), ODT, PDF, TMX, SDLTM, XML, "\
+                        "TBX , XLS(X), TXT and ZIP files are allowed. "\
+                        "The zip files can only contain files of the "\
+                        "specified types. Please consider removing the files"\
+                        "that do not belong to one of these types."
+
+                if response['status'] == "failed":
+                    return HttpResponse(json.dumps(response),
+                                        content_type="text/plain")
             xml_filename = filename + ".xml"
-            data['administration']['dataset'] = {"zip": zip_filename}
+            data['administration']['dataset'] = {"uploaded_file": out_filename}
             data['administration']['resource_file'] = xml_filename
             # create the form data xml file
             xml = dicttoxml.dicttoxml(data, custom_root='resource', attr_type=False)
@@ -1158,7 +1179,7 @@ def contribute(request):
         else:
             response['status'] = "failed"
             response['message'] = "The file you are trying to upload " \
-                                  "is larger than the maximum upload file size ({:.10} MB)!".format(
+                                  "exceeds the size limit. If the file(s) you would like to contribute exceed(s) {:.10} MB please contact us to provide an SFTP link for direct download or consider uploading smaller files.".format(
                 float(MAXIMUM_UPLOAD_SIZE) / (1024 * 1024))
             return HttpResponse(json.dumps(response), content_type="text/plain")
 
@@ -1212,7 +1233,7 @@ def create_description(xml_file, type, base, user):
 
         },
         "resource_file": ''.join(doc.xpath("//resource/administration/resource_file/text()")),
-        "dataset": ''.join(doc.xpath("//resource/administration/dataset/zip/text()"))
+        "dataset": ''.join(doc.xpath("//resource/administration/dataset/uploaded_file/text()"))
     }
     # Create a new Identification object
     identification = identificationInfoType_model.objects.create( \
@@ -1387,17 +1408,26 @@ def create_description(xml_file, type, base, user):
     # finally, if the user has provided a zip file dataset,
     # move the dataset to the respective storage folder
     if info['dataset'] != '':
-        data_source = '{}/{}'.format(base, info['dataset'])
-
-        shutil.move(data_source, '{}/{}'.format(data_destination, "archive.zip"))
+        source_fname = os.path.join(base, info['dataset'])
+        destination_zname = os.path.join(data_destination, "archive.zip")
+        if source_fname.endswith(".zip"):
+            shutil.move(source_fname, destination_zname)
+        else:
+            # create archive.zip in the target directory and put the
+            # source_fname contents inside.
+            # Then, remove source_fname.
+            with zipfile.ZipFile(destination_zname, "w") as zf:
+                zf.write(source_fname, arcname=os.path.basename(source_fname))
+                os.remove(source_fname)
         resource.storage_object.compute_checksum()
         resource.storage_object.save()
         resource.storage_object.update_storage()
 
     # move the processed xml file to the web_form/processed folder
-    xml_source = '{}/{}'.format(base, xml_file)
+    xml_source = os.path.join(base, xml_file)
     processed_file = "{}_{}.xml".format(xml_file.split('_')[0], resource.id)
-    xml_destination = '{}/processed/{}'.format(CONTRIBUTION_FORM_DATA, processed_file)
+    xml_destination = os.path.join(CONTRIBUTION_FORM_DATA, "processed",
+                                   processed_file)
     shutil.move(xml_source, xml_destination)
 
     return (resource, cperson, info['userInfo']['country'])

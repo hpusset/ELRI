@@ -72,9 +72,9 @@ $(function () {
     $('form').submit(function (event) {
         var file = $('#filebutton')[0].files[0];
         if (file !== undefined && file.size > 104857600) {
-            alert(gettext("The file you are trying to upload is larger " +
-                "than the maximum upload file size (100mb).\n" +
-                "Please contact elrc-share@ilsp.gr"));
+            alert(gettext("The file(s) you are trying to upload exceed(s) the size limit. " + "If the file(s) you would like to contribute exceed(s) 100 MB, " +
+                "please contact us to provide an SFTP link for direct download or " +
+                "consider uploading smaller files."));
             return false;
         }
         return true;
@@ -82,6 +82,8 @@ $(function () {
 });
 
 var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+var acceptedExtensions = [".zip", ".pdf", ".doc", ".docx", ".tmx", ".txt", ".xls", ".xlsx", ".xml", ".sdltm", ".odt", ".tbx"];
 
 if (!isIE) {
     $(function () {
@@ -92,10 +94,10 @@ if (!isIE) {
         $('form').ajaxForm({
             beforeSend: function (xhr, opts) {
                 var fileName = $('#filebutton').val().split('/').pop().split('\\').pop();
-                if (!endsWith(fileName, ".zip")) {
+                if (!$.grep(acceptedExtensions, function (el) {return endsWith(fileName, el)})) {
                     xhr.abort();
-                    alert(gettext("The file you are trying to upload does not have a .zip extension.\n" +
-                        "Please make sure that you properly compress your data into a valid .zip file before uploading."));
+                    alert(gettext("Only files of type ") + acceptedExtensions.join(", ") +
+                        gettext(" are allowed. The .zip files can only contain files of the specified types. Please consider removing the files that do not belong to one of these types."));
                     return false
                 }
                 status.html("<i class='fa fa-spinner fa-pulse' aria-hidden='true'></i>"+gettext(" Uploading file: \"" + fileName + "\".\nPlease wait..."));
@@ -119,7 +121,7 @@ if (!isIE) {
                 $('.uploadWin').hide();
                 $('.overlay').hide();
                 alert(gettext("There was an error uploading this file.\n" +
-                    "Please make sure that you are trying to upload a valid '.zip' file.\n" +
+                    "Please make sure that you are trying to upload a file with a valid extension.\n" +
                     "If the problem persists please try again later."));
             },
             complete: function (response) {
@@ -160,10 +162,10 @@ else {
                 dataType: "text",
                 beforeSend: function (xhr, opts) {
                     var fileName = $('input[type=file]').val().split('/').pop().split('\\').pop();
-                    if (!endsWith(fileName, ".zip")) {
+                    if (!$.grep(acceptedExtensions, function (el) {return endsWith(fileName, el)})) {
                         xhr.abort();
-                        alert(gettext("The file you are trying to upload does not have a .zip extension.\n" +
-                            "Please make sure that you properly compress your data into a valid .zip file before uploading."));
+                        alert(gettext("Only files of type ") + acceptedExtensions.join(", ") +
+                            gettext(" are allowed. The .zip files can only contain files of the specified types. Please consider removing the files that do not belong to one of these types."));
                         return false
                     }
                     status.removeClass("success");

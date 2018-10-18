@@ -201,11 +201,11 @@
             <!-- File Button -->
             <div class="form-group required" id="fileupload">
                 <label class="control-label" for="filebutton">{% trans 'Upload Resource' %}</label>
-                <input accept=".zip" id="filebutton" name="filebutton" class="input-file" type="file"
+                <input accept=".zip,.doc,.docx,.odt,.pdf,.tmx,.sdltm,.xml,.tbx,.xls,.xlsx,.txt" id="filebutton" name="filebutton" class="input-file" type="file"
                        required="">
-                <span class="help-block contrib-help">{% trans 'Please upload a <strong>.zip file</strong> up to 100MB.' %}
+                <span class="help-block contrib-help">{% trans 'Please upload a <strong>.zip, .doc(x), .odt, .tmx, .sdltm, .xml, .tbx, .xls(x), or .txt file</strong> up to 100MB.' %}
                     </br>
-                    {% trans 'In case the <strong>.zip file</strong> file you wish to upload is larger than 100MB, please contact <a href="mailto:elrc-share@ilsp.gr">elrc-share@ilsp.gr</a>.' %}
+                    {% trans 'In case the file you wish to upload is larger than 100MB, please contact us to provide an SFTP link for direct download or consider uploading smaller files' %}
                 </span>
             </div>
             <div class="form-group required" id="accept_tos">
