@@ -1093,15 +1093,14 @@ def contribute(request):
         filename = '{}_{}'.format(profile.country, uid)
         response = {}
 
-        file_object = request.FILES['filebutton']
-        out_filext = os.path.splitext(file_object.name)[-1]
-        out_filename = filename + out_filext
         accepted_extensions = [".zip", ".pdf", ".doc", ".docx", ".tmx", ".txt",
                                ".xls", ".xlsx", ".xml", ".sdltm", ".odt", ".tbx"]
         acceptable_re = "(.*)({0})$".format(
             "|".join("({0})".format(ext) for ext in accepted_extensions))
-        if (file_object.size <= MAXIMUM_UPLOAD_SIZE and
-            out_filext in accepted_extensions):
+        file_objects = request.FILES.getlist('filebutton')
+        getext = lambda file_object: os.path.splitext(file_object.name)[-1]
+        if (sum(fobj.size for fobj in file_objects) <= MAXIMUM_UPLOAD_SIZE and
+            all(getext(fobj) in accepted_extensions for fobj in file_objects)):
             try:
                 if not os.path.isdir(unprocessed_dir):
                     os.makedirs(unprocessed_dir)
@@ -1117,38 +1116,42 @@ def contribute(request):
                 with open(licence_filepath, 'wb+') as licence_destination:
                     for chunk in licence_file_object.chunks():
                         licence_destination.write(chunk)
+            out_filenames = []
+            for i, file_object in enumerate(file_objects):
+                out_filename = "{}_{}".format(filename, str(i)) + getext(file_object)
+                ofile_path = os.path.sep.join((unprocessed_dir, out_filename))
+                with open(ofile_path, 'wb+') as destination:
+                    for chunk in file_object.chunks():
+                        destination.write(chunk)
+                out_filenames.append(out_filename)
+                if ofile_path.endswith(".zip"):
+                    zfile = zipfile.ZipFile(ofile_path)
+                    if (not zipfile.is_zipfile(ofile_path) or
+                        zfile.testzip() is not None):
+                        os.remove(ofile_path)
+                        response['status'] = "failed"
+                        response['message'] = "Your request could not be completed. " \
+                                              "The file you tried to upload is corrupted or it is not a valid '.zip' file."
+                    if any(not (re.match(acceptable_re, fn) or
+                                fn.endswith(os.path.sep))
+                           for fn in zfile.namelist()):
+                        # the archive contains at least an entry which neither has
+                        # an accepted extension, nor is a directory:
+                        os.remove(ofile_path)
+                        response['status'] = "failed"
+                        response['message'] = \
+                            "Only files of type DOC(X), ODT, PDF, TMX, SDLTM, XML, "\
+                            "TBX , XLS(X), TXT and ZIP files are allowed. "\
+                            "The zip files can only contain files of the "\
+                            "specified types. Please consider removing the files"\
+                            "that do not belong to one of these types."
 
-            ofile_path = os.path.sep.join((unprocessed_dir, out_filename))
-            with open(ofile_path, 'wb+') as destination:
-                for chunk in file_object.chunks():
-                    destination.write(chunk)
-            if ofile_path.endswith(".zip"):
-                zfile = zipfile.ZipFile(ofile_path)
-                if (not zipfile.is_zipfile(ofile_path) or
-                    zfile.testzip() is not None):
-                    os.remove(ofile_path)
-                    response['status'] = "failed"
-                    response['message'] = "Your request could not be completed. " \
-                                          "The file you tried to upload is corrupted or it is not a valid '.zip' file."
-                if any(not (re.match(acceptable_re, fn) or
-                            fn.endswith(os.path.sep))
-                       for fn in zfile.namelist()):
-                    # the archive contains at least an entry which neither has
-                    # an accepted extension, nor is a directory:
-                    os.remove(ofile_path)
-                    response['status'] = "failed"
-                    response['message'] = \
-                        "Only files of type DOC(X), ODT, PDF, TMX, SDLTM, XML, "\
-                        "TBX , XLS(X), TXT and ZIP files are allowed. "\
-                        "The zip files can only contain files of the "\
-                        "specified types. Please consider removing the files"\
-                        "that do not belong to one of these types."
+                    if response.get('status') == "failed":
+                        return HttpResponse(json.dumps(response),
+                                            content_type="text/plain")
 
-                if response['status'] == "failed":
-                    return HttpResponse(json.dumps(response),
-                                        content_type="text/plain")
             xml_filename = filename + ".xml"
-            data['administration']['dataset'] = {"uploaded_file": out_filename}
+            data['administration']['dataset'] = {"uploaded_files": out_filenames}
             data['administration']['resource_file'] = xml_filename
             # create the form data xml file
             xml = dicttoxml.dicttoxml(data, custom_root='resource', attr_type=False)
@@ -1233,7 +1236,7 @@ def create_description(xml_file, type, base, user):
 
         },
         "resource_file": ''.join(doc.xpath("//resource/administration/resource_file/text()")),
-        "dataset": ''.join(doc.xpath("//resource/administration/dataset/uploaded_file/text()"))
+        "dataset": doc.xpath("//resource/administration/dataset/uploaded_files/item/text()")
     }
     # Create a new Identification object
     identification = identificationInfoType_model.objects.create( \
@@ -1405,20 +1408,22 @@ def create_description(xml_file, type, base, user):
     except:
         raise OSError, "STORAGE_PATH and LOCK_DIR must exist and be writable!"
 
-    # finally, if the user has provided a zip file dataset,
-    # move the dataset to the respective storage folder
-    if info['dataset'] != '':
-        source_fname = os.path.join(base, info['dataset'])
-        destination_zname = os.path.join(data_destination, "archive.zip")
-        if source_fname.endswith(".zip"):
-            shutil.move(source_fname, destination_zname)
-        else:
-            # create archive.zip in the target directory and put the
-            # source_fname contents inside.
-            # Then, remove source_fname.
-            with zipfile.ZipFile(destination_zname, "w") as zf:
-                zf.write(source_fname, arcname=os.path.basename(source_fname))
-                os.remove(source_fname)
+    # finally, move the dataset to the respective storage folder
+    if info['dataset']:
+        destination_zpath = os.path.join(data_destination, "archive.zip")
+        for source_fname in info['dataset']:
+            source_fpath = os.path.join(base, source_fname)
+            if source_fpath.endswith(".zip") and len(info['dataset']) == 1:
+                # if the user uploaded one single zip file, then move it to
+                # archive.zip as such
+                shutil.move(source_path, destination_zpath)
+            else:
+                # create archive.zip in the target directory and put the
+                # source_fname contents inside.
+                # Then, remove source_fname.
+                with zipfile.ZipFile(destination_zpath, "a") as zf:
+                    zf.write(source_fpath, arcname=source_fname)
+                    os.remove(source_fpath)
         resource.storage_object.compute_checksum()
         resource.storage_object.save()
         resource.storage_object.update_storage()
