@@ -697,6 +697,11 @@ def view(request, resource_name=None, object_id=None):
         context['LR_DOWNLOAD'] = reverse(
             'editor:repository_resourceinfotype_model_change',
             args=(resource.id,)) + 'datadl/'
+        if ((request.user.is_staff or request.user.is_superuser or
+             request.user.groups.filter(name="globaleditors").exists()) and
+            resource.storage_object.publication_status == INGESTED):
+            # only staff can validate INGESTED resources only
+            context['LR_VALIDATE'] = context['LR_EDIT']
     # Update statistics:
     if saveLRStats(resource, VIEW_STAT, request):
         # update view count in the search index, too
