@@ -228,7 +228,7 @@ def download(request, object_id, **kwargs):
     bypass_licence = False
     if request.user.is_superuser \
             or request.user.groups.filter(name="ecmembers").exists() \
-            or request.user.groups.filter(name="elrcReviewers").exists()\
+            or request.user.groups.filter(name="reviewers").exists()\
             or kwargs['api_auth']:
         bypass_licence = True
 
@@ -463,17 +463,18 @@ def has_view_permission(request, res_obj):
     """
     Returns `True` if the given request has permission to view the description
     of the current resource, `False` otherwise.
+    A resource can be viewed by a user if either:
+    - the user is a superuser
+    - the user is among the owners of the resource, or is a Reviewer, and
+      the resource is either INGESTED or PUBLISHED.
     """
-    if res_obj.storage_object.publication_status == PUBLISHED:
+    user = request.user
+    if user.is_superuser or (
+            (user in res_obj.owners.all() or
+             user.groups.filter(name='reviewers').exists()) and
+             res_obj.storage_object.publication_status in (INGESTED, PUBLISHED)):
         return True
-    else:
-        if request.user.is_superuser \
-                or request.user.groups.filter(name='ecmembers').exists() \
-                or request.user.groups.filter(name='elrcReviewers').exists():
-            return True
-
-        return False
-
+    return False
 
 def view(request, resource_name=None, object_id=None):
     """
@@ -814,9 +815,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
 
     def get_results(self):
         sqs = super(MetashareFacetedSearchView, self).get_results()
-
-        if not is_member(self.request.user, 'ecmembers') \
-                and not is_member(self.request.user, 'elrcReviewers') \
+        if not is_member(self.request.user, 'reviewers') \
                 and not self.request.user.is_superuser:
             sqs = sqs.filter_and(publicationStatusFilter__exact='published')
 

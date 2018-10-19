@@ -327,8 +327,8 @@ class EditorTest(TestCase):
         Verifies that manage actions (delete/ingest/publish/unpublish/add owners/remove owners)
         are only visible for authorized users.
 
-        +---------------+------------+------------+---------------+--------+
-        |               | editors    | ecmembers  | elrcReviewers | naps | admins |
+        +---------------+------------+------------+---------------+------+--------+
+        |               | editors    | ecmembers  | reviewers     | naps | admins |
         +===============+============+============+===============+===============+
         | delete        | NO         | NO         | NO            |  NO  | YES    |
         +---------------+------------+------------+---------------+---------------+

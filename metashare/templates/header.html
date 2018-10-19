@@ -25,14 +25,14 @@
                                     href="{% url 'editor:repository_resourceinfotype_model_myresources' %}">
                                     {% trans 'Manage your own resources' %}</a></li>
 {#                            {% if user.is_superuser or user|is_member:"legalReviewers" or user|is_member:"technicalReviewers" %}#}
-                            {% if user.is_superuser or user|is_member:"elrcReviewers" %}
+                            {% if user.is_superuser or user|is_member:"reviewers" %}
                                 <li title="{% trans 'Create/edit resource metadata or upload resource data' %}"><a
                                         href="{% url 'editor:repository_resourceinfotype_model_changelist' %}">
                                     {% trans 'Manage all resources' %}</a>
                                 </li>
                             {% endif %}
                             {# PROJECT MANAGEMENT #}
-                            {% if user.is_superuser or user|is_member:"elrcReviewers" %}
+                            {% if user.is_superuser or user|is_member:"reviewers" %}
                                 <li title="{% trans 'Manage LRs by ELRC deliverables' %}"><a
                                         href="/admin/project_management/managementobject/"> {% trans 'Manage LRs by ELRC deliverables' %}</a>
                                 </li>

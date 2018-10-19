@@ -225,7 +225,7 @@ def has_edit_permission(request, res_obj):
     """
     return request.user.is_active and (request.user.is_superuser \
         or request.user in res_obj.owners.all()
-        or request.user.groups.filter(name="elrcReviewers").exists())
+        or request.user.groups.filter(name="reviewers").exists())
 
 
 def has_publish_permission(request, queryset):
@@ -1319,7 +1319,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         # all users but the superusers may only see resources for which they are
         # either owner or editor group member:
         if not request.user.is_superuser \
-                and not request.user.groups.filter(name='elrcReviewers').exists():
+                and not request.user.groups.filter(name='reviewers').exists():
             if request.user.is_authenticated():
                 result = result.distinct().filter(Q(owners=request.user)
                         | Q(editor_groups__name__in=
