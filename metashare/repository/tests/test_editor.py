@@ -324,7 +324,7 @@ class EditorTest(TestCase):
 
     def test_manage_action_visibility(self):
         """
-        Verifies that manage actions (delete/ingest/publish/unpublish/add owners/remove owners)
+        Verifies that manage actions (delete/ingest/publish/suspend/add owners/remove owners)
         are only visible for authorized users.
 
         +---------------+------------+------------+---------------+------+--------+
@@ -336,7 +336,7 @@ class EditorTest(TestCase):
         +---------------+------------+------------+---------------+---------------+
         | publish       | YES        | YES        | YES           |  NO  | YES    |
         +---------------+------------+------------+---------------+---------------+
-        | unpublish     | YES        | YES        | YES           |  NO  | YES    |
+        | suspend       | YES        | YES        | YES           |  NO  | YES    |
         +---------------+------------+------------+---------------+---------------+
         | add owners    | YES        | YES        | YES           |  NO  | YES    |
         +---------------+------------+------------+---------------+---------------+
@@ -351,8 +351,8 @@ class EditorTest(TestCase):
             msg_prefix='an editor user must see the "ingest" action')
         self.assertContains(response, 'Publish selected ingested resources',
             msg_prefix='an editor user must see the "publish" action')
-        self.assertContains(response, 'Unpublish selected published',
-            msg_prefix='an editor user must see the "unpublish" action')
+        self.assertContains(response, 'Suspend selected published',
+            msg_prefix='an editor user must see the "suspend" action')
         self.assertNotContains(response, 'Mark selected resources as deleted',
             msg_prefix='an editor user must not see the "delete" action')
         # self.assertNotContains(response, 'value="add_group">Add editor groups',
@@ -400,8 +400,8 @@ class EditorTest(TestCase):
             msg_prefix='an nap user must see the "ingest" action')
         self.assertNotContains(response, 'Publish selected ingested resources',
             msg_prefix='an nap user must not see the "publish" action')
-        self.assertNotContains(response, 'Unpublish selected published',
-            msg_prefix='an nap user must not see the "unpublish" action')
+        self.assertNotContains(response, 'Suspend selected published',
+            msg_prefix='an nap user must not see the "suspend" action')
         self.assertNotContains(response, 'Add owners',
             msg_prefix='an nap user must not see the "add owners" action')
         self.assertNotContains(response, 'Remove owners',
@@ -414,8 +414,8 @@ class EditorTest(TestCase):
             msg_prefix='a superuser should see the "ingest" action')
         self.assertContains(response, 'Publish selected ingested resources',
             msg_prefix='a superuser should see the "publish" action')
-        self.assertContains(response, 'Unpublish selected published resources',
-            msg_prefix='a superuser should see the "unpublish" action')
+        self.assertContains(response, 'Suspend selected published resources',
+            msg_prefix='a superuser should see the "suspend" action')
         self.assertContains(response, 'Mark selected resources as deleted',
             msg_prefix='a superuser should see the "delete" action')
         self.assertContains(response, 'value="add_group">Add editor groups',
