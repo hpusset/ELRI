@@ -1343,13 +1343,19 @@ class ResourceModelAdmin(SchemaModelAdmin):
             # (1) she is owner of the resource and the resource has not been
             #     ingested, yet
             # (2) she is a manager of one of the resource's `EditorGroup`s
+            # (3) she is active and a reviewer (member of the "reviewers"
+            # group), and the resource is internal or ingested)
             res_groups = obj.editor_groups.all()
             return (request.user in obj.owners.all()
                     and obj.storage_object.publication_status == INTERNAL) \
                 or any(res_group.name == mgr_group.managed_group.name
                        for res_group in res_groups
                        for mgr_group in EditorGroupManagers.objects.filter(name__in=
-                            request.user.groups.values_list('name', flat=True)))
+                            request.user.groups.values_list('name', flat=True))) \
+                or (request.user.is_active and
+                    request.user.groups.filter(name='reviewers').exists()
+                    and obj.storage_object.publication_status in (INTERNAL,
+                                                                  INGESTED))
         return result
 
     def get_actions(self, request):
