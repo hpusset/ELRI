@@ -22,12 +22,14 @@ USE_L10N = True
 LANGUAGE_CODE = 'en-us'
 
 # Path to the local storage layer path used for persistent object storage.
-STORAGE_PATH = '/home/VICOMTECH/emartinez/git/ELRI/metashare/storage'
+STORAGE_PATH = '/data/mt/ELRI/metashare/storage'
+#'/home/VICOMTECH/emartinez/git/ELRI/metashare/storage'
 #'/path/to/storage/path'
 
 # Path to the local directory where all the static files (images, js, css) will 
 # be collected and served by the web server in STATIC_URL
-STATIC_ROOT = '/home/VICOMTECH/emartinez/git/ELRI/metashare/static-files' 
+STATIC_ROOT = '/data/mt/ELRI/metashare/static-files'
+#'/home/VICOMTECH/emartinez/git/ELRI/metashare/static-files' 
 #'/path/to/static/path'
 
 # Directory in which lock files will temporarily be created.
@@ -63,7 +65,7 @@ DATABASES = {
         'PASSWORD': 'elri',                  # Not used with sqlite3.
         'HOST': 'localhost',                      # Set to 'localhost' for localhost.
                                          # Not used with sqlite3.
-        'PORT': '5433',                      # Set to empty string for default.
+        'PORT': '5432',                      # Set to empty string for default.
                                          # Not used with sqlite3.
     }
 }
@@ -225,4 +227,4 @@ PMODE_FILE = ""
 LEGAL_REVIEWERS = ("1",)                                          
 
 REST_API_KEY = ""  
-ALLOWED_HOSTS = ['127.0.0.1','localhost']  
+ALLOWED_HOSTS = ['127.0.0.1','localhost','192.168.25.19']  
