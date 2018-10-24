@@ -212,6 +212,20 @@
                 {% static "metashare/LR-Upload-ToS.pdf" as lr_upload_tos %}
                 <input type="checkbox" name="accepttos" value="true" required="">{% blocktrans %}I agree with the <a target="_blank" href="{{ lr_upload_tos }}">Language resource upload Terms of Service for Data Holders</a>{% endblocktrans %}<br>
             </div>
+            <!-- Group selection -->
+            <div class="form-group">
+                <label class="control-label" for="groups">{% trans 'Group(s)' %}</label>
+                <div class="group">
+                    <select class="form-control" multiple style="padding: 6px; height:200px"
+                            name="groups[]"
+                            id="groups">
+                        {% for group_name, group_id in groups %}
+                        <option value="{{ group_id }}">{% blocktrans %} {{ group_name }} {% endblocktrans %}</option>
+                        {% endfor %}
+                    </select>
+                    <span class="help-block contrib-help">{% trans 'The group(s) the language resource is shared with.' %}</span>
+                </div>
+            </div>
             <!-- Button (Double) -->
             <div class="form-group">
                 <label class="control-label" for="submit"></label>

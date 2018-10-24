@@ -48,7 +48,7 @@ from django.utils.translation import ugettext as _
 
 from haystack.views import FacetedSearchView
 
-from metashare.accounts.models import UserProfile
+from metashare.accounts.models import UserProfile, Organization
 from metashare.local_settings import CONTRIBUTIONS_ALERT_EMAILS, TMP
 from metashare.recommendations.recommendations import SessionResourcesTracker, \
     get_download_recommendations, get_view_recommendations, \
@@ -465,14 +465,31 @@ def has_view_permission(request, res_obj):
     of the current resource, `False` otherwise.
     A resource can be viewed by a user if either:
     - the user is a superuser
-    - the user is among the owners of the resource, or is a Reviewer, and
-      the resource is either INGESTED or PUBLISHED.
+    - the user is among the owners of the resource, or is a Reviewer, and the
+      resource is either INGESTED or PUBLISHED
+    - the user is in a group the resource has been shared with, and the resource
+      is PUBLISHED.
     """
     user = request.user
-    if user.is_superuser or (
-            (user in res_obj.owners.all() or
-             user.groups.filter(name='reviewers').exists()) and
-             res_obj.storage_object.publication_status in (INGESTED, PUBLISHED)):
+    if (
+        user.is_superuser
+        or
+        (
+         (user in res_obj.owners.all()
+          or
+          user.groups.filter(name='reviewers').exists()
+         )
+         and
+         res_obj.storage_object.publication_status in (INGESTED, PUBLISHED)
+        )
+        or
+        (
+         user.groups.filter(name__in=
+            res_obj.groups.values_list("name", flat=True)).exists()
+         and
+         res_obj.storage_object.publication_status == PUBLISHED
+        )
+       ):
         return True
     return False
 
@@ -695,14 +712,15 @@ def view(request, resource_name=None, object_id=None):
         context['LR_EDIT'] = reverse(
             'admin:repository_resourceinfotype_model_change', \
             args=(resource.id,))
-        context['LR_DOWNLOAD'] = reverse(
-            'editor:repository_resourceinfotype_model_change',
-            args=(resource.id,)) + 'datadl/'
         if ((request.user.is_staff or request.user.is_superuser or
              request.user.groups.filter(name="globaleditors").exists()) and
             resource.storage_object.publication_status == INGESTED):
             # only staff can validate INGESTED resources only
             context['LR_VALIDATE'] = context['LR_EDIT']
+    if has_view_permission(request, resource):
+        context['LR_DOWNLOAD'] = reverse(
+            'editor:repository_resourceinfotype_model_change',
+            args=(resource.id,)) + 'datadl/'
     # Update statistics:
     if saveLRStats(resource, VIEW_STAT, request):
         # update view count in the search index, too
@@ -817,7 +835,17 @@ class MetashareFacetedSearchView(FacetedSearchView):
         sqs = super(MetashareFacetedSearchView, self).get_results()
         if not is_member(self.request.user, 'reviewers') \
                 and not self.request.user.is_superuser:
-            sqs = sqs.filter_and(publicationStatusFilter__exact='published')
+            resource_names = []
+            for res in resourceInfoType_model.objects.all():
+                if self.request.user.groups.filter(
+                    name__in=res.groups.values_list("name", flat=True)).exists():
+                    resource_names.append(
+                        res.identificationInfo.get_default_resourceName())
+            if resource_names:
+                sqs = sqs.filter(publicationStatusFilter__exact='published',
+                                 resourceNameSort__in=resource_names)
+            else:
+                sqs = sqs.none()
 
         # Sort the results (on only one sorting value)
         if 'sort' in self.request.GET:
@@ -1093,6 +1121,8 @@ def contribute(request):
 
         unprocessed_dir = os.path.sep.join((CONTRIBUTION_FORM_DATA,
                                             "unprocessed"))
+        if "groups[]" in request.POST:
+            data["resourceInfo"]["groups"] = request.POST.getlist("groups[]")
 
         filename = '{}_{}'.format(profile.country, uid)
         response = {}
@@ -1189,8 +1219,8 @@ def contribute(request):
                                   "exceeds the size limit. If the file(s) you would like to contribute exceed(s) {:.10} MB please contact us to provide an SFTP link for direct download or consider uploading smaller files.".format(
                 float(MAXIMUM_UPLOAD_SIZE) / (1024 * 1024))
             return HttpResponse(json.dumps(response), content_type="text/plain")
-
     return render_to_response('repository/editor/contributions/contribute.html', \
+                              {'groups': Organization.objects.values_list("name", "id")},
                               context_instance=RequestContext(request))
 
 
@@ -1229,6 +1259,7 @@ def create_description(xml_file, type, base, user):
         "languages": doc.xpath("//languages/item/text()"),
         "domains": doc.xpath("//appropriatenessForDSI/item/text()"),
         "licence": ''.join(doc.xpath("//licence//text()")),
+        "groups": doc.xpath("//groups/item/text()"),
         "userInfo": {
             "firstname": ''.join(doc.xpath("//userInfo/first_name/text()")),
             "lastname": ''.join(doc.xpath("//userInfo/last_name/text()")),
@@ -1404,6 +1435,7 @@ def create_description(xml_file, type, base, user):
 
     # also add the designated maintainer, based on the country of the country of the donor
     resource.owners.add(user.id)
+    resource.groups.add(*(int(g) for g in info["groups"]))
     # finally move the dataset to the respective storage folder
     data_destination = resource.storage_object._storage_folder()
     try:

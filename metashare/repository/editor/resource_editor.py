@@ -1323,7 +1323,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
             if request.user.is_authenticated():
                 result = result.distinct().filter(Q(owners=request.user)
                         | Q(editor_groups__name__in=
-                               request.user.groups.values_list('name', flat=True)))
+                                request.user.groups.values_list('name', flat=True))
+                        | Q(groups__name__in=
+                                request.user.groups.values_list('name', flat=True)))
             else:
                 result = result.none()
         return result

@@ -10,7 +10,7 @@ from django.utils.translation import get_language, ugettext_lazy as _
 from metashare.eurovoc import eurovoc
 from metashare.bcp47 import iana
 
-from metashare.accounts.models import EditorGroup
+from metashare.accounts.models import EditorGroup, Organization
 # pylint: disable-msg=W0611
 from metashare.repository.supermodel import SchemaModel, SubclassableModel, \
   _make_choices_from_list, _make_choices_from_int_list, \
@@ -165,6 +165,8 @@ class resourceInfoType_model(SchemaModel):
     editor_groups = models.ManyToManyField(EditorGroup, blank=True)
 
     owners = models.ManyToManyField(User, blank=True)
+
+    groups = models.ManyToManyField(Organization, blank=True)
 
     storage_object = models.ForeignKey(StorageObject, blank=True, null=True,
       unique=True)
