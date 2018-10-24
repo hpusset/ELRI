@@ -40,4 +40,5 @@ README_VIC.md
 metashare/accounts/django_migrations/
 metashare/repository/django_migrations/
 metashare/storage/django_migrations/
-
+metashare/stats/django_migrations/
+metashare/recommendations/django_migrations/
