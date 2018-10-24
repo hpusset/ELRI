@@ -24,60 +24,66 @@ function resetMessages() {
     $('#status').html("");
 }
 
-var mode = "uploadzip";
-$(document).ready(function () {
-        mode = $("#contributionmode").find("input[type='radio']:checked").val();
-        if (mode == "uploadzip") {
-            disable_input($("#resourceurl"));
-            enable_input($("#fileupload"));
-        } else if (mode == "url") {
-            disable_input($("#fileupload"));
-            enable_input($("#resourceurl"));
-        } else if (mode == "eDelivery") {
-            disable_input($("#fileupload"));
-            disable_input($("#resourceurl"));
-        }
+$(function () {
+    if ($("#licence").find("option:selected").val() ===
+        "non-standard/Other_Licence/Terms") {
+        enable_input($("#licencefile"));
     }
-);
+    else {
+        disable_input($("#licencefile"));
+    }
+});
 
 $(function () {
-        $("#contributionmode").find("input[type='radio']").change(function () {
-            mode = $(this).val();
-            if (mode == "uploadzip") {
-                disable_input($("#resourceurl"));
-                enable_input($("#fileupload"));
-            } else if (mode == "url") {
-                disable_input($("#fileupload"));
-                enable_input($("#resourceurl"));
-            } else if (mode == "eDelivery") {
-                disable_input($("#fileupload"));
-                disable_input($("#resourceurl"));
+    $("#licence").change(
+        function () {
+            licence = $(this).find("option:selected").val();
+            if (licence === "non-standard/Other_Licence/Terms") {
+                enable_input($("#licencefile"));
             }
-        })
-    }
-);
+            else {
+                disable_input($("#licencefile"));
+            }
+        }
+    );
+});
+
+$(function () {
+    $("option[data-toggle='tooltip']").mouseenter(
+        function () {
+            $(this).tooltip('show');
+        }
+    );
+
+    $("option[data-toggle='tooltip']").mouseleave(
+        function () {
+            var that = $(this);
+            setTimeout(
+                function () {
+                    that.tooltip('hide');
+                },
+                2000
+            );
+        }
+    );
+});
 
 $(function () {
     $('form').submit(function (event) {
-        // If contribution mode is eDelivery, we don't actuall submit the form but
-        // rather, we create an xml file for the user to download
-        if (mode == "eDelivery") {
-            $('form').submit();
+        var file = $('#filebutton')[0].files[0];
+        if (file !== undefined && file.size > 104857600) {
+            alert(gettext("The file(s) you are trying to upload exceed(s) the size limit. " + "If the file(s) you would like to contribute exceed(s) 100 MB, " +
+                "please contact us to provide an SFTP link for direct download or " +
+                "consider uploading smaller files."));
+            return false;
         }
-        else {
-            var file = $('#filebutton')[0].files[0];
-            if (file !== undefined && file.size > 104857600) {
-                alert(gettext("The file you are trying to upload is larger " +
-                    "than the maximum upload file size (100mb).\n" +
-                    "Please contact elrc-share@ilsp.gr"));
-                return false;
-            }
-            return true;
-        }
+        return true;
     })
 });
 
 var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+var acceptedExtensions = [".zip", ".pdf", ".doc", ".docx", ".tmx", ".txt", ".xls", ".xlsx", ".xml", ".sdltm", ".odt", ".tbx"];
 
 if (!isIE) {
     $(function () {
@@ -85,36 +91,17 @@ if (!isIE) {
         var percent = $('.percent');
         var status = $('#status');
         var ok = $('#ok');
-        // var mode = $("#contributionmode input[type='radio']:checked").val();
-        // console.log(mode);
         $('form').ajaxForm({
             beforeSend: function (xhr, opts) {
-                if (mode == undefined) {
+                var fileName = $('#filebutton').val().split('/').pop().split('\\').pop();
+                if (!$.grep(acceptedExtensions, function (el) {return endsWith(fileName, el)})) {
                     xhr.abort();
-                    alert(gettext("Please select a contribution mode!"));
+                    alert(gettext("Only files of type ") + acceptedExtensions.join(", ") +
+                        gettext(" are allowed. The .zip files can only contain files of the specified types. Please consider removing the files that do not belong to one of these types."));
                     return false
                 }
-                if (mode == "uploadzip") {
-                    var fileName = $('input[type=file]').val().split('/').pop().split('\\').pop();
-                    if (!endsWith(fileName, ".zip")) {
-                        xhr.abort();
-                        alert(gettext("The file you are trying to upload does not have a .zip extension.\n" +
-                            "Please make sure that you properly compress your data into a valid .zip file before uploading."));
-                        return false
-                    }
-                    status.html("<i class='fa fa-spinner fa-pulse' aria-hidden='true'></i>"+gettext(" Uploading file: \"" + fileName + "\".\nPlease wait..."));
-                }
+                status.html("<i class='fa fa-spinner fa-pulse' aria-hidden='true'></i>"+gettext(" Uploading file: \"" + fileName + "\".\nPlease wait..."));
                 status.removeClass("success");
-                if (mode == "url") {
-                    var url = $('input[id=resourceUrl]').val();
-                    if (validateURL(url)) {
-                        status.html("<i class='fa fa-spinner fa-pulse' aria-hidden='true'></i>" + gettext( "Submitting your contribution: \nPlease wait..."));
-                    } else {
-                        alert("Please enter a valid URL!");
-                        xhr.abort();
-                        return false;
-                    }
-                }
                 ok.hide();
                 donotclose();
                 var percentVal = '0%';
@@ -134,12 +121,72 @@ if (!isIE) {
                 $('.uploadWin').hide();
                 $('.overlay').hide();
                 alert(gettext("There was an error uploading this file.\n" +
-                    "Please make sure that you are trying to upload a valid '.zip' file.\n" +
+                    "Please make sure that you are trying to upload a file with a valid extension.\n" +
                     "If the problem persists please try again later."));
             },
             complete: function (response) {
-                if (mode != "eDelivery") {
-                    var json_response = $.parseJSON(response.responseText);
+                var json_response = $.parseJSON(response.responseText);
+                if (json_response.status == 'failed') {
+                    status.addClass("failure")
+                    bar.hide();
+                    percent.hide();
+                    $(".progress").hide();
+                } else {
+                    status.removeClass("failure");
+                    status.addClass("success");
+                    $('form').clearForm();
+                }
+                status.html(json_response.message);
+                ok.show();
+                //location.reload();
+            },
+
+        });
+    });
+}
+else {
+    $(function () {
+        var bar = $('.bar');
+        var percent = $('.percent');
+        var status = $('#status');
+        var ok = $('#ok');
+        $('form').submit(function (event) {
+            event.preventDefault();
+            $.ajax({
+                cache: false,
+                url: "/repository/contribute",
+                type: "POST",
+                data: new FormData($('form')[0]),
+                contentType: false,
+                processData: false,
+                dataType: "text",
+                beforeSend: function (xhr, opts) {
+                    var fileName = $('input[type=file]').val().split('/').pop().split('\\').pop();
+                    if (!$.grep(acceptedExtensions, function (el) {return endsWith(fileName, el)})) {
+                        xhr.abort();
+                        alert(gettext("Only files of type ") + acceptedExtensions.join(", ") +
+                            gettext(" are allowed. The .zip files can only contain files of the specified types. Please consider removing the files that do not belong to one of these types."));
+                        return false
+                    }
+                    status.removeClass("success");
+                    status.html("<i class='fa fa-spinner fa-pulse' aria-hidden='true'></i>" + gettext("Uploading file: \"" + fileName + "\".\nPlease wait..."));
+                    ok.hide();
+                    donotclose();
+                    var percentVal = '0%';
+                    bar.width(percentVal);
+                    percent.html(percentVal);
+                },
+                xhr: function () {
+                    var xhr = $.ajaxSettings.xhr();
+                    xhr.upload.onprogress = function (e) {
+                        var percentVal = Math.floor(e.loaded / e.total * 100) + '%';
+                        bar.width(percentVal);
+                        percent.html(percentVal);
+                    };
+                    return xhr;
+                },
+                success: function (responseData) {
+                    var json_response = $.parseJSON(responseData);
                     if (json_response.status == 'failed') {
                         status.addClass("failure")
                         bar.hide();
@@ -152,101 +199,18 @@ if (!isIE) {
                     }
                     status.html(json_response.message);
                     ok.show();
-                    //location.reload();
-                }
-            },
-
-        });
-    });
-}
-else {
-    $(function () {
-        var bar = $('.bar');
-        var percent = $('.percent');
-        var status = $('#status');
-        var ok = $('#ok');
-        // var mode = $("#contributionmode input[type='radio']:checked").val();
-        $('form').submit(function (event) {
-            if (mode != "eDelivery") {
-                event.preventDefault();
-                $.ajax({
-                    cache: false,
-                    url: "/repository/contribute",
-                    type: "POST",
-                    data: new FormData($('form')[0]),
-                    contentType: false,
-                    processData: false,
-                    dataType: "text",
-                    beforeSend: function (xhr, opts) {
-                        if (mode == undefined) {
-                            xhr.abort();
-                            alert(gettext("Please select a contribution mode!"))
-                            return false
-                        }
-                        var fileName = $('input[type=file]').val().split('/').pop().split('\\').pop();
-                        if (!endsWith(fileName, ".zip")) {
-                            xhr.abort();
-                            alert(gettext("The file you are trying to upload does not have a .zip extension.\n" +
-                                "Please make sure that you properly compress your data into a valid .zip file before uploading."));
-                            return false
-                        }
-                        status.removeClass("success");
-                        if (mode == "url") {
-                            var url = $('input[id=resourceUrl]').val();
-                            if (validateURL(url)) {
-                                status.html("<i class='fa fa-spinner' aria-hidden='true'></i>" + gettext("Submitting your contribution: \nPlease wait..."));
-                            } else {
-                                alert(gettext("Please enter a valid URL!"));
-                                xhr.abort();
-                                return false;
-                            }
-                        } else {
-                            status.html("<i class='fa fa-spinner fa-pulse' aria-hidden='true'></i>" + gettext("Uploading file: \"" + fileName + "\".\nPlease wait..."));
-                        }
-                        ok.hide();
-                        donotclose();
-                        var percentVal = '0%';
-                        bar.width(percentVal);
-                        percent.html(percentVal);
-                    },
-                    xhr: function () {
-                        var xhr = $.ajaxSettings.xhr();
-                        xhr.upload.onprogress = function (e) {
-                            var percentVal = Math.floor(e.loaded / e.total * 100) + '%';
-                            bar.width(percentVal);
-                            percent.html(percentVal);
-                        };
-                        return xhr;
-                    },
-                    success: function (responseData) {
-                        var json_response = $.parseJSON(responseData);
-                        if (json_response.status == 'failed') {
-                            status.addClass("failure")
-                            bar.hide();
-                            percent.hide();
-                            $(".progress").hide();
-                        } else {
-                            status.removeClass("failure");
-                            status.addClass("success");
-                            $('form').clearForm();
-                        }
-                        status.html(json_response.message);
-                        ok.show();
-                    },
-                    // error: function (responseData, textStatus, errorThrown) {
-                    //     alert("error: " + textStatus);
-                    // },
-                    // complete: function (xhr) {
-                    //     if (xhr.status == 200) {
-                    //         alert("ok");
-                    //     }
-                    // }
-                });
-            }
-            else {
-                $('.uploadWin').hide();
-                $('.overlay').hide();
-            }
+                },
+                // error: function (responseData, textStatus, errorThrown) {
+                //     alert("error: " + textStatus);
+                // },
+                // complete: function (xhr) {
+                //     if (xhr.status == 200) {
+                //         alert("ok");
+                //     }
+                // }
+            });
+            $('.uploadWin').hide();
+            $('.overlay').hide();
 
         });
         return false;

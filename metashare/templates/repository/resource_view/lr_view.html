@@ -250,6 +250,18 @@
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i> {% trans 'Edit Resource' %}</button>
 		    </a>
             {% endif %}
+            {% if LR_DOWNLOAD %}
+            <a href="{{ LR_DOWNLOAD }}">
+                <button class="span-4 button middle_button">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> {% trans 'Download Resource' %}</button>
+            </a>
+            {% endif %}
+            {% if LR_VALIDATE %}
+            <a href="{{ LR_VALIDATE }}">
+                <button class="span-4 button middle_button">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> {% trans 'Validate Resource' %}</button>
+            </a>
+            {% endif %}
 			<div style="clear: both;"></div>
 		</div>
 	</div>

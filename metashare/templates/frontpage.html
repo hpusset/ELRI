@@ -12,17 +12,19 @@
 {#                    <p style="text-align: center; color: #058dbe;font-weight: bold;">{{ resources|intcomma }} language#}
 {#                        resource{{ resources|pluralize }} at your disposal</p>#}
 {#                </div>#}
-                <form method="get" action="{% url 'frontpage' %}repository/search/" class="form_helper">
-                    <div id="search">
-                        <div id="search_input"><input class="big_input span-14" type="text" name="q"
-                                                      defaultText="{% trans 'Type in your keywords, please...' %}"/></div>
-                        <div id="search_button">
-                            <button type="submit" class="big_button_search" title="Search">
-                                <i class="fa fa-search" aria-hidden="true"></i>
-                            </button>
+                {% if user.is_authenticated %}
+                    <form method="get" action="{% url 'frontpage' %}repository/search/" class="form_helper">
+                        <div id="search">
+                            <div id="search_input"><input class="big_input span-14" type="text" name="q"
+                                                          defaultText="{% trans 'Type in your keywords, please...' %}"/></div>
+                            <div id="search_button">
+                                <button type="submit" class="big_button_search" title="Search">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                {% endif %}
             </div>
 
             <div class="span-24" style="vertical-align: middle; margin-top:30px;">

@@ -10,10 +10,10 @@
             <ul id="jsddm">
                 <li title="{% trans 'Home' %}"><a href="{% url 'frontpage' %}" %}>
                     <i class="fa fa-home menu_fontawesome" aria-hidden="true"></i> {% trans 'Home' %}</a></li>
-                <li title="{% trans 'Browse the resources of the META-SHARE catalogue' %}"><a
-                        href="{% url 'frontpage' %}repository/search/">
-                    <i class="fa fa-list-ul menu_fontawesome" aria-hidden="true"></i> {% trans 'Browse Resources' %}</a></li>
                 {% if user.is_authenticated %}
+                    <li title="{% trans 'Browse the resources of the META-SHARE catalogue' %}"><a
+                            href="{% url 'frontpage' %}repository/search/">
+                        <i class="fa fa-list-ul menu_fontawesome" aria-hidden="true"></i> {% trans 'Browse Resources' %}</a></li>
                     <li><a href="{% url 'contribute' %}">
                         <i class="fa fa-share-square-o menu_fontawesome" aria-hidden="true"></i> {% trans 'Contribute Resources' %}</a></li>
                 {% endif %}
@@ -25,22 +25,19 @@
                                     href="{% url 'editor:repository_resourceinfotype_model_myresources' %}">
                                     {% trans 'Manage your own resources' %}</a></li>
 {#                            {% if user.is_superuser or user|is_member:"legalReviewers" or user|is_member:"technicalReviewers" %}#}
-                            {% if user.is_superuser or user|is_member:"elrcReviewers" %}
+                            {% if user.is_superuser or user|is_member:"reviewers" %}
                                 <li title="{% trans 'Create/edit resource metadata or upload resource data' %}"><a
                                         href="{% url 'editor:repository_resourceinfotype_model_changelist' %}">
                                     {% trans 'Manage all resources' %}</a>
                                 </li>
                             {% endif %}
                             {# PROJECT MANAGEMENT #}
-                            {% if user.is_superuser or user|is_member:"elrcReviewers" %}
+                            {% if user.is_superuser or user|is_member:"reviewers" %}
                                 <li title="{% trans 'Manage LRs by ELRC deliverables' %}"><a
                                         href="/admin/project_management/managementobject/"> {% trans 'Manage LRs by ELRC deliverables' %}</a>
                                 </li>
                             {% endif %}
                             {% if user.is_superuser %}
-                                <li title="{% trans 'Manage contributed resources' %}">
-                                    <a href="{% url 'manage_contributed_data' %}"> {% trans 'Manage resources from contributors' %}</a>
-                                </li>
                                 <li title="{% trans 'Create/edit person object metadata' %}"><a
                                         href="{% url 'editor:repository_personinfotype_model_changelist' %}">
                                     {% trans 'Manage person objects' %}</a></li>

@@ -76,16 +76,35 @@ class RegistrationRequestForm(Form):
                                 label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Country")))
 
     organization = forms.CharField(UserProfile._meta.get_field('affiliation').max_length,
-                                   label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Organization")))
+                                   label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Organization name")))
+    organization_address = forms.CharField(
+            UserProfile._meta.get_field('affiliation_address').max_length,
+            label=mark_safe(u"%s<span style='color:red'>*</span>"
+                            % _("Organization address")))
+    organization_phone_number = forms.CharField(
+            UserProfile._meta.get_field('affiliation_phone_number').max_length,
+            label=mark_safe(u"%s<span style='color:red'>*</span>"
+                            % _("Organization phone number")))
+    position = forms.CharField(UserProfile._meta.get_field('position').max_length,
+                               label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Position in the organization")))
     phone_number = forms.CharField(UserProfile._meta.get_field('phone_number').max_length,
-                                   label=mark_safe(u"<span style='color:grey'>%s</span>" % _("Phone number")), required=False)
+                                   label=mark_safe(u"%s<span style='color:grey'>*</span>" % _("Phone number")))
     password = forms.CharField(User._meta.get_field('password').max_length,
                                label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Password")),
                                widget=forms.PasswordInput())
     confirm_password = forms.CharField(
         User._meta.get_field('password').max_length,
         label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Password confirmation")), widget=forms.PasswordInput())
+
+    contributor_group = forms.ChoiceField(
+        label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Contributor group"))
+        )
     accepted_tos = forms.BooleanField()
+
+    def __init__(self, *args, **kwargs):
+        group_choices = kwargs.pop("group_choices")
+        super(RegistrationRequestForm, self).__init__(*args, **kwargs)
+        self.fields["contributor_group"].choices = group_choices
 
     def clean_shortname(self):
         """

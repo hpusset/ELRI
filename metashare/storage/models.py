@@ -173,7 +173,7 @@ class StorageObject(models.Model):
         if value == True:
             self.publication_status = PUBLISHED
         else:
-            # request to unpublish depends on current state:
+            # request to suspend depends on current state:
             # if we are currently published, set to ingested;
             # else don't change
             if self.publication_status == PUBLISHED:

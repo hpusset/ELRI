@@ -225,7 +225,7 @@ def has_edit_permission(request, res_obj):
     """
     return request.user.is_active and (request.user.is_superuser \
         or request.user in res_obj.owners.all()
-        or request.user.groups.filter(name="elrcReviewers").exists())
+        or request.user.groups.filter(name="reviewers").exists())
 
 
 def has_publish_permission(request, queryset):
@@ -236,7 +236,7 @@ def has_publish_permission(request, queryset):
     # if not request.user.is_superuser:
     #     for obj in queryset:
     #         res_groups = obj.editor_groups.all()
-    #         # we only allow a user to ingest/publish/unpublish a resource if she
+    #         # we only allow a user to ingest/publish/suspend a resource if she
     #         # is a manager of one of the resource's `EditorGroup`s
     #         if not any(res_group.name == mgr_group.managed_group.name
     #                    for res_group in res_groups
@@ -274,7 +274,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
     # list_display = ('__unicode__', 'id', 'resource_type', 'publication_status', 'resource_Owners', 'editor_Groups',)
     list_display = ('__unicode__', 'id', 'resource_type', 'publication_status', 'resource_Owners', 'validated')
     list_filter = ('storage_object__publication_status', ResourceTypeFilter, ValidatedFilter)
-    actions = ('publish_action', 'unpublish_action', 'ingest_action',
+    actions = ('publish_action', 'suspend_action', 'ingest_action',
         'export_xml_action', 'delete', 'add_group', 'remove_group',
         'add_owner', 'remove_owner')
     hidden_fields = ('storage_object', 'owners', 'editor_groups',)
@@ -302,7 +302,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
 
     publish_action.short_description = _("Publish selected ingested resources")
 
-    def unpublish_action(self, request, queryset):
+    def suspend_action(self, request, queryset):
         if has_publish_permission(request, queryset):
             successful = 0
             for obj in queryset:
@@ -312,18 +312,18 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     saveLRStats(obj, INGEST_STAT, request)
             if successful > 0:
                 messages.info(request, ungettext(
-                        'Successfully unpublished %s published resource.',
-                        'Successfully unpublished %s published resources.',
+                        'Successfully suspended %s published resource.',
+                        'Successfully suspended %s published resources.',
                         successful) % (successful,))
             else:
                 messages.error(request,
-                    _('Only published resources can be unpublished.'))
+                    _('Only published resources can be suspended.'))
         else:
             messages.error(request, _('You do not have the permission to ' \
                             'perform this action for all selected resources.'))
 
-    unpublish_action.short_description = \
-        _("Unpublish selected published resources")
+    suspend_action.short_description = \
+        _("Suspend selected published resources")
 
     def ingest_action(self, request, queryset):
         if has_publish_permission(request, queryset) or request.user.is_staff:
@@ -713,7 +713,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 wrap(self.uploaddata_view),
                 name='%s_%s_uploaddata' % info),
             url(r'^(.+)/datadl/$',
-                wrap(self.datadl),
+                self.datadl,
             # VALIDATION REPORT
                 name='%s_%s_datadl' % info),
             url(r'^(.+)/upload-report/$',
@@ -1143,46 +1143,31 @@ class ResourceModelAdmin(SchemaModelAdmin):
         opts = model._meta
 
         obj = self.get_object(request, unquote(object_id))
-        storage_object = obj.storage_object
-        dl_path = storage_object.get_download()
-        if dl_path:
-            try:
-                def dl_stream_generator():
-                    with open(dl_path, 'rb') as _local_data:
-                        _chunk = _local_data.read(4096)
-                        while _chunk:
-                            yield _chunk
+        if obj is not None:
+            storage_object = obj.storage_object
+            dl_path = storage_object.get_download()
+            if dl_path:
+                try:
+                    def dl_stream_generator():
+                        with open(dl_path, 'rb') as _local_data:
                             _chunk = _local_data.read(4096)
+                            while _chunk:
+                                yield _chunk
+                                _chunk = _local_data.read(4096)
 
-                # build HTTP response with a guessed mime type; the response
-                # content is a stream of the download file
-                filemimetype = guess_type(dl_path)[0] or "application/octet-stream"
-                response = HttpResponse(dl_stream_generator(),
-                                        content_type=filemimetype)
-                response['Content-Length'] = getsize(dl_path)
-                response['Content-Disposition'] = 'attachment; filename={0}' \
-                    .format(split(dl_path)[1])
-                # LOGGER.info("Offering a local editor download of resource #{0}." \
-                #             .format(object_id))
-                return response
-            except:
-                pass
-        # redirect to a download location, if available
-        # elif download_urls:
-        #     for url in download_urls:
-        #         status_code = urlopen(url).getcode()
-        #         if not status_code or status_code < 400:
-        #             LOGGER.info("Redirecting to {0} for the download of resource " \
-        #                         "#{1}.".format(url, resource.id))
-        #             return redirect(url)
-        #     LOGGER.warn("No download could be offered for resource #{0}. These " \
-        #                 "URLs were tried: {1}".format(resource.id, download_urls))
-        # else:
-        #     LOGGER.error("No download could be offered for resource #{0} with " \
-        #                  "storage object identifier #{1} although our code " \
-        #                  "considered it to be downloadable!".format(resource.id,
-        #                                                             resource.storage_object.identifier))
-
+                    # build HTTP response with a guessed mime type; the response
+                    # content is a stream of the download file
+                    filemimetype = guess_type(dl_path)[0] or "application/octet-stream"
+                    response = HttpResponse(dl_stream_generator(),
+                                            content_type=filemimetype)
+                    response['Content-Length'] = getsize(dl_path)
+                    response['Content-Disposition'] = 'attachment; filename={0}' \
+                        .format(split(dl_path)[1])
+                    # LOGGER.info("Offering a local editor download of resource #{0}." \
+                    #             .format(object_id))
+                    return response
+                except:
+                    pass
         # no download could be provided
         return render_to_response('repository/lr_not_downloadable.html',
                                   {'resource': obj, 'reason': 'internal'},
@@ -1334,10 +1319,13 @@ class ResourceModelAdmin(SchemaModelAdmin):
         # all users but the superusers may only see resources for which they are
         # either owner or editor group member:
         if not request.user.is_superuser \
-                and not request.user.groups.filter(name='elrcReviewers').exists():
-            result = result.distinct().filter(Q(owners=request.user)
-                    | Q(editor_groups__name__in=
-                           request.user.groups.values_list('name', flat=True)))
+                and not request.user.groups.filter(name='reviewers').exists():
+            if request.user.is_authenticated():
+                result = result.distinct().filter(Q(owners=request.user)
+                        | Q(editor_groups__name__in=
+                               request.user.groups.values_list('name', flat=True)))
+            else:
+                result = result.none()
         return result
 
     def has_delete_permission(self, request, obj=None):
@@ -1355,13 +1343,19 @@ class ResourceModelAdmin(SchemaModelAdmin):
             # (1) she is owner of the resource and the resource has not been
             #     ingested, yet
             # (2) she is a manager of one of the resource's `EditorGroup`s
+            # (3) she is active and a reviewer (member of the "reviewers"
+            # group), and the resource is internal or ingested)
             res_groups = obj.editor_groups.all()
             return (request.user in obj.owners.all()
                     and obj.storage_object.publication_status == INTERNAL) \
                 or any(res_group.name == mgr_group.managed_group.name
                        for res_group in res_groups
                        for mgr_group in EditorGroupManagers.objects.filter(name__in=
-                            request.user.groups.values_list('name', flat=True)))
+                            request.user.groups.values_list('name', flat=True))) \
+                or (request.user.is_active and
+                    request.user.groups.filter(name='reviewers').exists()
+                    and obj.storage_object.publication_status in (INTERNAL,
+                                                                  INGESTED))
         return result
 
     def get_actions(self, request):
@@ -1386,13 +1380,13 @@ class ResourceModelAdmin(SchemaModelAdmin):
             if not self.has_delete_permission(request):
                 del result['delete']
             # only users who are the manager of some group can see the
-            # ingest/publish/unpublish actions:
+            # ingest/publish/suspend actions:
             if not request.user.is_staff:
-                for action in (self.publish_action, self.unpublish_action,):
+                for action in (self.publish_action, self.suspend_action,):
                     del result[action.__name__]
         if request.user.groups.filter(name='naps').exists():
             del result['publish_action']
-            del result['unpublish_action']
+            del result['suspend_action']
             del result['add_group']
             del result['add_owner']
         return result

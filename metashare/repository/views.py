@@ -4,6 +4,8 @@ import logging
 import os
 import shutil
 import uuid
+import zipfile
+import re
 
 from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
 from haystack.query import SearchQuerySet
@@ -226,7 +228,7 @@ def download(request, object_id, **kwargs):
     bypass_licence = False
     if request.user.is_superuser \
             or request.user.groups.filter(name="ecmembers").exists() \
-            or request.user.groups.filter(name="elrcReviewers").exists()\
+            or request.user.groups.filter(name="reviewers").exists()\
             or kwargs['api_auth']:
         bypass_licence = True
 
@@ -461,17 +463,18 @@ def has_view_permission(request, res_obj):
     """
     Returns `True` if the given request has permission to view the description
     of the current resource, `False` otherwise.
+    A resource can be viewed by a user if either:
+    - the user is a superuser
+    - the user is among the owners of the resource, or is a Reviewer, and
+      the resource is either INGESTED or PUBLISHED.
     """
-    if res_obj.storage_object.publication_status == PUBLISHED:
+    user = request.user
+    if user.is_superuser or (
+            (user in res_obj.owners.all() or
+             user.groups.filter(name='reviewers').exists()) and
+             res_obj.storage_object.publication_status in (INGESTED, PUBLISHED)):
         return True
-    else:
-        if request.user.is_superuser \
-                or request.user.groups.filter(name='ecmembers').exists() \
-                or request.user.groups.filter(name='elrcReviewers').exists():
-            return True
-
-        return False
-
+    return False
 
 def view(request, resource_name=None, object_id=None):
     """
@@ -692,7 +695,14 @@ def view(request, resource_name=None, object_id=None):
         context['LR_EDIT'] = reverse(
             'admin:repository_resourceinfotype_model_change', \
             args=(resource.id,))
-
+        context['LR_DOWNLOAD'] = reverse(
+            'editor:repository_resourceinfotype_model_change',
+            args=(resource.id,)) + 'datadl/'
+        if ((request.user.is_staff or request.user.is_superuser or
+             request.user.groups.filter(name="globaleditors").exists()) and
+            resource.storage_object.publication_status == INGESTED):
+            # only staff can validate INGESTED resources only
+            context['LR_VALIDATE'] = context['LR_EDIT']
     # Update statistics:
     if saveLRStats(resource, VIEW_STAT, request):
         # update view count in the search index, too
@@ -805,9 +815,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
 
     def get_results(self):
         sqs = super(MetashareFacetedSearchView, self).get_results()
-
-        if not is_member(self.request.user, 'ecmembers') \
-                and not is_member(self.request.user, 'elrcReviewers') \
+        if not is_member(self.request.user, 'reviewers') \
                 and not self.request.user.is_superuser:
             sqs = sqs.filter_and(publicationStatusFilter__exact='published')
 
@@ -989,8 +997,6 @@ class MetashareFacetedSearchView(FacetedSearchView):
         Creates a second level for faceting. 
         Sub filters are included after the parent filters.
         """
-        import re
-
         name = facet[0]
         label = facet[1]
 
@@ -1054,9 +1060,8 @@ class MetashareFacetedSearchView(FacetedSearchView):
 
 @login_required
 def contribute(request):
-    tmp_dir = '{}/tmp'.format(CONTRIBUTION_FORM_DATA)  # temp dir for resources downloaded from user provided url
     if request.method == "POST":
-        id = str(uuid.uuid4())
+        uid = str(uuid.uuid4())
         profile = UserProfile.objects.get(user=request.user)
         data = {
             'userInfo': {
@@ -1071,7 +1076,8 @@ def contribute(request):
 
             'resourceInfo': {
                 'resourceTitle': request.POST['resourceTitle'],
-                'shortDescription': request.POST['shortDescription'],
+                'shortDescription': request.POST['shortDescription'] or _("N/A"),
+                'licence': request.POST['licence'],
             },
             'administration': {
                 'processed': 'false',
@@ -1082,173 +1088,110 @@ def contribute(request):
         if 'languages[]' in request.POST:
             data['resourceInfo']['languages'] = request.POST.getlist('languages[]')
 
-        try:
-            data['resourceInfo']['resourceUrl'] = request.POST['resourceUrl']
-        except:
-            pass
+        if 'domains[]' in request.POST:
+            data['resourceInfo']['appropriatenessForDSI'] = request.POST.getlist('domains[]')
 
-        dir1 = '{}/unprocessed'.format(CONTRIBUTION_FORM_DATA)
-        # dir2 = '{}/{}'.format(dir1, id)
+        unprocessed_dir = os.path.sep.join((CONTRIBUTION_FORM_DATA,
+                                            "unprocessed"))
 
-        import cgi
-
-        form_data = cgi.FieldStorage()
-        # file_data = form_data['filebutton'].value
-        filename = '{}_{}'.format(profile.country, id)
-
-        zipped = None
-        # for chunk in request.FILES['filebutton'].chunks():
-        #     destination.write(chunk)
+        filename = '{}_{}'.format(profile.country, uid)
         response = {}
 
-        # if not request.POST['mode']:
-        #     response['status'] = "failed"
-        #     response['message'] = "Your request could not be completed. " \
-        #                           "An unexpected error has occured. " \
-        #                           "Please check your contribution mode and try again in a few minutes."
-        #     return HttpResponse(json.dumps(response), mimetype="application/json")
+        accepted_extensions = [".zip", ".pdf", ".doc", ".docx", ".tmx", ".txt",
+                               ".xls", ".xlsx", ".xml", ".sdltm", ".odt", ".tbx"]
+        acceptable_re = "(.*)({0})$".format(
+            "|".join("({0})".format(ext) for ext in accepted_extensions))
+        file_objects = request.FILES.getlist('filebutton')
+        getext = lambda file_object: os.path.splitext(file_object.name)[-1]
+        if (sum(fobj.size for fobj in file_objects) <= MAXIMUM_UPLOAD_SIZE and
+            all(getext(fobj) in accepted_extensions for fobj in file_objects)):
+            try:
+                if not os.path.isdir(unprocessed_dir):
+                    os.makedirs(unprocessed_dir)
+            except:
+                raise OSError, "Could not write to CONTRIBUTION_FORM_DATA path"
 
-        if request.POST['mode'] == 'uploadzip':
-            zipped = filename + ".zip"
-            if not request.FILES['filebutton'].size > MAXIMUM_UPLOAD_SIZE:
-                try:
-                    if not os.path.isdir(dir1):
-                        os.makedirs(dir1)
-                except:
-                    raise OSError, "Could not write to CONTRIBUTION_FORM_DATA path"
+            licence_file_object = request.FILES.get('licenceFile')
+            if licence_file_object:
+                # a licence file has been uploaded
+                licence_filename = filename + "_licence.pdf"
+                licence_filepath = os.path.sep.join((unprocessed_dir,
+                                                     licence_filename))
+                with open(licence_filepath, 'wb+') as licence_destination:
+                    for chunk in licence_file_object.chunks():
+                        licence_destination.write(chunk)
+            out_filenames = []
+            for i, file_object in enumerate(file_objects):
+                out_filename = "{}_{}".format(filename, str(i)) + getext(file_object)
+                ofile_path = os.path.sep.join((unprocessed_dir, out_filename))
+                with open(ofile_path, 'wb+') as destination:
+                    for chunk in file_object.chunks():
+                        destination.write(chunk)
+                out_filenames.append(out_filename)
+                if ofile_path.endswith(".zip"):
+                    zfile = zipfile.ZipFile(ofile_path)
+                    if (not zipfile.is_zipfile(ofile_path) or
+                        zfile.testzip() is not None):
+                        os.remove(ofile_path)
+                        response['status'] = "failed"
+                        response['message'] = "Your request could not be completed. " \
+                                              "The file you tried to upload is corrupted or it is not a valid '.zip' file."
+                    if any(not (re.match(acceptable_re, fn) or
+                                fn.endswith(os.path.sep))
+                           for fn in zfile.namelist()):
+                        # the archive contains at least an entry which neither has
+                        # an accepted extension, nor is a directory:
+                        os.remove(ofile_path)
+                        response['status'] = "failed"
+                        response['message'] = \
+                            "Only files of type DOC(X), ODT, PDF, TMX, SDLTM, XML, "\
+                            "TBX , XLS(X), TXT and ZIP files are allowed. "\
+                            "The zip files can only contain files of the "\
+                            "specified types. Please consider removing the files"\
+                            "that do not belong to one of these types."
 
-                destination = open('{}/{}'.format(dir1, zipped), 'wb+')
-                for chunk in request.FILES['filebutton'].chunks():
-                    destination.write(chunk)
-                destination.close()
-                import zipfile
-                zfile_path = '{}/{}'.format(dir1, zipped)
-                zfile = zipfile.ZipFile(zfile_path)
-                zip_ok = True
-                try:
-                    if zfile.testzip() is not None:
-                        zip_ok = False
-                except:
-                    zip_ok = False
-                if not zipfile.is_zipfile(zfile_path) or \
-                        not zip_ok or \
-                        not str(request.FILES['filebutton']).endswith(".zip"):
-                    os.remove(zfile_path)
-                    response['status'] = "failed"
-                    response['message'] = "Your request could not be completed. " \
-                                          "The file you tried to upload is corrupted or it is not a valid '.zip' file." \
-                                          "Please make sure that you have compressed your data properly."
-                    return HttpResponse(json.dumps(response), content_type="text/plain")
+                    if response.get('status') == "failed":
+                        return HttpResponse(json.dumps(response),
+                                            content_type="text/plain")
 
-            else:
-                response['status'] = "failed"
-                response['message'] = "The file you are trying to upload " \
-                                      "is larger than the maximum upload file size ({:.10} MB)!".format(
-                    float(MAXIMUM_UPLOAD_SIZE) / (1024 * 1024))
-                return HttpResponse(json.dumps(response), content_type="text/plain")
+            xml_filename = filename + ".xml"
+            data['administration']['dataset'] = {"uploaded_files": out_filenames}
+            data['administration']['resource_file'] = xml_filename
+            # create the form data xml file
+            xml = dicttoxml.dicttoxml(data, custom_root='resource', attr_type=False)
+            xml_file_path = os.path.sep.join((unprocessed_dir, xml_filename))
+            with open(xml_file_path, 'w') as f:
+                xml_file = File(f)
+                xml_file.write(xml)
+            # add the relevant entry to the DB
+            resource_type = request.POST["resourceType"] or "corpus"
+            d = create_description(os.path.basename(xml_file.name),
+                                   resource_type, unprocessed_dir,
+                                   request.user)
+            d[0].owners.add(request.user.id)
 
-        data['administration']['resource_file'] = filename + '.xml'
-        if zipped:
-            data['administration']['dataset'] = {"zip": zipped}
+            try:
+                send_mail(_("New submitted contributions"),
+                          _("You have new submitted contributed resources on elrc-share.eu"),
+                          'no-reply@elrc-share.ilsp.gr', CONTRIBUTIONS_ALERT_EMAILS, \
+                          fail_silently=False)
+            except:
+                LOGGER.error("An error has occurred while trying to send email to contributions"
+                             "alert recipients.")
+
+            response['status'] = "succeded"
+            response['message'] = "Thank you for sharing! Your data have been successfully submitted. " \
+                                  "You can now go on and contribute more data."
+            return HttpResponse(json.dumps(response), content_type="text/plain")
         else:
-            try:
-                data['administration']['dataset'] = {"url": data['resourceInfo']['resourceUrl']}
-            except KeyError:
-                data['administration']['dataset'] = "None"
-        if request.POST['mode'] == 'eDelivery':
-            data['administration']['edelivery'] = 'true'
-            del data['administration']
-        # create the form data xml file
-        xml = dicttoxml.dicttoxml(data, custom_root='resource', attr_type=False)
-        xml_file = filename + ".xml"
-        # download file if mode is "eDelivery"
-        if request.POST['mode'] == 'eDelivery':
-            try:
-                response = HttpResponse(xml, content_type='text/xml')
-                response['Content-Disposition'] = 'attachment; filename={}-contribution-info.xml'.format(request.user)
-                return response
-            except Exception:
-                return HttpResponseNotFound(_('Could not generate eDelivery metadata XML'))
-
-        xml_file_path = "{}/{}".format(dir1, xml_file)
-        with open(xml_file_path, 'w') as f:
-            xml_file = File(f)
-            xml_file.write(xml)
-            xml_file.closed
-            f.closed
-        try:
-            send_mail("New unmanaged contributions",
-                      "You have new unmanaged contributed resources on elrc-share.eu",
-                      # 'no-reply@elrc-share.ilsp.gr', ["mdel@ilsp.gr"],
-                      'no-reply@elrc-share.ilsp.gr', CONTRIBUTIONS_ALERT_EMAILS, \
-                      # 'no-reply@elrc-share.ilsp.gr', ["mdel@ilsp.gr"], \
-                      fail_silently=False)
-        except:
-            LOGGER.error("An error has occurred while trying to send email to contributions"
-                         "alert recipients.")
-
-        response['status'] = "succeded"
-        response['message'] = "Thank you for sharing! Your data have been successfully submitted. " \
-                              "You can now go on and contribute more data."
-        # if request.POST['mode'] == 'uploadzip':
-        return HttpResponse(json.dumps(response), content_type="text/plain")
-        # else:
-        #     return render_to_response('repository/editor/contributions/contribute.html', \
-        #                               response, context_instance=RequestContext(request))
+            response['status'] = "failed"
+            response['message'] = "The file you are trying to upload " \
+                                  "exceeds the size limit. If the file(s) you would like to contribute exceed(s) {:.10} MB please contact us to provide an SFTP link for direct download or consider uploading smaller files.".format(
+                float(MAXIMUM_UPLOAD_SIZE) / (1024 * 1024))
+            return HttpResponse(json.dumps(response), content_type="text/plain")
 
     return render_to_response('repository/editor/contributions/contribute.html', \
                               context_instance=RequestContext(request))
-
-
-@user_passes_test(lambda u: u.is_superuser)
-def manage_contributed_data(request):
-    template = 'repository/editor/contributions/manage_contributed_data.html'
-    xml_files = list()
-    base = '{}/unprocessed'.format(CONTRIBUTION_FORM_DATA)
-    for file in os.listdir(base):
-        if file.endswith(".xml"):
-            xml_files.append(file)
-
-    info = list()
-    for xml_file in xml_files:
-        doc = etree.parse('{}/{}'.format(base, xml_file))
-        dataset = {}
-        if doc.xpath("//resource/administration/dataset/zip"):
-            dataset = {
-                "zip": doc.xpath("//resource/administration/dataset/zip/text()")
-            }
-
-        elif doc.xpath("//resource/administration/dataset/url"):
-            dataset = {
-                "url": doc.xpath("//resource/administration/dataset/url/text()")
-            }
-
-        info.append({
-            "title": doc.xpath("//resourceTitle//text()"),
-            "description": doc.xpath("//shortDescription//text()"),
-            "languages": doc.xpath("//languages/item/text()"),
-            "userInfo": {
-                "firstname": doc.xpath("//userInfo/first_name/text()"),
-                "lastname": doc.xpath("//userInfo/last_name/text()"),
-                "country": doc.xpath("//userInfo/country/text()"),
-                "phoneNumber": doc.xpath("//userInfo/phoneNumber/text()"),
-                "email": doc.xpath("//userInfo/email/text()"),
-                "user": doc.xpath("//userInfo/user/text()"),
-                "institution": doc.xpath("//userInfo/institution/text()"),
-
-            },
-            "resource_file": doc.xpath("//resource/administration/resource_file/text()"),
-            "dataset": dataset,
-            'edelivery': util.strtobool(doc.xpath("//resource/administration/edelivery/text()")[0]),
-            'msg_id': doc.xpath("//resource/administration/edelivery/@msg_id")
-
-        })
-    context = {
-        'filelist': info
-    }
-    ctx = RequestContext(request)
-
-    return render_to_response(template, context, context_instance=ctx)
 
 
 @staff_member_required
@@ -1277,169 +1220,6 @@ def get_data(request, filename):
         except:
             pass
 
-
-@staff_member_required
-def remove(request, record):
-    record = record.split(".xml")[0]
-    path = "{}/unprocessed/{}".format(CONTRIBUTION_FORM_DATA, record)
-    # if xml exists, flag it and move it to the processed
-    if os.path.exists(path + ".xml"):
-        xml_destination = '{}/processed/{}'.format(CONTRIBUTION_FORM_DATA,
-                                                   "REMOVED_{}.xml".format(record))
-        shutil.move(path + ".xml", xml_destination)
-    if os.path.exists(path + ".zip"):
-        xml_destination = '{}/processed/{}'.format(CONTRIBUTION_FORM_DATA,
-                                                   "REMOVED_{}.zip".format(record))
-        shutil.move(path + ".zip", xml_destination)
-    return redirect(manage_contributed_data)
-
-
-@user_passes_test(lambda u: u.is_superuser)
-def addtodb(request):
-    recipients = []
-    total_res = 0
-    # get the list of maintainers from the dat file
-    maintainers = {}
-    with open('{}/maintainers.dat'.format(CONTRIBUTION_FORM_DATA)) as f:
-        for line in f:
-            (key, val) = line.split(":")
-            maintainers[key.strip()] = val.strip()
-        f.close()
-    # get the list all of files listed
-    files = request.POST.getlist('file[]')
-
-    # get the list of resource types
-    types = request.POST.getlist('resourceType[]')
-
-    # map the two list into a dictionary
-    dictionary = dict(zip(files, types))
-
-    # we will create descriptions only for those resources that have a
-    # resource type specified
-    valid = {}
-    recipients_resources = {}
-    contributor_resources = {}
-    base = '{}/unprocessed'.format(CONTRIBUTION_FORM_DATA)
-    for key, value in dictionary.items():
-        if dictionary[key] != "":
-            valid[key] = dictionary[key]
-    for file, type in valid.iteritems():
-        doc = etree.parse('{}/{}'.format(base, file))
-        c_fname = ''.join(doc.xpath("//userInfo/first_name/text()"))
-        c_lname = ''.join(doc.xpath("//userInfo/last_name/text()"))
-        c_username = ''.join(doc.xpath("//userInfo/user/text()"))
-
-        contributor = User.objects.get(first_name=c_fname,
-                                       last_name=c_lname,
-                                       username=c_username)
-        contributor_name = "{} {}".format(contributor.first_name.encode('utf-8'),
-                                          contributor.last_name.encode('utf-8'))
-        contributor_email = contributor.email
-
-        d = create_description(file, type, base, request.user)
-        # d[0]: resource, d[1]:person, d[2]: country
-        if not contributor_name in contributor_resources.keys():
-            contributor_resources[contributor_name] = {"email": contributor_email, "resources": []}
-        contributor_resources[contributor_name]["resources"].append(
-            d[0].identificationInfo.resourceName['en']
-        )
-        # add the contributor to owners nevertheless
-        d[0].owners.add(contributor.id)
-        res_maintainers = maintainers[d[2]].split(",")
-        users = []
-        for rm in res_maintainers:
-            rm_user = User.objects.get(username=rm)
-            users.append(rm_user)
-            d[0].owners.add(rm_user.id)
-            d[0].contactPerson.add(d[1])
-            info = "\nContact Details:\n" \
-                   "First Name: {}\n" \
-                   "Last Name: {}\n" \
-                   "Email: {}\n" \
-                   "Tel No: {}\n" \
-                   "Organization: {}".format \
-                (d[1].givenName, d[1].surname, d[1].communicationInfo.email,
-                 d[1].communicationInfo.telephoneNumber, d[1].affiliation)
-
-            if not rm_user.first_name + " " + rm_user.last_name in recipients:
-                recipients.append(rm_user.first_name + " " + rm_user.last_name)
-
-        if not recipients_resources.has_key(maintainers[d[2]]):
-            recipients_resources[maintainers[d[2]]] = {"count": 1}
-            recipients_resources[maintainers[d[2]]]["email"] = [rm.email for rm in users]
-        else:
-            recipients_resources[maintainers[d[2]]]["count"] += 1
-
-        total_res += 1
-
-    for recipient in recipients_resources.iterkeys():
-        if recipients_resources[recipient]["count"] > 0:
-            if recipients_resources[recipient]["count"] > 1:
-                title = "{} new resources from contributors".format(recipients_resources[recipient]["count"])
-                text = "You have received {} new resources from contributors. " \
-                       "Please check your ELRC-SHARE repository account.".format(
-                    recipients_resources[recipient]["count"])
-            else:
-                title = "1 new resource from contributors"
-                text = "You have received 1 new resource from contributors. " \
-                       "Please check your ELRC-SHARE repository account."
-
-            try:
-                send_mail(title, text, \
-                          'no-reply@elrc-share.ilsp.gr', recipients_resources[recipient]["email"], fail_silently=False)
-            except:
-                if total_res > 1:
-                    msg = '{} resources have been successfully imported into the database. '.format(total_res)
-                else:
-                    msg = '1 resource has been successfully imported into the database. '
-                messages.error(request, msg + 'However, there was a problem sending email to the maintainers.')
-                return redirect(manage_contributed_data)
-
-    ### email to contributors
-    for cr in contributor_resources:
-        lr_list = ""
-        mailto = contributor_resources[cr]['email']
-        for lr in contributor_resources[cr]['resources']:
-            lr_list += "\n\t" + str(contributor_resources[cr]['resources'].index(lr) + 1) + ". " + lr
-
-        msg_to_contributor = "Dear {},\n\n" \
-                             "Your resources" \
-                             "{}\n" \
-                             "have been imported into the ELRC-SHARE repository.\n" \
-                             "An ELRC member will now further describe your resources, " \
-                             "i.e. will complete the required metadata and review the " \
-                             "licencing conditions. During this process, we may " \
-                             "contact you for additional information. " \
-                             "Please, note that the description of your contributed resources " \
-                             "will be available for browsing and searching through the repository " \
-                             "only when this process is completed.\n\n" \
-                             "Thank you for sharing!\n\n" \
-                             "The ELRC-SHARE team".format(cr, lr_list).decode('utf-8')
-
-        try:
-            send_mail("Your resources in the ELRC-SHARE repository", msg_to_contributor, \
-                      'no-reply@elrc-share.ilsp.gr', [mailto], fail_silently=False)
-        except:
-            pass
-
-    if total_res > 1:
-
-        msg = u'{} resources have been successfully imported into ' \
-              u'the database. ' \
-              u'A notification email has been sent to the maintainers ({})'.format(total_res, u", ".join(recipients))
-        messages.success(request, msg)
-    elif total_res == 1:
-        msg = u'1 resource has been successfully imported into ' \
-              u'the database. ' \
-              u'A notification email has been sent to ' \
-              u'{}'.format(u", ".join(recipients))
-        messages.success(request, msg)
-    else:
-        msg = u'No Resources Selected'
-        messages.warning(request, msg)
-    return redirect(manage_contributed_data)
-
-
 def create_description(xml_file, type, base, user):
     # base = '{}/unprocessed'.format(WEB_FORM_STORAGE)
     doc = etree.parse('{}/{}'.format(base, xml_file))
@@ -1447,6 +1227,8 @@ def create_description(xml_file, type, base, user):
         "title": ''.join(doc.xpath("//resourceTitle//text()")),
         "description": ''.join(doc.xpath("//shortDescription//text()")),
         "languages": doc.xpath("//languages/item/text()"),
+        "domains": doc.xpath("//appropriatenessForDSI/item/text()"),
+        "licence": ''.join(doc.xpath("//licence//text()")),
         "userInfo": {
             "firstname": ''.join(doc.xpath("//userInfo/first_name/text()")),
             "lastname": ''.join(doc.xpath("//userInfo/last_name/text()")),
@@ -1458,12 +1240,13 @@ def create_description(xml_file, type, base, user):
 
         },
         "resource_file": ''.join(doc.xpath("//resource/administration/resource_file/text()")),
-        "dataset": ''.join(doc.xpath("//resource/administration/dataset/zip/text()"))
+        "dataset": doc.xpath("//resource/administration/dataset/uploaded_files/item/text()")
     }
     # Create a new Identification object
     identification = identificationInfoType_model.objects.create( \
         resourceName={'en': info['title'].encode('utf-8')},
-        description={'en': info['description'].encode('utf-8')}, )
+        description={'en': info['description'].encode('utf-8')},
+        appropriatenessForDSI=info['domains'])
     resource_creation = resourceCreationInfoType_model.objects.create(
         createdUsingELRCServices=False
     )
@@ -1613,7 +1396,8 @@ def create_description(xml_file, type, base, user):
     distribution = distributionInfoType_model.objects.create(
         availability=u"underReview",
         PSI=False)
-    licence_obj = licenceInfoType_model.objects.create(licence=u"underReview")
+    licence_obj, _ = licenceInfoType_model.objects.get_or_create(
+        licence=info['licence'])
     distribution.licenceInfo.add(licence_obj)
     resource.distributioninfotype_model_set.add(distribution)
     resource.save()
@@ -1628,20 +1412,31 @@ def create_description(xml_file, type, base, user):
     except:
         raise OSError, "STORAGE_PATH and LOCK_DIR must exist and be writable!"
 
-    # finally, if the user has provided a zip file dataset,
-    # move the dataset to the respective storage folder
-    if info['dataset'] != '':
-        data_source = '{}/{}'.format(base, info['dataset'])
-
-        shutil.move(data_source, '{}/{}'.format(data_destination, "archive.zip"))
+    # finally, move the dataset to the respective storage folder
+    if info['dataset']:
+        destination_zpath = os.path.join(data_destination, "archive.zip")
+        for source_fname in info['dataset']:
+            source_fpath = os.path.join(base, source_fname)
+            if source_fpath.endswith(".zip") and len(info['dataset']) == 1:
+                # if the user uploaded one single zip file, then move it to
+                # archive.zip as such
+                shutil.move(source_path, destination_zpath)
+            else:
+                # create archive.zip in the target directory and put the
+                # source_fname contents inside.
+                # Then, remove source_fname.
+                with zipfile.ZipFile(destination_zpath, "a") as zf:
+                    zf.write(source_fpath, arcname=source_fname)
+                    os.remove(source_fpath)
         resource.storage_object.compute_checksum()
         resource.storage_object.save()
         resource.storage_object.update_storage()
 
     # move the processed xml file to the web_form/processed folder
-    xml_source = '{}/{}'.format(base, xml_file)
+    xml_source = os.path.join(base, xml_file)
     processed_file = "{}_{}.xml".format(xml_file.split('_')[0], resource.id)
-    xml_destination = '{}/processed/{}'.format(CONTRIBUTION_FORM_DATA, processed_file)
+    xml_destination = os.path.join(CONTRIBUTION_FORM_DATA, "processed",
+                                   processed_file)
     shutil.move(xml_source, xml_destination)
 
     return (resource, cperson, info['userInfo']['country'])

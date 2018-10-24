@@ -181,7 +181,7 @@ class SearchTest(test_utils.IndexAwareTestCase):
 
         # create an groups used to get the proper results
         Group.objects.create(name='ecmembers')
-        Group.objects.create(name='elrcReviewers')
+        Group.objects.create(name='reviewers')
 
     def tearDown(self):
         """
@@ -364,7 +364,7 @@ class SearchTestPublishedResources(TestCase):
 
         # create an groups used to get the proper results
         Group.objects.create(name='ecmembers')
-        Group.objects.create(name='elrcReviewers')
+        Group.objects.create(name='reviewers')
 
         cls.importPublishedFixtures()
         # Make sure the index does not contain any stale entries:

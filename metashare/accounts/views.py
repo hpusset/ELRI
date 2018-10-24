@@ -39,13 +39,7 @@ def confirm(request, uuid):
     # Do not set user as staff/ editor
     user.is_staff = False
     user.groups.add(Group.objects.get(name='contributors'))
-    # For convenience, log user in:
-    # (We would actually have to authenticate the user before logging in,
-    # however, as we don't know the password, we manually set the authenication
-    # backend.)
-    user.backend = 'django.contrib.auth.backends.ModelBackend'
     user.save()
-    login(request, user)
 
     # Delete registration request instance.
     registration_request.delete()
@@ -63,7 +57,8 @@ def confirm(request, uuid):
         pass
 
     # Add a message to the user after successful creation.
-    messages.success(request, _("We have activated your user account."))
+    messages.success(request, _("We have activated user account for user {}."\
+                                .format(user.username)))
     
     # Redirect the user to the front page.
     return redirect('metashare.views.frontpage')
@@ -118,10 +113,13 @@ def create(request):
     """
     Creates a new user account request from a new user.
     """
+    group_choices = Group.objects.exclude(
+            id__in=EditorGroup.objects.values_list('id', flat=True))\
+            .values_list('name', 'name')
     # Check if the creation form has been submitted.
     if request.method == "POST":
         # If so, bind the creation form to HTTP POST values.
-        form = RegistrationRequestForm(request.POST)
+        form = RegistrationRequestForm(request.POST, group_choices=group_choices)
         
         # Check if the form has validated successfully.
         if form.is_valid():
@@ -137,51 +135,57 @@ def create(request):
 
             _profile = UserProfile.objects.get(user_id= _user.id)
             _profile.affiliation = form.cleaned_data['organization']
+            _profile.affiliation_address = form.cleaned_data['organization_address']
+            _profile.affiliation_phone_number = form.cleaned_data['organization_phone_number']
             _profile.country = form.cleaned_data['country']
-            if 'phone_number' in form.cleaned_data:
-                _profile.phone_number = form.cleaned_data['phone_number']
+            _profile.phone_number = form.cleaned_data['phone_number']
+            _profile.position = form.cleaned_data['position']
+            _profile.user.groups.add(
+                    Group.objects.get(name=form.cleaned_data['contributor_group']))
             _profile.save()
             # Create new RegistrationRequest instance.
             new_object = RegistrationRequest(user=_user)
             # Save new RegistrationRequest instance to django database.
             new_object.save()
-            
-            # Render confirmation email template with correct values.
-            data = {'firstname': _user.first_name,
-              'lastname': _user.last_name,
-              'shortname': _user.username, 'node_url': DJANGO_URL,
-              'confirmation_url': '{0}/accounts/confirm/{1}/'.format(
-                DJANGO_URL, new_object.uuid)}
-            email = render_to_string('accounts/confirmation.email', data)
-            
+            # Send e-mail to superusers
+            su_emails = [u.email for u in User.objects.filter(is_superuser=True)]
+            data = {
+                'username': _user.username,
+                'firstname': _user.first_name,
+                'lastname': _user.last_name,
+                'email': _user.email,
+                'telephone': _profile.phone_number,
+                'affiliation': _profile.affiliation,
+                'position': _profile.position,
+                'confirmation_url': '{0}/accounts/confirm/{1}/'.format(
+                    DJANGO_URL, new_object.uuid)}
+            email = render_to_string('accounts/registration.email', data)
             try:
-                # Send out confirmation email to the given email address.
-                send_mail(_('Please confirm your ELRC-SHARE user account'),
-                email, 'no-reply@elrc-share.eu', [_user.email],
-                fail_silently=False)
-            except: #SMTPException:
+                send_mail(_('New user registration'),
+                          email, 'no-reply@elri.eu',
+                          su_emails, fail_silently=False)
+            except:
+                # failed to send e-mail to superuser
                 # If the email could not be sent successfully, tell the user
                 # about it and also give the confirmation URL.
                 messages.error(request,
-                  _("There was an error sending out the confirmation email " \
-                      "for your registration account.  You can confirm your " \
-                      "account by <a href='%s'>clicking here</a>.")
-                    % (data['confirmation_url'],))
+                  _("There was an error sending out the notification email "
+                    "to the administrators. Please contact them directly."))
                 
                 # Redirect the user to the front page.
                 return redirect('metashare.views.frontpage')
             
             # Add a message to the user after successful creation.
             messages.success(request,
-              _("We have received your registration data and sent you an " \
-                "email with further activation instructions."))
+              _("We have received your registration data and sent the "
+                  "administrators a notification email."))
             
             # Redirect the user to the front page.
             return redirect('metashare.views.frontpage')
     
     # Otherwise, create an empty RegistrationRequestForm instance.
     else:
-        form = RegistrationRequestForm()
+        form = RegistrationRequestForm(group_choices=group_choices)
     
     dictionary = {'title': 'Create Account', 'form': form}
     return render_to_response('accounts/create_account.html', dictionary,

@@ -30,13 +30,6 @@
             font-size: 1.4em;
             color: #058dbe;
         }
-
-        #edelivery_modal p, li {
-            font-family: Arial, serif;
-            font-size: 16px;
-            line-height: 1.5;
-            color: #474747;
-        }
     </style>
     {% block links %}{% endblock %}
     <!-- Latest compiled and minified CSS -->
@@ -90,12 +83,22 @@
 
             </div>
             <!-- Textarea -->
-            <div class="form-group required">
+            <div class="form-group">
                 <label class="control-label" for="shortDescription">{% trans 'Resource short description' %}</label>
-                        <textarea class="form-control" id="shortDescription" name="shortDescription"
-                                  required=""></textarea>
+                        <textarea class="form-control" id="shortDescription" name="shortDescription"></textarea>
                 <span class="help-block contrib-help">{% blocktrans %}A short description, including any information considered useful about the resource, e.g. whether it's a dataset (collection of documents) or a lexicon, glossary, terminological resource, etc., its size, language(s), classification information (e.g. health reports, news bulletins, lexicon of sports terminology etc.){% endblocktrans %}</span>
             </div>
+            <div class="form-group">
+                <label class="control-label" for="resourceType">{% trans 'Resource type' %}</label>
+                <select name="resourceType">
+                    <option value="">------------</option>
+                    <option value="corpus">{% trans 'Corpus' %}</option>
+                    <option value="langdesc">{% trans 'Language Description' %}</option>
+                    <option value="lexicon">{% trans 'Lexical Conceptual Resource' %}</option>
+                </select>
+                <span class="help-block contrib-help">{% blocktrans %}The type of the resource: can be Corpus, Lexicon, or Language Description. Do not choose anything if you are not sure.{% endblocktrans %}</span>
+            </div>
+
             <!-- Text input-->
             <div class="form-group required">
                 <label class="control-label" for="languages">{% trans 'Language(s)' %}</label>
@@ -134,6 +137,47 @@
                     <span class="help-block contrib-help">{% trans 'The language(s) of the resource; for resources with multiple languages, hold down CTRL key to select multiple values' %}</span>
                 </div>
             </div>
+            <div class="form-group">
+                <label class="control-label" for="domains">{% trans 'Domain(s)' %}</label>
+                <div class="domain">
+                    <div id="tooltip_container"></div>
+                    <select class="form-control" multiple style="padding: 6px; height:200px" name="domains[]">
+                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources of European cultural heritage [<a target='_blank' href='https://www.europeana.eu/portal/en'>https://www.europeana.eu/portal/en</a>]" value="Europeana">{% trans 'eCulture' %}</option>
+                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for European national social security systems [<a target='_blank' href='https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/05/30/Electronic+Exchange+of+Social+Security+Information'>https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/05/30/Electronic+Exchange+of+Social+Security+Information</a>]" value="ElectronicExchangeOfSocialSecurityInformation">{% trans 'Electronic Exchange of Social Security Information' %}</option>
+                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for European health services. [<a target='_blank' href='https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/05/30/eHealth'>https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/05/30/eHealth</a>]" value="eHealth">{% trans 'eHealth' %}</option>
+                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for European judicial services. [<a target='_blank' href='https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/05/30/European+e-Justice+Portal'>https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/05/30/European+e-Justice+Portal</a>]" value="eJustice">{% trans 'eJustice' %}</option>
+                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for European procurement services. [<a target='_blank' href='https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/05/30/eProcurement'>https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/05/30/eProcurement</a>]" value="eProcurement">{% trans 'eProcurement' %}</option>
+                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources that can be publically shared to contribute to data re-use in Europe. [<a target='_blank' href='https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/03/13/Public+Open+Data%3A+access+to+re-usable+public+sector+information'>https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/03/13/Public+Open+Data%3A+access+to+re-usable+public+sector+information</a>]" value="OpenDataPortal">{% trans 'Public Open Data' %}</option>
+                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for the establishment of a safer internet for children. [<a target='_blank' href='https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/03/10/Safer+Internet%3A+a+better+and+safer+internet+for+children'>https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/03/10/Safer+Internet%3A+a+better+and+safer+internet+for+children</a>]" value="saferInternet">{% trans 'Safer Internet' %}</option>
+                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for the interconnection of business registers. [<a target='_blank' href='https://ec.europa.eu/cefdigital/wiki/pages/viewpage.action?pageId=46992657'>https://ec.europa.eu/cefdigital/wiki/pages/viewpage.action?pageId=46992657</a>]" value="BusinessRegistersInterconnectionSystem">{% trans 'Business Registers Interconnection System' %}</option>
+                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for Cybersecurity. [<a target='_blank' href='https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/05/30/Cybersecurity'>https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/05/30/Cybersecurity</a>]" value="Cybersecurity">{% trans 'Cybersecurity' %}</option>
+                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources in any field of activity." value="other">{% trans 'Other / Unknown' %}</option>
+                    </select>
+                    <span class="help-block contrib-help">
+                        {% trans 'Domain refers to information that belongs to a specific field of activity (e.g., culture or health) and is related to one of the building blocks of the European digital services indicated in the provided list. Digital resources that do not clearly belong to one of the provided domains can be left as Other/Unknown.' %}
+                    </span>
+                </div>
+            </div>
+            <div class="form-group required" id="licence">
+                <label class="control-label" for="licence">{% trans 'Licensing conditions' %}</label>
+                <select required name="licence">
+                    <option value="publicDomain">{% trans 'License-free' %}</option>
+                    <option value="CC-BY-4.0">{% trans 'Creative Commons - Attribution 4.0' %}</option>
+                    <option value="CC-BY-SA-4.0">{% trans 'Creative Commons - Attribution - ShareAlike 4.0' %}</option>
+                    <option value="CC-BY-NC-4.0">{% trans 'Creative Commons - Attribution - NonCommercial 4.0' %}</option>
+                    <option value="CC-BY-NC-SA-4.0">{% trans 'Creative Commons - Attribution - NonCommercial - ShareAlike 4.0' %}</option>
+                    <option value="non-standard/Other_Licence/Terms">{% trans 'Use External License' %}</option>
+                </select>
+                <span class="help-block contrib-help">{% blocktrans %}The licensing conditions for the resource.{% endblocktrans %}</span>
+            </div>
+            <div class="form-group required" id="licencefile" style="display:none">
+                <label class="control-label" for="licenceFile">{% trans 'License file' %}</label>
+                <input id="licenceFile" name="licenceFile"
+                       class="input-file" required=""
+                       type="file" accept=".pdf">
+                <span class="help-block contrib-help">{% trans 'Please upload license file in the <b>.pdf format</b>.' %}</span>
+            </div>
+
 {#            <div class="form-group required">#}
 {#                <label class="control-label" for="sensitive-info">Data contains sensitive information</label><br>#}
 {#                <select required class="form-control" style="width: 75px"#}
@@ -154,29 +198,19 @@
 {#                    <option value="false">NO</option>#}
 {#                </select>#}
 {#            </div>#}
-            <div class="form-group required" id="contributionmode">
-                <label class="control-label" for="contributionmode">{% trans 'Contribution Mode' %}</label><br>
-                <input type="radio" name="mode" value="uploadzip" checked> {% trans 'Upload ZIP archive' %}<br>
-                <input type="radio" name="mode" value="url"> {% trans 'Provide URL of resources' %}<br>
-                <input type="radio" name="mode" value="eDelivery"> {% trans 'eDelivery (Generate XML file to attach to your eDelivery contribution)' %}<br>
-                <span class="help-block contrib-help">{% trans 'Please select the way you wish to contribute your data. Uploading a ZIP archive is recommended.' %}</span>
-            </div>
             <!-- File Button -->
             <div class="form-group required" id="fileupload">
                 <label class="control-label" for="filebutton">{% trans 'Upload Resource' %}</label>
-                <input accept=".zip" id="filebutton" name="filebutton" class="input-file" type="file"
+                <input multiple accept=".zip,.doc,.docx,.odt,.pdf,.tmx,.sdltm,.xml,.tbx,.xls,.xlsx,.txt" id="filebutton" name="filebutton" class="input-file" type="file"
                        required="">
-                <span class="help-block contrib-help">{% trans 'Please upload a <strong>.zip file</strong> up to 100MB.' %}
+                <span class="help-block contrib-help">{% trans 'Please upload a <strong>.zip, .doc(x), .odt, .tmx, .sdltm, .xml, .tbx, .xls(x), or .txt file</strong> up to 100MB.' %}
                     </br>
-                    {% trans 'In case the <strong>.zip file</strong> file you wish to upload is larger than 100MB, please contact <a href="mailto:elrc-share@ilsp.gr">elrc-share@ilsp.gr</a>.' %}
+                    {% trans 'In case the file you wish to upload is larger than 100MB, please contact us to provide an SFTP link for direct download or consider uploading smaller files' %}
                 </span>
             </div>
-            <div class="form-group required" id="resourceurl" style="display: none">
-                <label class="control-label" for="resourceUrl">{% trans 'Resource URL' %}</label>
-                <input id="resourceUrl" name="resourceUrl" placeholder="" class="form-control input-md"
-                       required=""
-                       type="text">
-                <span class="help-block contrib-help">{% trans 'Please provide a URL containing the files you wish to contribute' %}</span>
+            <div class="form-group required" id="accept_tos">
+                {% static "metashare/LR-Upload-ToS.pdf" as lr_upload_tos %}
+                <input type="checkbox" name="accepttos" value="true" required="">{% blocktrans %}I agree with the <a target="_blank" href="{{ lr_upload_tos }}">Language resource upload Terms of Service for Data Holders</a>{% endblocktrans %}<br>
             </div>
             <!-- Button (Double) -->
             <div class="form-group">
@@ -194,26 +228,6 @@
             {% csrf_token %}
         </form>
     </div>
-    <div class="col-md-4" style="margin-top: 90px; margin-left: -10%;">
-        <div class="row">
-            <div class="col-md-8">
-                <img src="{{ STATIC_URL }}metashare/images/eDelivery.png" alt="">
-            </div>
-            <div class="col-md-10" style="margin: 0 10% 0 0;">
-                {#            <img src="{{ STATIC_URL }}metashare/images/cef_digital.svg" alt="">#}
-                <h4>{% trans 'Contribute Your Data Through eDelivery' %}</h4>
-                <div>
-                    {% blocktrans %}If you wish to share your data through
-                    <a href="https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/eDelivery" target="_blank">
-                        eDelivery
-                    </a>, you can use the ELRC-SHARE CEF eDelivery Access Point.
-                    For more information click <a data-toggle="modal" href="#edelivery_modal">here</a>.
-                    <br>In such a case, please fill in the form on the left
-                        and choose eDelivery in the Contribution mode.{% endblocktrans %}
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 <div class="uploadWin">
     <div id="status" style="padding: 3px;"></div>
@@ -224,76 +238,6 @@
     <div id="okbtn">
         <button class="btn btn-success btn-sm" id="ok" onclick="resetMessages()">OK
         </button>
-    </div>
-</div>
-<div class="modal fade" id="edelivery_modal" role="dialog">
-    <div class="modal-dialog" style="width:50%; font-size: 16px">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header" style="background-color: rgba(15, 141, 187, 0.62)">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">{% trans 'ELRC-SHARE eDelivery Help' %}</h4>
-            </div>
-            <div class="modal-body">
-                <p>
-                    {% blocktrans %}The ELRC-SHARE repository adopts the
-                    <a href="https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/Domibus+-+v3.3"
-                       target="_blank">Domibus</a> implementation
-                    of the eDelivery Building Block and it is available to accept payloads from your existing eDelivery
-                    Access Point.{% endblocktrans %}
-                </p>
-                <p>
-                    {% trans 'The ELRC-SHARE Access Point accepts messages containing <strong>two files as attachments</strong>:' %}
-                <ol>
-                    <li>{% trans 'an xml description of your dataset' %}<b>*</b></li>
-                    <li>{% trans 'the actual dataset in zip format, up to 400MB' %}</li>
-                </ol>
-                </p>
-                <p>
-                    {% blocktrans %}Before you can use the service, we need to add your Access Point to the ELRC-SHARE eDelivery trusted
-                    network. For trust to be established the following information is required:{% endblocktrans %}
-                <table class="table-striped">
-                    <tr>
-                        <td><strong>{% trans 'MSH Endpoint' %}</strong></td>
-                        <td>{% trans 'The endpoint of your Access Point' %}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>{% trans 'Gateway Party Name' %}</strong></td>
-                        <td>{% trans "The name of your Access Point's Gateway" %}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>{% trans 'Gateway Party ID' %}</strong></td>
-                        <td>{% trans "The identifier of your Access Point's Gateway" %}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>{% trans 'Public Certificate' %}</strong></td>
-                        <td>{% trans "Your Access Point's X.509 public certificate (.crt, .cert, .cer)" %}</td>
-                    </tr>
-                </table>
-                </p>
-                <p>
-                    {% blocktrans %}Once your application to join the ELRC-SHARE eDelivery trusted network is approved,
-                    the required ELRC-SHARE Access Point information will be emailed to you.
-                    Include this information in your Access Point configuration and complete the
-                    process of trust establishment. From this point onwards, you can send your
-                    data to the ELRC-SHARE Access Point using your implementation specific software.{% endblocktrans %}
-                </p>
-                <p>
-                    {% blocktrans %}Apply for eDelivery <a href="/accounts/edelivery_membership_application/">here</a>.{% endblocktrans %}
-                </p>
-                <p>
-                    <strong>*</strong><em>{% blocktrans %}The xml file is automatically generated and downloaded on your computer,
-                    once you fill in the required fields on the contribution form  and select the
-                    <strong>eDelivery</strong> contribution mode</em>.{% endblocktrans %}
-                </p>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">{% trans 'Close' %}</button>
-            </div>
-        </div>
-
     </div>
 </div>
 {% include "footer.html" %}

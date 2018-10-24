@@ -103,27 +103,27 @@ class StatusWorkflowTest(TestCase):
         resource = resourceInfoType_model.objects.get(pk=self.resource_id)
         self.assertEquals('published', resource.publication_status())
 
-    def test_can_unpublish_published(self):
+    def test_can_suspend_published(self):
         client = Client()
         client.login(username='manageruser', password='secret')        
         resource = resourceInfoType_model.objects.get(pk=self.resource_id)
         resource.storage_object.publication_status = PUBLISHED
         resource.storage_object.save()
         client.post(ADMINROOT,
-            {"action": "unpublish_action", ACTION_CHECKBOX_NAME: resource.id},
+            {"action": "suspend_action", ACTION_CHECKBOX_NAME: resource.id},
             follow=True)
         # fetch the resource from DB as our object is not up-to-date anymore
         resource = resourceInfoType_model.objects.get(pk=self.resource_id)
         self.assertEquals('ingested', resource.publication_status())
 
-    def test_cannot_unpublish_internal(self):
+    def test_cannot_suspend_internal(self):
         client = Client()
         client.login(username='manageruser', password='secret')        
         resource = resourceInfoType_model.objects.get(pk=self.resource_id)
         resource.storage_object.publication_status = INTERNAL
         resource.storage_object.save()
         client.post(ADMINROOT,
-            {"action": "unpublish_action", ACTION_CHECKBOX_NAME: resource.id},
+            {"action": "suspend_action", ACTION_CHECKBOX_NAME: resource.id},
             follow=True)
         # fetch the resource from DB as our object is not up-to-date anymore
         resource = resourceInfoType_model.objects.get(pk=self.resource_id)
@@ -145,7 +145,7 @@ class StatusWorkflowTest(TestCase):
         resource.storage_object.publication_status = PUBLISHED
         resource.storage_object.save()
         client.post(ADMINROOT,
-            {"action": "unpublish_action", ACTION_CHECKBOX_NAME: resource.id},
+            {"action": "suspend_action", ACTION_CHECKBOX_NAME: resource.id},
             follow=True)
         # fetch the resource from DB as our object is not up-to-date anymore
         resource = resourceInfoType_model.objects.get(pk=resource.id)
