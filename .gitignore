@@ -32,6 +32,5 @@ venv
 /metashare/tmx_management/settings.py
 /metashare/tmp/*
 /metashare/edelivery/files/*
-/metashare/static-files/*
 README_MORE.md
 README_VIC.md
