@@ -31,6 +31,5 @@ celery
 suds
 suds-requests
 pyjks
-
 xlsxwriter
 xmltodict
