@@ -100,7 +100,7 @@ def isOwner(username):
     return False
 
 
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser or u.groups.filter(name="reviewers").exists())
 def usagestats(request):
     """  Get usage of fields LR """
     expand_all = request.POST.get('expandall')
@@ -270,7 +270,7 @@ def _add_usage_meta(usage_fields, component_name, field, verbose_name, status, m
     return True
 
 
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser or u.groups.filter(name="reviewers").exists())
 def topstats(request):
     """ viewing statistics about the top LR and latest queries. """
     topdata = []
