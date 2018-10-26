@@ -1452,7 +1452,7 @@ def create_description(xml_file, type, base, user):
             if source_fpath.endswith(".zip") and len(info['dataset']) == 1:
                 # if the user uploaded one single zip file, then move it to
                 # archive.zip as such
-                shutil.move(source_path, destination_zpath)
+                shutil.move(source_fpath, destination_zpath)
             else:
                 # create archive.zip in the target directory and put the
                 # source_fname contents inside.
