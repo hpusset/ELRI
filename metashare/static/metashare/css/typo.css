@@ -23,7 +23,7 @@ h1, h2, h3, h4, h5, h6 {
     font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
 }
 
-.back h2::before {
+/*.back h2::before {
     background: #ffd500 none repeat scroll 0 0;
 }
 
@@ -35,7 +35,7 @@ h1::before, h2::before {
     margin-bottom: 20px;
     position: relative;
     width: 100px;
-}
+}*/
 
 h1 {
     color: #FF6600;
