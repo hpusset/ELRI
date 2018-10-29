@@ -83,6 +83,7 @@ class resourceInfoType_model(SchemaModel):
       ( u'identificationInfo', u'identificationInfo', REQUIRED ),
       ( u'distributionInfo', u'distributioninfotype_model_set', REQUIRED ),
       ( u'contactPerson', u'contactPerson', REQUIRED ),
+      ( u'groups', u'groups', REQUIRED ),
       ( u'metadataInfo', u'metadataInfo', REQUIRED ),
       ( u'versionInfo', u'versionInfo', RECOMMENDED ),
       ( u'resourceCreationInfo', u'resourceCreationInfo', RECOMMENDED ),
@@ -96,6 +97,7 @@ class resourceInfoType_model(SchemaModel):
     )
     __schema_classes__ = {
       u'contactPerson': "personInfoType_model",
+      u'groups': "Organization",
       u'corpusInfo': "corpusInfoType_model",
       u'distributionInfo': "distributionInfoType_model",
       u'identificationInfo': "identificationInfoType_model",
