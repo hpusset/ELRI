@@ -3,73 +3,48 @@
 
 {% block content %}
 
-    <div id="Managing_LRs" class="anchor"></div>
-    <h2>{% blocktrans %}Managing language resources with ERLI{% endblocktrans %}</h2>
+    <div id="ELRI_services" class="anchor"></div>
+    <h2>{% blocktrans %}ERLI Services{% endblocktrans %}</h2>
     <div class="content_box">
-        <p>{% blocktrans %}The ELRC-SHARE repository is intended for documenting, storing, browsing and accessing LRs that are
-            considered useful for feeding the CEF.AT platform.{% endblocktrans %}</p>
-        <p>{% blocktrans %}You are welcome to document and upload any LRs that you have identified as useful for this purpose. The <a
-                href="http://www.lr-coordination.eu" target="_blank">ELRC action</a> is looking for open data that can
-            be made available for re-use through open data initiatives, but also for commercially available datasets.{% endblocktrans %}
-        </p>
-        <p>{% blocktrans %}The LR descriptions (metadata) are licensed under the Creative Commons Attribution (CC-BY) version 4.0 or
-            higher. All LR providers are obliged to allow the harvesting of their metadata.{% endblocktrans %}</p>
-        <p>{% blocktrans %}Anyone can browse the inventory and view the resource descriptions; in addition, they may download resources
-            in accordance to the licensing terms under which they are provided.{% endblocktrans %}</p>
+        <p>{% blocktrans %}The ELRI project is intended to provide services related to the collection, preparation, storage and sharing of language resources. These services are provided via National Relay Stations, websites based in the Member States that are part of the initiative.{% endblocktrans %}</p>
+        
+        <p>{% blocktrans %}Users that have registered to an ELRI National Relay Stations can upload their data and benefit from fully prepared resources. For instance, users can upload collections of documents in different languages and retrieve translation memories that will have been created automatically by our integrated data processing engines.{% endblocktrans %}</p>
+        
+        <p>{% blocktrans %}Users can decide to share a given resource with a specific group of users, at the national level between similar public organisations, with the European Commission to help improve European public translation services, or with the community at large for data that can be shared without restrictions.{% endblocktrans %}</p>
+            
+        <p>{% blocktrans %}Only registered users can browse and download those resources that have been made available to the groups to which they belong, according to the licensing terms under which the resources are provided.{% endblocktrans %}</p>
+    </div>
+        
+    <div id="Managing_LRs" class="anchor"></div>
+    <h2>{% blocktrans %}Managing Language Resources{% endblocktrans %}</h2>
+    <div class="content_box">
+        <p>{% blocktrans %}To benefit from the services of this ELRI National Relay Station, users should follow the following procedure:{% endblocktrans %}</p>
+        <ul>
+            <li>{% blocktrans %}New users should first register <a href="../accounts/create/">here</a>. Once your account credentials have been validated, you can log in and either search (via the Browse Resources menu) or contribute ((via the Contribute Resources menu) language resources.{% endblocktrans %}</li>
+            
+            <li>{% blocktrans %}For each language resource, you will be asked to provide the languages of its content, a short title, the group with which you wish to share the resource, and the associated licensing conditions (see <a href="#Licensing_LRs">below</a>).{% endblocktrans %}</li>
 
-        <div id="Procedure_for_LR_provision" class="anchor"></div>
-        <h2>{% blocktrans %}Steps to follow for providing LRs{% endblocktrans %}</h2>
-        <div class="content_box">
-            <p>{% blocktrans %}All registered users can contribute LRs via the ELRC-SHARE repository according to the following
-                procedure:{% endblocktrans %}</p>
-            <ul>
-                <li>{% blocktrans %}First register <a href="../accounts/create/">here</a>; a valid email address is required for this
-                    process. Once you obtain the account credentials, you can log in and use a simple form (cf. menu
-                    item: "Contribute resources") to describe and upload LRs.{% endblocktrans %}
-                </li>
-                <li>{% blocktrans %}For each LR, you must provide at least a short description and a title in English and upload it in
-                    zipped format.{% endblocktrans %}
-                </li>
-                <li>{% blocktrans %}Following this submission, you will soon be contacted by an ELRC responsible who may ask for further
-                    information about the resource and its licensing conditions. During the documentation process, the
-                    resource descriptions are considered "internal" and can be viewed only by authorised editors of
-                    the ELRC consortium. When the documentation and the licensing conditions under
-                    which the resource is provided are finalised, the resource description (metadata record) will be
-                    made public through the inventory and the resource itself will be downloadable by users, in
-                    accordance to its licensing conditions.{% endblocktrans %}
-                </li>
-                <li>{% blocktrans %}Authorised users from the ELRC consortium ("editors") are assigned the task of enriching the
-                    descriptions of the resources provided by contributors according to the ELRC-SHARE metadata schema
-                    (adapted from the META-SHARE schema) and publishing them at the ELRC-SHARE inventory (cf. menu
-                    item:"Manage resources"). Each LR description must include the licensing terms under which the LR is
-                    provided - cf. <a href="#Licensing_LRs">below{% endblocktrans %}</a>.
-                </li>
-            </ul>
-        </div>
+            <li>{% blocktrans %}Users who require the creation of a specific group of users for sharing purposes, beyong the available user groups, can contact us via the Contact menu.{% endblocktrans %}</li>
+            
+            <li>{% blocktrans %}Once the resource has been fully prepared by our data processing engines, you will receive a notification email and will be able to download the prepared resource. If further information were needed about the resource and its licensing conditions, you may be contacted by an ELRI responsible.{% endblocktrans %}</li>
+            
+            <li>{% blocktrans %}Until clearance has been granted, the resource can only be viewed by authorised reviewers of the National Relay Station. Once clearing is granted, the prepared resource will be downloadable by users of the authorised group of users, in accordance to its licensing conditions.{% endblocktrans %}</li>
+            
+        </ul>
+    </div>
 
         <div id="Licensing_LRs" class="anchor"></div>
-        <h2>{% blocktrans %}Licensing LRs for the ELRC action{% endblocktrans %}</h2>
+        <h2>{% blocktrans %}Licensing Language Resources{% endblocktrans %}</h2>
         <div class="content_box">
-            <p>{% blocktrans %}Any grant of access to LRs through the ELRC-SHARE repository should include not only the right to read
+            <p>{% blocktrans %}Any grant of access to language resources via this National Relay Station should include not only the right to read
                 the relevant content but also to allow transformative uses, dissemination and distribution of such
-                resources
-                and their derivatives, according to the needs and policies of LR owners and users.{% endblocktrans %}</p>
-            <p>{% blocktrans %}To limit the complexity of licensing, we strongly advise LR providers to use one of the standard
-                licences, i.e. <b>Creative Commons</b> and open national licences (- cf. <a href="#Licences">table</a>
-                below). If, however, the LR comes with another licence, the licensing terms and conditions must be
-                documented in the metadata so that they are clearly available to all repository users.{% endblocktrans %}</p>
-            <p>{% blocktrans %}
-                A <a href="http://www.lr-coordination.eu/helpdesk" target="_blank">helpdesk facility</a> has been set up
-                for assistance in understanding, choosing and using any of these licences and other legal tools, as well
-                as the metadata required for the documentation of the licence.{% endblocktrans %}</p>
-            <p>{% blocktrans %}The rights of use of the resource, any possible restrictions, as well as rights and restrictions on the
-                original raw data are under the control and responsibility of the resource owners. The repository
-                acts mainly as a facilitator for the search-and-get procedure while providing
-                guidelines and metadata curation activities.{% endblocktrans %}</p>
-            <p>{% blocktrans %}Metadata elements regarding rights of use, availability and distribution are among the mandatory elements
-                of the metadata schema and are shown to users so that they can promptly understand what they are allowed
-                to do with a specific resource. Users are asked to always refer to these metadata before using any of
-                the resources in this repository.{% endblocktrans %}</p>
+                resources and their derivatives, according to the needs and policies of language resource owners and users.{% endblocktrans %}</p>
+            
+            <p>{% blocktrans %}To limit the complexity of licensing, we strongly advise data providers to use one of the standard
+                licences, i.e. <b>Creative Commons</b> and open national licences indicated below, which are pre-selected in the data upload form for convenience.{% endblocktrans %}</p>
+            
+            <p>{% blocktrans %}Users can also provide a licence of their choice by uploading a PDF file detailing the licensing conditions. These user-specific licenses will be reviewed by responsibles from the ELRI National Relay Station to assess whether this specific license meets the required terms of conditions for sharing via ELRI.{% endblocktrans %}</p>
+                                                
             <div id="Standard_and_National_Open_Licences" class="anchor"></div>
             <h3>{% blocktrans %}Licences{% endblocktrans %}</h3>
             <table id="Licences">
@@ -106,21 +81,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>CC-BY-NC-ND-4.0</td>
-                    <td><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"
-                           target="_blank">Creative Commons Attribution- NonCommercial-NoDerivatives v4.0</a></td>
-                    </td>
-                </tr>
-                <tr>
                     <td>CC-BY-NC-SA-4.0</td>
                     <td><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
                            target="_blank">Creative Commons Attribution-NonCommercial-ShareAlike v4.0</a></td>
-                    </td>
-                </tr>
-                <tr>
-                    <td>CC-BY-ND-4.0</td>
-                    <td><a href="https://creativecommons.org/licenses/by-nd/4.0/"
-                           target="_blank">Creative Commons Attribution-NoDerivatives v4.0</a></td>
                     </td>
                 </tr>
                 <tr>
@@ -130,96 +93,17 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>ODbL-1.0</td>
-                    <td><a href="http://www.opendatacommons.org/licenses/odbl/1.0/"
-                           target="_blank">ODC Open Database License v1.0</a></td>
-                    </td>
-                </tr>
-                <tr>
-                    <td>ODC-BY-1.0</td>
-                    <td><a href="http://opendatacommons.org/licenses/by/" target="_blank">Open Data Commons Attribution
-                        License</a></td>
-                    </td>
-                </tr>
-                <tr>
-                    <td>OGL-3.0</td>
-                    <td><a href="http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
-                           target="_blank">Open Government Licence (UK)</a></td>
-                    </td>
-                </tr>
-                <tr>
-                    <td>PDDL-1.0</td>
-                    <td><a href="https://opendatacommons.org/licenses/pddl/1.0/"
-                           target="_blank">ODC Public Domain Dedication & License 1.0</a></td>
-                    </td>
-                </tr>
-                <tr>
                     <td>openUnder_PSI</td>
                     <td>{% blocktrans %}Used for resources that are PSI-compliant and no further information is required or available{% endblocktrans %}
                     </td>
                     </td>
                 </tr>
-                <tr>
-                    <td>CC-BY-3.0</td>
-                    <td><a href="https://creativecommons.org/licenses/by/3.0/"
-                           target="_blank">Creative Commons Attribution v3.0</a></td>
-                    </td>
-                </tr>
-                <tr>
-                    <td>CC-BY-NC-3.0</td>
-                    <td><a href="https://creativecommons.org/licenses/by-nc/3.0/"
-                           target="_blank">Creative Commons Attribution-NonCommercial v3.0</a></td>
-                    </td>
-                </tr>
-                <tr>
-                    <td>CC-BY-NC-ND-3.0</td>
-                    <td><a href="https://creativecommons.org/licenses/by-nc-nd/3.0/"
-                           target="_blank">Creative Commons Attribution- NonCommercial-NoDerivatives v3.0</a></td>
-                    </td>
-                </tr>
-                <tr>
-                    <td>CC-BY-NC-SA-3.0</td>
-                    <td><a href="https://creativecommons.org/licenses/by-nc-sa/3.0/"
-                           target="_blank">Creative Commons Attribution-NonCommercial-ShareAlike v3.0</a></td>
-                    </td>
-                </tr>
-                <tr>
-                    <td>CC-BY-ND-3.0</td>
-                    <td><a href="https://creativecommons.org/licenses/by-nd/3.0/"
-                           target="_blank">Creative Commons Attribution-NoDerivatives v3.0</a></td>
-                    </td>
-                </tr>
-                <tr>
-                    <td>CC-BY-SA-3.0</td>
-                    <td><a href="https://creativecommons.org/licenses/by-sa/3.0/"
-                           target="_blank">Creative Commons Attribution-ShareAlike v3.0</a></td>
-                    </td>
-                </tr>
+
                 <!-- National Data Licences -->
                 <tr>
                     <td colspan="2">
                         <div style="font-size:1.2em; color: #4d4d4d;;">{% blocktrans %}National Data Licences{% endblocktrans %}</div>
                         <hr/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>dl-de/by-2-0</td>
-                    <td><a href="https://www.govdata.de/dl-de/by-2-0"
-                           target="_blank">Datenlizenz Deutschland – Namensnennung – Version 2.0</a> (Germany)
-                    </td>
-                    </td>
-                </tr>
-                <tr>
-                    <td>dl-de/zero-2-0</td>
-                    <td><a href="https://www.govdata.de/dl-de/zero-2-0"
-                           target="_blank">Datenlizenz Deutschland – Zero – Version 2.0</a> (Germany)
-                    </td>
-                    </td>
-                </tr>
-                <tr>
-                    <td>IODL-1.0</td>
-                    <td><a href="http://www.formez.it/iodl/" target="_blank">Italian Open Data License v1.0</a> (Italy)
-                    </td>
                     </td>
                 </tr>
                 <tr>
@@ -230,139 +114,7 @@
                     </td>
                     </td>
                 </tr>
-                <tr>
-                    <td>NCGL-1.0</td>
-                    <td>
-                        <a href="http://www.nationalarchives.gov.uk/doc/non-commercial-government-licence/non-commercial-government-licence.htm"
-                           target="_blank">Non-Commercial Government Licence</a> (UK)
-                    </td>
-                    </td>
-                </tr>
-                <tr>
-                    <td>NLOD-1.0</td>
-                    <td><a href="http://data.norge.no/nlod/en/1.0"
-                           target="_blank">Norwegian Licence for Open Government Data</a> (Norway)
-                    </td>
-                    </td>
-                </tr>
-                <!-- International Software Licences -->
-                <tr>
-                    <td colspan="2">
-                        <div style="font-size:1.2em; color: #4d4d4d;;">{% blocktrans %}International Software Licences{% endblocktrans %}</div>
-                        <hr/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>AGPL-3.0</td>
-                    <td><a href="http://www.opensource.org/licenses/AGPL-3.0"
-                           target="_blank">GNU Affero General Public License v3.0</a></td>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Apache-2.0</td>
-                    <td><a href="http://www.apache.org/licenses/LICENSE-2.0"
-                           target="_blank">Apache License 2.0</a></td>
-                    </td>
-                </tr>
-                <tr>
-                    <td>BSD-2-Clause</td>
-                    <td><a href="http://www.opensource.org/licenses/BSD-2-Clause"
-                           target="_blank">BSD 2-clause "Simplified" License</a></td>
-                    </td>
-                </tr>
-                <tr>
-                    <td>BSD-3-Clause</td>
-                    <td><a href="http://www.opensource.org/licenses/BSD-3-Clause"
-                           target="_blank">BSD 3-clause "New" or "Revised" License</a></td>
-                    </td>
-                </tr>
-                <tr>
-                    <td>BSD-4-Clause</td>
-                    <td><a href="https://spdx.org/licenses/BSD-4-Clause.html"
-                           target="_blank">BSD 4-clause "Original" or "Old" License</a></td>
-                    </td>
-                </tr>
-                <tr>
-                    <td>EPL-1.0</td>
-                    <td><a href="http://www.eclipse.org/legal/epl-v10.html"
-                           target="_blank">Eclipse Public License 1.0</a></td>
-                    </td>
-                </tr>
-                <tr>
-                    <td>GFDL-1.3</td>
-                    <td><a href="http://www.gnu.org/licenses/fdl-1.3.txt"
-                           target="_blank">GNU Free Documentation License v1.3</a></td>
-                    </td>
-                </tr>
-                <tr>
-                    <td>GPL-3.0</td>
-                    <td><a href="http://www.gnu.org/licenses/gpl-3.0-standalone.html"
-                           target="_blank">GNU General Public License v3.0 only</a></td>
-                    </td>
-                </tr>
-                <tr>
-                    <td>LGPL-3.0</td>
-                    <td><a href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html"
-                           target="_blank">GNU Lesser General Public License v3.0 only</a></td>
-                    </td>
-                </tr>
-                <tr>
-                    <td>MIT</td>
-                    <td><a href="http://www.opensource.org/licenses/MIT"
-                           target="_blank">MIT License</a></td>
-                    </td>
-                </tr>
-                <!-- International Software & Data Licences -->
-                <tr>
-                    <td colspan="2">
-                        <div style="font-size:1.2em; color: #4d4d4d;;">{% blocktrans %}International Software & Data Licences{% endblocktrans %}</div>
-                        <hr/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>EUPL-1.0</td>
-                    <td><a href="http://ec.europa.eu/idabc/servlets/Doc027f.pdf?id=31096"
-                           target="_blank">European Union Public Licence 1.0</a></td>
-                    </td>
-                </tr>
-                <tr>
-                    <td>EUPL-1.1</td>
-                    <td><a href="https://joinup.ec.europa.eu/sites/default/files/custom-page/attachment/eupl1.1.-licence-en_0.pdf"
-                           target="_blank">European Union Public Licence 1.1</a></td>
-                    </td>
-                </tr>
-                <tr>
-                    <td>EUPL-1.2</td>
-                    <td><a href="https://joinup.ec.europa.eu/sites/default/files/custom-page/attachment/eupl_v1.2_en.pdf"
-                           target="_blank">European Union Public Licence 1.2</a></td>
-                    </td>
-                </tr>
                 <!-- Other -->
-                <tr>
-                    <td colspan="2">
-                        <div style="font-size:1.2em; color: #4d4d4d;;">{% blocktrans %}Other{% endblocktrans %}</div>
-                        <hr/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>publicDomain</td>
-                    <td>{% blocktrans %}Used for resources that are free of all known legal restrictions{% endblocktrans %}
-                    </td>
-                    </td>
-                </tr>
-                <tr>
-                    <td>non-standard/Other_licence/Terms</td>
-                    <td>{% blocktrans %}Resources with this value are distributed with a non-standard or proprietary licence. Resource
-                        providers are prompted to provide the licence text or url of the resource for further details
-                        about the restrictions and/or conditions of use and other obligations.{% endblocktrans %}
-                    </td>
-                    </td>
-                </tr>
-                <tr>
-                    <td>underReview</td>
-                    <td>{% blocktrans %}Used for resources whose licence value is pending{% endblocktrans %}</td>
-                    </td>
-                </tr>
                 <tbody>
             </table>
         </div>
