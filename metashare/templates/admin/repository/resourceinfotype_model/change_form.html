@@ -74,6 +74,11 @@
                                 {% endif %}
                             </optgroup>
                             <optgroup label="Validation">
+                                {% if original.storage_object.publication_status == 'g' %}
+                                    <option label="Manually-Validate Language Resource"
+                                            value="validaterl/">Manually-Validate Language Resource
+                                    </option>
+                                {% endif %}
                                 {% if original.storage_object.get_validation %}
                                     <option label="Replace Validation Report (.PDF)" value="upload-report/">
                                         Replace Validation Report (.PDF)
