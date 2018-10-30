@@ -46,14 +46,6 @@
 </head>
 <body style="position: relative;">
 {% include 'header.html' %}
-    
-<!--
-<div class="back" style="margin-top: 20px">
-    <div style="width: 100% !important; height:450px; text-align: center; background-image: url('{{ STATIC_URL }}metashare/images/iStock_000055931356_XXXLarge_web.jpg'); background-position: center; background-repeat: no-repeat; border-bottom: 1px solid; ">
-        <h2 style=" text-align: left; left: 10%; color: white;  font-size: 45px;position:relative;top:170px; text-shadow: 1px 1px #000;">
-            {% trans 'Data Contribution' %}</h2></div>
-</div>
--->
 
 <div class="overlay"></div>
 {% if message %}
@@ -70,9 +62,8 @@
     </div>
 </noscript>
 
-        
-<div class="row">    
-    <div class="col-md-11">                
+<div class="row">
+    <div class="col-md-11">
         <form id="simple_form" name="simple_form" style="margin-left: 25%; margin-top: 80px" class="col-md-7"
               action="{% url 'contribute' %}" method="post"
               data-toggle="validator" enctype="multipart/form-data" encoding="multipart/form-data">
@@ -80,11 +71,10 @@
 
             <span class="help-block contrib-help">
                 <h3>{% trans "Uploading your data" %}</h3>
-                {% blocktrans %}Please provide the required information below for the data you wish to upload. Once uploaded, the ELRI engines will process your data with the goal of providing you, and users of the group of your choice, with a fully prepared language resource. 
+                {% blocktrans %}Please provide the required information below for the data you wish to upload. Once uploaded, the ELRI engines will process your data with the goal of providing you, and users of the group of your choice, with a fully prepared language resource.
                 <br>
-                Once your resource has been fully processed, you will be notified via email and will be able to download it from this repository.{% endblocktrans %}            
+                Once your resource has been fully processed, you will be notified via email and will be able to download it from this repository.{% endblocktrans %}
             </span>
-            
             <!-- Text input-->
             <div class="form-group required">
                 
@@ -157,7 +147,7 @@
                 <div class="domain">
                     <div id="tooltip_container"></div>
                     <select class="form-control" multiple style="padding: 6px; height:200px" name="domains[]">
-                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources in any field of activity." value="other">{% trans 'Other / Unknown' %}</option>                        
+                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources in any field of activity." value="other">{% trans 'Other / Unknown' %}</option>
                         <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources of European cultural heritage [<a target='_blank' href='https://www.europeana.eu/portal/en'>https://www.europeana.eu/portal/en</a>]" value="Europeana">{% trans 'eCulture' %}</option>
                         <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for European national social security systems [<a target='_blank' href='https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/05/30/Electronic+Exchange+of+Social+Security+Information'>https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/05/30/Electronic+Exchange+of+Social+Security+Information</a>]" value="ElectronicExchangeOfSocialSecurityInformation">{% trans 'Electronic Exchange of Social Security Information' %}</option>
                         <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for European health services. [<a target='_blank' href='https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/05/30/eHealth'>https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/05/30/eHealth</a>]" value="eHealth">{% trans 'eHealth' %}</option>
@@ -237,8 +227,10 @@
                     <span class="help-block contrib-help">{% trans 'The group(s) the language resource is shared with.' %}</span>
                 </div>
             </div>
+            <!-- Terms of Service confirmation -->
             <div class="form-group required" id="accept_tos">
-                <input type="checkbox" name="accepttos" value="true" required="">{% blocktrans %}I agree with the <a href="/elri/legal#Sharing">Language Resource upload Terms of Service for Data Holders</a> {% endblocktrans %}<br>
+                {% url 'legal' as legal_url %}
+                <input type="checkbox" name="accepttos" value="true" required="">{% blocktrans %}I agree with the <a target="_blank" href="{{ legal_url }}#Sharing">Language Resource upload Terms of Service for Data Holders</a> {% endblocktrans %}<br>
             </div>
         
         
