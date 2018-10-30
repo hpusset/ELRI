@@ -6,7 +6,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>{% spaceless %}{% block title %}{% trans 'ELRC-SHARE Repository' %}{% endblock %}{% endspaceless %}</title>
+    <title>{% spaceless %}{% block title %}{% trans 'ELRI' %}{% endblock %}{% endspaceless %}</title>
     <meta name="description" content="{% spaceless %}{% block description %}ELRC-SHARE: a repository used for documenting, storing, browsing and accessing Language Resources.{% endblock %}{% endspaceless %}"/>
     <meta name="keywords" content="{% spaceless %}{% block keywords %}ELRC-SHARE, language resources, language tools, ELRC, European Language Resource Coordination{% endblock %}{% endspaceless %}"/>
     <link rel="shortcut icon" href="{{ STATIC_URL }}metashare/images/favicon.ico"/>
@@ -46,11 +46,15 @@
 </head>
 <body style="position: relative;">
 {% include 'header.html' %}
+    
+<!--
 <div class="back" style="margin-top: 20px">
     <div style="width: 100% !important; height:450px; text-align: center; background-image: url('{{ STATIC_URL }}metashare/images/iStock_000055931356_XXXLarge_web.jpg'); background-position: center; background-repeat: no-repeat; border-bottom: 1px solid; ">
         <h2 style=" text-align: left; left: 10%; color: white;  font-size: 45px;position:relative;top:170px; text-shadow: 1px 1px #000;">
             {% trans 'Data Contribution' %}</h2></div>
 </div>
+-->
+
 <div class="overlay"></div>
 {% if message %}
     <div class="{{ status }}">{{ message }}</div>
@@ -65,15 +69,25 @@
         {% trans 'Please make sure that you have javascript enabled and refresh the page before proceeding with your contribution.' %}
     </div>
 </noscript>
-<div class="row">
-    <div class="col-md-8">
-        <form id="simple_form" name="simple_form" style="margin-left: 15%" class="col-md-7"
+
+        
+<div class="row">    
+    <div class="col-md-11">                
+        <form id="simple_form" name="simple_form" style="margin-left: 25%; margin-top: 80px" class="col-md-7"
               action="{% url 'contribute' %}" method="post"
               data-toggle="validator" enctype="multipart/form-data" encoding="multipart/form-data">
             <!-- Form Name -->
-            <legend style="padding:20px">{% trans 'New Resource' %}</legend>
+
+            <span class="help-block contrib-help">
+                <h3>{% trans "Uploading your data" %}</h3>
+                {% blocktrans %}Please provide the required information below for the data you wish to upload. Once uploaded, the ELRI engines will process your data with the goal of providing you, and users of the group of your choice, with a fully prepared language resource. 
+                <br>
+                Once your resource has been fully processed, you will be notified via email and will be able to download it from this repository.{% endblocktrans %}            
+            </span>
+            
             <!-- Text input-->
             <div class="form-group required">
+                
                 <label class="control-label" for="resourceTitle">{% trans 'Resource Title' %}</label>
 
                 <input id="resourceTitle" name="resourceTitle" placeholder="" class="form-control input-md"
@@ -82,11 +96,12 @@
                 <span class="help-block contrib-help">{% trans 'The name by which the resource is already known or by which you would like it to be known; e.g. "The GSRT bilingual corpus of Greek-English bulletins"' %}</span>
 
             </div>
+            
             <!-- Textarea -->
             <div class="form-group">
                 <label class="control-label" for="shortDescription">{% trans 'Resource short description' %}</label>
                         <textarea class="form-control" id="shortDescription" name="shortDescription"></textarea>
-                <span class="help-block contrib-help">{% blocktrans %}A short description, including any information considered useful about the resource, e.g. whether it's a dataset (collection of documents) or a lexicon, glossary, terminological resource, etc., its size, language(s), classification information (e.g. health reports, news bulletins, lexicon of sports terminology etc.){% endblocktrans %}</span>
+                <span class="help-block contrib-help">{% blocktrans %}[Optional] A short description, including any information considered useful about the resource, e.g. whether it's a dataset (collection of documents) or a lexicon, glossary, terminological resource, etc., its size, language(s), classification information (e.g. health reports, news bulletins, lexicon of sports terminology etc.){% endblocktrans %}</span>
             </div>
             <div class="form-group">
                 <label class="control-label" for="resourceType">{% trans 'Resource type' %}</label>
@@ -96,7 +111,7 @@
                     <option value="langdesc">{% trans 'Language Description' %}</option>
                     <option value="lexicon">{% trans 'Lexical Conceptual Resource' %}</option>
                 </select>
-                <span class="help-block contrib-help">{% blocktrans %}The type of the resource: can be Corpus, Lexicon, or Language Description. Do not choose anything if you are not sure.{% endblocktrans %}</span>
+                <span class="help-block contrib-help">{% blocktrans %}[Optional] The type of the resource: can be Corpus, Lexicon, or Language Description. Do not choose anything if you are not sure.{% endblocktrans %}</span>
             </div>
 
             <!-- Text input-->
@@ -142,6 +157,7 @@
                 <div class="domain">
                     <div id="tooltip_container"></div>
                     <select class="form-control" multiple style="padding: 6px; height:200px" name="domains[]">
+                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources in any field of activity." value="other">{% trans 'Other / Unknown' %}</option>                        
                         <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources of European cultural heritage [<a target='_blank' href='https://www.europeana.eu/portal/en'>https://www.europeana.eu/portal/en</a>]" value="Europeana">{% trans 'eCulture' %}</option>
                         <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for European national social security systems [<a target='_blank' href='https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/05/30/Electronic+Exchange+of+Social+Security+Information'>https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/05/30/Electronic+Exchange+of+Social+Security+Information</a>]" value="ElectronicExchangeOfSocialSecurityInformation">{% trans 'Electronic Exchange of Social Security Information' %}</option>
                         <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for European health services. [<a target='_blank' href='https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/05/30/eHealth'>https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/05/30/eHealth</a>]" value="eHealth">{% trans 'eHealth' %}</option>
@@ -151,10 +167,9 @@
                         <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for the establishment of a safer internet for children. [<a target='_blank' href='https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/03/10/Safer+Internet%3A+a+better+and+safer+internet+for+children'>https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/03/10/Safer+Internet%3A+a+better+and+safer+internet+for+children</a>]" value="saferInternet">{% trans 'Safer Internet' %}</option>
                         <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for the interconnection of business registers. [<a target='_blank' href='https://ec.europa.eu/cefdigital/wiki/pages/viewpage.action?pageId=46992657'>https://ec.europa.eu/cefdigital/wiki/pages/viewpage.action?pageId=46992657</a>]" value="BusinessRegistersInterconnectionSystem">{% trans 'Business Registers Interconnection System' %}</option>
                         <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for Cybersecurity. [<a target='_blank' href='https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/05/30/Cybersecurity'>https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/05/30/Cybersecurity</a>]" value="Cybersecurity">{% trans 'Cybersecurity' %}</option>
-                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources in any field of activity." value="other">{% trans 'Other / Unknown' %}</option>
                     </select>
                     <span class="help-block contrib-help">
-                        {% trans 'Domain refers to information that belongs to a specific field of activity (e.g., culture or health) and is related to one of the building blocks of the European digital services indicated in the provided list. Digital resources that do not clearly belong to one of the provided domains can be left as Other/Unknown.' %}
+                        {% trans '[Optional] Domain refers to information that belongs to a specific field of activity (e.g., culture or health) and is related to one of the building blocks of the European digital services indicated in the provided list. Digital resources that do not clearly belong to one of the provided domains can be left as Other/Unknown.' %}
                     </span>
                 </div>
             </div>
@@ -203,9 +218,9 @@
                 <label class="control-label" for="filebutton">{% trans 'Upload Resource' %}</label>
                 <input multiple accept=".zip,.doc,.docx,.odt,.pdf,.tmx,.sdltm,.xml,.tbx,.xls,.xlsx,.txt" id="filebutton" name="filebutton" class="input-file" type="file"
                        required="">
-                <span class="help-block contrib-help">{% trans 'Please upload a <strong>.zip, .doc(x), .odt, .tmx, .sdltm, .xml, .tbx, .xls(x), or .txt file</strong> up to 100MB.' %}
+                <span class="help-block contrib-help">{% trans 'Please upload a single <strong>.zip</strong> file or any number of files of the following type: <strong>.doc(x), .odt, .tmx, .sdltm, .xml, .tbx, .xls(x), or .txt file</strong> up to 100MB.' %}
                     </br>
-                    {% trans 'In case the file you wish to upload is larger than 100MB, please contact us to provide an SFTP link for direct download or consider uploading smaller files' %}
+                    {% trans 'In case the data you wish to upload are larger than 100MB, please contact us to provide an SFTP link for direct download or consider uploading smaller files' %}
                 </span>
             </div>
             <!-- Group selection -->
@@ -223,9 +238,10 @@
                 </div>
             </div>
             <div class="form-group required" id="accept_tos">
-                {% static "metashare/LR-Upload-ToS.pdf" as lr_upload_tos %}
-                <input type="checkbox" name="accepttos" value="true" required="">{% blocktrans %}I agree with the <a target="_blank" href="{{ lr_upload_tos }}">Language resource upload Terms of Service for Data Holders</a>{% endblocktrans %}<br>
+                <input type="checkbox" name="accepttos" value="true" required="">{% blocktrans %}I agree with the <a href="/elri/legal#Sharing">Language Resource upload Terms of Service for Data Holders</a> {% endblocktrans %}<br>
             </div>
+        
+        
             <!-- Button (Double) -->
             <div class="form-group">
                 <label class="control-label" for="submit"></label>

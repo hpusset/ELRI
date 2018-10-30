@@ -16,6 +16,7 @@ test-tmp
 stamp-h1
 xdiff
 xdiff-config.h
+*.err
 *.out
 *.diff
 media/images/emails/*.jpg
@@ -27,7 +28,17 @@ opt/
 venv
 # temporary
 .travis.yml
-/metashare/contributions_data/*
-/metashare/tmx_management/settings.py
-/metashare/tmp/*
-/metashare/edelivery/files/*
+metashare/contributions_data/*
+metashare/tmx_management/settings.py
+metashare/tmp/*
+metashare/edelivery/files/*
+metashare/static-files/
+solr/*.err
+solr/*.out
+README_MORE.md
+README_VIC.md
+metashare/accounts/django_migrations/
+metashare/repository/django_migrations/
+metashare/storage/django_migrations/
+metashare/stats/django_migrations/
+metashare/recommendations/django_migrations/
