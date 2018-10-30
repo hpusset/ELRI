@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-13 16:42+0200\n"
+"POT-Creation-Date: 2018-10-30 18:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: static/admin/js/SelectFilter2.js:47
-#, javascript-format
+#, c-format
 msgid "Available %s"
 msgstr ""
 
@@ -39,7 +39,7 @@ msgid "Remove"
 msgstr ""
 
 #: static/admin/js/SelectFilter2.js:75
-#, javascript-format
+#, c-format
 msgid "Chosen %s"
 msgstr ""
 
@@ -51,26 +51,26 @@ msgstr ""
 msgid "Clear all"
 msgstr ""
 
-#: static/admin/js/actions.min.js:1
+#: static/admin/js/actions.js:22 static/admin/js/actions.min.js:1
 msgid "%(sel)s of %(cnt)s selected"
 msgid_plural "%(sel)s of %(cnt)s selected"
 msgstr[0] ""
 msgstr[1] ""
 
-#: static/admin/js/actions.min.js:5
+#: static/admin/js/actions.js:114 static/admin/js/actions.min.js:5
 msgid ""
 "You have unsaved changes on individual editable fields. If you run an "
 "action, your unsaved changes will be lost."
 msgstr ""
 
-#: static/admin/js/actions.min.js:6
+#: static/admin/js/actions.js:126 static/admin/js/actions.min.js:6
 msgid ""
 "You have selected an action, but you haven't saved your changes to "
 "individual fields yet. Please click OK to save. You'll need to re-run the "
 "action."
 msgstr ""
 
-#: static/admin/js/actions.min.js:6
+#: static/admin/js/actions.js:128 static/admin/js/actions.min.js:6
 msgid ""
 "You have selected an action, and you haven't made any changes on individual "
 "fields. You're probably looking for the Go button rather than the Save "
@@ -124,18 +124,23 @@ msgstr ""
 msgid "Tomorrow"
 msgstr ""
 
-#: static/admin/js/collapse.min.js:8 static/admin/js/collapse.min.js:19
-msgid "Show"
-msgstr ""
-
-#: static/admin/js/collapse.min.js:16
-msgid "Hide"
-msgstr ""
-
-#: static/admin/js/dateparse.js:32
+#: static/admin/js/calendar.js:8 static/admin/js/dateparse.js:32
 msgid ""
 "January February March April May June July August September October November "
 "December"
+msgstr ""
+
+#: static/admin/js/calendar.js:9
+msgid "S M T W T F S"
+msgstr ""
+
+#: static/admin/js/collapse.js:8 static/admin/js/collapse.js.c:19
+#: static/admin/js/collapse.min.js:8 static/admin/js/collapse.min.js.c:19
+msgid "Show"
+msgstr ""
+
+#: static/admin/js/collapse.js:16 static/admin/js/collapse.min.js:16
+msgid "Hide"
 msgstr ""
 
 #: static/admin/js/dateparse.js:33
@@ -145,48 +150,31 @@ msgstr ""
 #: static/metashare/js/choice-type-widget.js:18
 msgid ""
 "Could not open popup window!\n"
-"Maybe there's a popup blocker runnning?"
+"Maybe there's a popup "
 msgstr ""
 
-#: static/metashare/js/upload.js:70
+#: static/metashare/js/upload.js:75
+msgid "The file(s) you are trying to upload exceed(s) the size limit. "
+msgstr ""
+
+#: static/metashare/js/upload.js:99 static/metashare/js/upload.js.c:167
+msgid "Only files of type "
+msgstr ""
+
+#: static/metashare/js/upload.js:100 static/metashare/js/upload.js.c:168
 msgid ""
-"The file you are trying to upload is larger than the maximum upload file "
-"size (100mb).\n"
-"Please contact elrc-share@ilsp.gr"
+" are allowed. The .zip files can only contain files of the specified types. "
+"Please consider removing the files that do not belong to one of these types."
 msgstr ""
 
-#: static/metashare/js/upload.js:94 static/metashare/js/upload.js:183
-msgid "Please select a contribution mode!"
-msgstr ""
-
-#: static/metashare/js/upload.js:101 static/metashare/js/upload.js:189
-msgid ""
-"The file you are trying to upload does not have a .zip extension.\n"
-"Please make sure that you properly compress your data into a valid .zip file "
-"before uploading."
-msgstr ""
-
-#: static/metashare/js/upload.js:105
+#: static/metashare/js/upload.js:103
 msgid " Uploading file: \""
 msgstr ""
 
-#: static/metashare/js/upload.js:111 static/metashare/js/upload.js:197
-msgid ""
-"Submitting your contribution: \n"
-"Please wait..."
+#: static/metashare/js/upload.js:123
+msgid "There was an error uploading this file.\n"
 msgstr ""
 
-#: static/metashare/js/upload.js:136
-msgid ""
-"There was an error uploading this file.\n"
-"Please make sure that you are trying to upload a valid '.zip' file.\n"
-"If the problem persists please try again later."
-msgstr ""
-
-#: static/metashare/js/upload.js:199
-msgid "Please enter a valid URL!"
-msgstr ""
-
-#: static/metashare/js/upload.js:204
+#: static/metashare/js/upload.js:172
 msgid "Uploading file: \""
 msgstr ""
