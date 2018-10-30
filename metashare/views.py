@@ -5,7 +5,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 
 from metashare.repository.models import resourceInfoType_model
-from metashare.settings import LOG_HANDLER
+from metashare.settings import LOG_HANDLER, COUNTRY
 from metashare.storage.models import PUBLISHED
 
 
@@ -21,7 +21,7 @@ def frontpage(request):
     lr_count = resourceInfoType_model.objects.filter(
         storage_object__publication_status=PUBLISHED,
         storage_object__deleted=False).count()
-    dictionary = {'title': 'Welcome to META-SHARE!', 'resources': lr_count}
+    dictionary = {'country': COUNTRY}
     return render_to_response('frontpage.html', dictionary,
       context_instance=RequestContext(request))
 

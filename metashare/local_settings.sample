@@ -4,6 +4,8 @@ import tempfile
 
 from django.utils.translation import ugettext_lazy as _
 
+from metashare.bcp47 import iana
+
 ROOT_PATH = abspath(dirname(__file__))
 
 # The URL for this META-SHARE node django application.  Do not use trailing /.
@@ -21,6 +23,11 @@ DJANGO_BASE = 'path/to/metashare/'
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 USE_L10N = True
+
+# one of the supported countries
+# one wants to make sure the country is among the EU countries
+COUNTRY = filter(lambda country: country == "...", iana.get_eu_regions())[0]
+
 USE_I18N = True
 
 LANGUAGE_CODE = "..." # one of the LANGUAGES language codes
