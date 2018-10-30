@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-13 16:42+0200\n"
+"POT-Creation-Date: 2018-10-30 18:27+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,415 +18,336 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: templates/repository/editor/contributions/contribute.html:9
-#: templates/repository/editor/contributions/manage_contributed_data.html:8
-msgid "ELRC-SHARE Repository"
+msgid "ELRI"
 msgstr ""
 
 #: templates/repository/editor/contributions/contribute.html:59
-msgid "Data Contribution"
-msgstr ""
-
-#: templates/repository/editor/contributions/contribute.html:70
 msgid "Your browser does not support JavaScript!"
 msgstr ""
 
-#: templates/repository/editor/contributions/contribute.html:72
+#: templates/repository/editor/contributions/contribute.html:61
 msgid ""
 "Please make sure that you have javascript enabled and refresh the page "
 "before proceeding with your contribution."
 msgstr ""
 
-#: templates/repository/editor/contributions/contribute.html:81
-msgid "New Resource"
+#: templates/repository/editor/contributions/contribute.html:73
+msgid "Uploading your data"
 msgstr ""
 
-#: templates/repository/editor/contributions/contribute.html:84
-#: templates/repository/editor/contributions/manage_contributed_data.html:79
+#: templates/repository/editor/contributions/contribute.html:74
+msgid ""
+"Please provide the required information below for the data you wish to "
+"upload. Once uploaded, the ELRI engines will process your data with the goal "
+"of providing you, and users of the group of your choice, with a fully "
+"prepared language resource.\n"
+"                <br>\n"
+"                Once your resource has been fully processed, you will be "
+"notified via email and will be able to download it from this repository."
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:81
 msgid "Resource Title"
 msgstr ""
 
-#: templates/repository/editor/contributions/contribute.html:89
+#: templates/repository/editor/contributions/contribute.html:86
 msgid ""
 "The name by which the resource is already known or by which you would like "
 "it to be known; e.g. \"The GSRT bilingual corpus of Greek-English bulletins\""
 msgstr ""
 
-#: templates/repository/editor/contributions/contribute.html:94
+#: templates/repository/editor/contributions/contribute.html:92
 msgid "Resource short description"
 msgstr ""
 
-#: templates/repository/editor/contributions/contribute.html:97
+#: templates/repository/editor/contributions/contribute.html:94
 msgid ""
-"A short description, including any information considered useful about the "
-"resource, e.g. whether it's a dataset (collection of documents) or a "
-"lexicon, glossary, terminological resource, etc., its size, language(s), "
+"[Optional] A short description, including any information considered useful "
+"about the resource, e.g. whether it's a dataset (collection of documents) or "
+"a lexicon, glossary, terminological resource, etc., its size, language(s), "
 "classification information (e.g. health reports, news bulletins, lexicon of "
 "sports terminology etc.)"
 msgstr ""
 
+#: templates/repository/editor/contributions/contribute.html:97
+#: templates/repository/editor/select_resource_type.html:12
+msgid "Resource type"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:100
+#: templates/repository/editor/select_resource_type.html:16
+msgid "Corpus"
+msgstr ""
+
 #: templates/repository/editor/contributions/contribute.html:101
-msgid "Language(s)"
+msgid "Language Description"
 msgstr ""
 
-#: templates/repository/editor/contributions/contribute.html:106
-msgid "Bulgarian"
+#: templates/repository/editor/contributions/contribute.html:102
+msgid "Lexical Conceptual Resource"
 msgstr ""
 
-#: templates/repository/editor/contributions/contribute.html:107
-msgid "Czech"
-msgstr ""
-
-#: templates/repository/editor/contributions/contribute.html:108
-msgid "Croatian"
+#: templates/repository/editor/contributions/contribute.html:104
+msgid ""
+"[Optional] The type of the resource: can be Corpus, Lexicon, or Language "
+"Description. Do not choose anything if you are not sure."
 msgstr ""
 
 #: templates/repository/editor/contributions/contribute.html:109
-msgid "Danish"
-msgstr ""
-
-#: templates/repository/editor/contributions/contribute.html:110
-msgid "Dutch; Flemish"
-msgstr ""
-
-#: templates/repository/editor/contributions/contribute.html:111
-msgid "English"
-msgstr ""
-
-#: templates/repository/editor/contributions/contribute.html:112
-msgid "Estonian"
-msgstr ""
-
-#: templates/repository/editor/contributions/contribute.html:113
-msgid "Finnish"
+msgid "Language(s)"
 msgstr ""
 
 #: templates/repository/editor/contributions/contribute.html:114
-msgid "French"
+msgid "Bulgarian"
 msgstr ""
 
 #: templates/repository/editor/contributions/contribute.html:115
-msgid "German"
+msgid "Czech"
 msgstr ""
 
 #: templates/repository/editor/contributions/contribute.html:116
-msgid "Hungarian"
+msgid "Croatian"
 msgstr ""
 
 #: templates/repository/editor/contributions/contribute.html:117
-msgid "Icelandic"
+msgid "Danish"
 msgstr ""
 
 #: templates/repository/editor/contributions/contribute.html:118
-msgid "Irish"
+msgid "Dutch; Flemish"
 msgstr ""
 
 #: templates/repository/editor/contributions/contribute.html:119
-msgid "Italian"
+msgid "English"
 msgstr ""
 
 #: templates/repository/editor/contributions/contribute.html:120
-msgid "Latvian"
+msgid "Estonian"
 msgstr ""
 
 #: templates/repository/editor/contributions/contribute.html:121
-msgid "Lithuanian"
+msgid "Finnish"
 msgstr ""
 
 #: templates/repository/editor/contributions/contribute.html:122
-msgid "Maltese"
+msgid "French"
 msgstr ""
 
 #: templates/repository/editor/contributions/contribute.html:123
-msgid "Modern Greek (1453-)"
+msgid "German"
 msgstr ""
 
 #: templates/repository/editor/contributions/contribute.html:124
-msgid "Norwegian Bokmål (nb)"
+msgid "Hungarian"
 msgstr ""
 
 #: templates/repository/editor/contributions/contribute.html:125
-msgid "Norwegian Nynorsk (nn)"
+msgid "Icelandic"
 msgstr ""
 
 #: templates/repository/editor/contributions/contribute.html:126
-msgid "Polish"
+msgid "Irish"
 msgstr ""
 
 #: templates/repository/editor/contributions/contribute.html:127
-msgid "Portuguese"
+msgid "Italian"
 msgstr ""
 
 #: templates/repository/editor/contributions/contribute.html:128
-msgid "Romanian; Moldavian; Moldovan"
+msgid "Latvian"
 msgstr ""
 
 #: templates/repository/editor/contributions/contribute.html:129
-msgid "Slovak"
+msgid "Lithuanian"
 msgstr ""
 
 #: templates/repository/editor/contributions/contribute.html:130
-msgid "Slovenian"
+msgid "Maltese"
 msgstr ""
 
 #: templates/repository/editor/contributions/contribute.html:131
-msgid "Spanish; Castilian"
+msgid "Modern Greek (1453-)"
 msgstr ""
 
 #: templates/repository/editor/contributions/contribute.html:132
-msgid "Swedish"
+msgid "Norwegian Bokmål (nb)"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:133
+msgid "Norwegian Nynorsk (nn)"
 msgstr ""
 
 #: templates/repository/editor/contributions/contribute.html:134
+msgid "Polish"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:135
+msgid "Portuguese"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:136
+msgid "Romanian; Moldavian; Moldovan"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:137
+msgid "Slovak"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:138
+msgid "Slovenian"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:139
+msgid "Spanish; Castilian"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:140
+msgid "Swedish"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:142
 msgid ""
 "The language(s) of the resource; for resources with multiple languages, hold "
 "down CTRL key to select multiple values"
 msgstr ""
 
+#: templates/repository/editor/contributions/contribute.html:146
+msgid "Domain(s)"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:150
+msgid "Other / Unknown"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:151
+msgid "eCulture"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:152
+msgid "Electronic Exchange of Social Security Information"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:153
+msgid "eHealth"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:154
+msgid "eJustice"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:155
+msgid "eProcurement"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:156
+msgid "Public Open Data"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:157
+msgid "Safer Internet"
+msgstr ""
+
 #: templates/repository/editor/contributions/contribute.html:158
-msgid "Contribution Mode"
+msgid "Business Registers Interconnection System"
 msgstr ""
 
 #: templates/repository/editor/contributions/contribute.html:159
-msgid "Upload ZIP archive"
-msgstr ""
-
-#: templates/repository/editor/contributions/contribute.html:160
-msgid "Provide URL of resources"
-msgstr ""
-
-#: templates/repository/editor/contributions/contribute.html:161
-msgid "eDelivery (Generate XML file to attach to your eDelivery contribution)"
+msgid "Cybersecurity"
 msgstr ""
 
 #: templates/repository/editor/contributions/contribute.html:162
 msgid ""
-"Please select the way you wish to contribute your data. Uploading a ZIP "
-"archive is recommended."
+"[Optional] Domain refers to information that belongs to a specific field of "
+"activity (e.g., culture or health) and is related to one of the building "
+"blocks of the European digital services indicated in the provided list. "
+"Digital resources that do not clearly belong to one of the provided domains "
+"can be left as Other/Unknown."
 msgstr ""
 
-#: templates/repository/editor/contributions/contribute.html:166
-msgid "Upload Resource"
+#: templates/repository/editor/contributions/contribute.html:167
+msgid "Licensing conditions"
 msgstr ""
 
 #: templates/repository/editor/contributions/contribute.html:169
-msgid "Please upload a <strong>.zip file</strong> up to 100MB."
+msgid "License-free"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:170
+msgid "Creative Commons - Attribution 4.0"
 msgstr ""
 
 #: templates/repository/editor/contributions/contribute.html:171
-msgid ""
-"In case the <strong>.zip file</strong> file you wish to upload is larger "
-"than 100MB, please contact <a href=\"mailto:elrc-share@ilsp.gr\">elrc-"
-"share@ilsp.gr</a>."
+msgid "Creative Commons - Attribution - ShareAlike 4.0"
 msgstr ""
 
-#: templates/repository/editor/contributions/contribute.html:175
-msgid "Resource URL"
+#: templates/repository/editor/contributions/contribute.html:172
+msgid "Creative Commons - Attribution - NonCommercial 4.0"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:173
+msgid "Creative Commons - Attribution - NonCommercial - ShareAlike 4.0"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:174
+msgid "Use External License"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:176
+msgid "The licensing conditions for the resource."
 msgstr ""
 
 #: templates/repository/editor/contributions/contribute.html:179
-msgid "Please provide a URL containing the files you wish to contribute"
+msgid "License file"
 msgstr ""
 
-#: templates/repository/editor/contributions/contribute.html:190
+#: templates/repository/editor/contributions/contribute.html:183
+msgid "Please upload license file in the <b>.pdf format</b>."
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:208
+msgid "Upload Resource"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:211
+msgid ""
+"Please upload a single <strong>.zip</strong> file or any number of files of "
+"the following type: <strong>.doc(x), .odt, .tmx, .sdltm, .xml, .tbx, ."
+"xls(x), or .txt file</strong> up to 100MB."
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:213
+msgid ""
+"In case the data you wish to upload are larger than 100MB, please contact us "
+"to provide an SFTP link for direct download or consider uploading smaller "
+"files"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:218
+msgid "Group(s)"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:224
+#, python-format
+msgid " %(group_name)s "
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:227
+msgid "The group(s) the language resource is shared with."
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:233
+#, python-format
+msgid ""
+"I agree with the <a target=\"_blank\" href=\"%(legal_url)s#Sharing"
+"\">Language Resource upload Terms of Service for Data Holders</a> "
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:246
 msgid "Submit"
 msgstr ""
 
-#: templates/repository/editor/contributions/contribute.html:191
-msgid "Reset"
-msgstr ""
-
-#: templates/repository/editor/contributions/contribute.html:204
-msgid "Contribute Your Data Through eDelivery"
-msgstr ""
-
-#: templates/repository/editor/contributions/contribute.html:206
-msgid ""
-"If you wish to share your data through\n"
-"                    <a href=\"https://ec.europa.eu/cefdigital/wiki/display/"
-"CEFDIGITAL/eDelivery\" target=\"_blank\">\n"
-"                        eDelivery\n"
-"                    </a>, you can use the ELRC-SHARE CEF eDelivery Access "
-"Point.\n"
-"                    For more information click <a data-toggle=\"modal\" href="
-"\"#edelivery_modal\">here</a>.\n"
-"                    <br>In such a case, please fill in the form on the left\n"
-"                        and choose eDelivery in the Contribution mode."
-msgstr ""
-
-#: templates/repository/editor/contributions/contribute.html:236
-msgid "ELRC-SHARE eDelivery Help"
-msgstr ""
-
-#: templates/repository/editor/contributions/contribute.html:240
-msgid ""
-"The ELRC-SHARE repository adopts the\n"
-"                    <a href=\"https://ec.europa.eu/cefdigital/wiki/display/"
-"CEFDIGITAL/Domibus+-+v3.3\"\n"
-"                       target=\"_blank\">Domibus</a> implementation\n"
-"                    of the eDelivery Building Block and it is available to "
-"accept payloads from your existing eDelivery\n"
-"                    Access Point."
-msgstr ""
-
 #: templates/repository/editor/contributions/contribute.html:247
-msgid ""
-"The ELRC-SHARE Access Point accepts messages containing <strong>two files as "
-"attachments</strong>:"
-msgstr ""
-
-#: templates/repository/editor/contributions/contribute.html:249
-msgid "an xml description of your dataset"
-msgstr ""
-
-#: templates/repository/editor/contributions/contribute.html:250
-msgid "the actual dataset in zip format, up to 400MB"
-msgstr ""
-
-#: templates/repository/editor/contributions/contribute.html:254
-msgid ""
-"Before you can use the service, we need to add your Access Point to the ELRC-"
-"SHARE eDelivery trusted\n"
-"                    network. For trust to be established the following "
-"information is required:"
-msgstr ""
-
-#: templates/repository/editor/contributions/contribute.html:258
-msgid "MSH Endpoint"
-msgstr ""
-
-#: templates/repository/editor/contributions/contribute.html:259
-msgid "The endpoint of your Access Point"
-msgstr ""
-
-#: templates/repository/editor/contributions/contribute.html:262
-msgid "Gateway Party Name"
-msgstr ""
-
-#: templates/repository/editor/contributions/contribute.html:263
-msgid "The name of your Access Point's Gateway"
-msgstr ""
-
-#: templates/repository/editor/contributions/contribute.html:266
-msgid "Gateway Party ID"
-msgstr ""
-
-#: templates/repository/editor/contributions/contribute.html:267
-msgid "The identifier of your Access Point's Gateway"
-msgstr ""
-
-#: templates/repository/editor/contributions/contribute.html:270
-msgid "Public Certificate"
-msgstr ""
-
-#: templates/repository/editor/contributions/contribute.html:271
-msgid "Your Access Point's X.509 public certificate (.crt, .cert, .cer)"
-msgstr ""
-
-#: templates/repository/editor/contributions/contribute.html:276
-msgid ""
-"Once your application to join the ELRC-SHARE eDelivery trusted network is "
-"approved,\n"
-"                    the required ELRC-SHARE Access Point information will be "
-"emailed to you.\n"
-"                    Include this information in your Access Point "
-"configuration and complete the\n"
-"                    process of trust establishment. From this point onwards, "
-"you can send your\n"
-"                    data to the ELRC-SHARE Access Point using your "
-"implementation specific software."
-msgstr ""
-
-#: templates/repository/editor/contributions/contribute.html:283
-msgid ""
-"Apply for eDelivery <a href=\"/accounts/edelivery_membership_application/"
-"\">here</a>."
-msgstr ""
-
-#: templates/repository/editor/contributions/contribute.html:286
-msgid ""
-"The xml file is automatically generated and downloaded on your computer,\n"
-"                    once you fill in the required fields on the contribution "
-"form  and select the\n"
-"                    <strong>eDelivery</strong> contribution mode</em>."
-msgstr ""
-
-#: templates/repository/editor/contributions/contribute.html:293
-msgid "Close"
-msgstr ""
-
-#: templates/repository/editor/contributions/manage_contributed_data.html:60
-msgid "Manage contributed resources"
-msgstr ""
-
-#: templates/repository/editor/contributions/manage_contributed_data.html:62
-msgid "Unmanaged Contributed Resources"
-msgstr ""
-
-#: templates/repository/editor/contributions/manage_contributed_data.html:80
-msgid "Short Description"
-msgstr ""
-
-#: templates/repository/editor/contributions/manage_contributed_data.html:81
-msgid "Languages"
-msgstr ""
-
-#: templates/repository/editor/contributions/manage_contributed_data.html:82
-msgid "Contributor"
-msgstr ""
-
-#: templates/repository/editor/contributions/manage_contributed_data.html:83
-msgid "Country"
-msgstr ""
-
-#: templates/repository/editor/contributions/manage_contributed_data.html:84
-msgid "Phone Number"
-msgstr ""
-
-#: templates/repository/editor/contributions/manage_contributed_data.html:85
-msgid "Organization"
-msgstr ""
-
-#: templates/repository/editor/contributions/manage_contributed_data.html:86
-msgid "eDelivery"
-msgstr ""
-
-#: templates/repository/editor/contributions/manage_contributed_data.html:88
-msgid "Data"
-msgstr ""
-
-#: templates/repository/editor/contributions/manage_contributed_data.html:89
-msgid "Import as"
-msgstr ""
-
-#: templates/repository/editor/contributions/manage_contributed_data.html:113
-msgid "Not through eDelivery"
-msgstr ""
-
-#: templates/repository/editor/contributions/manage_contributed_data.html:124
-msgid "No Data Available"
-msgstr ""
-
-#: templates/repository/editor/contributions/manage_contributed_data.html:131
-#: templates/repository/editor/select_resource_type.html:16
-msgid "Corpus"
-msgstr ""
-
-#: templates/repository/editor/contributions/manage_contributed_data.html:132
-#: templates/repository/editor/select_resource_type.html:17
-msgid "Language description"
-msgstr ""
-
-#: templates/repository/editor/contributions/manage_contributed_data.html:133
-#: templates/repository/editor/select_resource_type.html:18
-msgid "Lexical conceptual resource"
-msgstr ""
-
-#: templates/repository/editor/contributions/manage_contributed_data.html:144
-msgid "Import Resources to Database"
-msgstr ""
-
-#: templates/repository/editor/contributions/manage_contributed_data.html:149
-msgid "No New Resources"
+msgid "Reset"
 msgstr ""
 
 #: templates/repository/editor/dict_widget.html:4
@@ -494,8 +415,12 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
-#: templates/repository/editor/select_resource_type.html:12
-msgid "Resource type"
+#: templates/repository/editor/select_resource_type.html:17
+msgid "Language description"
+msgstr ""
+
+#: templates/repository/editor/select_resource_type.html:18
+msgid "Lexical conceptual resource"
 msgstr ""
 
 #: templates/repository/editor/select_resource_type.html:19

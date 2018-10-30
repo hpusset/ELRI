@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-13 16:42+0200\n"
+"POT-Creation-Date: 2018-10-30 18:27+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -144,7 +144,7 @@ msgid "Document"
 msgstr ""
 
 #: repository/editor/manual_admin_registration.py:145
-#: repository/editor/resource_editor.py:1547
+#: repository/editor/resource_editor.py:1550
 #: repository/editor/superadmin.py:268
 #, python-format
 msgid "%(name)s object with primary key %(key)r does not exist."
@@ -205,17 +205,17 @@ msgstr ""
 
 #: repository/editor/resource_editor.py:315
 #, python-format
-msgid "Successfully unpublished %s published resource."
-msgid_plural "Successfully unpublished %s published resources."
+msgid "Successfully suspended %s published resource."
+msgid_plural "Successfully suspended %s published resources."
 msgstr[0] ""
 msgstr[1] ""
 
 #: repository/editor/resource_editor.py:320
-msgid "Only published resources can be unpublished."
+msgid "Only published resources can be suspended."
 msgstr ""
 
 #: repository/editor/resource_editor.py:326
-msgid "Unpublish selected published resources"
+msgid "Suspend selected published resources"
 msgstr ""
 
 #: repository/editor/resource_editor.py:338
@@ -234,7 +234,7 @@ msgid "Ingest selected internal resources"
 msgstr ""
 
 #: repository/editor/resource_editor.py:368
-#: repository/editor/resource_editor.py:1228
+#: repository/editor/resource_editor.py:1220
 #, python-format
 msgid "Could not export resource \"%(name)s\" with primary key %(key)s."
 msgstr ""
@@ -345,52 +345,52 @@ msgstr ""
 msgid "Remove owners from selected resources"
 msgstr ""
 
-#: repository/editor/resource_editor.py:783
-#: repository/editor/resource_editor.py:874
-#: repository/editor/resource_editor.py:1014
-#: repository/editor/resource_editor.py:1205
+#: repository/editor/resource_editor.py:786
+#: repository/editor/resource_editor.py:877
+#: repository/editor/resource_editor.py:1021
+#: repository/editor/resource_editor.py:1197
 #, python-format
 msgid "%(name)s object with primary key %(key)s does not exist."
 msgstr ""
 
-#: repository/editor/resource_editor.py:788
-#: repository/editor/resource_editor.py:879
-#: repository/editor/resource_editor.py:1019
-#: repository/editor/resource_editor.py:1209
+#: repository/editor/resource_editor.py:791
+#: repository/editor/resource_editor.py:882
+#: repository/editor/resource_editor.py:1026
+#: repository/editor/resource_editor.py:1201
 #, python-format
 msgid ""
 "%(name)s object with primary key %(key)s does not have a StorageObject "
 "attached."
 msgstr ""
 
-#: repository/editor/resource_editor.py:792
-#: repository/editor/resource_editor.py:883
-#: repository/editor/resource_editor.py:1023
+#: repository/editor/resource_editor.py:795
+#: repository/editor/resource_editor.py:886
+#: repository/editor/resource_editor.py:1030
 #, python-format
 msgid "%(name)s object with primary key %(key)s is not a master-copy."
 msgstr ""
 
-#: repository/editor/resource_editor.py:844
+#: repository/editor/resource_editor.py:847
 #, python-format
 msgid "Upload resource: \"%s\""
 msgstr ""
 
-#: repository/editor/resource_editor.py:941
+#: repository/editor/resource_editor.py:944
 #, python-format
 msgid "Upload validation report: \"%s\""
 msgstr ""
 
-#: repository/editor/resource_editor.py:1076
+#: repository/editor/resource_editor.py:1083
 #, python-format
 msgid "Upload legal documentation: \"%s\""
 msgstr ""
 
-#: repository/editor/resource_editor.py:1212
+#: repository/editor/resource_editor.py:1204
 #, python-format
 msgid "%(name)s object with primary key %(key)s does not exist anymore."
 msgstr ""
 
-#: repository/editor/resource_editor.py:1305
+#: repository/editor/resource_editor.py:1297
 #, python-format
 msgid "%s"
 msgstr ""

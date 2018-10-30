@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-13 16:42+0200\n"
+"POT-Creation-Date: 2018-10-30 18:27+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,11 +34,10 @@ msgid "We&rsquo;re sorry, but the URL you requested was not found."
 msgstr ""
 
 #: templates/404.html:10 templates/500.html:10
-#, python-format
 msgid ""
-"Please try again and, if the error persists, either contact <a href="
-"\"%(the_node_maintainers)s\">the node maintainers</a> or the the ELRC-SHARE "
-"Repository (<a href=\"mailto:elrc-share@ilsp.gr\" >elrc-share@ilsp.gr</a>)."
+"Please try again and, if the error persists, contact the ELRI NRS support "
+"group (<a href=\"mailto:elri-nrs-support@vicomtech.org\" >elri-nrs-"
+"support@vicomtech.org</a>)."
 msgstr ""
 
 #: templates/500.html:6
@@ -51,437 +50,229 @@ msgid ""
 "request."
 msgstr ""
 
-#: templates/back.html:4
-msgid "ELRC-SHARE Repository"
+#: templates/back.html:5
+msgid "ELRI National Relay Station"
 msgstr ""
 
 #: templates/breadcrumbs.html:3 templates/header.html:11
-#: templates/header.html:12
+#: templates/header.html.py:12
 msgid "Home"
 msgstr ""
 
-#: templates/elrc-info.html:7
-msgid "Provision of LRs in the ELRC-SHARE repository"
+#: templates/elri-info.html:7 templates/header.html:93
+msgid "ELRI Services"
 msgstr ""
 
-#: templates/elrc-info.html:9
+#: templates/elri-info.html:9
 msgid ""
-"The ELRC-SHARE repository is intended for documenting, storing, browsing and "
-"accessing LRs that are\n"
-"            considered useful for feeding the CEF.AT platform."
+"The ELRI project is intended to provide services related to the collection, "
+"preparation, storage and sharing of language resources. These services are "
+"provided via National Relay Stations, websites based in the Member States "
+"that are part of the initiative."
 msgstr ""
 
-#: templates/elrc-info.html:11
+#: templates/elri-info.html:11
 msgid ""
-"You are welcome to document and upload any LRs that you have identified as "
-"useful for this purpose. The <a\n"
-"                href=\"http://www.lr-coordination.eu\" target=\"_blank"
-"\">ELRC action</a> is looking for open data that can\n"
-"            be made available for re-use through open data initiatives, but "
-"also for commercially available datasets."
+"Users that have registered to an ELRI National Relay Stations can upload "
+"their data and benefit from fully prepared resources. For instance, users "
+"can upload collections of documents in different languages and retrieve "
+"translation memories that will have been created automatically by our "
+"integrated data processing engines."
 msgstr ""
 
-#: templates/elrc-info.html:15
+#: templates/elri-info.html:13
 msgid ""
-"The LR descriptions (metadata) are licensed under the Creative Commons "
-"Attribution (CC-BY) version 4.0 or\n"
-"            higher. All LR providers are obliged to allow the harvesting of "
-"their metadata."
+"Users can decide to share a given resource with a specific group of users, "
+"at the national level between similar public organisations, with the "
+"European Commission to help improve European public translation services, or "
+"with the community at large for data that can be shared without restrictions."
 msgstr ""
 
-#: templates/elrc-info.html:17
+#: templates/elri-info.html:15
 msgid ""
-"Anyone can browse the inventory and view the resource descriptions; in "
-"addition, they may download resources\n"
-"            in accordance to the licensing terms under which they are "
-"provided."
+"Only registered users can browse and download those resources that have been "
+"made available to the groups to which they belong, according to the "
+"licensing terms under which the resources are provided."
 msgstr ""
 
-#: templates/elrc-info.html:21
-msgid "Steps to follow for providing LRs"
+#: templates/elri-info.html:19 templates/header.html:94
+msgid "Managing Language Resources"
 msgstr ""
 
-#: templates/elrc-info.html:23
+#: templates/elri-info.html:21
 msgid ""
-"All registered users can contribute LRs via the ELRC-SHARE repository "
-"according to the following\n"
-"                procedure:"
+"To benefit from the services of this ELRI National Relay Station, users "
+"should follow the following procedure:"
 msgstr ""
 
-#: templates/elrc-info.html:26
+#: templates/elri-info.html:23
 msgid ""
-"First register <a href=\"../accounts/create/\">here</a>; a valid email "
-"address is required for this\n"
-"                    process. Once you obtain the account credentials, you "
-"can log in and use a simple form (cf. menu\n"
-"                    item: \"Contribute resources\") to describe and upload "
-"LRs."
+"New users should first register <a href=\"../accounts/create/\">here</a>. "
+"Once your account credentials have been validated, you can log in and either "
+"search (via the Browse Resources menu) or contribute ((via the Contribute "
+"Resources menu) language resources."
 msgstr ""
 
-#: templates/elrc-info.html:30
+#: templates/elri-info.html:25
 msgid ""
-"For each LR, you must provide at least a short description and a title in "
-"English and upload it in\n"
-"                    zipped format."
+"For each language resource, you will be asked to provide the languages of "
+"its content, a short title, the group with which you wish to share the "
+"resource, and the associated licensing conditions (see <a href="
+"\"#Licensing_LRs\">below</a>)."
 msgstr ""
 
-#: templates/elrc-info.html:33
+#: templates/elri-info.html:27
 msgid ""
-"Following this submission, you will soon be contacted by an ELRC responsible "
-"who may ask for further\n"
-"                    information about the resource and its licensing "
-"conditions. During the documentation process, the\n"
-"                    resource descriptions are considered \"internal\" and "
-"can be viewed only by authorised editors of\n"
-"                    the ELRC consortium. When the documentation and the "
-"licensing conditions under\n"
-"                    which the resource is provided are finalised, the "
-"resource description (metadata record) will be\n"
-"                    made public through the inventory and the resource "
-"itself will be downloadable by users, in\n"
-"                    accordance to its licensing conditions."
+"Users who require the creation of a specific group of users for sharing "
+"purposes, beyong the available user groups, can contact us via the Contact "
+"menu."
 msgstr ""
 
-#: templates/elrc-info.html:41
+#: templates/elri-info.html:29
 msgid ""
-"Authorised users from the ELRC consortium (\"editors\") are assigned the "
-"task of enriching the\n"
-"                    descriptions of the resources provided by contributors "
-"according to the ELRC-SHARE metadata schema\n"
-"                    (adapted from the META-SHARE schema) and publishing them "
-"at the ELRC-SHARE inventory (cf. menu\n"
-"                    item:\"Manage resources\"). Each LR description must "
-"include the licensing terms under which the LR is\n"
-"                    provided - cf. <a href=\"#Licensing_LRs\">below"
+"Once the resource has been fully prepared by our data processing engines, "
+"you will receive a notification email and will be able to download the "
+"prepared resource. If further information were needed about the resource and "
+"its licensing conditions, you may be contacted by an ELRI responsible."
 msgstr ""
 
-#: templates/elrc-info.html:51 templates/header.html:99
-msgid "Licensing LRs for the ELRC action"
-msgstr ""
-
-#: templates/elrc-info.html:53
+#: templates/elri-info.html:31
 msgid ""
-"Any grant of access to LRs through the ELRC-SHARE repository should include "
-"not only the right to read\n"
+"Until clearance has been granted, the resource can only be viewed by "
+"authorised reviewers of the National Relay Station. Once clearing is "
+"granted, the prepared resource will be downloadable by users of the "
+"authorised group of users, in accordance to its licensing conditions."
+msgstr ""
+
+#: templates/elri-info.html:37 templates/header.html:95
+msgid "Licensing Language Resources"
+msgstr ""
+
+#: templates/elri-info.html:39
+msgid ""
+"Any grant of access to language resources via this National Relay Station "
+"should include not only the right to read\n"
 "                the relevant content but also to allow transformative uses, "
 "dissemination and distribution of such\n"
-"                resources\n"
-"                and their derivatives, according to the needs and policies "
-"of LR owners and users."
+"                resources and their derivatives, according to the needs and "
+"policies of language resource owners and users."
 msgstr ""
 
-#: templates/elrc-info.html:57
+#: templates/elri-info.html:43
 msgid ""
-"To limit the complexity of licensing, we strongly advise LR providers to use "
-"one of the standard\n"
+"To limit the complexity of licensing, we strongly advise data providers to "
+"use one of the standard\n"
 "                licences, i.e. <b>Creative Commons</b> and open national "
-"licences (- cf. <a href=\"#Licences\">table</a>\n"
-"                below). If, however, the LR comes with another licence, the "
-"licensing terms and conditions must be\n"
-"                documented in the metadata so that they are clearly "
-"available to all repository users."
+"licences indicated below, which are pre-selected in the data upload form for "
+"convenience."
 msgstr ""
 
-#: templates/elrc-info.html:61
+#: templates/elri-info.html:46
 msgid ""
-"\n"
-"                A <a href=\"http://www.lr-coordination.eu/helpdesk\" target="
-"\"_blank\">helpdesk facility</a> has been set up\n"
-"                for assistance in understanding, choosing and using any of "
-"these licences and other legal tools, as well\n"
-"                as the metadata required for the documentation of the "
-"licence."
+"Users can also provide a licence of their choice by uploading a PDF file "
+"detailing the licensing conditions. These user-specific licenses will be "
+"reviewed by responsibles from the ELRI National Relay Station to assess "
+"whether this specific license meets the required terms of conditions for "
+"sharing via ELRI."
 msgstr ""
 
-#: templates/elrc-info.html:65
-msgid ""
-"The rights of use of the resource, any possible restrictions, as well as "
-"rights and restrictions on the\n"
-"                original raw data are under the control and responsibility "
-"of the resource owners. The repository\n"
-"                acts mainly as a facilitator for the search-and-get "
-"procedure while providing\n"
-"                guidelines and metadata curation activities."
-msgstr ""
-
-#: templates/elrc-info.html:69
-msgid ""
-"Metadata elements regarding rights of use, availability and distribution are "
-"among the mandatory elements\n"
-"                of the metadata schema and are shown to users so that they "
-"can promptly understand what they are allowed\n"
-"                to do with a specific resource. Users are asked to always "
-"refer to these metadata before using any of\n"
-"                the resources in this repository."
-msgstr ""
-
-#: templates/elrc-info.html:74
+#: templates/elri-info.html:49
 msgid "Licences"
 msgstr ""
 
-#: templates/elrc-info.html:78
+#: templates/elri-info.html:53
 msgid "Value"
 msgstr ""
 
-#: templates/elrc-info.html:79
+#: templates/elri-info.html:54
 msgid "Full name with link to licence text or Definition"
 msgstr ""
 
-#: templates/elrc-info.html:86
+#: templates/elri-info.html:61
 msgid "International/National Data Licences"
 msgstr ""
 
-#: templates/elrc-info.html:158
+#: templates/elri-info.html:97
 msgid ""
 "Used for resources that are PSI-compliant and no further information is "
 "required or available"
 msgstr ""
 
-#: templates/elrc-info.html:201
+#: templates/elri-info.html:105
 msgid "National Data Licences"
 msgstr ""
 
-#: templates/elrc-info.html:251
-msgid "International Software Licences"
-msgstr ""
-
-#: templates/elrc-info.html:318
-msgid "International Software & Data Licences"
-msgstr ""
-
-#: templates/elrc-info.html:343
-msgid "Other"
-msgstr ""
-
-#: templates/elrc-info.html:349
-msgid "Used for resources that are free of all known legal restrictions"
-msgstr ""
-
-#: templates/elrc-info.html:355
-msgid ""
-"Resources with this value are distributed with a non-standard or proprietary "
-"licence. Resource\n"
-"                        providers are prompted to provide the licence text "
-"or url of the resource for further details\n"
-"                        about the restrictions and/or conditions of use and "
-"other obligations."
-msgstr ""
-
-#: templates/elrc-info.html:363
-msgid "Used for resources whose licence value is pending"
-msgstr ""
-
-#: templates/elrc-info.html:371
-msgid "Notice and Take Down Policy"
-msgstr ""
-
-#: templates/elrc-info.html:374
-msgid ""
-"If a rights holder is concerned that s/he has found Language Resources (LRs) "
-"on the ELRC-SHARE\n"
-"                repository, for which s/he has not given permission, granted "
-"a licence or is not covered by a limitation\n"
-"                or\n"
-"                exception in national law, such rights holder is asked to "
-"contact ELRC-SHARE\n"
-"                (<a href=\"mailto:elrc-share@ilsp.gr\" >elrc-share@ilsp.gr</"
-"a>) in writing, stating the following:"
-msgstr ""
-
-#: templates/elrc-info.html:380
-msgid "His/Her contact details;"
-msgstr ""
-
-#: templates/elrc-info.html:381
-msgid "The full bibliographic details of the LR;"
-msgstr ""
-
-#: templates/elrc-info.html:382
-msgid "The exact and full URL where s/he found the LR;"
-msgstr ""
-
-#: templates/elrc-info.html:383
-msgid ""
-"Proof that s/he is the rights holder and a statement that, under penalty of "
-"perjury, s/he is the\n"
-"                    rights holder or an authorised representative."
-msgstr ""
-
-#: templates/elrc-info.html:387
-msgid ""
-"Upon receipt of notification the <b>Notice and Takedown</b> procedure is "
-"then invoked as follows:"
-msgstr ""
-
-#: templates/elrc-info.html:389
-msgid ""
-"ELRC-SHARE will acknowledge receipt of the complaint by email or letter and "
-"will make an initial\n"
-"                    assessment of its validity and plausibility."
-msgstr ""
-
-#: templates/elrc-info.html:392
-msgid ""
-"Upon receipt of a valid complaint, the LR will be temporarily removed from "
-"the ELRC-SHARE inventory\n"
-"                    pending an agreed solution."
-msgstr ""
-
-#: templates/elrc-info.html:395
-msgid ""
-"ELRC-SHARE will contact the individual or organisation who deposited the "
-"material within ten working\n"
-"                    days from the reception of a valid complaint. The ELRC-"
-"SHARE depositor will be notified that the\n"
-"                    material is subject to a complaint, under what "
-"allegations, and will be encouraged to assuage the\n"
-"                    complaints concerned."
-msgstr ""
-
-#: templates/elrc-info.html:400
-msgid ""
-"The complainant and the ELRC-SHARE depositor will be encouraged to resolve "
-"the issue swiftly and\n"
-"                    amicably and to the satisfaction of both parties, with "
-"the following possible outcomes:"
-msgstr ""
-
-#: templates/elrc-info.html:403
-msgid "The LR is replaced on the ELRC-SHARE inventory unchanged."
-msgstr ""
-
-#: templates/elrc-info.html:404
-msgid "The LR is replaced on the ELRC-SHARE inventory with changes."
-msgstr ""
-
-#: templates/elrc-info.html:405
-msgid "The LR is permanently removed from the ELRC-SHARE inventory."
-msgstr ""
-
-#: templates/elrc-info.html:408
-msgid ""
-"If the ELRC-SHARE depositor and the complainant are unable to agree on a "
-"solution, the LR will\n"
-"                    remain unavailable through the ELRC-SHARE inventory "
-"until a time when a resolution has been reached."
-msgstr ""
-
-#: templates/elrc-info.html:415 templates/header.html:101
-msgid "Privacy"
-msgstr ""
-
-#: templates/elrc-info.html:417
-msgid ""
-"The ELRC-SHARE website and services log certain information about every "
-"request sent to them. This\n"
-"                information is used for system administration and for "
-"producing usage statistics. Summary statistics are\n"
-"                extracted from this data and some of these may be made "
-"publicly available, but these do not include\n"
-"                information from which individuals could be identified. "
-"Relevant subsets of this data may be used as\n"
-"                part of investigations of computer misuse involving this "
-"site. Data may also on occasion be used to\n"
-"                enable investigation of technical problems on the website. "
-"Otherwise logged information is not passed to\n"
-"                any third party except if required by law."
-msgstr ""
-
-#: templates/elrc-info.html:427 templates/header.html:102
-msgid "Data Protection"
-msgstr ""
-
-#: templates/elrc-info.html:429
-msgid ""
-"From time to time the ELRC-SHARE Service Providers may use electronic forms "
-"on this site to gather\n"
-"                personal information for purposes directly related to a "
-"service, function or activity of the ELRC\n"
-"                services. When the Service Provider will do so it will let "
-"users know the purpose for which the\n"
-"                information is being collected (including if the information "
-"is to be published). Completion of and\n"
-"                submission of any form on this website is entirely at the "
-"discretion of the user."
-msgstr ""
-
-#: templates/elrc-info.html:437 templates/header.html:103
-msgid "Data Protection Statement"
-msgstr ""
-
-#: templates/elrc-info.html:439
-msgid ""
-"In using and submitting content on the ELRC-SHARE services, users agree that "
-"the Service Provider may use\n"
-"                any personal data that users supply through contributing "
-"content or by filling in electronic forms. The\n"
-"                Service Providers respect users' privacy and seek to protect "
-"their personal data."
-msgstr ""
-
 #: templates/footer.html:6
-msgid ""
-"The European Language Resource Coordination - Connecting Europe Facility "
-"repository"
+msgid "ELRI National Relay Station "
 msgstr ""
 
 #: templates/footer.html:7
 msgid ""
-"powered by <a href=\"http://metashare.ilsp.gr/\" target=\"_blank\">META-"
-"SHARE</a>"
+"powered by <a href=\"http://meta-share.org/\" target=\"_blank\">META-SHARE</"
+"a> and <a href=\"https://elrc-share.eu/\" target=\"_blank\">ELRC-SHARE</a>"
 msgstr ""
 
-#: templates/frontpage.html:18
-msgid "Type in your keywords, please..."
+#: templates/frontpage.html:14
+#, python-format
+msgid "Welcome to ELRI in %(country)s!"
 msgstr ""
 
-#: templates/frontpage.html:33
-msgid "Welcome to the ELRC-SHARE repository!"
-msgstr ""
-
-#: templates/frontpage.html:34
+#: templates/frontpage.html:15
+#, python-format
 msgid ""
-"The ELRC-SHARE repository is used for documenting, storing, browsing and\n"
-"            accessing <a href=\"http://lr-coordination.eu/resources"
-"\">Language Resources</a> that\n"
-"            are collected through the <a href=\"http://lr-coordination.eu"
-"\">European Language\n"
-"                Resource Coordination</a> and considered useful for feeding "
-"the CEF Automated Translation\n"
-"            (<a href=\"http://lr-coordination.eu/discover#f3\" target="
-"\"_blank\">CEF.AT</a>) platform."
+"This site is the official National Relay Station in %(country)s, where "
+"language resources can be collected, prepared and shared amongst public "
+"institutions and translation centres."
 msgstr ""
 
-#: templates/frontpage.html:39
-msgid "If you want to contribute resources, all you have to do is"
-msgstr ""
-
-#: templates/frontpage.html:41
+#: templates/frontpage.html:17
 msgid ""
-"<a href=\"/accounts/create/\">register</a> (new user)\n"
-"                or <a href=\"/repository/contribute\">login</a> (returning "
-"user)"
+"National Relay Stations are developed within the  <a href=\"http://www.elri-"
+"project.eu\">ELRI</a> European project, supported by the <a href=\"http://ec."
+"europa.eu/inea/en/connecting-europe-facility\">Connecting Europe Facility</"
+"a> programme."
 msgstr ""
 
-#: templates/frontpage.html:44
-msgid "click <a href=\"/repository/contribute\">here</a>"
+#: templates/frontpage.html:19
+msgid "Help promote language equality in Europe by joining the ELRI network!"
 msgstr ""
 
-#: templates/frontpage.html:46
-msgid "and go on to describe and upload your data with a simple form."
+#: templates/frontpage.html:21
+msgid "Join ELRI"
 msgstr ""
 
-#: templates/frontpage.html:66
+#: templates/frontpage.html:22
 msgid ""
-"All data resources gathered by this initiative will be provided to the "
-"European Commission for use in the CEF.AT platform."
+"Members of public institutions and translation centres can join user groups "
+"to download shared resources, contribute their own data and benefit from "
+"translation memories or other language resources automatically prepared by "
+"the ELRI engines."
 msgstr ""
 
-#: templates/header.html:13
+#: templates/frontpage.html:24
+msgid ""
+"<a href=\"/elri/accounts/create\">Register</a> to become a member of ELRI.\n"
+"                            <br>Already a member? <a href=\"/elri/login"
+"\">Sign in</a>."
+msgstr ""
+
+#: templates/frontpage.html:27
+msgid "Search and share"
+msgstr ""
+
+#: templates/frontpage.html:28
+msgid ""
+"<a href=\"/elri/repository/search\">Browse</a> available language "
+"resources.\n"
+"                            <br><a href=\"/elri/repository/contribute"
+"\">Contribute</a> your own data and retrieve prepared language resources."
+msgstr ""
+
+#: templates/header.html:14
 msgid "Browse the resources of the META-SHARE catalogue"
 msgstr ""
 
-#: templates/header.html:15
+#: templates/header.html:16
 msgid "Browse Resources"
 msgstr ""
 
@@ -489,7 +280,7 @@ msgstr ""
 msgid "Contribute Resources"
 msgstr ""
 
-#: templates/header.html:21 templates/header.html:29
+#: templates/header.html:21 templates/header.html.py:29
 msgid "Create/edit resource metadata or upload resource data"
 msgstr ""
 
@@ -509,151 +300,163 @@ msgstr ""
 msgid "Manage all resources"
 msgstr ""
 
-#: templates/header.html:36 templates/header.html:37
+#: templates/header.html:36 templates/header.html.py:37
 msgid "Manage LRs by ELRC deliverables"
 msgstr ""
 
 #: templates/header.html:41
-msgid "Manage contributed resources"
-msgstr ""
-
-#: templates/header.html:42
-msgid "Manage resources from contributors"
-msgstr ""
-
-#: templates/header.html:44
 msgid "Create/edit person object metadata"
 msgstr ""
 
-#: templates/header.html:46
+#: templates/header.html:43
 msgid "Manage person objects"
 msgstr ""
 
-#: templates/header.html:47
+#: templates/header.html:44
 msgid "Create/edit organization object metadata"
 msgstr ""
 
-#: templates/header.html:49
+#: templates/header.html:46
 msgid "Manage organization objects"
 msgstr ""
 
-#: templates/header.html:50
+#: templates/header.html:47
 msgid "Create/edit project object metadata"
 msgstr ""
 
-#: templates/header.html:52
+#: templates/header.html:49
 msgid "Manage project objects"
 msgstr ""
 
-#: templates/header.html:53
+#: templates/header.html:50
 msgid "Create/edit document/paper object metadata"
 msgstr ""
 
-#: templates/header.html:55
+#: templates/header.html:52
 msgid "Manage document objects"
 msgstr ""
 
-#: templates/header.html:57
+#: templates/header.html:54
 msgid "Upload XML resource descriptions"
 msgstr ""
 
-#: templates/header.html:58
+#: templates/header.html:55
 msgid "Upload resource descriptions"
 msgstr ""
 
-#: templates/header.html:64
+#: templates/header.html:61
 msgid "Manage users and applications"
 msgstr ""
 
-#: templates/header.html:65
+#: templates/header.html:62
 msgid "Administration"
 msgstr ""
 
-#: templates/header.html:75
+#: templates/header.html:72
 msgid "eDelivery membership applications"
 msgstr ""
 
-#: templates/header.html:89
+#: templates/header.html:86
 msgid "View various statistics for this META-SHARE Node"
 msgstr ""
 
-#: templates/header.html:91
+#: templates/header.html:88
 msgid "Statistics"
 msgstr ""
 
-#: templates/header.html:93 templates/header.html:94 templates/help.html:5
-msgid "Help"
+#: templates/header.html:91 templates/repository/resource_view/usage.html:3
+msgid "Usage"
 msgstr ""
 
-#: templates/header.html:96
-msgid "About"
+#: templates/header.html:99
+msgid "Terms of Service"
 msgstr ""
 
-#: templates/header.html:98
-msgid "LR Provision"
+#: templates/header.html:101
+msgid "Use of ELRI Services"
 msgstr ""
 
-#: templates/header.html:100
+#: templates/header.html:102
+msgid "Sharing of Language Resources"
+msgstr ""
+
+#: templates/header.html:103
+msgid "Privacy"
+msgstr ""
+
+#: templates/header.html:104
+msgid "Data Protection"
+msgstr ""
+
+#: templates/header.html:105
+msgid "Data Protection Statement"
+msgstr ""
+
+#: templates/header.html:106
 msgid "Notice and Takedown Policy"
 msgstr ""
 
-#: templates/header.html:107
-msgid "Profile settings and actions"
-msgstr ""
-
-#: templates/header.html:108
-msgid "Your Profile,"
-msgstr ""
-
-#: templates/header.html:113
-msgid "View your recent actions"
+#: templates/header.html:110 templates/header.html.py:111 templates/help.html:5
+msgid "Help"
 msgstr ""
 
 #: templates/header.html:114
-msgid "View or edit your personal details"
+msgid "Profile settings and actions"
 msgstr ""
 
 #: templates/header.html:115
+msgid "Your Profile,"
+msgstr ""
+
+#: templates/header.html:120
+msgid "View your recent actions"
+msgstr ""
+
+#: templates/header.html:121
+msgid "View or edit your personal details"
+msgstr ""
+
+#: templates/header.html:122
 msgid "Edit your profile"
 msgstr ""
 
-#: templates/header.html:116
+#: templates/header.html:123
 msgid "Change your password"
 msgstr ""
 
-#: templates/header.html:127
+#: templates/header.html:134
 msgid "Apply for eDelivery membership"
 msgstr ""
 
-#: templates/header.html:127
+#: templates/header.html:134
 msgid "Apply for ELRC-SHARE eDelivery membership"
 msgstr ""
 
-#: templates/header.html:130 templates/header.html:131
+#: templates/header.html:137 templates/header.html.py:138
 #: templates/repository/api/help.html:31
 msgid "ELRC-SHARE RESTful API"
 msgstr ""
 
-#: templates/header.html:139
+#: templates/header.html:146
 msgid "Logout"
 msgstr ""
 
-#: templates/header.html:142
+#: templates/header.html:149
 msgid "Register"
 msgstr ""
 
-#: templates/header.html:144 templates/login.html:21
+#: templates/header.html:151 templates/login.html:21
 msgid "Login"
 msgstr ""
 
 #: templates/help.html:7
-msgid "Documentation on the ELRC-SHARE editor"
+msgid "Documentation on the ELRI National Relay Station"
 msgstr ""
 
 #: templates/help.html:9
 msgid ""
-"The following guidelines provide detailed information on how to use the "
-"editing facility for documenting and uploading LRs:"
+"The following guidelines provide detailed information on how to use this "
+"site:"
 msgstr ""
 
 #: templates/help.html:11
@@ -661,37 +464,460 @@ msgid "Walkthrough for contributors"
 msgstr ""
 
 #: templates/help.html:12
-msgid "Walkthrough for editors"
+msgid "Walkthrough for reviewers"
 msgstr ""
 
-#: templates/help.html:15
+#: templates/help.html:16
 msgid "ELRC-SHARE schema"
 msgstr ""
 
-#: templates/help.html:17
+#: templates/help.html:18
 msgid "ELRC-SHARE schema XSD"
 msgstr ""
 
-#: templates/help.html:18
+#: templates/help.html:19
 msgid "(based on the META-SHARE Schema)"
 msgstr ""
 
-#: templates/help.html:19
+#: templates/help.html:20
 msgid "Documentation about the schema"
 msgstr ""
 
-#: templates/help.html:22
+#: templates/help.html:24
 msgid "Contact details"
 msgstr ""
 
-#: templates/help.html:24
-msgid "Helpdesk"
+#: templates/help.html:26
+msgid ""
+"For enquiries related to the project, please refer to the <a href=\"http://"
+"www.elri-project.eu/contact-us.html\" target=\"_blank\">list of ELRI Contacts"
 msgstr ""
 
-#: templates/help.html:25
+#: templates/help.html:27
 msgid ""
-"Only for technical help about the ELRC-SHARE repository, you can contact us "
-"at <a href=\"mailto:elrc-share@ilsp.gr\" >elrc-share@ilsp.gr</a>."
+"For technical help about this National Relay Station, you can contact us at "
+"<a href=\"mailto:eli-nrs-support@vicomtech.org\" >eli-nrs-support@vicomtech."
+"org</a>."
+msgstr ""
+
+#: templates/legal.html:7
+msgid "<strong>ELRI Terms of Service</strong>"
+msgstr ""
+
+#: templates/legal.html:8
+msgid ""
+"These are the Terms of Use and Provision of the ELRI Services for all "
+"registered Users of the ELRI National Relay Station in [Member State]. By "
+"using ELRI Services, you are agreeing to these Terms. Please read them "
+"carefully, as you are bound by them."
+msgstr ""
+
+#: templates/legal.html:11
+msgid "<b>Interpretation</b>"
+msgstr ""
+
+#: templates/legal.html:12
+msgid ""
+"a) “User” or “You”: means an individual or entity who is exercising rights "
+"or undertaking legal obligations under this Service Agreement and who has "
+"not previously violated these Terms of Service or who has received express "
+"permission from the Service Provider despite a previous violation. "
+"Registered Users’ details are OR have been obtained through registration "
+"with the ELRI Services."
+msgstr ""
+
+#: templates/legal.html:14
+msgid ""
+"b) “ELRI”: means all organisations that form part of the ELRI consortium."
+msgstr ""
+
+#: templates/legal.html:16
+msgid ""
+"c) “Service Provider”: means the ELRI National Relay Station in [Member "
+"State], which is hosted by [NAME OF HOSTING ORGANISATION] as a member of "
+"ELRI."
+msgstr ""
+
+#: templates/legal.html:18
+msgid ""
+"d) “ELRI Services”: These are the services offered by ELRI, which include:"
+msgstr ""
+
+#: templates/legal.html:20
+msgid "User registration, authentication and authorisation"
+msgstr ""
+
+#: templates/legal.html:21
+msgid ""
+"Archiving (storage and maintenance for preservation purposes) of language "
+"resources"
+msgstr ""
+
+#: templates/legal.html:22
+msgid "Documentation (with metadata) of language resources"
+msgstr ""
+
+#: templates/legal.html:23
+msgid "Searching, browsing and viewing of resource metadata"
+msgstr ""
+
+#: templates/legal.html:24
+msgid "Uploading and downloading of language resources"
+msgstr ""
+
+#: templates/legal.html:25
+msgid "Automatic and manual processing of uploaded language resources"
+msgstr ""
+
+#: templates/legal.html:29
+msgid ""
+"e) “ELRI Registration Service”: means the service through which the Service "
+"Provider obtains your name and contact details."
+msgstr ""
+
+#: templates/legal.html:31
+msgid ""
+"f) “Depositor”: any individual or organisation who deposits material using "
+"ELRI Services."
+msgstr ""
+
+#: templates/legal.html:33
+msgid ""
+"g) Headings contained in this Terms of Service Agreement are for reference "
+"purposes only and shall not be deemed to be an indication of the meaning of "
+"the clause to which they relate."
+msgstr ""
+
+#: templates/legal.html:35
+msgid ""
+"h) Where the context so implies, words importing the singular number shall "
+"include the plural and vice versa and words importing the masculine shall "
+"include the feminine and vice versa."
+msgstr ""
+
+#: templates/legal.html:38
+msgid "<b>Modifications</b>"
+msgstr ""
+
+#: templates/legal.html:39
+msgid ""
+"The Service Provider may change these Terms at any time by posting changes "
+"online. Please review these Terms regularly to ensure You are aware of any "
+"changes made. Your continued use of the ELRI Services after changes are "
+"posted means You agree to be legally bound by these Terms as updated and/ or "
+"amended. The Service Provider agrees to notify You regarding any such change "
+"by email or through the ELRI Services or any other appropriate means. If "
+"additional services are added to the ELRI Services, then additional terms "
+"may apply which will become part of this agreement. "
+msgstr ""
+
+#: templates/legal.html:42
+msgid "<b>Use of ELRI Services</b>"
+msgstr ""
+
+#: templates/legal.html:43
+msgid ""
+" Access to and use of the ELRI Services is provided subject to the following "
+"terms, which shall take effect upon Your access to and use of the ELRI "
+"Services. You agree to use the ELRI Services only for lawful purposes and in "
+"a way that does not infringe the rights of, restrict or inhibit anyone "
+"else’s use of such resources."
+msgstr ""
+
+#: templates/legal.html:44
+msgid ""
+"If you are an ELRI Registered User, then You have unlimited access to all "
+"ELRI Services offered by the Service Provider; more specifically:"
+msgstr ""
+
+#: templates/legal.html:45
+msgid ""
+"access to all language resources in accordance to the relevant licensing "
+"terms granted for each resource;"
+msgstr ""
+
+#: templates/legal.html:46
+msgid ""
+"access to language resources documentation, upload, processing and storage "
+"services;"
+msgstr ""
+
+#: templates/legal.html:47
+msgid ""
+"searching, browsing and viewing of the ELRI inventory and of the language "
+"resources metadata;"
+msgstr ""
+
+#: templates/legal.html:48
+msgid ""
+"downloading of language resources in accordance to the relevant licensing "
+"terms."
+msgstr ""
+
+#: templates/legal.html:53
+msgid "<b>Sharing of Language Resources</b>"
+msgstr ""
+
+#: templates/legal.html:54
+msgid ""
+"By using the ELRI Services to upload and share one or more Language "
+"Resources you represent and warrant that:"
+msgstr ""
+
+#: templates/legal.html:56
+msgid "you have the full authority to deposit the Resource;"
+msgstr ""
+
+#: templates/legal.html:57
+msgid ""
+"you have the necessary legal title in the Resource or you are permitted to "
+"make the deposition of the Resource;"
+msgstr ""
+
+#: templates/legal.html:58
+msgid ""
+"the deposition of the Resource will not violate or be considered a breach of "
+"any obligation or right of a third party;"
+msgstr ""
+
+#: templates/legal.html:59
+msgid ""
+"the deposition of the Resource will not violate any applicable law or "
+"regulation;"
+msgstr ""
+
+#: templates/legal.html:60
+msgid ""
+"you have used reasonable skill and care to ensure that the information you "
+"provide in the process of deposition does not contain any untrue statements "
+"of legal or material facts."
+msgstr ""
+
+#: templates/legal.html:64
+msgid "<b>Privacy</b>"
+msgstr ""
+
+#: templates/legal.html:65
+msgid ""
+"The ELRI website and services log certain information about every request "
+"sent to them. This information is used for system administration and for "
+"producing usage statistics. Summary statistics are extracted from this data "
+"and some of these may be made publicly available, but these do not include "
+"information from which individuals could be identified. Relevant subsets of "
+"this data may be used as part of investigations of computer misuse involving "
+"this site. Data may also on occasion be used to enable investigation of "
+"technical problems on the website. Otherwise logged information is not "
+"passed to any third party except if required by law."
+msgstr ""
+
+#: templates/legal.html:68
+msgid "<b>Data protection</b>"
+msgstr ""
+
+#: templates/legal.html:69
+msgid ""
+"From time to time the ELRI Service Providers may use electronic forms on "
+"this site to gather personal information for purposes directly related to a "
+"service, function or activity of the ELRI Services. When the Service "
+"Provider will do so it will let users know the purpose for which the "
+"information is being collected (including if the information is to be "
+"published). Completion of and submission of any form on this website is "
+"entirely at the discretion of the user."
+msgstr ""
+
+#: templates/legal.html:72
+msgid "<b>Data protection statement</b>"
+msgstr ""
+
+#: templates/legal.html:73
+msgid ""
+"In using and submitting content on the ELRI Services, You agree that ELRI "
+"may use any personal data of Yours that You supply through contributing "
+"content or by filling in electronic forms. ELRI fully respects Your privacy "
+"and seeks to protect Your personal data:"
+msgstr ""
+
+#: templates/legal.html:75
+msgid ""
+"ELRI will only collect and use Your information to administer, support, "
+"improve and obtain feedback on its services."
+msgstr ""
+
+#: templates/legal.html:76
+msgid ""
+"ELRI may also contact You to obtain feedback on services and any "
+"improvements it can make."
+msgstr ""
+
+#: templates/legal.html:77
+msgid "ELRI will not disclose Your personal data to any other organization."
+msgstr ""
+
+#: templates/legal.html:78
+msgid ""
+"You can access and modify your personal data through the Registration "
+"Service."
+msgstr ""
+
+#: templates/legal.html:82
+msgid "<b>Cookies policy</b>"
+msgstr ""
+
+#: templates/legal.html:83
+msgid ""
+"This website does not use cookies nor any other tracking information on this "
+"website."
+msgstr ""
+
+#: templates/legal.html:86
+msgid "<b>ELRI Services misuse and notification regarding IPR infringement</b>"
+msgstr ""
+
+#: templates/legal.html:87
+msgid ""
+"You should not misuse the ELRI Services, e.g. by interfering with them or by "
+"trying to access them using a method different from the one suggested in the "
+"ELRI instructions. You may use the ELRI Services only as permitted by law, "
+"including applicable export and control laws, regulations and licenses. The "
+"Service Provider may suspend or stop providing ELRI Services to You if You "
+"do not comply with ELRI Terms or policies or if the Service Provider is "
+"investigating suspected misconduct.</p>\n"
+" \n"
+"        <p>ELRI maintains usage statistics as a measure of readership and "
+"other use of the ELRI Services by users. It is a violation of ELRI policy "
+"for a party to directly or indirectly use ELRI with a view to affect "
+"download and other usage statistics, or to encourage others to do so. As "
+"part of its general right to refuse or terminate service and remove or edit "
+"the content of the ELRI Services, ELRI reserves the right in its sole "
+"discretion to limit access, remove content, and adjust usage statistics to "
+"respond to any activity that appears likely to have such an effect.</p>\n"
+"\n"
+"        <p>In case You identify language resources that violate Your "
+"Intellectual Property Rights, You may follow the ELRI Notice and Take Down "
+"procedure found in Appendix A.\n"
+"        "
+msgstr ""
+
+#: templates/legal.html:95
+msgid "<b>Disclaimers and Limitation of Liability</b>"
+msgstr ""
+
+#: templates/legal.html:96
+msgid ""
+"ELRI Services, content and metadata are provided “AS IS” and on an “ΑS "
+"AVAILABLE” basis without any representations or any kind of warranty made "
+"(whether express or implied by law) to the extent permitted by law, "
+"including the implied warranties of satisfactory quality, fitness for a "
+"particular purpose, noninfringement, compatibility, security and accuracy.</"
+"p>\n"
+" \n"
+"        <p>Under no circumstances will ELRI be liable for any of the "
+"following losses or damage (whether such losses where foreseen, foreseeable, "
+"known or otherwise): (a) loss of data; (b) loss of opportunity; (c) loss of "
+"goodwill or injury to reputation; (d) losses suffered by third parties; or "
+"(e) any direct, indirect, consequential, special or exemplary damages "
+"arising from the use of the ELRI regardless of the form of action.</p>\n"
+" \n"
+"        <p>ELRI does not warrant that functions contained in the ELRI "
+"Services will be uninterrupted or error free, that defects will be "
+"corrected, or that the ELRI databases or the delivery mechanism that make it "
+"available are free of viruses and bugs."
+msgstr ""
+
+#: templates/legal.html:103
+msgid "<b>Termination</b>"
+msgstr ""
+
+#: templates/legal.html:104
+msgid ""
+"The rights granted hereunder will terminate automatically upon any breach by "
+"You of the Terms of Service. Subject to the above terms and conditions, this "
+"agreement will be valid for as long as ELRI Services are in existence and "
+"will continue in full force and effect unless terminated as stated above."
+msgstr ""
+
+#: templates/legal.html:107
+msgid "<b>Appendix A. Notice and Take Down policy</b>"
+msgstr ""
+
+#: templates/legal.html:108
+msgid ""
+"If a rights holder is concerned that s/he has found Language Resources (LRs) "
+"on the ELRI National Relay Station in [Member State], for which s/he has not "
+"given permission, granted a licence or is not covered by a limitation or "
+"exception in national law, such rights holder is asked to contact the "
+"Service Provider at [email address] in writing, stating the following:"
+msgstr ""
+
+#: templates/legal.html:110
+msgid "His/Her contact details;"
+msgstr ""
+
+#: templates/legal.html:111
+msgid "The full bibliographic details of the LR;"
+msgstr ""
+
+#: templates/legal.html:112
+msgid "The exact and full URL where s/he found the LR;"
+msgstr ""
+
+#: templates/legal.html:113
+msgid ""
+"Proof that s/he is the rights holder and a statement that, under penalty of "
+"perjury, s/he is the rights holder or an authorised representative."
+msgstr ""
+
+#: templates/legal.html:116
+msgid ""
+"Upon receipt of notification, the ‘Notice and Take Down’ procedure is then "
+"invoked as follows:"
+msgstr ""
+
+#: templates/legal.html:118
+msgid ""
+"The Service Provider will acknowledge receipt of the complaint by email or "
+"letter and will make an initial assessment of its validity and plausibility."
+msgstr ""
+
+#: templates/legal.html:119
+msgid ""
+"Upon receipt of a valid complaint, the LR will be temporarily removed from "
+"the ELRI Services pending an agreed solution."
+msgstr ""
+
+#: templates/legal.html:120
+msgid ""
+"The Service Provider will contact the individual or organisation who "
+"deposited the material within ten working days from the reception of a valid "
+"complaint. The Depositor will be notified that the material is subject to a "
+"complaint, under what allegations, and will be encouraged to assuage the "
+"complaints concerned."
+msgstr ""
+
+#: templates/legal.html:121
+msgid ""
+"The complainant and the Depositor will be encouraged to resolve the issue "
+"swiftly and amicably and to the satisfaction of both parties, with the "
+"following possible outcomes:"
+msgstr ""
+
+#: templates/legal.html:123
+msgid "The LR is replaced on the ELRI Services inventory unchanged."
+msgstr ""
+
+#: templates/legal.html:124
+msgid "The LR is replaced on the ELRI Services inventory with changes."
+msgstr ""
+
+#: templates/legal.html:125
+msgid "The LR is permanently removed from the ELRI Services inventory."
+msgstr ""
+
+#: templates/legal.html:127
+msgid ""
+"If the Depositor and the complainant are unable to agree on a solution, the "
+"LR will remain unavailable through the ELRI Services inventory until a time "
+"when a resolution has been reached."
 msgstr ""
 
 #: templates/login.html:6
@@ -1122,7 +1348,7 @@ msgstr ""
 #: templates/repository/legal_not_downloadable.html:28
 #: templates/repository/licence_agreement.html:77
 #: templates/repository/licence_selection.html:13
-#: templates/repository/lr_not_downloadable.html:28
+#: templates/repository/lr_not_downloadable.html:29
 #: templates/repository/report_not_downloadable.html:28
 msgid "Contact Resource Maintainer"
 msgstr ""
@@ -1201,7 +1427,7 @@ msgstr ""
 
 #: templates/repository/legal_not_downloadable.html:23
 #: templates/repository/licence_agreement.html:72
-#: templates/repository/lr_not_downloadable.html:23
+#: templates/repository/lr_not_downloadable.html:24
 #: templates/repository/report_not_downloadable.html:23
 msgid "Resource View"
 msgstr ""
@@ -1565,6 +1791,11 @@ msgstr ""
 msgid "Personal Data"
 msgstr ""
 
+#: templates/repository/resource_view/distribution.html:117
+#: templates/stats/mystats.html:44
+msgid "YES"
+msgstr ""
+
 #: templates/repository/resource_view/documentation.html:19
 msgid "Document Type"
 msgstr ""
@@ -1644,6 +1875,10 @@ msgstr ""
 msgid "Conditions"
 msgstr ""
 
+#: templates/repository/resource_view/linguality.html:7
+msgid "Linguality type"
+msgstr ""
+
 #: templates/repository/resource_view/linguality.html:15
 msgid "Multi-linguality type"
 msgstr ""
@@ -1688,24 +1923,32 @@ msgstr ""
 msgid "Edit Resource"
 msgstr ""
 
-#: templates/repository/resource_view/lr_view.html:264
+#: templates/repository/resource_view/lr_view.html:256
+msgid "Download Resource"
+msgstr ""
+
+#: templates/repository/resource_view/lr_view.html:262
+msgid "Validate Resource"
+msgstr ""
+
+#: templates/repository/resource_view/lr_view.html:276
 #, python-format
 msgid "Contact Person%(contact_person_dicts|length|pluralize)s"
 msgstr ""
 
-#: templates/repository/resource_view/lr_view.html:275
+#: templates/repository/resource_view/lr_view.html:287
 msgid "toolService"
 msgstr ""
 
-#: templates/repository/resource_view/lr_view.html:335
+#: templates/repository/resource_view/lr_view.html:347
 msgid "Documentation"
 msgstr ""
 
-#: templates/repository/resource_view/lr_view.html:341
+#: templates/repository/resource_view/lr_view.html:353
 msgid "Samples Location"
 msgstr ""
 
-#: templates/repository/resource_view/lr_view.html:348
+#: templates/repository/resource_view/lr_view.html:360
 msgid "Tool Documentation"
 msgstr ""
 
@@ -2020,10 +2263,6 @@ msgstr ""
 msgid "Details"
 msgstr ""
 
-#: templates/repository/resource_view/usage.html:3
-msgid "Usage"
-msgstr ""
-
 #: templates/repository/resource_view/usage.html:6
 msgid "Access tools"
 msgstr ""
@@ -2164,12 +2403,12 @@ msgid "(Page %(pgnum)s of %(numpgs)s)"
 msgstr ""
 
 #: templates/repository/search.html:128 templates/repository/search.html:155
-#: templates/stats/topstats.html:240 templates/stats/topstats.html:242
+#: templates/stats/topstats.html:240 templates/stats/topstats.html.py:242
 msgid "Previous"
 msgstr ""
 
 #: templates/repository/search.html:129 templates/repository/search.html:156
-#: templates/stats/topstats.html:246 templates/stats/topstats.html:248
+#: templates/stats/topstats.html:246 templates/stats/topstats.html.py:248
 msgid "Next"
 msgstr ""
 
@@ -2265,10 +2504,6 @@ msgstr ""
 msgid "Last access"
 msgstr ""
 
-#: templates/stats/mystats.html:44
-msgid "YES"
-msgstr ""
-
 #: templates/stats/mystats.html:46
 msgid "NO"
 msgstr ""
@@ -2338,11 +2573,11 @@ msgstr ""
 msgid "time%(object.3|pluralize)s"
 msgstr ""
 
-#: templates/stats/topstats.html:302 templates/stats/topstats.html:303
+#: templates/stats/topstats.html:302 templates/stats/topstats.html.py:303
 msgid "Number of downloads"
 msgstr ""
 
-#: templates/stats/topstats.html:304 templates/stats/topstats.html:305
+#: templates/stats/topstats.html:304 templates/stats/topstats.html.py:305
 msgid "Number of views"
 msgstr ""
 
