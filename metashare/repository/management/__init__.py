@@ -12,22 +12,28 @@ from metashare.repository.supermodel import SchemaModel, RECOMMENDED, OPTIONAL
 from metashare.utils import get_class_by_name
 
 GROUP_GLOBAL_EDITORS = 'globaleditors'
+GROUP_REVIEWERS = 'reviewers'
+GROUP_DGT = 'dgt'
 
 def is_schema_model(obj):
     return inspect.isclass(obj) and issubclass(obj, SchemaModel) and \
         not obj.__name__ in ('SchemaModel', 'SubclassableModel')
 
-def setup_group_global_editors(app, created_models, verbosity, **kwargs):
+def setup_groups(app, created_models, verbosity, **kwargs):
     '''
-    Set up a group for the staff users and give it add / change permissions
+    Set up three groups:
+    - a group for the staff users and give it add / change permissions
     for all repository models.
+    - a group for reviewers and give them add / change / delete permissions for
+      language resources (resourceInfoType_model) and dependent models.
+    - a group of DGT persons who can view / download resources shared with them.
     '''
     # Local functions
-    def has_group_globaleditors():
-        return Group.objects.filter(name=GROUP_GLOBAL_EDITORS).count() > 0
+    def has_group(group_name):
+        return Group.objects.filter(name=group_name).count() > 0
     
-    def create_group_globaleditors():
-        return Group.objects.create(name=GROUP_GLOBAL_EDITORS)
+    def create_group(group_name):
+        return Group.objects.create(name=group_name)
 
     def list_applabels_and_modelnames():
         result = []
@@ -64,17 +70,23 @@ def setup_group_global_editors(app, created_models, verbosity, **kwargs):
                         optionals.add(optional_classobj)
         return optionals
 
-    # Begin setup_group_global_editors():
-    if has_group_globaleditors():
-        return # already have the group
+    # Begin setup_groups():
+    if all(has_group(group_name) for group_name in
+            (GROUP_REVIEWERS, GROUP_DGT, GROUP_GLOBAL_EDITORS)):
+        return # already have all groups
     
-    staffusers = create_group_globaleditors()
+    staffusers, reviewers, dgt = [create_group(group_name) for group_name in
+                                  (GROUP_GLOBAL_EDITORS, GROUP_REVIEWERS,
+                                   GROUP_DGT)]
     
     optionals = get_optional_modelnames()
     for applabel, modelname in list_applabels_and_modelnames():
         add_permission = get_permission_object(applabel, modelname, 'add')
         change_permission = get_permission_object(applabel, modelname, 'change')
+        delete_permission = get_permission_object(applabel, modelname, 'delete')
         staffusers.permissions.add(add_permission, change_permission)
+        reviewers.permissions.add(add_permission, change_permission,
+                                  delete_permission)
         if modelname in optionals:
             delete_permission = get_permission_object(applabel, modelname, 'delete')
             staffusers.permissions.add(delete_permission)
@@ -94,13 +106,13 @@ def set_site_from_django_url(app, created_models, verbosity, **kwargs):
         site.save()
 
 
-# Register the setup_group_global_editors method such that it is called after syncdb is done.
+# Register the setup_groups method such that it is called after syncdb is done.
 # We must make sure that the post_syncdb hooks from auth.management are executed first,
 # or else our code cannot find the permissions we want to use:\
 from django.contrib.auth import management
 
-signals.post_syncdb.connect(setup_group_global_editors,
-    sender=repository_models, dispatch_uid = "metashare.repository.management.setup_group_global_editors")
+signals.post_syncdb.connect(setup_groups,
+    sender=repository_models, dispatch_uid = "metashare.repository.management.setup_groups")
 
 signals.post_syncdb.connect(set_site_from_django_url,
     sender=repository_models, dispatch_uid = "metashare.repository.management.set_site_from_django_url")

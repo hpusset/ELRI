@@ -707,7 +707,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
             return update_wrapper(wrapper, view)
 
         info = self.model._meta.app_label, self.model._meta.model_name
-        
         urlpatterns = patterns('',
             url(r'^(.+)/upload-data/$',
                 wrap(self.uploaddata_view),
@@ -722,6 +721,10 @@ class ResourceModelAdmin(SchemaModelAdmin):
             url(r'^(.+)/reportdl/$',
                 wrap(self.reportdl),
                 name='%s_%s_reportdl' % info),
+            # MANUAL VALIDATION
+            url(r'^(.+)/validaterl/$',
+                wrap(self.validaterl),
+                name="%s_%s_validaterl" % info),
             # LEGAL DOCUMENTATION
             url(r'^(.+)/upload-legal/$',
                 wrap(self.uploadlegal_view),
@@ -995,6 +998,10 @@ class ResourceModelAdmin(SchemaModelAdmin):
         return render_to_response('repository/report_not_downloadable.html',
                                   {'resource': obj, 'reason': 'internal'},
                                   context_instance=RequestContext(request))
+
+    @csrf_protect_m
+    def validaterl(self, request, object_id, extra_context=None):
+        raise Http404
 
     ## LEGAL DOCUMENTATION
     @csrf_protect_m
@@ -1323,7 +1330,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
             if request.user.is_authenticated():
                 result = result.distinct().filter(Q(owners=request.user)
                         | Q(editor_groups__name__in=
-                               request.user.groups.values_list('name', flat=True)))
+                                request.user.groups.values_list('name', flat=True))
+                        | Q(groups__name__in=
+                                request.user.groups.values_list('name', flat=True)))
             else:
                 result = result.none()
         return result

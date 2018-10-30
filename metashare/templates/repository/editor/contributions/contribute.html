@@ -223,13 +223,20 @@
                     {% trans 'In case the data you wish to upload are larger than 100MB, please contact us to provide an SFTP link for direct download or consider uploading smaller files' %}
                 </span>
             </div>
-
-<!--
-            <div class="form-group required" id="accept_tos">
-                {% static "metashare/LR-Upload-ToS.pdf" as lr_upload_tos %}
-                <input type="checkbox" name="accepttos" value="true" required="">{% blocktrans %}I agree with the <a target="_blank" href="{{ lr_upload_tos }}">Language resource upload Terms of Service for Data Holders</a>{% endblocktrans %}<br>
+            <!-- Group selection -->
+            <div class="form-group required">
+                <label class="control-label" for="groups">{% trans 'Group(s)' %}</label>
+                <div class="group">
+                    <select required class="form-control" multiple style="padding: 6px; height:200px"
+                            name="groups[]"
+                            id="groups">
+                        {% for group_name, group_id in groups %}
+                        <option value="{{ group_id }}">{% blocktrans %} {{ group_name }} {% endblocktrans %}</option>
+                        {% endfor %}
+                    </select>
+                    <span class="help-block contrib-help">{% trans 'The group(s) the language resource is shared with.' %}</span>
+                </div>
             </div>
--->
             <div class="form-group required" id="accept_tos">
                 <input type="checkbox" name="accepttos" value="true" required="">{% blocktrans %}I agree with the <a href="/elri/legal#Sharing">Language Resource upload Terms of Service for Data Holders</a> {% endblocktrans %}<br>
             </div>

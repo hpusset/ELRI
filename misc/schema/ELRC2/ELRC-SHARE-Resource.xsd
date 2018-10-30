@@ -39,6 +39,15 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="groups" type="ms:Organization" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on the group(s) the resource is shared with</xs:documentation>
+					<xs:appinfo>
+						<label>Group(s)</label>
+						<relation>many-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element ref="ms:metadataInfo">
 				<xs:annotation>
 					<xs:documentation>Groups information on the metadata record itself</xs:documentation>

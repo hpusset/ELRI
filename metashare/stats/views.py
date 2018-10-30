@@ -100,7 +100,7 @@ def isOwner(username):
     return False
 
 
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser or u.groups.filter(name="reviewers").exists())
 def usagestats(request):
     """  Get usage of fields LR """
     expand_all = request.POST.get('expandall')
@@ -172,14 +172,14 @@ def usagestats(request):
                 if not metaname in _fields:
                     if not verbose_name:
                         if not "_set" in _field and not "validation_info_type" in _field and not "relation_info_type" in _field:
-                            verbose_name = eval(u'{0}._meta.get_field("{1}").verbose_name'.format(_model, _field))
-                            class_name = eval(u'{0}._meta.verbose_name'.format(_classes[_component]))
+                            verbose_name = globals()[_model]._meta.get_field(_field).verbose_name[:]
+                            class_name = globals()[_classes[_component]]._meta.verbose_name[:]
                             if verbose_name != class_name:
                                 verbose_name = verbose_name + " [" + class_name + "]"
                                 style = "instance"
                                 metadata_type = _component
                         else:
-                            verbose_name = eval(u'{0}._meta.verbose_name'.format(_classes[_component]))
+                            verbose_name = globals()[_classes[_component]]._meta.verbose_name[:]
                     added = _add_usage_meta(usage_fields, component_name, _classes[_component], verbose_name, \
                                             _required, "component", metadata_type,
                                             usagedata.get(metaname.replace("Type_model", ""), None), selected_filters,
@@ -190,8 +190,7 @@ def usagestats(request):
                         instance_dbfields = getattr(mod, _classes[_component]).__schema_fields__
                         for _icomponent, _ifield, _irequired in instance_dbfields:
                             if not _icomponent in _classes:
-                                verbose_name = eval(
-                                    u'{0}._meta.get_field("{1}").verbose_name'.format(_classes[_component], _ifield))
+                                verbose_name = globals()[_classes[_component]]._meta.get_field(_ifield).verbose_name[:]
                                 metaname = metadata_type + " " + _ifield
                                 _add_usage_meta(usage_fields, component_name, \
                                                 _ifield, verbose_name, _irequired, \
@@ -204,7 +203,7 @@ def usagestats(request):
                                     selected_class = model_name
             else:
                 if not verbose_name:
-                    verbose_name = eval(u'{0}._meta.get_field("{1}").verbose_name'.format(_model, _field))
+                    verbose_name = globals()[_model]._meta.get_field(_field).verbose_name[:]
                 _add_usage_meta(usage_fields, component_name, \
                                 _field, verbose_name, _required, \
                                 "field", model_name, \
@@ -270,7 +269,7 @@ def _add_usage_meta(usage_fields, component_name, field, verbose_name, status, m
     return True
 
 
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser or u.groups.filter(name="reviewers").exists())
 def topstats(request):
     """ viewing statistics about the top LR and latest queries. """
     topdata = []
@@ -428,7 +427,7 @@ def getstats(request):
             for _not_used, _field, _required in dbfields:
                 model_name = _model.replace("Type_model", "")
                 if not _field.endswith('_set') and not model_name + " " + _field in _fields:
-                    verbose_name = eval(u'{0}._meta.get_field("{1}").verbose_name'.format(_model, _field))
+                    verbose_name = globals()[_model]._meta.get_field(_field).verbose_name[:]
                     _fields[model_name + " " + _field] = [model_name, _field, verbose_name, _required, 0, 0]
 
         usageset = UsageStats.objects.values('elname', 'elparent').annotate(Count('lrid', distinct=True), \
