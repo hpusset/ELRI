@@ -169,5 +169,4 @@ Notice that you will need to update the `ALLOWED_HOSTS` variable adding at least
 
         ALLOWED_HOSTS = ['127.0.0.1','localhost','192.168.25.19']
     Then, the webapp will be accessible at `http://192.168.25.19:port/elri`
- 
- 
+  
