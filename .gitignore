@@ -43,3 +43,6 @@ metashare/storage/django_migrations/
 metashare/stats/django_migrations/
 metashare/recommendations/django_migrations/
 po_files*.zip
+metashare/processed/*
+metashare/unprocessed/*
+shared_folder/lang-resources/*

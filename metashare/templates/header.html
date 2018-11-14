@@ -11,15 +11,15 @@
                 <li title="{% trans 'Home' %}"><a href="{% url 'frontpage' %}" %}>
                     <i class="fa fa-home menu_fontawesome" aria-hidden="true"></i> {% trans 'Home' %}</a></li>
                 {% if user.is_authenticated %}
-                    <li title="{% trans 'Browse the resources of the META-SHARE catalogue' %}"><a
+                    <li title="{% trans 'Browse the resources of the ELRI catalogue' %}"><a
                             href="{% url 'frontpage' %}repository/search/">
-                        <i class="fa fa-list-ul menu_fontawesome" aria-hidden="true"></i> {% trans 'Browse Resources' %}</a></li>
+                        <i class="fa fa-list-ul menu_fontawesome" aria-hidden="true"></i> {% trans 'Browse' %}</a></li>
                     <li><a href="{% url 'contribute' %}">
-                        <i class="fa fa-share-square-o menu_fontawesome" aria-hidden="true"></i> {% trans 'Contribute Resources' %}</a></li>
+                        <i class="fa fa-share-square-o menu_fontawesome" aria-hidden="true"></i> {% trans 'Contribute' %}</a></li>
                 {% endif %}
                 {% if user.userprofile.has_editor_permission %}
                     <li title="{% trans 'Create/edit resource metadata or upload resource data' %}"><a>
-                        <i class="fa fa-pencil-square-o menu_fontawesome" aria-hidden="true"></i> {% trans 'Manage Resources' %}</a>
+                        <i class="fa fa-pencil-square-o menu_fontawesome" aria-hidden="true"></i> {% trans 'Manage' %}</a>
                         <ul>
                             <li title="{% trans 'Create/edit your own resource metadata or upload resource data' %}"><a
                                     href="{% url 'editor:repository_resourceinfotype_model_myresources' %}">
@@ -32,11 +32,13 @@
                                 </li>
                             {% endif %}
                             {# PROJECT MANAGEMENT #}
+<!--
                             {% if user.is_superuser or user|is_member:"reviewers" %}
                                 <li title="{% trans 'Manage LRs by ELRC deliverables' %}"><a
                                         href="/admin/project_management/managementobject/"> {% trans 'Manage LRs by ELRC deliverables' %}</a>
                                 </li>
                             {% endif %}
+-->
                             {% if user.is_superuser %}
                                 <li title="{% trans 'Create/edit person object metadata' %}"><a
                                         href="{% url 'editor:repository_personinfotype_model_changelist' %}">
@@ -58,7 +60,7 @@
                 {% endif %}
 {#                {% if user.is_superuser or user.userprofile.has_organization_manager_permission or user.userprofile.has_manager_permission %}#}
                 {% if user.is_superuser %}
-                    <li title="{% trans 'Manage users and applications' %}"><a>
+                    <li title="{% trans 'Manage users and groups' %}"><a>
                         <i class="fa fa-wrench menu_fontawesome" aria-hidden="true"></i> {% trans 'Administration' %}</a>
                         <ul>
                             {% if user.is_superuser %}
@@ -66,10 +68,10 @@
 {#                                <li><a href="{% url 'editor:accounts_editorgroup_changelist' %}">Editor groups</a></li>#}
 {#                                <li><a href="{% url 'editor:accounts_editorgroupmanagers_changelist' %}">Editor group#}
 {#                                    managers</a></li>#}
-{#                                <li><a href="{% url 'editor:accounts_organization_changelist' %}">Organizations</a></li>#}
+                                <li><a href="{% url 'editor:accounts_organization_changelist' %}">Groups</a></li>
 {#                                <li><a href="{% url 'editor:accounts_organizationmanagers_changelist' %}">Organization#}
 {#                                    managers</a></li>#}
-                                <li><a href="{% url 'admin:accounts_accesspointedeliveryapplication_changelist' %}"> {% trans 'eDelivery membership applications' %}</a></li>
+{#                                <li><a href="{% url 'admin:accounts_accesspointedeliveryapplication_changelist' %}"> {% trans 'eDelivery membership applications' %}</a></li>#}
                             {% endif %}
 {#                            {% if user.userprofile.has_manager_permission %}#}
 {#                                <li><a href="{% url 'admin:accounts_editorgroupapplication_changelist' %}">Editor group#}
@@ -95,6 +97,7 @@
                         <li><a href="{% url 'info' %}#Licensing_LRs">{% trans 'Licensing Language Resources' %}</a></li>                                                
                     </ul>
                 </li>
+                {% if user.is_authenticated %}
                 <li><a href="{% url 'legal' %}">
                     <i class="fa fa-book menu_fontawesome" aria-hidden="true"></i> {% trans 'Terms of Service' %}</a>
                     <ul>
@@ -106,7 +109,7 @@
                         <li><a href="{% url 'legal' %}#Notice_take_down">{% trans 'Notice and Takedown Policy' %}</a></li>
                     </ul>
                 </li>                       
-                
+                {% endif %}
                 <li title="{% trans 'Help' %}"><a href="{% url 'help' %}">
                     <i class="fa fa-question-circle menu_fontawesome" aria-hidden="true"></i> {% trans 'Help' %}</a></li>
                 
@@ -130,14 +133,18 @@
 {#                            <li><a href="{% url 'organization_application' %}"#}
 {#                                   title="Apply for membership in organizations">Apply for organization membership</a>#}
 {#                            </li>#}
+<!--
                             <li><a href="{% url 'edelivery_application' %}"
                                    title="{% trans 'Apply for eDelivery membership' %}">{% trans 'Apply for ELRC-SHARE eDelivery membership' %}</a>
                             </li>
+-->
+<!--
                             {% if user.is_superuser or user|is_member:"ecmembers" %}
                                 <li title="{% trans 'ELRC-SHARE RESTful API' %}"><a
                                         href="/repository/api/v1/help/"> {% trans 'ELRC-SHARE RESTful API' %}</a>
                                 </li>
                             {% endif %}
+-->
                         </ul>
                     </li>
                 {% endif %}

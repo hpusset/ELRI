@@ -1,0 +1,521 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-10-30 18:27+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: templates/repository/editor/contributions/contribute.html:9
+msgid "ELRI"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:59
+msgid "Your browser does not support JavaScript!"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:61
+msgid ""
+"Please make sure that you have javascript enabled and refresh the page "
+"before proceeding with your contribution."
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:73
+msgid "Uploading your data"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:74
+msgid ""
+"Please provide the required information below for the data you wish to "
+"upload. Once uploaded, the ELRI engines will process your data with the goal "
+"of providing you, and users of the group of your choice, with a fully "
+"prepared language resource.\n"
+"                <br>\n"
+"                Once your resource has been fully processed, you will be "
+"notified via email and will be able to download it from this repository."
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:81
+msgid "Resource Title"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:86
+msgid ""
+"The name by which the resource is already known or by which you would like "
+"it to be known; e.g. \"The GSRT bilingual corpus of Greek-English bulletins\""
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:92
+msgid "Resource short description"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:94
+msgid ""
+"[Optional] A short description, including any information considered useful "
+"about the resource, e.g. whether it's a dataset (collection of documents) or "
+"a lexicon, glossary, terminological resource, etc., its size, language(s), "
+"classification information (e.g. health reports, news bulletins, lexicon of "
+"sports terminology etc.)"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:97
+#: templates/repository/editor/select_resource_type.html:12
+msgid "Resource type"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:100
+#: templates/repository/editor/select_resource_type.html:16
+msgid "Corpus"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:101
+msgid "Language Description"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:102
+msgid "Lexical Conceptual Resource"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:104
+msgid ""
+"[Optional] The type of the resource: can be Corpus, Lexicon, or Language "
+"Description. Do not choose anything if you are not sure."
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:109
+msgid "Language(s)"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:114
+msgid "Bulgarian"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:115
+msgid "Czech"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:116
+msgid "Croatian"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:117
+msgid "Danish"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:118
+msgid "Dutch; Flemish"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:119
+msgid "English"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:120
+msgid "Estonian"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:121
+msgid "Finnish"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:122
+msgid "French"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:123
+msgid "German"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:124
+msgid "Hungarian"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:125
+msgid "Icelandic"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:126
+msgid "Irish"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:127
+msgid "Italian"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:128
+msgid "Latvian"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:129
+msgid "Lithuanian"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:130
+msgid "Maltese"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:131
+msgid "Modern Greek (1453-)"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:132
+msgid "Norwegian Bokmål (nb)"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:133
+msgid "Norwegian Nynorsk (nn)"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:134
+msgid "Polish"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:135
+msgid "Portuguese"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:136
+msgid "Romanian; Moldavian; Moldovan"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:137
+msgid "Slovak"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:138
+msgid "Slovenian"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:139
+msgid "Spanish; Castilian"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:140
+msgid "Swedish"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:142
+msgid ""
+"The language(s) of the resource; for resources with multiple languages, hold "
+"down CTRL key to select multiple values"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:146
+msgid "Domain(s)"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:150
+msgid "Other / Unknown"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:151
+msgid "eCulture"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:152
+msgid "Electronic Exchange of Social Security Information"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:153
+msgid "eHealth"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:154
+msgid "eJustice"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:155
+msgid "eProcurement"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:156
+msgid "Public Open Data"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:157
+msgid "Safer Internet"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:158
+msgid "Business Registers Interconnection System"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:159
+msgid "Cybersecurity"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:162
+msgid ""
+"[Optional] Domain refers to information that belongs to a specific field of "
+"activity (e.g., culture or health) and is related to one of the building "
+"blocks of the European digital services indicated in the provided list. "
+"Digital resources that do not clearly belong to one of the provided domains "
+"can be left as Other/Unknown."
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:167
+msgid "Licensing conditions"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:169
+msgid "License-free"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:170
+msgid "Creative Commons - Attribution 4.0"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:171
+msgid "Creative Commons - Attribution - ShareAlike 4.0"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:172
+msgid "Creative Commons - Attribution - NonCommercial 4.0"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:173
+msgid "Creative Commons - Attribution - NonCommercial - ShareAlike 4.0"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:174
+msgid "Use External License"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:176
+msgid "The licensing conditions for the resource."
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:179
+msgid "License file"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:183
+msgid "Please upload license file in the <b>.pdf format</b>."
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:208
+msgid "Upload Resource"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:211
+msgid ""
+"Please upload a single <strong>.zip</strong> file or any number of files of "
+"the following type: <strong>.doc(x), .odt, .tmx, .sdltm, .xml, .tbx, ."
+"xls(x), or .txt file</strong> up to 100MB."
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:213
+msgid ""
+"In case the data you wish to upload are larger than 100MB, please contact us "
+"to provide an SFTP link for direct download or consider uploading smaller "
+"files"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:218
+msgid "Group(s)"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:224
+#, python-format
+msgid " %(group_name)s "
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:227
+msgid "The group(s) the language resource is shared with."
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:233
+#, python-format
+msgid ""
+"I agree with the <a target=\"_blank\" href=\"%(legal_url)s#Sharing"
+"\">Language Resource upload Terms of Service for Data Holders</a> "
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:246
+msgid "Submit"
+msgstr ""
+
+#: templates/repository/editor/contributions/contribute.html:247
+msgid "Reset"
+msgstr ""
+
+#: templates/repository/editor/dict_widget.html:4
+#: templates/repository/editor/dict_widget.html:8
+#: templates/repository/editor/lang_dict_widget.html:4
+#: templates/repository/editor/lang_dict_widget.html:8
+msgid "Delete Field"
+msgstr ""
+
+#: templates/repository/editor/dict_widget.html:6
+#: templates/repository/editor/lang_dict_widget.html:6
+msgid "Add Another Field"
+msgstr ""
+
+#: templates/repository/editor/index.html:28
+msgid "Recent Actions"
+msgstr ""
+
+#: templates/repository/editor/index.html:29
+msgid "My Actions"
+msgstr ""
+
+#: templates/repository/editor/index.html:33
+msgid "None available"
+msgstr ""
+
+#: templates/repository/editor/index.html:47
+msgid "Unknown content"
+msgstr ""
+
+#: templates/repository/editor/lang_dict_widget.html:4
+#: templates/repository/editor/lang_dict_widget.html:8
+msgid ""
+"Language of this entry (<a href=\"http://tools.ietf.org/html/"
+"rfc3066#section-2\" target=\"_blank\">RFC 3066 code</a>, preferably from <a "
+"href=\"http://www.loc.gov/standards/iso639-2/php/code_list.php\" target="
+"\"_blank\">ISO 639-1</a>)"
+msgstr ""
+
+#: templates/repository/editor/langdesc_info.html:10
+#: templates/repository/editor/lexicon_info.html:11
+#: templates/repository/editor/multi_corpus_info.html:8
+#: templates/repository/editor/multi_corpus_info.html:22
+#: templates/repository/editor/multi_corpus_info.html:35
+#: templates/repository/editor/one_media_info.html:9
+#: templates/repository/editor/toolservice_info.html:10
+msgid "Edit"
+msgstr ""
+
+#: templates/repository/editor/logged_out.html:4
+msgid "Home"
+msgstr ""
+
+#: templates/repository/editor/logged_out.html:10
+msgid "Thanks for using the ELRC-SHARE editor."
+msgstr ""
+
+#: templates/repository/editor/logged_out.html:14
+msgid "Log in again"
+msgstr ""
+
+#: templates/repository/editor/multi_corpus_info.html:18
+#: templates/repository/editor/multi_corpus_info.html:31
+#: templates/repository/editor/one_media_info.html:13
+msgid "Add"
+msgstr ""
+
+#: templates/repository/editor/select_resource_type.html:17
+msgid "Language description"
+msgstr ""
+
+#: templates/repository/editor/select_resource_type.html:18
+msgid "Lexical conceptual resource"
+msgstr ""
+
+#: templates/repository/editor/select_resource_type.html:19
+msgid "Tool / Service"
+msgstr ""
+
+#: templates/repository/editor/select_resource_type.html:41
+msgid "Please, use one of the values"
+msgstr ""
+
+#: templates/repository/editor/select_resource_type.html:44
+msgid "corpus"
+msgstr ""
+
+#: templates/repository/editor/select_resource_type.html:44
+msgid ""
+"for sets of documents in one or more\n"
+"                            languages, including, for instance,"
+msgstr ""
+
+#: templates/repository/editor/select_resource_type.html:47
+msgid ""
+"sets of public administration official documents (e.g. ministerial "
+"decisions, legal acts, Board decisions etc.),"
+msgstr ""
+
+#: templates/repository/editor/select_resource_type.html:48
+msgid "sets of journal, newspaper, bulletin, blog articles, etc."
+msgstr ""
+
+#: templates/repository/editor/select_resource_type.html:49
+msgid ""
+"parallel corpora, i.e. sets of original document with its translations "
+"(without any processing)"
+msgstr ""
+
+#: templates/repository/editor/select_resource_type.html:50
+msgid ""
+"translation memories, i.e. translated documents aligned with their originals."
+msgstr ""
+
+#: templates/repository/editor/select_resource_type.html:54
+msgid "language description"
+msgstr ""
+
+#: templates/repository/editor/select_resource_type.html:54
+#: templates/repository/editor/select_resource_type.html:61
+msgid "for resources such as:"
+msgstr ""
+
+#: templates/repository/editor/select_resource_type.html:56
+msgid "grammars, i.e. sets of rules that formalize a language"
+msgstr ""
+
+#: templates/repository/editor/select_resource_type.html:57
+msgid ""
+"language and translation models, which contain statistical information that "
+"assigns a probability to a piece of unseen text (based on some training "
+"data)."
+msgstr ""
+
+#: templates/repository/editor/select_resource_type.html:61
+msgid "lexical/conceptual resource"
+msgstr ""
+
+#: templates/repository/editor/select_resource_type.html:63
+msgid ""
+"terminological lexica, glossaries etc., i.e. including lists of terms, with "
+"or\n"
+"                                    without any other information (e.g. "
+"definition, examples, translation equivalents,\n"
+"                                    linguistic information etc.)"
+msgstr ""
+
+#: templates/repository/editor/select_resource_type.html:67
+msgid ""
+"lists of words, such as person names, names of places, names of products etc."
+msgstr ""
+
+#: templates/repository/editor/select_resource_type.html:68
+msgid ""
+"lexica and dictionaries containing words with linguistic information (e.g. "
+"part of\n"
+"                                    speech, inflectional information, etc.)."
+msgstr ""
+
+#: templates/repository/editor/select_resource_type.html:74
+msgid "Tool/Service"
+msgstr ""
+
+#: templates/repository/editor/select_resource_type.html:77
+msgid ""
+"language processing tools, web services, applications such as linguistic "
+"annotators\n"
+"                                    (e.g. Part-of-speech taggers, parsers, "
+"etc.), semantic annotators (e.g. Named Entity\n"
+"                                    Recognisers), aligners, etc."
+msgstr ""

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static from staticfiles %}
 {% load i18n %}
-{% block title %}{{ title }} &ndash; ELRC-SHARE{% endblock %}
+{% block title %}{{ title }} &ndash; ELRI{% endblock %}
 
 {% block messages %}
 {% if form.errors %}
@@ -18,8 +18,8 @@
     {% for field in form %}
       {{ field.errors }}
       {% if field.html_name == "accepted_tos" %}
-        {% static "metashare/ELRC-SHARE_ToS.pdf" as elrcshare_tos %}
-        {{ field }} <label for="{{ field.auto_id }}">{% blocktrans %}I accept the <a target="_blank" href="{{ elrcshare_tos }}">ERLC-SHARE Terms of Service for registered users</a>.{% endblocktrans %}</label>
+        {% static "metashare/ELRI_ToS_template.pdf" as elri_tos %}
+        {{ field }} <label for="{{ field.auto_id }}">{% blocktrans %}I accept the <a target="_blank" href="{{ elri_tos }}">ERLI Terms of Service</a>.{% endblocktrans %}</label>
       {% else %}
         {{ field.label_tag }} {{ field }}
       {% endif %}

@@ -28,11 +28,11 @@ following steps need to be undertaken:
 
 02. Set up a Python 2 virtualenv 
 
-        virtualenv env
+        virtualenv venv
 
     activate it
 
-        source env/bin/activate
+        source venv/bin/activate
 
     and install the dependencies via
 

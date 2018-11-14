@@ -276,7 +276,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
     list_filter = ('storage_object__publication_status', ResourceTypeFilter, ValidatedFilter)
     actions = ('publish_action', 'suspend_action', 'ingest_action',
         'export_xml_action', 'delete', 'add_group', 'remove_group',
-        'add_owner', 'remove_owner')
+        'add_owner', 'remove_owner', 'process_resource')
     hidden_fields = ('storage_object', 'owners', 'editor_groups',)
     search_fields = ("identificationInfo__resourceName", "identificationInfo__resourceShortName", "identificationInfo__description", "identificationInfo__identifier")
 
@@ -338,6 +338,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     'Successfully ingested %(internal)s internal resource.',
                     'Successfully ingested %(internal)s internal resources.',
                     successful) % {'internal': successful})
+                    
+                    # TE: system_branch(obj)
+                    
             else:
                 messages.error(request,
                                _('Only internal resources can be ingested.'))
@@ -346,6 +349,19 @@ class ResourceModelAdmin(SchemaModelAdmin):
                             'perform this action for all selected resources.'))
 
     ingest_action.short_description = _("Ingest selected internal resources")
+    
+    def system_branch(self, ingested_lr):
+        pass
+        
+        
+    def process_lr(self, request, queryset):
+		
+        if request.user.is_staff:
+			LOGGER.info(request)
+			LOGGER.info(queryset)
+			
+
+    process_lr.short_description = _("Process selected ingested resources")
 
     def export_xml_action(self, request, queryset):
         from StringIO import StringIO

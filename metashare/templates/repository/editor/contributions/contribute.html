@@ -221,10 +221,10 @@
                             name="groups[]"
                             id="groups">
                         {% for group_name, group_id in groups %}
-                        <option value="{{ group_id }}">{% blocktrans %} {{ group_name }} {% endblocktrans %}</option>
+                        <option value="{{ group_id }}">{{ group_name }}</option>
                         {% endfor %}
                     </select>
-                    <span class="help-block contrib-help">{% trans 'The group(s) the language resource is shared with.' %}</span>
+                    <span class="help-block contrib-help">{% trans 'The group(s) the language resource can be shared with (hold down the CTRL key to select multiple groups).' %}</span>
                 </div>
             </div>
             <!-- Terms of Service confirmation -->
@@ -232,8 +232,7 @@
                 {% url 'legal' as legal_url %}
                 <input type="checkbox" name="accepttos" value="true" required="">{% blocktrans %}I agree with the <a target="_blank" href="{{ legal_url }}#Sharing">Language Resource upload Terms of Service for Data Holders</a> {% endblocktrans %}<br>
             </div>
-        
-        
+                
             <!-- Button (Double) -->
             <div class="form-group">
                 <label class="control-label" for="submit"></label>

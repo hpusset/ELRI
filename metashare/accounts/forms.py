@@ -71,9 +71,11 @@ class RegistrationRequestForm(Form):
     last_name = forms.CharField(User._meta.get_field('last_name').max_length,
                                 label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Last name")))
     email = forms.EmailField(label=mark_safe(u"%s<span style='color:red'>*</span>" % _("E-mail")))
-    country = forms.ChoiceField(UserProfile._meta.get_field('country').choices,
-                                UserProfile._meta.get_field('country').max_length,
-                                label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Country")))
+
+	# For National Relay Stations, the country is limited to the Member State in which the NRS is deployed
+    #country = forms.ChoiceField(UserProfile._meta.get_field('country').choices,
+                                #UserProfile._meta.get_field('country').max_length,
+                                #label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Country")))
 
     organization = forms.CharField(UserProfile._meta.get_field('affiliation').max_length,
                                    label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Organization name")))
@@ -87,8 +89,11 @@ class RegistrationRequestForm(Form):
                             % _("Organization phone number")))
     position = forms.CharField(UserProfile._meta.get_field('position').max_length,
                                label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Position in the organization")))
-    phone_number = forms.CharField(UserProfile._meta.get_field('phone_number').max_length,
-                                   label=mark_safe(u"%s<span style='color:grey'>*</span>" % _("Phone number")))
+                               
+    #Removing user phone number for now: user email and organisation phone number should be sufficient
+    #phone_number = forms.CharField(UserProfile._meta.get_field('phone_number').max_length,
+                                   #label=mark_safe(u"%s<span style='color:grey'>*</span>" % _("Phone number")))
+                                   
     password = forms.CharField(User._meta.get_field('password').max_length,
                                label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Password")),
                                widget=forms.PasswordInput())
@@ -96,16 +101,20 @@ class RegistrationRequestForm(Form):
         User._meta.get_field('password').max_length,
         label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Password confirmation")), widget=forms.PasswordInput())
 
-    contributor_group = forms.ChoiceField(
-        label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Contributor group"))
-        )
+        
+	#Commenting from now, as it might be more functional to handle group assignment for logged in users
+	## In ELRI we need users to be able to join more than one group	
+    #contributor_group = forms.MultipleChoiceField(
+        #label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Contributor group"))
+        #)
+     
     accepted_tos = forms.BooleanField()
 
     def __init__(self, *args, **kwargs):
         group_choices = kwargs.pop("group_choices")
-        super(RegistrationRequestForm, self).__init__(*args, **kwargs)
-        self.fields["contributor_group"].choices = group_choices
-
+        super(RegistrationRequestForm, self).__init__(*args, **kwargs)        
+        #self.fields["contributor_group"].choices = group_choices
+ 
     def clean_shortname(self):
         """
         Make sure that the user name is still available.

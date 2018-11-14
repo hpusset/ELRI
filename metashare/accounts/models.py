@@ -220,8 +220,7 @@ class Organization(Group):
 
     def get_managers(self):
         return User.objects.filter(groups__name__in=
-                                   OrganizationManagers.objects.filter(managed_organization__name=self.name)
-                                   .values_list('name', flat=True))
+                                   OrganizationManagers.objects.values_list('name', flat=True))
 
 
 class OrganizationApplication(models.Model):
