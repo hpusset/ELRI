@@ -45,3 +45,4 @@ metashare/recommendations/django_migrations/
 po_files*.zip
 metashare/processed/*
 metashare/unprocessed/*
+elri_resources/

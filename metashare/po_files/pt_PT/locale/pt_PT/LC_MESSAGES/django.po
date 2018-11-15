@@ -3,68 +3,76 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-30 18:26+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2018-11-08 15:00+0100\n"
+"Language: pt_PT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.2\n"
 
 #: local_settings.py:35
 msgid "Spanish"
-msgstr ""
+msgstr "Espanhol"
 
 #: local_settings.py:36
 msgid "English"
-msgstr ""
+msgstr "Inglês"
 
 #: local_settings.py:37
 msgid "French"
-msgstr ""
+msgstr "Francês"
 
 #: local_settings.py:38
 msgid "Gaelic"
-msgstr ""
+msgstr "Gaélico"
 
 #: local_settings.py:39
 msgid "Portuguese"
-msgstr ""
+msgstr "Português"
 
 #: storage/models.py:108
 msgid "Can synchronize"
-msgstr ""
+msgstr "Pode sincronizar"
 
 #: storage/models.py:113
 msgid ""
 "(Read-only) base URL for the server where the master copy of the associated "
 "language resource is located."
 msgstr ""
+"(Somente leitura) URL base para o servidor onde a cópia mestre do recurso de "
+"idioma associado foi localizado."
 
 #: storage/models.py:117
 msgid "(Read-only) unique identifier for this storage object instance."
 msgstr ""
+"(Somente leitura) identificador único para esta instância do objeto de "
+"armazenamento."
 
 #: storage/models.py:121
 msgid "(Read-only) creation date for this storage object instance."
-msgstr ""
+msgstr "(Somente leitura) data de criação para este objecto de armazenamento."
 
 #: storage/models.py:124
 msgid ""
 "(Read-only) last modification date of the metadata XML for this storage "
 "object instance."
 msgstr ""
+"(Somente leitura) ultima data de modificação dos metadados XML para este "
+"objecto de armazenamento."
 
 #: storage/models.py:128
 msgid ""
 "(Read-only) MD5 checksum of the binary data for this storage object instance."
 msgstr ""
+"(Somente leitura) MD5 checksum para os dados binários para este objecto de "
+"armazenamento."
 
 #: storage/models.py:132
 msgid ""
@@ -72,38 +80,46 @@ msgid ""
 "serialized storage object and the metadata XML for this storage object "
 "instance."
 msgstr ""
+"(Somente leitura) MD5 checksum do ficheiro ZIP que contem os objecto de "
+"armazenamento globais, organizados por séries e os metadados deste objecto "
+"de armazenamento."
 
 #: storage/models.py:137
 msgid ""
 "(Read-only) last modification date of digest zip for this storage object "
 "instance."
 msgstr ""
+"(Somente leitura) última data de modificação do ZIP deste objecto de "
+"armazenamento."
 
 #: storage/models.py:141
 msgid ""
 "(Read-only) last update check date of digest zip for this storage object "
 "instance."
 msgstr ""
+"(Somente leitura) data da última actualização do ZIP para este objecto de "
+"armazenamento."
 
 #: storage/models.py:144
 msgid "Revision or version information for this storage object instance."
-msgstr ""
+msgstr "Revisão ou informação da versão para este objecto de armazenamento."
 
 #: storage/models.py:149
 msgid "(Read-only) META-SHARE version used with the storage object instance."
 msgstr ""
+"(Somente leitura) versão META-SHARE usada para este objecto de armazenamento."
 
 #: storage/models.py:152
 msgid "Specifies whether the resource is collected by ELRC 1"
-msgstr ""
+msgstr "Especifica se este recurso foi recolhido pela ELRC 1"
 
 #: storage/models.py:167
 msgid "Generalized copy status flag for this storage object instance."
-msgstr ""
+msgstr "Marcador de cópia genérico para este objecto de armazenamento."
 
 #: storage/models.py:185
 msgid "Generalized publication status flag for this storage object instance."
-msgstr ""
+msgstr "Publicação genérica do Status Flag para este objecto de armazenamento."
 
 #: storage/models.py:189
 msgid ""
@@ -111,24 +127,31 @@ msgid ""
 "set in local_settings.py in CORE_NODES and PROXIED_NODES; empty if resource "
 "stems from this local node"
 msgstr ""
+"(Somente leitura) Identificação do nódulo original do qual o recurso é "
+"derivado como definido em local_settings.py em CORE_NODES e PROXIED_NODES; "
+"vazio caso o recurso origine do nó original"
 
 #: storage/models.py:193
 msgid "Deletion status flag for this storage object instance."
-msgstr ""
+msgstr "Marcador para eliminação deste objecto de armazenamento."
 
 #: storage/models.py:197
 msgid ""
 "XML containing the metadata description for this storage object instance."
-msgstr ""
+msgstr "XML com descrição de metadados para este objecto de armazenamento."
 
 #: storage/models.py:201
 msgid ""
 "text containing the JSON serialization of global attributes for this storage "
 "object instance."
 msgstr ""
+"texto que contem a serialização JSON dos atributos globais para este objecto "
+"de armazenamento."
 
 #: storage/models.py:205
 msgid ""
 "text containing the JSON serialization of local attributes for this storage "
 "object instance."
 msgstr ""
+"texto que contem a serialização JSON dos atributos locais deste objecto de "
+"armazenamento."

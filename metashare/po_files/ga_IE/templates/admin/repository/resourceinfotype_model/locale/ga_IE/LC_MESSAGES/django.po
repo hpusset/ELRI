@@ -23,11 +23,11 @@ msgstr ""
 #: templates/admin/repository/resourceinfotype_model/upload_report.html:9
 #: templates/admin/repository/resourceinfotype_model/upload_resource.html:10
 msgid "Home"
-msgstr ""
+msgstr "Baile"
 
 #: templates/admin/repository/resourceinfotype_model/change_form.html:30
 msgid "Add"
-msgstr ""
+msgstr "Cuir le"
 
 #: templates/admin/repository/resourceinfotype_model/change_form.html:150
 #: templates/admin/repository/resourceinfotype_model/change_list.html:30
@@ -35,14 +35,16 @@ msgid "Please correct the error below."
 msgid_plural ""
 "Please\n"
 "                            correct the errors below."
-msgstr[0] ""
+msgstr[0] "Ceartaigh an earráid thíos."
 msgstr[1] ""
+"Le do thoil\n"
+"                            ceartaigh na hearráidí thíos."
 
 #: templates/admin/repository/resourceinfotype_model/change_list.html:21
 #, python-format
 msgid "Add %(name)s"
-msgstr ""
+msgstr "Cuir %(name)s leis"
 
 #: templates/admin/repository/resourceinfotype_model/change_list.html:41
 msgid "Filter"
-msgstr ""
+msgstr "Scag"

@@ -3,25 +3,25 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-30 18:27+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2018-11-13 17:54+0100\n"
+"Language: pt_PT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.2\n"
 
 #: templates/accounts/add_user_profile_to_editor_group.html:13
 #: templates/accounts/remove_user_profile_from_editor_group.html:12
-#, python-format
+#, fuzzy, python-format
 msgid "Editor Group%(selected_editorgroups|pluralize)s"
-msgstr ""
+msgstr "Grupo de edição %(selected_editorgroups|pluralize)s"
 
 #: templates/accounts/add_user_profile_to_editor_group.html:13
 #: templates/accounts/add_user_profile_to_editor_group_managers.html:12
@@ -32,42 +32,47 @@ msgstr ""
 #: templates/accounts/remove_user_profile_from_organization.html:12
 #: templates/accounts/remove_user_profile_from_organization_managers.html:12
 msgid "Members"
-msgstr ""
+msgstr "Membros"
 
 #: templates/accounts/add_user_profile_to_editor_group.html:13
 #: templates/accounts/remove_user_profile_from_editor_group.html:12
 msgid "Managers"
-msgstr ""
+msgstr "Gestores"
 
 #: templates/accounts/add_user_profile_to_editor_group_managers.html:8
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Add a user to the following editor group manager group"
 "%(selected_editorgroupmanagers|pluralize)s:"
 msgstr ""
+"Acrescentar um utilizador aos gestores grupo de edição group"
+"%(selected_editorgroupmanagers|pluralize)s:"
 
 #: templates/accounts/add_user_profile_to_editor_group_managers.html:12
 #: templates/accounts/remove_user_profile_from_editor_group_managers.html:12
 #, python-format
 msgid "Editor Group Manager Group%(selected_editorgroupmanagers|pluralize)s"
 msgstr ""
+"Gestor de grupo de edição Group%(selected_editorgroupmanagers|pluralize)s"
 
 #: templates/accounts/add_user_profile_to_organization.html:8
 #, python-format
 msgid ""
 "Add a user to the following organization%(selected_organizations|pluralize)s:"
 msgstr ""
+"Acrescentar utilizador á seguinte organização"
+"%(selected_organizations|pluralize)s:"
 
 #: templates/accounts/add_user_profile_to_organization.html:12
 #: templates/accounts/remove_user_profile_from_organization.html:12
 #, python-format
 msgid "Organization%(selected_organizations|pluralize)s"
-msgstr ""
+msgstr "Organização%(selected_organizations|pluralize)s"
 
 #: templates/accounts/add_user_profile_to_organization.html:14
 #: templates/accounts/remove_user_profile_from_organization.html:12
 msgid "Organization Managers"
-msgstr ""
+msgstr "Gestores da organização"
 
 #: templates/accounts/add_user_profile_to_organization_managers.html:8
 #, python-format
@@ -75,60 +80,62 @@ msgid ""
 "Add a user to the following organization manager group"
 "%(selected_organizationmanagers|pluralize)s:"
 msgstr ""
+"Acrescentar um utilizador como gestor da organização"
+"%(selected_organizationmanagers|pluralize)s:"
 
 #: templates/accounts/add_user_profile_to_organization_managers.html:12
 #, python-format
 msgid "Organization Manager%(selected_organizationmanagers|pluralize)s"
-msgstr ""
+msgstr "Gestor da organização%(selected_organizationmanagers|pluralize)s"
 
 #: templates/accounts/apply_for_edelivery.html:18
 msgid "Apply for ELRC-SHARE eDelivery membership"
-msgstr ""
+msgstr "Candidatar-se como membro do ELRC-SHARE eDelivery"
 
 #: templates/accounts/apply_for_edelivery.html:20
 msgid "MSH Endpoint"
-msgstr ""
+msgstr "MSH Endpoint"
 
 #: templates/accounts/apply_for_edelivery.html:29
 msgid "Access Point Gateway Party Name"
-msgstr ""
+msgstr "Access Point Gateway Party Name"
 
 #: templates/accounts/apply_for_edelivery.html:48
 msgid "Public Certificate (.crt, .cert, .cer)"
-msgstr ""
+msgstr "Certificado publico (.crt, .cert, .cer)"
 
 #: templates/accounts/change_password.html:3
 msgid "Change Your Password &ndash; ELRC-SHARE"
-msgstr ""
+msgstr "Mudar a password &ndash; ELRC-SHARE"
 
 #: templates/accounts/change_password.html:6
 #, python-format
 msgid "Please correct the error%(form.errors|pluralize)s below."
-msgstr ""
+msgstr "Por favor, corrija o seguinte erro%(form.errors|pluralize)s."
 
 #: templates/accounts/change_password.html:12
 msgid "Change your password"
-msgstr ""
+msgstr "Mudar a sua palavra-chave"
 
 #: templates/accounts/change_password.html:20
 msgid "Change Password"
-msgstr ""
+msgstr "Mudar palavra-chave"
 
 #: templates/accounts/change_password_done.html:3
 msgid "Password Change Successful &ndash; ELRC-SHARE"
-msgstr ""
+msgstr "Mudança da password com sucesso &ndash; ELRC-SHARE"
 
 #: templates/accounts/change_password_done.html:7
 msgid "Password change successful"
-msgstr ""
+msgstr "Sucesso. Mudança de palavra-chave com sucesso"
 
 #: templates/accounts/change_password_done.html:11
 msgid "Your password was changed"
-msgstr ""
+msgstr "A sua palavra-passe foi modificada"
 
 #: templates/accounts/change_password_done.html:15
 msgid "Go back to your profile"
-msgstr ""
+msgstr "Voltar para o perfil"
 
 #: templates/accounts/contact_maintainers.html:10
 #, python-format
@@ -140,10 +147,16 @@ msgid ""
 "\t  <a href=\"%(editor_group_application)s\">editor groups</a> or \n"
 "\t  <a href=\"%(organization_application_url)s\">organizations</a>."
 msgstr ""
+"Neste formulário, pode enviar mensagens para a equipa de manutenção do nó, "
+"por exemplo, se quiser sugerir a criação de um novo grupo de editores ou uma "
+"nova organização. Existem outros formulários disponíveis para se inscrever "
+"para membros existentes \n"
+"\t  <a href=“%(editor_group_application)s”>grupos de edição</a> ou \n"
+"\t  <a href=“%(organization_application_url)s”>organizações</a>."
 
 #: templates/accounts/contact_maintainers.html:19
 msgid "Send Message"
-msgstr ""
+msgstr "Enviar mensagem"
 
 #: templates/accounts/contact_maintainers.html:22
 #, python-format
@@ -152,32 +165,37 @@ msgid ""
 "receive your name and the e-mail address which is set in <a href="
 "\"%(edit_profile_url)s\">your user profile</a>."
 msgstr ""
+"Nota: com a sua mensagem, a equipa de manutenção do nó receberá "
+"automaticamente o seu nome e o endereço de e-mail definido em <a "
+"href=“%(edit_profile_url)s”>o seu perfil de utilizador</a>."
 
 #: templates/accounts/create_account.html:8
 msgid "Please fill in all fields to create your account."
-msgstr ""
+msgstr "Por favor, complete os todos campos da sua conta."
 
 #: templates/accounts/create_account.html:14
 #: templates/accounts/create_account.html:28
 msgid "Create Account"
-msgstr ""
+msgstr "Criar conta"
 
 #: templates/accounts/create_account.html:22
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "I accept the <a target=\"_blank\" href=\"%(elrcshare_tos)s\">ERLC-SHARE "
 "Terms of Service for registered users</a>."
 msgstr ""
+"Eu aceito o <a target=“_blank” href=“%(elrcshare_tos)s”>ERLC-SHARE Termos de "
+"serviço para utilizadores registados</a>."
 
 #: templates/accounts/delete_editor_group_application_selected_confirmation.html:6
 #: templates/accounts/delete_organization_application_selected_confirmation.html:6
 msgid "Home"
-msgstr ""
+msgstr "Home"
 
 #: templates/accounts/delete_editor_group_application_selected_confirmation.html:9
 #: templates/accounts/delete_organization_application_selected_confirmation.html:9
 msgid "Turn down multiple objects"
-msgstr ""
+msgstr "Recusar múltiplos objectos"
 
 #: templates/accounts/delete_editor_group_application_selected_confirmation.html:16
 #: templates/accounts/delete_organization_application_selected_confirmation.html:16
@@ -187,6 +205,9 @@ msgid ""
 "objects, but your account doesn't have permission to turn down the following "
 "types of objects:"
 msgstr ""
+"Rejeitar os %(objects_name)s selecionados resultará no apagamento dos "
+"objetos relacionados, mas sua conta não tem permissão para desativar os "
+"seguintes tipos de objetos:"
 
 #: templates/accounts/delete_editor_group_application_selected_confirmation.html:24
 #: templates/accounts/delete_organization_application_selected_confirmation.html:24
@@ -195,6 +216,8 @@ msgid ""
 "Turning down the selected %(objects_name)s would require deleting the "
 "following protected related objects:"
 msgstr ""
+"Rejeitar os %(objects_name)s selecionados resultará no apagamento dos "
+"objetos protegidos relacionados:"
 
 #: templates/accounts/delete_editor_group_application_selected_confirmation.html:32
 #: templates/accounts/delete_organization_application_selected_confirmation.html:32
@@ -203,23 +226,25 @@ msgid ""
 "Are you sure you want to turn down the selected %(objects_name)s? All of the "
 "following objects and their related items will be turned down:"
 msgstr ""
+"Tem certeza de que deseja desativar os %(objects_name)s? selecionados? Todos "
+"os seguintes objetos e itens relacionados serão desativados:"
 
 #: templates/accounts/delete_editor_group_application_selected_confirmation.html:43
 #: templates/accounts/delete_organization_application_selected_confirmation.html:43
 msgid "Yes, I"
-msgstr ""
+msgstr "Sim, eu"
 
 #: templates/accounts/edit_profile.html:8
 msgid "First name"
-msgstr ""
+msgstr "Primeiro nome"
 
 #: templates/accounts/edit_profile.html:11
 msgid "Last name"
-msgstr ""
+msgstr "Último nome"
 
 #: templates/accounts/edit_profile.html:14
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 #: templates/accounts/edit_profile.html:20
 #, python-format
@@ -227,102 +252,117 @@ msgid ""
 "If you would like to change any of the above details, please <a href="
 "\"%(contact_url)s\">contact the maintainers of ELRC-SHARE Repository</a>."
 msgstr ""
+"Se quiser alterar qualquer um dos detalhes acima, <a "
+"href=“%(contact_url)s”>entre em contato com a equipa de manutençãos do "
+"Repositório ELRC-SHARE, por favor </a>."
 
 #: templates/accounts/edit_profile.html:22
+#, fuzzy
 msgid "API KEY"
-msgstr ""
+msgstr "API KEY"
 
 #: templates/accounts/edit_profile.html:27
 #, python-format
 msgid "Editor Group Manager Group%(editor_group_managers_member_of|pluralize)s"
 msgstr ""
+"Gestor de grupo de edição Group%(editor_group_managers_member_of|pluralize)s"
 
 #: templates/accounts/edit_profile.html:34
 msgid ""
 "Displays all the editor groups you belong in. Editor groups that are applied "
 "by default to your resources, are shown in italic."
 msgstr ""
+"Exibe todos os grupos de edição aos quais pertence. Os grupos de edição "
+"aplicados por defeito aos seus recursos são mostrados em itálico."
 
 #: templates/accounts/edit_profile.html:34
-#, python-format
+#, fuzzy, python-format
 msgid "Editor Group%(editor_groups_member_of|pluralize)s"
-msgstr ""
+msgstr "Grupo de edição%(editor_groups_member_of|pluralize)s"
 
 #: templates/accounts/edit_profile.html:42
 msgid "This editor group is set by default to your resources."
-msgstr ""
+msgstr "Este grupo de edição é aplicado por defeito aos seus recursos."
 
 #: templates/accounts/edit_profile.html:55
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "You already applied for a membership of the following editor group"
 "%(groups_applied_for|pluralize)s: %(groups_applied_for|join:\", \")s"
 msgstr ""
+"Já se inscreveu como membro do seguinte grupo de editores group"
+"%(groups_applied_for|pluralize)s: %(groups_applied_for|join:”, “)s"
 
 #: templates/accounts/edit_profile.html:60
 #, python-format
 msgid "Organization Manager Group%(organization_managers_member_of|pluralize)s"
 msgstr ""
+"Gestor de grupo de edição Group%(organization_managers_member_of|pluralize)s"
 
 #: templates/accounts/edit_profile.html:66
-#, python-format
+#, fuzzy, python-format
 msgid "Organization%(organizations_member_of|pluralize)s"
-msgstr ""
+msgstr "Organização%(organizations_member_of|pluralize)s"
 
 #: templates/accounts/edit_profile.html:71
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "You already applied for a membership of the following organization"
 "%(organizations_applied_for|pluralize)s: "
 "%(organizations_applied_for|join:\", \")s"
 msgstr ""
+"Já se candidatou á seguinte organização organization"
+"%(organizations_applied_for|pluralize)s: "
+"%(organizations_applied_for|join:”, “)s"
 
 #: templates/accounts/edit_profile.html:74
 msgid "Edit Profile"
-msgstr ""
+msgstr "Editar Perfil"
 
 #: templates/accounts/editor_group_application.html:6
 #: templates/accounts/update_default_editor_group.html:8
 msgid "Please give at least one editor group."
-msgstr ""
+msgstr "Por favor, designe pelo menos um grupo de editores."
 
 #: templates/accounts/editor_group_application.html:11
 msgid "Apply for editor group membership"
-msgstr ""
+msgstr "Candidatar-se ao grupo de editores"
 
 #: templates/accounts/editor_group_application.html:18
 #: templates/accounts/organization_application.html:18
 msgid "Apply"
-msgstr ""
+msgstr "Candidatar-se"
 
 #: templates/accounts/organization_application.html:6
 msgid "Please give at least one organization."
-msgstr ""
+msgstr "Por favor, designe pelo menos uma organização."
 
 #: templates/accounts/organization_application.html:11
 msgid "Apply for organization membership"
-msgstr ""
+msgstr "Candidatar-se a uma organização"
 
 #: templates/accounts/remove_user_profile_from_editor_group.html:8
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Remove a user from the following editor group"
 "%(selected_editorgroups|pluralize)s:"
 msgstr ""
+"Remover um utilizador do seguinte grupo de edição group"
+"%(selected_editorgroups|pluralize)s:"
 
 #: templates/accounts/remove_user_profile_from_editor_group.html:26
 #: templates/accounts/remove_user_profile_from_editor_group_managers.html:26
 #: templates/accounts/remove_user_profile_from_organization.html:26
 #: templates/accounts/remove_user_profile_from_organization_managers.html:26
 msgid "Remove"
-msgstr ""
+msgstr "Remover"
 
 #: templates/accounts/remove_user_profile_from_editor_group.html:27
 #: templates/accounts/remove_user_profile_from_editor_group_managers.html:27
 #: templates/accounts/remove_user_profile_from_organization.html:27
 #: templates/accounts/remove_user_profile_from_organization_managers.html:27
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: templates/accounts/remove_user_profile_from_editor_group_managers.html:8
 #, python-format
@@ -330,6 +370,8 @@ msgid ""
 "Remove a user from the following editor group manager group"
 "%(selected_editorgroupmanagers|pluralize)s:"
 msgstr ""
+"Remover um utilizador da gestão de grupo de editores group"
+"%(selected_editorgroupmanagers|pluralize)s:"
 
 #: templates/accounts/remove_user_profile_from_organization.html:8
 #, python-format
@@ -337,6 +379,8 @@ msgid ""
 "Remove a user from the following organization"
 "%(selected_organizations|pluralize)s:"
 msgstr ""
+"Remover um utilizador da seguinte organização organization"
+"%(selected_organizations|pluralize)s:"
 
 #: templates/accounts/remove_user_profile_from_organization_managers.html:8
 #, python-format
@@ -344,17 +388,21 @@ msgid ""
 "Remove a user from the following organization manager group"
 "%(selected_organizationmanagers|pluralize)s:"
 msgstr ""
+"Remover um utilizador da gestão de grupo de editores group"
+"%(selected_organizationmanagers|pluralize)s:"
 
 #: templates/accounts/remove_user_profile_from_organization_managers.html:12
 #, python-format
 msgid "Organization Manager Group%(selected_organizationmanagers|pluralize)s"
-msgstr ""
+msgstr "Gestor da organização Group%(selected_organizationmanagers|pluralize)s"
 
 #: templates/accounts/reset_account.html:5
 #: templates/accounts/reset_account.html:12
+#, fuzzy
 msgid "Reset Account"
-msgstr ""
+msgstr "Reset da conta"
 
 #: templates/accounts/update_default_editor_group.html:25
+#, fuzzy
 msgid "Update"
-msgstr ""
+msgstr "Actualização"
