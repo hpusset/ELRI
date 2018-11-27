@@ -197,6 +197,15 @@ class ResourceComponentInline(ReverseInlineModelAdmin):
 class IdentificationInline(ReverseInlineModelAdmin):
     readonly_fields = ('metaShareId',)
 
+def check_resource_status(resource):
+    '''
+    Return the status of the given resource.
+    
+    '''	
+    if not hasattr(resource, 'storage_object'):
+        raise NotImplementedError, "{0} has no storage object".format(resource)
+    status = resource.storage_object.publication_status
+    return status
 
 def change_resource_status(resource, status, precondition_status=None):
     '''
@@ -298,137 +307,144 @@ class ResourceModelAdmin(SchemaModelAdmin):
             #TODO:add checking : do it only if only it is an ingested resource
             #messages.info(request,queryset)
             for obj in queryset:
-				messages.info(request,_('You are processing a resource. This can take a while...'))
-				########DEBUGGING_INFO
-				##PATH TO THE RESOURCE
-				#messages.info(request,escape(obj.storage_object._storage_folder()))
-				
-				#messages.info(request,obj.metadataInfo)
-				##XML INFO OF THE RESOURCE
-				#messages.info(request,"info del request...")
-				#messages.info(request,to_xml_string(obj.export_to_elementtree(),
-                #                               encoding="utf-8").encode("utf-8"))#obj.export_to_elementtree())
-				
-				################
-				resource_info=obj.export_to_elementtree()
-				r_languages=[]
-				for lang in resource_info.iter('languageInfo'):
-					lang_id=lang.find('languageId').text
-					r_languages.append(lang_id)
-				########DEBUGGING_INFO	
-				#messages.info(request,"info de idiomas...")	
-				#messages.info(request,langs)
-				################
-				#get the resource storage folder path
-				resource_path=obj.storage_object._storage_folder()
-				#first process for this resource:
-				#cp archive.zip to _archive.zip iif _archive.zip does not exist...
-				if not os.path.isfile(resource_path+'/_archive.zip'): #save the resource source for possible later reprocessing steps 
-					copyfile(resource_path+'/archive.zip',resource_path+'/_archive.zip')
-				#TODO look for archive.zip or _archive.zip --> if _archive.zip exists --> it is a reprocess step
-				#unzip always _archive.zip wich has always the source resource files; archive.zip can contain processed documents 
-				resource_zip=zipfile.ZipFile(resource_path+'/_archive.zip','r')
-				#and unzip the resource files into the corresponding /input folder
-				resources=resource_zip.namelist()
-				#create, if needed, the /tm /docs /other folder 
-				resource_tm_path=resource_path+'/tm'
-				resource_doc_path=resource_path+'/doc'
-				resource_other_path=resource_path+'/other'
-				tmx_files=[]
-				call_tm2tmx=0
-				call_doc2tmx=0
-				for r in resources:
-						#check the extension of the files
-						#if it is a tm file:
-						filext=getext(r)
-						if filext in tmextensions:
-							if  not os.path.isdir(resource_tm_path):
-								os.makedirs(resource_tm_path)
-								os.makedirs(resource_tm_path+'/input')
-							resource_zip.extract(r,resource_tm_path+'/input')	
-							tmx_files.append(r)
-							call_tm2tmx = call_tm2tmx + 1
-						elif filext in docextensions: #if it is a doc file
-							if not os.path.isdir(resource_doc_path):
-								os.makedirs(resource_doc_path)
-								os.makedirs(resource_doc_path+'/input')
-							resource_zip.extract(r,resource_doc_path+'/input')	
-							call_doc2tmx = call_doc2tmx + 1
-						else : #either case... 
-							if not os.path.isdir(resource_other_path):
-								os.makedirs(resource_other_path)
-							resource_zip.extract(r,resource_other_path)
-				response_tm=''
-				if call_tm2tmx > 0:
-					#prepare the json for calling the tm2tmx tc for each tmx in tmx_files
-					r_id=obj.storage_object.id 
-					r_overwrite='true'
+				if check_resource_status(obj)== INGESTED or check_resource_status(obj)== PUBLISHED : #only process INGESTED or PUBLISHED resources 
+					messages.info(request,_('You are processing a resource. This can take a while...'))
+					########DEBUGGING_INFO
+					##PATH TO THE RESOURCE
+					#messages.info(request,escape(obj.storage_object._storage_folder()))
 					
-					messages.info(request,"Processing resource with tm2tmx...")
-					for tm in tmx_files:
-						r_input=resource_tm_path+'/input/'+tm
-						tm_json= {'id':r_id, 'input':r_input,'overwrite':r_overwrite,'languages':r_languages}
-						#####DEBUG show tm_json info
-						#messages.info(request,tm_json)
-						#####
-						response_tm=requests.post('http://localhost:1004/ELRI_WebService/tc_tm2tmx/process',json=tm_json)
-						if json_validator(response_tm):
-							if response_tm.json()["status"]=="Success":
-								successful +=1
-							else:
-								messages.error(request,"Something went wrong when processing the resource...")
-						else:
-							messages.error(request,"Something went wrong when processing the resource..."+response_tm.text)
-							
-				response_doc=''	
-				if call_doc2tmx > 0:
-					#prepare the json for calling the doc2tmx tc 
-					r_id=obj.storage_object.id 
-					r_input=resource_doc_path+'/input'
-					r_overwrite='true'
-					doc_json={'id':r_id, 'input':r_input,'overwrite':r_overwrite,'languages':r_languages}
-					messages.info(request,"Processing resource with doc2tmx...")
-					#####DEBUG show doc_json info
-					#messages.info(request,doc_json)
-					#####
-					response_doc=requests.post('http://localhost:1004/ELRI_WebService/tc_doc2tmx/process',json=doc_json)
-					if json_validator(response_doc):
-						if response_doc.json()["status"] == "Success":
-							successful += 1
-						else:
-							messages.error(request,"Something went wrong...")
-					else:
-						messages.error(request,"Something went wrong..."+response_doc.text)
+					#messages.info(request,obj.metadataInfo)
+					##XML INFO OF THE RESOURCE
+					#messages.info(request,"info del request...")
+					#messages.info(request,to_xml_string(obj.export_to_elementtree(),
+					#                               encoding="utf-8").encode("utf-8"))#obj.export_to_elementtree())
+					
+					################
+					resource_info=obj.export_to_elementtree()
+					r_languages=[]
+					for lang in resource_info.iter('languageInfo'):
+						lang_id=lang.find('languageId').text
+						r_languages.append(lang_id)
+					########DEBUGGING_INFO	
+					#messages.info(request,"info de idiomas...")	
+					#messages.info(request,langs)
+					################
+					#get the resource storage folder path
+					resource_path=obj.storage_object._storage_folder()
+					#first process for this resource:
+					#cp archive.zip to _archive.zip iif _archive.zip does not exist...
+					if not os.path.isfile(resource_path+'/_archive.zip'): #save the resource source for possible later reprocessing steps 
+						copyfile(resource_path+'/archive.zip',resource_path+'/_archive.zip')
+					#TODO look for archive.zip or _archive.zip --> if _archive.zip exists --> it is a reprocess step
+					#unzip always _archive.zip wich has always the source resource files; archive.zip can contain processed documents 
+					resource_zip=zipfile.ZipFile(resource_path+'/_archive.zip','r')
+					#and unzip the resource files into the corresponding /input folder
+					resources=resource_zip.namelist()
+					#create, if needed, the /tm /docs /other folder 
+					resource_tm_path=resource_path+'/tm'
+					resource_doc_path=resource_path+'/doc'
+					resource_other_path=resource_path+'/other'
+					tmx_files=[]
+					call_tm2tmx=0
+					call_doc2tmx=0
+					for r in resources:
+							#check the extension of the files
+							#if it is a tm file:
+							filext=getext(r)
+							if filext in tmextensions:
+								if  not os.path.isdir(resource_tm_path):
+									os.makedirs(resource_tm_path)
+									os.makedirs(resource_tm_path+'/input')
+								resource_zip.extract(r,resource_tm_path+'/input')	
+								tmx_files.append(r)
+								call_tm2tmx = call_tm2tmx + 1
+							elif filext in docextensions: #if it is a doc file
+								if not os.path.isdir(resource_doc_path):
+									os.makedirs(resource_doc_path)
+									os.makedirs(resource_doc_path+'/input')
+								resource_zip.extract(r,resource_doc_path+'/input')	
+								call_doc2tmx = call_doc2tmx + 1
+							else : #either case... 
+								if not os.path.isdir(resource_other_path):
+									os.makedirs(resource_other_path)
+								resource_zip.extract(r,resource_other_path)
+					response_tm=''
+					if call_tm2tmx > 0:
+						#prepare the json for calling the tm2tmx tc for each tmx in tmx_files
+						r_id=obj.storage_object.id 
+						r_overwrite='true'
 						
-				##########DEBUG get response info
-				#messages.info(request,response_doc.status_code)
-				#messages.info(request,response_doc.json())
-				#messages.info(request,response_doc.json()["info"])
-				##response_doc.json={u'status': u'Success', u'output': u'/data/mt/ELRI/elri_resources/language_resources/f17cc912ee7811e8be27a0423f38a62178a159269a2f4f5ba61a5d2c033af27d/doc/8_output', u'info': u'TMX extraction from documents done successfully.', u'rejected': u'/data/mt/ELRI/elri_resources/language_resources/f17cc912ee7811e8be27a0423f38a62178a159269a2f4f5ba61a5d2c033af27d/doc/8_rejected'}
-				################
-				##DEBUG: test tc connectivity
-				#response=requests.get('http://localhost:1004/ELRI_WebService/tc_doc2tmx/hello')
-				#if response.status_code == 200 :
-				#	successful +=1 
-				#	messages.info(request,str(response.status_code)+' :: '+response.text)
-				################
-				#if something success-> create new archive.zip and replace the old one uploaded by the user 	
+						messages.info(request,"Processing resource with tm2tmx...")
+						for tm in tmx_files:
+							r_input=resource_tm_path+'/input/'+tm
+							tm_json= {'id':r_id, 'input':r_input,'overwrite':r_overwrite,'languages':r_languages}
+							#####DEBUG show tm_json info
+							#messages.info(request,tm_json)
+							#####
+							response_tm=requests.post('http://localhost:1004/ELRI_WebService/tc_tm2tmx/process',json=tm_json)
+							if json_validator(response_tm):
+								if response_tm.json()["status"]=="Success":
+									successful +=1
+								else:
+									messages.error(request,"Something went wrong when processing the resource...")
+							else:
+								messages.error(request,"Something went wrong when processing the resource..."+response_tm.text)
+								
+					response_doc=''	
+					if call_doc2tmx > 0:
+						#prepare the json for calling the doc2tmx tc 
+						r_id=obj.storage_object.id 
+						r_input=resource_doc_path+'/input'
+						r_overwrite='true'
+						doc_json={'id':r_id, 'input':r_input,'overwrite':r_overwrite,'languages':r_languages}
+						messages.info(request,"Processing resource with doc2tmx...")
+						#####DEBUG show doc_json info
+						#messages.info(request,doc_json)
+						#####
+						response_doc=requests.post('http://localhost:1004/ELRI_WebService/tc_doc2tmx/process',json=doc_json)
+						if json_validator(response_doc):
+							if response_doc.json()["status"] == "Success":
+								successful += 1
+							else:
+								messages.error(request,"Something went wrong...")
+						else:
+							messages.error(request,"Something went wrong..."+response_doc.text)
+							
+					##########DEBUG get response info
+					#messages.info(request,response_doc.status_code)
+					#messages.info(request,response_doc.json())
+					#messages.info(request,response_doc.json()["info"])
+					##response_doc.json={u'status': u'Success', u'output': u'/data/mt/ELRI/elri_resources/language_resources/f17cc912ee7811e8be27a0423f38a62178a159269a2f4f5ba61a5d2c033af27d/doc/8_output', u'info': u'TMX extraction from documents done successfully.', u'rejected': u'/data/mt/ELRI/elri_resources/language_resources/f17cc912ee7811e8be27a0423f38a62178a159269a2f4f5ba61a5d2c033af27d/doc/8_rejected'}
+					################
+					##DEBUG: test tc connectivity
+					#response=requests.get('http://localhost:1004/ELRI_WebService/tc_doc2tmx/hello')
+					#if response.status_code == 200 :
+					#	successful +=1 
+					#	messages.info(request,str(response.status_code)+' :: '+response.text)
+					################
+					#if something success-> create new archive.zip and replace the old one uploaded by the user 	
 				if successful > 0:
 					#create the archive.zip with the processed resources
 					processed_zip=zipfile.ZipFile(resource_path+'/archive.zip',mode='w')
 					if response_doc != '' and json_validator(response_doc):
 						messages.info(request,response_doc.json()["info"])
-						#processed_zip.write(resource_doc_path)
 						for root, dirs, files in os.walk(response_doc.json()["output"]):
 							for f in files:
-								processed_zip.write(os.path.join(root,f),'doc/'+f)
+								processed_zip.write(os.path.join(root,f),'doc/processed/'+f)
+						for root, dirs, files in os.walk(response_doc.json()["rejected"]):
+							for f in files:
+								processed_zip.write(os.path.join(root,f),'doc/unprocessed/'+f)	
 					elif call_doc2tmx > 0:
 						messages.error(request,"Some error happened when processing resource with doc2tmx ")
+						
 					if response_tm != '' and json_validator(response_tm):
 						messages.info(request,response_tm.json()["info"])
 						for root, dirs, files in os.walk(response_tm.json()["output"]):
 							for f in files:
-								processed_zip.write(os.path.join(root,f),'tm/'+f)
+								processed_zip.write(os.path.join(root,f),'tm/processed/'+f)
+						for root, dirs, files in os.walk(response_tm.json()["rejected"]):
+							for f in files:
+								processed_zip.write(os.path.join(root,f),'tm/unprocessed/'+f)
 					elif call_tm2tmx > 0 :
 						messages.error(request,"Some error happened when processing resource with tm2tmx ")
 					
@@ -442,12 +458,12 @@ class ResourceModelAdmin(SchemaModelAdmin):
 					
 				else:#TODO: INCLUDE JSON MESSAGE ERROR
 					messages.error(request,
-                               _('Only ingested resources can be processed.'))
+                               _('Only ingested/published resources can be re-processed.'))
         else:
             messages.error(request, _('You do not have the permission to ' \
                             'perform this action for all selected resources.'))
 
-    process_action.short_description = _("Process selected ingested resources")
+    process_action.short_description = _("Process selected ingested/published resources")
 
     def publish_action(self, request, queryset):
         if has_publish_permission(request, queryset):
@@ -494,6 +510,10 @@ class ResourceModelAdmin(SchemaModelAdmin):
     suspend_action.short_description = \
         _("Suspend selected published resources")
 
+    def branch_lr(self, request,queryset):
+        #implements automatic processing for ingested lr
+        self.process_action(request,queryset)
+
     def ingest_action(self, request, queryset):
         if has_publish_permission(request, queryset) or request.user.is_staff:
             successful = 0
@@ -502,14 +522,14 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                           precondition_status=INTERNAL):
                     successful += 1
                     saveLRStats(obj, INGEST_STAT, request)
+                    
             if successful > 0:
                 messages.info(request, ungettext(
                     'Successfully ingested %(internal)s internal resource.',
                     'Successfully ingested %(internal)s internal resources.',
                     successful) % {'internal': successful})
-                    
-                    # TE: branch_lr(obj)
-                    
+                #Implements the system branch 4 automatic lr processing
+                self.branch_lr(request,queryset)
             else:
                 messages.error(request,
                                _('Only internal resources can be ingested.'))
@@ -519,8 +539,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
 
     ingest_action.short_description = _("Ingest selected internal resources")
     
-    def branch_lr(self, ingested_lr):
-        pass
         
 
     def export_xml_action(self, request, queryset):
