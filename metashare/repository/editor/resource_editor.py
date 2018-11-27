@@ -1,4 +1,4 @@
-import datetime
+import datetime, requests, os, zipfile
 from functools import update_wrapper
 from mimetypes import guess_type
 
@@ -274,11 +274,138 @@ class ResourceModelAdmin(SchemaModelAdmin):
     # list_display = ('__unicode__', 'id', 'resource_type', 'publication_status', 'resource_Owners', 'editor_Groups',)
     list_display = ('__unicode__', 'id', 'resource_type', 'publication_status', 'resource_Owners', 'validated')
     list_filter = ('storage_object__publication_status', ResourceTypeFilter, ValidatedFilter)
-    actions = ('publish_action', 'suspend_action', 'ingest_action',
+    actions = ('process_action','publish_action', 'suspend_action', 'ingest_action',
         'export_xml_action', 'delete', 'add_group', 'remove_group',
         'add_owner', 'remove_owner', 'process_resource')
     hidden_fields = ('storage_object', 'owners', 'editor_groups',)
     search_fields = ("identificationInfo__resourceName", "identificationInfo__resourceShortName", "identificationInfo__description", "identificationInfo__identifier")
+    
+    def process_action(self, request, queryset):
+        getext = lambda file_object: os.path.splitext(file_object)[-1]
+        tmextensions=[".tmx", "sdltm"]
+        docextensions=[ ".pdf", ".doc", ".docx", ".txt", ".odt"]
+		
+        from metashare.xml_utils import to_xml_string
+        if has_publish_permission(request, queryset):
+            successful = 0
+            #TODO:add checking : do it only if only it is an ingested resource
+            #messages.info(request,queryset)
+            for obj in queryset:
+				messages.info(request,_('You are processing a resource. This can take a while...'))
+				########DEBUGGING_INFO
+				##PATH TO THE RESOURCE
+				#messages.info(request,escape(obj.storage_object._storage_folder()))
+				
+				#messages.info(request,obj.metadataInfo)
+				##XML INFO OF THE RESOURCE
+				#messages.info(request,"info del request...")
+				#messages.info(request,to_xml_string(obj.export_to_elementtree(),
+                #                               encoding="utf-8").encode("utf-8"))#obj.export_to_elementtree())
+				
+				################
+				resource_info=obj.export_to_elementtree()
+				r_languages=[]
+				for lang in resource_info.iter('languageInfo'):
+					lang_id=lang.find('languageId').text
+					r_languages.append(lang_id)
+				########DEBUGGING_INFO	
+				#messages.info(request,"info de idiomas...")	
+				#messages.info(request,langs)
+				################
+				#get the resource storage folder path
+				resource_path=obj.storage_object._storage_folder()
+				
+				#and unzip the resource files into the /input folder
+				resource_zip=zipfile.ZipFile(resource_path+'/archive.zip','r')
+				resources=resource_zip.namelist()
+				#create, if needed, the /tm /docs /other folder 
+				resource_tm_path=resource_path+'/tm'
+				resource_doc_path=resource_path+'/doc'
+				resource_other_path=resource_path+'/other'
+				tmx_files=[]
+				call_tm2tmx=0
+				call_doc2tmx=0
+				for r in resources:
+						#check the extension of the files
+						#if it is a tm file:
+						filext=getext(r)
+						if filext in tmextensions:
+							if  not os.path.isdir(resource_tm_path):
+								os.makedirs(resource_tm_path)
+								os.makedirs(resource_tm_path+'/input')
+							resource_zip.extract(r,resource_tm_path+'/input')	
+							tmx_files.append(r)
+							call_tm2tmx = call_tm2tmx + 1
+						elif filext in docextensions: #if it is a doc file
+							if not os.path.isdir(resource_doc_path):
+								os.makedirs(resource_doc_path)
+								os.makedirs(resource_doc_path+'/input')
+							resource_zip.extract(r,resource_doc_path+'/input')	
+							call_doc2tmx = call_doc2tmx + 1
+						else : #either case... 
+							if not os.path.isdir(resource_ohter_path):
+								os.makedirs(resource_other_path)
+								os.makedirs(resource_other_path+'/input')
+							resource_zip.extract(r,resource_other_path+'/input')
+				response_tm=''
+				if call_tm2tmx > 0:
+					#prepare the json for calling the tm2tmx tc for each tmx in tmx_files
+					r_id=obj.storage_object.id 
+					r_overwrite='true'
+					
+					
+					for tm in tmx_files:
+						r_input=resource_tm_path+'/input/'+tm
+						tm_json= {'id':r_id, 'input':r_input,'overwrite':r_overwrite,'languages':r_languages}
+						messages.info(request,"Processing resource with tm2tmx")
+						messages.info(request,tm_json)
+						response_tm=requests.post('http://localhost:1004/ELRI_WebService/tc_tm2tmx/process',json=tm_json)
+						if response_tm.json()["status"]=="Success":
+							successful +=1
+				response_doc=''	
+				if call_doc2tmx > 0:
+					#prepare the json for calling the doc2tmx tc 
+					r_id=obj.storage_object.id 
+					r_input=resource_doc_path+'/input'
+					r_overwrite='true'
+					doc_json={'id':r_id, 'input':r_input,'overwrite':r_overwrite,'languages':r_languages}
+					messages.info(request,"Processing resource with doc2tmx")
+					messages.info(request,doc_json)
+					response_doc=requests.post('http://localhost:1004/ELRI_WebService/tc_doc2tmx/process',json=doc_json)
+					messages.info(request,response_doc)
+					if response_doc.json()["status"] == "Success":
+						successful += 1
+				##########DEBUG get response info
+				#messages.info(request,response_doc.status_code)
+				#messages.info(request,response_doc.json())
+				#messages.info(request,response_doc.json()["info"])
+				##response_doc.json={u'status': u'Success', u'output': u'/data/mt/ELRI/elri_resources/language_resources/f17cc912ee7811e8be27a0423f38a62178a159269a2f4f5ba61a5d2c033af27d/doc/8_output', u'info': u'TMX extraction from documents done successfully.', u'rejected': u'/data/mt/ELRI/elri_resources/language_resources/f17cc912ee7811e8be27a0423f38a62178a159269a2f4f5ba61a5d2c033af27d/doc/8_rejected'}
+				################
+				##DEBUG: test tc connectivity
+				#response=requests.get('http://localhost:1004/ELRI_WebService/tc_doc2tmx/hello')
+				#if response.status_code == 200 :
+				#	successful +=1 
+				#	messages.info(request,str(response.status_code)+' :: '+response.text)
+				################
+					
+				if successful > 0:
+					if response_doc != '' :
+						messages.info(request,response_doc.json()["info"])
+					if response_tm != '' :
+						messages.info(request,response_tm.json()["info"])
+					messages.info(request, ungettext(
+						'Successfully processed %(ingested)s ingested resource.',
+						'Successfully processed %(ingested)s ingested resources.',
+						successful) % {'ingested': successful})	
+                
+				else:#TODO: INCLUDE JSON MESSAGE ERROR
+					messages.error(request,
+                               _('Only ingested resources can be processed.'))
+        else:
+            messages.error(request, _('You do not have the permission to ' \
+                            'perform this action for all selected resources.'))
+
+    process_action.short_description = _("Process selected ingested resources")
 
     def publish_action(self, request, queryset):
         if has_publish_permission(request, queryset):
@@ -339,7 +466,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     'Successfully ingested %(internal)s internal resources.',
                     successful) % {'internal': successful})
                     
-                    # TE: system_branch(obj)
+                    # TE: branch_lr(obj)
                     
             else:
                 messages.error(request,
@@ -350,18 +477,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
 
     ingest_action.short_description = _("Ingest selected internal resources")
     
-    def system_branch(self, ingested_lr):
+    def branch_lr(self, ingested_lr):
         pass
         
-        
-    def process_lr(self, request, queryset):
-		
-        if request.user.is_staff:
-			LOGGER.info(request)
-			LOGGER.info(queryset)
-			
-
-    process_lr.short_description = _("Process selected ingested resources")
 
     def export_xml_action(self, request, queryset):
         from StringIO import StringIO
@@ -1406,10 +1524,12 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 del result['delete']
             # only users who are the manager of some group can see the
             # ingest/publish/suspend actions:
+            # and the process action as well 
             if not request.user.is_staff:
-                for action in (self.publish_action, self.suspend_action,):
+                for action in (self.publish_action, self.suspend_action,self.process_action,):
                     del result[action.__name__]
         if request.user.groups.filter(name='naps').exists():
+            del result['process_action']
             del result['publish_action']
             del result['suspend_action']
             del result['add_group']
