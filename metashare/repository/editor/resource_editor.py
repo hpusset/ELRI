@@ -1,6 +1,7 @@
 import datetime, requests, os, zipfile
 from functools import update_wrapper
 from mimetypes import guess_type
+from shutil import copyfile 
 
 from django import forms
 from django.contrib import admin, messages
@@ -261,6 +262,12 @@ class MetadataInline(ReverseInlineModelAdmin):
     form = MetadataForm
     readonly_fields = ('metadataCreationDate', 'metadataLastDateUpdated',)
     
+def json_validator(data):
+	try:
+		data.json()
+		return True
+	except:
+		return False
 
 class ResourceModelAdmin(SchemaModelAdmin): 
     
@@ -314,9 +321,14 @@ class ResourceModelAdmin(SchemaModelAdmin):
 				################
 				#get the resource storage folder path
 				resource_path=obj.storage_object._storage_folder()
-				
-				#and unzip the resource files into the /input folder
-				resource_zip=zipfile.ZipFile(resource_path+'/archive.zip','r')
+				#first process for this resource:
+				#cp archive.zip to _archive.zip iif _archive.zip does not exist...
+				if not os.path.isfile(resource_path+'/_archive.zip'): #save the resource source for possible later reprocessing steps 
+					copyfile(resource_path+'/archive.zip',resource_path+'/_archive.zip')
+				#TODO look for archive.zip or _archive.zip --> if _archive.zip exists --> it is a reprocess step
+				#unzip always _archive.zip wich has always the source resource files; archive.zip can contain processed documents 
+				resource_zip=zipfile.ZipFile(resource_path+'/_archive.zip','r')
+				#and unzip the resource files into the corresponding /input folder
 				resources=resource_zip.namelist()
 				#create, if needed, the /tm /docs /other folder 
 				resource_tm_path=resource_path+'/tm'
@@ -343,25 +355,31 @@ class ResourceModelAdmin(SchemaModelAdmin):
 							resource_zip.extract(r,resource_doc_path+'/input')	
 							call_doc2tmx = call_doc2tmx + 1
 						else : #either case... 
-							if not os.path.isdir(resource_ohter_path):
+							if not os.path.isdir(resource_other_path):
 								os.makedirs(resource_other_path)
-								os.makedirs(resource_other_path+'/input')
-							resource_zip.extract(r,resource_other_path+'/input')
+							resource_zip.extract(r,resource_other_path)
 				response_tm=''
 				if call_tm2tmx > 0:
 					#prepare the json for calling the tm2tmx tc for each tmx in tmx_files
 					r_id=obj.storage_object.id 
 					r_overwrite='true'
 					
-					
+					messages.info(request,"Processing resource with tm2tmx...")
 					for tm in tmx_files:
 						r_input=resource_tm_path+'/input/'+tm
 						tm_json= {'id':r_id, 'input':r_input,'overwrite':r_overwrite,'languages':r_languages}
-						messages.info(request,"Processing resource with tm2tmx")
-						messages.info(request,tm_json)
+						#####DEBUG show tm_json info
+						#messages.info(request,tm_json)
+						#####
 						response_tm=requests.post('http://localhost:1004/ELRI_WebService/tc_tm2tmx/process',json=tm_json)
-						if response_tm.json()["status"]=="Success":
-							successful +=1
+						if json_validator(response_tm):
+							if response_tm.json()["status"]=="Success":
+								successful +=1
+							else:
+								messages.error(request,"Something went wrong when processing the resource...")
+						else:
+							messages.error(request,"Something went wrong when processing the resource..."+response_tm.text)
+							
 				response_doc=''	
 				if call_doc2tmx > 0:
 					#prepare the json for calling the doc2tmx tc 
@@ -369,12 +387,19 @@ class ResourceModelAdmin(SchemaModelAdmin):
 					r_input=resource_doc_path+'/input'
 					r_overwrite='true'
 					doc_json={'id':r_id, 'input':r_input,'overwrite':r_overwrite,'languages':r_languages}
-					messages.info(request,"Processing resource with doc2tmx")
-					messages.info(request,doc_json)
+					messages.info(request,"Processing resource with doc2tmx...")
+					#####DEBUG show doc_json info
+					#messages.info(request,doc_json)
+					#####
 					response_doc=requests.post('http://localhost:1004/ELRI_WebService/tc_doc2tmx/process',json=doc_json)
-					messages.info(request,response_doc)
-					if response_doc.json()["status"] == "Success":
-						successful += 1
+					if json_validator(response_doc):
+						if response_doc.json()["status"] == "Success":
+							successful += 1
+						else:
+							messages.error(request,"Something went wrong...")
+					else:
+						messages.error(request,"Something went wrong..."+response_doc.text)
+						
 				##########DEBUG get response info
 				#messages.info(request,response_doc.status_code)
 				#messages.info(request,response_doc.json())
@@ -387,17 +412,34 @@ class ResourceModelAdmin(SchemaModelAdmin):
 				#	successful +=1 
 				#	messages.info(request,str(response.status_code)+' :: '+response.text)
 				################
-					
+				#if something success-> create new archive.zip and replace the old one uploaded by the user 	
 				if successful > 0:
-					if response_doc != '' :
+					#create the archive.zip with the processed resources
+					processed_zip=zipfile.ZipFile(resource_path+'/archive.zip',mode='w')
+					if response_doc != '' and json_validator(response_doc):
 						messages.info(request,response_doc.json()["info"])
-					if response_tm != '' :
+						#processed_zip.write(resource_doc_path)
+						for root, dirs, files in os.walk(response_doc.json()["output"]):
+							for f in files:
+								processed_zip.write(os.path.join(root,f),'doc/'+f)
+					elif call_doc2tmx > 0:
+						messages.error(request,"Some error happened when processing resource with doc2tmx ")
+					if response_tm != '' and json_validator(response_tm):
 						messages.info(request,response_tm.json()["info"])
-					messages.info(request, ungettext(
-						'Successfully processed %(ingested)s ingested resource.',
-						'Successfully processed %(ingested)s ingested resources.',
-						successful) % {'ingested': successful})	
-                
+						for root, dirs, files in os.walk(response_tm.json()["output"]):
+							for f in files:
+								processed_zip.write(os.path.join(root,f),'tm/'+f)
+					elif call_tm2tmx > 0 :
+						messages.error(request,"Some error happened when processing resource with tm2tmx ")
+					
+					#if there are other files: add them as well
+					if os.path.isdir(resource_other_path):
+						for root,dirs,files in os.walk(resource_other_path):
+							for f in files:
+								processed_zip.write(os.path.join(root,f),'other/'+f)
+					#close zip file with processed resources
+					processed_zip.close()
+					
 				else:#TODO: INCLUDE JSON MESSAGE ERROR
 					messages.error(request,
                                _('Only ingested resources can be processed.'))
