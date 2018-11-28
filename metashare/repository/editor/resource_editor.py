@@ -311,7 +311,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
 					messages.info(request,_('You are processing a resource. This can take a while...'))
 					########DEBUGGING_INFO
 					##PATH TO THE RESOURCE
-					messages.info(request,escape(obj.storage_object._storage_folder()))
+					#messages.info(request,escape(obj.storage_object._storage_folder()))
 					
 					#messages.info(request,obj.metadataInfo)
 					##XML INFO OF THE RESOURCE
@@ -327,7 +327,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
 						r_languages.append(lang_id)
 					########DEBUGGING_INFO	
 					#messages.info(request,"info de idiomas...")	
-					messages.info(request,r_languages)
+					#messages.info(request,r_languages)
 					################
 					#get the resource storage folder path
 					resource_path=obj.storage_object._storage_folder()
@@ -379,9 +379,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
 							r_input=resource_tm_path+'/input/'+tm
 							tm_json= {'id':r_id, 'input':r_input,'overwrite':r_overwrite,'languages':r_languages}
 							#####DEBUG show tm_json info
-							messages.info(request,tm_json)
-							#####
-							response_tm=requests.post('http://localhost:1004/ELRI_WebService/tc_tm2tmx/process',json=tm_json)
+							#messages.info(request,tm_json)
+							#####settings.TM2TMX ; settings.DOC2TMX
+							response_tm=requests.post(settings.TM2TMX,json=tm_json)
 							if json_validator(response_tm):
 								if response_tm.json()["status"]=="Success":
 									successful +=1
@@ -401,7 +401,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
 						#####DEBUG show doc_json info
 						#messages.info(request,doc_json)
 						#####
-						response_doc=requests.post('http://localhost:1004/ELRI_WebService/tc_doc2tmx/process',json=doc_json)
+						response_doc=requests.post(settings.DOC2TMX,json=doc_json)
 						if json_validator(response_doc):
 							if response_doc.json()["status"] == "Success":
 								successful += 1
