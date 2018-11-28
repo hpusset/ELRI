@@ -311,7 +311,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
 					messages.info(request,_('You are processing a resource. This can take a while...'))
 					########DEBUGGING_INFO
 					##PATH TO THE RESOURCE
-					#messages.info(request,escape(obj.storage_object._storage_folder()))
+					messages.info(request,escape(obj.storage_object._storage_folder()))
 					
 					#messages.info(request,obj.metadataInfo)
 					##XML INFO OF THE RESOURCE
@@ -327,7 +327,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
 						r_languages.append(lang_id)
 					########DEBUGGING_INFO	
 					#messages.info(request,"info de idiomas...")	
-					#messages.info(request,langs)
+					messages.info(request,r_languages)
 					################
 					#get the resource storage folder path
 					resource_path=obj.storage_object._storage_folder()
@@ -379,7 +379,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
 							r_input=resource_tm_path+'/input/'+tm
 							tm_json= {'id':r_id, 'input':r_input,'overwrite':r_overwrite,'languages':r_languages}
 							#####DEBUG show tm_json info
-							#messages.info(request,tm_json)
+							messages.info(request,tm_json)
 							#####
 							response_tm=requests.post('http://localhost:1004/ELRI_WebService/tc_tm2tmx/process',json=tm_json)
 							if json_validator(response_tm):
