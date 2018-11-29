@@ -7,7 +7,7 @@ import uuid
 import zipfile
 import re
 import pdb
-
+from unidecode import unidecode 
 from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
 from haystack.query import SearchQuerySet
 from metashare.report_utils.report_utils import _is_processed, _is_not_processed_or_related, _get_country, \
@@ -843,8 +843,14 @@ class MetashareFacetedSearchView(FacetedSearchView):
 			for res in resourceInfoType_model.objects.all():
 				if self.request.user.groups.filter(
 					name__in=res.groups.values_list("name", flat=True)).exists():
-					resource_names.append(
-						res.identificationInfo.get_default_resourceName())
+					#get resource Name
+					resourceName=unidecode(res.identificationInfo.get_default_resourceName())
+					#keep alphanumeric characters only
+					resourceName=re.sub('[\W_]', '', resourceName)
+					#lowercase
+					resourceName=resourceName.lower()
+					#append resource name to the list
+					resource_names.append(resourceName)
 			if resource_names:
 				sqs = sqs.filter(publicationStatusFilter__exact='published',
 								 resourceNameSort__in=resource_names)

@@ -304,11 +304,10 @@ class ResourceModelAdmin(SchemaModelAdmin):
         from metashare.xml_utils import to_xml_string
         if has_publish_permission(request, queryset):
             successful = 0
-            #TODO:add checking : do it only if only it is an ingested resource
             #messages.info(request,queryset)
             for obj in queryset:
 				if check_resource_status(obj)== INGESTED or check_resource_status(obj)== PUBLISHED : #only process INGESTED or PUBLISHED resources 
-					messages.info(request,_('You are processing a resource. This can take a while...'))
+					messages.info(request,_('You are processing a resource. This may take some time...'))
 					########DEBUGGING_INFO
 					##PATH TO THE RESOURCE
 					#messages.info(request,escape(obj.storage_object._storage_folder()))
@@ -335,7 +334,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
 					#cp archive.zip to _archive.zip iif _archive.zip does not exist...
 					if not os.path.isfile(resource_path+'/_archive.zip'): #save the resource source for possible later reprocessing steps 
 						copyfile(resource_path+'/archive.zip',resource_path+'/_archive.zip')
-					#TODO look for archive.zip or _archive.zip --> if _archive.zip exists --> it is a reprocess step
 					#unzip always _archive.zip wich has always the source resource files; archive.zip can contain processed documents 
 					resource_zip=zipfile.ZipFile(resource_path+'/_archive.zip','r')
 					#and unzip the resource files into the corresponding /input folder
@@ -380,8 +378,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
 							tm_json= {'id':r_id, 'input':r_input,'overwrite':r_overwrite,'languages':r_languages}
 							#####DEBUG show tm_json info
 							#messages.info(request,tm_json)
-							#####settings.TM2TMX ; settings.DOC2TMX
-							response_tm=requests.post(settings.TM2TMX,json=tm_json)
+							#####settings.TM2TMX_URL ; settings.DOC2TMX_URL
+							response_tm=requests.post(settings.TM2TMX_URL,json=tm_json)
 							if json_validator(response_tm):
 								if response_tm.json()["status"]=="Success":
 									successful +=1
@@ -401,7 +399,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
 						#####DEBUG show doc_json info
 						#messages.info(request,doc_json)
 						#####
-						response_doc=requests.post(settings.DOC2TMX,json=doc_json)
+						response_doc=requests.post(settings.DOC2TMX_URL,json=doc_json)
 						if json_validator(response_doc):
 							if response_doc.json()["status"] == "Success":
 								successful += 1
@@ -430,10 +428,10 @@ class ResourceModelAdmin(SchemaModelAdmin):
 						messages.info(request,response_doc.json()["info"])
 						for root, dirs, files in os.walk(response_doc.json()["output"]):
 							for f in files:
-								processed_zip.write(os.path.join(root,f),'doc/processed/'+f)
-						for root, dirs, files in os.walk(response_doc.json()["rejected"]):
-							for f in files:
-								processed_zip.write(os.path.join(root,f),'doc/unprocessed/'+f)	
+								processed_zip.write(os.path.join(root,f),f)
+						#for root, dirs, files in os.walk(response_doc.json()["rejected"]):
+						#	for f in files:
+						#		processed_zip.write(os.path.join(root,f),f)	
 					elif call_doc2tmx > 0:
 						messages.error(request,"Some error happened when processing resource with doc2tmx ")
 						
@@ -441,10 +439,10 @@ class ResourceModelAdmin(SchemaModelAdmin):
 						messages.info(request,response_tm.json()["info"])
 						for root, dirs, files in os.walk(response_tm.json()["output"]):
 							for f in files:
-								processed_zip.write(os.path.join(root,f),'tm/processed/'+f)
-						for root, dirs, files in os.walk(response_tm.json()["rejected"]):
-							for f in files:
-								processed_zip.write(os.path.join(root,f),'tm/unprocessed/'+f)
+								processed_zip.write(os.path.join(root,f),f)
+						#for root, dirs, files in os.walk(response_tm.json()["rejected"]):
+						#	for f in files:
+						#		processed_zip.write(os.path.join(root,f),f)
 					elif call_tm2tmx > 0 :
 						messages.error(request,"Some error happened when processing resource with tm2tmx ")
 					
@@ -452,7 +450,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
 					if os.path.isdir(resource_other_path):
 						for root,dirs,files in os.walk(resource_other_path):
 							for f in files:
-								processed_zip.write(os.path.join(root,f),'other/'+f)
+								processed_zip.write(os.path.join(root,f),f)
 					#close zip file with processed resources
 					processed_zip.close()
 					
