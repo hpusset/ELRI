@@ -339,6 +339,7 @@ class identificationInfoType_model(SchemaModel):
     __schema_name__ = 'identificationInfoType'
     __schema_fields__ = (
       ( u'resourceName', u'resourceName', REQUIRED ),
+      ( u'resourceNameGroups', u'resourceName', OPTIONAL ),
       ( u'description', u'description', REQUIRED ),
       ( u'resourceShortName', u'resourceShortName', OPTIONAL ),
       ( u'url', u'url', RECOMMENDED ),

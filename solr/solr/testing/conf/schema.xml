@@ -396,7 +396,7 @@
     
     <field name="resourceNameSort_exact" type="string" indexed="true"
       stored="true" multiValued="false" />
-    
+	
   </fields>
 
   <!-- field to use to determine and enforce document uniqueness. -->

@@ -393,9 +393,10 @@
     
     <field name="resourceNameSort" type="text_en" indexed="true"
       stored="true" multiValued="false" />
-    
+	
     <field name="resourceNameSort_exact" type="string" indexed="true"
       stored="true" multiValued="false" />
+	
     
   </fields>
 
