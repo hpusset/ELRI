@@ -1,6 +1,6 @@
 # pylint: disable-msg=C0302
 import logging
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,Group
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.db import models
@@ -97,7 +97,7 @@ class resourceInfoType_model(SchemaModel):
     )
     __schema_classes__ = {
       u'contactPerson': "personInfoType_model",
-      u'groups': "Organization",
+      u'groups': "Organization", ###????
       u'corpusInfo': "corpusInfoType_model",
       u'distributionInfo': "distributionInfoType_model",
       u'identificationInfo': "identificationInfoType_model",
@@ -118,6 +118,7 @@ class resourceInfoType_model(SchemaModel):
       'urce'),
       )
 
+    
     # OneToMany field: distributionInfo
 
     contactPerson = models.ManyToManyField("personInfoType_model",
@@ -167,8 +168,14 @@ class resourceInfoType_model(SchemaModel):
     editor_groups = models.ManyToManyField(EditorGroup, blank=True)
 
     owners = models.ManyToManyField(User, blank=True)
-
-    groups = models.ManyToManyField(Organization, blank=True)
+    
+    groups = models.ManyToManyField(Organization, blank=True,
+									verbose_name=_('Sharing Groups'),
+									help_text=_('Groups within the resourse is shared'))
+    #ManyToManyField(Organization, blank=True, null=True,
+	#								verbose_name=_('Sharing Groups'),
+	#								help_text=_('Groups within the resourse is shared'),)
+    #groups = models.ManyToManyField("Organization", verbose_name=_('Groups'),help_text=_('Resource associated groups'),)
 
     storage_object = models.ForeignKey(StorageObject, blank=True, null=True,
       unique=True)

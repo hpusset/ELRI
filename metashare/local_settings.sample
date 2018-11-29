@@ -252,5 +252,7 @@ PMODE_FILE = ""
 LEGAL_REVIEWERS = ("1",)
 
 REST_API_KEY = ""
-
+ALLOWED_HOSTS = ("*",)
+DOC2TMX_URL = 'URL to tm2tmx process service'
+TM2TMX_URL = 'URL to tm2tmx process service'
 

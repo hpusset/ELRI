@@ -7,7 +7,7 @@ import uuid
 import zipfile
 import re
 import pdb
-
+from unidecode import unidecode 
 from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
 from haystack.query import SearchQuerySet
 from metashare.report_utils.report_utils import _is_processed, _is_not_processed_or_related, _get_country, \
@@ -516,7 +516,7 @@ def view(request, resource_name=None, object_id=None):
 	# Convert resource to ElementTree and then to template tuples.
 	lr_content = _convert_to_template_tuples(
 		resource.export_to_elementtree(pretty=True))
-
+	
 	# get the 'best' language version of a "DictField" and all other versions
 	resource_name = resource.identificationInfo.get_default_resourceName()
 	res_short_names = resource.identificationInfo.resourceShortName.values()
@@ -843,8 +843,14 @@ class MetashareFacetedSearchView(FacetedSearchView):
 			for res in resourceInfoType_model.objects.all():
 				if self.request.user.groups.filter(
 					name__in=res.groups.values_list("name", flat=True)).exists():
-					resource_names.append(
-						res.identificationInfo.get_default_resourceName())
+					#get resource Name
+					resourceName=unidecode(res.identificationInfo.get_default_resourceName())
+					#keep alphanumeric characters only
+					resourceName=re.sub('[\W_]', '', resourceName)
+					#lowercase
+					resourceName=resourceName.lower()
+					#append resource name to the list
+					resource_names.append(resourceName)
 			if resource_names:
 				sqs = sqs.filter(publicationStatusFilter__exact='published',
 								 resourceNameSort__in=resource_names)
@@ -1227,9 +1233,11 @@ def contribute(request):
 										  
 	# In ELRI, LR contributions can only be shared within the groups to which a user belongs.
 	return render_to_response('repository/editor/contributions/contribute.html', \
-							  {'groups':request.user.groups.values_list("name")},
+							  {'groups':Organization.objects.values_list("name","id").filter(id__in = request.user.groups.values_list("id"))},
 							  context_instance=RequestContext(request))
-
+	#return render_to_response('repository/editor/contributions/contribute.html', \
+	#						  {'groups':request.user.groups.values_list("name")},
+	#						  context_instance=RequestContext(request))
 
 
 @staff_member_required
