@@ -843,15 +843,22 @@ class MetashareFacetedSearchView(FacetedSearchView):
 			for res in resourceInfoType_model.objects.all():
 				if self.request.user.groups.filter(
 					name__in=res.groups.values_list("name", flat=True)).exists():
-					#get resource Name
-					resourceName=unidecode(res.identificationInfo.get_default_resourceName())
-					#keep alphanumeric characters only
+					resname=res.identificationInfo.get_default_resourceName()
+					##get resource Name
+					resourceName=unidecode(resname)
+					##keep alphanumeric characters only
 					resourceName=re.sub('[\W_]', '', resourceName)
-					#lowercase
+					##lowercase
 					resourceName=resourceName.lower()
-					#append resource name to the list
+					##append resource name to the list
+					##resource_names.append(resourceName)
+					for g in res.groups.values_list("name",flat=True):
+						resourceName=resourceName+g
 					resource_names.append(resourceName)
+			#LOGGER.info(resource_names)		
 			if resource_names:
+				#for r in sqs.filter(publicationStatusFilter__exact='published'): #, resourceNameSortGroup__in=resource_names):
+				#	LOGGER.info(r.resourceNameSort)
 				sqs = sqs.filter(publicationStatusFilter__exact='published',
 								 resourceNameSort__in=resource_names)
 			else:

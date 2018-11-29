@@ -320,6 +320,9 @@ class resourceInfoType_modelIndex(SearchIndex, indexes.Indexable):
         resourceNameSort = re.sub('[\W_]', '', resourceNameSort)
         # set Resource Name to lower case
         resourceNameSort = resourceNameSort.lower()
+        #temporary solution to the naming conflict that can arise from resources sharing the same name but with different group sharing policy
+        for g in obj.groups.values_list("name",flat=True):
+            resourceNameSort = resourceNameSort+g
 
         return resourceNameSort
 
