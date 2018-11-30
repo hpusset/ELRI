@@ -233,8 +233,13 @@ def has_edit_permission(request, res_obj):
     Returns `True` if the given request has permission to edit the metadata
     for the current resource, `False` otherwise.
     """
+    ##previously:
+    #return request.user.is_active and (request.user.is_superuser \
+    #    or request.user in res_obj.owners.all() ##if it is owner, only can edit if it is a reviewer....
+    #    or request.user.groups.filter(name="reviewers").exists())
+    
+    ## A user only can edit a resource if it is a superuser or a reviewer
     return request.user.is_active and (request.user.is_superuser \
-        or request.user in res_obj.owners.all()
         or request.user.groups.filter(name="reviewers").exists())
 
 
