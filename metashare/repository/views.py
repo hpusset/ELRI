@@ -570,7 +570,7 @@ def view(request, resource_name=None, object_id=None):
 			relation_info_tuples.append(_tuple)
 		elif _tuple[0] == "Resource component type":
 			resource_component_tuple = _tuple[1]
-	LOGGER.info(contact_person_tuples)
+	
 	# Convert resource_component_tuple to nested dictionaries
 	resource_component_dicts = {}
 	validation_dicts = []
@@ -582,8 +582,7 @@ def view(request, resource_name=None, object_id=None):
 	distribution_dicts = []
 	for item in contact_person_tuples:
 		contact_person_dicts.append(tuple2dict([item]))
-	LOGGER.info('dicts:')
-	LOGGER.info(contact_person_dicts)	
+	
 	for item in distribution_info_tuples:
 		distribution_dicts.append(tuple2dict([item]))
 	resource_component_dict = tuple2dict(resource_component_tuple)
