@@ -540,7 +540,7 @@ def view(request, resource_name=None, object_id=None):
 	distribution_info_tuple = None
 	attribution_details = model_utils.get_resource_attribution_texts(resource)
 	distribution_info_tuples = []
-	contact_person_tuples = []
+	contact_person_tuples =  []
 	metadata_info_tuple = None
 	version_info_tuple = None
 	validation_info_tuples = []
@@ -570,7 +570,7 @@ def view(request, resource_name=None, object_id=None):
 			relation_info_tuples.append(_tuple)
 		elif _tuple[0] == "Resource component type":
 			resource_component_tuple = _tuple[1]
-
+	
 	# Convert resource_component_tuple to nested dictionaries
 	resource_component_dicts = {}
 	validation_dicts = []
@@ -582,6 +582,7 @@ def view(request, resource_name=None, object_id=None):
 	distribution_dicts = []
 	for item in contact_person_tuples:
 		contact_person_dicts.append(tuple2dict([item]))
+	
 	for item in distribution_info_tuples:
 		distribution_dicts.append(tuple2dict([item]))
 	resource_component_dict = tuple2dict(resource_component_tuple)
@@ -1217,7 +1218,8 @@ def contribute(request):
 								   resource_type, unprocessed_dir,
 								   request.user)
 			d[0].owners.add(request.user.id)
-
+			d[0].contactPerson.add(d[1])
+			
 			try:
 				send_mail(_("New submitted contributions"),
 						  _("You have new submitted contributed resources on elrc-share.eu"),
@@ -1351,8 +1353,9 @@ def create_description(xml_file, type, base, user):
 			(surname={'en': info["userInfo"]["lastname"]},
 			 givenName={'en': info["userInfo"]["firstname"]},
 			 )[0]
-	resource = None
 
+	resource = None
+	
 	# Handle different resource type structures
 	if type == 'corpus':
 		corpus_media_type = corpusMediaTypeType_model.objects.create()

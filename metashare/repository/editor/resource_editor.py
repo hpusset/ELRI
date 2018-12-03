@@ -233,8 +233,13 @@ def has_edit_permission(request, res_obj):
     Returns `True` if the given request has permission to edit the metadata
     for the current resource, `False` otherwise.
     """
+    ##previously:
+    #return request.user.is_active and (request.user.is_superuser \
+    #    or request.user in res_obj.owners.all() ##if it is owner, only can edit if it is a reviewer....
+    #    or request.user.groups.filter(name="reviewers").exists())
+    
+    ## A user only can edit a resource if it is a superuser or a reviewer
     return request.user.is_active and (request.user.is_superuser \
-        or request.user in res_obj.owners.all()
         or request.user.groups.filter(name="reviewers").exists())
 
 
@@ -476,6 +481,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     'Successfully published %(ingested)s ingested resource.',
                     'Successfully published %(ingested)s ingested resources.',
                     successful) % {'ingested': successful})
+				#TODO sent email to owner: your resource has been published
             else:
                 messages.error(request,
                                _('Only ingested resources can be published.'))
@@ -528,6 +534,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     successful) % {'internal': successful})
                 #Implements the system branch 4 automatic lr processing
                 self.branch_lr(request,queryset)
+                #TODO send an email to resource groups reviewers to notify a new resource availabe to validate 
             else:
                 messages.error(request,
                                _('Only internal resources can be ingested.'))
