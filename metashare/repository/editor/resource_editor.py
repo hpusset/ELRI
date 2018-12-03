@@ -481,6 +481,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     'Successfully published %(ingested)s ingested resource.',
                     'Successfully published %(ingested)s ingested resources.',
                     successful) % {'ingested': successful})
+				#TODO sent email to owner: your resource has been published
             else:
                 messages.error(request,
                                _('Only ingested resources can be published.'))
@@ -533,6 +534,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     successful) % {'internal': successful})
                 #Implements the system branch 4 automatic lr processing
                 self.branch_lr(request,queryset)
+                #TODO send an email to resource groups reviewers to notify a new resource availabe to validate 
             else:
                 messages.error(request,
                                _('Only internal resources can be ingested.'))
