@@ -39,9 +39,6 @@ def confirm(request, uuid):
 	# Do not set user as staff/ editor
 	user.is_staff = False
 	
-	LOGGER.info("USER GROUPS")
-	LOGGER.info(user.groups)
-	
 	#user.groups.add(Group.objects.get(name='contributors'))
 	user.save()
 
@@ -56,7 +53,7 @@ def confirm(request, uuid):
 		# Send an activation email.
 		# TODO: add localisation and change email
 		send_mail(_('Your ELRI user account has been activated'),
-		email, 'no-reply@elrc-share.eu', [user.email], fail_silently=False)
+		email, 'no-reply@elri.eu', [user.email], fail_silently=False)
 	except: # SMTPException:
 		# there was a problem sending the activation e-mail -- not too bad
 		pass
@@ -90,9 +87,9 @@ def contact(request):
 			superuser_emails = User.objects.filter(is_superuser=True) \
 				.values_list('email', flat=True)
 			try:
-				send_mail(_('[ELRC-SHARE] Contact Form Request: %s')
+				send_mail(_('[ELRI] Contact Form Request: %s')
 						% (data['subject'],), email_msg,
-					'no-reply@elrc-share.eu', superuser_emails,
+					'no-reply@elri.eu', superuser_emails,
 					fail_silently=False)
 			except:
 				# if the email could not be sent successfully, tell the user
@@ -326,7 +323,7 @@ def editor_group_application(request):
 					# Send out notification email to the managers and superusers
 					send_mail('New editor membership request',
 						render_to_string('accounts/notification_editor_group_managers_application.email', data),
-						'no-reply@elrc-share.eu', emails, fail_silently=False)
+						'no-reply@elri.eu', emails, fail_silently=False)
 				except: #SMTPException:
 					# If the email could not be sent successfully, tell the user
 					# about it.

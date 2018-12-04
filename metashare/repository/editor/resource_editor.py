@@ -9,6 +9,7 @@ from django.contrib.admin.utils import unquote
 from django.contrib.admin.views.main import ChangeList
 from django.contrib.auth.decorators import permission_required
 from django.core.exceptions import ValidationError, PermissionDenied, ObjectDoesNotExist
+from django.core.mail import send_mail
 from django.db.models import Q
 from django.http import Http404, HttpResponseNotFound, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
@@ -19,6 +20,8 @@ from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _, ungettext
 from django.views.decorators.csrf import csrf_protect
+
+
 
 from metashare import settings
 from metashare.accounts.models import EditorGroup, EditorGroupManagers
@@ -471,17 +474,43 @@ class ResourceModelAdmin(SchemaModelAdmin):
     def publish_action(self, request, queryset):
         if has_publish_permission(request, queryset):
             successful = 0
+            
+            from metashare.xml_utils import to_xml_string
             for obj in queryset:
                 if change_resource_status(obj, status=PUBLISHED,
                                           precondition_status=INGESTED):
                     successful += 1
                     saveLRStats(obj, UPDATE_STAT, request)
+                
+                    ##resource_info.append(obj.export_to_elementtree())
+                    ##messages.info(request,to_xml_string(obj.export_to_elementtree(),
+					##                               encoding="utf-8").encode("utf-8"))#obj.export_to_elementtree()
+                    resource_name=[u.find('resourceName').text for u in obj.export_to_elementtree().iter('identificationInfo')]
+                    ##messages.info(request,resource_name)
+                    ##messages.info(request,obj.storage_object.id)
+                    #TODO sent email to owner: your resource has been published
+                    #TODO add more resource info, localize email content, agree upon email content
+                    ##resource_name=resourceInfoType_model.objects.filter(id=obj.storage_object.id).value_list("name")
+                    ##messages.info(request,resource_name)
+                    emails=[]
+                    for u in obj.owners.all():
+                        ##messages.info(request,u.email)
+                        emails.append(u.email)
+
+                    try:
+                        send_mail('Published Resource', 'Your resource {0} has been published'.format(resource_name[0]),'no-reply@elri.eu',emails, fail_silently=False)
+                    except:
+                        # failed to send e-mail to superuser
+                        # If the email could not be sent successfully, tell the user
+                        # about it and also give the confirmation URL.
+                        messages.error(request,_("There was an error sending out the notification email to the resource owners. Please contact them directly."))
+                        # Redirect the user to the front page. ?
+                        #return redirect('metashare.views.frontpage')
             if successful > 0:
                 messages.info(request, ungettext(
                     'Successfully published %(ingested)s ingested resource.',
                     'Successfully published %(ingested)s ingested resources.',
                     successful) % {'ingested': successful})
-				#TODO sent email to owner: your resource has been published
             else:
                 messages.error(request,
                                _('Only ingested resources can be published.'))
@@ -519,14 +548,48 @@ class ResourceModelAdmin(SchemaModelAdmin):
         self.process_action(request,queryset)
 
     def ingest_action(self, request, queryset):
+        #messages.info(request,request)
         if has_publish_permission(request, queryset) or request.user.is_staff:
             successful = 0
+            resource_info=[]
+            from metashare.xml_utils import to_xml_string
             for obj in queryset:
                 if change_resource_status(obj, status=INGESTED,
                                           precondition_status=INTERNAL):
-                    successful += 1
-                    saveLRStats(obj, INGEST_STAT, request)
-                    
+					successful += 1
+					saveLRStats(obj, INGEST_STAT, request)
+					resource_info.append(obj.export_to_elementtree())
+					#get resource name to include in the email
+					resource_name=[u.find('resourceName').text for u in obj.export_to_elementtree().iter('identificationInfo')]
+					groups_name=[]
+					for g in obj.groups.all():
+						groups_name.append(g.name)
+					##DEBUG
+					#messages.info(request,groups_name)
+					##
+					#send an email to the reviewers related to the groups where the resource is published
+					#get the emails of those users that are reviewers
+					reviewers = [u.email for u in User.objects.filter(groups__name__in=['reviewers'])] #,groups__name__in=groups_name)]
+					##DEBUG
+					##group_users=[u.email for u in User.objects.filter(groups__name__in=groups_name)]
+					##
+					#get the emails of the reviewers that share groups with the resource
+					group_reviewers = [u.email for u in User.objects.filter(groups__name__in=groups_name, email__in=reviewers)]
+					#####DEBUG
+					##messages.info(request,reviewers)
+					##messages.info(request,group_users)
+					##messages.info(request,group_reviewers)
+					####
+					#send the ingested resource notification mail 
+					try:
+						send_mail("Ingested Resource", "There are new ingested resources to review ({0})".format(' '.join(resource_name)),'no-reply@elri.eu',group_reviewers) 
+					except:
+						# failed to send e-mail to superuser
+						# If the email could not be sent successfully, tell the user
+						# about it and also give the confirmation URL.
+						messages.error(request,_("There was an error sending out the notification email to the group reviewers. Please contact them directly."))
+						# Redirect the user to the front page. ?
+						#return redirect('metashare.views.frontpage')
             if successful > 0:
                 messages.info(request, ungettext(
                     'Successfully ingested %(internal)s internal resource.',
@@ -534,7 +597,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     successful) % {'internal': successful})
                 #Implements the system branch 4 automatic lr processing
                 self.branch_lr(request,queryset)
-                #TODO send an email to resource groups reviewers to notify a new resource availabe to validate 
+                
             else:
                 messages.error(request,
                                _('Only internal resources can be ingested.'))

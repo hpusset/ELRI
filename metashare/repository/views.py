@@ -1220,10 +1220,11 @@ def contribute(request):
 			d[0].owners.add(request.user.id)
 			d[0].contactPerson.add(d[1])
 			
+			su_emails=[u.email for u in User.objects.filter(is_superuser=True)]
 			try:
 				send_mail(_("New submitted contributions"),
-						  _("You have new submitted contributed resources on elrc-share.eu"),
-						  'no-reply@elrc-share.ilsp.gr', CONTRIBUTIONS_ALERT_EMAILS, \
+						  _("You have new submitted contributed resources on ELRI ({0})".format(data['resourceInfo']['resourceTitle'])),
+						  'no-reply@elri.eu', su_emails, \
 						  fail_silently=False)
 			except:
 				LOGGER.error("An error has occurred while trying to send email to contributions"
@@ -1244,10 +1245,6 @@ def contribute(request):
 	return render_to_response('repository/editor/contributions/contribute.html', \
 							  {'groups':Organization.objects.values_list("name","id").filter(id__in = request.user.groups.values_list("id"))},
 							  context_instance=RequestContext(request))
-	#return render_to_response('repository/editor/contributions/contribute.html', \
-	#						  {'groups':request.user.groups.values_list("name")},
-	#						  context_instance=RequestContext(request))
-
 
 @staff_member_required
 def get_data(request, filename):
@@ -1457,6 +1454,7 @@ def create_description(xml_file, type, base, user):
 		licence=info['licence'])
 	distribution.licenceInfo.add(licence_obj)
 	resource.distributioninfotype_model_set.add(distribution)
+	#LOGGER.info(len(resource.distributioninfotype_model_set.all()))
 	resource.save()
 
 	# also add the designated maintainer, based on the country of the country of the donor
