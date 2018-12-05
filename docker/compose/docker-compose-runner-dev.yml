@@ -1,0 +1,25 @@
+version: '3.5'
+services:
+  # django app
+  elri-node1:
+    ports:
+      - "8000:8000"
+  # Linux POSTGRES Server 
+  postgres-server:
+    ports:
+      - "5432:5432"
+  # Solr indexing
+  solr:
+    ports:
+      - "8983:8983"
+  # NGINX webserver
+  nginx:
+    ports:
+      - "80:80"
+secrets:
+  db.secret:
+    file: db_secret.properties
+  app.secret:
+    file: nrs_secret.properties
+  web.secret:
+    file: web_secret.properties

@@ -1,0 +1,56 @@
+version: '3.5'
+services:
+  # django app
+  elri-node1:
+    container_name: elri_app
+    image: elrinrs/nationalrelaystation:MASTER
+    secrets:
+      - db.secret
+      - app.secret
+      - web.secret
+    environment:
+      - DBELRI_USER={{DOCKER-SECRET:db.secret}}
+      - DBELRI_PASS={{DOCKER-SECRET:db.secret}}
+      - DBELRI_NAME={{DOCKER-SECRET:db.secret}}
+      - ELRI_TIMEZONE={{DOCKER-SECRET:app.secret}}
+      - ELRI_LANGUAGE={{DOCKER-SECRET:app.secret}}
+      - ELRI_SALT={{DOCKER-SECRET:app.secret}}
+      - ELRI_ALERT_MAILS={{DOCKER-SECRET:app.secret}}
+      - ELRI_HOSTNAME={{DOCKER-SECRET:web.secret}}
+      - ELRI_DOMAINNAME={{DOCKER-SECRET:web.secret}}
+      - ELRI_COUNTRY={{DOCKER-SECRET:app.secret}}
+    depends_on:
+      - solr
+      - postgres-server
+  # Linux POSTGRES Server 
+  postgres-server:
+    container_name: elri_db
+    image: elrinrs/postgres-server:MASTER
+    secrets:
+      - db.secret
+    environment:
+      - DBELRI_USER={{DOCKER-SECRET:db.secret}}
+      - DBELRI_PASS={{DOCKER-SECRET:db.secret}}
+      - DBELRI_NAME={{DOCKER-SECRET:db.secret}}
+      - POSTGRES_USER={{DOCKER-SECRET:db.secret}}
+      - POSTGRES_PASSWORD={{DOCKER-SECRET:db.secret}}
+  # Solr indexing
+  solr:
+    container_name: elri_solr
+    image: elrinrs/solr:MASTER
+  # NGINX webserver
+  nginx:
+    container_name: elri_webserver
+    image: elrinrs/nginx:MASTER
+    secrets:
+      - web.secret
+    environment:
+      - ELRI_HOSTNAME={{DOCKER-SECRET:web.secret}}
+      - ELRI_DOMAINNAME={{DOCKER-SECRET:web.secret}}
+      - ELRI_NODES=elri-node1:8000
+    depends_on:
+      - elri-node1
+secrets:
+  db.secret:
+  app.secret:
+  web.secret:
