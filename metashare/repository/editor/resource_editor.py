@@ -13,6 +13,7 @@ from django.core.mail import send_mail
 from django.db.models import Q
 from django.http import Http404, HttpResponseNotFound, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
+from django.template.loader import render_to_string
 from django.template.context import RequestContext
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_unicode, force_text
@@ -484,21 +485,19 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 
                     ##resource_info.append(obj.export_to_elementtree())
                     ##messages.info(request,to_xml_string(obj.export_to_elementtree(),
-					##                               encoding="utf-8").encode("utf-8"))#obj.export_to_elementtree()
+                    ##                               encoding="utf-8").encode("utf-8"))#obj.export_to_elementtree()
                     resource_name=[u.find('resourceName').text for u in obj.export_to_elementtree().iter('identificationInfo')]
                     ##messages.info(request,resource_name)
                     ##messages.info(request,obj.storage_object.id)
-                    #TODO sent email to owner: your resource has been published
-                    #TODO add more resource info, localize email content, agree upon email content
                     ##resource_name=resourceInfoType_model.objects.filter(id=obj.storage_object.id).value_list("name")
                     ##messages.info(request,resource_name)
-                    emails=[]
-                    for u in obj.owners.all():
-                        ##messages.info(request,u.email)
-                        emails.append(u.email)
+                    emails=obj.owners.all().values_list('email',flat=True)
+                    name=obj.owners.all().values_list('first_name',flat=True)
+                    surname=obj.owners.all().values_list('last_name',flat=True)
 
+                    email_data={'resourcename':resource_name[0],'username':name[0], 'usersurname':surname[0]}
                     try:
-                        send_mail('Published Resource', 'Your resource {0} has been published'.format(resource_name[0]),'no-reply@elri.eu',emails, fail_silently=False)
+                        send_mail('Published Resource', render_to_string('repository/published_resource.email',email_data) ,'no-reply@elri.eu',emails, fail_silently=False)
                     except:
                         # failed to send e-mail to superuser
                         # If the email could not be sent successfully, tell the user
@@ -548,7 +547,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         self.process_action(request,queryset)
 
     def ingest_action(self, request, queryset):
-        #messages.info(request,request)
+       
         if has_publish_permission(request, queryset) or request.user.is_staff:
             successful = 0
             resource_info=[]
@@ -581,8 +580,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
 					##messages.info(request,group_reviewers)
 					####
 					#send the ingested resource notification mail 
+					email_data={'resourcename':resource_name[0]}
 					try:
-						send_mail("Ingested Resource", "There are new ingested resources to review ({0})".format(' '.join(resource_name)),'no-reply@elri.eu',group_reviewers) 
+						send_mail("Ingested Resource", render_to_string('repository/ingested_resource.email',email_data),'no-reply@elri.eu',group_reviewers) 
 					except:
 						# failed to send e-mail to superuser
 						# If the email could not be sent successfully, tell the user

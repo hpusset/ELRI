@@ -1219,13 +1219,13 @@ def contribute(request):
 								   request.user)
 			d[0].owners.add(request.user.id)
 			d[0].contactPerson.add(d[1])
-			
+
 			su_emails=[u.email for u in User.objects.filter(is_superuser=True)]
 			try:
+				mail_data={'resourcename':data['resourceInfo']['resourceTitle']}
 				send_mail(_("New submitted contributions"),
-						  _("You have new submitted contributed resources on ELRI ({0})".format(data['resourceInfo']['resourceTitle'])),
-						  'no-reply@elri.eu', su_emails, \
-						  fail_silently=False)
+							render_to_string('repository/resource_new_contributions.email', mail_data),
+						  'no-reply@elri.eu', su_emails,  fail_silently=False)
 			except:
 				LOGGER.error("An error has occurred while trying to send email to contributions"
 							 "alert recipients.")
