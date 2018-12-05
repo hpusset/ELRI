@@ -1,5 +1,6 @@
 import logging
 
+from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.core.management.base import BaseCommand, CommandError
 from metashare.edelivery.wsdl_services import download_messages
@@ -15,11 +16,14 @@ class Command(BaseCommand):
         # if success
         if download_result[0]:
             LOGGER.info(download_result[1])
+
+            #contact the superusers of the NRS
+            superuser_emails = User.objects.filter(is_superuser=True).values_list('email', flat=True)
             try:
                 send_mail("New contributions through eDelivery",
-                          "You have new unmanaged contributed resources on elrc-share.eu, through eDelivery.",
-                          recipient_list=CONTRIBUTIONS_ALERT_EMAILS,
-                          from_email='no-reply@elrc-share.eu', \
+                          "You have new unmanaged contributed resources on elri.eu, through eDelivery.",
+                          recipient_list=superuser_emails,
+                          from_email='no-reply@elri.eu', \
                           fail_silently=False)
             except:
                 LOGGER.error("An error has occurred while trying to send email to contributions "

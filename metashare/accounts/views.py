@@ -39,9 +39,6 @@ def confirm(request, uuid):
 	# Do not set user as staff/ editor
 	user.is_staff = False
 	
-	LOGGER.info("USER GROUPS")
-	LOGGER.info(user.groups)
-	
 	#user.groups.add(Group.objects.get(name='contributors'))
 	user.save()
 
@@ -56,7 +53,7 @@ def confirm(request, uuid):
 		# Send an activation email.
 		# TODO: add localisation and change email
 		send_mail(_('Your ELRI user account has been activated'),
-		email, 'no-reply@elrc-share.eu', [user.email], fail_silently=False)
+		email, 'no-reply@elri.eu', [user.email], fail_silently=False)
 	except: # SMTPException:
 		# there was a problem sending the activation e-mail -- not too bad
 		pass
@@ -90,9 +87,9 @@ def contact(request):
 			superuser_emails = User.objects.filter(is_superuser=True) \
 				.values_list('email', flat=True)
 			try:
-				send_mail(_('[ELRC-SHARE] Contact Form Request: %s')
+				send_mail(_('[ELRI] Contact Form Request: %s')
 						% (data['subject'],), email_msg,
-					'no-reply@elrc-share.eu', superuser_emails,
+					'no-reply@elri.eu', superuser_emails,
 					fail_silently=False)
 			except:
 				# if the email could not be sent successfully, tell the user
@@ -326,7 +323,7 @@ def editor_group_application(request):
 					# Send out notification email to the managers and superusers
 					send_mail('New editor membership request',
 						render_to_string('accounts/notification_editor_group_managers_application.email', data),
-						'no-reply@elrc-share.eu', emails, fail_silently=False)
+						'no-reply@elri.eu', emails, fail_silently=False)
 				except: #SMTPException:
 					# If the email could not be sent successfully, tell the user
 					# about it.
@@ -480,7 +477,7 @@ def organization_application(request):
 					# Send out notification email to the organization managers and superusers
 					send_mail('New organization membership request',
 						render_to_string('accounts/notification_organization_managers_application.email', data),
-						'no-reply@elrc-share.eu', emails, fail_silently=False)
+						'no-reply@elri.eu', emails, fail_silently=False)
 				except: #SMTPException:
 					# If the email could not be sent successfully, tell the user
 					# about it.
@@ -542,8 +539,8 @@ def reset(request, uuid=None):
 				
 				try:
 					# Send out reset email to the given email address.
-					send_mail(_('Please confirm your ELRC-SHARE reset request'),
-					email, 'no-reply@elrc-share.eu', [user.email],
+					send_mail(_('Please confirm your ELRI reset request'),
+					email, 'no-reply@elri.eu', [user.email],
 					fail_silently=False)
 				
 				except SMTPException:
@@ -589,8 +586,8 @@ def reset(request, uuid=None):
 	
 	try:
 		# Send out re-activation email to the given email address.
-		send_mail(_('Your ELRC-SHARE user account has been re-activated'),
-		email, 'no-reply@elrc-share.eu', [user.email], fail_silently=False)
+		send_mail(_('Your ELRI user account has been re-activated'),
+		email, 'no-reply@elri.eu', [user.email], fail_silently=False)
 	
 	except SMTPException:
 		# If the email could not be sent successfully, tell the user about it.
@@ -636,11 +633,11 @@ def edelivery_application(request):
 				application.save()
 				messages.success(request, "Your application has been successfully submitted!")
 				send_mail(subject="New eDelivery application from user " + request.user.username + ".",
-						  message="User '{}' has applied for membership in the ELRC_SHARE eDelivery "
+						  message="User '{}' has applied for membership in the ELRI eDelivery "
 								  "Network. Please review the application at "
-								  "https://elrc-share.eu/admin/accounts/accesspointedeliveryapplication/ and "
-								  "accept or reject the application.".format(request.user.username), from_email="elrc-share@ilsp.gr",
-						  recipient_list=["edelivery@elrc-share.eu"], fail_silently=False
+								  "https://elri.eu/admin/accounts/accesspointedeliveryapplication/ and "
+								  "accept or reject the application.".format(request.user.username), from_email="elri@ilsp.gr",
+						  recipient_list=["edelivery@elri.eu"], fail_silently=False
 					  )
 			# TODO: email admin??
 			return redirect('metashare.views.frontpage')
