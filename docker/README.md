@@ -85,3 +85,9 @@ File                              | Property             | Description
 django/Dockerfile                 | GIT_URL              | Replace `trunk` for the desired release
 solr/Dockerfile                   | GIT_URL              | Replace `trunk` for the desired release
 compose/docker-compose-runner.yml | image (each service) | Replace ` MASTER` for the desired release
+
+02. Super user creation for application login:
+
+```
+$ docker exec -ti elri_app /elri/create_super_user.sh
+```
