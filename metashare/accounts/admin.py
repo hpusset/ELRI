@@ -310,7 +310,7 @@ class EditorGroupApplicationAdmin(admin.ModelAdmin):
                     # Send out notification email to the user
                     send_mail('Application accepted',
                               render_to_string('accounts/notification_editor_group_application_accepted.email', data),
-                              'no-reply@elrc-share.eu', (req.user.email,),
+                              'no-reply@elri.eu', (req.user.email,),
                               fail_silently=False)
                 except:  # SMTPException:
                     # If the email could not be sent successfully, tell the user
@@ -370,7 +370,7 @@ class EditorGroupApplicationAdmin(admin.ModelAdmin):
             send_mail('Application turned down', render_to_string('accounts/'
                                                                   'notification_editor_group_application_turned_down.email',
                                                                   data),
-                      'no-reply@elrc-share.eu', (obj.user.email,),
+                      'no-reply@elri.eu', (obj.user.email,),
                       fail_silently=False)
         except:  # SMTPException:
             # If the email could not be sent successfully, tell the user
@@ -778,7 +778,7 @@ class OrganizationApplicationAdmin(admin.ModelAdmin):
                     # Send out notification email to the user
                     send_mail('Application accepted',
                               render_to_string('accounts/notification_organization_application_accepted.email', data),
-                              'no-reply@elrc-share.eu', (req.user.email,),
+                              'no-reply@elri.eu', (req.user.email,),
                               fail_silently=False)
                 except:  # SMTPException:
                     # If the email could not be sent successfully, tell the user
@@ -830,7 +830,7 @@ class OrganizationApplicationAdmin(admin.ModelAdmin):
             send_mail('Application turned down', render_to_string('accounts/'
                                                                   'notification_organization_application_turned_down.email',
                                                                   data),
-                      'no-reply@elrc-share.eu', (obj.user.email,),
+                      'no-reply@elri.eu', (obj.user.email,),
                       fail_silently=False)
         except:  # SMTPException:
             # If the email could not be sent successfully, tell the user
@@ -1142,12 +1142,12 @@ class EdeliveryApplicationAdmin(admin.ModelAdmin):
                 if req.rejection_reason:
                     req.status = "REJECTED"
                     req.save()
-                    send_mail("ELRC-SHARE eDelivery application",
+                    send_mail("ELRI eDelivery application",
                               "Dear {}, \n"
                               "Your eDelivery application has been rejected due to the"
                               "following reasons:\n"
                               "{}.".format(req.user.username, req.rejection_reason),
-                              "edelivery@elrc-share.eu", [req.user.email])
+                              "edelivery@elri.eu", [req.user.email])
                     messages.success(request, "The selected applications have been rejected. "
                                               "The requesting users have been notified via email.")
                 else:
@@ -1190,12 +1190,12 @@ class EdeliveryApplicationAdmin(admin.ModelAdmin):
 
                     req.status = "REVOKED"
                     # TODO: remove pmode and certificate from access point
-                    send_mail("ELRC-SHARE eDelivery application",
+                    send_mail("ELRI eDelivery application",
                               "Dear {}, \n"
                               "Your eDelivery application has been revoked due to the"
                               "following reasons:\n"
                               "{}.".format(req.user.username, req.rejection_reason),
-                              "edelivery@elrc-share.eu", [req.user.email])
+                              "edelivery@elri.eu", [req.user.email])
                     req.save()
                     messages.success(request, "The selected applications have been revoked. "
                                               "The requesting users have been notified via email.")
