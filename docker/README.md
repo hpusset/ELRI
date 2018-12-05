@@ -22,8 +22,11 @@ following steps need to be undertaken:
 01. Checkout `compose` directory to the desired location
 
 02. Merge `docker-compose-runner.yml` and `docker-compose-runner-dev.yml` files:
-        $ docker-compose -f docker-compose-runner.yml -f docker-compose-runner-dev.yml config > docker-compose.yml
-    
+
+```        
+$ docker-compose -f docker-compose-runner.yml -f docker-compose-runner-dev.yml config > docker-compose.yml
+```
+
 03. Change the desired property files to match the destination country requirements:
 
 ### db_secret.properties:
@@ -54,7 +57,10 @@ ELRI_HOSTNAME     | nrs               | ELRI hostname
 ELRI_DOMAINNAME   | dev.elri.com      | ELRI domain name
 
 04. Start the project:
-        $ docker-compose up
+
+```
+$ docker-compose up
+```
 
 ## Production
 
@@ -64,7 +70,10 @@ Testing
 -----
 
 01. After starting up the project we can open a web browser and check the url composed by the variables set in `ELRI_HOSTNAME` and `ELRI_DOMAINNAME`:
-        http://`ELRI_HOSTNAME`.`ELRI_DOMAINNAME`
+        
+```
+http://`ELRI_HOSTNAME`.`ELRI_DOMAINNAME`
+```
 
 Reminders
 -----
