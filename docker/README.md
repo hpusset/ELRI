@@ -11,6 +11,18 @@ Docker image provisioning of the project composed by the next components:
 - Solr image for the indexing component requirement (based on the solr directory in main structure)
 - NGINX image for the web server requirement and managing custom rules to the NRS application
 
+Requirements
+------------
+
+### Recommended
+
+- Docker-ce version 18.09.0 or above [Install Link](https://docs.docker.com/v17.12/install/#server)
+- Docker-compose version 1.23.1 or above [Install Link](https://docs.docker.com/compose/install)
+
+### Minimum
+
+- Docker-ce version 17.12.0
+
 Setup
 -----
 
@@ -27,7 +39,7 @@ following steps need to be undertaken:
 $ docker-compose -f docker-compose-runner.yml -f docker-compose-runner-dev.yml config > docker-compose.yml
 ```
 
-03. Change the desired property files to match the destination country requirements:
+03. Change the following property files to match the destination country requirements:
 
 ### db_secret.properties:
 
@@ -62,6 +74,12 @@ ELRI_DOMAINNAME   | dev.elri.com      | ELRI domain name
 $ docker-compose up
 ```
 
+05. (Optional) Super user creation for application login:
+
+```
+$ docker exec -ti elri_app /elri/create_super_user.sh
+```
+
 ## Production
 
 In order to set up the production environment we just need to replace in the development procedure above `docker-compose-runner-dev.yml` for `docker-compose-runner-prd.yml`
@@ -86,8 +104,8 @@ django/Dockerfile                 | GIT_URL              | Replace `trunk` for t
 solr/Dockerfile                   | GIT_URL              | Replace `trunk` for the desired release
 compose/docker-compose-runner.yml | image (each service) | Replace ` MASTER` for the desired release
 
-02. Super user creation for application login:
+To do:
+-----
 
-```
-$ docker exec -ti elri_app /elri/create_super_user.sh
-```
+- [ ] Toolchain integration
+- [ ] E-mail server configuration (R1.2)
