@@ -16,12 +16,12 @@ Requirements
 
 ### Recommended
 
-- Docker-ce version 18.09.0 or above [Install Link](https://docs.docker.com/v17.12/install/#server)
+- Docker CE (Community Edition) version 18.09.0 or above [Install Link](https://docs.docker.com/v17.12/install/#server)
 - Docker-compose version 1.23.1 or above [Install Link](https://docs.docker.com/compose/install)
 
 ### Minimum
 
-- Docker-ce version 17.12.0
+- Docker CE (Community Edition) version 17.12.0
 
 Setup
 -----
