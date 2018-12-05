@@ -88,9 +88,16 @@ Testing
 -----
 
 01. After starting up the project we can open a web browser and check the url composed by the variables set in `ELRI_HOSTNAME` and `ELRI_DOMAINNAME` like the example below:
-        
+
 ```
 http://nrs.dev.elri.com
+```
+
+**Note:** If testing locally and there is no DNS configured for the url above, it can be set in /etc/hosts file to point to `localhost` like the example below:
+
+```
+$ vi /etc/hosts
+127.0.0.1	localhost nrs.dev.elri.com
 ```
 
 Reminders
