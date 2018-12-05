@@ -69,10 +69,10 @@ In order to set up the production environment we just need to replace in the dev
 Testing
 -----
 
-01. After starting up the project we can open a web browser and check the url composed by the variables set in `ELRI_HOSTNAME` and `ELRI_DOMAINNAME`:
+01. After starting up the project we can open a web browser and check the url composed by the variables set in `ELRI_HOSTNAME` and `ELRI_DOMAINNAME` like the example below:
         
 ```
-http://`ELRI_HOSTNAME`.`ELRI_DOMAINNAME`
+http://nrs.dev.elri.com
 ```
 
 Reminders
