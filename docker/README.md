@@ -61,6 +61,11 @@ ELRI_LANGUAGE     | pt-pt             | ELRI country language code
 ELRI_SALT         | e07fc77c1ec(...)  | ELRI salt used with encryption
 ELRI_ALERT_MAILS  | noreply@elri.com  | ELRI alert mails 'from' field
 ELRI_COUNTRY      | Portugal          | ELRI country value
+ELRI_EMAIL_TLS    | True              | ELRI Mail server TLS usage
+ELRI_EMAIL_HOST   | elri_mailserver   | ELRI Mail server hostname
+ELRI_EMAIL_PORT   | 1025              | ELRI Mail server port
+ELRI_EMAIL_USER   | ''                | ELRI Mail server auth user (if exists)
+ELRI_EMAIL_PASS   | ''                | ELRI Mail server auth password (if exists)
 
 ### web_secret.properties:
 
