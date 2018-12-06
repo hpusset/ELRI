@@ -1,6 +1,6 @@
 version: '3.5'
 services:
-  # django app
+  # Django app
   elri-node1:
     container_name: elri_app
     image: elrinrs/nationalrelaystation:MASTER
@@ -29,7 +29,9 @@ services:
     depends_on:
       - solr
       - postgres-server
-  # Linux POSTGRES Server 
+    networks:
+      elri-nw: {}
+  # POSTGRES Database Server 
   postgres-server:
     container_name: elri_db
     image: elrinrs/postgres-server:MASTER
@@ -41,10 +43,14 @@ services:
       - DBELRI_NAME={{DOCKER-SECRET:db.secret}}
       - POSTGRES_USER={{DOCKER-SECRET:db.secret}}
       - POSTGRES_PASSWORD={{DOCKER-SECRET:db.secret}}
+    networks:
+      elri-nw: {}
   # Solr indexing
   solr:
     container_name: elri_solr
     image: elrinrs/solr:MASTER
+    networks:
+      elri-nw: {}
   # NGINX webserver
   nginx:
     container_name: elri_webserver
@@ -57,6 +63,9 @@ services:
       - ELRI_NODES=elri-node1:8000
     depends_on:
       - elri-node1
+    networks:
+      elri-nw: {}
+  # Toolchain image
   toolchain:
     container_name: elri_toolchain
     image: elrinrs/toolchain:R1.1
@@ -64,9 +73,14 @@ services:
       - elri-resources:/elri_docker/elri_resources:rw
     environment:
       - SHARED_FOLDER=/elri_docker/elri_resources
+    networks:
+      elri-nw: {}
+  # Local e-mail server (testing purposes only)
   mail:
     container_name: elri_mailserver
     image: mailhog/mailhog
+    networks:
+      elri-nw: {}
 volumes:
   elri-resources:
     name: elri-shared-resources
@@ -74,3 +88,5 @@ secrets:
   db.secret:
   app.secret:
   web.secret:
+networks:
+  elri-nw: {}

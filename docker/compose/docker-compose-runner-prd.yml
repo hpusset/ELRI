@@ -34,3 +34,9 @@ secrets:
     file: nrs_secret.properties
   web.secret:
     file: web_secret.properties
+networks:
+  elri-nw:
+    name: elri-nw
+    ipam:
+      config:
+        - subnet: 10.1.0.0/24

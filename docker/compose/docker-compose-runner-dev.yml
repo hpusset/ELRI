@@ -16,6 +16,14 @@ services:
   nginx:
     ports:
       - "80:80"
+  toolchain:
+    ports:
+      - "8080:8080"
+  mail:
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+
 secrets:
   db.secret:
     file: db_secret.properties
@@ -23,3 +31,9 @@ secrets:
     file: nrs_secret.properties
   web.secret:
     file: web_secret.properties
+networks:
+  elri-nw:
+    name: dev-elri-nw
+    ipam:
+      config:
+        - subnet: 10.0.0.0/24

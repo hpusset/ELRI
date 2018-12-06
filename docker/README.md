@@ -101,6 +101,12 @@ $ vi /etc/hosts
 127.0.0.1	localhost nrs.dev.elri.com
 ```
 
+02. Accessing mail server web page (to check if e-mails are being sent):
+
+```
+http://localhost:8025
+```
+
 Reminders
 -----
 
@@ -118,5 +124,5 @@ compose/docker-compose-runner.yml | image (each service) | Replace ` MASTER` for
 To do:
 -----
 
-- [ ] Toolchain integration
-- [ ] E-mail server configuration (R1.2)
+- [X] Toolchain integration
+- [X] E-mail server configuration (R1.2)
