@@ -38,6 +38,6 @@ secrets:
 networks:
   elri-nw:
     name: dev-elri-nw
-    ipam:
-      config:
-        - subnet: 10.0.0.0/24
+    # ipam:
+    #   config:
+    #     - subnet: 10.0.0.0/24
