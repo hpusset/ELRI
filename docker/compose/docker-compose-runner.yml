@@ -18,6 +18,11 @@ services:
       - ELRI_LANGUAGE={{DOCKER-SECRET:app.secret}}
       - ELRI_SALT={{DOCKER-SECRET:app.secret}}
       - ELRI_ALERT_MAILS={{DOCKER-SECRET:app.secret}}
+      - ELRI_EMAIL_TLS={{DOCKER-SECRET:app.secret}}
+      - ELRI_EMAIL_HOST={{DOCKER-SECRET:app.secret}}
+      - ELRI_EMAIL_PORT={{DOCKER-SECRET:app.secret}}
+      - ELRI_EMAIL_USER={{DOCKER-SECRET:app.secret}}
+      - ELRI_EMAIL_PASS={{DOCKER-SECRET:app.secret}}
       - ELRI_HOSTNAME={{DOCKER-SECRET:web.secret}}
       - ELRI_DOMAINNAME={{DOCKER-SECRET:web.secret}}
       - ELRI_COUNTRY={{DOCKER-SECRET:app.secret}}
@@ -59,6 +64,9 @@ services:
       - elri-resources:/elri_docker/elri_resources:rw
     environment:
       - SHARED_FOLDER=/elri_docker/elri_resources
+  mail:
+    container_name: elri_mailserver
+    image: mailhog/mailhog
 volumes:
   elri-resources:
     name: elri-shared-resources
