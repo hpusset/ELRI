@@ -10,6 +10,7 @@ Docker image provisioning of the project composed by the next components:
 - NRS image for the metashare application requirement (based on the metashare and project_management directories in main structure)
 - Solr image for the indexing component requirement (based on the solr directory in main structure)
 - NGINX image for the web server requirement and managing custom rules to the NRS application
+- Toolchain image for the toolchain requirement
 
 Requirements
 ------------
@@ -82,7 +83,7 @@ $ docker exec -ti elri_app /elri/create_super_user.sh
 
 ## Production
 
-In order to set up the production environment we just need to replace in the development procedure above `docker-compose-runner-dev.yml` for `docker-compose-runner-prd.yml`
+In order to set up the production environment we just need to replace in the development procedure above `docker-compose-runner-dev.yml` with `docker-compose-runner-prd.yml`
 
 Testing
 -----
@@ -110,6 +111,9 @@ File                              | Property             | Description
 django/Dockerfile                 | GIT_URL              | Replace `trunk` for the desired release
 solr/Dockerfile                   | GIT_URL              | Replace `trunk` for the desired release
 compose/docker-compose-runner.yml | image (each service) | Replace ` MASTER` for the desired release
+
+02. Docker volumes that are created with project content:
+- `elri-shared-resources` : Shared resources between `elri_app` and `elri_toolchain` checked out from GIT `elri_resources` directory
 
 To do:
 -----

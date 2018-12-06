@@ -28,6 +28,7 @@ COPY resources/env_secrets_expand.sh \
 
 RUN svn export ${GIT_URL}/metashare /elri/metashare \
     && svn export ${GIT_URL}/project_management /elri/project_management \
+    && svn export ${GIT_URL}/elri_resources /elri/elri_resources \
     && mkdir -p /elri/metashare/unprocessed \
              /elri/metashare/processed \
     && pip install -r /elri/requirements.txt \
@@ -46,9 +47,8 @@ RUN useradd django \
     && groupmod --gid 8283 django \
     && chown -R django:django /elri
 
-VOLUME [ "/storage", "/certificates" ]
+VOLUME [ "/storage", "/certificates", "/elri/elri_resources" ]
 
 USER django
 
 ENTRYPOINT [ "/elri/startup.sh" ]
-

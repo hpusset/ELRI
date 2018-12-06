@@ -8,6 +8,8 @@ services:
       - db.secret
       - app.secret
       - web.secret
+    volumes:
+      - elri-resources:/elri/elri_resources:rw
     environment:
       - DBELRI_USER={{DOCKER-SECRET:db.secret}}
       - DBELRI_PASS={{DOCKER-SECRET:db.secret}}
@@ -50,6 +52,16 @@ services:
       - ELRI_NODES=elri-node1:8000
     depends_on:
       - elri-node1
+  toolchain:
+    container_name: elri_toolchain
+    image: elrinrs/toolchain:R1.1
+    volumes:
+      - elri-resources:/elri_docker/elri_resources:rw
+    environment:
+      - SHARED_FOLDER=/elri_docker/elri_resources
+volumes:
+  elri-resources:
+    name: elri-shared-resources
 secrets:
   db.secret:
   app.secret:
