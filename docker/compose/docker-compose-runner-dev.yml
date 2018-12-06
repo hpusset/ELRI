@@ -19,11 +19,15 @@ services:
   toolchain:
     ports:
       - "8080:8080"
+  # Local e-mail server (testing purposes only)
   mail:
+    container_name: elri_mailserver
+    image: mailhog/mailhog
     ports:
       - "8025:8025"
       - "1025:1025"
-
+    networks:
+      elri-nw: {}
 secrets:
   db.secret:
     file: db_secret.properties

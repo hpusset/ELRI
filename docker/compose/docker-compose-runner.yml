@@ -75,12 +75,6 @@ services:
       - SHARED_FOLDER=/elri_docker/elri_resources
     networks:
       elri-nw: {}
-  # Local e-mail server (testing purposes only)
-  mail:
-    container_name: elri_mailserver
-    image: mailhog/mailhog
-    networks:
-      elri-nw: {}
 volumes:
   elri-resources:
     name: elri-shared-resources
