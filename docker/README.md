@@ -24,8 +24,8 @@ Requirements
 03. Docker user (unprivileged) in docker group:
 ```
 Example user elri:
-useradd --shell /bin/false --expiredate 1 elri # No login and no shell user for automation purposes (e.g. start docker containers)
-usermod -a -G docker elri # Add user to the docker group to allow interaction with docker
+$ useradd --shell /bin/false --expiredate 1 elri # No login and no shell user for automation purposes (e.g. start docker containers)
+$ usermod -a -G docker elri # Add user to the docker group to allow interaction with docker
 ```
 
 ### Minimum
@@ -102,9 +102,9 @@ following steps need to be undertaken:
 01. Create OS users:
 
 ```
-useradd --shell /bin/false --uid 8283 --no-create-home --expiredate 1 django # No login and no shell user to match postgres-server container user
-useradd --shell /bin/false --uid 6263 --no-create-home --expiredate 1 postgres # No login and no shell user to match django container user
-useradd --shell /bin/false --uid 7273 --no-create-home --expiredate 1 solr # No login and no shell user to match solr container user
+$ useradd --shell /bin/false --uid 8283 --no-create-home --expiredate 1 django # No login and no shell user to match postgres-server container user
+$ useradd --shell /bin/false --uid 6263 --no-create-home --expiredate 1 postgres # No login and no shell user to match django container user
+$ useradd --shell /bin/false --uid 7273 --no-create-home --expiredate 1 solr # No login and no shell user to match solr container user
 ```
 
 02. Execute the development procedure above replacing `docker-compose-runner-dev.yml` with `docker-compose-runner-prd.yml` in step `02`
@@ -190,9 +190,6 @@ File                              | Property             | Description
 django/Dockerfile                 | GIT_URL              | Replace `trunk` for the desired release
 solr/Dockerfile                   | GIT_URL              | Replace `trunk` for the desired release
 compose/docker-compose-runner.yml | image (each service) | Replace ` MASTER` for the desired release
-
-02. Docker volumes that are created with project content:
-- `elri-shared-resources` : Shared resources between `elri_app` and `elri_toolchain` checked out from GIT `elri_resources` directory
 
 To do:
 -----
