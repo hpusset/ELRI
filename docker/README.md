@@ -62,25 +62,25 @@ POSTGRES_PASSWORD | rootpass          | ELRI database root pass
 
 ### nrs_secret.properties:
 
-Property          | Default value     | Description
--------------     | -------------     | -------------
-ELRI_TIMEZONE     | Europe/Lisbon     | ELRI country timezone
-ELRI_LANGUAGE     | pt-pt             | ELRI country language code
-ELRI_SALT         | e07fc77c1ec(...)  | ELRI salt used with encryption
-ELRI_ALERT_MAILS  | noreply@elri.com  | ELRI alert mails 'from' field
-ELRI_COUNTRY      | Portugal          | ELRI country value
-ELRI_EMAIL_TLS    | True              | ELRI Mail server TLS usage
-ELRI_EMAIL_HOST   | elri_mailserver   | ELRI Mail server hostname
-ELRI_EMAIL_PORT   | 1025              | ELRI Mail server port
-ELRI_EMAIL_USER   | ''                | ELRI Mail server auth user (if exists)
-ELRI_EMAIL_PASS   | ''                | ELRI Mail server auth password (if exists)
+Property          | Default value                  | Description
+-------------     | -------------                  | -------------
+ELRI_TIMEZONE     | Europe/Lisbon                  | ELRI country timezone
+ELRI_LANGUAGE     | pt-pt                          | ELRI country language code
+ELRI_SALT         | e07fc77c1ec(...)               | ELRI salt used with encryption
+ELRI_ALERT_MAILS  | elri-nrs-support@vicomtech.org | ELRI alert mails 'from' field
+ELRI_COUNTRY      | Portugal                       | ELRI country value
+ELRI_EMAIL_TLS    | True                           | ELRI Mail server TLS usage
+ELRI_EMAIL_HOST   | elri_mailserver                | ELRI Mail server hostname
+ELRI_EMAIL_PORT   | 1025                           | ELRI Mail server port
+ELRI_EMAIL_USER   | ''                             | ELRI Mail server auth user (if exists)
+ELRI_EMAIL_PASS   | ''                             | ELRI Mail server auth password (if exists)
 
 ### web_secret.properties:
 
 Property          | Default value     | Description
 -------------     | -------------     | -------------
-ELRI_HOSTNAME     | nrs               | ELRI hostname
-ELRI_DOMAINNAME   | dev.elri.com      | ELRI domain name
+ELRI_HOSTNAME     | dev               | ELRI hostname
+ELRI_DOMAINNAME   | elri-nrs.eu      | ELRI domain name
 
 04. Start the project:
 
@@ -121,14 +121,14 @@ Testing
 - Open a web browser and check the url composed by the variables set in `ELRI_HOSTNAME` and `ELRI_DOMAINNAME` like the example below:
 
 ```
-http://nrs.dev.elri.com
+http://dev.elri-nrs.eu
 ```
 
 **Note:** If testing locally and there is no DNS configured for the url above, it can be set in /etc/hosts file to point to `localhost` like the example below:
 
 ```
 $ vi /etc/hosts
-127.0.0.1	localhost nrs.dev.elri.com
+127.0.0.1	localhost dev.elri-nrs.eu
 ```
 
 - Accessing mail server web page (to check if e-mails are being sent):
