@@ -9,7 +9,7 @@ services:
       - app.secret
       - web.secret
     volumes:
-      - elri-resources:/elri/elri_resources:rw
+      - elri-shared-resources:/elri/elri_resources:rw
     environment:
       - DBELRI_USER={{DOCKER-SECRET:db.secret}}
       - DBELRI_PASS={{DOCKER-SECRET:db.secret}}
