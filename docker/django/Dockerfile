@@ -45,7 +45,8 @@ WORKDIR /elri
 RUN useradd django \
     && usermod --shell /bin/false --uid 8283 --expiredate 1 --lock django \
     && groupmod --gid 8283 django \
-    && chown -R django:django /elri
+    && chown -R django:django /elri \
+    && chmod -R 774 /elri/elri_resources
 
 VOLUME [ "/storage", "/certificates", "/elri/elri_resources" ]
 
