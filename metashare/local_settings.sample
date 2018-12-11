@@ -49,8 +49,8 @@ LOCALE_PATHS = tuple([
     if dn == "locale"
 ])
 
-# Path to the local storage layer path used for persistent object storage.
-STORAGE_PATH = '/path/to/storage/path'
+# Path to the local storage layer path used for persistent object storage:path to the elri_resources folder
+STORAGE_PATH = '/path/to/storage/path/elri_resources'
 
 # Path to the local directory where all the static files (images, js, css) will 
 # be collected and served by the web server in STATIC_URL
@@ -228,8 +228,8 @@ CONTRIBUTIONS_ALERT_EMAILS = ["elri@example.com"]
 
 TMP = "/tmp"
 
-CONTRIBUTION_FORM_DATA = ""
-DOCUMENTATION_ROOT=""
+CONTRIBUTION_FORM_DATA = "PATH TO THE /metashare folder"
+DOCUMENTATION_ROOT="PATH TO THE FOLDER WHERE /metashare is"
 
 # Immaterial for launching the application
 AP_CERTS_DIR = "/path/to/app/certs/dir"
