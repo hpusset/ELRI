@@ -6,10 +6,9 @@ server {
     server_tokens   off;
     listen          80;
     server_name     {{ .Env.ELRI_HOSTNAME }}.{{ .Env.ELRI_DOMAINNAME }};
-    rewrite         ^/$ /elri/ permanent;
 
     location / {
-        proxy_pass http://elri-node1:8000/;
-        proxy_redirect http://elri-node1:8000/ http://{{ .Env.ELRI_HOSTNAME }}.{{ .Env.ELRI_DOMAINNAME }}/;
+        proxy_pass http://elri-node1:8000;
+        proxy_redirect http://elri-node1:8000 http://{{ .Env.ELRI_HOSTNAME }}.{{ .Env.ELRI_DOMAINNAME }};
     }
 }
