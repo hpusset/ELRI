@@ -69,15 +69,15 @@ services:
   toolchain:
     container_name: elri_toolchain
     image: elrinrs/toolchain:R1.1
-    volumes:
-      - elri-shared-resources:/elri_docker/elri_resources:rw
+    volumes:   
+      - elri-shared-resources:/elri/elri_resources:rw
     environment:
-      - SHARED_FOLDER=/elri_docker/elri_resources
+      - SHARED_FOLDER=/elri/elri_resources
     networks:
       elri-nw: {}
 volumes:
   elri-shared-resources:
-    name: elri-shared
+    name: elri-shared    
 secrets:
   db.secret:
   app.secret:
