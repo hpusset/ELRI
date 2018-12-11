@@ -11,12 +11,12 @@ ROOT_PATH = abspath(dirname(__file__))
 
 # The URL for this META-SHARE node django application.  Do not use trailing /.
 # This URL has to include DJANGO_BASE (without its trailing /)!
-DJANGO_URL = 'http://' + environ['ELRI_HOSTNAME'] + '.' + environ['ELRI_DOMAINNAME'] + '/elri'
+DJANGO_URL = 'http://' + environ['ELRI_HOSTNAME'] + '.' + environ['ELRI_DOMAINNAME']
 
 # The base path under which django is deployed at DJANGO_URL.  Use trailing /.
 # Do not use leading / though.  Leave empty if META-SHARE is deployed directly
 # under the given DJANGO_URL.
-DJANGO_BASE = 'elri/'
+DJANGO_BASE = ''
 
 # Required if deployed with lighttpd.
 # FORCE_SCRIPT_NAME = ""
@@ -51,7 +51,7 @@ LOCALE_PATHS = tuple([
 ])
 
 # Path to the local storage layer path used for persistent object storage.
-STORAGE_PATH = '/storage'
+STORAGE_PATH = '/elri/elri_resources/language_resources'
 
 # Path to the local directory where all the static files (images, js, css) will 
 # be collected and served by the web server in STATIC_URL
@@ -228,8 +228,8 @@ CONTRIBUTIONS_ALERT_EMAILS = [environ['ELRI_ALERT_MAILS']]
 
 TMP = "/tmp"
 
-CONTRIBUTION_FORM_DATA = ""
-DOCUMENTATION_ROOT=""
+CONTRIBUTION_FORM_DATA = "/elri/metashare"
+DOCUMENTATION_ROOT="/elri"
 
 # Immaterial for launching the application
 AP_CERTS_DIR = "/certificates"
@@ -262,5 +262,5 @@ REST_API_KEY = ""
 
 ALLOWED_HOSTS = ['elri-node1', 'localhost']
 
-DOC2TMX_URL = "http://elri_toolchain:8080/ELRI_WebService/tc_doc2tmx/process"
-TM2TMX_URL = "http://elri_toolchain:8080/ELRI_WebService/tc_tm2tmx/process"
+DOC2TMX_URL = "http://toolchain:8080/ELRI_WebService/tc_doc2tmx/process"
+TM2TMX_URL = "http://toolchain:8080/ELRI_WebService/tc_tm2tmx/process"
