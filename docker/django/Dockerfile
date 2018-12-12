@@ -48,7 +48,7 @@ RUN useradd django \
     && chown -R django:django /elri \
     && chmod -R 774 /elri/elri_resources
 
-VOLUME [ "/storage", "/certificates", "/elri/elri_resources" ]
+VOLUME [ "/certificates", "/elri/elri_resources" ]
 
 USER django
 

@@ -3,7 +3,6 @@ services:
   # django app
   elri-node1:
     volumes:
-      - elri-storage:/storage:rw
       - elri-certs:/certificates:ro
   # Linux POSTGRES Server 
   postgres-server:
@@ -19,8 +18,6 @@ services:
 volumes:
   elri-db:
     name: elri-db
-  elri-storage:
-    name: elri-storage
   elri-certs:
     name: elri-certs
   web-certs:
