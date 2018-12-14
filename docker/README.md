@@ -42,7 +42,9 @@ following steps need to be undertaken with the user created with the purpose of 
 
 01. Checkout `compose` directory from this project
 
-02. Merge `docker-compose-runner.yml` and `docker-compose-runner-dev.yml` files:
+02. Replace `MASTER` tags in `docker-compose-runner.yml` file with the desired release (it must match the tag at the docker repository)
+
+03. Merge `docker-compose-runner.yml` and `docker-compose-runner-dev.yml` files:
 
 ```        
 $ docker-compose -f docker-compose-runner.yml -f docker-compose-runner-dev.yml config > docker-compose.yml
