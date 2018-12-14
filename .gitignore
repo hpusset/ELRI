@@ -46,5 +46,4 @@ po_files*.zip
 metashare/processed/*
 metashare/unprocessed/*
 elri_resources/language_resources/
-elri_resources/toolchain_resources/
 docker/

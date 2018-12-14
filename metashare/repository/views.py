@@ -18,6 +18,7 @@ from metashare.repository.templatetags.is_member import is_member
 from django.http import JsonResponse
 from collections import OrderedDict
 
+
 try:
 	import cStringIO as StringIO
 except ImportError:
@@ -50,7 +51,7 @@ from django.utils.translation import ugettext as _
 from haystack.views import FacetedSearchView
 
 from metashare.accounts.models import UserProfile, Organization, OrganizationManagers
-from metashare.local_settings import CONTRIBUTIONS_ALERT_EMAILS, TMP
+from metashare.local_settings import CONTRIBUTIONS_ALERT_EMAILS, TMP, SUPPORTED_LANGUAGES
 from metashare.recommendations.recommendations import SessionResourcesTracker, \
 	get_download_recommendations, get_view_recommendations, \
 	get_more_from_same_creators_qs, get_more_from_same_projects_qs
@@ -1132,8 +1133,16 @@ def contribute(request):
 			}
 		}
 
+		def decode_csv_to_list(csv):
+			delimiter = ','
+			if csv == '':
+				return []
+			ret_list = sorted(set(csv.split(delimiter)))
+			return ret_list
+		
 		if 'languages[]' in request.POST:
-			data['resourceInfo']['languages'] = request.POST.getlist('languages[]')
+			data['resourceInfo']['languages'] = decode_csv_to_list(request.POST.getlist('languages[]')[0])
+			LOGGER.info(data['resourceInfo']['languages'])
 
 		if 'domains[]' in request.POST:
 			data['resourceInfo']['appropriatenessForDSI'] = request.POST.getlist('domains[]')
@@ -1242,9 +1251,12 @@ def contribute(request):
 			return HttpResponse(json.dumps(response), content_type="text/plain")
 										  
 	# In ELRI, LR contributions can only be shared within the groups to which a user belongs.
+	languages=SUPPORTED_LANGUAGES
+	
 	return render_to_response('repository/editor/contributions/contribute.html', \
-							  {'groups':Organization.objects.values_list("name","id").filter(id__in = request.user.groups.values_list("id"))},
+							  {'groups':Organization.objects.values_list("name","id").filter(id__in = request.user.groups.values_list("id")), 'languages':languages},
 							  context_instance=RequestContext(request))
+	
 
 @staff_member_required
 def get_data(request, filename):
