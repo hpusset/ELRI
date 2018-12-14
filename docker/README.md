@@ -179,7 +179,6 @@ elri-db       | /var/lib/docker/volumes/elri-db      | Postgres database data
 $ docker-compose start
 ```
 
-
 Reminders
 -----
 
@@ -187,9 +186,7 @@ Reminders
 
 File                              | Property             | Description
 -------------                     | -------------        | -------------
-django/Dockerfile                 | GIT_URL              | Replace `trunk` for the desired release
-solr/Dockerfile                   | GIT_URL              | Replace `trunk` for the desired release
-compose/docker-compose-runner.yml | image (each service) | Replace ` MASTER` for the desired release
+compose/docker-compose-runner.yml | image (each service) | Replace `MASTER` for the desired release
 
 To do:
 -----
