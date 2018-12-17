@@ -41,6 +41,8 @@ LANGUAGES = (
     ('pt-pt', _("Portuguese")),
 )
 
+SUPPORTED_LANGUAGES=[("English", "English"), ("French", "French"), ("German", "German"), ("Italian", "Italian"), ("Irish", "Irish"), ("Spanish; Castilian", "Spanish"), ("Portuguese", "Portuguese")]
+
 # Directories containing the translations
 LOCALE_PATHS = tuple([
     join(directory, dn)
