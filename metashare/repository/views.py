@@ -1137,11 +1137,17 @@ def contribute(request):
 			delimiter = ','
 			if csv == '':
 				return []
-			ret_list = sorted(set(csv.split(delimiter)))
+			if len(csv)==1:
+				ret_list = sorted(set(csv[0].split(delimiter)))
+			else:
+				ret_list=set()
+				for l in csv:
+					ret_list.update(l.split(delimiter))
+				ret_list=sorted(ret_list)
 			return ret_list
 		
 		if 'languages[]' in request.POST:
-			data['resourceInfo']['languages'] = decode_csv_to_list(request.POST.getlist('languages[]')[0])
+			data['resourceInfo']['languages'] = decode_csv_to_list(request.POST.getlist('languages[]'))
 			LOGGER.info(data['resourceInfo']['languages'])
 
 		if 'domains[]' in request.POST:
