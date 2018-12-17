@@ -5,6 +5,8 @@ RUN tar xvfz /tmp/dockerize-alpine-linux-amd64-v0.5.0.tar.gz -C /tmp/
 
 FROM python:2.7.15-stretch
 
+ARG RELEASE="trunk"
+#ARG RELEASE="branches/R2"
 ENV DB_HOST="postgres-server" \
     DB_PORT="5432" \
     SOLR_HOST="solr" \
@@ -17,7 +19,7 @@ ENV DB_HOST="postgres-server" \
     ELRI_COUNTRY="Portugal" \
     ELRI_SALT="e07fc77c1ecd3" \
     ELRI_ALERT_MAILS="noreply@elri.com" \
-    GIT_URL="https://github.com/ELDAELRA/ELRI/trunk"
+    GIT_URL="https://github.com/ELDAELRA/ELRI/${RELEASE}"
 
 COPY --from=base /tmp/dockerize /usr/local/bin/
 COPY resources/env_secrets_expand.sh \

@@ -23,4 +23,4 @@ Reminders
 
 File                       | Property             | Description
 -------------              | -------------        | -------------
-Dockerfile                 | GIT_URL              | Replace `trunk` for the desired release
+Dockerfile                 | RELEASE              | Replace `trunk` for the desired release

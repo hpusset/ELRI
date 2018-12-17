@@ -42,13 +42,15 @@ following steps need to be undertaken with the user created with the purpose of 
 
 01. Checkout `compose` directory from this project
 
-02. Merge `docker-compose-runner.yml` and `docker-compose-runner-dev.yml` files:
+02. Replace `MASTER` tags in `docker-compose-runner.yml` file with the desired release (it must match the tag at the docker repository)
+
+03. Merge `docker-compose-runner.yml` and `docker-compose-runner-dev.yml` files:
 
 ```        
 $ docker-compose -f docker-compose-runner.yml -f docker-compose-runner-dev.yml config > docker-compose.yml
 ```
 
-03. Change the following property files to match the destination country requirements:
+04. Change the following property files to match the destination country requirements:
 
 ### db_secret.properties:
 
@@ -82,13 +84,13 @@ Property          | Default value     | Description
 ELRI_HOSTNAME     | dev               | ELRI hostname
 ELRI_DOMAINNAME   | elri-nrs.eu      | ELRI domain name
 
-04. Start the project:
+05. Start the project:
 
 ```
 $ docker-compose up
 ```
 
-05. (Optional) Super user creation for application login:
+06. (Optional) Super user creation for application login:
 
 ```
 $ docker exec -ti elri_app /elri/create_super_user.sh
