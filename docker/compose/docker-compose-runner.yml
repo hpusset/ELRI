@@ -3,7 +3,7 @@ services:
   # Django app
   elri-node1:
     container_name: elri_app
-    image: elrinrs/nationalrelaystation:MASTER
+    image: elrinrs/nationalrelaystation:R1
     secrets:
       - db.secret
       - app.secret
@@ -34,7 +34,7 @@ services:
   # POSTGRES Database Server 
   postgres-server:
     container_name: elri_db
-    image: elrinrs/postgres-server:MASTER
+    image: elrinrs/postgres-server:R1
     secrets:
       - db.secret
     environment:
@@ -48,13 +48,13 @@ services:
   # Solr indexing
   solr:
     container_name: elri_solr
-    image: elrinrs/solr:MASTER
+    image: elrinrs/solr:R1
     networks:
       elri-nw: {}
   # NGINX webserver
   nginx:
     container_name: elri_webserver
-    image: elrinrs/nginx:MASTER
+    image: elrinrs/nginx:R1
     secrets:
       - web.secret
     environment:

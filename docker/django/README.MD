@@ -7,7 +7,7 @@ Build
 01. Building the image locally
 
 ```
-$ docker build . -t elrinrs/nationalrelaystation:MASTER
+$ docker build . --no-cache -t elrinrs/nationalrelaystation:MASTER
 ```
 
 02. Publishing the image to the repository

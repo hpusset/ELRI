@@ -7,7 +7,7 @@ Build
 01. Building the image locally
 
 ```
-$ docker build . -t elrinrs/solr:MASTER
+$ docker build . --no-cache -t elrinrs/solr:MASTER
 ```
 
 02. Publishing the image to the repository
