@@ -65,7 +65,7 @@ POSTGRES_PASSWORD | rootpass          | ELRI database root pass
 Property          | Default value                  | Description
 -------------     | -------------                  | -------------
 ELRI_TIMEZONE     | Europe/Lisbon                  | ELRI country timezone
-ELRI_LANGUAGE     | pt-pt                          | ELRI country language code
+ELRI_LANGUAGE     | pt-pt*                         | ELRI country language code
 ELRI_SALT         | e07fc77c1ec(...)               | ELRI salt used with encryption
 ELRI_ALERT_MAILS  | elri-nrs-support@vicomtech.org | ELRI alert mails 'from' field
 ELRI_COUNTRY      | Portugal                       | ELRI country value
@@ -74,6 +74,16 @@ ELRI_EMAIL_HOST   | elri_mailserver                | ELRI Mail server hostname
 ELRI_EMAIL_PORT   | 1025                           | ELRI Mail server port
 ELRI_EMAIL_USER   | ''                             | ELRI Mail server auth user (if exists)
 ELRI_EMAIL_PASS   | ''                             | ELRI Mail server auth password (if exists)
+
+```
+* Countries:
+    es-es (Spanish)
+    en-ie (English)
+    fr-fr (French)
+    ga-ie (Gaelic)
+    pt-pt (Portuguese)
+
+```
 
 ### web_secret.properties:
 
