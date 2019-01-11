@@ -1249,7 +1249,7 @@ def contribute(request):
 				mail_data={'resourcename':data['resourceInfo']['resourceTitle']}
 				send_mail(_("New submitted contributions"),
 							render_to_string('repository/resource_new_contributions.email', mail_data),
-						  'no-reply@elri.eu', su_emails,  fail_silently=False)
+						  'no-reply@elri.eu', group_reviewers,  fail_silently=False)
 			except:
 				LOGGER.error("An error has occurred while trying to send email to contributions"
 							 "alert recipients.")
