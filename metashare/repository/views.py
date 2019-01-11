@@ -1236,7 +1236,7 @@ def contribute(request):
 			d[0].contactPerson.add(d[1])
 
 			su_emails=[u.email for u in User.objects.filter(is_superuser=True)]
-			#not only superusers but also reviewers
+			#not only superusers but also reviewers: IN PRACTICE, ALL SUPERUSERS MUST BE ALSO REVIEWERS
 			groups_name=data['resourceInfo']['groups']
 			## DEBUG
 			#LOGGER.info(groups_name)
@@ -1244,7 +1244,8 @@ def contribute(request):
 			#get the emails of those users that are reviewers
 			reviewers = [u.email for u in User.objects.filter(groups__name__in=['reviewers'])] 
 			group_reviewers = [u.email for u in User.objects.filter(groups__id__in=groups_name, email__in=reviewers)]
-
+			## DEBUG
+			#LOGGER.info(group_reviewers+su_emails)
 			try:
 				mail_data={'resourcename':data['resourceInfo']['resourceTitle']}
 				send_mail(_("New submitted contributions"),
