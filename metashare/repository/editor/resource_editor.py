@@ -388,14 +388,18 @@ class ResourceModelAdmin(SchemaModelAdmin):
 							#####DEBUG show tm_json info
 							#messages.info(request,tm_json)
 							#####settings.TM2TMX_URL ; settings.DOC2TMX_URL
-							response_tm=requests.post(settings.TM2TMX_URL,json=tm_json)
-							if json_validator(response_tm):
-								if response_tm.json()["status"]=="Success":
-									successful +=1
+							try: 
+								response_tm=requests.post(settings.TM2TMX_URL,json=tm_json)
+								messages.error(request,response_tm)
+								if json_validator(response_tm):
+									if response_tm.json()["status"]=="Success":
+										successful +=1
+									else:
+										messages.error(request,"Something went wrong when processing the resource...")
 								else:
-									messages.error(request,"Something went wrong when processing the resource...")
-							else:
-								messages.error(request,"Something went wrong when processing the resource..."+response_tm.text)
+									messages.error(request,"Something went wrong when processing the resource..."+response_tm.text)
+							except: 
+								messages.error(request,"Something went wrong when processing the resource...")
 								
 					response_doc=''	
 					if call_doc2tmx > 0:
@@ -408,14 +412,17 @@ class ResourceModelAdmin(SchemaModelAdmin):
 						#####DEBUG show doc_json info
 						#messages.info(request,doc_json)
 						#####
-						response_doc=requests.post(settings.DOC2TMX_URL,json=doc_json)
-						if json_validator(response_doc):
-							if response_doc.json()["status"] == "Success":
-								successful += 1
+						try:
+							response_doc=requests.post(settings.DOC2TMX_URL,json=doc_json)
+							if json_validator(response_doc):
+								if response_doc.json()["status"] == "Success":
+									successful += 1
+								else:
+									messages.error(request,"Something went wrong...")
 							else:
-								messages.error(request,"Something went wrong...")
-						else:
-							messages.error(request,"Something went wrong..."+response_doc.text)
+								messages.error(request,"Something went wrong..."+response_doc.text)
+						except:
+							messages.error(request,"Something went wrong when processing the resource...")
 							
 					##########DEBUG get response info
 					#messages.info(request,response_doc.status_code)

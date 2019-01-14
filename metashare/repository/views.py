@@ -18,6 +18,7 @@ from metashare.repository.templatetags.is_member import is_member
 from django.http import JsonResponse
 from collections import OrderedDict
 
+
 try:
 	import cStringIO as StringIO
 except ImportError:
@@ -50,7 +51,7 @@ from django.utils.translation import ugettext as _
 from haystack.views import FacetedSearchView
 
 from metashare.accounts.models import UserProfile, Organization, OrganizationManagers
-from metashare.local_settings import CONTRIBUTIONS_ALERT_EMAILS, TMP
+from metashare.local_settings import CONTRIBUTIONS_ALERT_EMAILS, TMP, SUPPORTED_LANGUAGES
 from metashare.recommendations.recommendations import SessionResourcesTracker, \
 	get_download_recommendations, get_view_recommendations, \
 	get_more_from_same_creators_qs, get_more_from_same_projects_qs
@@ -1132,8 +1133,22 @@ def contribute(request):
 			}
 		}
 
+		def decode_csv_to_list(csv):
+			delimiter = ','
+			if csv == '':
+				return []
+			if len(csv)==1:
+				ret_list = sorted(set(csv[0].split(delimiter)))
+			else:
+				ret_list=set()
+				for l in csv:
+					ret_list.update(l.split(delimiter))
+				ret_list=sorted(ret_list)
+			return ret_list
+		
 		if 'languages[]' in request.POST:
-			data['resourceInfo']['languages'] = request.POST.getlist('languages[]')
+			data['resourceInfo']['languages'] = decode_csv_to_list(request.POST.getlist('languages[]'))
+			LOGGER.info(data['resourceInfo']['languages'])
 
 		if 'domains[]' in request.POST:
 			data['resourceInfo']['appropriatenessForDSI'] = request.POST.getlist('domains[]')
@@ -1221,11 +1236,21 @@ def contribute(request):
 			d[0].contactPerson.add(d[1])
 
 			su_emails=[u.email for u in User.objects.filter(is_superuser=True)]
+			#not only superusers but also reviewers: IN PRACTICE, ALL SUPERUSERS MUST BE ALSO REVIEWERS
+			groups_name=data['resourceInfo']['groups']
+			## DEBUG
+			#LOGGER.info(groups_name)
+			#send an email to the reviewers related to the groups where the resource is published
+			#get the emails of those users that are reviewers
+			reviewers = [u.email for u in User.objects.filter(groups__name__in=['reviewers'])] 
+			group_reviewers = [u.email for u in User.objects.filter(groups__id__in=groups_name, email__in=reviewers)]
+			## DEBUG
+			#LOGGER.info(group_reviewers+su_emails)
 			try:
 				mail_data={'resourcename':data['resourceInfo']['resourceTitle']}
 				send_mail(_("New submitted contributions"),
 							render_to_string('repository/resource_new_contributions.email', mail_data),
-						  'no-reply@elri.eu', su_emails,  fail_silently=False)
+						  'no-reply@elri.eu', group_reviewers,  fail_silently=False)
 			except:
 				LOGGER.error("An error has occurred while trying to send email to contributions"
 							 "alert recipients.")
@@ -1242,9 +1267,12 @@ def contribute(request):
 			return HttpResponse(json.dumps(response), content_type="text/plain")
 										  
 	# In ELRI, LR contributions can only be shared within the groups to which a user belongs.
+	languages=SUPPORTED_LANGUAGES
+	
 	return render_to_response('repository/editor/contributions/contribute.html', \
-							  {'groups':Organization.objects.values_list("name","id").filter(id__in = request.user.groups.values_list("id"))},
+							  {'groups':Organization.objects.values_list("name","id").filter(id__in = request.user.groups.values_list("id")), 'languages':languages},
 							  context_instance=RequestContext(request))
+	
 
 @staff_member_required
 def get_data(request, filename):
