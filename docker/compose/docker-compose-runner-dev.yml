@@ -1,0 +1,43 @@
+version: '3.5'
+services:
+  # django app
+  elri-node1:
+    ports:
+      - "8000:8000"
+  # Linux POSTGRES Server 
+  postgres-server:
+    ports:
+      - "5432:5432"
+  # Solr indexing
+  solr:
+    ports:
+      - "8983:8983"
+  # NGINX webserver
+  nginx:
+    ports:
+      - "80:80"
+  toolchain:
+    ports:
+      - "8080:8080"
+  # Local e-mail server (testing purposes only)
+  mail:
+    container_name: elri_mailserver
+    image: mailhog/mailhog
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+    networks:
+      elri-nw: {}
+secrets:
+  db.secret:
+    file: db_secret.properties
+  app.secret:
+    file: nrs_secret.properties
+  web.secret:
+    file: web_secret.properties
+networks:
+  elri-nw:
+    name: dev-elri-nw
+    # ipam:
+    #   config:
+    #     - subnet: 10.0.0.0/24

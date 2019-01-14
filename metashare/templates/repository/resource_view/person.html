@@ -5,7 +5,11 @@
 
 {% spaceless %}
 
+
+
+
 <div class="dataline" style="margin-bottom:3px;">
+	
 	{% if level == "sub" %}
 		<label class='subtitle'>{% trans type %}</label>
 	{% else %}	
@@ -13,7 +17,6 @@
 			<span class='title'>{% trans type %}</span>
 		{% endif %}
 	{% endif %}
-	
 	<a href='#' class="contactcard" title="{% trans 'Click to view contact card' %}">
 		<label class="dataline indented" style="float:left;">
 			{{ person_dict.Given_name }}

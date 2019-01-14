@@ -1,0 +1,86 @@
+version: '3.5'
+services:
+  # Django app
+  elri-node1:
+    container_name: elri_app
+    image: elrinrs/nationalrelaystation:R1
+    secrets:
+      - db.secret
+      - app.secret
+      - web.secret
+    volumes:
+      - elri-shared-resources:/elri/elri_resources:rw
+    environment:
+      - DBELRI_USER={{DOCKER-SECRET:db.secret}}
+      - DBELRI_PASS={{DOCKER-SECRET:db.secret}}
+      - DBELRI_NAME={{DOCKER-SECRET:db.secret}}
+      - ELRI_TIMEZONE={{DOCKER-SECRET:app.secret}}
+      - ELRI_LANGUAGE={{DOCKER-SECRET:app.secret}}
+      - ELRI_SALT={{DOCKER-SECRET:app.secret}}
+      - ELRI_ALERT_MAILS={{DOCKER-SECRET:app.secret}}
+      - ELRI_EMAIL_TLS={{DOCKER-SECRET:app.secret}}
+      - ELRI_EMAIL_HOST={{DOCKER-SECRET:app.secret}}
+      - ELRI_EMAIL_PORT={{DOCKER-SECRET:app.secret}}
+      - ELRI_EMAIL_USER={{DOCKER-SECRET:app.secret}}
+      - ELRI_EMAIL_PASS={{DOCKER-SECRET:app.secret}}
+      - ELRI_HOSTNAME={{DOCKER-SECRET:web.secret}}
+      - ELRI_DOMAINNAME={{DOCKER-SECRET:web.secret}}
+      - ELRI_COUNTRY={{DOCKER-SECRET:app.secret}}
+    depends_on:
+      - solr
+      - postgres-server
+    networks:
+      elri-nw: {}
+  # POSTGRES Database Server 
+  postgres-server:
+    container_name: elri_db
+    image: elrinrs/postgres-server:R1
+    secrets:
+      - db.secret
+    environment:
+      - DBELRI_USER={{DOCKER-SECRET:db.secret}}
+      - DBELRI_PASS={{DOCKER-SECRET:db.secret}}
+      - DBELRI_NAME={{DOCKER-SECRET:db.secret}}
+      - POSTGRES_USER={{DOCKER-SECRET:db.secret}}
+      - POSTGRES_PASSWORD={{DOCKER-SECRET:db.secret}}
+    networks:
+      elri-nw: {}
+  # Solr indexing
+  solr:
+    container_name: elri_solr
+    image: elrinrs/solr:R1
+    networks:
+      elri-nw: {}
+  # NGINX webserver
+  nginx:
+    container_name: elri_webserver
+    image: elrinrs/nginx:R1
+    secrets:
+      - web.secret
+    environment:
+      - ELRI_HOSTNAME={{DOCKER-SECRET:web.secret}}
+      - ELRI_DOMAINNAME={{DOCKER-SECRET:web.secret}}
+      - ELRI_NODES=elri-node1:8000
+    depends_on:
+      - elri-node1
+    networks:
+      elri-nw: {}
+  # Toolchain image
+  toolchain:
+    container_name: elri_toolchain
+    image: elrinrs/toolchain:R1.1
+    volumes:   
+      - elri-shared-resources:/elri/elri_resources:rw
+    environment:
+      - SHARED_FOLDER=/elri/elri_resources
+    networks:
+      elri-nw: {}
+volumes:
+  elri-shared-resources:
+    name: elri-shared    
+secrets:
+  db.secret:
+  app.secret:
+  web.secret:
+networks:
+  elri-nw: {}
