@@ -390,7 +390,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
 							#####settings.TM2TMX_URL ; settings.DOC2TMX_URL
 							try: 
 								response_tm=requests.post(settings.TM2TMX_URL,json=tm_json)
-								messages.error(request,response_tm)
 								if json_validator(response_tm):
 									if response_tm.json()["status"]=="Success":
 										successful +=1

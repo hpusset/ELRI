@@ -32,7 +32,7 @@ USE_I18N = True
 
 LANGUAGE_CODE = "..." # one of the LANGUAGES language codes
 
-# Supported languages
+# Supported localisation languages
 LANGUAGES = (
     ('es-es', _('Spanish')),
     ('en-ie', _('English')),
@@ -41,6 +41,7 @@ LANGUAGES = (
     ('pt-pt', _("Portuguese")),
 )
 
+# Supported processing languages 
 SUPPORTED_LANGUAGES=[("English", "English"), ("French", "French"), ("German", "German"), ("Italian", "Italian"), ("Irish", "Irish"), ("Spanish; Castilian", "Spanish"), ("Portuguese", "Portuguese")]
 
 # Directories containing the translations
