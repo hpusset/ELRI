@@ -16,6 +16,7 @@ ENV DB_HOST="postgres-server" \
     DBELRI_NAME="elri_metashare" \
     ELRI_TIMEZONE="Europe/Lisbon" \
     ELRI_LANGUAGE="pt-pt" \
+    ELRI_SUP_LANGUAGES='[("English", "English"), ("French", "French"), ("German", "German"), ("Italian", "Italian"), ("Irish", "Irish"), ("Spanish; Castilian", "Spanish"), ("Portuguese", "Portuguese")]' \
     ELRI_COUNTRY="Portugal" \
     ELRI_SALT="e07fc77c1ecd3" \
     ELRI_ALERT_MAILS="noreply@elri.com" \

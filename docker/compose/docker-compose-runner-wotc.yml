@@ -67,15 +67,15 @@ services:
     networks:
       elri-nw: {}
   # Toolchain image
-  toolchain:
-    container_name: elri_toolchain
-    image: elrinrs/toolchain:R1.1
-    volumes:   
-      - elri-shared-resources:/elri/elri_resources:rw
-    environment:
-      - SHARED_FOLDER=/elri/elri_resources
-    networks:
-      elri-nw: {}
+  #toolchain:
+  #  container_name: elri_toolchain
+  #  image: elrinrs/toolchain:R1.1
+  #  volumes:   
+  #    - elri-shared-resources:/elri/elri_resources:rw
+  #  environment:
+  #    - SHARED_FOLDER=/elri/elri_resources
+  #  networks:
+  #    elri-nw: {}
 volumes:
   elri-shared-resources:
     name: elri-shared    

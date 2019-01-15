@@ -42,6 +42,11 @@ LANGUAGES = (
     ('pt-pt', _("Portuguese")),
 )
 
+lang_list = environ['ELRI_SUP_LANGUAGES']
+import ast
+SUPPORTED_LANGUAGES = ast.literal_eval(lang_list)
+
+
 # Directories containing the translations
 LOCALE_PATHS = tuple([
     join(directory, dn)
