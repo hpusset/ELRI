@@ -33,7 +33,7 @@ USE_I18N = True
 
 LANGUAGE_CODE = environ['ELRI_LANGUAGE'] # one of the LANGUAGES language codes
 
-# Supported languages
+# Supported localisation languages
 LANGUAGES = (
     ('es-es', _('Spanish')),
     ('en-ie', _('English')),
@@ -42,6 +42,7 @@ LANGUAGES = (
     ('pt-pt', _("Portuguese")),
 )
 
+# Supported processing languages
 lang_list = environ['ELRI_SUP_LANGUAGES']
 import ast
 SUPPORTED_LANGUAGES = ast.literal_eval(lang_list)
