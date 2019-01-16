@@ -228,10 +228,12 @@ def download(request, object_id, **kwargs):
 	"""
 	user_membership = _get_user_membership(request.user)
 	bypass_licence = False
+	api_auth=kwargs.get('api_auth', None)
 	if request.user.is_superuser \
 			or request.user.groups.filter(name="ecmembers").exists() \
 			or request.user.groups.filter(name="reviewers").exists()\
-			or kwargs['api_auth']:
+			or api_auth:
+#			or kwargs['api_auth']:
 		bypass_licence = True
 
 	# here we are only interested in licenses (or their names) of the specified
@@ -256,6 +258,7 @@ def download(request, object_id, **kwargs):
 
 	licence_choice = None
 
+	
 	# if the user is superuser or in ecmembers group, provide download directly bypassing licensing and stats
 	if request.method == "GET" and bypass_licence:
 		return _provide_download(request, resource, None, bypass_licence)

@@ -238,7 +238,8 @@
                 <i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
 {#            {% if user.is_superuser or user|is_member:"ecmembers" and resource.storage_object.publication_status == 'p' %}#}
 {#            check if users can download the resource and there is actually a file to download#}
-            {% if resource.storage_object.get_download and request.download_permitted %}
+            {# % if resource.storage_object.get_download and request.download_permitted % #}
+            {% if LR_DOWNLOAD%}
                 <a href="{% url 'download' resource.storage_object.identifier %}">
                     <button class="span-4 button middle_button">
                         <i class="fa fa-download" aria-hidden="true"></i> {% trans 'Download' %}</button>
@@ -250,12 +251,12 @@
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i> {% trans 'Edit Resource' %}</button>
 		    </a>
             {% endif %}
-            {% if LR_DOWNLOAD %}
-            <a href="{{ LR_DOWNLOAD }}">
+            {#% if LR_DOWNLOAD %#}
+            <!--<a href="{{ LR_DOWNLOAD }}">
                 <button class="span-4 button middle_button">
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i> {% trans 'Download Resource' %}</button>
-            </a>
-            {% endif %}
+            </a>-->
+            {#% endif %#}
             {% if LR_VALIDATE %}
             <a href="{{ LR_VALIDATE }}">
                 <button class="span-4 button middle_button">
