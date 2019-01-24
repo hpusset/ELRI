@@ -98,6 +98,7 @@ class corpusTextInfo_model_inline(SchemaModelInline):
 # pylint: disable-msg=C0103
 class distributionInfo_model_inline(SchemaModelInline):
     model = distributionInfoType_model
+    extra = 0
 
 
 # pylint: disable-msg=C0103
