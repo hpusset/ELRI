@@ -98,7 +98,7 @@ ELRI_DOMAINNAME   | elri-nrs.eu      | ELRI domain name
 $ docker-compose up
 ```
 
-05. (Optional) Super user creation for application login:
+05. Super user creation for application login:
 
 ```
 $ docker exec -ti elri_app /elri/create_super_user.sh
@@ -120,6 +120,35 @@ $ useradd --shell /bin/false --uid 7273 --no-create-home --expiredate 1 solr # N
 02. Execute the development procedure above replacing `docker-compose-runner-dev.yml` with `docker-compose-runner-prd.yml` in step `02`
 
 03. Start the project in detached mode:
+
+```
+$ docker-compose up -d
+```
+
+04. (Optional) To allow SSL termination at the Nginx Web Server:
+
+* Stop the project:
+
+```
+$ docker-compose down
+```
+
+* Uncomment docker-compose-runner-prd.yml entries identified by the comment:
+
+```
+# Uncomment if using SSL termination at nginx server
+```
+
+* Merge the files `docker-compose-runner-prd.yml` and  `docker-compose-runner.yml` again
+
+* Update certificate and key:
+
+File          | Destination                             | Description
+------------- | -------------                           | -------------
+server.crt    | /var/lib/docker/volumes/web-certs/_data | Valid registered Certificate for `ELRI_HOSTNAME`.`ELRI_DOMAINNAME`
+server.key    | /var/lib/docker/volumes/web-keys/_data  | Valid registered Certificate key `ELRI_HOSTNAME`.`ELRI_DOMAINNAME`
+
+* Start the project in detached mode:
 
 ```
 $ docker-compose up -d
@@ -204,3 +233,5 @@ To do:
 - [X] Toolchain integration
 - [X] E-mail server configuration (R1.2)
 - [ ] Auto configure release name at the Dockerfile/docker-compose-runner.yml files
+- [ ] SMTP service to send/recieve e-mails
+- [X] Nginx SSL support

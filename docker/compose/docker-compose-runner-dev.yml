@@ -16,6 +16,7 @@ services:
   nginx:
     ports:
       - "80:80"
+      - "443:443"
   toolchain:
     ports:
       - "8080:8080"
