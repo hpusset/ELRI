@@ -16,6 +16,7 @@ services:
       - DBELRI_NAME={{DOCKER-SECRET:db.secret}}
       - ELRI_TIMEZONE={{DOCKER-SECRET:app.secret}}
       - ELRI_LANGUAGE={{DOCKER-SECRET:app.secret}}
+      - ELRI_SUP_LANGUAGES={{DOCKER-SECRET:app.secret}}
       - ELRI_SALT={{DOCKER-SECRET:app.secret}}
       - ELRI_ALERT_MAILS={{DOCKER-SECRET:app.secret}}
       - ELRI_EMAIL_TLS={{DOCKER-SECRET:app.secret}}
