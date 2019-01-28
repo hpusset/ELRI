@@ -157,7 +157,45 @@
                     <li><a href="{% url 'login' %}">
                         <i class="fa fa-sign-in menu_fontawesome" aria-hidden="true"></i> {% trans 'Login' %}</a></li>
                 {% endif %}
+
+
+                {% get_current_language as LANGUAGE_CODE  %}
+                {% if LANGUAGE_CODE == "en-ie" or LANGUAGE_CODE == "ga-ie"%}
+                    {% if LANGUAGE_CODE == "en-ie" %}
+                         <li id=en_language title="{% trans 'English' %}" style="float: right; background: #cde8f2;">
+                             <a onclick="toEnglish()">  English </a>
+                         </li>
+                         <li id=ga_language title="{% trans 'Gaeilge' %}" style="float: right;">
+                             <a onclick="toGaeilge()">Gaeilge </a>
+                         </li>
+                    {% endif %}
+                    {% if LANGUAGE_CODE == "ga-ie"%}
+                         <li id=en_language title="{% trans 'English' %}" style="float: right;">
+                             <a onclick="toEnglish()">  English </a>
+                         </li>
+                         <li id=ga_language title="{% trans 'Gaeilge' %}" style="float: right; background: #cde8f2;">
+                             <a onclick="toGaeilge()">Gaeilge </a>
+                         </li>
+                    {% endif %}
+                {% endif %}
             </ul>
         </div>
     </div>
+
+
+
+    <script>
+        function toGaeilge() {
+            var urlStr = document.URL;
+            if (urlStr.includes("/en-ie/")) {
+                window.location.href = urlStr.replace("/en-ie/", "/ga-ie/");
+            }
+        }
+        function toEnglish() {
+            var urlStr = document.URL;
+            if (urlStr.includes("/ga-ie/")) {
+                window.location.href = urlStr.replace("/ga-ie/", "/en-ie/");
+            }
+        }
+    </script>
 {% endspaceless %}
