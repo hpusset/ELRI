@@ -18,7 +18,6 @@ from metashare.repository.templatetags.is_member import is_member
 from django.http import JsonResponse
 from collections import OrderedDict
 
-
 try:
 	import cStringIO as StringIO
 except ImportError:
@@ -549,9 +548,11 @@ def view(request, resource_name=None, object_id=None):
 	documentation_info_tuple = None
 	resource_creation_info_tuple = None
 	relation_info_tuples = []
-	resource_component_tuple = None
+	resource_component_tuple =  None
+	##LOGGER.info(lr_content[1])
+	
 	for _tuple in lr_content[1]:
-		if _tuple[0] == "Distribution":
+		if _tuple[0] == "Distribution": #lr_content[1][1]
 			distribution_info_tuples.append(_tuple)
 		elif _tuple[0] == "Contact person":
 			contact_person_tuples.append(_tuple)
@@ -586,6 +587,7 @@ def view(request, resource_name=None, object_id=None):
 	
 	for item in distribution_info_tuples:
 		distribution_dicts.append(tuple2dict([item]))
+	##LOGGER.info(resource_component_tuple)
 	resource_component_dict = tuple2dict(resource_component_tuple)
 	resource_creation_dict = tuple2dict([resource_creation_info_tuple])
 	metadata_dict = tuple2dict([metadata_info_tuple])
@@ -1151,7 +1153,7 @@ def contribute(request):
 		
 		if 'languages[]' in request.POST:
 			data['resourceInfo']['languages'] = decode_csv_to_list(request.POST.getlist('languages[]'))
-			LOGGER.info(data['resourceInfo']['languages'])
+			#LOGGER.info(data['resourceInfo']['languages'])
 
 		if 'domains[]' in request.POST:
 			data['resourceInfo']['appropriatenessForDSI'] = request.POST.getlist('domains[]')
@@ -1231,10 +1233,10 @@ def contribute(request):
 				xml_file = File(f)
 				xml_file.write(xml)
 			# add the relevant entry to the DB
-			LOGGER.info(request.POST)
-			#resource_type = request.POST["resourceType"] or "corpus"
+			#LOGGER.info(request.POST)
+			##resource_type = request.POST["resourceType"] or "corpus"
 			resource_type = request.POST.get("resourceType",False) or "corpus"
-			LOGGER.info(resource_type)
+			#LOGGER.info(resource_type)
 			d = create_description(os.path.basename(xml_file.name),
 								   resource_type, unprocessed_dir,
 								   request.user)
