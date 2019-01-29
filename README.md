@@ -91,7 +91,7 @@ following steps need to be undertaken:
          `local_settings.py` file.
 
         ```
-        psql -u postgres
+        psql -U postgres
         postgres=# create role your_user;
         postgres=# alter user your_user with encrypted password 'yourPassword' ;
         ```
