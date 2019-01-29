@@ -1569,11 +1569,11 @@ class ResourceModelAdmin(SchemaModelAdmin):
             
             if len(_visible_fields) > 0:
                 _detail = ', '.join(_visible_fields_verbose_names)
-                _caption = '{0} administration information: {1}'.format(_field_status.capitalize(), _detail)
+                _caption = u'{0} administration information: {1}'.format(_field_status.capitalize(), _detail)
                 _fieldset = {'fields': _visible_fields}
                 _fieldsets.append((_caption, _fieldset))
             if len(_visible_content_fields) > 0:
-                _caption = '{0} content information: {1}'.format(_field_status.capitalize(), '')
+                _caption = u'{0} content information: {1}'.format(_field_status.capitalize(), '')
                 _fieldset = {'fields': _visible_content_fields}
                 _content_fieldsets.append((_caption, _fieldset))
         
