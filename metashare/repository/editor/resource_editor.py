@@ -287,6 +287,28 @@ def json_validator(data):
 	except:
 		return False
 
+def add_files2zip(files_path, filezip):
+	for root, dirs, files in os.walk(files_path):
+		for f in files:
+			filezip.write(os.path.join(root,f),f)
+			
+def add_rejected_files2zip(files_path, filezip):
+	for root, dirs, files in os.walk(files_path):
+		for f in files:
+			filezip.write(os.path.join(root,f),'rejected/'+f)
+
+def prepare_error_zip(error_msg,resource_path,request):
+	errorzip=zipfile.ZipFile(resource_path+'/archive.zip',mode='w')
+	add_files2zip(resource_path+'/doc/input',errorzip)
+	add_files2zip(resource_path+'/tm/input',errorzip)
+	add_files2zip(resource_path+'/other',errorzip)
+	error_log = open(os.path.join(resource_path,'error.log'), 'w')
+	error_log.write(error_msg)
+	error_log.close()
+	errorzip.write(os.path.join(resource_path,'error.log'), 'error.log')
+	#close zip file with processed resources
+	errorzip.close()
+
 class ResourceModelAdmin(SchemaModelAdmin): 
     
     haystack_connection = 'default'
@@ -305,6 +327,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
     hidden_fields = ('storage_object', 'owners', 'editor_groups',)
     search_fields = ("identificationInfo__resourceName", "identificationInfo__resourceShortName", "identificationInfo__description", "identificationInfo__identifier")
     
+
+    
     def process_action(self, request, queryset):
         getext = lambda file_object: os.path.splitext(file_object)[-1]
         tmextensions=[".tmx", "sdltm"]
@@ -317,7 +341,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
             for obj in queryset:
 				if check_resource_status(obj)== INGESTED or check_resource_status(obj)== PUBLISHED : #only process INGESTED or PUBLISHED resources 
 					messages.info(request,_('You are processing a resource. This may take some time...'))
-					########DEBUGGING_INFO
+					'''DEBUGGING_INFO
 					##PATH TO THE RESOURCE
 					#messages.info(request,escape(obj.storage_object._storage_folder()))
 					
@@ -326,17 +350,16 @@ class ResourceModelAdmin(SchemaModelAdmin):
 					#messages.info(request,"info del request...")
 					#messages.info(request,to_xml_string(obj.export_to_elementtree(),
 					#                               encoding="utf-8").encode("utf-8"))#obj.export_to_elementtree())
-					
-					################
+					'''
 					resource_info=obj.export_to_elementtree()
 					r_languages=[]
 					for lang in resource_info.iter('languageInfo'):
 						lang_id=lang.find('languageId').text
 						r_languages.append(lang_id)
-					########DEBUGGING_INFO	
+					'''DEBUGGING_INFO	
 					#messages.info(request,"info de idiomas...")	
 					#messages.info(request,r_languages)
-					################
+					'''
 					#get the resource storage folder path
 					resource_path=obj.storage_object._storage_folder()
 					#first process for this resource:
@@ -354,6 +377,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
 					tmx_files=[]
 					call_tm2tmx=0
 					call_doc2tmx=0
+					#prepare tc calls:
 					for r in resources:
 							#check the extension of the files
 							#if it is a tm file:
@@ -376,6 +400,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
 									os.makedirs(resource_other_path)
 								resource_zip.extract(r,resource_other_path)
 					response_tm=''
+					#variables to control tc errors
+					error_msg=''
+					errors=0
 					if call_tm2tmx > 0:
 						#prepare the json for calling the tm2tmx tc for each tmx in tmx_files
 						r_id=obj.storage_object.id 
@@ -385,20 +412,27 @@ class ResourceModelAdmin(SchemaModelAdmin):
 						for tm in tmx_files:
 							r_input=resource_tm_path+'/input/'+tm
 							tm_json= {'id':r_id, 'input':r_input,'overwrite':r_overwrite,'languages':r_languages}
-							#####DEBUG show tm_json info
-							#messages.info(request,tm_json)
-							#####settings.TM2TMX_URL ; settings.DOC2TMX_URL
+							
 							try: 
 								response_tm=requests.post(settings.TM2TMX_URL,json=tm_json)
 								if json_validator(response_tm):
 									if response_tm.json()["status"]=="Success":
 										successful +=1
 									else:
-										messages.error(request,"Something went wrong when processing the resource...")
-								else:
-									messages.error(request,"Something went wrong when processing the resource..."+response_tm.text)
+										messages.error(request,"Something went wrong when processing the resource with the tm2tmx toolchain.")
+										error_msg=error_msg+"Something went wrong when processing the resource with the tm2tmx toolchain."+response_tm.json()["info"]+'\n'
+										#ToDo: add timestamp info to error.log 
+										errors+=1
+								else:	
+									messages.error(request,"Invalid json response from tm2tmx toolchain: "+response_tm.text)
+									error_msg=error_msg+"Invalid json response from tm2tmx toolchain: "+response_tm.text+'\n'
+									#ToDo: add timestamp info to error.log 
+									errors+=1
 							except: 
-								messages.error(request,"Something went wrong when processing the resource...")
+								messages.error(request,"The POST request to the tm2tmx toolchain has failed.")
+								error_msg=error_msg+"The POST request to the tm2tmx toolchain has failed."+response_tm.json()["info"]+"\n"
+								#ToDo: add timestamp info to error.log 
+								errors+=1
 								
 					response_doc=''	
 					if call_doc2tmx > 0:
@@ -408,69 +442,63 @@ class ResourceModelAdmin(SchemaModelAdmin):
 						r_overwrite='true'
 						doc_json={'id':r_id, 'input':r_input,'overwrite':r_overwrite,'languages':r_languages}
 						messages.info(request,"Processing resource with doc2tmx...")
-						#####DEBUG show doc_json info
-						#messages.info(request,doc_json)
-						#####
+						
 						try:
 							response_doc=requests.post(settings.DOC2TMX_URL,json=doc_json)
 							if json_validator(response_doc):
 								if response_doc.json()["status"] == "Success":
 									successful += 1
 								else:
-									messages.error(request,"Something went wrong...")
+									messages.error(request,"Something went wrong when processing the resource with the doc2tmx toolchain.\n "+response_doc.json()["info"])
+									error_msg=error_msg+"Something went wrong when processing the resource with the doc2tmx toolchain.\n "+response_doc.json()["info"]+"\n"
+									#ToDo: add timestamp info to error.log 
+									errors+=1
 							else:
-								messages.error(request,"Something went wrong..."+response_doc.text)
+								messages.error(request,response_doc.text)
+								messages.error(request,"Invalid json response from doc2tmx toolchain: "+response_doc.text)
+								error_msg=error_msg+"Invalid json response from doc2tmx toolchain: "+response_doc.text+'\n'
+								#ToDo: add timestamp info to error.log 
+								errors+=1
+								
 						except:
-							messages.error(request,"Something went wrong when processing the resource...")
-							
-					##########DEBUG get response info
-					#messages.info(request,response_doc.status_code)
-					#messages.info(request,response_doc.json())
-					#messages.info(request,response_doc.json()["info"])
-					##response_doc.json={u'status': u'Success', u'output': u'/data/mt/ELRI/elri_resources/language_resources/f17cc912ee7811e8be27a0423f38a62178a159269a2f4f5ba61a5d2c033af27d/doc/8_output', u'info': u'TMX extraction from documents done successfully.', u'rejected': u'/data/mt/ELRI/elri_resources/language_resources/f17cc912ee7811e8be27a0423f38a62178a159269a2f4f5ba61a5d2c033af27d/doc/8_rejected'}
-					################
-					##DEBUG: test tc connectivity
-					#response=requests.get('http://localhost:1004/ELRI_WebService/tc_doc2tmx/hello')
-					#if response.status_code == 200 :
-					#	successful +=1 
-					#	messages.info(request,str(response.status_code)+' :: '+response.text)
-					################
-					#if something success-> create new archive.zip and replace the old one uploaded by the user 	
-				if successful > 0:
+							messages.error(request,"The POST request to the doc2tmx toolchain has failed.\n"+response_doc.json()["info"])
+							error_msg=error_msg+"Something went wrong when processing the resource with the doc2tmx toolchain.\n "+response_doc.json()["info"]+'\n'
+							#ToDo: add timestamp info to error.log 
+							errors+=1
+						
+				#if something success-> create new archive.zip and replace the old one uploaded by the user 	
+				# if any errors, then handle error reporting
+				if errors > 0 or error_msg!='':
+					#create the archive.zip with the original files and the error.log file
+					prepare_error_zip(error_msg,resource_path,request)
+				elif successful > 0:
 					#create the archive.zip with the processed resources
 					processed_zip=zipfile.ZipFile(resource_path+'/archive.zip',mode='w')
+
 					if response_doc != '' and json_validator(response_doc):
 						messages.info(request,response_doc.json()["info"])
-						for root, dirs, files in os.walk(response_doc.json()["output"]):
-							for f in files:
-								processed_zip.write(os.path.join(root,f),f)
-						#for root, dirs, files in os.walk(response_doc.json()["rejected"]):
-						#	for f in files:
-						#		processed_zip.write(os.path.join(root,f),f)	
-					elif call_doc2tmx > 0:
-						messages.error(request,"Some error happened when processing resource with doc2tmx ")
-						
+						#if any rejected file and !E file(s) in output --> add input/into rejected/inside archive.zip
+						if not os.listdir(response_doc.json()["output"]): 
+							add_rejected_files2zip(r_input,processed_zip)							
+						else: #if there are any produced output-> copy output and rejected file(s)
+							add_files2zip(response_doc.json()["output"],processed_zip)
+							add_rejected_files2zip(response_doc.json()["rejected"],processed_zip)
+
 					if response_tm != '' and json_validator(response_tm):
-						messages.info(request,response_tm.json()["info"])
-						for root, dirs, files in os.walk(response_tm.json()["output"]):
-							for f in files:
-								processed_zip.write(os.path.join(root,f),f)
-						#for root, dirs, files in os.walk(response_tm.json()["rejected"]):
-						#	for f in files:
-						#		processed_zip.write(os.path.join(root,f),f)
-					elif call_tm2tmx > 0 :
-						messages.error(request,"Some error happened when processing resource with tm2tmx ")
+						add_files2zip(response_tm.json()["output"],processed_zip)
+						add_rejected_files2zip(response_tm.json()["rejected"],processed_zip)
 					
 					#if there are other files: add them as well
-					if os.path.isdir(resource_other_path):
-						for root,dirs,files in os.walk(resource_other_path):
-							for f in files:
-								processed_zip.write(os.path.join(root,f),f)
+					add_files2zip(resource_other_path,processed_zip)
+					
 					#close zip file with processed resources
 					processed_zip.close()
 					
-				else:#TODO: INCLUDE JSON MESSAGE ERROR
-					messages.error(request,
+				else:
+					if error_msg !='':
+						prepare_error_zip(error_msg,resource_path,request)
+					else:
+						messages.error(request,
                                _('Only ingested/published resources can be re-processed.'))
         else:
             messages.error(request, _('You do not have the permission to ' \
@@ -488,15 +516,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                           precondition_status=INGESTED):
                     successful += 1
                     saveLRStats(obj, UPDATE_STAT, request)
-                
-                    ##resource_info.append(obj.export_to_elementtree())
-                    ##messages.info(request,to_xml_string(obj.export_to_elementtree(),
-                    ##                               encoding="utf-8").encode("utf-8"))#obj.export_to_elementtree()
+
                     resource_name=[u.find('resourceName').text for u in obj.export_to_elementtree().iter('identificationInfo')]
-                    ##messages.info(request,resource_name)
-                    ##messages.info(request,obj.storage_object.id)
-                    ##resource_name=resourceInfoType_model.objects.filter(id=obj.storage_object.id).value_list("name")
-                    ##messages.info(request,resource_name)
+                    
                     emails=obj.owners.all().values_list('email',flat=True)
                     name=obj.owners.all().values_list('first_name',flat=True)
                     surname=obj.owners.all().values_list('last_name',flat=True)

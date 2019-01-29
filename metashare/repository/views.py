@@ -244,10 +244,7 @@ def download(request, object_id, **kwargs):
 	# Get a dictionary, where the values are triplets:
 	# (licenceInfo instance, download location, access)
 	licences = _get_licences(resource, user_membership)
-
-	LOGGER.info("-------------------------- FROM  DOWNLOAD --------------------------")
-	LOGGER.info(resource.storage_object.master_copy)
-
+	
 	# Check whether the resource is from the current node, or whether it must be
 	# redirected to the master copy
 	if not resource.storage_object.master_copy:
@@ -1231,7 +1228,10 @@ def contribute(request):
 				xml_file = File(f)
 				xml_file.write(xml)
 			# add the relevant entry to the DB
-			resource_type = request.POST["resourceType"] or "corpus"
+			LOGGER.info(request.POST)
+			#resource_type = request.POST["resourceType"] or "corpus"
+			resource_type = request.POST.get("resourceType",False) or "corpus"
+			LOGGER.info(resource_type)
 			d = create_description(os.path.basename(xml_file.name),
 								   resource_type, unprocessed_dir,
 								   request.user)
