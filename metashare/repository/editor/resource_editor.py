@@ -341,16 +341,17 @@ class ResourceModelAdmin(SchemaModelAdmin):
             for obj in queryset:
 				if check_resource_status(obj)== INGESTED or check_resource_status(obj)== PUBLISHED : #only process INGESTED or PUBLISHED resources 
 					messages.info(request,_('You are processing a resource. This may take some time...'))
-					'''DEBUGGING_INFO
+					###DEBUGGING_INFO
 					##PATH TO THE RESOURCE
 					#messages.info(request,escape(obj.storage_object._storage_folder()))
 					
 					#messages.info(request,obj.metadataInfo)
 					##XML INFO OF THE RESOURCE
-					#messages.info(request,"info del request...")
-					#messages.info(request,to_xml_string(obj.export_to_elementtree(),
-					#                               encoding="utf-8").encode("utf-8"))#obj.export_to_elementtree())
-					'''
+					
+					messages.info(request,"info del request...")
+					messages.info(request,to_xml_string(obj.export_to_elementtree(),
+					                               encoding="utf-8").encode("utf-8"))#obj.export_to_elementtree())
+					
 					resource_info=obj.export_to_elementtree()
 					r_languages=[]
 					for lang in resource_info.iter('languageInfo'):
@@ -360,6 +361,19 @@ class ResourceModelAdmin(SchemaModelAdmin):
 					#messages.info(request,"info de idiomas...")	
 					#messages.info(request,r_languages)
 					'''
+					r_name=''
+					for r_info in resource_info.iter('resourceName'):
+						r_name=r_info.text
+					###	DEBUG
+					#messages.info(request,'####'+r_name)
+					
+					licence_info=''
+					for l_info in resource_info.iter('licenceInfo'):
+						licence_info+=l_info.find('licence').text+': '
+						licence_info+=l_info.find('otherLicenceName').text
+					###	DEBUG	
+					#messages.info(request,'####'+licence_info)
+					
 					#get the resource storage folder path
 					resource_path=obj.storage_object._storage_folder()
 					#first process for this resource:
@@ -411,7 +425,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
 						messages.info(request,"Processing resource with tm2tmx...")
 						for tm in tmx_files:
 							r_input=resource_tm_path+'/input/'+tm
-							tm_json= {'id':r_id, 'input':r_input,'overwrite':r_overwrite,'languages':r_languages}
+							tm_json= {'id':r_id, 'title': r_name ,'input':r_input,'overwrite':r_overwrite,'languages':r_languages, 'license':licence_info}
 							
 							try: 
 								response_tm=requests.post(settings.TM2TMX_URL,json=tm_json)
@@ -440,7 +454,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
 						r_id=obj.storage_object.id 
 						r_input=resource_doc_path+'/input'
 						r_overwrite='true'
-						doc_json={'id':r_id, 'input':r_input,'overwrite':r_overwrite,'languages':r_languages}
+						doc_json={'id':r_id, 'title':r_name,'input':r_input,'overwrite':r_overwrite,'languages':r_languages, 'license':licence_info}
 						messages.info(request,"Processing resource with doc2tmx...")
 						
 						try:
