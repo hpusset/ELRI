@@ -773,10 +773,12 @@ def tuple2dict(_tuple):
 		if isinstance(item, tuple) or isinstance(item, list):
 			if isinstance(item[0], basestring):
 				# Replace spaces by underscores for component names.
+				# Handle strings as unicode to avoid "UnicodeEncodeError: 'ascii' codec can't encode character " errors
 				if item[0].find(" "):
-					_key = str(item[0].replace(" ", "_").replace("/", "_"))
+					_key = u''.join(item[0]).encode('utf-8').replace(" ", "_").replace("/", "_")
+					
 				else:
-					_key = str(item[0])
+					_key = u''.join(item[0]) #str(item[0])
 				if _key in _dict:
 					# If a repeatable component is found, a customized 
 					# dictionary is added, since no duplicate key names
@@ -794,11 +796,12 @@ def tuple2dict(_tuple):
 			else:
 				if isinstance(item[0], tuple):
 					# Replace spaces by underscores for element names.
+					
 					if item[0][0][:].find(" "):
-						_key = str(item[0][0].replace(" ", "_").replace('(', "").replace(")", "").replace("/", "_").replace(
-							"-", "_"))
+						#LOGGER.info(u''.join(item[0][0]).encode('utf-8'))
+						_key=u''.join(item[0][0]).encode('utf-8').replace(" ", "_").replace('(', "").replace(")", "").replace("/", "_").replace("-", "_")
 					else:
-						_key = str(item[0][0])
+						_key = u''.join(item[0][0]).encode('utf-8')
 
 					# If the item is a date, convert it to real datetime
 					if _key.find("_date") != -1:
