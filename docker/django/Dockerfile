@@ -39,8 +39,10 @@ RUN svn export ${GIT_URL}/metashare /elri/metashare \
     && chmod +x /elri/startup.sh \
                 /elri/env_secrets_expand.sh \
                 /elri/create_super_user.sh
-    
-COPY resources/local_settings.py resources/maintainers.dat /elri/metashare/
+
+COPY resources/local_settings.py \
+     resources/maintainers.dat \
+     resources/wsgi.py /elri/metashare/
 
 EXPOSE 8000
 

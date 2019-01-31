@@ -22,6 +22,10 @@ python /elri/manage.py rebuild_index --noinput
 python /elri/manage.py collectstatic --noinput
 #python /elri/manage.py createsuperuser --email elri@example.com --username admin --noinput 
 
-cmd="$cmd python /elri/manage.py runserver 0.0.0.0:8000 --insecure"
+if [ "${DEVELOPMENT}" != "" ]; then
+    cmd="$cmd python /elri/manage.py runserver 0.0.0.0:8000 --insecure"
+else
+    cmd="$cmd gunicorn metashare.wsgi -b 0.0.0.0:8000 -w 4 --threads 8 --preload"
+fi
 
 $cmd

@@ -4,6 +4,8 @@ services:
   elri-node1:
     ports:
       - "8000:8000"
+    environment:
+      - DEVELOPMENT=1
   # Linux POSTGRES Server 
   postgres-server:
     ports:
