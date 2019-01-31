@@ -27,12 +27,12 @@ COPY --from=base /tmp/dockerize /usr/local/bin/
 COPY resources/env_secrets_expand.sh \
      resources/startup.sh \
      resources/create_super_user.sh \
-     resources/requirements.txt \
      resources/manage.py /elri/
 
 RUN svn export ${GIT_URL}/metashare /elri/metashare \
     && svn export ${GIT_URL}/project_management /elri/project_management \
     && svn export ${GIT_URL}/elri_resources /elri/elri_resources \
+    && svn export ${GIT_URL}/requirements.txt /elri/requirements.txt \
     && mkdir -p /elri/metashare/unprocessed \
              /elri/metashare/processed \
     && pip install -r /elri/requirements.txt \
