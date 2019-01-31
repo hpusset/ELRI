@@ -90,7 +90,8 @@ ELRI_EMAIL_PASS   | ''                             | ELRI Mail server auth passw
 Property          | Default value     | Description
 -------------     | -------------     | -------------
 ELRI_HOSTNAME     | dev               | ELRI hostname
-ELRI_DOMAINNAME   | elri-nrs.eu      | ELRI domain name
+ELRI_DOMAINNAME   | elri-nrs.eu       | ELRI domain name
+ELRI_PROTOCOL     | http              | General protocol used by the web server (when Nginx is in charge of SSL offloading)
 
 04. Start the project:
 
@@ -233,5 +234,5 @@ To do:
 - [X] Toolchain integration
 - [X] E-mail server configuration (R1.2)
 - [ ] Auto configure release name at the Dockerfile/docker-compose-runner.yml files
-- [ ] SMTP service to send/recieve e-mails
-- [X] Nginx SSL support
+- [X] Mail service to recieve mails only (mailhog, for testing purposes), for sending e-mails it is preferred to use a e-mail relay service (e.g. google, as it is free of charge)
+- [X] Nginx SSL support (R1.1)
