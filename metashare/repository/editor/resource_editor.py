@@ -337,7 +337,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
     def process_action(self, request, queryset):
         getext = lambda file_object: os.path.splitext(file_object)[-1]
         tmextensions=[".tmx", ".sdltm"]
-        docextensions=[ ".pdf", ".doc", ".docx", ".txt", ".odt"]
+        docextensions=[ ".pdf", ".doc", ".docx", ".rtf", ".txt", ".odt"]
 		
         from metashare.xml_utils import to_xml_string
         if has_publish_permission(request, queryset):

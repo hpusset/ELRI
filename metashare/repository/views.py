@@ -1166,7 +1166,7 @@ def contribute(request):
 		filename = '{}_{}'.format(profile.country, uid)
 		response = {}
 
-		accepted_extensions = [".zip", ".pdf", ".doc", ".docx", ".tmx", ".txt",
+		accepted_extensions = [".zip", ".pdf", ".doc", ".docx", ".tmx", ".txt", ".rtf",
 							   ".xls", ".xlsx", ".xml", ".sdltm", ".odt", ".tbx"]
 		acceptable_re = "(.*)({0})$".format(
 			"|".join("({0})".format(ext) for ext in accepted_extensions))
