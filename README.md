@@ -47,6 +47,18 @@ following steps need to be undertaken:
     use `psycopg2==2.7`.
     Check if `flup` is also in the requirements file. It may be needed.
 
+    If this error occurs:
+
+    ```
+    django.core.exceptions.ImproperlyConfigured: Error loading psycopg2 module: /data/elri/ELRI/venv/local/lib/python2.7/site-packages/psycopg2/.libs/./libresolv-2-c4c53def.5.so: symbol __res_maybe_init version GLIBC_PRIVATE not defined in file libc.so.6 with link time reference
+    ```
+
+    Try upgrading `psycopg2`:
+
+    ```
+    pip install psycopg2 --upgrade
+    ```
+
 03. Launch Solr by `cd`-ing in the `solr/` folder and doing
 
         java -jar -Djetty.port=chosen_port start.jar
@@ -91,7 +103,7 @@ following steps need to be undertaken:
          `local_settings.py` file.
 
         ```
-        psql -u postgres
+        psql -U postgres
         postgres=# create role your_user;
         postgres=# alter user your_user with encrypted password 'yourPassword' ;
         ```
