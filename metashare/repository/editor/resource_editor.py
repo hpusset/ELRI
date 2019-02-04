@@ -375,7 +375,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
 					licence_info=''
 					for l_info in resource_info.iter('licenceInfo'):
 						licence_info+=l_info.find('licence').text+': '
-						licence_info+=l_info.find('otherLicenceName').text
+						if l_info.find('otherLicenceName'):
+							licence_info+=l_info.find('otherLicenceName').text
 					###	DEBUG	
 					#messages.info(request,'####'+licence_info)
 					
