@@ -431,30 +431,30 @@ class ResourceModelAdmin(SchemaModelAdmin):
 						r_overwrite='true'
 						
 						messages.info(request,"Processing resource with tm2tmx...")
-						for tm in tmx_files:
-							r_input=resource_tm_path+'/input/'+tm
-							tm_json= {'id':r_id, 'title': r_name ,'input':r_input,'overwrite':r_overwrite,'languages':r_languages, 'license':licence_info}
-							
-							try: 
-								response_tm=requests.post(settings.TM2TMX_URL,json=tm_json)
-								if json_validator(response_tm):
-									if response_tm.json()["status"]=="Success":
-										successful +=1
-									else:
-										messages.error(request,"Something went wrong when processing the resource with the tm2tmx toolchain.")
-										error_msg=error_msg+"Something went wrong when processing the resource with the tm2tmx toolchain."+response_tm.json()["info"]+'\n'
-										#ToDo: add timestamp info to error.log 
-										errors+=1
-								else:	
-									messages.error(request,"Invalid json response from tm2tmx toolchain: "+response_tm.text)
-									error_msg=error_msg+"Invalid json response from tm2tmx toolchain: "+response_tm.text+'\n'
+						#for tm in tmx_files:
+						r_input=resource_tm_path+'/input'#+tm
+						tm_json= {'id':r_id, 'title': r_name ,'input':r_input,'overwrite':r_overwrite,'languages':r_languages, 'license':licence_info}
+						
+						try: 
+							response_tm=requests.post(settings.TM2TMX_URL,json=tm_json)
+							if json_validator(response_tm):
+								if response_tm.json()["status"]=="Success":
+									successful +=1
+								else:
+									messages.error(request,"Something went wrong when processing the resource with the tm2tmx toolchain.")
+									error_msg=error_msg+"Something went wrong when processing the resource with the tm2tmx toolchain."+response_tm.json()["info"]+'\n'
 									#ToDo: add timestamp info to error.log 
 									errors+=1
-							except: 
-								messages.error(request,"The POST request to the tm2tmx toolchain has failed: \n"+response_tm)
-								error_msg=error_msg+"The POST request to the tm2tmx toolchain has failed."+response_tm+"\n"
+							else:	
+								messages.error(request,"Invalid json response from tm2tmx toolchain: "+response_tm.text)
+								error_msg=error_msg+"Invalid json response from tm2tmx toolchain: "+response_tm.text+'\n'
 								#ToDo: add timestamp info to error.log 
 								errors+=1
+						except: 
+							messages.error(request,"The POST request to the tm2tmx toolchain has failed: \n"+response_tm)
+							error_msg=error_msg+"The POST request to the tm2tmx toolchain has failed."+response_tm+"\n"
+							#ToDo: add timestamp info to error.log 
+							errors+=1
 								
 					response_doc=''	
 					if call_doc2tmx > 0:
