@@ -115,9 +115,9 @@
                 
                 {% if user.is_active %}
                     <li title="{% trans 'Profile settings and actions' %}"><a href="{% url 'edit_profile' %}">
-                        <i class="fa fa-user menu_fontawesome" aria-hidden="true"></i> {% trans 'Your Profile,' %}
+                        <i class="fa fa-user menu_fontawesome" aria-hidden="true"></i> <!-- removing Your Profile and switching user.username and user.firtname to show-->
                         {% load firstof from future %}{% filter force_escape %}
-                            {% firstof user.first_name user.username %}{% endfilter %}</a>
+                            {% firstof user.username user.first_name %}{% endfilter %}                            
                         <ul>
                             {% if user.is_staff %}
                                 <li><a href="{% url 'editor:index' %}">{% trans 'View your recent actions' %}</a></li>{% endif %}

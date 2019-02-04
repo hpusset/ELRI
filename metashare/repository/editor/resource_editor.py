@@ -296,7 +296,12 @@ def add_rejected_files2zip(files_path, filezip):
 	for root, dirs, files in os.walk(files_path):
 		for f in files:
 			filezip.write(os.path.join(root,f),'rejected/'+f)
-
+			
+def add_other_files2zip(files_path, filezip):
+	for root, dirs, files in os.walk(files_path):
+		for f in files:
+			filezip.write(os.path.join(root,f),'other/'+f)
+			
 def prepare_error_zip(error_msg,resource_path,request):
 	errorzip=zipfile.ZipFile(resource_path+'/archive.zip',mode='w')
 	add_files2zip(resource_path+'/doc/input',errorzip)
@@ -331,7 +336,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
     
     def process_action(self, request, queryset):
         getext = lambda file_object: os.path.splitext(file_object)[-1]
-        tmextensions=[".tmx", "sdltm"]
+        tmextensions=[".tmx", ".sdltm"]
         docextensions=[ ".pdf", ".doc", ".docx", ".txt", ".odt"]
 		
         from metashare.xml_utils import to_xml_string
@@ -348,9 +353,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
 					#messages.info(request,obj.metadataInfo)
 					##XML INFO OF THE RESOURCE
 					
-					messages.info(request,"info del request...")
-					messages.info(request,to_xml_string(obj.export_to_elementtree(),
-					                               encoding="utf-8").encode("utf-8"))#obj.export_to_elementtree())
+					#messages.info(request,"info del request...")
+					#messages.info(request,to_xml_string(obj.export_to_elementtree(),
+					#                               encoding="utf-8").encode("utf-8"))#obj.export_to_elementtree())
 					
 					resource_info=obj.export_to_elementtree()
 					r_languages=[]
@@ -380,6 +385,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
 					#cp archive.zip to _archive.zip iif _archive.zip does not exist...
 					if not os.path.isfile(resource_path+'/_archive.zip'): #save the resource source for possible later reprocessing steps 
 						copyfile(resource_path+'/archive.zip',resource_path+'/_archive.zip')
+						#save also a copy of the original uploaded resource
+						copyfile(resource_path+'/archive.zip',resource_path+'/_archive_origin.zip')
 					#unzip always _archive.zip wich has always the source resource files; archive.zip can contain processed documents 
 					resource_zip=zipfile.ZipFile(resource_path+'/_archive.zip','r')
 					#and unzip the resource files into the corresponding /input folder
@@ -443,8 +450,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
 									#ToDo: add timestamp info to error.log 
 									errors+=1
 							except: 
-								messages.error(request,"The POST request to the tm2tmx toolchain has failed.")
-								error_msg=error_msg+"The POST request to the tm2tmx toolchain has failed."+response_tm.json()["info"]+"\n"
+								messages.error(request,"The POST request to the tm2tmx toolchain has failed: \n"+response_tm)
+								error_msg=error_msg+"The POST request to the tm2tmx toolchain has failed."+response_tm+"\n"
 								#ToDo: add timestamp info to error.log 
 								errors+=1
 								
@@ -475,8 +482,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
 								errors+=1
 								
 						except:
-							messages.error(request,"The POST request to the doc2tmx toolchain has failed.\n"+response_doc.json()["info"])
-							error_msg=error_msg+"Something went wrong when processing the resource with the doc2tmx toolchain.\n "+response_doc.json()["info"]+'\n'
+							messages.error(request,"The POST request to the doc2tmx toolchain has failed.\n"+response_doc)
+							error_msg=error_msg+"The POST request to the doc2tmx toolchain has failed.\n "+response_doc+'\n'
 							#ToDo: add timestamp info to error.log 
 							errors+=1
 						
@@ -1130,7 +1137,10 @@ class ResourceModelAdmin(SchemaModelAdmin):
                         # pylint: disable-msg=E1101
                         for _chunk in resource.chunks():
                             _out_file.write(_chunk)
-
+                            
+                    #save a copy of the uploaded files to allow reprocessing         
+                    copyfile(_out_filename, '{}/_archive.{}'.format(_storage_folder,
+                      _extension))
                     # Update the corresponding StorageObject to update its
                     # download data checksum.
                     obj.storage_object.compute_checksum()

@@ -848,7 +848,11 @@ class MetashareFacetedSearchView(FacetedSearchView):
 				and not self.request.user.is_superuser:
 			resource_names = []
 			for res in resourceInfoType_model.objects.all():
-				if self.request.user.groups.filter(
+				#get resource id
+				id_res = res.storage_object.id
+				res_groups=res.groups.values_list("name", flat=True)
+				
+				if self.request.user.groups.filter(	
 					name__in=res.groups.values_list("name", flat=True)).exists():
 					resname=res.identificationInfo.get_default_resourceName()
 					##get resource Name
@@ -857,15 +861,11 @@ class MetashareFacetedSearchView(FacetedSearchView):
 					resourceName=re.sub('[\W_]', '', resourceName)
 					##lowercase
 					resourceName=resourceName.lower()
-					##append resource name to the list
-					##resource_names.append(resourceName)
-					for g in res.groups.values_list("name",flat=True):
-						resourceName=resourceName+g
-					resource_names.append(resourceName)
-			#LOGGER.info(resource_names)		
+					##append resource name to the list,
+					#concatenate it to its id to resolve the conflicts that 
+					#  can arise from resources sharing the same name but with different group sharing policy
+					resource_names.append(resourceName+str(id_res))
 			if resource_names:
-				#for r in sqs.filter(publicationStatusFilter__exact='published'): #, resourceNameSortGroup__in=resource_names):
-				#	LOGGER.info(r.resourceNameSort)
 				sqs = sqs.filter(publicationStatusFilter__exact='published',
 								 resourceNameSort__in=resource_names)
 			else:
