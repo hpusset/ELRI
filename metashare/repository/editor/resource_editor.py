@@ -389,7 +389,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
 						copyfile(resource_path+'/archive.zip',resource_path+'/_archive_origin.zip')
 					#unzip always _archive.zip wich has always the source resource files; archive.zip can contain processed documents 
 
-          resource_zip=zipfile.ZipFile(resource_path+'/_archive.zip','r')
+          				resource_zip=zipfile.ZipFile(resource_path+'/_archive.zip','r')
 					#and unzip the resource files into the corresponding /input folder
 					resources=resource_zip.namelist()
 					#create, if needed, the /tm /docs /other folder
