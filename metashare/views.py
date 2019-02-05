@@ -1,9 +1,8 @@
 import logging
 
-from django.contrib.auth.views import login as LOGIN, logout as LOGOUT
+from django.contrib.auth import views as auth_views
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-
 from metashare.repository.models import resourceInfoType_model
 from metashare.settings import LOG_HANDLER, COUNTRY
 from metashare.storage.models import PUBLISHED
@@ -30,13 +29,13 @@ def login(request, template_name):
     """Renders login view by connecting to django.contrib.auth.views."""
     LOGGER.info(u'Rendering login view for user "{0}".'.format(
       request.user.username or "Anonymous"))
-    
-    return LOGIN(request, template_name)
+
+    return auth_views.login(request, template_name)
 
 
-def logout(request, next_page):
+def logout(request):
     """Renders logout view by connecting to django.contrib.auth.views."""
-    LOGGER.info(u'Logging out user "{0}", redirecting to "{1}".'.format(
-      request.user.username or "Anonymous", next_page)) 
-    
-    return LOGOUT(request, next_page)
+    LOGGER.info(u'Logging out user "{0}", redirecting to /.'.format(
+      request.user.username or "Anonymous"))
+
+    return auth_views.logout(request, 'frontpage')
