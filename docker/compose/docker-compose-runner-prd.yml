@@ -12,18 +12,22 @@ services:
   nginx:
     ports:
       - "80:80"
-    volumes:
-      - web-certs:/etc/ssl/certs:ro
-      - web-keys:/etc/ssl/private:ro
+      # Uncomment if using SSL termination at nginx server
+      # - "443:443"
+    # Uncomment if using SSL termination at nginx server
+    # volumes:
+    #   - web-certs:/etc/ssl/certs:ro
+    #   - web-keys:/etc/ssl/private:ro
 volumes:
   elri-db:
     name: elri-db
   elri-certs:
     name: elri-certs
-  web-certs:
-    name: web-certs
-  web-keys:
-    name: web-keys
+  # Uncomment if using SSL termination at nginx server
+  # web-certs:
+  #   name: web-certs
+  # web-keys:
+  #   name: web-keys
 secrets:
   db.secret:
     file: db_secret.properties
