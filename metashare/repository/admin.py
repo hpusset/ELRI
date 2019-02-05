@@ -99,6 +99,7 @@ class corpusTextInfo_model_inline(SchemaModelInline):
 class distributionInfo_model_inline(SchemaModelInline):
     model = distributionInfoType_model
     extra = 0
+    min_num = 1
 
 
 # pylint: disable-msg=C0103
@@ -136,18 +137,23 @@ class languageDescriptionInfo_model_inline(SchemaModelInline):
 class languageInfo_model_inline_corpusTextInfoType_model(SchemaModelInline):
     model = languageInfoType_model
     fk_name = 'back_to_corpustextinfotype_model'
+    extra = 0 
+    min_num = 1
 
 
 # pylint: disable-msg=C0103
 class languageInfo_model_inline_languageDescriptionTextInfoType_model(SchemaModelInline):
     model = languageInfoType_model
     fk_name = 'back_to_languagedescriptiontextinfotype_model'
-
+    extra = 0 
+    min_num = 1
 
 # pylint: disable-msg=C0103
 class languageInfo_model_inline_lexicalConceptualResourceTextInfoType_model(SchemaModelInline):
     model = languageInfoType_model
     fk_name = 'back_to_lexicalconceptualresourcetextinfotype_model'
+    extra = 0 
+    min_num = 1
 
 
 # pylint: disable-msg=C0103

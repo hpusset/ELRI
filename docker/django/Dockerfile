@@ -5,9 +5,9 @@ RUN tar xvfz /tmp/dockerize-alpine-linux-amd64-v0.5.0.tar.gz -C /tmp/
 
 FROM python:2.7.15-stretch
 
-ARG RELEASE="trunk"
+#ARG RELEASE="trunk"
 #ARG RELEASE="tags/R1.2"
-#ARG RELEASE="branches/R2"
+ARG RELEASE="branches/VIC"
 ENV DB_HOST="postgres-server" \
     DB_PORT="5432" \
     SOLR_HOST="solr" \
@@ -27,20 +27,24 @@ COPY --from=base /tmp/dockerize /usr/local/bin/
 COPY resources/env_secrets_expand.sh \
      resources/startup.sh \
      resources/create_super_user.sh \
-     resources/requirements.txt \
+     resources/gettext.patch \ 
      resources/manage.py /elri/
 
 RUN svn export ${GIT_URL}/metashare /elri/metashare \
     && svn export ${GIT_URL}/project_management /elri/project_management \
     && svn export ${GIT_URL}/elri_resources /elri/elri_resources \
+    && svn export ${GIT_URL}/requirements.txt /elri/requirements.txt \
     && mkdir -p /elri/metashare/unprocessed \
              /elri/metashare/processed \
+    && patch /usr/local/lib/python2.7/gettext.py < /elri/gettext.patch \
     && pip install -r /elri/requirements.txt \
     && chmod +x /elri/startup.sh \
                 /elri/env_secrets_expand.sh \
                 /elri/create_super_user.sh
-    
-COPY resources/local_settings.py resources/maintainers.dat /elri/metashare/
+
+COPY resources/local_settings.py \
+     resources/maintainers.dat \
+     resources/wsgi.py /elri/metashare/
 
 EXPOSE 8000
 

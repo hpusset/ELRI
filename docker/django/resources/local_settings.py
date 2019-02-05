@@ -118,7 +118,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # See the Django documentation for more details:
 # - https://docs.djangoproject.com/en/1.3/topics/email/#smtp-backend
 
-EMAIL_USE_TLS = environ['ELRI_EMAIL_TLS']
+EMAIL_USE_TLS = environ['ELRI_EMAIL_TLS'].lower() == 'true'
 EMAIL_HOST = environ['ELRI_EMAIL_HOST']
 EMAIL_PORT = environ['ELRI_EMAIL_PORT']
 EMAIL_HOST_USER = environ['ELRI_EMAIL_USER']
@@ -266,7 +266,7 @@ LEGAL_REVIEWERS = ("1",)
 
 REST_API_KEY = ""
 
-ALLOWED_HOSTS = ['elri-node1', 'localhost']
+ALLOWED_HOSTS = ['elri-node1', 'localhost', 'deep-hslt.vicomtech.es']
 
-DOC2TMX_URL = "http://toolchain:8080/ELRI_WebService/tc_doc2tmx/process"
-TM2TMX_URL = "http://toolchain:8080/ELRI_WebService/tc_tm2tmx/process"
+DOC2TMX_URL = "http://toolchain:8084/ELRI_WebService/tc_doc2tmx/process"
+TM2TMX_URL = "http://toolchain:8084/ELRI_WebService/tc_tm2tmx/process"

@@ -26,6 +26,7 @@ services:
       - ELRI_EMAIL_PASS={{DOCKER-SECRET:app.secret}}
       - ELRI_HOSTNAME={{DOCKER-SECRET:web.secret}}
       - ELRI_DOMAINNAME={{DOCKER-SECRET:web.secret}}
+      - ELRI_PROTOCOL={{DOCKER-SECRET:web.secret}}
       - ELRI_COUNTRY={{DOCKER-SECRET:app.secret}}
     depends_on:
       - solr
@@ -61,6 +62,7 @@ services:
     environment:
       - ELRI_HOSTNAME={{DOCKER-SECRET:web.secret}}
       - ELRI_DOMAINNAME={{DOCKER-SECRET:web.secret}}
+      - ELRI_PROTOCOL={{DOCKER-SECRET:web.secret}}
       - ELRI_NODES=elri-node1:8000
     depends_on:
       - elri-node1
