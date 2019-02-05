@@ -18,7 +18,6 @@ from metashare.repository.templatetags.is_member import is_member
 from django.http import JsonResponse
 from collections import OrderedDict
 
-
 try:
 	import cStringIO as StringIO
 except ImportError:
@@ -228,10 +227,12 @@ def download(request, object_id, **kwargs):
 	"""
 	user_membership = _get_user_membership(request.user)
 	bypass_licence = False
+	api_auth=kwargs.get('api_auth', None)
 	if request.user.is_superuser \
 			or request.user.groups.filter(name="ecmembers").exists() \
 			or request.user.groups.filter(name="reviewers").exists()\
-			or kwargs['api_auth']:
+			or api_auth:
+#			or kwargs['api_auth']:
 		bypass_licence = True
 
 	# here we are only interested in licenses (or their names) of the specified
@@ -242,10 +243,7 @@ def download(request, object_id, **kwargs):
 	# Get a dictionary, where the values are triplets:
 	# (licenceInfo instance, download location, access)
 	licences = _get_licences(resource, user_membership)
-
-	LOGGER.info("-------------------------- FROM  DOWNLOAD --------------------------")
-	LOGGER.info(resource.storage_object.master_copy)
-
+	
 	# Check whether the resource is from the current node, or whether it must be
 	# redirected to the master copy
 	if not resource.storage_object.master_copy:
@@ -256,6 +254,7 @@ def download(request, object_id, **kwargs):
 
 	licence_choice = None
 
+	
 	# if the user is superuser or in ecmembers group, provide download directly bypassing licensing and stats
 	if request.method == "GET" and bypass_licence:
 		return _provide_download(request, resource, None, bypass_licence)
@@ -549,9 +548,11 @@ def view(request, resource_name=None, object_id=None):
 	documentation_info_tuple = None
 	resource_creation_info_tuple = None
 	relation_info_tuples = []
-	resource_component_tuple = None
+	resource_component_tuple =  None
+	##LOGGER.info(lr_content[1])
+	
 	for _tuple in lr_content[1]:
-		if _tuple[0] == "Distribution":
+		if _tuple[0] == "Distribution": #lr_content[1][1]
 			distribution_info_tuples.append(_tuple)
 		elif _tuple[0] == "Contact person":
 			contact_person_tuples.append(_tuple)
@@ -586,6 +587,7 @@ def view(request, resource_name=None, object_id=None):
 	
 	for item in distribution_info_tuples:
 		distribution_dicts.append(tuple2dict([item]))
+	##LOGGER.info(resource_component_tuple)
 	resource_component_dict = tuple2dict(resource_component_tuple)
 	resource_creation_dict = tuple2dict([resource_creation_info_tuple])
 	metadata_dict = tuple2dict([metadata_info_tuple])
@@ -773,10 +775,12 @@ def tuple2dict(_tuple):
 		if isinstance(item, tuple) or isinstance(item, list):
 			if isinstance(item[0], basestring):
 				# Replace spaces by underscores for component names.
+				# Handle strings as unicode to avoid "UnicodeEncodeError: 'ascii' codec can't encode character " errors
 				if item[0].find(" "):
-					_key = str(item[0].replace(" ", "_").replace("/", "_"))
+					_key = u''.join(item[0]).encode('utf-8').replace(" ", "_").replace("/", "_")
+					
 				else:
-					_key = str(item[0])
+					_key = u''.join(item[0]) #str(item[0])
 				if _key in _dict:
 					# If a repeatable component is found, a customized 
 					# dictionary is added, since no duplicate key names
@@ -794,11 +798,12 @@ def tuple2dict(_tuple):
 			else:
 				if isinstance(item[0], tuple):
 					# Replace spaces by underscores for element names.
+					
 					if item[0][0][:].find(" "):
-						_key = str(item[0][0].replace(" ", "_").replace('(', "").replace(")", "").replace("/", "_").replace(
-							"-", "_"))
+						#LOGGER.info(u''.join(item[0][0]).encode('utf-8'))
+						_key=u''.join(item[0][0]).encode('utf-8').replace(" ", "_").replace('(', "").replace(")", "").replace("/", "_").replace("-", "_")
 					else:
-						_key = str(item[0][0])
+						_key = u''.join(item[0][0]).encode('utf-8')
 
 					# If the item is a date, convert it to real datetime
 					if _key.find("_date") != -1:
@@ -843,7 +848,11 @@ class MetashareFacetedSearchView(FacetedSearchView):
 				and not self.request.user.is_superuser:
 			resource_names = []
 			for res in resourceInfoType_model.objects.all():
-				if self.request.user.groups.filter(
+				#get resource id
+				id_res = res.storage_object.id
+				res_groups=res.groups.values_list("name", flat=True)
+				
+				if self.request.user.groups.filter(	
 					name__in=res.groups.values_list("name", flat=True)).exists():
 					resname=res.identificationInfo.get_default_resourceName()
 					##get resource Name
@@ -852,15 +861,11 @@ class MetashareFacetedSearchView(FacetedSearchView):
 					resourceName=re.sub('[\W_]', '', resourceName)
 					##lowercase
 					resourceName=resourceName.lower()
-					##append resource name to the list
-					##resource_names.append(resourceName)
-					for g in res.groups.values_list("name",flat=True):
-						resourceName=resourceName+g
-					resource_names.append(resourceName)
-			#LOGGER.info(resource_names)		
+					##append resource name to the list,
+					#concatenate it to its id to resolve the conflicts that 
+					#  can arise from resources sharing the same name but with different group sharing policy
+					resource_names.append(resourceName+str(id_res))
 			if resource_names:
-				#for r in sqs.filter(publicationStatusFilter__exact='published'): #, resourceNameSortGroup__in=resource_names):
-				#	LOGGER.info(r.resourceNameSort)
 				sqs = sqs.filter(publicationStatusFilter__exact='published',
 								 resourceNameSort__in=resource_names)
 			else:
@@ -1148,7 +1153,7 @@ def contribute(request):
 		
 		if 'languages[]' in request.POST:
 			data['resourceInfo']['languages'] = decode_csv_to_list(request.POST.getlist('languages[]'))
-			LOGGER.info(data['resourceInfo']['languages'])
+			#LOGGER.info(data['resourceInfo']['languages'])
 
 		if 'domains[]' in request.POST:
 			data['resourceInfo']['appropriatenessForDSI'] = request.POST.getlist('domains[]')
@@ -1161,7 +1166,7 @@ def contribute(request):
 		filename = '{}_{}'.format(profile.country, uid)
 		response = {}
 
-		accepted_extensions = [".zip", ".pdf", ".doc", ".docx", ".tmx", ".txt",
+		accepted_extensions = [".zip", ".pdf", ".doc", ".docx", ".tmx", ".txt", ".rtf",
 							   ".xls", ".xlsx", ".xml", ".sdltm", ".odt", ".tbx"]
 		acceptable_re = "(.*)({0})$".format(
 			"|".join("({0})".format(ext) for ext in accepted_extensions))
@@ -1228,7 +1233,10 @@ def contribute(request):
 				xml_file = File(f)
 				xml_file.write(xml)
 			# add the relevant entry to the DB
-			resource_type = request.POST["resourceType"] or "corpus"
+			#LOGGER.info(request.POST)
+			##resource_type = request.POST["resourceType"] or "corpus"
+			resource_type = request.POST.get("resourceType",False) or "corpus"
+			#LOGGER.info(resource_type)
 			d = create_description(os.path.basename(xml_file.name),
 								   resource_type, unprocessed_dir,
 								   request.user)
