@@ -1,4 +1,7 @@
-{% load humanize replace i18n %}
+{% load replace %}
+{% load humanize %}
+{% load i18n %}
+{% spaceless %}
     <label class='component'>Distribution</label>
     {% if distribution.Distribution.Availability %}
         <div class="dataline indented">
