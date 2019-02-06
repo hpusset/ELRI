@@ -27,7 +27,12 @@ COPY resources/startup.sh /
 COPY resources/vhost.tmpl /tmp/
 
 RUN chmod +x /startup.sh /env_secrets_expand.sh \
-    && echo "daemon off;" >> /etc/nginx/nginx.conf
+    && echo "daemon off;" >> /etc/nginx/nginx.conf 
+# Set file size upload to 100MB  
+RUN cp /etc/nginx/nginx.conf /etc/nginx/_nginx.conf
+RUN cat /etc/nginx/_nginx.conf | awk 'BEGIN {http=0} {if ($0 == "http {") { http = 1; print $0 } else if ($0 == "}" && http == 1) {print "    client_max_body_size 100M;\n}"} else { print $0}}' > /etc/nginx/nginx.conf && rm /etc/nginx/_nginx.conf
+
+
 
 EXPOSE 80 443
 
