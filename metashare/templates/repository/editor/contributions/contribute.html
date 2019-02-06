@@ -105,6 +105,7 @@
             </div>
 
             <!-- Text input-->
+            <!--
             <div class="form-group required">
                 <label class="control-label" for="languages">{% trans 'Language(s)' %}</label>
                 <div class="language">
@@ -142,6 +143,22 @@
                     <span class="help-block contrib-help">{% trans 'The language(s) of the resource; for resources with multiple languages, hold down CTRL key to select multiple values' %}</span>
                 </div>
             </div>
+            -->
+            
+            <div class="form-group required">
+                <label class="control-label" for="languages">{% trans 'Language(s)' %}</label>
+                <div class="language">
+                    <select required class="form-control" multiple style="padding: 6px; height:200px"
+                            name="languages[]"
+                            id="languages">
+                            {% for lid, lname in languages %}
+                            <option value="{{ lid }}">{{ lname }}</option>
+                            {% endfor %}
+					</select>
+                    <span class="help-block contrib-help">{% trans 'The language(s) of the resource; for resources with multiple languages, hold down CTRL key to select multiple values' %}</span>
+                </div>
+            </div>          
+            
             <div class="form-group">
                 <label class="control-label" for="domains">{% trans 'Domain(s)' %}</label>
                 <div class="domain">
