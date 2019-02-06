@@ -6,8 +6,8 @@ RUN tar xvfz /tmp/dockerize-alpine-linux-amd64-v0.5.0.tar.gz -C /tmp/
 FROM python:2.7.15-stretch
 
 #ARG RELEASE="trunk"
-#ARG RELEASE="tags/R1.2"
-ARG RELEASE="branches/VIC"
+ARG RELEASE="tags/R2"
+#ARG RELEASE="branches/VIC"
 ENV DB_HOST="postgres-server" \
     DB_PORT="5432" \
     SOLR_HOST="solr" \
@@ -41,10 +41,14 @@ RUN svn export ${GIT_URL}/metashare /elri/metashare \
     && chmod +x /elri/startup.sh \
                 /elri/env_secrets_expand.sh \
                 /elri/create_super_user.sh
+# Workaround to allow elri_resources persistence without overriding shared volume with toolchains image
+RUN svn export ${GIT_URL}/elri_resources/config/web_service.cfg /elri/web_service.cfg
 
 COPY resources/local_settings.py \
      resources/maintainers.dat \
      resources/wsgi.py /elri/metashare/
+
+#COPY /elri/elri_resources/config/web_service.cfg /elri/
 
 EXPOSE 8000
 
