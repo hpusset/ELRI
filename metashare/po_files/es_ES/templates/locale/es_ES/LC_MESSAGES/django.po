@@ -37,12 +37,10 @@ msgstr "Lo sentimos, pero la URL que solicitó no fue encontrada."
 #: templates/404.html:10 templates/500.html:10
 msgid ""
 "Please try again and, if the error persists, contact the ELRI NRS support "
-"group (<a href=\"mailto:elri-nrs-support@vicomtech.org\" >elri-nrs-"
-"support@vicomtech.org</a>)."
+"group (<a href=\"mailto:{{ email }}\" >{{ email }}</a>)."
 msgstr ""
 "Inténtelo de nuevo y, si el error persiste, póngase en contacto con el grupo "
-"de soporte del repositorio ELRI (<a href=\"mailto:elri-nrs-support@vicomtech."
-"org\" >elri-nrs-support@vicomtech.org</a>)."
+"de soporte del repositorio ELRI (<a href=\"mailto:{{ email }}\" >{{ email }}</a>)."
 
 #: templates/500.html:6
 msgid "Internal Server Error (500)"
@@ -590,12 +588,10 @@ msgstr ""
 #: templates/help.html:27
 msgid ""
 "For technical help about this National Relay Station, you can contact us at "
-"<a href=\"mailto:eli-nrs-support@vicomtech.org\" >eli-nrs-support@vicomtech."
-"org</a>."
+"<a href=\"mailto:{{ mail }}\" >{{ mail }}</a>."
 msgstr ""
 "Para obtener ayuda técnica sobre este repositorio, puede ponerse en contacto "
-"con nosotros en <<a href=\"mailto:eli-nrs-support@vicomtech.org\" >eli-nrs-"
-"support@vicomtech.org</a>."
+"con nosotros en <a href=\"mailto:{{ mail }}\" >{{ mail }}</a>."
 
 #: templates/legal.html:7
 msgid "<strong>ELRI Terms of Service</strong>"
