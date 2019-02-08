@@ -21,7 +21,7 @@
         {% static "metashare/ELRI_ToS_template.pdf" as elri_tos %}
         {{ field }} <label for="{{ field.auto_id }}">{% blocktrans %}I accept the <a target="_blank" href="{{ elri_tos }}">ERLI Terms of Service</a>.{% endblocktrans %}</label>
       {% else %}
-        {{ field.label_tag }} {{ field }}
+        {{ field.label_tag }} {{ field }}<span style='color:red'>*</span>
       {% endif %}
       <div>{# for spacing and for clearing the last float environments #}</div>
     {% endfor %}
