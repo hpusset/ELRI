@@ -1,20 +1,39 @@
-FROM busybox:1.29.3 as base
+FROM busybox:1.30.0 as base
 
 RUN wget -O /tmp/dockerize-alpine-linux-amd64-v0.5.0.tar.gz https://github.com/jwilder/dockerize/releases/download/v0.5.0/dockerize-alpine-linux-amd64-v0.5.0.tar.gz
 RUN tar xvfz /tmp/dockerize-alpine-linux-amd64-v0.5.0.tar.gz -C /tmp/
 
+FROM alpine as ssl-container
+
+RUN apk update \
+  && apk add --no-cache openssl \
+  && rm -rf /var/cache/apk/* \
+  && openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /tmp/server.key -out /tmp/server.crt  -subj "/C=PT/ST=Lisboa/L=Lisboa/O=Dev/CN=dev.elri-nrs.eu"
+
 FROM nginx:1.15.5
 
-ENV ELRI_HOSTNAME="nrs" \
-    ELRI_DOMAINNAME="dev.elri.com" \
-    ELRI_NODES=test-node1:8000
+ENV ELRI_HOSTNAME="dev" \
+    ELRI_DOMAINNAME="elri-nrs.eu" \
+    ELRI_NODES=test-node1:8000 \
+    ELRI_CERT="server.crt" \
+    ELRI_KEY="server.key"
 
 COPY --from=base /tmp/dockerize /usr/local/bin/
+COPY --from=ssl-container /tmp/server.crt /etc/ssl/certs/server.crt
+COPY --from=ssl-container /tmp/server.key /etc/ssl/private/server.key
 COPY resources/env_secrets_expand.sh /
-COPY resources/startup.sh /startup.sh
-COPY resources/vhost.tmpl /etc/nginx/conf.d/
+COPY resources/startup.sh /
+#COPY resources/vhost.tmpl /etc/nginx/conf.d/
+COPY resources/vhost.tmpl /tmp/
 
 RUN chmod +x /startup.sh /env_secrets_expand.sh \
-    && echo "daemon off;" >> /etc/nginx/nginx.conf
+    && echo "daemon off;" >> /etc/nginx/nginx.conf 
+# Set file size upload to 100MB  
+RUN cp /etc/nginx/nginx.conf /etc/nginx/_nginx.conf
+RUN cat /etc/nginx/_nginx.conf | awk 'BEGIN {http=0} {if ($0 == "http {") { http = 1; print $0 } else if ($0 == "}" && http == 1) {print "    client_max_body_size 100M;\n}"} else { print $0}}' > /etc/nginx/nginx.conf && rm /etc/nginx/_nginx.conf
+
+
+
+EXPOSE 80 443
 
 CMD [ "/startup.sh" ]

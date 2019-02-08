@@ -4,6 +4,8 @@ services:
   elri-node1:
     ports:
       - "8000:8000"
+    environment:
+      - DEVELOPMENT=1
   # Linux POSTGRES Server 
   postgres-server:
     ports:
@@ -16,6 +18,7 @@ services:
   nginx:
     ports:
       - "80:80"
+      - "443:443"
   toolchain:
     ports:
       - "8080:8080"

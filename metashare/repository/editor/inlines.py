@@ -14,14 +14,14 @@ from metashare.repository.editor.schemamodel_mixin import SchemaModelLookup
 
 
 class SchemaModelInline(InlineModelAdmin, RelatedAdminMixin, SchemaModelLookup):
-    extra = 1
     template = 'admin/edit_inline/stacked.html'
     collapse = False
+    extra = 1
 
     def __init__(self, parent_model, admin_site):
         super(SchemaModelInline, self).__init__(parent_model, admin_site)
         if self.collapse:
-            self.verbose_name_plural = '_{}'.format(force_unicode(self.verbose_name_plural))
+            self.verbose_name_plural = u'_{}'.format(force_unicode(self.verbose_name_plural))
         # Show m2m fields as horizontal filter widget unless they have a custom widget:
         self.filter_horizontal = self.list_m2m_fields_without_custom_widget(self.model)
 
@@ -130,12 +130,12 @@ def reverse_inlineformset_factory(parent_model,
 class ReverseInlineModelAdmin(SchemaModelInline):
     '''
     Derived from http://djangosnippets.org/snippets/2032/
-    
+
     reverseadmin
     ============
-    
+
     Module that makes django admin handle OneToOneFields in a better way.
-    
+
     A common use case for one-to-one relationships is to "embed" a model
     inside another one. For example, a Person may have multiple foreign
     keys pointing to an Address entity, one home address, one business
@@ -146,9 +146,9 @@ class ReverseInlineModelAdmin(SchemaModelInline):
     entity, django admins standard inline classes can't be used. Which is
     why I created this module that implements "reverse inlines" for this
     use case.
-    
+
     Example:
-    
+
         from django.db import models
         class Address(models.Model):
             street = models.CharField(max_length = 255)
@@ -159,33 +159,33 @@ class ReverseInlineModelAdmin(SchemaModelInline):
             business_addr = models.OneToOneField(Address,
                                                  related_name = 'business_addr')
             home_addr = models.OneToOneField(Address, related_name = 'home_addr')
-    
+
     This is how standard django admin renders it:
-    
+
         http://img9.imageshack.us/i/beforetz.png/
-    
+
     Here is how it looks when using the reverseadmin module:
-    
+
         http://img408.imageshack.us/i/afterw.png/
-    
+
     You use reverseadmin in the following way:
-    
+
         from django.contrib import admin
         from models import Person
         from reverseadmin import ReverseModelAdmin
         class PersonAdmin(ReverseModelAdmin):
             inline_type = 'tabular'
         admin.site.register(Person, PersonAdmin)
-    
+
     inline_type can be either "tabular" or "stacked" for tabular and
     stacked inlines respectively.
-    
+
     The module is designed to work with Django 1.1.1. Since it hooks into
     the internals of the admin package, it may not work with later Django
     versions.
     '''
     formset = ReverseInlineFormSet
-    
+
     def __init__(self,
                  parent_model,
                  parent_fk_name,

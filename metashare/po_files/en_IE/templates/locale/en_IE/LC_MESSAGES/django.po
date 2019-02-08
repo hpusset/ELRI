@@ -37,8 +37,7 @@ msgstr ""
 #: templates/404.html:10 templates/500.html:10
 msgid ""
 "Please try again and, if the error persists, contact the ELRI NRS support "
-"group (<a href=\"mailto:elri-nrs-support@vicomtech.org\" >elri-nrs-"
-"support@vicomtech.org</a>)."
+"group (<a href=\"mailto:{{ email }}\" >{{ email }}</a>)."
 msgstr ""
 
 #: templates/500.html:6
@@ -500,8 +499,7 @@ msgstr ""
 #: templates/help.html:27
 msgid ""
 "For technical help about this National Relay Station, you can contact us at "
-"<a href=\"mailto:eli-nrs-support@vicomtech.org\" >eli-nrs-support@vicomtech."
-"org</a>."
+"<a href=\"mailto:{{ mail }}\" >{{ mail }}</a>."
 msgstr ""
 
 #: templates/legal.html:7

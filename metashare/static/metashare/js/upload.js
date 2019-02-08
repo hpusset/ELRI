@@ -57,13 +57,7 @@ $(function () {
 
     $("option[data-toggle='tooltip']").mouseleave(
         function () {
-            var that = $(this);
-            setTimeout(
-                function () {
-                    that.tooltip('hide');
-                },
-                2000
-            );
+            $(this).tooltip('hide');
         }
     );
 });
@@ -83,7 +77,7 @@ $(function () {
 
 var isIE = /*@cc_on!@*/false || !!document.documentMode;
 
-var acceptedExtensions = [".zip", ".pdf", ".doc", ".docx", ".tmx", ".txt", ".xls", ".xlsx", ".xml", ".sdltm", ".odt", ".tbx"];
+var acceptedExtensions = [".zip", ".pdf", ".doc", ".docx", ".rtf", ".tmx", ".txt", ".xls", ".xlsx", ".xml", ".sdltm", ".odt", ".tbx"];
 
 if (!isIE) {
     $(function () {

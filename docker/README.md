@@ -90,7 +90,8 @@ ELRI_EMAIL_PASS   | ''                             | ELRI Mail server auth passw
 Property          | Default value     | Description
 -------------     | -------------     | -------------
 ELRI_HOSTNAME     | dev               | ELRI hostname
-ELRI_DOMAINNAME   | elri-nrs.eu      | ELRI domain name
+ELRI_DOMAINNAME   | elri-nrs.eu       | ELRI domain name
+ELRI_PROTOCOL     | http              | General protocol used by the web server (when Nginx is in charge of SSL offloading)
 
 04. Start the project:
 
@@ -98,7 +99,7 @@ ELRI_DOMAINNAME   | elri-nrs.eu      | ELRI domain name
 $ docker-compose up
 ```
 
-05. (Optional) Super user creation for application login:
+05. Super user creation for application login:
 
 ```
 $ docker exec -ti elri_app /elri/create_super_user.sh
@@ -120,6 +121,35 @@ $ useradd --shell /bin/false --uid 7273 --no-create-home --expiredate 1 solr # N
 02. Execute the development procedure above replacing `docker-compose-runner-dev.yml` with `docker-compose-runner-prd.yml` in step `02`
 
 03. Start the project in detached mode:
+
+```
+$ docker-compose up -d
+```
+
+04. (Optional) To allow SSL termination at the Nginx Web Server:
+
+* Stop the project:
+
+```
+$ docker-compose down
+```
+
+* Uncomment docker-compose-runner-prd.yml entries identified by the comment:
+
+```
+# Uncomment if using SSL termination at nginx server
+```
+
+* Merge the files `docker-compose-runner-prd.yml` and  `docker-compose-runner.yml` again
+
+* Update certificate and key:
+
+File          | Destination                             | Description
+------------- | -------------                           | -------------
+server.crt    | /var/lib/docker/volumes/web-certs/_data | Valid registered Certificate for `ELRI_HOSTNAME`.`ELRI_DOMAINNAME`
+server.key    | /var/lib/docker/volumes/web-keys/_data  | Valid registered Certificate key `ELRI_HOSTNAME`.`ELRI_DOMAINNAME`
+
+* Start the project in detached mode:
 
 ```
 $ docker-compose up -d
@@ -204,3 +234,5 @@ To do:
 - [X] Toolchain integration
 - [X] E-mail server configuration (R1.2)
 - [ ] Auto configure release name at the Dockerfile/docker-compose-runner.yml files
+- [X] Mail service to recieve mails only (mailhog, for testing purposes), for sending e-mails it is preferred to use a e-mail relay service (e.g. google, as it is free of charge)
+- [X] Nginx SSL support (R1.1)

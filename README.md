@@ -17,6 +17,11 @@ will integrate, among other things:
 - automatic language resource processing toolchain integration
 - manual quality control workflow elements.
 
+Requirements
+------------
+
+- Java 8
+
 Setup
 -----
 
@@ -26,7 +31,7 @@ following steps need to be undertaken:
 01. Copy `metashare/local_settings.sample` to `metashare/local_settings.py` and
     change the local_settings accordingly.
 
-02. Set up a Python 2 virtualenv 
+02. Set up a Python 2 virtualenv
 
         virtualenv venv
 
@@ -42,10 +47,22 @@ following steps need to be undertaken:
     use `psycopg2==2.7`.
     Check if `flup` is also in the requirements file. It may be needed.
 
+    If this error occurs:
+
+    ```
+    django.core.exceptions.ImproperlyConfigured: Error loading psycopg2 module: /data/elri/ELRI/venv/local/lib/python2.7/site-packages/psycopg2/.libs/./libresolv-2-c4c53def.5.so: symbol __res_maybe_init version GLIBC_PRIVATE not defined in file libc.so.6 with link time reference
+    ```
+
+    Try upgrading `psycopg2`:
+
+    ```
+    pip install psycopg2 --upgrade
+    ```
+
 03. Launch Solr by `cd`-ing in the `solr/` folder and doing
 
         java -jar -Djetty.port=chosen_port start.jar
-    
+
     Make sure to update the `SOLR_URL` and `TESTING_SOLR_URL` environment
     variables in `metashare/local_settings.py` accordingly.
 
@@ -70,15 +87,15 @@ following steps need to be undertaken:
         local all postgres trust
         # Database administrative login by Unix domain socket
         #local  all             all                                     peer
-        local   all             all                                     md5 
+        local   all             all                                     md5
         # Allow replication connections from localhost, by a user with the
         # replication privilege.  
         #local  replication     all                                     peer
         local   replication     all                                     md5
         ```
- 
+
     And restart the `postgresql` service
- 
+
         ```
         sudo service postgresql restart
         ```
@@ -86,7 +103,7 @@ following steps need to be undertaken:
          `local_settings.py` file.
 
         ```
-        psql -u postgres
+        psql -U postgres
         postgres=# create role your_user;
         postgres=# alter user your_user with encrypted password 'yourPassword' ;
         ```
@@ -99,7 +116,7 @@ following steps need to be undertaken:
         postgres=# grant all privileges on database your_user to your_user ;
         postgres=# ALTER ROLE "your_user" WITH LOGIN;
         ```
-    
+
     At this point, you will be able to login with your user doing `psql -U
     your_user`.
 
@@ -108,31 +125,31 @@ following steps need to be undertaken:
 
         ```
         createdb -U postgres your_metashare_db
-        psql -U postgres 
+        psql -U postgres
         postgres=# grant all privileges on database your_metashare_db to \
         your_user ;
         ```
-    
+
     If you have allowed the login for the `your_user` user, you will be able to
-    login on the `your_metashare_db` data base by doing 
+    login on the `your_metashare_db` data base by doing
 
         ```
         psql -U your_user your_metashare_db
         ```
 
     4.5. Check the `postgresql` service port:
-    
+
         ```
         sudo netstat -nl | grep postgres
         unix  2      [ ACC ]     STREAM     LISTENING     186337   /var/run/postgresql/.s.PGSQL.5433
         ```
 
     and check the `PORT` field in the `DATABASES` variable of the
-    `local_settings.py`, in this case it should be `5433`. 
+    `local_settings.py`, in this case it should be `5433`.
 
-    
+
 05. Generate migrations for the relevant apps by doing a
-  
+
         python manage.py makemigrations accounts repository stats \
         recommendations storage
 
@@ -152,16 +169,16 @@ following steps need to be undertaken:
 
 09. Create the file `metashare/maintainers.dat`, which should have the following
     format:
-    
+
     Country_name:maintainer_user_name_1,user_name_2,...
-  
+
     for each authorised country_name/maintainer_user_name in the system.
 
 10. Create the folder specified in the `STATIC_ROOT` `metashare/local_settings.py`
     environment variable and run
 
         python manage.py collectstatic
-    
+
     to collect all static files to the STATIC_ROOT directory.
 
 11. Create a superuser so that one can log in to the application:
@@ -179,7 +196,7 @@ following steps need to be undertaken:
     need to set up `ALLOWED_HOSTS` to accept connections from any host:
 
         ALLOWED_HOSTS = ["*"]
-    
+
     Also, check the `DJANGO_BASE` and the `DJANGO_URL` variables to know the
     base path under which Django is deployed. By default, the webapp will be
     deployed in `http://localhost:8000/django_base_value`.
@@ -187,9 +204,9 @@ following steps need to be undertaken:
 13. Do a
 
         python manage.py runserver --insecure
-    
+
     to launch the app in the development mode.
-    
+
     If you want to launch the app in development mode and make it available from
     an internal network run:
 
@@ -199,5 +216,3 @@ following steps need to be undertaken:
     development mode and making it accessible from an internal network. And the
     `stop_dev_webapp.sh` script to stop the webapp. Notice that you may need to
     change the ports used in these scripts.   
-
-

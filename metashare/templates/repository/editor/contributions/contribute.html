@@ -183,12 +183,14 @@
             <div class="form-group required" id="licence">
                 <label class="control-label" for="licence">{% trans 'Licensing conditions' %}</label>
                 <select required name="licence">
-                    <option value="publicDomain">{% trans 'License-free' %}</option>
-                    <option value="CC-BY-4.0">{% trans 'Creative Commons - Attribution 4.0' %}</option>
-                    <option value="CC-BY-SA-4.0">{% trans 'Creative Commons - Attribution - ShareAlike 4.0' %}</option>
-                    <option value="CC-BY-NC-4.0">{% trans 'Creative Commons - Attribution - NonCommercial 4.0' %}</option>
-                    <option value="CC-BY-NC-SA-4.0">{% trans 'Creative Commons - Attribution - NonCommercial - ShareAlike 4.0' %}</option>
-                    <option value="non-standard/Other_Licence/Terms">{% trans 'Use External License' %}</option>
+                    <option value="publicDomain">{% trans 'Public Domain' %}</option>
+                    <option value="openUnder-PSI">{% trans 'Open Under-PSI' %}</option>
+                    <option value="CC0-1.0">{% trans 'Creative Commons Zero 1.0 (CC0-1.0)' %}</option>
+                    <option value="CC-BY-4.0">{% trans 'Creative Commons - Attribution 4.0 (CC-BY-4.0)' %}</option>
+                    <option value="CC-BY-SA-4.0">{% trans 'Creative Commons - Attribution - ShareAlike 4.0 (CC-BY-SA-4.0)' %}</option>
+                    <option value="CC-BY-NC-4.0">{% trans 'Creative Commons - Attribution - NonCommercial 4.0 (CC-BY-NC-4.0)' %}</option>
+                    <option value="CC-BY-NC-SA-4.0">{% trans 'Creative Commons - Attribution - NonCommercial - ShareAlike 4.0 (CC-BY-NC-SA-4.0)' %}</option>
+                    <option value="non-standard/Other_Licence/Terms">{% trans 'Non-Standard/Other_Licence/Terms' %}</option>
                 </select>
                 <span class="help-block contrib-help">{% blocktrans %}The licensing conditions for the resource.{% endblocktrans %}</span>
             </div>
@@ -223,9 +225,9 @@
             <!-- File Button -->
             <div class="form-group required" id="fileupload">
                 <label class="control-label" for="filebutton">{% trans 'Upload Resource' %}</label>
-                <input multiple accept=".zip,.doc,.docx,.odt,.pdf,.tmx,.sdltm,.xml,.tbx,.xls,.xlsx,.txt" id="filebutton" name="filebutton" class="input-file" type="file"
+                <input multiple accept=".zip,.doc,.docx,.odt,.rtf,.pdf,.tmx,.sdltm,.xml,.tbx,.xls,.xlsx,.txt" id="filebutton" name="filebutton" class="input-file" type="file"
                        required="">
-                <span class="help-block contrib-help">{% trans 'Please upload a single <strong>.zip</strong> file or any number of files of the following type: <strong>.doc(x), .odt, .tmx, .sdltm, .xml, .tbx, .xls(x), or .txt file</strong> up to 100MB.' %}
+                <span class="help-block contrib-help">{% trans 'Please upload a single <strong>.zip</strong> file or any number of files of the following type: <strong>.doc(x), .odt, .rtf, .tmx, .sdltm, .xml, .tbx, .xls(x), or .txt file</strong> up to 100MB.' %}
                     </br>
                     {% trans 'In case the data you wish to upload are larger than 100MB, please contact us to provide an SFTP link for direct download or consider uploading smaller files' %}
                 </span>
