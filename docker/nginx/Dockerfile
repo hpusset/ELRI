@@ -23,16 +23,18 @@ COPY --from=ssl-container /tmp/server.crt /etc/ssl/certs/server.crt
 COPY --from=ssl-container /tmp/server.key /etc/ssl/private/server.key
 COPY resources/env_secrets_expand.sh /
 COPY resources/startup.sh /
-#COPY resources/vhost.tmpl /etc/nginx/conf.d/
 COPY resources/vhost.tmpl /tmp/
 
 RUN chmod +x /startup.sh /env_secrets_expand.sh \
-    && echo "daemon off;" >> /etc/nginx/nginx.conf 
+    && echo "daemon off;" >> /etc/nginx/nginx.conf \
+    && mkdir -p /www/data/static \
+    && chown 8283:8283 /www/data/static
+
 # Set file size upload to 100MB  
 RUN cp /etc/nginx/nginx.conf /etc/nginx/_nginx.conf
 RUN cat /etc/nginx/_nginx.conf | awk 'BEGIN {http=0} {if ($0 == "http {") { http = 1; print $0 } else if ($0 == "}" && http == 1) {print "    client_max_body_size 100M;\n}"} else { print $0}}' > /etc/nginx/nginx.conf && rm /etc/nginx/_nginx.conf
 
-
+VOLUME [ "/www/data/static" ]
 
 EXPOSE 80 443
 

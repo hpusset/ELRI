@@ -3,13 +3,14 @@ services:
   # Django app
   elri-node1:
     container_name: elri_app
-    image: elrinrs/nationalrelaystation:R2
+    image: elrinrs/nationalrelaystation:R2.1
     secrets:
       - db.secret
       - app.secret
       - web.secret
     volumes:
       - elri-shared-resources:/elri/elri_resources:rw
+      - elri-static-resources:/elri/static:rw
     environment:
       - DBELRI_USER={{DOCKER-SECRET:db.secret}}
       - DBELRI_PASS={{DOCKER-SECRET:db.secret}}
@@ -56,9 +57,11 @@ services:
   # NGINX webserver
   nginx:
     container_name: elri_webserver
-    image: elrinrs/nginx:R2
+    image: elrinrs/nginx:R2.1
     secrets:
       - web.secret
+    volumes:
+      - elri-static-resources:/www/data/static:ro
     environment:
       - ELRI_HOSTNAME={{DOCKER-SECRET:web.secret}}
       - ELRI_DOMAINNAME={{DOCKER-SECRET:web.secret}}
@@ -80,10 +83,12 @@ services:
       elri-nw: {}
 volumes:
   elri-shared-resources:
-    name: elri-shared    
+    name: elri-shared
+  elri-static-resources:
+    name: elri-static
 secrets:
-  db.secret:
-  app.secret:
-  web.secret:
+  db.secret: {}
+  app.secret: {}
+  web.secret: {}
 networks:
   elri-nw: {}
