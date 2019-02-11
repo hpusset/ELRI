@@ -48,8 +48,6 @@ COPY resources/local_settings.py \
      resources/maintainers.dat \
      resources/wsgi.py /elri/metashare/
 
-#COPY /elri/elri_resources/config/web_service.cfg /elri/
-
 EXPOSE 8000
 
 WORKDIR /elri
@@ -57,10 +55,11 @@ WORKDIR /elri
 RUN useradd django \
     && usermod --shell /bin/false --uid 8283 --expiredate 1 --lock django \
     && groupmod --gid 8283 django \
-    && chown -R django:django /elri \
+    && mkdir -p /elri/static \
+    && chown -R 8283:8283 /elri \
     && chmod -R 774 /elri/elri_resources
 
-VOLUME [ "/certificates", "/elri/elri_resources" ]
+VOLUME [ "/certificates", "/elri/elri_resources", "/elri/static" ]
 
 USER django
 
