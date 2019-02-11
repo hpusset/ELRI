@@ -1,0 +1,28 @@
+diff --git a/Lib/gettext.py b/Lib/gettext.py
+--- a/Lib/gettext.py
++++ b/Lib/gettext.py
+@@ -48,7 +48,7 @@
+ 
+ import locale, copy, io, os, re, struct, sys
+ from errno import ENOENT
+-
++import warnings
+ 
+ __all__ = ['NullTranslations', 'GNUTranslations', 'Catalog',
+            'find', 'translation', 'install', 'textdomain', 'bindtextdomain',
+@@ -293,7 +293,14 @@
+                         self._charset = v.split('charset=')[1]
+                     elif k == 'plural-forms':
+                         v = v.split(';')
+-                        plural = v[1].split('plural=')[1]
++                        if len(v) < 2:
++                            warnings.warn('plural-forms header is empty')
++                            continue
++                        v = v[1].split('plural=')
++                        if len(v) < 2:
++                            warnings.warn('"plural=" not found')
++                            continue
++                        plural = v[1]
+                         self.plural = c2py(plural)
+             # Note: we unconditionally convert both msgids and msgstrs to
+             # Unicode using the character encoding specified in the charset

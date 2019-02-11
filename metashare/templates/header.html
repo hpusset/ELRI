@@ -1,7 +1,7 @@
 {% load static from staticfiles %}
 {% load is_member i18n %}
 {% spaceless %}
-    <div id="header">        
+    <div id="header">
         <a href="http://www.elri-project.eu/" title="European Language Resource Infrastructure"
            target="_blank"><img style="float:right; margin: 10px 20px 0 0"
                                 src="{{ STATIC_URL }}metashare/images/elri-logo-title-small.png"/></a>
@@ -93,31 +93,31 @@
                     <i class="fa fa-info-circle menu_fontawesome" aria-hidden="true"></i> {% trans 'Usage' %}</a>
                     <ul>
                         <li><a href="{% url 'info' %}#ELRI_services">{% trans 'ELRI Services' %}</a></li>
-                        <li><a href="{% url 'info' %}#Managing_LRs">{% trans 'Managing Language Resources' %}</a></li>                        
-                        <li><a href="{% url 'info' %}#Licensing_LRs">{% trans 'Licensing Language Resources' %}</a></li>                                                
+                        <li><a href="{% url 'info' %}#Managing_LRs">{% trans 'Managing Language Resources' %}</a></li>
+                        <li><a href="{% url 'info' %}#Licensing_LRs">{% trans 'Licensing Language Resources' %}</a></li>
                     </ul>
                 </li>
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'legal' %}">
                     <i class="fa fa-book menu_fontawesome" aria-hidden="true"></i> {% trans 'Terms of Service' %}</a>
                     <ul>
-                        <li><a href="{% url 'legal' %}#Use_of_services">{% trans 'Use of ELRI Services' %}</a></li>                                                                        
-                        <li><a href="{% url 'legal' %}#Sharing">{% trans 'Sharing of Language Resources' %}</a></li>                                                
+                        <li><a href="{% url 'legal' %}#Use_of_services">{% trans 'Use of ELRI Services' %}</a></li>
+                        <li><a href="{% url 'legal' %}#Sharing">{% trans 'Sharing of Language Resources' %}</a></li>
                         <li><a href="{% url 'legal' %}#Privacy">{% trans 'Privacy' %}</a></li>
                         <li><a href="{% url 'legal' %}#Data_protection">{% trans 'Data Protection' %}</a></li>
                         <li><a href="{% url 'legal' %}#Data_protection_statement">{% trans 'Data Protection Statement' %}</a></li>
                         <li><a href="{% url 'legal' %}#Notice_take_down">{% trans 'Notice and Takedown Policy' %}</a></li>
                     </ul>
-                </li>                       
+                </li>
                 {% endif %}
                 <li title="{% trans 'Help' %}"><a href="{% url 'help' %}">
                     <i class="fa fa-question-circle menu_fontawesome" aria-hidden="true"></i> {% trans 'Help' %}</a></li>
-                
+
                 {% if user.is_active %}
                     <li title="{% trans 'Profile settings and actions' %}"><a href="{% url 'edit_profile' %}">
-                        <i class="fa fa-user menu_fontawesome" aria-hidden="true"></i> {% trans 'Your Profile,' %}
+                        <i class="fa fa-user menu_fontawesome" aria-hidden="true"></i> <!-- removing Your Profile and switching user.username and user.firtname to show-->
                         {% load firstof from future %}{% filter force_escape %}
-                            {% firstof user.first_name user.username %}{% endfilter %}</a>
+                            {% firstof user.username user.first_name %}{% endfilter %}                            
                         <ul>
                             {% if user.is_staff %}
                                 <li><a href="{% url 'editor:index' %}">{% trans 'View your recent actions' %}</a></li>{% endif %}
@@ -149,7 +149,7 @@
                     </li>
                 {% endif %}
                 {% if user.username %}
-                    <li><a href="{% url 'logout' %}?next={{ request.path }}">
+                    <li><a href="{% url 'logout' %}">
                         <i class="fa fa-sign-out menu_fontawesome" aria-hidden="true"></i> {% trans 'Logout' %}</a></li>
                 {% else %}
                     <li><a href="{% url 'create' %}">
