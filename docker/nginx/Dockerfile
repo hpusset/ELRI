@@ -30,10 +30,6 @@ RUN chmod +x /startup.sh /env_secrets_expand.sh \
     && mkdir -p /www/data/static \
     && chown 8283:8283 /www/data/static
 
-# Set file size upload to 100MB  
-RUN cp /etc/nginx/nginx.conf /etc/nginx/_nginx.conf
-RUN cat /etc/nginx/_nginx.conf | awk 'BEGIN {http=0} {if ($0 == "http {") { http = 1; print $0 } else if ($0 == "}" && http == 1) {print "    client_max_body_size 100M;\n}"} else { print $0}}' > /etc/nginx/nginx.conf && rm /etc/nginx/_nginx.conf
-
 VOLUME [ "/www/data/static" ]
 
 EXPOSE 80 443

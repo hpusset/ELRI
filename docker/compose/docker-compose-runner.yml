@@ -57,7 +57,7 @@ services:
   # NGINX webserver
   nginx:
     container_name: elri_webserver
-    image: elrinrs/nginx:R2.1
+    image: elrinrs/nginx:R2.2
     secrets:
       - web.secret
     volumes:
