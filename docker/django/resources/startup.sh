@@ -4,6 +4,11 @@ GREEN='\033[0;32m'
 BLUE='\033[1;34m'
 NC='\033[0m' # No Color
 
+# Workaround to allow elri_resources persistence without overriding shared volume with toolchains image
+# Updating web_service config file but saving already existing config file first
+cp /elri/elri_resources/config/web_service.cfg /elri/elri_resources/config/_web_service.cfg
+cp /elri/web_service.cfg /elri/elri_resources/config/web_service.cfg
+
 source /elri/env_secrets_expand.sh
 
 cmd="dockerize"
@@ -29,3 +34,4 @@ else
 fi
 
 $cmd
+

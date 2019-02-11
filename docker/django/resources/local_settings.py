@@ -266,7 +266,7 @@ LEGAL_REVIEWERS = ("1",)
 
 REST_API_KEY = ""
 
-ALLOWED_HOSTS = ['elri-node1', 'localhost', 'deep-hslt.vicomtech.es']
+ALLOWED_HOSTS = ['elri-node1', 'localhost']
 
-DOC2TMX_URL = "http://toolchain:8084/ELRI_WebService/tc_doc2tmx/process"
-TM2TMX_URL = "http://toolchain:8084/ELRI_WebService/tc_tm2tmx/process"
+DOC2TMX_URL = "http://toolchain:8080/ELRI_WebService/tc_doc2tmx/process"
+TM2TMX_URL = "http://toolchain:8080/ELRI_WebService/tc_tm2tmx/process"

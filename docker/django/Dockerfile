@@ -6,8 +6,8 @@ RUN tar xvfz /tmp/dockerize-alpine-linux-amd64-v0.5.0.tar.gz -C /tmp/
 FROM python:2.7.15-stretch
 
 #ARG RELEASE="trunk"
-#ARG RELEASE="tags/R1.2"
-ARG RELEASE="branches/VIC"
+ARG RELEASE="tags/R2"
+#ARG RELEASE="branches/VIC"
 ENV DB_HOST="postgres-server" \
     DB_PORT="5432" \
     SOLR_HOST="solr" \
@@ -41,6 +41,8 @@ RUN svn export ${GIT_URL}/metashare /elri/metashare \
     && chmod +x /elri/startup.sh \
                 /elri/env_secrets_expand.sh \
                 /elri/create_super_user.sh
+# Workaround to allow elri_resources persistence without overriding shared volume with toolchains image
+RUN svn export ${GIT_URL}/elri_resources/config/web_service.cfg /elri/web_service.cfg
 
 COPY resources/local_settings.py \
      resources/maintainers.dat \
@@ -53,10 +55,11 @@ WORKDIR /elri
 RUN useradd django \
     && usermod --shell /bin/false --uid 8283 --expiredate 1 --lock django \
     && groupmod --gid 8283 django \
-    && chown -R django:django /elri \
+    && mkdir -p /elri/static \
+    && chown -R 8283:8283 /elri \
     && chmod -R 774 /elri/elri_resources
 
-VOLUME [ "/certificates", "/elri/elri_resources" ]
+VOLUME [ "/certificates", "/elri/elri_resources", "/elri/static" ]
 
 USER django
 

@@ -23,11 +23,14 @@ COPY --from=ssl-container /tmp/server.crt /etc/ssl/certs/server.crt
 COPY --from=ssl-container /tmp/server.key /etc/ssl/private/server.key
 COPY resources/env_secrets_expand.sh /
 COPY resources/startup.sh /
-#COPY resources/vhost.tmpl /etc/nginx/conf.d/
 COPY resources/vhost.tmpl /tmp/
 
 RUN chmod +x /startup.sh /env_secrets_expand.sh \
-    && echo "daemon off;" >> /etc/nginx/nginx.conf
+    && echo "daemon off;" >> /etc/nginx/nginx.conf \
+    && mkdir -p /www/data/static \
+    && chown 8283:8283 /www/data/static
+
+VOLUME [ "/www/data/static" ]
 
 EXPOSE 80 443
 

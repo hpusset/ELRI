@@ -1,0 +1,54 @@
+version: '3.5'
+services:
+  # django app
+  elri-node1:
+    ports:
+      - "8000:8000"
+    volumes:
+      - elri-certs:/certificates:ro
+  # Linux POSTGRES Server 
+  postgres-server:
+    volumes:
+      - elri-db:/var/lib/postgresql/data:rw
+    ports:
+      - "5432:5432"
+  # Solr indexing
+  solr:
+    ports:
+      - "8983:8983"
+  # NGINX webserver
+  nginx:
+    ports:
+      - "80:80"
+      # Uncomment if using SSL termination at nginx server
+      # - "443:443"
+    # Uncomment if using SSL termination at nginx server
+    # volumes:
+    #   - web-certs:/etc/ssl/certs:ro
+    #   - web-keys:/etc/ssl/private:ro
+  toolchain:
+    ports:
+      - "8080:8080"
+volumes:
+  elri-db:
+    name: elri-db
+  elri-certs:
+    name: elri-certs
+  # Uncomment if using SSL termination at nginx server
+  # web-certs:
+  #   name: web-certs
+  # web-keys:
+  #   name: web-keys
+secrets:
+  db.secret:
+    file: db_secret.properties
+  app.secret:
+    file: nrs_secret.properties
+  web.secret:
+    file: web_secret.properties
+networks:
+  elri-nw:
+    name: elri-nw
+    # ipam:
+    #   config:
+    #     - subnet: 10.1.0.0/24
