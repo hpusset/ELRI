@@ -4,7 +4,7 @@ from django.contrib.auth import views as auth_views
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from metashare.repository.models import resourceInfoType_model
-from metashare.settings import LOG_HANDLER, COUNTRY
+from metashare.settings import LOG_HANDLER, COUNTRY, LANGUAGE_CODE
 from metashare.storage.models import PUBLISHED
 
 
@@ -15,6 +15,8 @@ LOGGER.addHandler(LOG_HANDLER)
 
 def frontpage(request):
     """Renders the front page view."""
+    LOGGER.info(LANGUAGE_CODE)
+    request.session['django_language'] = LANGUAGE_CODE
     LOGGER.info(u'Rendering frontpage view for user "{0}".'
                 .format(request.user.username or "Anonymous"))
     lr_count = resourceInfoType_model.objects.filter(
