@@ -1558,8 +1558,10 @@ def repo_report(request):
 			{'font_size': 11, 'font_color': 'white', 'bold': True, 'bg_color': "#058DBE", 'border': 1})
 		bold = workbook.add_format({'bold': True})
 		date_format = workbook.add_format({'num_format': 'yyyy, mmmm d'})
-		title = "ELRC-SHARE_OVERVIEW_{}".format(
+		title = "ELRI_OVERVIEW_{}".format(
 			datetime.datetime.now().strftime("%Y-%m-%d"))
+#		title = "ELRC-SHARE_OVERVIEW_{}".format(
+#			datetime.datetime.now().strftime("%Y-%m-%d"))
 		worksheet = workbook.add_worksheet(name=title)
 
 		worksheet.write('A1', 'Resource ID', heading)
@@ -1773,12 +1775,19 @@ def repo_report(request):
 			rp = open('{}/report_recipients.dat'.format(TMP)).read().splitlines()
 
 			msg_body = "Dear all,\n" \
-					   "Please find attached an overview of the resources available in the ELRC-SHARE " \
+					   "Please find attached an overview of the resources available in the ELRI " \
 					   "repository and their status today, {}.\n" \
 					   "Best regards,\n\n" \
-					   "The ELRC-SHARE group".format(datetime.datetime.now().strftime("%d, %b %Y"))
-			msg = EmailMessage("[ELRC] ERLC-SHARE weekly report", msg_body,
-							   from_email='elrc-share@ilsp.gr', bcc=rp)
+					   "The ELRI group".format(datetime.datetime.now().strftime("%d, %b %Y"))
+			#msg_body = "Dear all,\n" \
+			#		   "Please find attached an overview of the resources available in the ELRC-SHARE " \
+			#		   "repository and their status today, {}.\n" \
+			#		   "Best regards,\n\n" \
+			#		   "The ELRC-SHARE group".format(datetime.datetime.now().strftime("%d, %b %Y"))	   
+			#msg = EmailMessage("[ELRC] ERLC-SHARE weekly report", msg_body,
+			#				   from_email='elrc-share@ilsp.gr', bcc=rp)
+			msg = EmailMessage("[ELRI] ELRI weekly report", msg_body,
+							   from_email='elri-share@ilsp.gr', bcc=rp)
 			msg.attach("{}.xlsx".format(title), output.getvalue(),
 					   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 			msg.send()

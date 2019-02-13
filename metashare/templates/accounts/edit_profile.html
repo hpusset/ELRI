@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block title %}{{ title }} &ndash; ELRC-SHARE{% endblock %}
+{% block title %}{{ title }} &ndash; ELRI{% endblock %}
 {% block content %}
 <form class="form_helper" action="{% url 'edit_profile' %}" method="post">
 <table>
@@ -17,7 +17,7 @@
 {#  <tr><th><label>META-SHARE Membership</label></th><td class="readonly">{{ metashare_membership }}</td></tr>#}
 {#  {% endif %}#}
 {% url 'contact' as contact_url %}
-  <tr><td colspan="2" style="text-align:center; height:40px;">{% blocktrans %}If you would like to change any of the above details, please <a href="{{ contact_url }}">contact the maintainers of ELRC-SHARE Repository</a>.{% endblocktrans %}</td></tr>
+  <tr><td colspan="2" style="text-align:center; height:40px;">{% blocktrans %}If you would like to change any of the above details, please <a href="{{ contact_url }}">contact the maintainers of ELRI Repository</a>.{% endblocktrans %}</td></tr>
   {% if API_KEY %}
       <tr><th><label>{% trans 'API KEY' %}</label></th><td class="readonly">{{ API_KEY }}</td></tr>
   {% endif %}

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load replace i18n %}
 {% block title %}
-    {{ resource }} &ndash; {% trans 'Download Licence Agreement' %} &ndash; ELRC-SHARE
+    {{ resource }} &ndash; {% trans 'Download Licence Agreement' %} &ndash; ELRI
 {% endblock %}
 
 {% block content %}
@@ -49,7 +49,7 @@
             </div>
             <div class="licence_agreement_form">
                 {% if not request.user.is_authenticated %}
-                    <div style="font-size: 1.25em; font-weight: bold;background: #f2e89db3;padding: 10px;margin-top: 10px;border-radius: 5px;">{% blocktrans %}Stay in touch with ELRC!
+                    <div style="font-size: 1.25em; font-weight: bold;background: #f2e89db3;padding: 10px;margin-top: 10px;border-radius: 5px;">{% blocktrans %}Stay in touch with ELRI!
                     Register <a target="_blank" href="/accounts/create">here</a>.{% endblocktrans %}</div>
                 {% endif %}
                 {% if not download_available %}

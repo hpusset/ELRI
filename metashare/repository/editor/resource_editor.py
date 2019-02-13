@@ -1232,11 +1232,17 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 if _extension:
                     _storage_folder = storage_object._storage_folder()
 
-                    _out_filename = u'{}/ELRC_VALREP_{}_{}.{}'.format(_storage_folder,
+                    _out_filename = u'{}/ELRI_VALREP_{}_{}.{}'.format(_storage_folder,
                                                                       object_id,
                                                                       obj.identificationInfo.resourceName['en']
                                                                       .replace(u"/", u"_").replace(u" ", u"_"),
                                                                       _extension)
+					#_out_filename = u'{}/ELRC_VALREP_{}_{}.{}'.format(_storage_folder,
+                    #                                                  object_id,
+                    #                                                  obj.identificationInfo.resourceName['en']
+                    #                                                  .replace(u"/", u"_").replace(u" ", u"_"),
+                    #                                                  _extension)
+                    
                     # we need to make sure the any existing report is removed
                     # while the new one may have a different filename due to
                     # resourceName change
