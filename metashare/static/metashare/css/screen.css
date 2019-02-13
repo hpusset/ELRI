@@ -751,13 +751,6 @@ div.citation label a {
     font-size: 12px;
 }
 
-/*table width*/
-table.result_table {
-    width: 800px;
-}
-
-/*end table width*/
-
 table.result_table tr.result_table_head {
     text-shadow: 0px 1px 1px white;
     font-size: 12px;

@@ -1,136 +1,120 @@
-{% extends "base.html" %}
-{% load static from staticfiles %}
-{%load i18n %}
-{% block content %}
-    <noscript><b>{% trans 'It seems JavaScript is either disabled or not supported by your browser.' %}</b>
-        {% blocktrans %}JavaScript should be enabled in order to support all functionalities.
-        Enable JavaScript by changing your browser options, and then try again.{% endblocktrans %}
-    </noscript>
-    {% if geovisits|length > 0 %}
-        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-        <script type="text/javascript">
-            try {
-                google.load('visualization', '1', {packages: ['geochart']});
-                google.setOnLoadCallback(drawVisualization);
-            } catch (e) {
-                // error calling Google occured
-            }
-            var data;
-            var setOn = 0;
-            function drawVisualization() {
-                var data = google.visualization.arrayToDataTable([
-                    ['Country', 'Count'],
-                    {% for geoinfo in geovisits %}
-                        {% if geoinfo.0|length > 0 %}
-                            ['{{ geoinfo.0 }}', {{ geoinfo.1 }}],
-                        {% endif %}
-                    {% endfor %}
-                ]);
-                var options = {width: 300, legend: false, colorAxis: {colors: ['#FF6600']}};
-                options["datalessRegionColor"] = 'efefef';
+{% extends "stats/base.html" %}
+{% load static i18n  %}
+    {% block extra_js %}
+        <noscript><b>{% trans 'It seems JavaScript is either disabled or not supported by your browser.' %}</b>
+            {% blocktrans %}JavaScript should be enabled in order to support all functionalities.
+            Enable JavaScript by changing your browser options, and then try again.{% endblocktrans %}
+        </noscript>
+        {% if geovisits|length > 0 %}
+            <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+            <script type="text/javascript">
+                try {
+                    google.load('visualization', '1', {packages: ['geochart']});
+                    google.setOnLoadCallback(drawVisualization);
+                } catch (e) {
+                    // error calling Google occured
+                }
+                var data;
+                var setOn = 0;
+                function drawVisualization() {
+                    var data = google.visualization.arrayToDataTable([
+                        ['Country', 'Count'],
+                        {% for geoinfo in geovisits %}
+                            {% if geoinfo.0|length > 0 %}
+                                ['{{ geoinfo.0 }}', {{ geoinfo.1 }}],
+                            {% endif %}
+                        {% endfor %}
+                    ]);
+                    var options = {width: 300, legend: false, colorAxis: {colors: ['#FF6600']}};
+                    options["datalessRegionColor"] = 'efefef';
 
-                var geochart = new google.visualization.GeoChart(
-                        document.getElementById('googlemap'));
-                google.visualization.events.addListener(geochart, 'select',
-                        function () {
-                            var selection = geochart.getSelection()[0];
-                            var countrycode = data.getValue(selection.row, 0);
-                            window.location.replace("{% url 'frontpage' %}stats/top/?view={{ view }}&country=" + countrycode);
-                        });
+                    var geochart = new google.visualization.GeoChart(
+                            document.getElementById('googlemap'));
+                    google.visualization.events.addListener(geochart, 'select',
+                            function () {
+                                var selection = geochart.getSelection()[0];
+                                var countrycode = data.getValue(selection.row, 0);
+                                window.location.replace("{% url 'frontpage' %}stats/top/?view={{ view }}&country=" + countrycode);
+                            });
 
-                geochart.draw(data, options);
-
-            }
-        </script>
-    {% endif %}
-
-    <script language="javascript">
-        $(document).ready(function () {
-            $("div.filter").each(function () {
-                var allDds = $(this).children("div").not('.subresult').nextUntil("div.accordion");
-                if (allDds.length > 4) {
-                    var hideableDds = allDds.has("a.addableFacet");
-                    if (hideableDds.length > 1) {
-                        hiddenDds = hideableDds.slice(
-                                Math.max(0, 4 - (allDds.length - hideableDds.length))).hide();
-                        var moreTxt = 'more', lessTxt = 'less';
-                        hiddenDds.last().after($("<div><a href='#'>" + moreTxt + "</a></div>")
-                                .children().first().click({hiddenDds: hiddenDds}, function (e) {
-                                    e.preventDefault();
-                                    $(this).text($(this).text() == moreTxt ? lessTxt : moreTxt);
-                                    e.data.hiddenDds.slideToggle();
-                                }).parent());
+                    geochart.draw(data, options);
+                }
+            </script>
+        {% endif %}
+        <script language="javascript">
+            $(document).ready(function () {
+                function addStatus(filter) {
+                    if (filter.next("div.filter").attr("style") == "display: none;") {
+                        filter.addClass('collapsed');
+                        filter.removeClass('expanded');
                     }
-                }
+                    else {
+                        filter.addClass('expanded');
+                        filter.removeClass('collapsed');
+                    }
+                };
+                $("div.filter").each(function () {
+                    var allDds = $(this).children("div").not('.subresult').nextUntil("div.accordion");
+                    if (allDds.length > 4) {
+                        var hideableDds = allDds.has("a.addableFacet");
+                        if (hideableDds.length > 1) {
+                            hiddenDds = hideableDds.slice(
+                                    Math.max(0, 4 - (allDds.length - hideableDds.length))).hide();
+                            var moreTxt = 'more', lessTxt = 'less';
+                            hiddenDds.last().after($("<div><a href='#'>" + moreTxt + "</a></div>")
+                                    .children().first().click({hiddenDds: hiddenDds}, function (e) {
+                                        e.preventDefault();
+                                        $(this).text($(this).text() == moreTxt ? lessTxt : moreTxt);
+                                        e.data.hiddenDds.slideToggle();
+                                    }).parent());
+                        }
+                    }
+                });
+                $("div.filter").hide();
+                $("div.accordion").each(function () {
+                    $(this).next("div.filter").find("a.removableFacet").parents("div.filter").show();
+                    addStatus($(this));
+                    $(this).next("div.filter").find("a.addFilter").parents("div.filter").show();
+                    addStatus($(this));
+                });
+
+                $("div.accordion.expanded").each(function () {
+                    if ($(this).next("div.filter").find("a.removableFacet").length > 0) {
+                        $(this).addClass("selected");
+                    }
+                    if ($(this).next("div.filter").find("a.addFilter").length > 0) {
+                        $(this).addClass("selected");
+                    }
+                });
+
+                $("div.accordion").click(function () {
+                    if ($(this).next("div.filter").attr("style") == "display: none;") {
+                        $(this).addClass('expanded');
+                        $(this).removeClass('collapsed');
+                    }
+                    else {
+                        $(this).addClass('collapsed');
+                        $(this).removeClass('expanded');
+                    }
+                    $(this).next("div.filter").slideToggle();
+                });
             });
-            $("div.filter").hide();
-            $("div.accordion").each(function () {
-                $(this).next("div.filter").find("a.removableFacet").parents("div.filter").show();
-                addStatus($(this));
-                $(this).next("div.filter").find("a.addFilter").parents("div.filter").show();
-                addStatus($(this));
-            });
+        </script>
+    {% endblock %}
 
-            $("div.accordion.expanded").each(function () {
-                if ($(this).next("div.filter").find("a.removableFacet").length > 0) {
-                    $(this).addClass("selected");
-                }
-                if ($(this).next("div.filter").find("a.addFilter").length > 0) {
-                    $(this).addClass("selected");
-                }
-            });
 
-            $("div.accordion").click(function () {
-                if ($(this).next("div.filter").attr("style") == "display: none;") {
-                    $(this).addClass('expanded');
-                    $(this).removeClass('collapsed');
-                }
-                else {
-                    $(this).addClass('collapsed');
-                    $(this).removeClass('expanded');
-                }
-                $(this).next("div.filter").slideToggle();
-            });
-        });
-
-        function addStatus(filter) {
-            if (filter.next("div.filter").attr("style") == "display: none;") {
-                filter.addClass('collapsed');
-                filter.removeClass('expanded');
-            }
-            else {
-                filter.addClass('expanded');
-                filter.removeClass('collapsed');
-            }
-        }
-    </script>
-
-    <link rel="stylesheet" href="{% static "metashare/css/view_stats.css" %}" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="{% static "metashare/css/results.css" %}" type="text/css" media="screen"/>
-
-    <div class='tab-container'>
-        <ul class='etabs'>
-            <li class='tab tab-nobr'>{% trans 'ELRI visits statistics' %}</li>
-            <!--<li class='tab tab-nobr'>{% trans 'ELRC-SHARE visits statistics' %}</li>-->
-            <li class='tab'><a href="{% url 'frontpage' %}stats/usage/">{% trans 'Statistics on resource metadata' %}</a></li>
-            {% if user.username and myres %}
-                <li class='tab'><a href="{% url 'frontpage' %}stats/mystats/">{% trans 'My resources' %}</a></li>
-            {% endif %}
-        </ul>
-    </div>
-
-    <div class="content_tab">
+    {% block content_tab %}
         <div style="margin-left: 0px; padding-top: 1px;">
             <form class="form_helper" name="topform" id="topform" action="{% url 'frontpage' %}stats/top/" method="get">
                 <h4>{% trans 'Show the' %} <select style="color: #000; background: #eee" name='view' onchange="topform.submit();">
 
                     <option value='topviewed'
-                            style="background-image: url({% static "stats/img/view_icon.gif" %}); background-repeat: no-repeat; padding-left: 20px;">
+                            style="background-image: url({% static 'stats/img/view_icon.gif' %}); background-repeat: no-repeat; padding-left: 20px;">
                         {% trans 'Most Viewed Resources' %}
                     </option>
 
                     <option value='topqueries'
-                            style="background-image: url({% static "stats/img/retrieve_icon.gif" %}); background-repeat: no-repeat; padding-left: 20px;"
+                            style="background-image: url({% static 'stats/img/retrieve_icon.gif' %}); background-repeat: no-repeat; padding-left: 20px;"
                             {% ifequal view "topqueries" %}
                             selected
                             {% endifequal %}>
@@ -138,7 +122,7 @@
                     </option>
 
                     <option value='latestqueries'
-                            style="background-image: url({% static "stats/img/retrieve_icon.gif" %}); background-repeat: no-repeat; padding-left: 20px;"
+                            style="background-image: url({% static 'stats/img/retrieve_icon.gif' %}); background-repeat: no-repeat; padding-left: 20px;"
                             {% ifequal view "latestqueries" %}
                             selected
                             {% endifequal %}>
@@ -146,7 +130,7 @@
                     </option>
 
                     <option value='topdownloaded'
-                            style="background-image: url({% static "stats/img/download_icon.gif" %}); background-repeat: no-repeat; padding-left: 20px;"
+                            style="background-image: url({% static 'stats/img/download_icon.gif' %}); background-repeat: no-repeat; padding-left: 20px;"
                             {% ifequal view "topdownloaded" %}
                             selected
                             {% endifequal %}>
@@ -154,7 +138,7 @@
                     </option>
 
                     <option value='latestupdated'
-                            style="background-image: url({% static "stats/img/update_icon.gif" %}); background-repeat: no-repeat; padding-left: 20px;"
+                            style="background-image: url({% static 'stats/img/update_icon.gif' %}); background-repeat: no-repeat; padding-left: 20px;"
                             {% ifequal view "latestupdated" %}
                             selected
                             {% endifequal %}>
@@ -174,7 +158,7 @@
                             <h4>{% trans 'Filter by:' %}</h4>
                             <div id="searchFilters">
                                 {% if not "late" in view %}
-                                    <div class="accordion"><a href="#" onclick="return false">{% trans 'Date' %}</a></div>
+                                    <div class="accordion"><a href="#">{% trans 'Date' %}</a></div>
                                     <div class="filter">
                                         {% with "day week month year" as list %}
                                             {% for date in list.split %}
@@ -195,8 +179,9 @@
                                 {% endif %}
 
                                 {% if geovisits|length > 0 %}
-                                    <div class="accordion"><a href="#" onclick="return false">{% trans 'Provenance' %}
-                                        of {{ visitstitle }}</a></div>
+                                    <div class="accordion">
+                                        <a href="#">{% trans 'Provenance' %} of {{ visitstitle }}</a>
+                                    </div>
                                     <div class="filter">
                                         {% for geoinfo in geovisits %}
                                             <div style="vertical-align: top">
@@ -210,10 +195,9 @@
                                                 {% endifequal %}
                                                 {{ geoinfo.2 }}
                                                 <img height=20
-                                                     src="{% static "metashare/css/international_flags/iso/32x32/flag-"|add:geoinfo.0|lower|add:".png" %}">
+                                                     src="{% static 'metashare/css/international_flags/iso/32x32/flag-'|add:geoinfo.0|lower|add:'.png' %}">
                                                 </a>
                                                 &nbsp;({{ geoinfo.1 }})
-
                                             </div>
                                         {% endfor %}
                                     </div>
@@ -232,7 +216,6 @@
                         <ul class=errorlist>{% trans 'No data matched' %}</ul>
                     {% endif %}
                 {% endif %}
-
                 <div class="content_box">
                     <div class="results">
                         {% if offset != 0 or has_next %}
@@ -250,7 +233,6 @@
                                 {% endif %}
                             </p>
                         {% endif %}
-
                         {% spaceless %}
                             {% load resource_languages %}
                             {% load resource_media_types %}
@@ -267,7 +249,7 @@
 
                                         <div class="resourceName">
                                             <a href="{% url 'frontpage' %}repository/search/?{{ object.4 }}"><img
-                                                    src="{% static "metashare/css/sexybuttons/images/icons/silk/zoom.png" %}"> {{ object.0 }}
+                                                    src="{% static 'metashare/css/sexybuttons/images/icons/silk/zoom.png' %}"> {{ object.0 }}
                                             </a>
                                             {% ifnotequal object.1 "" %}
                                                 &nbsp;&nbsp;filter by:
@@ -284,7 +266,6 @@
                                                 {% endifequal %}
                                             </div>
                                         </div>
-
                                     {% else %}
                                         {% ifnotequal object.1 "" %}
                                             <div class=lasttime>{{ object.1 }}</div>
@@ -299,31 +280,23 @@
                                             &nbsp;{% resource_media_types object.0.resourceComponentType.as_subclass %}
 
                                             <div class="accessStats">
-                                                <img src="{% static "stats/img/download_icon.gif" %}"
+                                                <img src="{% static 'stats/img/download_icon.gif' %}"
                                                      alt="{% trans 'Number of downloads' %}"
                                                      title="{% trans 'Number of downloads' %}"/>&nbsp;{{ object.0.storage_object.identifier|get_download_count }}
-                                                <img src="{% static "stats/img/view_icon.gif" %}" alt="{% trans 'Number of views' %}"
+                                                <img src="{% static 'stats/img/view_icon.gif' %}" alt="{% trans 'Number of views' %}"
                                                      title="{% trans 'Number of views' %}"/>&nbsp;{{ object.0.storage_object.identifier|get_view_count }}
                                             </div>
                                             <ul>
                                                 {% resource_languages object.0.resourceComponentType.as_subclass %}
                                             </ul>
                                         </div>
-
                                     {% endif %}
                                 </div>
                             {% endfor %}
                         {% endspaceless %}
-
                     </div>
-                    {# end results #}
-                </div>{# end content_box #}
-                </div>{# end id=content #}
                 </div>
-
-            {% endif %}
-{% endblock %}
-
-  
-  
-
+            </div>
+        </div>
+        {% endif %}
+    {% endblock %}

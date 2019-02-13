@@ -1,9 +1,15 @@
 import sys
 import logging
 import uuid
+import urllib
 from metashare.settings import DJANGO_URL, STATS_SERVER_URL, METASHARE_VERSION, STORAGE_PATH
-from metashare.repository.models import resourceInfoType_model
+from metashare.repository.models import (
+    sizeInfoType_model,
+    metadataInfoType_model,
+)
+from metashare.bcp47 import iana
 from metashare.storage.models import PUBLISHED
+from metashare.accounts.models import UserProfile
 from metashare.stats.models import LRStats, QueryStats, UsageStats
 from django.contrib.auth.decorators import user_passes_test
 # pylint: disable-msg=W0611, W0401
@@ -14,23 +20,23 @@ from metashare.repository.models import *
 
 from django.utils.importlib import import_module
 import django.utils.encoding
-from django.shortcuts import render_to_response
-from django.db.models import Count, Max, Min, Avg
-from django.http import HttpResponse
+from django.utils.translation import ugettext as _
+from django.shortcuts import render, render_to_response
+from django.db.models import Q, Count, Max, Min, Avg
+from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
 from django.template import RequestContext
-from django.core.paginator import Paginator
 
 from json import JSONEncoder
 from datetime import datetime, date
 from dateutil.relativedelta import relativedelta
-import urllib, urllib2
 from threading import Timer
+from collections import Counter, OrderedDict
 from metashare.settings import LOG_HANDLER
 from metashare.stats.geoip import getcountry_name
 
 try:
     import cPickle as pickle
-except:
+except ImportError:
     import pickle
 
 # no accessable fields
@@ -44,7 +50,7 @@ from django.db.models.sql import aggregates
 
 
 class CountIf(aggregates.Count):
-    """ 
+    """
     Hack Count() to get a conditional count working.
     """
     is_ordinal = True
@@ -459,6 +465,79 @@ def getstats(request):
         data["lrstats"] = lrstats
 
     return HttpResponse("[" + json.dumps(data) + "]", content_type="application/json")
+
+
+@user_passes_test(lambda u: u.groups.filter(name='reviewers').exists())
+def chartstats(request):
+    return render(request, 'stats/chartstats.html', {
+        'countries': iana.get_eu_regions(),
+        'myres': isOwner(request.user.username)})
+
+
+@user_passes_test(lambda u: u.groups.filter(name='reviewers').exists())
+def tustats(request):
+    """ Return resources size unit and size value.
+    """
+    if request.is_ajax():
+        tu_count = Counter()
+        for res in resourceInfoType_model.objects.all():
+            for size_unit, size in res.storage_object.sizes_infos:
+                if size_unit.text in ['words', 'translationUnits', 'entries']:
+                    tu_count[size_unit.text] += int(size.text)
+        return JsonResponse(tu_count, safe=False)
+    return HttpResponseNotFound()
+
+
+@user_passes_test(lambda u: u.groups.filter(name='reviewers').exists())
+def groupsstats(request):
+    """ Return resources count per groups.
+    """
+    if request.is_ajax():
+        groups_count = Counter()
+        for res in resourceInfoType_model.objects.all():
+            for group in res.groups.all():
+                groups_count[group.name] += 1
+        return JsonResponse(groups_count, safe=False)
+    return HttpResponseNotFound()
+
+
+@user_passes_test(lambda u: u.groups.filter(name='reviewers').exists())
+def domainsstats(request):
+    """ Return resources count per domains.
+    """
+    if request.is_ajax():
+        domains_count = Counter()
+        for d in domainInfoType_model.objects.all():
+            domains_count[d.domain] += 1
+        return JsonResponse(domains_count, safe=False)
+    return HttpResponseNotFound()
+
+
+@user_passes_test(lambda u: u.groups.filter(name='reviewers').exists())
+def creationstats(request):
+    """ Return resources count per creation date.
+    """
+    if request.is_ajax():
+        creation_data_count = OrderedDict()
+        if 'start-date' in request.GET and 'end-date' in request.GET:
+            start_date = datetime.strptime(request.GET.get('start-date'), "%d-%m-%Y")
+            end_date = datetime.strptime(request.GET.get('end-date'), "%d-%m-%Y")
+            if start_date < end_date:
+                resources = metadataInfoType_model.objects.filter(
+                    Q(metadataCreationDate__gte=start_date) &
+                    Q(metadataCreationDate__lte=end_date)
+                )
+            else:
+                return JsonResponse({'errors': _('Start date is greater than end date.')})
+        else:
+            resources = metadataInfoType_model.objects.all()
+        for resource in resources.order_by("metadataCreationDate"):
+            creation_date = str(resource.metadataCreationDate)
+            if creation_date not in creation_data_count:
+                creation_data_count[creation_date] = 0
+            creation_data_count[creation_date] += 1
+        return JsonResponse(creation_data_count, safe=False)
+    return HttpResponseNotFound()
 
 
 # pylint: disable-msg=R0911
