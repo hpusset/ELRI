@@ -66,7 +66,6 @@ from metashare.repository.models import resourceInfoType_model, identificationIn
     metadataInfoType_model, languageDescriptionTextInfoType_model, languageDescriptionMediaTypeType_model, \
     languageDescriptionInfoType_model, lexicalConceptualResourceTextInfoType_model, \
     lexicalConceptualResourceMediaTypeType_model, lexicalConceptualResourceInfoType_model, distributionInfoType_model, \
-
     licenceInfoType_model, resourceCreationInfoType_model, projectInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex, \
     update_lr_index_entry
@@ -223,7 +222,6 @@ def _get_licences(resource, user_membership):
             # further negotiations are required with the current license
             result[name] = (l_info, access_links, False)
     return result
->>>>>>> Fix error message on bad extension upload. Issue #82
 
 
 def download(request, object_id, **kwargs):

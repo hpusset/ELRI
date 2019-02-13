@@ -1,0 +1,9 @@
+{% load i18n %}
+<template id="tpl-date-filters">
+    <form>
+        <input type="text" name="start-date" id="date-picker-start" placeholder="{% trans 'Start date' %}">
+        <input type="text" name="end-date" id="date-picker-end" placeholder="{% trans 'End date' %}">
+        <button type="submit">{% trans 'Apply filters' %}</button>
+        <button id="reset">{% trans 'Reset' %}</button>
+    </form>
+</template>

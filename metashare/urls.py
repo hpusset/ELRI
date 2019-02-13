@@ -38,7 +38,7 @@ urlpatterns += i18n_patterns('metashare.accounts.views',
 )
 
 urlpatterns += i18n_patterns('metashare.stats.views',
-  (r'^{0}stats/'.format(DJANGO_BASE), include('metashare.stats.urls')),
+  (r'^{0}stats/'.format(DJANGO_BASE), include('metashare.stats.urls', namespace="statistics")),
 )
 
 urlpatterns += i18n_patterns('metashare.repository.views',

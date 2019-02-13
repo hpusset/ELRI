@@ -1,93 +1,107 @@
+.w-100 {
+    width: 100%;
+}
 /* tabbed panel */
 .etabs { margin: 0; padding: 0}
 
-.tab {display: inline-block;
-    zoom: 1; 
-    *display:inline; 
+.tab {
+    display: inline-block;
+    zoom: 1;
     margin-right: 5px;
-    background: url("../images/button_top_bg.png") repeat-x scroll 50% top #f5f3e5; 
-    border: solid 1px #ccc; 
-    border-bottom: none; 
-    -moz-border-radius: 5px 5px 0 0; 
+    background: url("../images/button_top_bg.png") repeat-x scroll 50% top #f5f3e5;
+    border: solid 1px #ccc;
+    border-bottom: none;
+    -moz-border-radius: 5px 5px 0 0;
     -webkit-border-radius: 5px 5px 0 0;
-	-khtml-border-radius: 5px 5px 0 0;
+    -khtml-border-radius: 5px 5px 0 0;
 }
 
-.tab a {font-family: Tahoma,Arial;
-  	text-shadow: 0px -1px 1px #FF9900;
-	font-weight: 600; 
-	color: white !important;
-	font-size: 12px; 
-    line-height: 2em; 
-    display: block; 
-    padding: 0 10px; 
-    outline: none; 
+.tab a {
+    font-family: Tahoma, Arial;
+    text-shadow: 0px -1px 1px #FF9900;
+    font-weight: 600;
+    color: white !important;
+    font-size: 12px;
+    line-height: 2em;
+    display: block;
+    padding: 0 10px;
+    outline: none;
 }
 
-.tab a:hover { text-decoration: none; 
+.tab:not(.tab-nobr) a:hover {
+    text-decoration: none;
     background: url("../images/button_top_bg2.png")
 }
 
-.tab a.active { font-weight: bold; 
-    color: #fff 
+.tab a.active { font-weight: bold;
+    color: #fff
 }
 
-.tab-container .panel-container {background: #fff; 
-    border: solid #666 1px; 
-    padding: 10px; 
-    -moz-border-radius: 0 5px 5px 5px; 
-    -webkit-border-radius: 0 5px 5px 5px;
-    -khtml-border-radius: 0 5px 5px 5px;
-}
-
-.tab.tab-nobr { background: #fff; 
-    font-weight: 600; 
-    font-family: Tahoma,Arial;
-  	color: #000 !important;
-	font-size: 12px; 
+.tab.tab-nobr {
+    background: #fff;
+    font-weight: 600;
+    font-family: Tahoma, Arial;
+    color: #000 !important;
+    font-size: 12px;
     line-height: 2em;
     padding: 0 10px;
     outline: none;
     text-decoration: none;
-    border-bottom: none; 
+    border-bottom: none;
 }
+
+.tab.tab-nobr a {
+    color: #000 !important;
+    text-shadow: none;
+}
+
+.tab-container .panel-container {
+    background: #fff;
+    border: solid #666 1px;
+    padding: 10px;
+    -moz-border-radius: 0 5px 5px 5px;
+    -webkit-border-radius: 0 5px 5px 5px;
+    -khtml-border-radius: 0 5px 5px 5px;
+}
+
 
 .content_tab {
     padding: 10px;
     vertical-align: top;
     color: #000;
     padding-bottom: 40px;
-	background-color: white;
+    background-color: white;
     border: 1px solid #ccc;
 }
 
 /* usage metadata */
-div.coverage { 
+div.coverage {
     display: inline;
     padding-left: 4px;
     padding-right: 6px;
-    margin-left: 2px; 
-    margin-right: 2px; 
+    margin-left: 2px;
+    margin-right: 2px;
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
-    border-bottom: 1px solid #999; 
-    border-top: none; 
-    border-right: 1px solid #999; 
-    border-left: none; 
+    border-bottom: 1px solid #999;
+    border-top: none;
+    border-right: 1px solid #999;
+    border-left: none;
     width: auto;
 }
 
-div.required { 
+div.required {
     background-color: lightgreen;
 }
-div.optional { 
+div.optional {
     background-color: yellow;
 }
-div.recommended { 
+div.recommended {
     background-color: orange;
 }
-div.fieldvalues {background: #E6E6FA; 
-    border: 1px solid #000; 
+div.fieldvalues {
+    background: #E6E6FA;
+    border: 1px solid #000;
     float: right;
     width: 570px;
     padding: 0px;
@@ -98,10 +112,10 @@ div.fieldvalues {background: #E6E6FA;
     border-bottom-right-radius: 10px;
     vertical-align: top
 }
-    
+
 div.warning {
-    background: lightyellow; 
-    border: 1px solid #FFA500; 
+    background: lightyellow;
+    border: 1px solid #FFA500;
     padding: 5px;
     margin-top: -15px;
     margin-left: 10px;
@@ -109,19 +123,20 @@ div.warning {
     text-align:justify;
     height:auto;
 }
-    
-label.title {background-color: #fda;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 0;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 0;
-        color: #000;
-        font-size: 12px;
-        font-weight: 600;
-        margin-bottom: 0.3em;
-        margin-left: 0px;
-        margin-right: 5px;
-        padding-left: 2px;
+
+label.title {
+    background-color: #fda;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 0;
+    color: #000;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 0.3em;
+    margin-left: 0px;
+    margin-right: 5px;
+    padding-left: 2px;
 }
 
 label.pointer {
@@ -153,7 +168,7 @@ a.deleteFilter:before {
 
 a.addFilter:before {
     content: " " url("sexybuttons/images/icons/silk/accept.png");
-    vertical-align: top; 
+    vertical-align: top;
 }
 
 #colsubtab {
@@ -177,14 +192,14 @@ a.addFilter:before {
 #section {
     border: solid 1px #ccc;
     margin-right: 20px;
-    -moz-border-radius: 5px 5px 5px 5px; 
+    -moz-border-radius: 5px 5px 5px 5px;
     -webkit-border-radius: 5px 5px 5px 5px;
     -khtml-border-radius: 5px 5px 5px 5px;
 }
 
 div.itemcounter {
-    display: inline; 
-    font-size: 8pt; 
+    display: inline;
+    font-size: 8pt;
     margin-right: 10px;
     padding-right: 15px;
     float: left;
@@ -195,9 +210,9 @@ div.itemcounter {
 }
 
 div.lasttime {
-    display: inline; 
-    font-size:8pt; 
-    text-align:left; 
+    display: inline;
+    font-size:8pt;
+    text-align:left;
     float: right;
     margin-left: 10px;
     margin-bottom: -14px;
@@ -210,4 +225,3 @@ td.resourceName{
     font-size: 10pt;
     font-weight: bold;
 }
-

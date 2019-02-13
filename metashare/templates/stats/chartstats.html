@@ -1,0 +1,43 @@
+{% extends 'stats/base.html' %}
+{% load static i18n %}
+
+{% block extra_head %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/themes/smoothness/jquery-ui.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/statistics.css' %}">
+    <script type="text/javascript" src="{% static 'metashare/js/jquery-ui.min.js' %}" defer></script>
+    <script type="text/javascript" src="{% static 'js/lib/lodash.js' %}" defer></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('43', {packages: ['corechart']});
+        google.charts.setOnLoadCallback(function() {
+            document.dispatchEvent(new Event("googleLoaded"));
+        });
+    </script>
+    <script type="module" src="{% static 'js/statistics/statistics.js' %}" defer></script>
+{% endblock %}
+
+{% block content_tab %}
+    {% include "stats/templates.html" %}
+    <section id="statistics">
+        <header id="statistics-header">
+            <form id="statistics-form">
+                <!-- <label for="statistics-choice">{% trans 'Statistics choice' %}</label> -->
+                <select name="statistics-choice" id="statistics-choice">
+                    <option value="translation-units">{% trans 'Data sizes' %}</option>
+                    <option value="group-data">{% trans 'Data per groups' %}</option>
+                    <option value="domains-data">{% trans 'Data per domains' %}</option>
+                    <option value="creation-date-data">{% trans 'Data per dates' %}</option>
+                </select>
+            </form>
+        </header>
+        <section id="statistics-body">
+            <aside id="statistics-aside">
+                <article id="chart-filters">
+                </article>
+            </aside>
+            <article id="chart-container">
+            </article>
+        </section>
+    </section>
+{% endblock %}
