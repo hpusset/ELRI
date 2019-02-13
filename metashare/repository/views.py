@@ -55,7 +55,7 @@ from metashare.recommendations.recommendations import SessionResourcesTracker, \
 	get_download_recommendations, get_view_recommendations, \
 	get_more_from_same_creators_qs, get_more_from_same_projects_qs
 from metashare.repository import model_utils
-from metashare.repository.editor.resource_editor import has_edit_permission
+from metashare.repository.editor.resource_editor import has_edit_permission, _get_licences, _get_user_membership, MEMBER_TYPES, LICENCEINFOTYPE_URLS_LICENCE_CHOICES
 from metashare.repository.forms import LicenseSelectionForm, \
 	LicenseAgreementForm, DownloadContactForm, MORE_FROM_SAME_CREATORS, \
 	MORE_FROM_SAME_PROJECTS
@@ -118,108 +118,6 @@ def _convert_to_template_tuples(element_tree):
 		return ((element_tree.attrib["pretty"], element_tree.text),)
 
 
-# a type providing an enumeration of META-SHARE member types
-MEMBER_TYPES = type('MemberEnum', (), dict(GOD=100, FULL=3, ASSOCIATE=2, NON=1))
-
-# a dictionary holding a URL for each download licence and a member type which
-# is required at a minimum to be able to download the associated resource
-# straight away; otherwise the licence requires a hard-copy signature
-LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
-	'CC-BY-4.0': (STATIC_URL + 'metashare/licences/CC-BY-4.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-NC-4.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-4.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-NC-ND-4.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-ND-4.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-NC-SA-4.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-SA-4.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-ND-4.0': (STATIC_URL + 'metashare/licences/CC-BY-ND-4.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-SA-4.0': (STATIC_URL + 'metashare/licences/CC-BY-SA-4.0.pdf', MEMBER_TYPES.NON),
-	'CC0-1.0': (STATIC_URL + 'metashare/licences/CC0-1.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-3.0': (STATIC_URL + 'metashare/licences/CC-BY-3.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-NC-3.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-3.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-NC-ND-3.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-ND-3.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-NC-SA-3.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-SA-3.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-ND-3.0': (STATIC_URL + 'metashare/licences/CC-BY-ND-3.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-SA-3.0': (STATIC_URL + 'metashare/licences/CC-BY-SA-3.0.pdf', MEMBER_TYPES.NON),
-	# TODO: PDDL
-	'PDDL-1.0': (STATIC_URL + 'metashare/licences/PDDL-1.0.pdf', MEMBER_TYPES.NON),
-	# TODO: ODC-BY
-	'ODC-BY-1.0': (STATIC_URL + 'metashare/licences/ODC-BY-1.0.pdf', MEMBER_TYPES.NON),
-	'ODbL-1.0': (STATIC_URL + 'metashare/licences/ODbL-1.0.pdf', MEMBER_TYPES.NON),
-	'AGPL-3.0': (STATIC_URL + 'metashare/licences/AGPL-3.0.pdf', MEMBER_TYPES.NON),
-	'Apache-2.0': (STATIC_URL + 'metashare/licences/Apache-2.0.pdf', MEMBER_TYPES.NON),
-	'BSD-4-Clause': (STATIC_URL + 'metashare/licences/BSD-4-Clause.pdf', MEMBER_TYPES.NON),
-	'BSD-3-Clause': (STATIC_URL + 'metashare/licences/BSD-3-Clause.pdf', MEMBER_TYPES.NON),
-	'BSD-2-Clause': (STATIC_URL + 'metashare/licences/BSD-2-Clause', MEMBER_TYPES.NON),
-	'GFDL-1.3': (STATIC_URL + 'metashare/licences/GFDL-1.3.pdf', MEMBER_TYPES.NON),
-	'GPL-3.0': (STATIC_URL + 'metashare/licences/GPL-3.0.pdf', MEMBER_TYPES.NON),
-	'LGPL-3.0': (STATIC_URL + 'metashare/licences/LGPL-3.0.pdf', MEMBER_TYPES.NON),
-	'MIT': (STATIC_URL + 'metashare/licences/MIT.pdf', MEMBER_TYPES.NON),
-	'EPL-1.0': (STATIC_URL + 'metashare/licences/EPL-1.0.pdf', MEMBER_TYPES.NON),
-	'EUPL-1.0': (STATIC_URL + 'metashare/licences/EUPL-1.0.pdf', MEMBER_TYPES.NON),
-	'EUPL-1.1': (STATIC_URL + 'metashare/licences/EUPL-1.1.pdf', MEMBER_TYPES.NON),
-	'EUPL-1.2': (STATIC_URL + 'metashare/licences/EUPL-1.2.pdf', MEMBER_TYPES.NON),
-	'LO-OL-v2': (STATIC_URL + 'metashare/licences/LO-OL-v2.pdf', MEMBER_TYPES.NON),
-	'dl-de/by-2-0': (STATIC_URL + 'metashare/licences/dl-de_by-2-0.pdf', MEMBER_TYPES.NON),
-	'dl-de/zero-2-0': (STATIC_URL + 'metashare/licences/dl-de_zero-2-0.pdf', MEMBER_TYPES.NON),
-	'IODL-1.0': (STATIC_URL + 'metashare/licences/IODL-1.0.pdf', MEMBER_TYPES.NON),
-	'NLOD-1.0': (STATIC_URL + 'metashare/licences/NLOD-1.0.pdf', MEMBER_TYPES.NON),
-	'OGL-3.0': (STATIC_URL + 'metashare/licences/OGL-3.0.pdf', MEMBER_TYPES.NON),
-	'NCGL-1.0': (STATIC_URL + 'metashare/licences/NCGL-1.0.pdf', MEMBER_TYPES.GOD),
-	'openUnder-PSI': ('', MEMBER_TYPES.NON),
-	'publicDomain': ('', MEMBER_TYPES.NON),
-	'non-standard/Other_Licence/Terms': ('', MEMBER_TYPES.NON),
-	'underReview': ('', MEMBER_TYPES.GOD),
-}
-
-
-def _get_user_membership(user):
-	"""
-	Returns a `MEMBER_TYPES` type based on the permissions of the given
-	authenticated user. 
-	"""
-	if user.has_perm('accounts.ms_full_member'):
-		return MEMBER_TYPES.FULL
-	elif user.has_perm('accounts.ms_associate_member'):
-		return MEMBER_TYPES.ASSOCIATE
-	return MEMBER_TYPES.NON
-
-
-def _get_licences(resource, user_membership):
-	"""
-	Returns the licences under which a download/purchase of the given resource
-	is possible for the given user membership.
-	
-	The result is a dictionary mapping from licence names to pairs. Each pair
-	contains the corresponding `licenceInfoType_model`, the download location
-	URLs and a boolean denoting whether the resource may (and can) be directly
-	downloaded or if there need to be further negotiations of some sort.
-	"""
-	distribution_infos = tuple(resource.distributioninfotype_model_set.all())
-
-	# licence_infos = tuple([(l_info, d_info.downloadLocation + d_info.executionLocation) \
-	licence_infos = tuple([(l_info, d_info.downloadLocation + d_info.executionLocation) \
-						   for d_info in distribution_infos for l_info in d_info.licenceInfo.all()])
-
-	all_licenses = dict([(l_info.licence, (l_info, access_links)) \
-						 for l_info, access_links in licence_infos])
-	result = {}
-	for name, info in all_licenses.items():
-		l_info, access_links = info
-		access = LICENCEINFOTYPE_URLS_LICENCE_CHOICES.get(name, None)
-		if access == None:
-			LOGGER.warn("Unknown license name discovered in the database for " \
-						"object #{}: {}".format(resource.id, name))
-			del all_licenses[name]
-		elif user_membership >= access[1] \
-				and (len(access_links) or resource.storage_object.get_download()):
-			# the resource can be downloaded somewhere under the current license
-			# terms and the user's membership allows her to immediately download
-			# the resource
-			result[name] = (l_info, access_links, True)
-		else:
-			# further negotiations are required with the current license
-			result[name] = (l_info, access_links, False)
-	return result
-
-
 def download(request, object_id, **kwargs):
 	"""
 	Renders the resource download/purchase view including license selection,
@@ -264,6 +162,7 @@ def download(request, object_id, **kwargs):
 		if licence_choice and 'in_licence_agree_form' in request.POST:
 			la_form = LicenseAgreementForm(licence_choice, data=request.POST)
 			l_info, access_links, access = licences[licence_choice]
+			LOGGER.info(access_links)
 			if la_form.is_valid():
 				# before really providing the download, we have to make sure
 				# that the user hasn't tried to circumvent the permission system
@@ -313,10 +212,12 @@ def download(request, object_id, **kwargs):
 
 def _provide_download(request, resource, access_links, bypass_stats):
 	"""
-	Returns an HTTP response with a download of the given resource.
+	Returns an HTTP response with a download of the given resource. AFTER ACCEPTING THE LICENSE IF THERE IS ANY...
 	"""
 	dl_path = resource.storage_object.get_download()
+
 	if dl_path:
+
 		try:
 			def dl_stream_generator():
 				with open(dl_path, 'rb') as _local_data:
@@ -344,6 +245,7 @@ def _provide_download(request, resource, access_links, bypass_stats):
 						.format(resource.id))
 	# redirect to a download location, if available
 	elif access_links:
+
 		for url in access_links:
 			try:
 				req = requests.request('GET', url)
