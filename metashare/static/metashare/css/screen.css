@@ -10,7 +10,7 @@
     }
 }
 
-@media screen and (max-width: 1414px) {
+@media screen and (max-width: 1200px) {
     #jsddm li a i {
         display: none;
     }
