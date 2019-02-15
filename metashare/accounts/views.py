@@ -12,6 +12,7 @@ from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.utils.html import escape
 from django.utils.translation import ugettext as _
+from django.utils import translation
 
 from metashare.accounts.forms import RegistrationRequestForm, ResetRequestForm, \
 	UserProfileForm, EditorGroupApplicationForm, UpdateDefaultEditorGroupForm, \
@@ -198,9 +199,11 @@ def create(request):
 		form = RegistrationRequestForm(group_choices=group_choices)
 	
 	elri_tos_def='metashare/ELRI_ToS_template.pdf'
-	elri_tos='metashare/ELRI_ToS_'+LANGUAGE_CODE+'.pdf'
-	LOGGER.info(elri_tos)
+	#provide ToS document according to the user prefered language: the one that appears in the URL 
+	lang=translation.get_language()
 	
+	elri_tos='metashare/ELRI_ToS_'+lang+'.pdf'
+		
 	dictionary = {'title': 'Create Account', 'form': form, 'elri_tos': elri_tos }
 	return render_to_response('accounts/create_account.html', dictionary,
 	  context_instance=RequestContext(request))
