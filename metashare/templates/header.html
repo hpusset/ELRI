@@ -11,7 +11,7 @@
         {% else %}
         <a href="http://www.elri-project.eu/" title="{% trans 'Go to the ELRI project homepage' %}"
                 target="_blank"><img style="float:right; margin: 10px 20px 0 0"
-                                        src="{{ STATIC_URL }}metashare/images/elri-logo-title-small.png" alt="ELRI ‐ European Language 
+                                        src="{{ STATIC_URL }}metashare/images/elri-logo-title-small.png" alt="ELRI ‐ European Language
         Resource Infrastructure"/></a>
         {% endif %}
         <div id="jsddmdiv" class="jsddm">
@@ -124,11 +124,13 @@
 
                 {% if user.is_active %}
                     <li title="{% trans 'Profile settings and actions' %}">
-                     <a href="{% url 'edit_profile' %}">
-                        <i class="fa fa-user menu_fontawesome" aria-hidden="true"></i> <!-- removing Your Profile and switching user.username and user.firtname to show-->
-                        {% load firstof from future %}{% filter force_escape %}
-                            {% firstof user.username user.first_name %}{% endfilter %}   
-                     </a>                         
+                        <a href="{% url 'edit_profile' %}">
+                            <i class="fa fa-user menu_fontawesome" aria-hidden="true"></i> <!-- removing Your Profile and switching user.username and user.firtname to show-->
+                            {% load firstof from future %}
+                            {% filter force_escape %}
+                                {% firstof user.username user.first_name %}
+                            {% endfilter %}
+                        </a>
                         <ul>
                             {% if user.is_staff %}
                                 <li><a href="{% url 'editor:index' %}">{% trans 'View your recent actions' %}</a></li>{% endif %}
