@@ -45,6 +45,7 @@ from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.core.mail import send_mail, EmailMessage
+from django.utils import translation
 from django.utils.translation import ugettext as _
 
 from haystack.views import FacetedSearchView
@@ -69,7 +70,7 @@ from metashare.repository.models import resourceInfoType_model, identificationIn
 from metashare.repository.search_indexes import resourceInfoType_modelIndex, \
 	update_lr_index_entry
 from metashare.settings import LOG_HANDLER, STATIC_URL, DJANGO_URL, MAXIMUM_UPLOAD_SIZE, CONTRIBUTION_FORM_DATA, \
-	ROOT_PATH
+	ROOT_PATH, LANGUAGE_CODE
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
 	saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
 from metashare.storage.models import PUBLISHED, INGESTED
@@ -403,6 +404,10 @@ def view(request, resource_name=None, object_id=None):
 	"""
 	Render browse or detail view for the repository application.
 	"""
+	translation.activate(LANGUAGE_CODE)
+	request.session['django_language'] = LANGUAGE_CODE
+	request.LANGUAGE_CODE = LANGUAGE_CODE
+	
 	# only published resources may be viewed. Ingested LRs can be viewed only
 	# by EC members and technical reviewers
 	resource = get_object_or_404(resourceInfoType_model,
