@@ -13,7 +13,8 @@ from metashare.storage.models import PUBLISHED
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
-translation.activate(LANGUAGE_CODE)
+#issue 69: temporal fix
+#translation.activate(LANGUAGE_CODE)
 
 #Custom authentication error messages: 
 class ELRIAuthenticationForm(AuthenticationForm):
@@ -25,9 +26,9 @@ class ELRIAuthenticationForm(AuthenticationForm):
 
 def frontpage(request):
     """Renders the front page view."""
-    
-    request.session['django_language'] = LANGUAGE_CODE
-    request.LANGUAGE_CODE = LANGUAGE_CODE
+    #issue 69: temporal fix
+    #request.session['django_language'] = LANGUAGE_CODE
+    #request.LANGUAGE_CODE = LANGUAGE_CODE
     
     LOGGER.info(u'Rendering frontpage view for user "{0}".'
                 .format(request.user.username or "Anonymous"))
