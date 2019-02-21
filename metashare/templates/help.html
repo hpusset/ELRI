@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load email_protection i18n %}
+{% load get_email %}
 {% load static %}
 {% block content %}
     <h2>{% trans 'Help' %}</h2>
@@ -7,7 +8,8 @@
         <h2>{% trans 'Contact details' %}</h2>
         <ul>
             <li>{% trans 'For enquiries related to the project, please refer to the <a href="http://www.elri-project.eu/contact-us.html" target="_blank">list of ELRI Contacts' %}</a>.</li>
-            <li>{% trans 'For technical help about this National Relay Station, you can contact us at <a href="mailto:eli-nrs-support@vicomtech.org" >eli-nrs-support@vicomtech.org</a>.' %}</li>
+            {% get_email 'elri-nrs-support' as email %}
+            <li>{% blocktrans %}For technical help about this National Relay Station, you can contact us at <a href="mailto:{{ email }}" >{{ email }}</a>.{% endblocktrans %}</li>
         </ul>
     </div>
 {% endblock %}

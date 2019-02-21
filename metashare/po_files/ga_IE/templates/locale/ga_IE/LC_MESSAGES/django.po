@@ -36,11 +36,11 @@ msgstr "Tá brón orainn, níor aimsíodh an URL a d'iarr tú."
 
 #: templates/404.html:10 templates/500.html:10
 msgid ""
-"Please try again and, if the error persists, contact the ELRI NRS support group (<a href=\"mailto:elri-nrs-"
-"support@vicomtech.org\" >elri-nrs-support@vicomtech.org</a>)."
+"Please try again and, if the error persists, contact the ELRI NRS support group (<a href=\"mailto:{{ email }}\""
+" >{{ email }}</a>)."
 msgstr ""
 "Triail arís agus má leanann an earráid ar aghaidh bí i dteagmháil le grúpa tacaíochta an ELRI NRS (<a href="
-"\"mailto:elri-nrs-support@vicomtech.org\" >elri-nrs-support@vicomtech.org</a>)."
+"\"mailto:{{ email }}\" >{{ email }}</a>)."
 
 #: templates/500.html:6
 msgid "Internal Server Error (500)"
@@ -528,11 +528,10 @@ msgstr ""
 
 #: templates/help.html:27
 msgid ""
-"For technical help about this National Relay Station, you can contact us at <a href=\"mailto:eli-nrs-"
-"support@vicomtech.org\" >eli-nrs-support@vicomtech.org</a>."
+"For technical help about this National Relay Station, you can contact us at <a href=\"mailto:{{ mail }}\" >{{ mail }}</a>."
 msgstr ""
-"Do chabhair theicniúil faoin Stáisiún Athsheachadta Náisiúnta seo, déan teagmháil linn ag <a href=\"mailto:eli-"
-"nrs-support@vicomtech.org\" >eli-nrs-support@vicomtech.org</a>."
+"Do chabhair theicniúil faoin Stáisiún Athsheachadta Náisiúnta seo, déan teagmháil linn ag <a href=\"mailto:{{ mail }}\" "
+">{{ mail }}</a>."
 
 #: templates/legal.html:7
 msgid "<strong>ELRI Terms of Service</strong>"
