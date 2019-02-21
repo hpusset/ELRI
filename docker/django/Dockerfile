@@ -21,7 +21,9 @@ ENV DB_HOST="postgres-server" \
     ELRI_COUNTRY="Portugal" \
     ELRI_SALT="e07fc77c1ecd3" \
     ELRI_ALERT_MAILS="noreply@elri.com" \
-    GIT_URL="https://github.com/ELDAELRA/ELRI/${RELEASE}"
+    GIT_URL="https://github.com/ELDAELRA/ELRI/${RELEASE}" \
+    ELRI_WORKERS=2 \
+    ELRI_THREADS=4
 
 COPY --from=base /tmp/dockerize /usr/local/bin/
 COPY resources/env_secrets_expand.sh \

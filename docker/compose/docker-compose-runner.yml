@@ -3,7 +3,7 @@ services:
   # Django app
   elri-node1:
     container_name: elri_app
-    image: elrinrs/nationalrelaystation:R2.1
+    image: elrinrs/nationalrelaystation:R2.3
     secrets:
       - db.secret
       - app.secret
@@ -29,6 +29,8 @@ services:
       - ELRI_DOMAINNAME={{DOCKER-SECRET:web.secret}}
       - ELRI_PROTOCOL={{DOCKER-SECRET:web.secret}}
       - ELRI_COUNTRY={{DOCKER-SECRET:app.secret}}
+      - ELRI_WORKERS={{DOCKER-SECRET:app.secret}}
+      - ELRI_THREADS={{DOCKER-SECRET:app.secret}}
     depends_on:
       - solr
       - postgres-server
