@@ -140,7 +140,18 @@ $ docker-compose down
 # Uncomment if using SSL termination at nginx server
 ```
 
+* Change `ELRI_PROTOCOL` value from `http` to `https` at `web_secret.properties` file
+
 * Merge the files `docker-compose-runner-prd.yml` and  `docker-compose-runner.yml` again
+
+* (If certificate is a chain file) Concatenate your primary certificate file (your_domain_name.crt) and the intermediate certificate chain file (DigiCertCA.crt) into a single .pem file:
+
+```
+cat your_domain_name.crt DigiCertCA.crt > server.crt
+```
+
+For more information:
+https://www.digicert.com/csr-ssl-installation/nginx-openssl.htm#ssl_certificate_install
 
 * Update certificate and key:
 
