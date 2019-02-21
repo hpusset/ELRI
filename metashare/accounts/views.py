@@ -12,6 +12,7 @@ from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.utils.html import escape
 from django.utils.translation import ugettext as _
+from django.utils import translation
 
 from metashare.accounts.forms import RegistrationRequestForm, ResetRequestForm, \
 	UserProfileForm, EditorGroupApplicationForm, UpdateDefaultEditorGroupForm, \
@@ -19,7 +20,8 @@ from metashare.accounts.forms import RegistrationRequestForm, ResetRequestForm, 
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
 	EditorGroupApplication, EditorGroupManagers, EditorGroup, \
 	OrganizationApplication, OrganizationManagers, Organization, UserProfile, AccessPointEdeliveryApplication
-from metashare.settings import DJANGO_URL, LOG_HANDLER, REST_API_KEY, EMAIL_ADDRESSES
+
+from metashare.settings import DJANGO_URL, LOG_HANDLER, REST_API_KEY, LANGUAGE_CODE, EMAIL_ADDRESSES
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -197,7 +199,13 @@ def create(request):
 	else:
 		form = RegistrationRequestForm(group_choices=group_choices)
 	
-	dictionary = {'title': 'Create Account', 'form': form}
+	elri_tos_def='metashare/ELRI_ToS_template.pdf'
+	#provide ToS document according to the user prefered language: the one that appears in the URL 
+	lang=translation.get_language()
+	
+	elri_tos='metashare/ELRI_ToS_'+lang+'.pdf'
+		
+	dictionary = {'title': 'Create Account', 'form': form, 'elri_tos': elri_tos }
 	return render_to_response('accounts/create_account.html', dictionary,
 	  context_instance=RequestContext(request))
 

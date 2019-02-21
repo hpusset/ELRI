@@ -1,5 +1,6 @@
 <head>
-<title>ELRC-SHARE Statictics</title>
+<!--<title>ELRC-SHARE Statictics</title>-->
+<title>ELRI Statistics</title>
 <style type="text/css">
     html * { padding:0; margin:0; }
     body * { padding:10px 10px; }
@@ -97,7 +98,8 @@ Show statistics for <select onchange="submit()" name="date">
 </div>
 <table id="nodes" cellspacing=1 class="tablesorter">
 	<thead><tr valign=top>
-	    <th class="header" width=30%>ELRC-SHARE Nodes ({{ traffic|length|add:-1 }})</th>
+	    <!--<th class="header" width=30%>ELRC-SHARE Nodes ({{ traffic|length|add:-1 }})</th>-->
+	    <th class="header" width=30%>ELRI Nodes ({{ traffic|length|add:-1 }})</th>
 	    <th class="header">Last check</th>
 	    {% for fieldname, fieldlabel in stats_fields %}
 	        <th class="header">{{ fieldlabel.0 }}</th>

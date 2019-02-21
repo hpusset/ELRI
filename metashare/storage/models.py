@@ -149,7 +149,8 @@ class StorageObject(models.Model):
                                          help_text=_("(Read-only) META-SHARE version used with the storage object instance."))
 
     legacy_resource = models.BooleanField(
-        help_text=_('Specifies whether the resource is collected by ELRC 1'),
+        #help_text=_('Specifies whether the resource is collected by ELRC 1'),
+        help_text=_('Specifies whether the resource is collected by ELRI 1'),
         default=False)
 
     def _get_master_copy(self):
@@ -263,7 +264,8 @@ class StorageObject(models.Model):
         """
         import re
 
-        pattern = re.compile("ELRC_VALREP.*\.pdf")
+        pattern = re.compile("ELRI_VALREP.*\.pdf")
+        #pattern = re.compile("ELRC_VALREP.*\.pdf")
         try:
             for f in os.listdir(self._storage_folder()):
                 if pattern.match(f):
