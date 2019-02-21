@@ -51,7 +51,7 @@ from django.utils.translation import ugettext as _
 from haystack.views import FacetedSearchView
 
 from metashare.accounts.models import UserProfile, Organization, OrganizationManagers
-from metashare.local_settings import CONTRIBUTIONS_ALERT_EMAILS, TMP, SUPPORTED_LANGUAGES
+from metashare.local_settings import CONTRIBUTIONS_ALERT_EMAILS, TMP, SUPPORTED_LANGUAGES, EMAIL_ADDRESSES
 from metashare.recommendations.recommendations import SessionResourcesTracker, \
 	get_download_recommendations, get_view_recommendations, \
 	get_more_from_same_creators_qs, get_more_from_same_projects_qs
@@ -1165,7 +1165,7 @@ def contribute(request):
 				mail_data={'resourcename':data['resourceInfo']['resourceTitle']}
 				send_mail(_("New submitted contributions"),
 							render_to_string('repository/resource_new_contributions.email', mail_data),
-						  'no-reply@elri.eu', group_reviewers,  fail_silently=False)
+						  EMAIL_ADDRESSES['elri-no-reply'], group_reviewers,  fail_silently=False)
 			except:
 				LOGGER.error("An error has occurred while trying to send email to contributions"
 							 "alert recipients.")
@@ -1686,15 +1686,10 @@ def repo_report(request):
 					   "repository and their status today, {}.\n" \
 					   "Best regards,\n\n" \
 					   "The ELRI group".format(datetime.datetime.now().strftime("%d, %b %Y"))
-			#msg_body = "Dear all,\n" \
-			#		   "Please find attached an overview of the resources available in the ELRC-SHARE " \
-			#		   "repository and their status today, {}.\n" \
-			#		   "Best regards,\n\n" \
-			#		   "The ELRC-SHARE group".format(datetime.datetime.now().strftime("%d, %b %Y"))	   
-			#msg = EmailMessage("[ELRC] ERLC-SHARE weekly report", msg_body,
-			#				   from_email='elrc-share@ilsp.gr', bcc=rp)
+      
 			msg = EmailMessage("[ELRI] ELRI weekly report", msg_body,
-							   from_email='elri-share@ilsp.gr', bcc=rp)
+							   from_email=EMAIL_ADDRESSES['elri-ilsp'], bcc=rp)
+
 			msg.attach("{}.xlsx".format(title), output.getvalue(),
 					   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 			msg.send()

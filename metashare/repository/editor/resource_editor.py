@@ -684,7 +684,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     
                     email_data={'resourcename':resource_name[0],'username':name[0], 'usersurname':surname[0]}
                     try:
-                        send_mail('Published Resource', render_to_string('repository/published_resource.email',email_data) ,'no-reply@elri.eu',emails, fail_silently=False)
+                        send_mail('Published Resource', render_to_string('repository/published_resource.email',email_data) , settings.EMAIL_ADDRESSES['elri-no-reply'],emails, fail_silently=False)
                     except:
                         # failed to send e-mail to superuser
                         # If the email could not be sent successfully, tell the user
@@ -770,7 +770,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
 					#send the ingested resource notification mail
 					email_data={'resourcename':resource_name[0]}
 					try:
-						send_mail("Ingested Resource", render_to_string('repository/ingested_resource.email',email_data),'no-reply@elri.eu',group_reviewers)
+						send_mail("Ingested Resource", render_to_string('repository/ingested_resource.email',email_data),settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
 					except:
 						# failed to send e-mail to superuser
 						# If the email could not be sent successfully, tell the user

@@ -38,12 +38,10 @@ msgstr ""
 #: templates/404.html:10 templates/500.html:10
 msgid ""
 "Please try again and, if the error persists, contact the ELRI NRS support "
-"group (<a href=\"mailto:elri-nrs-support@vicomtech.org\" >elri-nrs-"
-"support@vicomtech.org</a>)."
+"group (<a href=\"mailto:{{ email }}\" >{{ email }}</a>)."
 msgstr ""
 "Merci de réessayer et, si le problème persiste, contactez le groupe de "
-"support ELRI NLRS (<a href=\"mailto:elri-nrs-support@vicomtech.org\" >elri-"
-"nrs-support@vicomtech.org</a>)."
+"support ELRI NLRS (<a href=\"mailto:{{ email }}\" >{{ email }}</a>)."
 
 #: templates/500.html:6
 msgid "Internal Server Error (500)"
@@ -552,12 +550,11 @@ msgstr ""
 #: templates/help.html:27
 msgid ""
 "For technical help about this National Relay Station, you can contact us at "
-"<a href=\"mailto:eli-nrs-support@vicomtech.org\" >eli-nrs-support@vicomtech."
-"org</a>."
+"<a href=\"mailto:{{ mail }}\" >{{ mail }}</a>."
 msgstr ""
 "Pour une assistance technique sur cette Station de Relai National, vous "
-"pouvez nous joindre sur <a href=\"mailto:eli-nrs-support@vicomtech.org\" "
-">eli-nrs-support@vicomtech.org</a>."
+"pouvez nous joindre sur <a href=\"mailto:{{ mail }}\" "
+">{{ mail }}</a>."
 
 #: templates/legal.html:7
 msgid "<strong>ELRI Terms of Service</strong>"

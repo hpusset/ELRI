@@ -74,7 +74,7 @@ services:
   # Toolchain image
   toolchain:
     container_name: elri_toolchain
-    image: elrinrs/toolchain:R2.1
+    image: elrinrs/toolchain:R2.2
     volumes:   
       - elri-shared-resources:/elri/elri_resources:rw
     environment:

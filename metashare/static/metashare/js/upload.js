@@ -57,13 +57,7 @@ $(function () {
 
     $("option[data-toggle='tooltip']").mouseleave(
         function () {
-            var that = $(this);
-            setTimeout(
-                function () {
-                    that.tooltip('hide');
-                },
-                2000
-            );
+            $(this).tooltip('hide');
         }
     );
 });
