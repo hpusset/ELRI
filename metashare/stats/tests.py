@@ -95,7 +95,7 @@ class StatsTest(TestCase):
  
     def test_visiting_stats(self):
         """
-        Tries to load the visiting stats page of the ELRC-SHARE website.
+        Tries to load the visiting stats page of the ELRI website.
         Some user calls from 193.254.26.9 are used as example of Italian IP address
         """
         su_client = Client()
@@ -124,7 +124,8 @@ class StatsTest(TestCase):
         
         response = su_client.get('/{0}stats/top/'.format(DJANGO_BASE))
         self.assertTemplateUsed(response, 'stats/topstats.html')
-        self.assertContains(response, "ELRC-SHARE visits statistics")
+        #self.assertContains(response, "ELRC-SHARE visits statistics")
+        self.assertContains(response, "ELRI visits statistics")
         self.assertNotContains(response, ">No data found<")
 
         response = su_client.get('/{0}stats/top/?last=week'.format(DJANGO_BASE))
@@ -255,7 +256,8 @@ class StatsTest(TestCase):
         client.login(username='su', password='supwd')
         response = client.get('/{0}stats/top/'.format(DJANGO_BASE))
         self.assertTemplateUsed(response, 'stats/topstats.html')
-        self.assertContains(response, "ELRC-SHARE visits statistics")
+        #self.assertContains(response, "ELRC-SHARE visits statistics")
+        self.assertContains(response, "ELRI visits statistics")
         self.assertNotContains(response, "identificationInfo")
         
         client.login(username='manageruser', password='secret')

@@ -243,8 +243,9 @@ class ViewTest(TestCase):
         response = client.get(url, follow = True)
         self.assertTemplateUsed(response, 'repository/resource_view/lr_view.html')
         self.assertContains(response, '<title>Italian TTS Speech Corpus ' \
+                            '(Appen) &ndash; ELRI</title>')
+		#self.assertContains(response, '<title>Italian TTS Speech Corpus ' \
                             '(Appen) &ndash; ELRC-SHARE</title>')
-
     def testResourceTitle(self):
         """
         Tests whether the resource title is correct 

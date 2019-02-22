@@ -2,7 +2,7 @@ import datetime, requests, os, zipfile
 from functools import update_wrapper
 from mimetypes import guess_type
 from shutil import copyfile
-
+import logging
 from django import forms
 from django.contrib import admin, messages
 from django.contrib.admin.utils import unquote
@@ -25,6 +25,8 @@ from django.views.decorators.csrf import csrf_protect
 
 
 from metashare import settings
+from metashare.settings import STATIC_URL,LOG_HANDLER,ROOT_PATH
+
 from metashare.accounts.models import EditorGroup, EditorGroupManagers
 from metashare.repository.editor.editorutils import FilteredChangeList, AllChangeList
 from metashare.repository.editor.filters import ValidatedFilter, ResourceTypeFilter
@@ -46,9 +48,118 @@ from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
     ALLOWED_ARCHIVE_EXTENSIONS, ALLOWED_VALIDATION_EXTENSIONS, ALLOWED_LEGAL_DOCUMENTATION_EXTENSIONS
 from metashare.utils import verify_subclass, create_breadcrumb_template_params
 
+
 from os.path import split, getsize
 
+# Setup logging support.
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(LOG_HANDLER)
+
+
 csrf_protect_m = method_decorator(csrf_protect)
+
+# a type providing an enumeration of META-SHARE member types
+MEMBER_TYPES = type('MemberEnum', (), dict(GOD=100, FULL=3, ASSOCIATE=2, NON=1))
+
+
+# a dictionary holding a URL for each download licence and a member type which
+# is required at a minimum to be able to download the associated resource
+# straight away; otherwise the licence requires a hard-copy signature
+LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
+	'CC-BY-4.0': (STATIC_URL + 'metashare/licences/CC-BY-4.0.pdf', MEMBER_TYPES.NON),
+	'CC-BY-NC-4.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-4.0.pdf', MEMBER_TYPES.NON),
+	'CC-BY-NC-ND-4.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-ND-4.0.pdf', MEMBER_TYPES.NON),
+	'CC-BY-NC-SA-4.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-SA-4.0.pdf', MEMBER_TYPES.NON),
+	'CC-BY-ND-4.0': (STATIC_URL + 'metashare/licences/CC-BY-ND-4.0.pdf', MEMBER_TYPES.NON),
+	'CC-BY-SA-4.0': (STATIC_URL + 'metashare/licences/CC-BY-SA-4.0.pdf', MEMBER_TYPES.NON),
+	'CC0-1.0': (STATIC_URL + 'metashare/licences/CC0-1.0.pdf', MEMBER_TYPES.NON),
+	'CC-BY-3.0': (STATIC_URL + 'metashare/licences/CC-BY-3.0.pdf', MEMBER_TYPES.NON),
+	'CC-BY-NC-3.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-3.0.pdf', MEMBER_TYPES.NON),
+	'CC-BY-NC-ND-3.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-ND-3.0.pdf', MEMBER_TYPES.NON),
+	'CC-BY-NC-SA-3.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-SA-3.0.pdf', MEMBER_TYPES.NON),
+	'CC-BY-ND-3.0': (STATIC_URL + 'metashare/licences/CC-BY-ND-3.0.pdf', MEMBER_TYPES.NON),
+	'CC-BY-SA-3.0': (STATIC_URL + 'metashare/licences/CC-BY-SA-3.0.pdf', MEMBER_TYPES.NON),
+	# TODO: PDDL
+	'PDDL-1.0': (STATIC_URL + 'metashare/licences/PDDL-1.0.pdf', MEMBER_TYPES.NON),
+	# TODO: ODC-BY
+	'ODC-BY-1.0': (STATIC_URL + 'metashare/licences/ODC-BY-1.0.pdf', MEMBER_TYPES.NON),
+	'ODbL-1.0': (STATIC_URL + 'metashare/licences/ODbL-1.0.pdf', MEMBER_TYPES.NON),
+	'AGPL-3.0': (STATIC_URL + 'metashare/licences/AGPL-3.0.pdf', MEMBER_TYPES.NON),
+	'Apache-2.0': (STATIC_URL + 'metashare/licences/Apache-2.0.pdf', MEMBER_TYPES.NON),
+	'BSD-4-Clause': (STATIC_URL + 'metashare/licences/BSD-4-Clause.pdf', MEMBER_TYPES.NON),
+	'BSD-3-Clause': (STATIC_URL + 'metashare/licences/BSD-3-Clause.pdf', MEMBER_TYPES.NON),
+	'BSD-2-Clause': (STATIC_URL + 'metashare/licences/BSD-2-Clause', MEMBER_TYPES.NON),
+	'GFDL-1.3': (STATIC_URL + 'metashare/licences/GFDL-1.3.pdf', MEMBER_TYPES.NON),
+	'GPL-3.0': (STATIC_URL + 'metashare/licences/GPL-3.0.pdf', MEMBER_TYPES.NON),
+	'LGPL-3.0': (STATIC_URL + 'metashare/licences/LGPL-3.0.pdf', MEMBER_TYPES.NON),
+	'MIT': (STATIC_URL + 'metashare/licences/MIT.pdf', MEMBER_TYPES.NON),
+	'EPL-1.0': (STATIC_URL + 'metashare/licences/EPL-1.0.pdf', MEMBER_TYPES.NON),
+	'EUPL-1.0': (STATIC_URL + 'metashare/licences/EUPL-1.0.pdf', MEMBER_TYPES.NON),
+	'EUPL-1.1': (STATIC_URL + 'metashare/licences/EUPL-1.1.pdf', MEMBER_TYPES.NON),
+	'EUPL-1.2': (STATIC_URL + 'metashare/licences/EUPL-1.2.pdf', MEMBER_TYPES.NON),
+	'LO-OL-v2': (STATIC_URL + 'metashare/licences/LO-OL-v2.pdf', MEMBER_TYPES.NON),
+	'dl-de/by-2-0': (STATIC_URL + 'metashare/licences/dl-de_by-2-0.pdf', MEMBER_TYPES.NON),
+	'dl-de/zero-2-0': (STATIC_URL + 'metashare/licences/dl-de_zero-2-0.pdf', MEMBER_TYPES.NON),
+	'IODL-1.0': (STATIC_URL + 'metashare/licences/IODL-1.0.pdf', MEMBER_TYPES.NON),
+	'NLOD-1.0': (STATIC_URL + 'metashare/licences/NLOD-1.0.pdf', MEMBER_TYPES.NON),
+	'OGL-3.0': (STATIC_URL + 'metashare/licences/OGL-3.0.pdf', MEMBER_TYPES.NON),
+	'NCGL-1.0': (STATIC_URL + 'metashare/licences/NCGL-1.0.pdf', MEMBER_TYPES.GOD),
+	'openUnder-PSI': (STATIC_URL + 'metashare/licences/openUnderPSI.txt', MEMBER_TYPES.NON),
+	'publicDomain': (STATIC_URL + 'metashare/licences/publicDomain.txt', MEMBER_TYPES.NON), #('', MEMBER_TYPES.NON),
+	'non-standard/Other_Licence/Terms': ('', MEMBER_TYPES.NON),
+	'underReview': ('', MEMBER_TYPES.GOD),
+}
+
+
+def _get_user_membership(user):
+	"""
+	Returns a `MEMBER_TYPES` type based on the permissions of the given
+	authenticated user. 
+	"""
+	if user.has_perm('accounts.ms_full_member'):
+		return MEMBER_TYPES.FULL
+	elif user.has_perm('accounts.ms_associate_member'):
+		return MEMBER_TYPES.ASSOCIATE
+	return MEMBER_TYPES.NON
+
+
+def _get_licences(resource, user_membership):
+	"""
+	Returns the licences under which a download/purchase of the given resource
+	is possible for the given user membership.
+	
+	The result is a dictionary mapping from licence names to pairs. Each pair
+	contains the corresponding `licenceInfoType_model`, the download location
+	URLs and a boolean denoting whether the resource may (and can) be directly
+	downloaded or if there need to be further negotiations of some sort.
+	"""
+	distribution_infos = tuple(resource.distributioninfotype_model_set.all())
+
+	# licence_infos = tuple([(l_info, d_info.downloadLocation + d_info.executionLocation) \
+	licence_infos = tuple([(l_info, d_info.downloadLocation + d_info.executionLocation) \
+						   for d_info in distribution_infos for l_info in d_info.licenceInfo.all()])
+
+	all_licenses = dict([(l_info.licence, (l_info, access_links)) \
+						 for l_info, access_links in licence_infos])
+	result = {}
+	for name, info in all_licenses.items():
+		
+		l_info, access_links = info
+		access = LICENCEINFOTYPE_URLS_LICENCE_CHOICES.get(name, None)
+		if access == None:
+			LOGGER.warn("Unknown license name discovered in the database for " \
+						"object #{}: {}".format(resource.id, name))
+			del all_licenses[name]
+		elif user_membership >= access[1] \
+				and (len(access_links) or resource.storage_object.get_download()):
+			# the resource can be downloaded somewhere under the current license
+			# terms and the user's membership allows her to immediately download
+			# the resource
+			result[name] = (l_info, access[0], True)
+		else:
+			# further negotiations are required with the current license
+			result[name] = (l_info, access[0], False)
+	return result
 
 
 class ResourceComponentInlineFormSet(ReverseInlineFormSet):
@@ -342,7 +453,10 @@ class ResourceModelAdmin(SchemaModelAdmin):
             successful = 0
             #messages.info(request,queryset)
             for obj in queryset:
-				if check_resource_status(obj)== INGESTED or check_resource_status(obj)== PUBLISHED : #only process INGESTED or PUBLISHED resources
+				#variables to control tc errors
+				errors=0
+				error_msg=''
+				if check_resource_status(obj)== INGESTED : #only (re)process INGESTED resources, published are suposed to be ok #or check_resource_status(obj)== PUBLISHED : #only process INGESTED or PUBLISHED resources
 					messages.info(request,_('You are processing a resource. This may take some time...'))
 					###DEBUGGING_INFO
 					##PATH TO THE RESOURCE
@@ -389,7 +503,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
 						copyfile(resource_path+'/archive.zip',resource_path+'/_archive_origin.zip')
 					#unzip always _archive.zip wich has always the source resource files; archive.zip can contain processed documents 
 
-          				resource_zip=zipfile.ZipFile(resource_path+'/_archive.zip','r')
+					resource_zip=zipfile.ZipFile(resource_path+'/_archive.zip','r')
 					#and unzip the resource files into the corresponding /input folder
 					resources=resource_zip.namelist()
 					#create, if needed, the /tm /docs /other folder
@@ -422,9 +536,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
 									os.makedirs(resource_other_path)
 								resource_zip.extract(r,resource_other_path)
 					response_tm=''
-					#variables to control tc errors
-					error_msg=''
-					errors=0
+					
 					if call_tm2tmx > 0:
 						#prepare the json for calling the tm2tmx tc for each tmx in tmx_files
 						r_id=obj.storage_object.id
@@ -528,12 +640,12 @@ class ResourceModelAdmin(SchemaModelAdmin):
 						prepare_error_zip(error_msg,resource_path,request)
 					else:
 						messages.error(request,
-                           _('Only ingested/published resources can be re-processed.'))
+                           _('Only ingested resources can be re-processed.'))
         else:
             messages.error(request, _('You do not have the permission to ' \
                             'perform this action for all selected resources.'))
 
-    process_action.short_description = _("Process selected ingested/published resources")
+    process_action.short_description = _("Process selected ingested resources")
 
     def publish_action(self, request, queryset):
         if has_publish_permission(request, queryset):
@@ -548,13 +660,31 @@ class ResourceModelAdmin(SchemaModelAdmin):
 
                     resource_name=[u.find('resourceName').text for u in obj.export_to_elementtree().iter('identificationInfo')]
                     
+                    #If successfully published, add to the archive.zip file the license documentation 
+                    resource_info=obj.export_to_elementtree()
+                    licences_name=[]
+                    for lic in resource_info.iter('licenceInfo'):
+                        lic_name=lic.find('licence').text
+                        licences_name.append(lic_name)
+                    user_membership = _get_user_membership(request.user)    
+                    licences = _get_licences(obj,user_membership)    
+                    resource_path=obj.storage_object._storage_folder()
+                    lr_archive_zip=zipfile.ZipFile(resource_path+'/archive.zip', mode='a')
+                    for l in licences_name:
+                        l_info, access_links, access = licences[l]
+                        #add access file to the lr.archive.zip file 
+                        licence_path=ROOT_PATH+access_links
+                        path, filename = os.path.split(licence_path)
+                        lr_archive_zip.write(licence_path,'license_'+filename)
+                    lr_archive_zip.close()
+                    #send corresponding emails
                     emails=obj.owners.all().values_list('email',flat=True)
                     name=obj.owners.all().values_list('first_name',flat=True)
                     surname=obj.owners.all().values_list('last_name',flat=True)
-
+                    
                     email_data={'resourcename':resource_name[0],'username':name[0], 'usersurname':surname[0]}
                     try:
-                        send_mail('Published Resource', render_to_string('repository/published_resource.email',email_data) ,'no-reply@elri.eu',emails, fail_silently=False)
+                        send_mail('Published Resource', render_to_string('repository/published_resource.email',email_data) , settings.EMAIL_ADDRESSES['elri-no-reply'],emails, fail_silently=False)
                     except:
                         # failed to send e-mail to superuser
                         # If the email could not be sent successfully, tell the user
@@ -570,6 +700,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
             else:
                 messages.error(request,
                                _('Only ingested resources can be published.'))
+           
         else:
             messages.error(request, _('You do not have the permission to ' \
                             'perform this action for all selected resources.'))
@@ -639,7 +770,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
 					#send the ingested resource notification mail
 					email_data={'resourcename':resource_name[0]}
 					try:
-						send_mail("Ingested Resource", render_to_string('repository/ingested_resource.email',email_data),'no-reply@elri.eu',group_reviewers)
+						send_mail("Ingested Resource", render_to_string('repository/ingested_resource.email',email_data),settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
 					except:
 						# failed to send e-mail to superuser
 						# If the email could not be sent successfully, tell the user
@@ -1232,11 +1363,17 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 if _extension:
                     _storage_folder = storage_object._storage_folder()
 
-                    _out_filename = u'{}/ELRC_VALREP_{}_{}.{}'.format(_storage_folder,
+                    _out_filename = u'{}/ELRI_VALREP_{}_{}.{}'.format(_storage_folder,
                                                                       object_id,
                                                                       obj.identificationInfo.resourceName['en']
                                                                       .replace(u"/", u"_").replace(u" ", u"_"),
                                                                       _extension)
+					#_out_filename = u'{}/ELRC_VALREP_{}_{}.{}'.format(_storage_folder,
+                    #                                                  object_id,
+                    #                                                  obj.identificationInfo.resourceName['en']
+                    #                                                  .replace(u"/", u"_").replace(u" ", u"_"),
+                    #                                                  _extension)
+                    
                     # we need to make sure the any existing report is removed
                     # while the new one may have a different filename due to
                     # resourceName change

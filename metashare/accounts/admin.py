@@ -20,7 +20,7 @@ from metashare.accounts.models import RegistrationRequest, ResetRequest, \
     UserProfile, EditorGroup, EditorGroupApplication, EditorGroupManagers, \
     Organization, OrganizationApplication, OrganizationManagers, AccessPointEdeliveryApplication
 from metashare.accounts.views import confirm
-from metashare.settings import ELRC_CERT
+from metashare.settings import ELRC_CERT, EMAIL_ADDRESSES
 from metashare.utils import create_breadcrumb_template_params
 from ..edelivery.update_ap_files import update_pmode, update_truststore
 
@@ -310,7 +310,7 @@ class EditorGroupApplicationAdmin(admin.ModelAdmin):
                     # Send out notification email to the user
                     send_mail('Application accepted',
                               render_to_string('accounts/notification_editor_group_application_accepted.email', data),
-                              'no-reply@elri.eu', (req.user.email,),
+                              EMAIL_ADDRESSES['elri-no-reply'], (req.user.email,),
                               fail_silently=False)
                 except:  # SMTPException:
                     # If the email could not be sent successfully, tell the user
@@ -370,7 +370,7 @@ class EditorGroupApplicationAdmin(admin.ModelAdmin):
             send_mail('Application turned down', render_to_string('accounts/'
                                                                   'notification_editor_group_application_turned_down.email',
                                                                   data),
-                      'no-reply@elri.eu', (obj.user.email,),
+                      EMAIL_ADDRESSES['elri-no-reply'], (obj.user.email,),
                       fail_silently=False)
         except:  # SMTPException:
             # If the email could not be sent successfully, tell the user
@@ -778,7 +778,7 @@ class OrganizationApplicationAdmin(admin.ModelAdmin):
                     # Send out notification email to the user
                     send_mail('Application accepted',
                               render_to_string('accounts/notification_organization_application_accepted.email', data),
-                              'no-reply@elri.eu', (req.user.email,),
+                              EMAIL_ADDRESSES['elri-no-reply'], (req.user.email,),
                               fail_silently=False)
                 except:  # SMTPException:
                     # If the email could not be sent successfully, tell the user
@@ -830,7 +830,7 @@ class OrganizationApplicationAdmin(admin.ModelAdmin):
             send_mail('Application turned down', render_to_string('accounts/'
                                                                   'notification_organization_application_turned_down.email',
                                                                   data),
-                      'no-reply@elri.eu', (obj.user.email,),
+                      EMAIL_ADDRESSES['elri-no-reply'], (obj.user.email,),
                       fail_silently=False)
         except:  # SMTPException:
             # If the email could not be sent successfully, tell the user
@@ -1147,7 +1147,7 @@ class EdeliveryApplicationAdmin(admin.ModelAdmin):
                               "Your eDelivery application has been rejected due to the"
                               "following reasons:\n"
                               "{}.".format(req.user.username, req.rejection_reason),
-                              "edelivery@elri.eu", [req.user.email])
+                              EMAIL_ADDRESSES['elri-edelivery'], [req.user.email])
                     messages.success(request, "The selected applications have been rejected. "
                                               "The requesting users have been notified via email.")
                 else:
@@ -1195,7 +1195,7 @@ class EdeliveryApplicationAdmin(admin.ModelAdmin):
                               "Your eDelivery application has been revoked due to the"
                               "following reasons:\n"
                               "{}.".format(req.user.username, req.rejection_reason),
-                              "edelivery@elri.eu", [req.user.email])
+                              EMAIL_ADDRESSES['elri-edelivery'], [req.user.email])
                     req.save()
                     messages.success(request, "The selected applications have been revoked. "
                                               "The requesting users have been notified via email.")

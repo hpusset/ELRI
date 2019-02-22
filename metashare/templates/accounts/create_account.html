@@ -16,13 +16,20 @@
 <div class="content_box">
   <form class="form_helper" method="post" action="{% url 'metashare.accounts.views.create' %}">
     {% csrf_token %}
+
     {% for field in form %}
+       
       {{ field.errors }}
+
       {% if field.html_name == "accepted_tos" %}
-        {% static "metashare/ELRI_ToS_template.pdf" as elri_tos %}
-        {{ field }} <label for="{{ field.auto_id }}">{% blocktrans %}I accept the <a target="_blank" href="{{ elri_tos }}">ELRI Terms of Service</a>.{% endblocktrans %}</label>
+      
+        {{ field }} <label for="{{ field.auto_id }}"> I accept the <a target="_blank" href="{% static  elri_tos %}">ELRI Terms of Service</a>. </label>
+        <!--{% static "metashare/ELRI_ToS_template.pdf" as elri_tos %}-->
+        <!--{{ field }} <label for="{{ field.auto_id }}">{% blocktrans %}I accept the <a target="_blank" href="{{ elri_tos }}">ELRI Terms of Service</a>.{% endblocktrans %}</label>-->
       {% else %}
+        
         {{ field.label_tag }} {{ field }}
+
       {% endif %}
       <div>{# for spacing and for clearing the last float environments #}</div>
     {% endfor %}

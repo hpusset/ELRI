@@ -7,7 +7,7 @@ import uuid
 import zipfile
 import re
 import pdb
-from unidecode import unidecode 
+from unidecode import unidecode
 from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
 from haystack.query import SearchQuerySet
 from metashare.report_utils.report_utils import _is_processed, _is_not_processed_or_related, _get_country, \
@@ -45,17 +45,18 @@ from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.core.mail import send_mail, EmailMessage
+from django.utils import translation
 from django.utils.translation import ugettext as _
 
 from haystack.views import FacetedSearchView
 
 from metashare.accounts.models import UserProfile, Organization, OrganizationManagers
-from metashare.local_settings import CONTRIBUTIONS_ALERT_EMAILS, TMP, SUPPORTED_LANGUAGES
+from metashare.local_settings import CONTRIBUTIONS_ALERT_EMAILS, TMP, SUPPORTED_LANGUAGES, EMAIL_ADDRESSES
 from metashare.recommendations.recommendations import SessionResourcesTracker, \
 	get_download_recommendations, get_view_recommendations, \
 	get_more_from_same_creators_qs, get_more_from_same_projects_qs
 from metashare.repository import model_utils
-from metashare.repository.editor.resource_editor import has_edit_permission
+from metashare.repository.editor.resource_editor import has_edit_permission, _get_licences, _get_user_membership, MEMBER_TYPES, LICENCEINFOTYPE_URLS_LICENCE_CHOICES
 from metashare.repository.forms import LicenseSelectionForm, \
 	LicenseAgreementForm, DownloadContactForm, MORE_FROM_SAME_CREATORS, \
 	MORE_FROM_SAME_PROJECTS
@@ -69,13 +70,15 @@ from metashare.repository.models import resourceInfoType_model, identificationIn
 from metashare.repository.search_indexes import resourceInfoType_modelIndex, \
 	update_lr_index_entry
 from metashare.settings import LOG_HANDLER, STATIC_URL, DJANGO_URL, MAXIMUM_UPLOAD_SIZE, CONTRIBUTION_FORM_DATA, \
-	ROOT_PATH
+	ROOT_PATH, LANGUAGE_CODE
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
 	saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
 from metashare.storage.models import PUBLISHED, INGESTED
 from metashare.utils import prettify_camel_case_string
 
 MAXIMUM_READ_BLOCK_SIZE = 4096
+ALLOWED_EXTENSIONS = [".zip", ".pdf", ".doc", ".docx", ".tmx", ".txt", ".rtf",
+							".xls", ".xlsx", ".xml", ".sdltm", ".odt", ".tbx"]
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -103,121 +106,19 @@ def _convert_to_template_tuples(element_tree):
 		values = []
 		for child in element_tree:
 			values.append(_convert_to_template_tuples(child))
-		# use pretty print name of element instead of tag; requires that 
+		# use pretty print name of element instead of tag; requires that
 		# element_tree is created using export_to_elementtree(pretty=True)
 		return (element_tree.attrib["pretty"], values)
 
-	# Otherwise, we return a tuple containg (key, value, required), 
+	# Otherwise, we return a tuple containg (key, value, required),
 	# i.e., (tag, text, <True,False>).
-	# The "required" element was added to the tree, for passing 
+	# The "required" element was added to the tree, for passing
 	# information about whether a field is required or not, to correctly
 	# render the single resource view.
 	else:
-		# use pretty print name of element instead of tag; requires that 
+		# use pretty print name of element instead of tag; requires that
 		# element_tree is created using export_to_elementtree(pretty=True)
 		return ((element_tree.attrib["pretty"], element_tree.text),)
-
-
-# a type providing an enumeration of META-SHARE member types
-MEMBER_TYPES = type('MemberEnum', (), dict(GOD=100, FULL=3, ASSOCIATE=2, NON=1))
-
-# a dictionary holding a URL for each download licence and a member type which
-# is required at a minimum to be able to download the associated resource
-# straight away; otherwise the licence requires a hard-copy signature
-LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
-	'CC-BY-4.0': (STATIC_URL + 'metashare/licences/CC-BY-4.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-NC-4.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-4.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-NC-ND-4.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-ND-4.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-NC-SA-4.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-SA-4.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-ND-4.0': (STATIC_URL + 'metashare/licences/CC-BY-ND-4.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-SA-4.0': (STATIC_URL + 'metashare/licences/CC-BY-SA-4.0.pdf', MEMBER_TYPES.NON),
-	'CC0-1.0': (STATIC_URL + 'metashare/licences/CC0-1.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-3.0': (STATIC_URL + 'metashare/licences/CC-BY-3.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-NC-3.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-3.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-NC-ND-3.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-ND-3.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-NC-SA-3.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-SA-3.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-ND-3.0': (STATIC_URL + 'metashare/licences/CC-BY-ND-3.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-SA-3.0': (STATIC_URL + 'metashare/licences/CC-BY-SA-3.0.pdf', MEMBER_TYPES.NON),
-	# TODO: PDDL
-	'PDDL-1.0': (STATIC_URL + 'metashare/licences/PDDL-1.0.pdf', MEMBER_TYPES.NON),
-	# TODO: ODC-BY
-	'ODC-BY-1.0': (STATIC_URL + 'metashare/licences/ODC-BY-1.0.pdf', MEMBER_TYPES.NON),
-	'ODbL-1.0': (STATIC_URL + 'metashare/licences/ODbL-1.0.pdf', MEMBER_TYPES.NON),
-	'AGPL-3.0': (STATIC_URL + 'metashare/licences/AGPL-3.0.pdf', MEMBER_TYPES.NON),
-	'Apache-2.0': (STATIC_URL + 'metashare/licences/Apache-2.0.pdf', MEMBER_TYPES.NON),
-	'BSD-4-Clause': (STATIC_URL + 'metashare/licences/BSD-4-Clause.pdf', MEMBER_TYPES.NON),
-	'BSD-3-Clause': (STATIC_URL + 'metashare/licences/BSD-3-Clause.pdf', MEMBER_TYPES.NON),
-	'BSD-2-Clause': (STATIC_URL + 'metashare/licences/BSD-2-Clause', MEMBER_TYPES.NON),
-	'GFDL-1.3': (STATIC_URL + 'metashare/licences/GFDL-1.3.pdf', MEMBER_TYPES.NON),
-	'GPL-3.0': (STATIC_URL + 'metashare/licences/GPL-3.0.pdf', MEMBER_TYPES.NON),
-	'LGPL-3.0': (STATIC_URL + 'metashare/licences/LGPL-3.0.pdf', MEMBER_TYPES.NON),
-	'MIT': (STATIC_URL + 'metashare/licences/MIT.pdf', MEMBER_TYPES.NON),
-	'EPL-1.0': (STATIC_URL + 'metashare/licences/EPL-1.0.pdf', MEMBER_TYPES.NON),
-	'EUPL-1.0': (STATIC_URL + 'metashare/licences/EUPL-1.0.pdf', MEMBER_TYPES.NON),
-	'EUPL-1.1': (STATIC_URL + 'metashare/licences/EUPL-1.1.pdf', MEMBER_TYPES.NON),
-	'EUPL-1.2': (STATIC_URL + 'metashare/licences/EUPL-1.2.pdf', MEMBER_TYPES.NON),
-	'LO-OL-v2': (STATIC_URL + 'metashare/licences/LO-OL-v2.pdf', MEMBER_TYPES.NON),
-	'dl-de/by-2-0': (STATIC_URL + 'metashare/licences/dl-de_by-2-0.pdf', MEMBER_TYPES.NON),
-	'dl-de/zero-2-0': (STATIC_URL + 'metashare/licences/dl-de_zero-2-0.pdf', MEMBER_TYPES.NON),
-	'IODL-1.0': (STATIC_URL + 'metashare/licences/IODL-1.0.pdf', MEMBER_TYPES.NON),
-	'NLOD-1.0': (STATIC_URL + 'metashare/licences/NLOD-1.0.pdf', MEMBER_TYPES.NON),
-	'OGL-3.0': (STATIC_URL + 'metashare/licences/OGL-3.0.pdf', MEMBER_TYPES.NON),
-	'NCGL-1.0': (STATIC_URL + 'metashare/licences/NCGL-1.0.pdf', MEMBER_TYPES.GOD),
-	'openUnder-PSI': ('', MEMBER_TYPES.NON),
-	'publicDomain': ('', MEMBER_TYPES.NON),
-	'non-standard/Other_Licence/Terms': ('', MEMBER_TYPES.NON),
-	'underReview': ('', MEMBER_TYPES.GOD),
-}
-
-
-def _get_user_membership(user):
-	"""
-	Returns a `MEMBER_TYPES` type based on the permissions of the given
-	authenticated user. 
-	"""
-	if user.has_perm('accounts.ms_full_member'):
-		return MEMBER_TYPES.FULL
-	elif user.has_perm('accounts.ms_associate_member'):
-		return MEMBER_TYPES.ASSOCIATE
-	return MEMBER_TYPES.NON
-
-
-def _get_licences(resource, user_membership):
-	"""
-	Returns the licences under which a download/purchase of the given resource
-	is possible for the given user membership.
-	
-	The result is a dictionary mapping from licence names to pairs. Each pair
-	contains the corresponding `licenceInfoType_model`, the download location
-	URLs and a boolean denoting whether the resource may (and can) be directly
-	downloaded or if there need to be further negotiations of some sort.
-	"""
-	distribution_infos = tuple(resource.distributioninfotype_model_set.all())
-
-	# licence_infos = tuple([(l_info, d_info.downloadLocation + d_info.executionLocation) \
-	licence_infos = tuple([(l_info, d_info.downloadLocation + d_info.executionLocation) \
-						   for d_info in distribution_infos for l_info in d_info.licenceInfo.all()])
-
-	all_licenses = dict([(l_info.licence, (l_info, access_links)) \
-						 for l_info, access_links in licence_infos])
-	result = {}
-	for name, info in all_licenses.items():
-		l_info, access_links = info
-		access = LICENCEINFOTYPE_URLS_LICENCE_CHOICES.get(name, None)
-		if access == None:
-			LOGGER.warn("Unknown license name discovered in the database for " \
-						"object #{}: {}".format(resource.id, name))
-			del all_licenses[name]
-		elif user_membership >= access[1] \
-				and (len(access_links) or resource.storage_object.get_download()):
-			# the resource can be downloaded somewhere under the current license
-			# terms and the user's membership allows her to immediately download
-			# the resource
-			result[name] = (l_info, access_links, True)
-		else:
-			# further negotiations are required with the current license
-			result[name] = (l_info, access_links, False)
-	return result
 
 
 def download(request, object_id, **kwargs):
@@ -243,7 +144,7 @@ def download(request, object_id, **kwargs):
 	# Get a dictionary, where the values are triplets:
 	# (licenceInfo instance, download location, access)
 	licences = _get_licences(resource, user_membership)
-	
+
 	# Check whether the resource is from the current node, or whether it must be
 	# redirected to the master copy
 	if not resource.storage_object.master_copy:
@@ -254,7 +155,7 @@ def download(request, object_id, **kwargs):
 
 	licence_choice = None
 
-	
+
 	# if the user is superuser or in ecmembers group, provide download directly bypassing licensing and stats
 	if request.method == "GET" and bypass_licence:
 		return _provide_download(request, resource, None, bypass_licence)
@@ -313,10 +214,12 @@ def download(request, object_id, **kwargs):
 
 def _provide_download(request, resource, access_links, bypass_stats):
 	"""
-	Returns an HTTP response with a download of the given resource.
+	Returns an HTTP response with a download of the given resource. AFTER ACCEPTING THE LICENSE IF THERE IS ANY...
 	"""
 	dl_path = resource.storage_object.get_download()
+
 	if dl_path:
+
 		try:
 			def dl_stream_generator():
 				with open(dl_path, 'rb') as _local_data:
@@ -344,6 +247,7 @@ def _provide_download(request, resource, access_links, bypass_stats):
 						.format(resource.id))
 	# redirect to a download location, if available
 	elif access_links:
+
 		for url in access_links:
 			try:
 				req = requests.request('GET', url)
@@ -501,6 +405,10 @@ def view(request, resource_name=None, object_id=None):
 	"""
 	Render browse or detail view for the repository application.
 	"""
+	#translation.activate(LANGUAGE_CODE)
+	#request.session['django_language'] = LANGUAGE_CODE
+	#request.LANGUAGE_CODE = LANGUAGE_CODE
+
 	# only published resources may be viewed. Ingested LRs can be viewed only
 	# by EC members and technical reviewers
 	resource = get_object_or_404(resourceInfoType_model,
@@ -516,7 +424,7 @@ def view(request, resource_name=None, object_id=None):
 	# Convert resource to ElementTree and then to template tuples.
 	lr_content = _convert_to_template_tuples(
 		resource.export_to_elementtree(pretty=True))
-	
+
 	# get the 'best' language version of a "DictField" and all other versions
 	resource_name = resource.identificationInfo.get_default_resourceName()
 	res_short_names = resource.identificationInfo.resourceShortName.values()
@@ -550,7 +458,7 @@ def view(request, resource_name=None, object_id=None):
 	relation_info_tuples = []
 	resource_component_tuple =  None
 	##LOGGER.info(lr_content[1])
-	
+
 	for _tuple in lr_content[1]:
 		if _tuple[0] == "Distribution": #lr_content[1][1]
 			distribution_info_tuples.append(_tuple)
@@ -572,7 +480,7 @@ def view(request, resource_name=None, object_id=None):
 			relation_info_tuples.append(_tuple)
 		elif _tuple[0] == "Resource component type":
 			resource_component_tuple = _tuple[1]
-	
+
 	# Convert resource_component_tuple to nested dictionaries
 	resource_component_dicts = {}
 	validation_dicts = []
@@ -584,7 +492,7 @@ def view(request, resource_name=None, object_id=None):
 	distribution_dicts = []
 	for item in contact_person_tuples:
 		contact_person_dicts.append(tuple2dict([item]))
-	
+
 	for item in distribution_info_tuples:
 		distribution_dicts.append(tuple2dict([item]))
 	##LOGGER.info(resource_component_tuple)
@@ -713,8 +621,8 @@ def view(request, resource_name=None, object_id=None):
 	}
 	template = 'repository/resource_view/lr_view.html'
 
-	# For users who have edit permission for this resource, we have to add 
-	# LR_EDIT which contains the URL of the Django admin backend page 
+	# For users who have edit permission for this resource, we have to add
+	# LR_EDIT which contains the URL of the Django admin backend page
 	# for this resource.
 	if has_edit_permission(request, resource):
 		context['LR_EDIT'] = reverse(
@@ -766,7 +674,7 @@ def view(request, resource_name=None, object_id=None):
 
 def tuple2dict(_tuple):
 	'''
-	Recursively converts a tuple into a dictionary for ease of use 
+	Recursively converts a tuple into a dictionary for ease of use
 	in templates.
 	'''
 	_dict = {}
@@ -778,14 +686,14 @@ def tuple2dict(_tuple):
 				# Handle strings as unicode to avoid "UnicodeEncodeError: 'ascii' codec can't encode character " errors
 				if item[0].find(" "):
 					_key = u''.join(item[0]).encode('utf-8').replace(" ", "_").replace("/", "_")
-					
+
 				else:
 					_key = u''.join(item[0]) #str(item[0])
 				if _key in _dict:
-					# If a repeatable component is found, a customized 
+					# If a repeatable component is found, a customized
 					# dictionary is added, since no duplicate key names
 					# are allowed. We keep a dictionary with counts and
-					# add a new entry in the original dictionary in the 
+					# add a new entry in the original dictionary in the
 					# form <component>_<no_of_occurences>
 					if not _key in count_dict:
 						count_dict[_key] = 1
@@ -798,7 +706,7 @@ def tuple2dict(_tuple):
 			else:
 				if isinstance(item[0], tuple):
 					# Replace spaces by underscores for element names.
-					
+
 					if item[0][0][:].find(" "):
 						#LOGGER.info(u''.join(item[0][0]).encode('utf-8'))
 						_key=u''.join(item[0][0]).encode('utf-8').replace(" ", "_").replace('(', "").replace(")", "").replace("/", "_").replace("-", "_")
@@ -824,7 +732,7 @@ def _format_recommendations(recommended_resources):
 	Returns the given resource recommendations list formatted as a list of
 	dictionaries with the two keys "name" and "url" (for use in the single
 	resource view).
-	
+
 	The number of returned recommendations is restricted to at most 4.
 	'''
 	result = []
@@ -851,8 +759,8 @@ class MetashareFacetedSearchView(FacetedSearchView):
 				#get resource id
 				id_res = res.storage_object.id
 				res_groups=res.groups.values_list("name", flat=True)
-				
-				if self.request.user.groups.filter(	
+
+				if self.request.user.groups.filter(
 					name__in=res.groups.values_list("name", flat=True)).exists():
 					resname=res.identificationInfo.get_default_resourceName()
 					##get resource Name
@@ -862,7 +770,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
 					##lowercase
 					resourceName=resourceName.lower()
 					##append resource name to the list,
-					#concatenate it to its id to resolve the conflicts that 
+					#concatenate it to its id to resolve the conflicts that
 					#  can arise from resources sharing the same name but with different group sharing policy
 					resource_names.append(resourceName+str(id_res))
 			if resource_names:
@@ -931,7 +839,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
 		"""
 		Creates a data structure encapsulating most of the logic which is
 		required for rendering the filters/facets of the META-SHARE search.
-		
+
 		Takes the raw facet 'fields' dictionary which is (indirectly) returned
 		by the `facet_counts()` method of a `SearchQuerySet`.
 		"""
@@ -1046,7 +954,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
 
 	def show_subfilter(self, facet, sel_facets, facet_fields, results):
 		"""
-		Creates a second level for faceting. 
+		Creates a second level for faceting.
 		Sub filters are included after the parent filters.
 		"""
 		name = facet[0]
@@ -1112,7 +1020,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
 
 @login_required
 def contribute(request):
-		
+
 	if request.method == "POST":
 		uid = str(uuid.uuid4())
 		profile = UserProfile.objects.get(user=request.user)
@@ -1150,7 +1058,28 @@ def contribute(request):
 					ret_list.update(l.split(delimiter))
 				ret_list=sorted(ret_list)
 			return ret_list
-		
+
+		def files_extensions_are_valid(files):
+			""" Return True if all filenames extensions of files are allowed.
+			"""
+			return all(filename_extension_is_valid(f.name) for f in files)
+
+		def filename_extension_is_valid(filename):
+			""" Return True if filename extension is allowed.
+			"""
+			return filename_ext(filename) in ALLOWED_EXTENSIONS
+
+		def filename_ext(filename):
+			""" Return filename extension.
+			"""
+			if isinstance(filename, basestring):
+				return os.path.splitext(filename)[-1]
+			if issubclass(filename, File) or isinstance(filename, file):
+				return os.path.splitext(filename.name)[-1]
+			raise TypeError(
+				"%s argument is not a basetring format, type `file` or subclass of \
+				`django.core.files.base.File`." % filename)
+
 		if 'languages[]' in request.POST:
 			data['resourceInfo']['languages'] = decode_csv_to_list(request.POST.getlist('languages[]'))
 			#LOGGER.info(data['resourceInfo']['languages'])
@@ -1166,14 +1095,19 @@ def contribute(request):
 		filename = '{}_{}'.format(profile.country, uid)
 		response = {}
 
-		accepted_extensions = [".zip", ".pdf", ".doc", ".docx", ".tmx", ".txt", ".rtf",
-							   ".xls", ".xlsx", ".xml", ".sdltm", ".odt", ".tbx"]
-		acceptable_re = "(.*)({0})$".format(
-			"|".join("({0})".format(ext) for ext in accepted_extensions))
 		file_objects = request.FILES.getlist('filebutton')
-		getext = lambda file_object: os.path.splitext(file_object.name)[-1]
-		if (sum(fobj.size for fobj in file_objects) <= MAXIMUM_UPLOAD_SIZE and
-			all(getext(fobj) in accepted_extensions for fobj in file_objects)):
+		if not files_extensions_are_valid(file_objects):
+			response['status'] = "failed"
+			response['message'] = _("""
+				Only files of type DOC(X), ODT, RTF, PDF, TMX, SDLTM, XML,
+				TBX , XLS(X), TXT and ZIP files are allowed.
+				The zip files can only contain files of the
+				specified types. Please consider removing the files
+				that do not belong to one of these types.""")
+			return HttpResponse(json.dumps(response),
+								content_type="application/json")
+
+		if sum(fobj.size for fobj in file_objects) <= MAXIMUM_UPLOAD_SIZE:
 			try:
 				if not os.path.isdir(unprocessed_dir):
 					os.makedirs(unprocessed_dir)
@@ -1191,7 +1125,7 @@ def contribute(request):
 						licence_destination.write(chunk)
 			out_filenames = []
 			for i, file_object in enumerate(file_objects):
-				out_filename = "{}_{}".format(filename, str(i)) + getext(file_object)
+				out_filename = "{}_{}".format(filename, str(i)) + filename_ext(file_object.name)
 				ofile_path = os.path.sep.join((unprocessed_dir, out_filename))
 				with open(ofile_path, 'wb+') as destination:
 					for chunk in file_object.chunks():
@@ -1203,8 +1137,10 @@ def contribute(request):
 						zfile.testzip() is not None):
 						os.remove(ofile_path)
 						response['status'] = "failed"
-						response['message'] = "Your request could not be completed. " \
-											  "The file you tried to upload is corrupted or it is not a valid '.zip' file."
+						response['message'] = _("""
+							Your request could not be completed."
+							The file you tried to upload is corrupted or it is
+							not a valid '.zip' file.""")
 					if any(not (re.match(acceptable_re, fn) or
 								fn.endswith(os.path.sep))
 						   for fn in zfile.namelist()):
@@ -1213,7 +1149,7 @@ def contribute(request):
 						os.remove(ofile_path)
 						response['status'] = "failed"
 						response['message'] = \
-							"Only files of type DOC(X), ODT, PDF, TMX, SDLTM, XML, "\
+							"Only files of type DOC(X), RTF, ODT, PDF, TMX, SDLTM, XML, "\
 							"TBX , XLS(X), TXT and ZIP files are allowed. "\
 							"The zip files can only contain files of the "\
 							"specified types. Please consider removing the files"\
@@ -1221,7 +1157,7 @@ def contribute(request):
 
 					if response.get('status') == "failed":
 						return HttpResponse(json.dumps(response),
-											content_type="text/plain")
+											content_type="application/json")
 
 			xml_filename = filename + ".xml"
 			data['administration']['dataset'] = {"uploaded_files": out_filenames}
@@ -1250,7 +1186,7 @@ def contribute(request):
 			#LOGGER.info(groups_name)
 			#send an email to the reviewers related to the groups where the resource is published
 			#get the emails of those users that are reviewers
-			reviewers = [u.email for u in User.objects.filter(groups__name__in=['reviewers'])] 
+			reviewers = [u.email for u in User.objects.filter(groups__name__in=['reviewers'])]
 			group_reviewers = [u.email for u in User.objects.filter(groups__id__in=groups_name, email__in=reviewers)]
 			## DEBUG
 			#LOGGER.info(group_reviewers+su_emails)
@@ -1258,29 +1194,32 @@ def contribute(request):
 				mail_data={'resourcename':data['resourceInfo']['resourceTitle']}
 				send_mail(_("New submitted contributions"),
 							render_to_string('repository/resource_new_contributions.email', mail_data),
-						  'no-reply@elri.eu', group_reviewers,  fail_silently=False)
+						  EMAIL_ADDRESSES['elri-no-reply'], group_reviewers,  fail_silently=False)
 			except:
 				LOGGER.error("An error has occurred while trying to send email to contributions"
 							 "alert recipients.")
 
 			response['status'] = "succeded"
-			response['message'] = "Thank you for sharing! Your data have been successfully submitted. " \
-								  "You can now go on and contribute more data."
-			return HttpResponse(json.dumps(response), content_type="text/plain")
+			response['message'] = _("""
+				Thank you for sharing! Your data have been successfully submitted.
+				You can now go on and contribute more data.""")
+			return HttpResponse(json.dumps(response), content_type="application/json")
 		else:
 			response['status'] = "failed"
-			response['message'] = "The file you are trying to upload " \
-								  "exceeds the size limit. If the file(s) you would like to contribute exceed(s) {:.10} MB please contact us to provide an SFTP link for direct download or consider uploading smaller files.".format(
-				float(MAXIMUM_UPLOAD_SIZE) / (1024 * 1024))
-			return HttpResponse(json.dumps(response), content_type="text/plain")
-										  
+			response['message'] = _("""
+				The file you are trying to upload exceeds the size limit. If the file(s) you
+				would like to contribute exceed(s) {:.10} MB please contact us to provide an SFTP link for direct
+				download or consider uploading smaller files.""".format(
+				float(MAXIMUM_UPLOAD_SIZE) / (1024 * 1024)))
+			return HttpResponse(json.dumps(response), content_type="application/json")
+
 	# In ELRI, LR contributions can only be shared within the groups to which a user belongs.
 	languages=SUPPORTED_LANGUAGES
-	
+
 	return render_to_response('repository/editor/contributions/contribute.html', \
 							  {'groups':Organization.objects.values_list("name","id").filter(id__in = request.user.groups.values_list("id")), 'languages':languages},
 							  context_instance=RequestContext(request))
-	
+
 
 @staff_member_required
 def get_data(request, filename):
@@ -1388,7 +1327,7 @@ def create_description(xml_file, type, base, user):
 			 )[0]
 
 	resource = None
-	
+
 	# Handle different resource type structures
 	if type == 'corpus':
 		corpus_media_type = corpusMediaTypeType_model.objects.create()
@@ -1558,8 +1497,10 @@ def repo_report(request):
 			{'font_size': 11, 'font_color': 'white', 'bold': True, 'bg_color': "#058DBE", 'border': 1})
 		bold = workbook.add_format({'bold': True})
 		date_format = workbook.add_format({'num_format': 'yyyy, mmmm d'})
-		title = "ELRC-SHARE_OVERVIEW_{}".format(
+		title = "ELRI_OVERVIEW_{}".format(
 			datetime.datetime.now().strftime("%Y-%m-%d"))
+#		title = "ELRC-SHARE_OVERVIEW_{}".format(
+#			datetime.datetime.now().strftime("%Y-%m-%d"))
 		worksheet = workbook.add_worksheet(name=title)
 
 		worksheet.write('A1', 'Resource ID', heading)
@@ -1773,12 +1714,14 @@ def repo_report(request):
 			rp = open('{}/report_recipients.dat'.format(TMP)).read().splitlines()
 
 			msg_body = "Dear all,\n" \
-					   "Please find attached an overview of the resources available in the ELRC-SHARE " \
+					   "Please find attached an overview of the resources available in the ELRI " \
 					   "repository and their status today, {}.\n" \
 					   "Best regards,\n\n" \
-					   "The ELRC-SHARE group".format(datetime.datetime.now().strftime("%d, %b %Y"))
-			msg = EmailMessage("[ELRC] ERLC-SHARE weekly report", msg_body,
-							   from_email='elrc-share@ilsp.gr', bcc=rp)
+					   "The ELRI group".format(datetime.datetime.now().strftime("%d, %b %Y"))
+
+			msg = EmailMessage("[ELRI] ELRI weekly report", msg_body,
+							   from_email=EMAIL_ADDRESSES['elri-ilsp'], bcc=rp)
+
 			msg.attach("{}.xlsx".format(title), output.getvalue(),
 					   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 			msg.send()

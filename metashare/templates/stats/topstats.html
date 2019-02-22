@@ -110,7 +110,8 @@
 
     <div class='tab-container'>
         <ul class='etabs'>
-            <li class='tab tab-nobr'>{% trans 'ELRC-SHARE visits statistics' %}</li>
+            <li class='tab tab-nobr'>{% trans 'ELRI visits statistics' %}</li>
+            <!--<li class='tab tab-nobr'>{% trans 'ELRC-SHARE visits statistics' %}</li>-->
             <li class='tab'><a href="{% url 'frontpage' %}stats/usage/">{% trans 'Statistics on resource metadata' %}</a></li>
             {% if user.username and myres %}
                 <li class='tab'><a href="{% url 'frontpage' %}stats/mystats/">{% trans 'My resources' %}</a></li>
