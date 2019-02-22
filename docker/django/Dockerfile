@@ -22,7 +22,10 @@ ENV DB_HOST="postgres-server" \
     ELRI_SALT="e07fc77c1ecd3" \
     ELRI_ALERT_MAILS="noreply@elri.com" \
     GIT_URL="https://github.com/ELDAELRA/ELRI/${RELEASE}"\
-    ELRI_EMAIL_ADDRESSES="elri-nrs-support:elri-nrs-support@vicomtech.org,elri-no-reply:no-reply-elri@email.com,elri-ilsp:elri-ilsp@email.com,elri-edelivery:elri-edelivery@email.com"
+    ELRI_EMAIL_ADDRESSES="elri-nrs-support:elri-nrs-support@vicomtech.org,elri-no-reply:no-reply-elri@email.com,elri-ilsp:elri-ilsp@email.com,elri-edelivery:elri-edelivery@email.com"\
+    ELRI_WORKERS=2 \
+    ELRI_THREADS=4
+
 
 COPY --from=base /tmp/dockerize /usr/local/bin/
 COPY resources/env_secrets_expand.sh \

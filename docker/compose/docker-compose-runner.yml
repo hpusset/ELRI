@@ -30,6 +30,9 @@ services:
       - ELRI_PROTOCOL={{DOCKER-SECRET:web.secret}}
       - ELRI_COUNTRY={{DOCKER-SECRET:app.secret}}
       - ELRI_EMAIL_ADDRESSES={{DOCKER-SECRET:app.secret}}
+      - ELRI_WORKERS={{DOCKER-SECRET:app.secret}}
+      - ELRI_THREADS={{DOCKER-SECRET:app.secret}}
+
     depends_on:
       - solr
       - postgres-server
@@ -58,7 +61,7 @@ services:
   # NGINX webserver
   nginx:
     container_name: elri_webserver
-    image: elrinrs/nginx:R2.2
+    image: elrinrs/nginx:R2.3
     secrets:
       - web.secret
     volumes:
