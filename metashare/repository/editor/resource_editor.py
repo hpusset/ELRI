@@ -104,7 +104,7 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
 	'NLOD-1.0': (STATIC_URL + 'metashare/licences/NLOD-1.0.pdf', MEMBER_TYPES.NON),
 	'OGL-3.0': (STATIC_URL + 'metashare/licences/OGL-3.0.pdf', MEMBER_TYPES.NON),
 	'NCGL-1.0': (STATIC_URL + 'metashare/licences/NCGL-1.0.pdf', MEMBER_TYPES.GOD),
-	'openUnder-PSI': ('', MEMBER_TYPES.NON),
+	'openUnder-PSI': (STATIC_URL + 'metashare/licences/openUnderPSI.txt', MEMBER_TYPES.NON),
 	'publicDomain': (STATIC_URL + 'metashare/licences/publicDomain.txt', MEMBER_TYPES.NON), #('', MEMBER_TYPES.NON),
 	'non-standard/Other_Licence/Terms': ('', MEMBER_TYPES.NON),
 	'underReview': ('', MEMBER_TYPES.GOD),
