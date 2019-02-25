@@ -62,18 +62,21 @@ POSTGRES_PASSWORD | rootpass          | ELRI database root pass
 
 ### nrs_secret.properties:
 
-Property          | Default value                  | Description
--------------     | -------------                  | -------------
-ELRI_TIMEZONE     | Europe/Lisbon                  | ELRI country timezone
-ELRI_LANGUAGE     | pt-pt*                         | ELRI country language code
-ELRI_SALT         | e07fc77c1ec(...)               | ELRI salt used with encryption
-ELRI_ALERT_MAILS  | elri-nrs-support@vicomtech.org | ELRI alert mails 'from' field
-ELRI_COUNTRY      | Portugal                       | ELRI country value
-ELRI_EMAIL_TLS    | True                           | ELRI Mail server TLS usage
-ELRI_EMAIL_HOST   | elri_mailserver                | ELRI Mail server hostname
-ELRI_EMAIL_PORT   | 1025                           | ELRI Mail server port
-ELRI_EMAIL_USER   | ''                             | ELRI Mail server auth user (if exists)
-ELRI_EMAIL_PASS   | ''                             | ELRI Mail server auth password (if exists)
+Property           | Default value                   | Description
+-------------      | -------------                   | -------------
+ELRI_TIMEZONE      | Europe/Lisbon                   | ELRI country timezone
+ELRI_LANGUAGE      | pt-pt*                          | ELRI country language code
+ELRI_SALT          | e07fc77c1ec(...)                | ELRI salt used with encryption
+ELRI_ALERT_MAILS   | elri-nrs-support@vicomtech.org  | ELRI alert mails 'from' field
+ELRI_COUNTRY       | Portugal                        | ELRI country value
+ELRI_EMAIL_TLS     | True                            | ELRI Mail server TLS usage
+ELRI_EMAIL_HOST    | elri_mailserver                 | ELRI Mail server hostname
+ELRI_EMAIL_PORT    | 1025                            | ELRI Mail server port
+ELRI_EMAIL_USER    | elri_noreply_user@smtserver.com | ELRI Mail server auth user (if exists)
+ELRI_EMAIL_PASS    | xxxxxxxx                        | ELRI Mail server auth password (if exists)
+ELRI_SUP_LANGUAGES | [("English", "English"),(...)]  | ELRI Supported languages
+ELRI_WORKERS       | 4                               | Number of workers used
+ELRI_THREADS       | 8                               | Number of threads used
 
 ```
 * Countries:
@@ -140,7 +143,18 @@ $ docker-compose down
 # Uncomment if using SSL termination at nginx server
 ```
 
+* Change `ELRI_PROTOCOL` value from `http` to `https` at `web_secret.properties` file
+
 * Merge the files `docker-compose-runner-prd.yml` and  `docker-compose-runner.yml` again
+
+* (If certificate is a chain file) Concatenate your primary certificate file (your_domain_name.crt) and the intermediate certificate chain file (DigiCertCA.crt) into a single .pem file:
+
+```
+cat your_domain_name.crt DigiCertCA.crt > server.crt
+```
+
+For more information:
+https://www.digicert.com/csr-ssl-installation/nginx-openssl.htm#ssl_certificate_install
 
 * Update certificate and key:
 

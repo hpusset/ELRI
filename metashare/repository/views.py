@@ -7,7 +7,7 @@ import uuid
 import zipfile
 import re
 import pdb
-from unidecode import unidecode 
+from unidecode import unidecode
 from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
 from haystack.query import SearchQuerySet
 from metashare.report_utils.report_utils import _is_processed, _is_not_processed_or_related, _get_country, \
@@ -77,6 +77,8 @@ from metashare.storage.models import PUBLISHED, INGESTED
 from metashare.utils import prettify_camel_case_string
 
 MAXIMUM_READ_BLOCK_SIZE = 4096
+ALLOWED_EXTENSIONS = [".zip", ".pdf", ".doc", ".docx", ".tmx", ".txt", ".rtf",
+							".xls", ".xlsx", ".xml", ".sdltm", ".odt", ".tbx"]
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -104,17 +106,17 @@ def _convert_to_template_tuples(element_tree):
 		values = []
 		for child in element_tree:
 			values.append(_convert_to_template_tuples(child))
-		# use pretty print name of element instead of tag; requires that 
+		# use pretty print name of element instead of tag; requires that
 		# element_tree is created using export_to_elementtree(pretty=True)
 		return (element_tree.attrib["pretty"], values)
 
-	# Otherwise, we return a tuple containg (key, value, required), 
+	# Otherwise, we return a tuple containg (key, value, required),
 	# i.e., (tag, text, <True,False>).
-	# The "required" element was added to the tree, for passing 
+	# The "required" element was added to the tree, for passing
 	# information about whether a field is required or not, to correctly
 	# render the single resource view.
 	else:
-		# use pretty print name of element instead of tag; requires that 
+		# use pretty print name of element instead of tag; requires that
 		# element_tree is created using export_to_elementtree(pretty=True)
 		return ((element_tree.attrib["pretty"], element_tree.text),)
 
@@ -142,7 +144,7 @@ def download(request, object_id, **kwargs):
 	# Get a dictionary, where the values are triplets:
 	# (licenceInfo instance, download location, access)
 	licences = _get_licences(resource, user_membership)
-	
+
 	# Check whether the resource is from the current node, or whether it must be
 	# redirected to the master copy
 	if not resource.storage_object.master_copy:
@@ -153,7 +155,7 @@ def download(request, object_id, **kwargs):
 
 	licence_choice = None
 
-	
+
 	# if the user is superuser or in ecmembers group, provide download directly bypassing licensing and stats
 	if request.method == "GET" and bypass_licence:
 		return _provide_download(request, resource, None, bypass_licence)
@@ -163,7 +165,6 @@ def download(request, object_id, **kwargs):
 		if licence_choice and 'in_licence_agree_form' in request.POST:
 			la_form = LicenseAgreementForm(licence_choice, data=request.POST)
 			l_info, access_links, access = licences[licence_choice]
-			LOGGER.info(access_links)
 			if la_form.is_valid():
 				# before really providing the download, we have to make sure
 				# that the user hasn't tried to circumvent the permission system
@@ -404,10 +405,10 @@ def view(request, resource_name=None, object_id=None):
 	"""
 	Render browse or detail view for the repository application.
 	"""
-	translation.activate(LANGUAGE_CODE)
-	request.session['django_language'] = LANGUAGE_CODE
-	request.LANGUAGE_CODE = LANGUAGE_CODE
-	
+	#translation.activate(LANGUAGE_CODE)
+	#request.session['django_language'] = LANGUAGE_CODE
+	#request.LANGUAGE_CODE = LANGUAGE_CODE
+
 	# only published resources may be viewed. Ingested LRs can be viewed only
 	# by EC members and technical reviewers
 	resource = get_object_or_404(resourceInfoType_model,
@@ -423,7 +424,7 @@ def view(request, resource_name=None, object_id=None):
 	# Convert resource to ElementTree and then to template tuples.
 	lr_content = _convert_to_template_tuples(
 		resource.export_to_elementtree(pretty=True))
-	
+
 	# get the 'best' language version of a "DictField" and all other versions
 	resource_name = resource.identificationInfo.get_default_resourceName()
 	res_short_names = resource.identificationInfo.resourceShortName.values()
@@ -457,7 +458,7 @@ def view(request, resource_name=None, object_id=None):
 	relation_info_tuples = []
 	resource_component_tuple =  None
 	##LOGGER.info(lr_content[1])
-	
+
 	for _tuple in lr_content[1]:
 		if _tuple[0] == "Distribution": #lr_content[1][1]
 			distribution_info_tuples.append(_tuple)
@@ -479,7 +480,7 @@ def view(request, resource_name=None, object_id=None):
 			relation_info_tuples.append(_tuple)
 		elif _tuple[0] == "Resource component type":
 			resource_component_tuple = _tuple[1]
-	
+
 	# Convert resource_component_tuple to nested dictionaries
 	resource_component_dicts = {}
 	validation_dicts = []
@@ -491,7 +492,7 @@ def view(request, resource_name=None, object_id=None):
 	distribution_dicts = []
 	for item in contact_person_tuples:
 		contact_person_dicts.append(tuple2dict([item]))
-	
+
 	for item in distribution_info_tuples:
 		distribution_dicts.append(tuple2dict([item]))
 	##LOGGER.info(resource_component_tuple)
@@ -620,8 +621,8 @@ def view(request, resource_name=None, object_id=None):
 	}
 	template = 'repository/resource_view/lr_view.html'
 
-	# For users who have edit permission for this resource, we have to add 
-	# LR_EDIT which contains the URL of the Django admin backend page 
+	# For users who have edit permission for this resource, we have to add
+	# LR_EDIT which contains the URL of the Django admin backend page
 	# for this resource.
 	if has_edit_permission(request, resource):
 		context['LR_EDIT'] = reverse(
@@ -673,7 +674,7 @@ def view(request, resource_name=None, object_id=None):
 
 def tuple2dict(_tuple):
 	'''
-	Recursively converts a tuple into a dictionary for ease of use 
+	Recursively converts a tuple into a dictionary for ease of use
 	in templates.
 	'''
 	_dict = {}
@@ -685,14 +686,14 @@ def tuple2dict(_tuple):
 				# Handle strings as unicode to avoid "UnicodeEncodeError: 'ascii' codec can't encode character " errors
 				if item[0].find(" "):
 					_key = u''.join(item[0]).encode('utf-8').replace(" ", "_").replace("/", "_")
-					
+
 				else:
 					_key = u''.join(item[0]) #str(item[0])
 				if _key in _dict:
-					# If a repeatable component is found, a customized 
+					# If a repeatable component is found, a customized
 					# dictionary is added, since no duplicate key names
 					# are allowed. We keep a dictionary with counts and
-					# add a new entry in the original dictionary in the 
+					# add a new entry in the original dictionary in the
 					# form <component>_<no_of_occurences>
 					if not _key in count_dict:
 						count_dict[_key] = 1
@@ -705,7 +706,7 @@ def tuple2dict(_tuple):
 			else:
 				if isinstance(item[0], tuple):
 					# Replace spaces by underscores for element names.
-					
+
 					if item[0][0][:].find(" "):
 						#LOGGER.info(u''.join(item[0][0]).encode('utf-8'))
 						_key=u''.join(item[0][0]).encode('utf-8').replace(" ", "_").replace('(', "").replace(")", "").replace("/", "_").replace("-", "_")
@@ -731,7 +732,7 @@ def _format_recommendations(recommended_resources):
 	Returns the given resource recommendations list formatted as a list of
 	dictionaries with the two keys "name" and "url" (for use in the single
 	resource view).
-	
+
 	The number of returned recommendations is restricted to at most 4.
 	'''
 	result = []
@@ -758,8 +759,8 @@ class MetashareFacetedSearchView(FacetedSearchView):
 				#get resource id
 				id_res = res.storage_object.id
 				res_groups=res.groups.values_list("name", flat=True)
-				
-				if self.request.user.groups.filter(	
+
+				if self.request.user.groups.filter(
 					name__in=res.groups.values_list("name", flat=True)).exists():
 					resname=res.identificationInfo.get_default_resourceName()
 					##get resource Name
@@ -769,7 +770,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
 					##lowercase
 					resourceName=resourceName.lower()
 					##append resource name to the list,
-					#concatenate it to its id to resolve the conflicts that 
+					#concatenate it to its id to resolve the conflicts that
 					#  can arise from resources sharing the same name but with different group sharing policy
 					resource_names.append(resourceName+str(id_res))
 			if resource_names:
@@ -838,7 +839,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
 		"""
 		Creates a data structure encapsulating most of the logic which is
 		required for rendering the filters/facets of the META-SHARE search.
-		
+
 		Takes the raw facet 'fields' dictionary which is (indirectly) returned
 		by the `facet_counts()` method of a `SearchQuerySet`.
 		"""
@@ -953,7 +954,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
 
 	def show_subfilter(self, facet, sel_facets, facet_fields, results):
 		"""
-		Creates a second level for faceting. 
+		Creates a second level for faceting.
 		Sub filters are included after the parent filters.
 		"""
 		name = facet[0]
@@ -1019,7 +1020,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
 
 @login_required
 def contribute(request):
-		
+
 	if request.method == "POST":
 		uid = str(uuid.uuid4())
 		profile = UserProfile.objects.get(user=request.user)
@@ -1057,7 +1058,28 @@ def contribute(request):
 					ret_list.update(l.split(delimiter))
 				ret_list=sorted(ret_list)
 			return ret_list
-		
+
+		def files_extensions_are_valid(files):
+			""" Return True if all filenames extensions of files are allowed.
+			"""
+			return all(filename_extension_is_valid(f.name) for f in files)
+
+		def filename_extension_is_valid(filename):
+			""" Return True if filename extension is allowed.
+			"""
+			return filename_ext(filename) in ALLOWED_EXTENSIONS
+
+		def filename_ext(filename):
+			""" Return filename extension.
+			"""
+			if isinstance(filename, basestring):
+				return os.path.splitext(filename)[-1]
+			if issubclass(filename, File) or isinstance(filename, file):
+				return os.path.splitext(filename.name)[-1]
+			raise TypeError(
+				"%s argument is not a basetring format, type `file` or subclass of \
+				`django.core.files.base.File`." % filename)
+
 		if 'languages[]' in request.POST:
 			data['resourceInfo']['languages'] = decode_csv_to_list(request.POST.getlist('languages[]'))
 			#LOGGER.info(data['resourceInfo']['languages'])
@@ -1073,14 +1095,19 @@ def contribute(request):
 		filename = '{}_{}'.format(profile.country, uid)
 		response = {}
 
-		accepted_extensions = [".zip", ".pdf", ".doc", ".docx", ".tmx", ".txt", ".rtf",
-							   ".xls", ".xlsx", ".xml", ".sdltm", ".odt", ".tbx"]
-		acceptable_re = "(.*)({0})$".format(
-			"|".join("({0})".format(ext) for ext in accepted_extensions))
 		file_objects = request.FILES.getlist('filebutton')
-		getext = lambda file_object: os.path.splitext(file_object.name)[-1]
-		if (sum(fobj.size for fobj in file_objects) <= MAXIMUM_UPLOAD_SIZE and
-			all(getext(fobj) in accepted_extensions for fobj in file_objects)):
+		if not files_extensions_are_valid(file_objects):
+			response['status'] = "failed"
+			response['message'] = _("""
+				Only files of type DOC(X), ODT, RTF, PDF, TMX, SDLTM, XML,
+				TBX , XLS(X), TXT and ZIP files are allowed.
+				The zip files can only contain files of the
+				specified types. Please consider removing the files
+				that do not belong to one of these types.""")
+			return HttpResponse(json.dumps(response),
+								content_type="application/json")
+
+		if sum(fobj.size for fobj in file_objects) <= MAXIMUM_UPLOAD_SIZE:
 			try:
 				if not os.path.isdir(unprocessed_dir):
 					os.makedirs(unprocessed_dir)
@@ -1098,7 +1125,7 @@ def contribute(request):
 						licence_destination.write(chunk)
 			out_filenames = []
 			for i, file_object in enumerate(file_objects):
-				out_filename = "{}_{}".format(filename, str(i)) + getext(file_object)
+				out_filename = "{}_{}".format(filename, str(i)) + filename_ext(file_object.name)
 				ofile_path = os.path.sep.join((unprocessed_dir, out_filename))
 				with open(ofile_path, 'wb+') as destination:
 					for chunk in file_object.chunks():
@@ -1110,8 +1137,10 @@ def contribute(request):
 						zfile.testzip() is not None):
 						os.remove(ofile_path)
 						response['status'] = "failed"
-						response['message'] = "Your request could not be completed. " \
-											  "The file you tried to upload is corrupted or it is not a valid '.zip' file."
+						response['message'] = _("""
+							Your request could not be completed."
+							The file you tried to upload is corrupted or it is
+							not a valid '.zip' file.""")
 					if any(not (re.match(acceptable_re, fn) or
 								fn.endswith(os.path.sep))
 						   for fn in zfile.namelist()):
@@ -1120,7 +1149,7 @@ def contribute(request):
 						os.remove(ofile_path)
 						response['status'] = "failed"
 						response['message'] = \
-							"Only files of type DOC(X), ODT, PDF, TMX, SDLTM, XML, "\
+							"Only files of type DOC(X), RTF, ODT, PDF, TMX, SDLTM, XML, "\
 							"TBX , XLS(X), TXT and ZIP files are allowed. "\
 							"The zip files can only contain files of the "\
 							"specified types. Please consider removing the files"\
@@ -1128,7 +1157,7 @@ def contribute(request):
 
 					if response.get('status') == "failed":
 						return HttpResponse(json.dumps(response),
-											content_type="text/plain")
+											content_type="application/json")
 
 			xml_filename = filename + ".xml"
 			data['administration']['dataset'] = {"uploaded_files": out_filenames}
@@ -1157,7 +1186,7 @@ def contribute(request):
 			#LOGGER.info(groups_name)
 			#send an email to the reviewers related to the groups where the resource is published
 			#get the emails of those users that are reviewers
-			reviewers = [u.email for u in User.objects.filter(groups__name__in=['reviewers'])] 
+			reviewers = [u.email for u in User.objects.filter(groups__name__in=['reviewers'])]
 			group_reviewers = [u.email for u in User.objects.filter(groups__id__in=groups_name, email__in=reviewers)]
 			## DEBUG
 			#LOGGER.info(group_reviewers+su_emails)
@@ -1171,23 +1200,26 @@ def contribute(request):
 							 "alert recipients.")
 
 			response['status'] = "succeded"
-			response['message'] = "Thank you for sharing! Your data have been successfully submitted. " \
-								  "You can now go on and contribute more data."
-			return HttpResponse(json.dumps(response), content_type="text/plain")
+			response['message'] = _("""
+				Thank you for sharing! Your data have been successfully submitted.
+				You can now go on and contribute more data.""")
+			return HttpResponse(json.dumps(response), content_type="application/json")
 		else:
 			response['status'] = "failed"
-			response['message'] = "The file you are trying to upload " \
-								  "exceeds the size limit. If the file(s) you would like to contribute exceed(s) {:.10} MB please contact us to provide an SFTP link for direct download or consider uploading smaller files.".format(
-				float(MAXIMUM_UPLOAD_SIZE) / (1024 * 1024))
-			return HttpResponse(json.dumps(response), content_type="text/plain")
-										  
+			response['message'] = _("""
+				The file you are trying to upload exceeds the size limit. If the file(s) you
+				would like to contribute exceed(s) {:.10} MB please contact us to provide an SFTP link for direct
+				download or consider uploading smaller files.""".format(
+				float(MAXIMUM_UPLOAD_SIZE) / (1024 * 1024)))
+			return HttpResponse(json.dumps(response), content_type="application/json")
+
 	# In ELRI, LR contributions can only be shared within the groups to which a user belongs.
 	languages=SUPPORTED_LANGUAGES
-	
+
 	return render_to_response('repository/editor/contributions/contribute.html', \
 							  {'groups':Organization.objects.values_list("name","id").filter(id__in = request.user.groups.values_list("id")), 'languages':languages},
 							  context_instance=RequestContext(request))
-	
+
 
 @staff_member_required
 def get_data(request, filename):
@@ -1295,7 +1327,7 @@ def create_description(xml_file, type, base, user):
 			 )[0]
 
 	resource = None
-	
+
 	# Handle different resource type structures
 	if type == 'corpus':
 		corpus_media_type = corpusMediaTypeType_model.objects.create()
@@ -1686,7 +1718,7 @@ def repo_report(request):
 					   "repository and their status today, {}.\n" \
 					   "Best regards,\n\n" \
 					   "The ELRI group".format(datetime.datetime.now().strftime("%d, %b %Y"))
-      
+
 			msg = EmailMessage("[ELRI] ELRI weekly report", msg_body,
 							   from_email=EMAIL_ADDRESSES['elri-ilsp'], bcc=rp)
 
