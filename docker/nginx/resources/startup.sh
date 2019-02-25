@@ -12,11 +12,25 @@ fi
 
 pushd /tmp
 
-for file in *.tmpl; do
-	filename=`echo ${file} | cut -d '.' -f 1`
-	extension=`echo ${file} | cut -d '.' -f 2`
-	cmd="$cmd -template /tmp/${file}:/etc/nginx/conf.d/${filename}.conf"
-done
+case "${ELRI_PROTOCOL}" in
+	"https")
+		for file in https-*.tmpl; do
+			filename=`echo ${file} | cut -d '.' -f 1`
+			extension=`echo ${file} | cut -d '.' -f 2`
+			cmd="$cmd -template /tmp/${file}:/etc/nginx/conf.d/${filename}.conf"
+		done
+		;;
+	"http")
+		for file in http-*.tmpl; do
+			filename=`echo ${file} | cut -d '.' -f 1`
+			extension=`echo ${file} | cut -d '.' -f 2`
+			cmd="$cmd -template /tmp/${file}:/etc/nginx/conf.d/${filename}.conf"
+		done
+		;;
+	*)
+		printf "Protocol option does not exist or is not set: %s" "${ELRI_PROTOCOL}"
+		;;
+esac
 
 popd
 

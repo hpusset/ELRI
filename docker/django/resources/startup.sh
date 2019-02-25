@@ -25,12 +25,11 @@ python /elri/manage.py makemigrations accounts repository stats recommendations 
 python /elri/manage.py migrate
 python /elri/manage.py rebuild_index --noinput
 python /elri/manage.py collectstatic --noinput
-#python /elri/manage.py createsuperuser --email elri@example.com --username admin --noinput 
 
 if [ "${DEVELOPMENT}" != "" ]; then
     cmd="$cmd python /elri/manage.py runserver 0.0.0.0:8000 --insecure"
 else
-    cmd="$cmd gunicorn metashare.wsgi -b 0.0.0.0:8000 -w 4 --threads 8 --preload"
+    cmd="$cmd gunicorn metashare.wsgi -b 0.0.0.0:8000 --workers ${ELRI_WORKERS} --threads ${ELRI_THREADS} --preload"
 fi
 
 $cmd

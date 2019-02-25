@@ -47,7 +47,6 @@ lang_list = environ['ELRI_SUP_LANGUAGES']
 import ast
 SUPPORTED_LANGUAGES = ast.literal_eval(lang_list)
 
-
 # Directories containing the translations
 LOCALE_PATHS = tuple([
     join(directory, dn)
@@ -123,6 +122,9 @@ EMAIL_HOST = environ['ELRI_EMAIL_HOST']
 EMAIL_PORT = environ['ELRI_EMAIL_PORT']
 EMAIL_HOST_USER = environ['ELRI_EMAIL_USER']
 EMAIL_HOST_PASSWORD = environ['ELRI_EMAIL_PASS']
+EMAIL_ADDRESSES = {k:v for k,v in (s.split(':') for s in environ['ELRI_EMAIL_ADDRESSES'].split(','))}
+
+
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
