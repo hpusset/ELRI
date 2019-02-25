@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block title %}Apply for eDelivery membership &ndash; ELRC-SHARE{% endblock %}
+{% block title %}Apply for eDelivery membership &ndash; ELRI{% endblock %}
 {% block messages %}
 {% if form.errors %}
 <p class="error">{{form.errors}}</p>
@@ -15,7 +15,7 @@
           action="{% url 'edelivery_application' %}"
           method="post">
         <fieldset>
-            <legend style="padding:20px">{% trans 'Apply for ELRC-SHARE eDelivery membership' %}</legend>
+            <legend style="padding:20px">{% trans 'Apply for ELRI eDelivery membership' %}</legend>
             <div class="form-group required">
                 <label class="col-md-4 control-label" for="endpoint">{% trans 'MSH Endpoint' %}</label>
 

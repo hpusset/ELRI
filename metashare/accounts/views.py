@@ -12,6 +12,7 @@ from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.utils.html import escape
 from django.utils.translation import ugettext as _
+from django.utils import translation
 
 from metashare.accounts.forms import RegistrationRequestForm, ResetRequestForm, \
 	UserProfileForm, EditorGroupApplicationForm, UpdateDefaultEditorGroupForm, \
@@ -19,7 +20,8 @@ from metashare.accounts.forms import RegistrationRequestForm, ResetRequestForm, 
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
 	EditorGroupApplication, EditorGroupManagers, EditorGroup, \
 	OrganizationApplication, OrganizationManagers, Organization, UserProfile, AccessPointEdeliveryApplication
-from metashare.settings import DJANGO_URL, LOG_HANDLER, REST_API_KEY
+
+from metashare.settings import DJANGO_URL, LOG_HANDLER, REST_API_KEY, LANGUAGE_CODE, EMAIL_ADDRESSES
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -53,7 +55,7 @@ def confirm(request, uuid):
 		# Send an activation email.
 		# TODO: add localisation and change email
 		send_mail(_('Your ELRI user account has been activated'),
-		email, 'no-reply@elri.eu', [user.email], fail_silently=False)
+		email, EMAIL_ADDRESSES['elri-no-reply'], [user.email], fail_silently=False)
 	except: # SMTPException:
 		# there was a problem sending the activation e-mail -- not too bad
 		pass
@@ -89,7 +91,7 @@ def contact(request):
 			try:
 				send_mail(_('[ELRI] Contact Form Request: %s')
 						% (data['subject'],), email_msg,
-					'no-reply@elri.eu', superuser_emails,
+					EMAIL_ADDRESSES['elri-no-reply'], superuser_emails,
 					fail_silently=False)
 			except:
 				# if the email could not be sent successfully, tell the user
@@ -172,7 +174,7 @@ def create(request):
 			email = render_to_string('accounts/registration.email', data)
 			try:
 				send_mail(_('New user registration'),
-						  email, 'no-reply@elri.eu',
+						  email, EMAIL_ADDRESSES['elri-no-reply'], 
 						  su_emails, fail_silently=False)
 			except:
 				# failed to send e-mail to superuser
@@ -197,7 +199,13 @@ def create(request):
 	else:
 		form = RegistrationRequestForm(group_choices=group_choices)
 	
-	dictionary = {'title': 'Create Account', 'form': form}
+	elri_tos_def='metashare/ELRI_ToS_template.pdf'
+	#provide ToS document according to the user prefered language: the one that appears in the URL 
+	lang=translation.get_language()
+	
+	elri_tos='metashare/ELRI_ToS_'+lang+'.pdf'
+		
+	dictionary = {'title': 'Create Account', 'form': form, 'elri_tos': elri_tos }
 	return render_to_response('accounts/create_account.html', dictionary,
 	  context_instance=RequestContext(request))
 
@@ -323,7 +331,7 @@ def editor_group_application(request):
 					# Send out notification email to the managers and superusers
 					send_mail('New editor membership request',
 						render_to_string('accounts/notification_editor_group_managers_application.email', data),
-						'no-reply@elri.eu', emails, fail_silently=False)
+						EMAIL_ADDRESSES['elri-no-reply'], emails, fail_silently=False)
 				except: #SMTPException:
 					# If the email could not be sent successfully, tell the user
 					# about it.
@@ -477,7 +485,7 @@ def organization_application(request):
 					# Send out notification email to the organization managers and superusers
 					send_mail('New organization membership request',
 						render_to_string('accounts/notification_organization_managers_application.email', data),
-						'no-reply@elri.eu', emails, fail_silently=False)
+						EMAIL_ADDRESSES['elri-no-reply'], emails, fail_silently=False)
 				except: #SMTPException:
 					# If the email could not be sent successfully, tell the user
 					# about it.
@@ -540,7 +548,7 @@ def reset(request, uuid=None):
 				try:
 					# Send out reset email to the given email address.
 					send_mail(_('Please confirm your ELRI reset request'),
-					email, 'no-reply@elri.eu', [user.email],
+					email, EMAIL_ADDRESSES['elri-no-reply'], [user.email],
 					fail_silently=False)
 				
 				except SMTPException:
@@ -587,7 +595,7 @@ def reset(request, uuid=None):
 	try:
 		# Send out re-activation email to the given email address.
 		send_mail(_('Your ELRI user account has been re-activated'),
-		email, 'no-reply@elri.eu', [user.email], fail_silently=False)
+		email, EMAIL_ADDRESSES['elri-no-reply'], [user.email], fail_silently=False)
 	
 	except SMTPException:
 		# If the email could not be sent successfully, tell the user about it.
@@ -637,7 +645,7 @@ def edelivery_application(request):
 								  "Network. Please review the application at "
 								  "https://elri.eu/admin/accounts/accesspointedeliveryapplication/ and "
 								  "accept or reject the application.".format(request.user.username), from_email="elri@ilsp.gr",
-						  recipient_list=["edelivery@elri.eu"], fail_silently=False
+						  recipient_list=[EMAIL_ADDRESSES['elri-edelivery']], fail_silently=False
 					  )
 			# TODO: email admin??
 			return redirect('metashare.views.frontpage')

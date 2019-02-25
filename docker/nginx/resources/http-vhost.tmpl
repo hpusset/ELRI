@@ -5,9 +5,6 @@ server {
     gzip_static          on;
     server_tokens        off;
     listen               80;
-    listen               443 ssl;
-    ssl_certificate      /etc/ssl/certs/server.crt;
-    ssl_certificate_key  /etc/ssl/private/server.key;
     server_name          {{ .Env.ELRI_HOSTNAME }}.{{ .Env.ELRI_DOMAINNAME }};
     root                 /www/data;
     client_max_body_size 100M;

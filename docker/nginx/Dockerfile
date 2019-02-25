@@ -23,7 +23,7 @@ COPY --from=ssl-container /tmp/server.crt /etc/ssl/certs/server.crt
 COPY --from=ssl-container /tmp/server.key /etc/ssl/private/server.key
 COPY resources/env_secrets_expand.sh /
 COPY resources/startup.sh /
-COPY resources/vhost.tmpl /tmp/
+COPY resources/*vhost.tmpl /tmp/
 
 RUN chmod +x /startup.sh /env_secrets_expand.sh \
     && echo "daemon off;" >> /etc/nginx/nginx.conf \

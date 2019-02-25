@@ -27,8 +27,11 @@ def extended_report():
         storage_object__deleted=False)
     link = None
     if len(resources) > 0:
-        title = "ELRC-SHARE_{}-EXT".format(
+        title = "ELRI_{}-EXT".format(
             datetime.datetime.now().strftime("%d-%m-%y"))
+        #title = "ELRC-SHARE_{}-EXT".format(
+        #    datetime.datetime.now().strftime("%d-%m-%y"))
+
         output = StringIO.StringIO()
         workbook = xlsxwriter.Workbook(output)
 

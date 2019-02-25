@@ -3,7 +3,7 @@ services:
   # Django app
   elri-node1:
     container_name: elri_app
-    image: elrinrs/nationalrelaystation:R2.1
+    image: elrinrs/nationalrelaystation:R2.4
     secrets:
       - db.secret
       - app.secret
@@ -29,6 +29,10 @@ services:
       - ELRI_DOMAINNAME={{DOCKER-SECRET:web.secret}}
       - ELRI_PROTOCOL={{DOCKER-SECRET:web.secret}}
       - ELRI_COUNTRY={{DOCKER-SECRET:app.secret}}
+      - ELRI_EMAIL_ADDRESSES={{DOCKER-SECRET:app.secret}}
+      - ELRI_WORKERS={{DOCKER-SECRET:app.secret}}
+      - ELRI_THREADS={{DOCKER-SECRET:app.secret}}
+
     depends_on:
       - solr
       - postgres-server
@@ -57,7 +61,7 @@ services:
   # NGINX webserver
   nginx:
     container_name: elri_webserver
-    image: elrinrs/nginx:R2.2
+    image: elrinrs/nginx:R2.3
     secrets:
       - web.secret
     volumes:
@@ -74,7 +78,7 @@ services:
   # Toolchain image
   toolchain:
     container_name: elri_toolchain
-    image: elrinrs/toolchain:R2.1
+    image: elrinrs/toolchain:R2.2
     volumes:   
       - elri-shared-resources:/elri/elri_resources:rw
     environment:

@@ -164,7 +164,8 @@ def prepare_input():
 
 
 def build_val_rep_name(target_res_id):
-    name = "ELRC_VALREP_{}_v2.0.pdf".format(target_res_id)
+    #name = "ELRC_VALREP_{}_v2.0.pdf".format(target_res_id)
+    name = "ELRI_VALREP_{}_v2.0.pdf".format(target_res_id)
     return name
 
 
