@@ -1141,19 +1141,17 @@ def contribute(request):
 							Your request could not be completed."
 							The file you tried to upload is corrupted or it is
 							not a valid '.zip' file.""")
-					if any(not (re.match(acceptable_re, fn) or
-								fn.endswith(os.path.sep))
-						   for fn in zfile.namelist()):
+					if not (filename_extension_is_valid(fn) or fn.endswith(os.path.sep) for fn in zfile.namelist()):
 						# the archive contains at least an entry which neither has
 						# an accepted extension, nor is a directory:
 						os.remove(ofile_path)
 						response['status'] = "failed"
-						response['message'] = \
-							"Only files of type DOC(X), RTF, ODT, PDF, TMX, SDLTM, XML, "\
-							"TBX , XLS(X), TXT and ZIP files are allowed. "\
-							"The zip files can only contain files of the "\
-							"specified types. Please consider removing the files"\
-							"that do not belong to one of these types."
+						response['message'] =  _("""
+							Only files of type DOC(X), ODT, PDF, TMX, SDLTM, XML,
+							TBX , XLS(X), TXT and ZIP files are allowed.
+							The zip files can only contain files of the
+							specified types. Please consider removing the files
+							that do not belong to one of these types.""")
 
 					if response.get('status') == "failed":
 						return HttpResponse(json.dumps(response),

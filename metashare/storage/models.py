@@ -37,9 +37,12 @@ XML_DECL = re.compile(r'\s*<\?xml version=".+" encoding=".+"\?>\s*\n?',
 INTERNAL = 'i'
 INGESTED = 'g'
 PUBLISHED = 'p'
+PROCESSING = 'r'
+
 STATUS_CHOICES = (
     (INTERNAL, 'internal'),
     (INGESTED, 'ingested'),
+    (PROCESSING, 'processing'),
     (PUBLISHED, 'published'),
 )
 
@@ -423,7 +426,7 @@ class StorageObject(models.Model):
             dumps(_dict_global, cls=DjangoJSONEncoder, sort_keys=True, separators=(',', ':'))
         if self.global_storage != _global_storage:
             self.global_storage = _global_storage
-            if self.publication_status in (INGESTED, PUBLISHED):
+            if self.publication_status in (INGESTED, PUBLISHED, PROCESSING):
                 with open('{0}/storage-global.json'.format(
                         self._storage_folder()), 'wb') as _out:
                     _out.write(unicode(self.global_storage).encode('utf-8'))
