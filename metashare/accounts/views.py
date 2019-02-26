@@ -15,11 +15,11 @@ from django.utils.translation import ugettext as _
 from django.utils import translation
 
 from metashare.accounts.forms import RegistrationRequestForm, ResetRequestForm, \
-	UserProfileForm, EditorGroupApplicationForm, UpdateDefaultEditorGroupForm, \
-	OrganizationApplicationForm, ContactForm, EdeliveryApplicationForm
+    UserProfileForm, EditorGroupApplicationForm, UpdateDefaultEditorGroupForm, \
+    OrganizationApplicationForm, ContactForm, EdeliveryApplicationForm
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
-	EditorGroupApplication, EditorGroupManagers, EditorGroup, \
-	OrganizationApplication, OrganizationManagers, Organization, UserProfile, AccessPointEdeliveryApplication
+    EditorGroupApplication, EditorGroupManagers, EditorGroup, \
+    OrganizationApplication, OrganizationManagers, Organization, UserProfile, AccessPointEdeliveryApplication
 
 from metashare.settings import DJANGO_URL, LOG_HANDLER, REST_API_KEY, LANGUAGE_CODE, EMAIL_ADDRESSES
 
@@ -29,185 +29,185 @@ LOGGER.addHandler(LOG_HANDLER)
 
 
 def confirm(request, uuid):
-	"""
-	Confirms the user account request for the given user id.
-	"""
-	# Loads the RegistrationRequest instance for the given uuid.
-	registration_request = get_object_or_404(RegistrationRequest, uuid=uuid)
+    """
+    Confirms the user account request for the given user id.
+    """
+    # Loads the RegistrationRequest instance for the given uuid.
+    registration_request = get_object_or_404(RegistrationRequest, uuid=uuid)
 
-	# Activate the corresponding User instance.
-	user = registration_request.user
-	user.is_active = True
-	# Do not set user as staff/ editor
-	user.is_staff = False
-	
-	#user.groups.add(Group.objects.get(name='contributors'))
-	user.save()
+    # Activate the corresponding User instance.
+    user = registration_request.user
+    user.is_active = True
+    # Do not set user as staff/ editor
+    user.is_staff = False
+    
+    #user.groups.add(Group.objects.get(name='contributors'))
+    user.save()
 
-	# Delete registration request instance.
-	registration_request.delete()
+    # Delete registration request instance.
+    registration_request.delete()
 
-	# Render activation email template with correct values.
-	data = {'firstname': user.first_name, 'lastname': user.last_name,
-	  'shortname': user.username}
-	email = render_to_string('accounts/activation.email', data)
-	try:
-		# Send an activation email.
-		# TODO: add localisation and change email
-		send_mail(_('Your ELRI user account has been activated'),
-		email, EMAIL_ADDRESSES['elri-no-reply'], [user.email], fail_silently=False)
-	except: # SMTPException:
-		# there was a problem sending the activation e-mail -- not too bad
-		pass
+    # Render activation email template with correct values.
+    data = {'firstname': user.first_name, 'lastname': user.last_name,
+      'shortname': user.username}
+    email = render_to_string('accounts/activation.email', data)
+    try:
+    	# Send an activation email.
+    	# TODO: add localisation and change email
+    	send_mail(_('Your ELRI user account has been activated'),
+    	email, EMAIL_ADDRESSES['elri-no-reply'], [user.email], fail_silently=False)
+    except: # SMTPException:
+    	# there was a problem sending the activation e-mail -- not too bad
+    	pass
 
-	# Add a message to the user after successful creation.
-	messages.success(request, _("We have activated user account for user {}."\
-								.format(user.username)))
-	
-	# Redirect the user to the front page.
-	return redirect('metashare.views.frontpage')
+    # Add a message to the user after successful creation.
+    messages.success(request, _("We have activated user account for user {}."\
+    	    	    	    	.format(user.username)))
+    
+    # Redirect the user to the front page.
+    return redirect('metashare.views.frontpage')
 
 
 @login_required
 def contact(request):
-	"""
-	Provides a form for contacting the superuser(s) of this META-SHARE node.
-	"""
-	if request.method == "POST":
-		form = ContactForm(request.POST)
-		if form.is_valid():
-			# render contact email template with correct values
-			data = {'user_first_name': request.user.first_name,
-			  'user_last_name': request.user.last_name,
-			  'user_account_name': request.user.username,
-			  'user_email': request.user.email,
-			  'node_url': DJANGO_URL, 'message': form.cleaned_data['message'],
-			  'subject': form.cleaned_data['subject']}
-			email_msg = render_to_string('accounts/contact_maintainers.email',
-										 data)
-			# send out the email to all superusers
-			superuser_emails = User.objects.filter(is_superuser=True) \
-				.values_list('email', flat=True)
-			try:
-				send_mail(_('[ELRI] Contact Form Request: %s')
-						% (data['subject'],), email_msg,
-					EMAIL_ADDRESSES['elri-no-reply'], superuser_emails,
-					fail_silently=False)
-			except:
-				# if the email could not be sent successfully, tell the user
-				# about it
-				messages.error(request, _("Oops, there was an error sending out"
-					" your contact request. You can copy your message and try "
-					"again later: <pre>%s</pre>") % (escape(data['message']),))
-			else:
-				# show a message to the user after successfully sending the mail
-				messages.success(request, _("We have received your message and "
-					"successfully sent it to the node maintainers. Please give "
-					"them some days to get back to you."))
-			# redirect the user to the front page
-			return redirect('metashare.views.frontpage')
-	else:
-		form = ContactForm()
-	dictionary = {'title': 'Contact Node Maintainers', 'form': form}
-	return render_to_response('accounts/contact_maintainers.html', dictionary,
-							  context_instance=RequestContext(request))
+    """
+    Provides a form for contacting the superuser(s) of this META-SHARE node.
+    """
+    if request.method == "POST":
+    	form = ContactForm(request.POST)
+    	if form.is_valid():
+    	    # render contact email template with correct values
+    	    data = {'user_first_name': request.user.first_name,
+    	      'user_last_name': request.user.last_name,
+    	      'user_account_name': request.user.username,
+    	      'user_email': request.user.email,
+    	      'node_url': DJANGO_URL, 'message': form.cleaned_data['message'],
+    	      'subject': form.cleaned_data['subject']}
+    	    email_msg = render_to_string('accounts/contact_maintainers.email',
+    	    	    	    	    	 data)
+    	    # send out the email to all superusers
+    	    superuser_emails = User.objects.filter(is_superuser=True) \
+    	    	.values_list('email', flat=True)
+    	    try:
+    	    	send_mail(_('[ELRI] Contact Form Request: %s')
+    	    	    	% (data['subject'],), email_msg,
+    	    	    EMAIL_ADDRESSES['elri-no-reply'], superuser_emails,
+    	    	    fail_silently=False)
+    	    except:
+    	    	# if the email could not be sent successfully, tell the user
+    	    	# about it
+    	    	messages.error(request, _("Oops, there was an error sending out"
+    	    	    " your contact request. You can copy your message and try "
+    	    	    "again later: <pre>%s</pre>") % (escape(data['message']),))
+    	    else:
+    	    	# show a message to the user after successfully sending the mail
+    	    	messages.success(request, _("We have received your message and "
+    	    	    "successfully sent it to the node maintainers. Please give "
+    	    	    "them some days to get back to you."))
+    	    # redirect the user to the front page
+    	    return redirect('metashare.views.frontpage')
+    else:
+    	form = ContactForm()
+    dictionary = {'title': 'Contact Node Maintainers', 'form': form}
+    return render_to_response('accounts/contact_maintainers.html', dictionary,
+    	    	    	      context_instance=RequestContext(request))
 
 
 def create(request):
-	"""
-	Creates a new user account request from a new user.
-	"""
-	#Commenting from now, as it might be more functional to handle group assignment for logged in users
-	group_choices = Group.objects.exclude(
-			id__in=EditorGroup.objects.values_list('id', flat=True))\
-			.values_list('name', 'name')
-							
-	# Check if the creation form has been submitted.
-	if request.method == "POST":
-		# If so, bind the creation form to HTTP POST values.
-		form = RegistrationRequestForm(request.POST, group_choices=group_choices)
-		
-		# Check if the form has validated successfully.
-		if form.is_valid():
-			# Create a new (inactive) User account so that we can discard the
-			# plain text password. This will also create a corresponding
-			# `UserProfile` instance by post_save "magic".
-			_user = User.objects.create_user(form.cleaned_data['shortname'],
-				form.cleaned_data['email'], form.cleaned_data['password'])
-			_user.first_name = form.cleaned_data['first_name']
-			_user.last_name = form.cleaned_data['last_name']
-			_user.is_active = False
-			_user.save()
+    """
+    Creates a new user account request from a new user.
+    """
+    #Commenting from now, as it might be more functional to handle group assignment for logged in users
+    group_choices = Group.objects.exclude(
+    	    id__in=EditorGroup.objects.values_list('id', flat=True))\
+    	    .values_list('name', 'name')
+    	    	    	    
+    # Check if the creation form has been submitted.
+    if request.method == "POST":
+    	# If so, bind the creation form to HTTP POST values.
+    	form = RegistrationRequestForm(request.POST, group_choices=group_choices)
+    	
+    	# Check if the form has validated successfully.
+    	if form.is_valid():
+    	    # Create a new (inactive) User account so that we can discard the
+    	    # plain text password. This will also create a corresponding
+    	    # `UserProfile` instance by post_save "magic".
+    	    _user = User.objects.create_user(form.cleaned_data['shortname'],
+    	    	form.cleaned_data['email'], form.cleaned_data['password'])
+    	    _user.first_name = form.cleaned_data['first_name']
+    	    _user.last_name = form.cleaned_data['last_name']
+    	    _user.is_active = False
+    	    _user.save()
 
-			_profile = UserProfile.objects.get(user_id= _user.id)
-			_profile.affiliation = form.cleaned_data['organization']
-			_profile.affiliation_address = form.cleaned_data['organization_address']
-			_profile.affiliation_phone_number = form.cleaned_data['organization_phone_number']
-			
-			# These two were removed from the form
-			#_profile.country = form.cleaned_data['country']
-			#_profile.phone_number = form.cleaned_data['phone_number']
-			
-			_profile.position = form.cleaned_data['position']
-						
-			#Commenting from now, as it might be more functional to handle group assignment for logged in users			
-			#_profile.user.groups.add(
-					#Group.objects.get(name=form.cleaned_data['contributor_group']))
-	
-			_profile.save()
-			# Create new RegistrationRequest instance.
-			new_object = RegistrationRequest(user=_user)
-			# Save new RegistrationRequest instance to django database.
-			new_object.save()
-			# Send e-mail to superusers
-			su_emails = [u.email for u in User.objects.filter(is_superuser=True)]
-			data = {
-				'username': _user.username,
-				'firstname': _user.first_name,
-				'lastname': _user.last_name,
-				'email': _user.email,
-				'telephone': _profile.phone_number,
-				'affiliation': _profile.affiliation,
-				'position': _profile.position,
-				'confirmation_url': '{0}/accounts/confirm/{1}/'.format(
-					DJANGO_URL, new_object.uuid)}
-			email = render_to_string('accounts/registration.email', data)
-			try:
-				send_mail(_('New user registration'),
-						  email, EMAIL_ADDRESSES['elri-no-reply'], 
-						  su_emails, fail_silently=False)
-			except:
-				# failed to send e-mail to superuser
-				# If the email could not be sent successfully, tell the user
-				# about it and also give the confirmation URL.
-				messages.error(request,
-				  _("There was an error sending out the notification email "
-					"to the administrators. Please contact them directly."))
-				
-				# Redirect the user to the front page.
-				return redirect('metashare.views.frontpage')
-			
-			# Add a message to the user after successful creation.
-			messages.success(request,
-			  _("We have received your registration data and sent the "
-				  "administrators a notification email."))
-			
-			# Redirect the user to the front page.
-			return redirect('metashare.views.frontpage')
-	
-	# Otherwise, create an empty RegistrationRequestForm instance.
-	else:
-		form = RegistrationRequestForm(group_choices=group_choices)
-	
-	elri_tos_def='metashare/ELRI_ToS_template.pdf'
-	#provide ToS document according to the user prefered language: the one that appears in the URL 
-	lang=translation.get_language()
-	
-	elri_tos='metashare/ELRI_ToS_'+lang+'.pdf'
-		
-	dictionary = {'title': 'Create Account', 'form': form, 'elri_tos': elri_tos }
-	return render_to_response('accounts/create_account.html', dictionary,
-	  context_instance=RequestContext(request))
+    	    _profile = UserProfile.objects.get(user_id= _user.id)
+    	    _profile.affiliation = form.cleaned_data['organization']
+    	    _profile.affiliation_address = form.cleaned_data['organization_address']
+    	    _profile.affiliation_phone_number = form.cleaned_data['organization_phone_number']
+    	    
+    	    # These two were removed from the form
+    	    #_profile.country = form.cleaned_data['country']
+    	    #_profile.phone_number = form.cleaned_data['phone_number']
+    	    
+    	    _profile.position = form.cleaned_data['position']
+    	    	    	
+    	    #Commenting from now, as it might be more functional to handle group assignment for logged in users    	    
+    	    #_profile.user.groups.add(
+    	    	    #Group.objects.get(name=form.cleaned_data['contributor_group']))
+    
+    	    _profile.save()
+    	    # Create new RegistrationRequest instance.
+    	    new_object = RegistrationRequest(user=_user)
+    	    # Save new RegistrationRequest instance to django database.
+    	    new_object.save()
+    	    # Send e-mail to superusers
+    	    su_emails = [u.email for u in User.objects.filter(is_superuser=True)]
+    	    data = {
+    	    	'username': _user.username,
+    	    	'firstname': _user.first_name,
+    	    	'lastname': _user.last_name,
+    	    	'email': _user.email,
+    	    	'telephone': _profile.phone_number,
+    	    	'affiliation': _profile.affiliation,
+    	    	'position': _profile.position,
+    	    	'confirmation_url': '{0}/accounts/confirm/{1}/'.format(
+    	    	    DJANGO_URL, new_object.uuid)}
+    	    email = render_to_string('accounts/registration.email', data)
+    	    try:
+    	    	send_mail(_('New user registration'),
+    	    	    	  email, EMAIL_ADDRESSES['elri-no-reply'], 
+    	    	    	  su_emails, fail_silently=False)
+    	    except:
+    	    	# failed to send e-mail to superuser
+    	    	# If the email could not be sent successfully, tell the user
+    	    	# about it and also give the confirmation URL.
+    	    	messages.error(request,
+    	    	  _("There was an error sending out the notification email "
+    	    	    "to the administrators. Please contact them directly."))
+    	    	
+    	    	# Redirect the user to the front page.
+    	    	return redirect('metashare.views.frontpage')
+    	    
+    	    # Add a message to the user after successful creation.
+    	    messages.success(request,
+    	      _("We have received your registration data and sent the "
+    	    	  "administrators a notification email."))
+    	    
+    	    # Redirect the user to the front page.
+    	    return redirect('metashare.views.frontpage')
+    
+    # Otherwise, create an empty RegistrationRequestForm instance.
+    else:
+    	form = RegistrationRequestForm(group_choices=group_choices)
+    
+    elri_tos_def='metashare/ELRI_ToS_template.pdf'
+    #provide ToS document according to the user prefered language: the one that appears in the URL 
+    lang=translation.get_language()
+    
+    elri_tos='/static/metashare/ELRI_ToS_'+lang+'.pdf'
+    	
+    dictionary = {'title': 'Create Account', 'form': form, 'elri_tos': elri_tos }
+    return render_to_response('accounts/create_account.html', dictionary,
+      context_instance=RequestContext(request))
 
 
 @login_required
