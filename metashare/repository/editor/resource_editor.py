@@ -45,7 +45,7 @@ from metashare.repository.models import resourceComponentTypeType_model, \
     licenceInfoType_model, User
 from metashare.repository.supermodel import SchemaModel
 from metashare.stats.model_utils import saveLRStats, UPDATE_STAT, INGEST_STAT, DELETE_STAT
-from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, PROCESSING, \
+from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, PROCESSING, ERROR, \
     ALLOWED_ARCHIVE_EXTENSIONS, ALLOWED_VALIDATION_EXTENSIONS, ALLOWED_LEGAL_DOCUMENTATION_EXTENSIONS
 from metashare.utils import verify_subclass, create_breadcrumb_template_params
 
@@ -457,7 +457,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 error_msg=''
                 call_tm2tmx=-1
                 call_doc2tmx=-1
-                if check_resource_status(obj)== INGESTED or check_resource_status(obj)== PROCESSING: 
+                if check_resource_status(obj)== INGESTED or check_resource_status(obj)== PROCESSING or check_resource_status(obj)== ERROR: 
                     #only (re)process INGESTED resources, published are suposed to be ok #or check_resource_status(obj)== PUBLISHED : #only process INGESTED or PUBLISHED resources
                     
                     ####messages.info(request,_('You are processing a resource. This may take some time...'))
@@ -562,17 +562,20 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                 if response_tm.json()["status"]=="Success":
                                     successful +=1
                                 else:
-                                    messages.error(request,"Something went wrong when processing the resource with the tm2tmx toolchain.")
+                                    change_resource_status(obj,status=ERROR, precondition_status=PROCESSING)
+                                    #messages.error(request,"Something went wrong when processing the resource with the tm2tmx toolchain.")
                                     error_msg=error_msg+"Something went wrong when processing the resource with the tm2tmx toolchain."+response_tm.json()["info"]+'\n'
                                     #ToDo: add timestamp info to error.log 
                                     errors+=1
                             else:    
-                                messages.error(request,"Invalid json response from tm2tmx toolchain: "+response_tm.text)
+                                change_resource_status(obj,status=ERROR, precondition_status=PROCESSING)
+                                #messages.error(request,"Invalid json response from tm2tmx toolchain: "+response_tm.text)
                                 error_msg=error_msg+"Invalid json response from tm2tmx toolchain: "+response_tm.text+'\n'
                                 #ToDo: add timestamp info to error.log 
                                 errors+=1
                         except: 
-                            messages.error(request,"The POST request to the tm2tmx toolchain has failed: \n"+response_tm)
+                            change_resource_status(obj,status=ERROR, precondition_status=PROCESSING)
+                            #messages.error(request,"The POST request to the tm2tmx toolchain has failed: \n"+response_tm)
                             error_msg=error_msg+"The POST request to the tm2tmx toolchain has failed."+response_tm+"\n"
                             #ToDo: add timestamp info to error.log 
                             errors+=1
@@ -594,29 +597,32 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                 if response_doc.json()["status"] == "Success":
                                     successful += 1
                                 else:
-                                    messages.error(request,"Something went wrong when processing the resource with the doc2tmx toolchain.\n "+response_doc.json()["info"])
+                                    change_resource_status(obj,status=ERROR, precondition_status=PROCESSING)
+                                    #messages.error(request,"Something went wrong when processing the resource with the doc2tmx toolchain.\n "+response_doc.json()["info"])
                                     error_msg=error_msg+"Something went wrong when processing the resource with the doc2tmx toolchain.\n "+response_doc.json()["info"]+"\n"
                                     #ToDo: add timestamp info to error.log 
                                     errors+=1
                             else:
-                                messages.error(request,response_doc.text)
-                                messages.error(request,"Invalid json response from doc2tmx toolchain: "+response_doc.text)
+                                change_resource_status(obj,status=ERROR, precondition_status=PROCESSING)
+                                #messages.error(request,response_doc.text)
+                                #messages.error(request,"Invalid json response from doc2tmx toolchain: "+response_doc.text)
                                 error_msg=error_msg+"Invalid json response from doc2tmx toolchain: "+response_doc.text+'\n'
                                 #ToDo: add timestamp info to error.log 
                                 errors+=1
                                 
                         except:
-
-                            messages.error(request,"The POST request to the doc2tmx toolchain has failed.\n"+response_doc)
+                            change_resource_status(obj,status=ERROR, precondition_status=PROCESSING)
+                            #messages.error(request,"The POST request to the doc2tmx toolchain has failed.\n"+response_doc)
                             error_msg=error_msg+"The POST request to the doc2tmx toolchain has failed.\n "+response_doc+'\n'
                             #ToDo: add timestamp info to error.log 
                             errors+=1
-                        
+                            
                 #if something success-> create new archive.zip and replace the old one uploaded by the user     
                 # if any errors, then handle error reporting
                 if errors > 0 or error_msg!='':
                     #create the archive.zip with the original files and the error.log file
                     prepare_error_zip(error_msg,resource_path,request)
+                    return False
                 elif successful > 0:
                     #create the archive.zip with the processed resources
                     processed_zip=zipfile.ZipFile(resource_path+'/archive.zip',mode='w')
@@ -641,20 +647,23 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     
                     #close zip file with processed resources
                     processed_zip.close()
-
+                    return True
                     
                 else:
                     if error_msg !='':
                         prepare_error_zip(error_msg,resource_path,request)
+                        return False
                     elif call_tm2tmx==0 or call_doc2tmx==0:
-                        pass
                         #messages.error(request,"this is it!")
+                        return True
                     else:
                         messages.error(request,
                            _('Only ingested resources can be re-processed.'))
+                        return True
         else:
             messages.error(request, _('You do not have the permission to ' \
                             'perform this action for all selected resources.'))
+            return False
 
     process_action.short_description = _("Process selected ingested resources")
 
@@ -816,7 +825,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
     
     def branch_lr(self, request,queryset):
         #implements automatic processing for ingested lr
-        self.process_action(request,queryset)
+        return self.process_action(request,queryset)
 
     def ingest_action(self, request, queryset):
         if has_publish_permission(request, queryset) or request.user.is_staff:            
@@ -827,7 +836,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
             resource_names=[]
             
             for obj in queryset:
-                if change_resource_status(obj, status=PROCESSING, precondition_status=INTERNAL) or change_resource_status(obj, status=PROCESSING, precondition_status=PROCESSING):
+                if change_resource_status(obj, status=PROCESSING, precondition_status=INTERNAL) or change_resource_status(obj, status=PROCESSING, precondition_status=ERROR):
                     successful += 1
                     saveLRStats(obj, INGEST_STAT, request)
                     resource_info.append(obj.export_to_elementtree())
@@ -858,7 +867,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     You will be notified by email once the resource has been fully processed.
                     """.format(successful))
                 #Implements the system branch 4 automatic lr processing
-                self.branch_lr(request,queryset)
+                if not self.branch_lr(request,queryset):
+                    return
+            
                 #send the ingested resource notification email
                 for i,r in enumerate(resource_names):
                     email_data={'resourcename':r}
@@ -872,10 +883,12 @@ class ResourceModelAdmin(SchemaModelAdmin):
                         # Redirect the user to the front page. ?
                         #return redirect('metashare.views.frontpage')
                 for obj in queryset:
-                    change_resource_status(obj,status=INGESTED, precondition_status=PROCESSING)                        
+                    if not change_resource_status(obj,status=INGESTED, precondition_status=PROCESSING):
+                        messages.error(request, _('You do not have the permission to ' \
+                            'perform this action for all selected resources.'))
             else:
                 messages.error(request,
-                               _('Only internal resources can be ingested.'))
+                               _('Only internal resources or resources with processing errors can be ingested.'))
         else:
             messages.error(request, _('You do not have the permission to ' \
                             'perform this action for all selected resources.'))
