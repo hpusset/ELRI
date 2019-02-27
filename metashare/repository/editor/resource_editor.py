@@ -343,26 +343,6 @@ def change_resource_status(resource, status, precondition_status=None):
         return True
     return False
 
-def change_resource_status2(resource, status, precondition_status=None):
-    '''
-    Change the status of the given resource to the new status given.
-
-    If precondition_status is not None, then apply the change ONLY IF the
-    current status of the resource is precondition_status; otherwise do nothing.
-    The status of non-master copy resources is never changed.
-    '''
-    if not hasattr(resource, 'storage_object'):
-        raise NotImplementedError, "{0} has no storage object".format(resource)
-    if resource.storage_object.master_copy and \
-      (precondition_status is None \
-       or precondition_status == resource.storage_object.publication_status):
-        resource.storage_object.publication_status = status
-        resource.storage_object.save()
-        # explicitly write metadata XML and storage object to the storage folder
-        #resource.storage_object.update_storage()
-        return True
-    return False
-
 def has_edit_permission(request, res_obj):
     """
     Returns `True` if the given request has permission to edit the metadata
@@ -446,7 +426,6 @@ def prepare_error_zip(error_msg,resource_path,request):
     errorzip.close()
 
 class ResourceModelAdmin(SchemaModelAdmin): 
-
     haystack_connection = 'default'
     inline_type = 'stacked'
     custom_one2one_inlines = {'identificationInfo':IdentificationInline,
@@ -478,7 +457,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 error_msg=''
                 call_tm2tmx=-1
                 call_doc2tmx=-1
-                if check_resource_status(obj)== INGESTED or check_resource_status(obj)== PROCESSING : #only (re)process INGESTED resources, published are suposed to be ok #or check_resource_status(obj)== PUBLISHED : #only process INGESTED or PUBLISHED resources
+                if check_resource_status(obj)== INGESTED or check_resource_status(obj)== PROCESSING: 
+                    #only (re)process INGESTED resources, published are suposed to be ok #or check_resource_status(obj)== PUBLISHED : #only process INGESTED or PUBLISHED resources
                     
                     ####messages.info(request,_('You are processing a resource. This may take some time...'))
                     
@@ -537,30 +517,34 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     tmx_files=[]
                     call_tm2tmx=0
                     call_doc2tmx=0
+                    others=0
                     #prepare tc calls:
                     for r in resources:
-                            #check the extension of the files
-                            #if it is a tm file:
-                            filext=getext(r)
-                            if filext in tmextensions:
-                                if  not os.path.isdir(resource_tm_path):
-                                    os.makedirs(resource_tm_path)
-                                    os.makedirs(resource_tm_path+'/input')
-                                resource_zip.extract(r,resource_tm_path+'/input')
-                                tmx_files.append(r)
-                                call_tm2tmx = call_tm2tmx + 1
-                            elif filext in docextensions: #if it is a doc file
-                                if not os.path.isdir(resource_doc_path):
-                                    os.makedirs(resource_doc_path)
-                                    os.makedirs(resource_doc_path+'/input')
-                                resource_zip.extract(r,resource_doc_path+'/input')
-                                call_doc2tmx = call_doc2tmx + 1
-                            else : #either case...
-                                if not os.path.isdir(resource_other_path):
-                                    os.makedirs(resource_other_path)
-                                resource_zip.extract(r,resource_other_path)
+                        #check the extension of the files
+                        #if it is a tm file:
+                        filext=getext(r)
+                        if filext in tmextensions:
+                            if  not os.path.isdir(resource_tm_path):
+                                os.makedirs(resource_tm_path)
+                                os.makedirs(resource_tm_path+'/input')
+                            resource_zip.extract(r,resource_tm_path+'/input')
+                            tmx_files.append(r)
+                            call_tm2tmx = call_tm2tmx + 1
+                        elif filext in docextensions: #if it is a doc file
+                            if not os.path.isdir(resource_doc_path):
+                                os.makedirs(resource_doc_path)
+                                os.makedirs(resource_doc_path+'/input')
+                            resource_zip.extract(r,resource_doc_path+'/input')
+                            call_doc2tmx = call_doc2tmx + 1
+                        else : #either case...
+                            if not os.path.isdir(resource_other_path):
+                                os.makedirs(resource_other_path)
+                            resource_zip.extract(r,resource_other_path)
+                            os.rename(resource_other_path+'/'+r,resource_other_path+'/'+r_name+'_'+str(others)+filext)
+                            others = others+1
+                            
                     response_tm=''
-                    
+                        
                     if call_tm2tmx > 0:
                         #prepare the json for calling the tm2tmx tc for each tmx in tmx_files
                         r_id=obj.storage_object.id
@@ -634,7 +618,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     #create the archive.zip with the original files and the error.log file
                     prepare_error_zip(error_msg,resource_path,request)
                 elif successful > 0:
-
                     #create the archive.zip with the processed resources
                     processed_zip=zipfile.ZipFile(resource_path+'/archive.zip',mode='w')
 
@@ -681,19 +664,26 @@ class ResourceModelAdmin(SchemaModelAdmin):
 
             from metashare.xml_utils import to_xml_string
             for obj in queryset:
-                if change_resource_status(obj, status=PUBLISHED,
-                                          precondition_status=INGESTED):
+                if change_resource_status(obj, status=PUBLISHED, precondition_status=INGESTED):
                     successful += 1
                     saveLRStats(obj, UPDATE_STAT, request)
-
-                    resource_name=[u.find('resourceName').text for u in obj.export_to_elementtree().iter('identificationInfo')]
                     
                     #If successfully published, add to the archive.zip file the license documentation 
                     resource_info=obj.export_to_elementtree()
+                    ## DEBUG
+                    #LOGGER.info(to_xml_string(obj.export_to_elementtree(),encoding="utf-8").encode("utf-8"))
+
+                    resource_name=[u.find('resourceName').text for u in resource_info.iter('identificationInfo')]
+                    
                     licences_name=[]
+                    licences_restriction=[]
                     for lic in resource_info.iter('licenceInfo'):
                         lic_name=lic.find('licence').text
+                        lic_restriction='' 
+                        if lic.find('restrictionsOfUse') is not None:
+                            lic_restriction=lic.find('restrictionsOfUse').text
                         licences_name.append(lic_name)
+                        licences_restriction.append(lic_restriction)
                     user_membership = _get_user_membership(request.user)    
                     licences = _get_licences(obj,user_membership)    
                     resource_path=obj.storage_object._storage_folder()
@@ -704,12 +694,75 @@ class ResourceModelAdmin(SchemaModelAdmin):
                         licence_path=ROOT_PATH+access_links
                         path, filename = os.path.split(licence_path)
                         lr_archive_zip.write(licence_path,'license_'+filename)
+                    
+                    #get info for metadata file
+                    #iprHolder info
+                    iprHolder_name=[]
+                    iprHolder_surname=[]
+                    iprHolder_email=[]
+                    iprHolder_organization=[]
+                    for ipr in resource_info.iter('iprHolder'):
+                        for pI in ipr.iter('personInfo'):
+                            #LOGGER.info(to_xml_string(pI,encoding="utf-8").encode("utf-8"))
+                            if pI.find('givenName') is not None:
+                                #LOGGER.info(to_xml_string(pI.find('givenName'), encoding="utf-8"))
+                                iprHolder_name.append(pI.find('givenName').text)
+                            if pI.find('surname') is not None:
+                                iprHolder_surname.append(pI.find('surname').text)
+                            for cI in pI.iter('communicationInfo'):
+                                if cI.find('email') is not None:
+                                    iprHolder_email.append(cI.find('email').text)
+                            for aI in pI.iter('affiliation'):
+                                if aI.find('organizationName') is not None:
+                                    iprHolder_organization.append(aI.find('organizationName').text)
+                    #contact person info
+                    contact_name=[]
+                    contact_surname=[]
+                    contact_email=[]
+                    contact_organization=[]
+                    for cP in resource_info.iter('contactPerson'):
+                        if cP.find('givenName') is not None:
+                            contact_name.append(cP.find('givenName').text)
+                        if cP.find('surname') is not None:
+                            contact_surname.append(cP.find('surname').text)
+                        for cI in cP.iter('communicationInfo'):
+                            if cI.find('email') is not None:
+                                contact_email.append(cI.find('email').text)
+                        for aI in cP.iter('affiliation'):
+                            if aI.find('organizationName') is not None:
+                                    contact_organization.append(aI.find('organizationName').text)
+                    #write metadata LR file
+                    # LR name
+                    # License:
+                    # Restrictions of Use:
+                    # IPR Holder: Name Surname (email), Organization 
+                    # Contact Person: Name Surname (email), Organization 
+                    metadata_file_path=resource_path+'/'+resource_name[0]+'_metadata.txt'
+                    with open(metadata_file_path, 'w') as metadata_file:
+                        metadata_file.write('Resource_name: '+resource_name[0]+'\n')
+                        for i,l in enumerate(licences_name):
+                            metadata_file.write('License: '+l+'\n')
+                            if licences_restriction[i] =='':
+                                metadata_file.write('\t Restrictions of Use: None\n')
+                            else:
+                                metadata_file.write('\t Restrictions of Use: '+licences_restriction[i]+'\n')
+                        if len(iprHolder_name)>0:
+                            for i,h in enumerate(iprHolder_name):
+                                metadata_file.write('IPR Holder: '+ h +' '+iprHolder_surname[i] + ' (' + iprHolder_email[i]+'), '+iprHolder_organization[i]+'\n')
+                        else:
+                            metadata_file.write('IPR Holder: N/A \n')
+                        if len(contact_name)>0:
+                            for i,p in enumerate(contact_name):
+                                metadata_file.write('Contact Person: '+p+' '+contact_surname[i]+' ('+contact_email[i]+'), '+contact_organization[i]+'\n')
+                        else:
+                            metadata_file.write('Contact Person: N/A \n')
+                    lr_archive_zip.write(metadata_file_path,resource_name[0]+'_metadata.txt',)
                     lr_archive_zip.close()
+                    
                     #send corresponding emails
                     emails=obj.owners.all().values_list('email',flat=True)
                     name=obj.owners.all().values_list('first_name',flat=True)
                     surname=obj.owners.all().values_list('last_name',flat=True)
-                    
                     email_data={'resourcename':resource_name[0],'username':name[0], 'usersurname':surname[0]}
                     try:
                         send_mail('Published Resource', render_to_string('repository/published_resource.email',email_data) , settings.EMAIL_ADDRESSES['elri-no-reply'],emails, fail_silently=False)
@@ -720,6 +773,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                         messages.error(request,_("There was an error sending out the notification email to the resource owners. Please contact them directly."))
                         # Redirect the user to the front page. ?
                         #return redirect('metashare.views.frontpage')
+                    #write the metadatafile
+                    
             if successful > 0:
                 messages.info(request, ungettext(
                     'Successfully published %(ingested)s ingested resource.',
@@ -794,7 +849,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     #get the emails of the reviewers that share groups with the resource
                     group_reviewers = [u.email for u in User.objects.filter(groups__name__in=groups_name, email__in=reviewers)]
                     lr_reviewers.append(group_reviewers)
-
 
             if successful > 0:
                 info = {}
