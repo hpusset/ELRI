@@ -450,6 +450,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         from metashare.xml_utils import to_xml_string
         if has_publish_permission(request, queryset):
             successful = 0
+            processing_status=True
             #messages.info(request,queryset)
             for obj in queryset:
                 #variables to control tc errors
@@ -457,23 +458,18 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 error_msg=''
                 call_tm2tmx=-1
                 call_doc2tmx=-1
-                if check_resource_status(obj)== INGESTED or check_resource_status(obj)== PROCESSING or check_resource_status(obj)== ERROR: 
-                    #only (re)process INGESTED resources, published are suposed to be ok #or check_resource_status(obj)== PUBLISHED : #only process INGESTED or PUBLISHED resources
+                pre_status=check_resource_status(obj)
+                if change_resource_status(obj, status=PROCESSING, precondition_status=INGESTED) or change_resource_status(obj, status=PROCESSING, precondition_status=ERROR) or change_resource_status(obj, status=PROCESSING, precondition_status=INTERNAL): #or check_resource_status(obj)== PROCESSING:
+                    #only (re)process INGESTED or ERROR or PROCESSING resources, published are suposed to be ok 
                     
-                    ####messages.info(request,_('You are processing a resource. This may take some time...'))
-                    
-                    ###DEBUGGING_INFO
-                    ##PATH TO THE RESOURCE
-                    #messages.info(request,escape(obj.storage_object._storage_folder()))
-
-                    #messages.info(request,obj.metadataInfo)
-                    ##XML INFO OF THE RESOURCE
-                    
-                    #messages.info(request,"info del request...")
-                    #messages.info(request,to_xml_string(obj.export_to_elementtree(),
-                    #                               encoding="utf-8").encode("utf-8"))#obj.export_to_elementtree())
-
                     ################
+                    ##GET INFO TO SEND NOTIFICATION EMAILS
+                    groups_name=[]
+                    for g in obj.groups.all():
+                        groups_name.append(g.name)
+                    reviewers = [u.email for u in User.objects.filter(groups__name__in=['reviewers'])] #,groups__name__in=groups_name)]
+                    group_reviewers = [u.email for u in User.objects.filter(groups__name__in=groups_name, email__in=reviewers)]
+                    ####
                     resource_info=obj.export_to_elementtree()
                     r_languages=[]
                     for lang in resource_info.iter('languageInfo'):
@@ -550,8 +546,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
                         r_id=obj.storage_object.id
                         r_overwrite='true'
 
-                        ####messages.info(request,"Processing resource with tm2tmx...")
-
                         #for tm in tmx_files:
                         r_input=resource_tm_path+'/input'#+tm
                         tm_json= {'id':r_id, 'title': r_name ,'input':r_input,'overwrite':r_overwrite,'languages':r_languages, 'license':licence_info}
@@ -563,23 +557,36 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                     successful +=1
                                 else:
                                     change_resource_status(obj,status=ERROR, precondition_status=PROCESSING)
-                                    #messages.error(request,"Something went wrong when processing the resource with the tm2tmx toolchain.")
-                                    error_msg=error_msg+"Something went wrong when processing the resource with the tm2tmx toolchain."+response_tm.json()["info"]+'\n'
+                                    error_msg=error_msg+_("Something went wrong when processing the resource with the tm2tmx toolchain.")+response_tm.json()["info"]+'\n'
                                     #ToDo: add timestamp info to error.log 
                                     errors+=1
+                                    #send notification email
+                                    try:
+                                        send_mail(_("Error when processing resource %s") % r_name, _('An error occurred when processing the resource %s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %s') % (r_name,settings.EMAIL_ADDRESSES['elri-nrs-support']), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
+                                    except: 
+                                        messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
+                                                                                                                                                                                                                                                            
                             else:    
                                 change_resource_status(obj,status=ERROR, precondition_status=PROCESSING)
-                                #messages.error(request,"Invalid json response from tm2tmx toolchain: "+response_tm.text)
-                                error_msg=error_msg+"Invalid json response from tm2tmx toolchain: "+response_tm.text+'\n'
+                                error_msg=error_msg+_("Invalid json response from tm2tmx toolchain: ")+response_tm.text+'\n'
                                 #ToDo: add timestamp info to error.log 
                                 errors+=1
+                                #send notification email
+                                try:
+                                    send_mail(_("Error when processing resource %s") % r_name, _('An error occurred when processing the resource %s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %s') % (r_name,settings.EMAIL_ADDRESSES['elri-nrs-support']), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
+                                except: 
+                                    messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
+                                
                         except: 
                             change_resource_status(obj,status=ERROR, precondition_status=PROCESSING)
-                            #messages.error(request,"The POST request to the tm2tmx toolchain has failed: \n"+response_tm)
-                            error_msg=error_msg+"The POST request to the tm2tmx toolchain has failed."+response_tm+"\n"
+                            error_msg=error_msg+_("The POST request to the tm2tmx toolchain has failed.")+response_tm+"\n"
                             #ToDo: add timestamp info to error.log 
                             errors+=1
-                                
+                            #send notification email
+                            try:
+                                send_mail(_("Error when processing resource %s") % r_name, _('An error occurred when processing the resource %s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %s') % (r_name,settings.EMAIL_ADDRESSES['elri-nrs-support']), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
+                            except: 
+                                messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
                     response_doc=''    
 
                     if call_doc2tmx > 0:
@@ -598,38 +605,47 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                     successful += 1
                                 else:
                                     change_resource_status(obj,status=ERROR, precondition_status=PROCESSING)
-                                    #messages.error(request,"Something went wrong when processing the resource with the doc2tmx toolchain.\n "+response_doc.json()["info"])
-                                    error_msg=error_msg+"Something went wrong when processing the resource with the doc2tmx toolchain.\n "+response_doc.json()["info"]+"\n"
+                                    error_msg=error_msg+_("Something went wrong when processing the resource with the doc2tmx toolchain.\n ")+response_doc.json()["info"]+"\n"
                                     #ToDo: add timestamp info to error.log 
                                     errors+=1
+                                    #send notification email
+                                    try:
+                                        send_mail(_("Error when processing resource %s") % r_name, _('An error occurred when processing the resource %s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %s') % (r_name,settings.EMAIL_ADDRESSES['elri-nrs-support']), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
+                                    except: 
+                                        messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
                             else:
                                 change_resource_status(obj,status=ERROR, precondition_status=PROCESSING)
-                                #messages.error(request,response_doc.text)
-                                #messages.error(request,"Invalid json response from doc2tmx toolchain: "+response_doc.text)
-                                error_msg=error_msg+"Invalid json response from doc2tmx toolchain: "+response_doc.text+'\n'
+                                error_msg=error_msg+_("Invalid json response from doc2tmx toolchain: ")+response_doc.text+'\n'
                                 #ToDo: add timestamp info to error.log 
                                 errors+=1
+                                #send notification email
+                                try:
+                                    send_mail(_("Error when processing resource %s") % r_name, _('An error occurred when processing the resource %s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %s') % (r_name,settings.EMAIL_ADDRESSES['elri-nrs-support']), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
+                                except: 
+                                    messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
                                 
                         except:
                             change_resource_status(obj,status=ERROR, precondition_status=PROCESSING)
-                            #messages.error(request,"The POST request to the doc2tmx toolchain has failed.\n"+response_doc)
-                            error_msg=error_msg+"The POST request to the doc2tmx toolchain has failed.\n "+response_doc+'\n'
+                            error_msg=error_msg+_("The POST request to the doc2tmx toolchain has failed.\n ")+response_doc+'\n'
                             #ToDo: add timestamp info to error.log 
                             errors+=1
+                            #send notification email
+                            try:
+                                send_mail(_("Error when processing resource %s") % r_name, _('An error occurred when processing the resource %s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %s') % (r_name,settings.EMAIL_ADDRESSES['elri-nrs-support']), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
+                            except: 
+                                messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
                             
                 #if something success-> create new archive.zip and replace the old one uploaded by the user     
                 # if any errors, then handle error reporting
                 if errors > 0 or error_msg!='':
                     #create the archive.zip with the original files and the error.log file
                     prepare_error_zip(error_msg,resource_path,request)
-                    return False
+                    processing_status = processing_status and False
                 elif successful > 0:
                     #create the archive.zip with the processed resources
                     processed_zip=zipfile.ZipFile(resource_path+'/archive.zip',mode='w')
 
                     if response_doc != '' and json_validator(response_doc):
-                        messages.info(request,response_doc.json()["info"])
-
                         #if any rejected file and !E file(s) in output --> add input/into rejected/inside archive.zip
                         if not os.listdir(response_doc.json()["output"]): 
                             add_rejected_files2zip(r_input,processed_zip)                            
@@ -647,25 +663,36 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     
                     #close zip file with processed resources
                     processed_zip.close()
-                    return True
+                    #if pre_status == INGESTED or pre_status==ERROR :
+                    change_resource_status(obj,status=INGESTED, precondition_status=PROCESSING)
+                        
+                    processing_status = processing_status and True
                     
                 else:
                     if error_msg !='':
                         prepare_error_zip(error_msg,resource_path,request)
-                        return False
+                        processing_status = processing_status and False
                     elif call_tm2tmx==0 or call_doc2tmx==0:
-                        #messages.error(request,"this is it!")
-                        return True
+                        change_resource_status(obj,status=INGESTED, precondition_status=PROCESSING)
+                        processing_status = processing_status and True
                     else:
                         messages.error(request,
-                           _('Only ingested resources can be re-processed.'))
-                        return True
+                           _('Only ingested or error resources can be re-processed.'))
+                        processing_status = processing_status and True
+                        
+            if processing_status and (pre_status==INGESTED or pre_status==ERROR):
+                messages.info(request, _('Resource(s) re-processed correctly.'))
+            elif processing_status and pre_status==INTERNAL:
+                messages.info(request, _('Resource(s) processed correctly.'))
+            else:
+                messages.error(request,_("Something went wrong when processing the resource(s). Check the error.log file(s). You will receive a notification email."))
+            return processing_status
         else:
             messages.error(request, _('You do not have the permission to ' \
                             'perform this action for all selected resources.'))
             return False
 
-    process_action.short_description = _("Process selected ingested resources")
+    process_action.short_description = _("Re-process selected resources")
 
     def publish_action(self, request, queryset):
         if has_publish_permission(request, queryset):
@@ -748,23 +775,23 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     # Contact Person: Name Surname (email), Organization 
                     metadata_file_path=resource_path+'/'+resource_name[0]+'_metadata.txt'
                     with open(metadata_file_path, 'w') as metadata_file:
-                        metadata_file.write('Resource_name: '+resource_name[0]+'\n')
+                        metadata_file.write(_('Resource_name: ')+resource_name[0]+'\n')
                         for i,l in enumerate(licences_name):
-                            metadata_file.write('License: '+l+'\n')
+                            metadata_file.write(_('License: ')+l+'\n')
                             if licences_restriction[i] =='':
-                                metadata_file.write('\t Restrictions of Use: None\n')
+                                metadata_file.write(_('\t Restrictions of Use: None\n'))
                             else:
-                                metadata_file.write('\t Restrictions of Use: '+licences_restriction[i]+'\n')
+                                metadata_file.write(_('\t Restrictions of Use: ')+licences_restriction[i]+'\n')
                         if len(iprHolder_name)>0:
                             for i,h in enumerate(iprHolder_name):
-                                metadata_file.write('IPR Holder: '+ h +' '+iprHolder_surname[i] + ' (' + iprHolder_email[i]+'), '+iprHolder_organization[i]+'\n')
+                                metadata_file.write(_('IPR Holder: ')+ h +' '+iprHolder_surname[i] + ' (' + iprHolder_email[i]+'), '+iprHolder_organization[i]+'\n')
                         else:
-                            metadata_file.write('IPR Holder: N/A \n')
+                            metadata_file.write(_('IPR Holder: N/A \n'))
                         if len(contact_name)>0:
                             for i,p in enumerate(contact_name):
-                                metadata_file.write('Contact Person: '+p+' '+contact_surname[i]+' ('+contact_email[i]+'), '+contact_organization[i]+'\n')
+                                metadata_file.write(_('Contact Person: ')+p+' '+contact_surname[i]+' ('+contact_email[i]+'), '+contact_organization[i]+'\n')
                         else:
-                            metadata_file.write('Contact Person: N/A \n')
+                            metadata_file.write(_('Contact Person: N/A \n'))
                     lr_archive_zip.write(metadata_file_path,resource_name[0]+'_metadata.txt',)
                     lr_archive_zip.close()
                     
@@ -774,7 +801,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     surname=obj.owners.all().values_list('last_name',flat=True)
                     email_data={'resourcename':resource_name[0],'username':name[0], 'usersurname':surname[0]}
                     try:
-                        send_mail('Published Resource', render_to_string('repository/published_resource.email',email_data) , settings.EMAIL_ADDRESSES['elri-no-reply'],emails, fail_silently=False)
+                        send_mail(_('Published Resource'), render_to_string('repository/published_resource.email',email_data) , settings.EMAIL_ADDRESSES['elri-no-reply'],emails, fail_silently=False)
                     except:
                         # failed to send e-mail to superuser
                         # If the email could not be sent successfully, tell the user
@@ -836,7 +863,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
             resource_names=[]
             
             for obj in queryset:
-                if change_resource_status(obj, status=PROCESSING, precondition_status=INTERNAL) or change_resource_status(obj, status=PROCESSING, precondition_status=ERROR):
+                #only ingest internal resources 
+                if check_resource_status(obj)== INTERNAL :
+                #change_resource_status(obj, status=PROCESSING, precondition_status=INTERNAL): 
                     successful += 1
                     saveLRStats(obj, INGEST_STAT, request)
                     resource_info.append(obj.export_to_elementtree())
@@ -846,9 +875,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     groups_name=[]
                     for g in obj.groups.all():
                         groups_name.append(g.name)
-                    ##DEBUG
-                    #messages.info(request,groups_name)
-                    ##
                     #send an email to the reviewers related to the groups where the resource is published
                     #get the emails of those users that are reviewers
                     reviewers = [u.email for u in User.objects.filter(groups__name__in=['reviewers'])] #,groups__name__in=groups_name)]
@@ -861,34 +887,47 @@ class ResourceModelAdmin(SchemaModelAdmin):
 
             if successful > 0:
                 info = {}
-                info['status'] = "succeded"
-                info['message'] = _("""
-                    Successfully ingested {}(s) internal resource(s). 
-                    You will be notified by email once the resource has been fully processed.
-                    """.format(successful))
                 #Implements the system branch 4 automatic lr processing
                 if not self.branch_lr(request,queryset):
+                    info['status'] = "failed"
+                    info['message'] = _("""
+                        The ingestion process has been interrupted.
+                        Re-process the resource(s) with error status.
+                        """)
+                    messages.error(request,_("""
+                        The ingestion process has been interrupted.
+                        Re-process the resource(s) with error status.
+                        """))
                     return
-            
-                #send the ingested resource notification email
-                for i,r in enumerate(resource_names):
-                    email_data={'resourcename':r}
-                    try:
-                        send_mail("Ingested Resource", render_to_string('repository/ingested_resource.email',email_data),settings.EMAIL_ADDRESSES['elri-no-reply'],lr_reviewers[i])
-                    except:
-                        # failed to send e-mail to superuser
-                        # If the email could not be sent successfully, tell the user
-                        # about it and also give the confirmation URL.
-                        messages.error(request,_("There was an error sending out the notification email to the group reviewers. Please contact them directly."))
-                        # Redirect the user to the front page. ?
-                        #return redirect('metashare.views.frontpage')
-                for obj in queryset:
-                    if not change_resource_status(obj,status=INGESTED, precondition_status=PROCESSING):
-                        messages.error(request, _('You do not have the permission to ' \
-                            'perform this action for all selected resources.'))
+                else:
+                    info['status'] = "succeded"
+                    info['message'] = _("""
+                        Successfully ingested {} internal resource(s). 
+                        You will be notified by email once the resource has been fully processed.
+                        """.format(successful))
+                    messages.info(request,_("""
+                        Successfully ingested {}(s) internal resource(s). 
+                        You will be notified by email once the resource(s) has been fully processed.
+                        """.format(successful))) 
+                    #send the ingested resource notification email
+                    for i,r in enumerate(resource_names):
+                        email_data={'resourcename':r}
+                        try:
+                            send_mail("Ingested Resource", render_to_string('repository/ingested_resource.email',email_data),settings.EMAIL_ADDRESSES['elri-no-reply'],lr_reviewers[i])
+                        except:
+                            # failed to send e-mail to superuser
+                            # If the email could not be sent successfully, tell the user
+                            # about it and also give the confirmation URL.
+                            messages.error(request,_("There was an error sending out the notification email to the group reviewers. Please contact them directly."))
+                            # Redirect the user to the front page. ?
+                            #return redirect('metashare.views.frontpage')
+                    for obj in queryset:
+                        if not change_resource_status(obj,status=INGESTED, precondition_status=PROCESSING):
+                            messages.error(request, _('You do not have the permission to ' \
+                                'perform this action for all selected resources.'))
             else:
                 messages.error(request,
-                               _('Only internal resources or resources with processing errors can be ingested.'))
+                               _('Only internal resources can be ingested.'))
         else:
             messages.error(request, _('You do not have the permission to ' \
                             'perform this action for all selected resources.'))
