@@ -45,6 +45,28 @@
             }
         </style>
         {% block extra_head %}{% endblock %}
+        <link rel="stylesheet" type="text/css"
+              href="/static/metashare/css/cookie_consent.css"/><script src="/static/metashare/js/cookie_consent.js"></script><script>
+            window.addEventListener("load", function () {
+                window.cookieconsent.initialise({
+                    "palette": {
+                        "popup": {
+                            "background": "#edeff5",
+                            "text": "#838391"
+                        },
+                        "button": {
+                            "background": "#4b81e8"
+                        }
+                    },
+                    "type": "opt-out",
+                     "content": {
+                        "message": {% blocktrans %}"We use cookies on this site to enhance your user experience. By clicking any link on this page you are giving your consent for us to set cookies." {% endblocktrans %},
+                        "dismiss": {% blocktrans %}"OK, I aggree "{% endblocktrans %}
+                    }
+                })
+            });
+        </script>
+        
     </head>
     <body>
     {% analytical_body_top %}

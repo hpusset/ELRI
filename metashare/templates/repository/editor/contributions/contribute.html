@@ -43,6 +43,28 @@
     {#            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"#}
     {#            crossorigin="anonymous"></script>#}
 
+    <link rel="stylesheet" type="text/css"
+              href="/static/metashare/css/cookie_consent.css"/><script src="/static/metashare/js/cookie_consent.js"></script><script>
+            window.addEventListener("load", function () {
+                window.cookieconsent.initialise({
+                    "palette": {
+                        "popup": {
+                            "background": "#edeff5",
+                            "text": "#838391"
+                        },
+                        "button": {
+                            "background": "#4b81e8"
+                        }
+                    },
+                    "type": "opt-out",
+                    "content": {
+                        "message": "We use cookies on this site to enhance your user experience. " +
+                            "By clicking any link on this page you are giving your consent for us to set cookies.",
+                        "dismiss": "OK, I aggree"
+                    }
+                })
+            });
+        </script>
 </head>
 <body style="position: relative;">
 {% include 'header.html' %}
@@ -93,6 +115,7 @@
                         <textarea class="form-control" id="shortDescription" name="shortDescription"></textarea>
                 <span class="help-block contrib-help">{% blocktrans %}[Optional] A short description, including any information considered useful about the resource, e.g. whether it's a dataset (collection of documents) or a lexicon, glossary, terminological resource, etc., its size, language(s), classification information (e.g. health reports, news bulletins, lexicon of sports terminology etc.){% endblocktrans %}</span>
             </div>
+            <!--
             <div class="form-group">
                 <label class="control-label" for="resourceType">{% trans 'Resource type' %}</label>
                 <select name="resourceType">
@@ -103,7 +126,7 @@
                 </select>
                 <span class="help-block contrib-help">{% blocktrans %}[Optional] The type of the resource: can be Corpus, Lexicon, or Language Description. Do not choose anything if you are not sure.{% endblocktrans %}</span>
             </div>
-
+			-->
             <!-- Text input-->
             <!--
             <div class="form-group required">
@@ -152,9 +175,9 @@
                             name="languages[]"
                             id="languages">
                             {% for lid, lname in languages %}
-                            <option value="{{ lid }}">{{ lname }}</option>
+                            <option value="{{ lid }}">{% trans lname %}</option>
                             {% endfor %}
-					</select>
+                    </select>
                     <span class="help-block contrib-help">{% trans 'The language(s) of the resource; for resources with multiple languages, hold down CTRL key to select multiple values' %}</span>
                 </div>
             </div>          
@@ -165,15 +188,15 @@
                     <div id="tooltip_container"></div>
                     <select class="form-control" multiple style="padding: 6px; height:200px" name="domains[]">
                         <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources in any field of activity." value="other">{% trans 'Other / Unknown' %}</option>
-                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources of European cultural heritage [<a target='_blank' href='https://www.europeana.eu/portal/en'>https://www.europeana.eu/portal/en</a>]" value="Europeana">{% trans 'eCulture' %}</option>
-                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for European national social security systems [<a target='_blank' href='https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/05/30/Electronic+Exchange+of+Social+Security+Information'>https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/05/30/Electronic+Exchange+of+Social+Security+Information</a>]" value="ElectronicExchangeOfSocialSecurityInformation">{% trans 'Electronic Exchange of Social Security Information' %}</option>
-                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for European health services. [<a target='_blank' href='https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/05/30/eHealth'>https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/05/30/eHealth</a>]" value="eHealth">{% trans 'eHealth' %}</option>
-                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for European judicial services. [<a target='_blank' href='https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/05/30/European+e-Justice+Portal'>https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/05/30/European+e-Justice+Portal</a>]" value="eJustice">{% trans 'eJustice' %}</option>
-                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for European procurement services. [<a target='_blank' href='https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/05/30/eProcurement'>https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/05/30/eProcurement</a>]" value="eProcurement">{% trans 'eProcurement' %}</option>
-                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources that can be publically shared to contribute to data re-use in Europe. [<a target='_blank' href='https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/03/13/Public+Open+Data%3A+access+to+re-usable+public+sector+information'>https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/03/13/Public+Open+Data%3A+access+to+re-usable+public+sector+information</a>]" value="OpenDataPortal">{% trans 'Public Open Data' %}</option>
-                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for the establishment of a safer internet for children. [<a target='_blank' href='https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/03/10/Safer+Internet%3A+a+better+and+safer+internet+for+children'>https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/03/10/Safer+Internet%3A+a+better+and+safer+internet+for+children</a>]" value="saferInternet">{% trans 'Safer Internet' %}</option>
-                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for the interconnection of business registers. [<a target='_blank' href='https://ec.europa.eu/cefdigital/wiki/pages/viewpage.action?pageId=46992657'>https://ec.europa.eu/cefdigital/wiki/pages/viewpage.action?pageId=46992657</a>]" value="BusinessRegistersInterconnectionSystem">{% trans 'Business Registers Interconnection System' %}</option>
-                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for Cybersecurity. [<a target='_blank' href='https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/05/30/Cybersecurity'>https://ec.europa.eu/cefdigital/wiki/display/CEFDIGITAL/2017/05/30/Cybersecurity</a>]" value="Cybersecurity">{% trans 'Cybersecurity' %}</option>
+                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources of European cultural heritage " value="Europeana">{% trans 'eCulture' %}</option>
+                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for European national social security systems " value="ElectronicExchangeOfSocialSecurityInformation">{% trans 'Electronic Exchange of Social Security Information' %}</option>
+                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for European health services. " value="eHealth">{% trans 'eHealth' %}</option>
+                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for European judicial services. " value="eJustice">{% trans 'eJustice' %}</option>
+                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for European procurement services. " value="eProcurement">{% trans 'eProcurement' %}</option>
+                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources that can be publically shared to contribute to data re-use in Europe. " value="OpenDataPortal">{% trans 'Public Open Data' %}</option>
+                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for the establishment of a safer internet for children. " value="saferInternet">{% trans 'Safer Internet' %}</option>
+                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for the interconnection of business registers. " value="BusinessRegistersInterconnectionSystem">{% trans 'Business Registers Interconnection System' %}</option>
+                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for Cybersecurity. " value="Cybersecurity">{% trans 'Cybersecurity' %}</option>
                     </select>
                     <span class="help-block contrib-help">
                         {% trans '[Optional] Domain refers to information that belongs to a specific field of activity (e.g., culture or health) and is related to one of the building blocks of the European digital services indicated in the provided list. Digital resources that do not clearly belong to one of the provided domains can be left as Other/Unknown.' %}
@@ -192,7 +215,8 @@
                     <option value="CC-BY-NC-SA-4.0">{% trans 'Creative Commons - Attribution - NonCommercial - ShareAlike 4.0 (CC-BY-NC-SA-4.0)' %}</option>
                     <option value="non-standard/Other_Licence/Terms">{% trans 'Non-Standard/Other_Licence/Terms' %}</option>
                 </select>
-                <span class="help-block contrib-help">{% blocktrans %}The licensing conditions for the resource.{% endblocktrans %}</span>
+                <span class="help-block contrib-help">{% blocktrans %}The licensing conditions for the resource.{% endblocktrans %} 
+                <a href="{% url 'info' %}#Licensing_LRs">{% blocktrans %} More information about the available licences.{% endblocktrans %}  </a></span>
             </div>
             <div class="form-group required" id="licencefile" style="display:none">
                 <label class="control-label" for="licenceFile">{% trans 'License file' %}</label>

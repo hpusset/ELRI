@@ -1,6 +1,7 @@
 {% load url from future %}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 {% load static from staticfiles %}
 {% load string_utils %}
+{% load i18n %}
 <html xmlns="http://www.w3.org/1999/xhtml" lang="{{ LANGUAGE_CODE|default:"en-us" }}" xml:lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
 <title>{% block title %}{% endblock %}</title> 
@@ -20,6 +21,27 @@
 </style>
 {% block extrahead %}{% endblock %}
 {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
+<link rel="stylesheet" type="text/css"
+              href="/static/metashare/css/cookie_consent.css"/><script src="/static/metashare/js/cookie_consent.js"></script><script>
+            window.addEventListener("load", function () {
+                window.cookieconsent.initialise({
+                    "palette": {
+                        "popup": {
+                            "background": "#edeff5",
+                            "text": "#838391"
+                        },
+                        "button": {
+                            "background": "#4b81e8"
+                        }
+                    },
+                    "type": "opt-out",
+                    "content": {
+                        "message": {% blocktrans %}"We use cookies on this site to enhance your user experience. By clicking any link on this page you are giving your consent for us to set cookies." {% endblocktrans %},
+                        "dismiss": {% blocktrans %}"OK, I aggree "{% endblocktrans %}
+                    }
+                })
+            });
+        </script>
 </head>
 {% load i18n %}
 <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}">
