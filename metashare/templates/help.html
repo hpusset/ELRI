@@ -1,10 +1,22 @@
 {% extends "base.html" %}
 {% load email_protection i18n %}
 {% load get_email %}
+{% load get_guidelines %}
 {% load static %}
 {% block content %}
+
     <h2>{% trans 'Help' %}</h2>
     <div class="content_box">
+        <h2>{% trans 'Documentation' %}</h2>
+        
+        <ul>
+            <li>{% trans 'The following user guidelines provide detailed information on how to use the ELRI platform for uploading and sharing LRs.' %}</li>
+            <ul>{% get_current_language as LANGUAGE_CODE %}
+                {% get_guidelines LANGUAGE_CODE as elri_userguidelines %}
+                <li> <a href="{% static elri_userguidelines %}">{% trans 'User guidelines' %}</a>
+                </li>
+            </ul>
+        </ul>
         <h2>{% trans 'Contact details' %}</h2>
         <ul>
             <li>{% trans 'For enquiries related to the project, please refer to the <a href="http://www.elri-project.eu/contact-us.html" target="_blank">list of ELRI Contacts' %}</a>.</li>

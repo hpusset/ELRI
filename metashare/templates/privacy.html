@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load get_email %}
+
+{% block content %}
+    <div class="content_box">
+        <h2 style="text-align: center;">{% blocktrans %}<strong>ELRI NRS Privacy Policy</strong>{% endblocktrans %}</h2>
+        
+        <div id="Protection" class="anchor"></div>
+        <br>
+        <h3 style="color:red">WARNING: THIS IS THE TEMPLATE PRIVACY POLICY, NOT THE FINAL VERSION.</h3>
+        <br>
+        
+        <h3>{% blocktrans %}<b>ELRI National Relay Station Data Protection Notice</b>{% endblocktrans %}</h3>      
+        <p align=justify>{% blocktrans %}Within  the  Connecting  Europe  Facility  Programme,  the  Commission  of  the  European 
+        Communities (referred to as “the European Commission”) has awarded a grant under 
+        agreement No INEA/CEF/ICT/A2016/1330962 for the Action entitled “European Language Resource Infrastructure (ELRI)” 
+        (Action number 2016-EU-IA-0111), whose purpose is the deployment  of  a  network  that  enables  accessible,  
+        secure  and  reliable  sharing  of Language Resources (LRs) by different stakeholders at EU level.{% endblocktrans %}</p>
+        <p align=justify>{% blocktrans %}The ELRI Consortium consisting of Fundación Centro de Tecnologías de Interacción Visual 
+        y  Comunicaciones  (<a href="http://www.vicomtech.org">VICOMTECH</a>),  the  Administrative  Modernization 
+        Agency  (<a href="https://www.ama.gov.pt/">AMA</a>),  Dublin  City  University  School  of  Computing 
+        (<a href="https://www.computing.dcu.ie">DCU</a>),  the  Evaluations  and  Language  Resource  Distribution 
+        Agency (<a href="http://www.elda.org">ELDA</a>),  Faculdade de Ciências da Universidade de Lisboa (<a href="https://ciencias.ulisboa.pt">FCUL</a>),    
+        Linkare TI – Tecnologias de Informação, Lda. (<a href="http://www.linkare.com">Linkare</a>) 
+        and  the Kingdom  of Spain, represented by the Secretary  of State for 
+        Digital Progress (<a href="https://www.mincotur.gob.es/telecomunicaciones">SEAD</a>) 
+        are  jointly  responsible  for  the  collection  and 
+        processing of personal data. ELRI and all its members are committed to goal- and risk-oriented  
+        information  privacy  and  the  fundamental  right  to  the  protection  of  personal 
+        data. The  ELRI  Action  deploys  websites  (“National  Relay  Stations”)  dedicated  to  the 
+        collection, processing and sharing of  Language Resources in different  Member States of 
+        the European Union. In this data protection policy, we inform you about the processing of 
+        your  personal  data  when  visiting  the  website  and/or  using  the  services  of  this  National 
+        Relay Station.{% endblocktrans %}</p>
+       
+        {% get_email 'elri-nrs-org' as email_org %}
+        {% get_email 'elri-nrs-dpo' as email_dpo %}
+        
+        <div id="Controller" class="anchor"></div>
+        <h3>{% blocktrans %}<b>Controller</b>{% endblocktrans %}</h3>
+        <p align=justify>{% blocktrans %} 
+        HOSTING ORGANIZATION OF THE NRS{% endblocktrans %}</p>
+        <ul>
+        <li> {% blocktrans %} Contact: CONTACT HOSTING ORGANISATION, Phone: PHONE, {% endblocktrans %}</li>
+        <li> {% blocktrans %} E-Mail: {% endblocktrans %}<a href="mailto:{{ email_org }}" >{{ email_org }}</a> </li>
+        </ul>
+        
+        <div id="Officer" class="anchor"></div>
+        <h3>{% blocktrans %}<b>Data Protection Officer</b>{% endblocktrans %}</h3>
+       
+        <p align=justify>{% blocktrans %} 
+        Name of the data protection officer at the hosting organisation of the NRS, if applicable{% endblocktrans %}</p>
+        <ul>
+        <li> {% blocktrans %} Contact: CONTACT/NAME OF THE DATA PROTECTION OFFICER, Phone: PHONE, {% endblocktrans %}</li>
+        <li> {% blocktrans %} E-Mail: {% endblocktrans %}<a href="mailto:{{ email_dpo }}" >{{ email_dpo }}</a> </li>
+        </ul>
+        
+        <div id="Purpose" class="anchor"></div>
+        <h3>{% blocktrans %}<b>Purpose</b>{% endblocktrans %}</h3>
+        <p align=justify>{% blocktrans %} Within an ELRI National Relay Station, personal data are only processed for the following purposes:{% endblocktrans %}</p>
+        <ul>
+            <li>{% blocktrans %} Establishment of contact and correspondence with visitors and users {% endblocktrans %}</li>
+            <li>{% blocktrans %} Registration of users.{% endblocktrans %}</li>
+        </ul>
+        
+        <div id="Anonymous" class="anchor"></div>
+        <h3>{% blocktrans %}<b>Anonymous and protected usage</b>{% endblocktrans %}</h3>
+        <p align=justify>{% blocktrans %} Personal  data  are  only  collected  via  our  contact  page,  where  users  can  contact  us 
+        electronically, and via our registration page.{% endblocktrans %}</p>
+        
+        <div id="Recipients" class="anchor"></div>
+        <h3>{% blocktrans %}<b>Recipients</b>{% endblocktrans %}</h3>
+        <p align=justify>{% blocktrans %}  The  processed  data  will  not  be  transmitted  to  any  third  parties  or  otherwise  disclosed,
+        except  on  the  basis  of  concrete  legal  obligations  or  contractual  obligations  within  the ELRI Action 2016-EU-IA-0111 
+        under grant agreement No INEA/CEF/ICT/A2016/1330962. 
+        Within our information offering, we do not embed information or service offerings of third party providers. {% endblocktrans %}</p>
+        
+        <div id="Access" class="anchor"></div>
+        <h3>{% blocktrans %}<b>Access data</b>{% endblocktrans %}</h3>
+        <p align=justify>{% blocktrans %}The legitimate interests pursued by ELRI include, among others, also the adaptation and 
+        optimisation of the information offering and the investigation, detection and prosecution 
+        of illegal activities in connection with the usage of our website.{% endblocktrans %}</p>
+        <p align=justify>{% blocktrans %}The ELRI National Relay Station and services log certain information about every request 
+        sent to them. This information is used for system administration and for producing usage statistics.  
+        Summary  statistics  are  extracted  from  this  data and  some  of  these  may  be made  publicly  available,  
+        but  these  do  not  include  information  from  which  individuals could be identified.{% endblocktrans %}</p>
+        <p align=justify>{% blocktrans %} Relevant subsets of this data may be used as part of investigations of computer misuse 
+        involving this site. Data may also on occasion be used to enable investigation of technical 
+        problems on the website. Otherwise logged information is not passed to any third party except if required by law. {% endblocktrans %}</p>
+        
+               
+        <div id="Correspondence" class="anchor"></div>
+        <h3>{% blocktrans %}<b>Correspondence</b>{% endblocktrans %}</h3>
+        <p align=justify>{% blocktrans %}You have the option to contact us by e-mail. We will use your e-mail address and other 
+        personal contact data for the correspondence with you. Due to legal obligation, every e-mail  correspondence  will  be  archived.  
+        Subject  to  our  legitimate  interests  your  e-mail address  and  other  personal  contact  data  can  be  stored  in  our  
+        contact  database.  In  this case,  you  will  receive  a  corresponding  information  on  the  processing  of  your  contact 
+        data.{% endblocktrans %}</p>
+        
+        <div id="Intervention" class="anchor"></div>
+        <h3>{% blocktrans %}<b>Access and Intervention</b>{% endblocktrans %}</h3>
+        <p align=justify>{% blocktrans %} Besides the information in this data protection policy you have the right of access to your 
+        personal data. To ensure fair data processing, you have the following rights: {% endblocktrans %}</p>
+        <ul>
+            <li>{% blocktrans %} The right to rectification and completion of your personal data {% endblocktrans %}</li>
+            <li>{% blocktrans %} The right to erasure of your personal data {% endblocktrans %}</li>
+            <li>{% blocktrans %} The right to restriction of the processing of your personal data {% endblocktrans %}</li>
+            <li>{% blocktrans %} The right to object to the processing of your personal data on grounds related to 
+            your particular situation{% endblocktrans %}</li>
+        </ul>
+        <p align=justify>{% blocktrans %} To   exercise   these   rights,   please   contact   us   at   the   following   email   address: 
+	{% endblocktrans %}<a href="mailto:{{ email_org }}" >{{ email_org }}</a>  </p>
+        
+        <div id="Complaint" class="anchor"></div>
+        <h3>{% blocktrans %}<b>Right to lodge a complaint</b>{% endblocktrans %}</h3>
+        <p align=justify>{% blocktrans %}You have the right to lodge a complaint with a supervisory authority if you consider that 
+        the processing of your personal data infringes statutory data protection regulations.{% endblocktrans %}</p>
+
+        <div id="Cookies" class="anchor"></div>
+        <h3>{% blocktrans %}<b>Cookies policy</b>{% endblocktrans %}</h3>
+        <p align=justify>{% blocktrans %}We use cookies on this site to enhance your user experience. By clicking any link of this page you are giving your consent for us to set cookies.{% endblocktrans %}</p>
+    </div>
+{% endblock %}

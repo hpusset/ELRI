@@ -5,7 +5,7 @@
 
 {% block messages %}
 {% if form.errors %}
-<p class="error">{% blocktrans %}Please fill in all fields to create your account.{% endblocktrans %}</p>
+<p class="error">Please fill in all fields to create your account.</p>
 {% endif %}
 {% endblock %}
 
@@ -22,8 +22,7 @@
       {{ field.errors }}
 
       {% if field.html_name == "accepted_tos" %}
-      
-        {{ field }} <label for="{{ field.auto_id }}"> I accept the <a target="_blank" href="{% static  elri_tos %}">ELRI Terms of Service</a>. </label>
+        {{ field }} <label for="{{ field.auto_id }}"> {% blocktrans %}I accept the <a target="_blank" href="{{ elri_tos }}">ELRI Terms of Service</a>.{% endblocktrans %}</label>
         <!--{% static "metashare/ELRI_ToS_template.pdf" as elri_tos %}-->
         <!--{{ field }} <label for="{{ field.auto_id }}">{% blocktrans %}I accept the <a target="_blank" href="{{ elri_tos }}">ELRI Terms of Service</a>.{% endblocktrans %}</label>-->
       {% else %}

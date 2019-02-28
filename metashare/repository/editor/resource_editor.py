@@ -2,6 +2,7 @@ import datetime, requests, os, zipfile
 from functools import update_wrapper
 from mimetypes import guess_type
 from shutil import copyfile
+import json
 import logging
 from django import forms
 from django.contrib import admin, messages
@@ -44,7 +45,7 @@ from metashare.repository.models import resourceComponentTypeType_model, \
     licenceInfoType_model, User
 from metashare.repository.supermodel import SchemaModel
 from metashare.stats.model_utils import saveLRStats, UPDATE_STAT, INGEST_STAT, DELETE_STAT
-from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
+from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, PROCESSING, ERROR, \
     ALLOWED_ARCHIVE_EXTENSIONS, ALLOWED_VALIDATION_EXTENSIONS, ALLOWED_LEGAL_DOCUMENTATION_EXTENSIONS
 from metashare.utils import verify_subclass, create_breadcrumb_template_params
 
@@ -66,100 +67,100 @@ MEMBER_TYPES = type('MemberEnum', (), dict(GOD=100, FULL=3, ASSOCIATE=2, NON=1))
 # is required at a minimum to be able to download the associated resource
 # straight away; otherwise the licence requires a hard-copy signature
 LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
-	'CC-BY-4.0': (STATIC_URL + 'metashare/licences/CC-BY-4.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-NC-4.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-4.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-NC-ND-4.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-ND-4.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-NC-SA-4.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-SA-4.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-ND-4.0': (STATIC_URL + 'metashare/licences/CC-BY-ND-4.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-SA-4.0': (STATIC_URL + 'metashare/licences/CC-BY-SA-4.0.pdf', MEMBER_TYPES.NON),
-	'CC0-1.0': (STATIC_URL + 'metashare/licences/CC0-1.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-3.0': (STATIC_URL + 'metashare/licences/CC-BY-3.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-NC-3.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-3.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-NC-ND-3.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-ND-3.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-NC-SA-3.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-SA-3.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-ND-3.0': (STATIC_URL + 'metashare/licences/CC-BY-ND-3.0.pdf', MEMBER_TYPES.NON),
-	'CC-BY-SA-3.0': (STATIC_URL + 'metashare/licences/CC-BY-SA-3.0.pdf', MEMBER_TYPES.NON),
-	# TODO: PDDL
-	'PDDL-1.0': (STATIC_URL + 'metashare/licences/PDDL-1.0.pdf', MEMBER_TYPES.NON),
-	# TODO: ODC-BY
-	'ODC-BY-1.0': (STATIC_URL + 'metashare/licences/ODC-BY-1.0.pdf', MEMBER_TYPES.NON),
-	'ODbL-1.0': (STATIC_URL + 'metashare/licences/ODbL-1.0.pdf', MEMBER_TYPES.NON),
-	'AGPL-3.0': (STATIC_URL + 'metashare/licences/AGPL-3.0.pdf', MEMBER_TYPES.NON),
-	'Apache-2.0': (STATIC_URL + 'metashare/licences/Apache-2.0.pdf', MEMBER_TYPES.NON),
-	'BSD-4-Clause': (STATIC_URL + 'metashare/licences/BSD-4-Clause.pdf', MEMBER_TYPES.NON),
-	'BSD-3-Clause': (STATIC_URL + 'metashare/licences/BSD-3-Clause.pdf', MEMBER_TYPES.NON),
-	'BSD-2-Clause': (STATIC_URL + 'metashare/licences/BSD-2-Clause', MEMBER_TYPES.NON),
-	'GFDL-1.3': (STATIC_URL + 'metashare/licences/GFDL-1.3.pdf', MEMBER_TYPES.NON),
-	'GPL-3.0': (STATIC_URL + 'metashare/licences/GPL-3.0.pdf', MEMBER_TYPES.NON),
-	'LGPL-3.0': (STATIC_URL + 'metashare/licences/LGPL-3.0.pdf', MEMBER_TYPES.NON),
-	'MIT': (STATIC_URL + 'metashare/licences/MIT.pdf', MEMBER_TYPES.NON),
-	'EPL-1.0': (STATIC_URL + 'metashare/licences/EPL-1.0.pdf', MEMBER_TYPES.NON),
-	'EUPL-1.0': (STATIC_URL + 'metashare/licences/EUPL-1.0.pdf', MEMBER_TYPES.NON),
-	'EUPL-1.1': (STATIC_URL + 'metashare/licences/EUPL-1.1.pdf', MEMBER_TYPES.NON),
-	'EUPL-1.2': (STATIC_URL + 'metashare/licences/EUPL-1.2.pdf', MEMBER_TYPES.NON),
-	'LO-OL-v2': (STATIC_URL + 'metashare/licences/LO-OL-v2.pdf', MEMBER_TYPES.NON),
-	'dl-de/by-2-0': (STATIC_URL + 'metashare/licences/dl-de_by-2-0.pdf', MEMBER_TYPES.NON),
-	'dl-de/zero-2-0': (STATIC_URL + 'metashare/licences/dl-de_zero-2-0.pdf', MEMBER_TYPES.NON),
-	'IODL-1.0': (STATIC_URL + 'metashare/licences/IODL-1.0.pdf', MEMBER_TYPES.NON),
-	'NLOD-1.0': (STATIC_URL + 'metashare/licences/NLOD-1.0.pdf', MEMBER_TYPES.NON),
-	'OGL-3.0': (STATIC_URL + 'metashare/licences/OGL-3.0.pdf', MEMBER_TYPES.NON),
-	'NCGL-1.0': (STATIC_URL + 'metashare/licences/NCGL-1.0.pdf', MEMBER_TYPES.GOD),
-	'openUnder-PSI': (STATIC_URL + 'metashare/licences/openUnderPSI.txt', MEMBER_TYPES.NON),
-	'publicDomain': (STATIC_URL + 'metashare/licences/publicDomain.txt', MEMBER_TYPES.NON), #('', MEMBER_TYPES.NON),
-	'non-standard/Other_Licence/Terms': ('', MEMBER_TYPES.NON),
-	'underReview': ('', MEMBER_TYPES.GOD),
+    'CC-BY-4.0': (STATIC_URL + 'metashare/licences/CC-BY-4.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-NC-4.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-4.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-NC-ND-4.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-ND-4.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-NC-SA-4.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-SA-4.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-ND-4.0': (STATIC_URL + 'metashare/licences/CC-BY-ND-4.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-SA-4.0': (STATIC_URL + 'metashare/licences/CC-BY-SA-4.0.pdf', MEMBER_TYPES.NON),
+    'CC0-1.0': (STATIC_URL + 'metashare/licences/CC0-1.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-3.0': (STATIC_URL + 'metashare/licences/CC-BY-3.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-NC-3.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-3.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-NC-ND-3.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-ND-3.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-NC-SA-3.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-SA-3.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-ND-3.0': (STATIC_URL + 'metashare/licences/CC-BY-ND-3.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-SA-3.0': (STATIC_URL + 'metashare/licences/CC-BY-SA-3.0.pdf', MEMBER_TYPES.NON),
+    # TODO: PDDL
+    'PDDL-1.0': (STATIC_URL + 'metashare/licences/PDDL-1.0.pdf', MEMBER_TYPES.NON),
+    # TODO: ODC-BY
+    'ODC-BY-1.0': (STATIC_URL + 'metashare/licences/ODC-BY-1.0.pdf', MEMBER_TYPES.NON),
+    'ODbL-1.0': (STATIC_URL + 'metashare/licences/ODbL-1.0.pdf', MEMBER_TYPES.NON),
+    'AGPL-3.0': (STATIC_URL + 'metashare/licences/AGPL-3.0.pdf', MEMBER_TYPES.NON),
+    'Apache-2.0': (STATIC_URL + 'metashare/licences/Apache-2.0.pdf', MEMBER_TYPES.NON),
+    'BSD-4-Clause': (STATIC_URL + 'metashare/licences/BSD-4-Clause.pdf', MEMBER_TYPES.NON),
+    'BSD-3-Clause': (STATIC_URL + 'metashare/licences/BSD-3-Clause.pdf', MEMBER_TYPES.NON),
+    'BSD-2-Clause': (STATIC_URL + 'metashare/licences/BSD-2-Clause', MEMBER_TYPES.NON),
+    'GFDL-1.3': (STATIC_URL + 'metashare/licences/GFDL-1.3.pdf', MEMBER_TYPES.NON),
+    'GPL-3.0': (STATIC_URL + 'metashare/licences/GPL-3.0.pdf', MEMBER_TYPES.NON),
+    'LGPL-3.0': (STATIC_URL + 'metashare/licences/LGPL-3.0.pdf', MEMBER_TYPES.NON),
+    'MIT': (STATIC_URL + 'metashare/licences/MIT.pdf', MEMBER_TYPES.NON),
+    'EPL-1.0': (STATIC_URL + 'metashare/licences/EPL-1.0.pdf', MEMBER_TYPES.NON),
+    'EUPL-1.0': (STATIC_URL + 'metashare/licences/EUPL-1.0.pdf', MEMBER_TYPES.NON),
+    'EUPL-1.1': (STATIC_URL + 'metashare/licences/EUPL-1.1.pdf', MEMBER_TYPES.NON),
+    'EUPL-1.2': (STATIC_URL + 'metashare/licences/EUPL-1.2.pdf', MEMBER_TYPES.NON),
+    'LO-OL-v2': (STATIC_URL + 'metashare/licences/LO-OL-v2.pdf', MEMBER_TYPES.NON),
+    'dl-de/by-2-0': (STATIC_URL + 'metashare/licences/dl-de_by-2-0.pdf', MEMBER_TYPES.NON),
+    'dl-de/zero-2-0': (STATIC_URL + 'metashare/licences/dl-de_zero-2-0.pdf', MEMBER_TYPES.NON),
+    'IODL-1.0': (STATIC_URL + 'metashare/licences/IODL-1.0.pdf', MEMBER_TYPES.NON),
+    'NLOD-1.0': (STATIC_URL + 'metashare/licences/NLOD-1.0.pdf', MEMBER_TYPES.NON),
+    'OGL-3.0': (STATIC_URL + 'metashare/licences/OGL-3.0.pdf', MEMBER_TYPES.NON),
+    'NCGL-1.0': (STATIC_URL + 'metashare/licences/NCGL-1.0.pdf', MEMBER_TYPES.GOD),
+    'openUnder-PSI': (STATIC_URL + 'metashare/licences/openUnderPSI.txt', MEMBER_TYPES.NON),
+    'publicDomain': (STATIC_URL + 'metashare/licences/publicDomain.txt', MEMBER_TYPES.NON), #('', MEMBER_TYPES.NON),
+    'non-standard/Other_Licence/Terms': ('', MEMBER_TYPES.NON),
+    'underReview': ('', MEMBER_TYPES.GOD),
 }
 
 
 def _get_user_membership(user):
-	"""
-	Returns a `MEMBER_TYPES` type based on the permissions of the given
-	authenticated user. 
-	"""
-	if user.has_perm('accounts.ms_full_member'):
-		return MEMBER_TYPES.FULL
-	elif user.has_perm('accounts.ms_associate_member'):
-		return MEMBER_TYPES.ASSOCIATE
-	return MEMBER_TYPES.NON
+    """
+    Returns a `MEMBER_TYPES` type based on the permissions of the given
+    authenticated user. 
+    """
+    if user.has_perm('accounts.ms_full_member'):
+        return MEMBER_TYPES.FULL
+    elif user.has_perm('accounts.ms_associate_member'):
+        return MEMBER_TYPES.ASSOCIATE
+    return MEMBER_TYPES.NON
 
 
 def _get_licences(resource, user_membership):
-	"""
-	Returns the licences under which a download/purchase of the given resource
-	is possible for the given user membership.
-	
-	The result is a dictionary mapping from licence names to pairs. Each pair
-	contains the corresponding `licenceInfoType_model`, the download location
-	URLs and a boolean denoting whether the resource may (and can) be directly
-	downloaded or if there need to be further negotiations of some sort.
-	"""
-	distribution_infos = tuple(resource.distributioninfotype_model_set.all())
+    """
+    Returns the licences under which a download/purchase of the given resource
+    is possible for the given user membership.
+    
+    The result is a dictionary mapping from licence names to pairs. Each pair
+    contains the corresponding `licenceInfoType_model`, the download location
+    URLs and a boolean denoting whether the resource may (and can) be directly
+    downloaded or if there need to be further negotiations of some sort.
+    """
+    distribution_infos = tuple(resource.distributioninfotype_model_set.all())
 
-	# licence_infos = tuple([(l_info, d_info.downloadLocation + d_info.executionLocation) \
-	licence_infos = tuple([(l_info, d_info.downloadLocation + d_info.executionLocation) \
-						   for d_info in distribution_infos for l_info in d_info.licenceInfo.all()])
+    # licence_infos = tuple([(l_info, d_info.downloadLocation + d_info.executionLocation) \
+    licence_infos = tuple([(l_info, d_info.downloadLocation + d_info.executionLocation) \
+                           for d_info in distribution_infos for l_info in d_info.licenceInfo.all()])
 
-	all_licenses = dict([(l_info.licence, (l_info, access_links)) \
-						 for l_info, access_links in licence_infos])
-	result = {}
-	for name, info in all_licenses.items():
-		
-		l_info, access_links = info
-		access = LICENCEINFOTYPE_URLS_LICENCE_CHOICES.get(name, None)
-		if access == None:
-			LOGGER.warn("Unknown license name discovered in the database for " \
-						"object #{}: {}".format(resource.id, name))
-			del all_licenses[name]
-		elif user_membership >= access[1] \
-				and (len(access_links) or resource.storage_object.get_download()):
-			# the resource can be downloaded somewhere under the current license
-			# terms and the user's membership allows her to immediately download
-			# the resource
-			result[name] = (l_info, access[0], True)
-		else:
-			# further negotiations are required with the current license
-			result[name] = (l_info, access[0], False)
-	return result
+    all_licenses = dict([(l_info.licence, (l_info, access_links)) \
+                         for l_info, access_links in licence_infos])
+    result = {}
+    for name, info in all_licenses.items():
+        
+        l_info, access_links = info
+        access = LICENCEINFOTYPE_URLS_LICENCE_CHOICES.get(name, None)
+        if access == None:
+            LOGGER.warn("Unknown license name discovered in the database for " \
+                        "object #{}: {}".format(resource.id, name))
+            del all_licenses[name]
+        elif user_membership >= access[1] \
+                and (len(access_links) or resource.storage_object.get_download()):
+            # the resource can be downloaded somewhere under the current license
+            # terms and the user's membership allows her to immediately download
+            # the resource
+            result[name] = (l_info, access[0], True)
+        else:
+            # further negotiations are required with the current license
+            result[name] = (l_info, access[0], False)
+    return result
 
 
 class ResourceComponentInlineFormSet(ReverseInlineFormSet):
@@ -342,7 +343,6 @@ def change_resource_status(resource, status, precondition_status=None):
         return True
     return False
 
-
 def has_edit_permission(request, res_obj):
     """
     Returns `True` if the given request has permission to edit the metadata
@@ -392,41 +392,40 @@ class MetadataInline(ReverseInlineModelAdmin):
     readonly_fields = ('metadataCreationDate', 'metadataLastDateUpdated',)
 
 def json_validator(data):
-	try:
-		data.json()
-		return True
-	except:
-		return False
+    try:
+        data.json()
+        return True
+    except:
+        return False
 
 def add_files2zip(files_path, filezip):
-	for root, dirs, files in os.walk(files_path):
-		for f in files:
-			filezip.write(os.path.join(root,f),f)
-			
+    for root, dirs, files in os.walk(files_path):
+        for f in files:
+            filezip.write(os.path.join(root,f),f)
+            
 def add_rejected_files2zip(files_path, filezip):
-	for root, dirs, files in os.walk(files_path):
-		for f in files:
-			filezip.write(os.path.join(root,f),'rejected/'+f)
-			
+    for root, dirs, files in os.walk(files_path):
+        for f in files:
+            filezip.write(os.path.join(root,f),'rejected/'+f)
+            
 def add_other_files2zip(files_path, filezip):
-	for root, dirs, files in os.walk(files_path):
-		for f in files:
-			filezip.write(os.path.join(root,f),'other/'+f)
-			
+    for root, dirs, files in os.walk(files_path):
+        for f in files:
+            filezip.write(os.path.join(root,f),'other/'+f)
+            
 def prepare_error_zip(error_msg,resource_path,request):
-	errorzip=zipfile.ZipFile(resource_path+'/archive.zip',mode='w')
-	add_files2zip(resource_path+'/doc/input',errorzip)
-	add_files2zip(resource_path+'/tm/input',errorzip)
-	add_files2zip(resource_path+'/other',errorzip)
-	error_log = open(os.path.join(resource_path,'error.log'), 'w')
-	error_log.write(error_msg)
-	error_log.close()
-	errorzip.write(os.path.join(resource_path,'error.log'), 'error.log')
-	#close zip file with processed resources
-	errorzip.close()
+    errorzip=zipfile.ZipFile(resource_path+'/archive.zip',mode='w')
+    add_files2zip(resource_path+'/doc/input',errorzip)
+    add_files2zip(resource_path+'/tm/input',errorzip)
+    add_files2zip(resource_path+'/other',errorzip)
+    error_log = open(os.path.join(resource_path,'error.log'), 'w')
+    error_log.write(error_msg)
+    error_log.close()
+    errorzip.write(os.path.join(resource_path,'error.log'), 'error.log')
+    #close zip file with processed resources
+    errorzip.close()
 
 class ResourceModelAdmin(SchemaModelAdmin): 
-
     haystack_connection = 'default'
     inline_type = 'stacked'
     custom_one2one_inlines = {'identificationInfo':IdentificationInline,
@@ -443,209 +442,266 @@ class ResourceModelAdmin(SchemaModelAdmin):
     hidden_fields = ('storage_object', 'owners', 'editor_groups',)
     search_fields = ("identificationInfo__resourceName", "identificationInfo__resourceShortName", "identificationInfo__description", "identificationInfo__identifier")
 
-    def process_action(self, request, queryset):
+    def process_action(self, request, queryset, from_ingest=None ):
         getext = lambda file_object: os.path.splitext(file_object)[-1]
         tmextensions=[".tmx", ".sdltm"]
         docextensions=[ ".pdf", ".doc", ".docx", ".rtf", ".txt", ".odt"]
-		
+        
         from metashare.xml_utils import to_xml_string
         if has_publish_permission(request, queryset):
             successful = 0
+            processing_status=True
             #messages.info(request,queryset)
             for obj in queryset:
-				#variables to control tc errors
-				errors=0
-				error_msg=''
-				if check_resource_status(obj)== INGESTED : #only (re)process INGESTED resources, published are suposed to be ok #or check_resource_status(obj)== PUBLISHED : #only process INGESTED or PUBLISHED resources
-					messages.info(request,_('You are processing a resource. This may take some time...'))
-					###DEBUGGING_INFO
-					##PATH TO THE RESOURCE
-					#messages.info(request,escape(obj.storage_object._storage_folder()))
+                #variables to control tc errors
+                errors=0
+                error_msg=''
+                call_tm2tmx=-1
+                call_doc2tmx=-1
+                pre_status=check_resource_status(obj)
+                LOGGER.info(pre_status)
+                if change_resource_status(obj, status=PROCESSING, precondition_status=INGESTED) or change_resource_status(obj, status=PROCESSING, precondition_status=ERROR) or (from_ingest and change_resource_status(obj, status=PROCESSING, precondition_status=INTERNAL)) : #or check_resource_status(obj)== PROCESSING:
+                    #only (re)process INGESTED or ERROR or INTERNAL resources, published are suposed to be ok 
+                    
+                    ################
+                    ##GET INFO TO SEND NOTIFICATION EMAILS
+                    groups_name=[]
+                    for g in obj.groups.all():
+                        groups_name.append(g.name)
+                    reviewers = [u.email for u in User.objects.filter(groups__name__in=['reviewers'])] #,groups__name__in=groups_name)]
+                    group_reviewers = [u.email for u in User.objects.filter(groups__name__in=groups_name, email__in=reviewers)]
+                    ####
+                    resource_info=obj.export_to_elementtree()
+                    r_languages=[]
+                    for lang in resource_info.iter('languageInfo'):
+                        lang_id=lang.find('languageId').text
+                        r_languages.append(lang_id)
+                    '''DEBUGGING_INFO    
+                    #messages.info(request,"info de idiomas...")    
+                    #messages.info(request,r_languages)
+                    '''
+                    r_name=''
+                    for r_info in resource_info.iter('resourceName'):
+                        r_name=r_info.text
+                    ###    DEBUG
+                    #messages.info(request,'####'+r_name)
+                    
+                    licence_info=''
+                    for l_info in resource_info.iter('licenceInfo'):
+                        licence_info+=l_info.find('licence').text+': '
+                        if l_info.find('otherLicenceName'):
+                            licence_info+=l_info.find('otherLicenceName').text
+                    ###    DEBUG    
+                    #messages.info(request,'####'+licence_info)
+                    
+                    #get the resource storage folder path
+                    resource_path=obj.storage_object._storage_folder()
+                    #first process for this resource:
+                    #cp archive.zip to _archive.zip iif _archive.zip does not exist...
+                    if not os.path.isfile(resource_path+'/_archive.zip'): #save the resource source for possible later reprocessing steps
+                        copyfile(resource_path+'/archive.zip',resource_path+'/_archive.zip')
+                        #save also a copy of the original uploaded resource
+                        copyfile(resource_path+'/archive.zip',resource_path+'/_archive_origin.zip')
+                    #unzip always _archive.zip wich has always the source resource files; archive.zip can contain processed documents 
 
-					#messages.info(request,obj.metadataInfo)
-					##XML INFO OF THE RESOURCE
-					
-					#messages.info(request,"info del request...")
-					#messages.info(request,to_xml_string(obj.export_to_elementtree(),
-					#                               encoding="utf-8").encode("utf-8"))#obj.export_to_elementtree())
+                    resource_zip=zipfile.ZipFile(resource_path+'/_archive.zip','r')
+                    #and unzip the resource files into the corresponding /input folder
+                    resources=resource_zip.namelist()
+                    #create, if needed, the /tm /docs /other folder
+                    resource_tm_path=resource_path+'/tm'
+                    resource_doc_path=resource_path+'/doc'
+                    resource_other_path=resource_path+'/other'
+                    tmx_files=[]
+                    call_tm2tmx=0
+                    call_doc2tmx=0
+                    others=0
+                    #prepare tc calls:
+                    for r in resources:
+                        #check the extension of the files
+                        #if it is a tm file:
+                        filext=getext(r)
+                        if filext in tmextensions:
+                            if  not os.path.isdir(resource_tm_path):
+                                os.makedirs(resource_tm_path)
+                                os.makedirs(resource_tm_path+'/input')
+                            resource_zip.extract(r,resource_tm_path+'/input')
+                            tmx_files.append(r)
+                            call_tm2tmx = call_tm2tmx + 1
+                        elif filext in docextensions: #if it is a doc file
+                            if not os.path.isdir(resource_doc_path):
+                                os.makedirs(resource_doc_path)
+                                os.makedirs(resource_doc_path+'/input')
+                            resource_zip.extract(r,resource_doc_path+'/input')
+                            call_doc2tmx = call_doc2tmx + 1
+                        else : #either case...
+                            if not os.path.isdir(resource_other_path):
+                                os.makedirs(resource_other_path)
+                            resource_zip.extract(r,resource_other_path)
+                            os.rename(resource_other_path+'/'+r,resource_other_path+'/'+r_name+'_'+str(others)+filext)
+                            others = others+1
+                            
+                    response_tm=''
+                        
+                    if call_tm2tmx > 0:
+                        #prepare the json for calling the tm2tmx tc for each tmx in tmx_files
+                        r_id=obj.storage_object.id
+                        r_overwrite='true'
 
-					################
-					resource_info=obj.export_to_elementtree()
-					r_languages=[]
-					for lang in resource_info.iter('languageInfo'):
-						lang_id=lang.find('languageId').text
-						r_languages.append(lang_id)
-					'''DEBUGGING_INFO	
-					#messages.info(request,"info de idiomas...")	
-					#messages.info(request,r_languages)
-					'''
-					r_name=''
-					for r_info in resource_info.iter('resourceName'):
-						r_name=r_info.text
-					###	DEBUG
-					#messages.info(request,'####'+r_name)
-					
-					licence_info=''
-					for l_info in resource_info.iter('licenceInfo'):
-						licence_info+=l_info.find('licence').text+': '
-						if l_info.find('otherLicenceName'):
-							licence_info+=l_info.find('otherLicenceName').text
-					###	DEBUG	
-					#messages.info(request,'####'+licence_info)
-					
-					#get the resource storage folder path
-					resource_path=obj.storage_object._storage_folder()
-					#first process for this resource:
-					#cp archive.zip to _archive.zip iif _archive.zip does not exist...
-					if not os.path.isfile(resource_path+'/_archive.zip'): #save the resource source for possible later reprocessing steps
-						copyfile(resource_path+'/archive.zip',resource_path+'/_archive.zip')
-						#save also a copy of the original uploaded resource
-						copyfile(resource_path+'/archive.zip',resource_path+'/_archive_origin.zip')
-					#unzip always _archive.zip wich has always the source resource files; archive.zip can contain processed documents 
+                        #for tm in tmx_files:
+                        r_input=resource_tm_path+'/input'#+tm
+                        tm_json= {'id':r_id, 'title': r_name ,'input':r_input,'overwrite':r_overwrite,'languages':r_languages, 'license':licence_info}
+                        
+                        try: 
+                            response_tm=requests.post(settings.TM2TMX_URL,json=tm_json)
+                            if json_validator(response_tm):
+                                if response_tm.json()["status"]=="Success":
+                                    successful +=1
+                                else:
+                                    change_resource_status(obj,status=ERROR, precondition_status=PROCESSING)
+                                    error_msg=error_msg+_("Something went wrong when processing the resource with the tm2tmx toolchain.")+response_tm.json()["info"]+'\n'
+                                    #ToDo: add timestamp info to error.log 
+                                    errors+=1
+                                    #send notification email
+                                    try:
+                                        send_mail(_("Error when processing resource %s") % r_name, _('An error occurred when processing the resource %s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %s') % (r_name,settings.EMAIL_ADDRESSES['elri-nrs-support']), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
+                                    except: 
+                                        messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
+                                                                                                                                                                                                                                                            
+                            else:    
+                                change_resource_status(obj,status=ERROR, precondition_status=PROCESSING)
+                                error_msg=error_msg+_("Invalid json response from tm2tmx toolchain: ")+response_tm.text+'\n'
+                                #ToDo: add timestamp info to error.log 
+                                errors+=1
+                                #send notification email
+                                try:
+                                    send_mail(_("Error when processing resource %s") % r_name, _('An error occurred when processing the resource %s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %s') % (r_name,settings.EMAIL_ADDRESSES['elri-nrs-support']), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
+                                except: 
+                                    messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
+                                
+                        except: 
+                            change_resource_status(obj,status=ERROR, precondition_status=PROCESSING)
+                            error_msg=error_msg+_("The POST request to the tm2tmx toolchain has failed.")+response_tm+"\n"
+                            #ToDo: add timestamp info to error.log 
+                            errors+=1
+                            #send notification email
+                            try:
+                                send_mail(_("Error when processing resource %s") % r_name, _('An error occurred when processing the resource %s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %s') % (r_name,settings.EMAIL_ADDRESSES['elri-nrs-support']), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
+                            except: 
+                                messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
+                    response_doc=''    
 
-					resource_zip=zipfile.ZipFile(resource_path+'/_archive.zip','r')
-					#and unzip the resource files into the corresponding /input folder
-					resources=resource_zip.namelist()
-					#create, if needed, the /tm /docs /other folder
-					resource_tm_path=resource_path+'/tm'
-					resource_doc_path=resource_path+'/doc'
-					resource_other_path=resource_path+'/other'
-					tmx_files=[]
-					call_tm2tmx=0
-					call_doc2tmx=0
-					#prepare tc calls:
-					for r in resources:
-							#check the extension of the files
-							#if it is a tm file:
-							filext=getext(r)
-							if filext in tmextensions:
-								if  not os.path.isdir(resource_tm_path):
-									os.makedirs(resource_tm_path)
-									os.makedirs(resource_tm_path+'/input')
-								resource_zip.extract(r,resource_tm_path+'/input')
-								tmx_files.append(r)
-								call_tm2tmx = call_tm2tmx + 1
-							elif filext in docextensions: #if it is a doc file
-								if not os.path.isdir(resource_doc_path):
-									os.makedirs(resource_doc_path)
-									os.makedirs(resource_doc_path+'/input')
-								resource_zip.extract(r,resource_doc_path+'/input')
-								call_doc2tmx = call_doc2tmx + 1
-							else : #either case...
-								if not os.path.isdir(resource_other_path):
-									os.makedirs(resource_other_path)
-								resource_zip.extract(r,resource_other_path)
-					response_tm=''
-					
-					if call_tm2tmx > 0:
-						#prepare the json for calling the tm2tmx tc for each tmx in tmx_files
-						r_id=obj.storage_object.id
-						r_overwrite='true'
+                    if call_doc2tmx > 0:
+                        #prepare the json for calling the doc2tmx tc
+                        r_id=obj.storage_object.id
+                        r_input=resource_doc_path+'/input'
+                        r_overwrite='true'
+                        doc_json={'id':r_id, 'title':r_name,'input':r_input,'overwrite':r_overwrite,'languages':r_languages, 'license':licence_info}
 
-						messages.info(request,"Processing resource with tm2tmx...")
+                        ####messages.info(request,"Processing resource with doc2tmx...")
+                        
+                        try:
+                            response_doc=requests.post(settings.DOC2TMX_URL,json=doc_json)
+                            if json_validator(response_doc):
+                                if response_doc.json()["status"] == "Success":
+                                    successful += 1
+                                else:
+                                    change_resource_status(obj,status=ERROR, precondition_status=PROCESSING)
+                                    error_msg=error_msg+_("Something went wrong when processing the resource with the doc2tmx toolchain.\n ")+response_doc.json()["info"]+"\n"
+                                    #ToDo: add timestamp info to error.log 
+                                    errors+=1
+                                    #send notification email
+                                    try:
+                                        send_mail(_("Error when processing resource %s") % r_name, _('An error occurred when processing the resource %s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %s') % (r_name,settings.EMAIL_ADDRESSES['elri-nrs-support']), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
+                                    except: 
+                                        messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
+                            else:
+                                change_resource_status(obj,status=ERROR, precondition_status=PROCESSING)
+                                error_msg=error_msg+_("Invalid json response from doc2tmx toolchain: ")+response_doc.text+'\n'
+                                #ToDo: add timestamp info to error.log 
+                                errors+=1
+                                #send notification email
+                                try:
+                                    send_mail(_("Error when processing resource %s") % r_name, _('An error occurred when processing the resource %s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %s') % (r_name,settings.EMAIL_ADDRESSES['elri-nrs-support']), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
+                                except: 
+                                    messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
+                                
+                        except:
+                            change_resource_status(obj,status=ERROR, precondition_status=PROCESSING)
+                            error_msg=error_msg+_("The POST request to the doc2tmx toolchain has failed.\n ")+response_doc+'\n'
+                            #ToDo: add timestamp info to error.log 
+                            errors+=1
+                            #send notification email
+                            try:
+                                send_mail(_("Error when processing resource %s") % r_name, _('An error occurred when processing the resource %s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %s') % (r_name,settings.EMAIL_ADDRESSES['elri-nrs-support']), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
+                            except: 
+                                messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
+                            
+                #if something success-> create new archive.zip and replace the old one uploaded by the user     
+                # if any errors, then handle error reporting
+                if errors > 0 or error_msg!='':
+                    #create the archive.zip with the original files and the error.log file
+                    prepare_error_zip(error_msg,resource_path,request)
+                    processing_status = processing_status and False
+                elif successful > 0:
+                    #create the archive.zip with the processed resources
+                    processed_zip=zipfile.ZipFile(resource_path+'/archive.zip',mode='w')
 
-						#for tm in tmx_files:
-						r_input=resource_tm_path+'/input'#+tm
-						tm_json= {'id':r_id, 'title': r_name ,'input':r_input,'overwrite':r_overwrite,'languages':r_languages, 'license':licence_info}
-						
-						try: 
-							response_tm=requests.post(settings.TM2TMX_URL,json=tm_json)
-							if json_validator(response_tm):
-								if response_tm.json()["status"]=="Success":
-									successful +=1
-								else:
-									messages.error(request,"Something went wrong when processing the resource with the tm2tmx toolchain.")
-									error_msg=error_msg+"Something went wrong when processing the resource with the tm2tmx toolchain."+response_tm.json()["info"]+'\n'
-									#ToDo: add timestamp info to error.log 
-									errors+=1
-							else:	
-								messages.error(request,"Invalid json response from tm2tmx toolchain: "+response_tm.text)
-								error_msg=error_msg+"Invalid json response from tm2tmx toolchain: "+response_tm.text+'\n'
-								#ToDo: add timestamp info to error.log 
-								errors+=1
-						except: 
-							messages.error(request,"The POST request to the tm2tmx toolchain has failed: \n"+response_tm)
-							error_msg=error_msg+"The POST request to the tm2tmx toolchain has failed."+response_tm+"\n"
-							#ToDo: add timestamp info to error.log 
-							errors+=1
-								
-					response_doc=''	
+                    if response_doc != '' and json_validator(response_doc):
+                        #if any rejected file and !E file(s) in output --> add input/into rejected/inside archive.zip
+                        if not os.listdir(response_doc.json()["output"]): 
+                            add_rejected_files2zip(r_input,processed_zip)                            
+                        else: #if there are any produced output-> copy output and rejected file(s)
+                            add_files2zip(response_doc.json()["output"],processed_zip)
+                            add_rejected_files2zip(response_doc.json()["rejected"],processed_zip)
 
-					if call_doc2tmx > 0:
-						#prepare the json for calling the doc2tmx tc
-						r_id=obj.storage_object.id
-						r_input=resource_doc_path+'/input'
-						r_overwrite='true'
-						doc_json={'id':r_id, 'title':r_name,'input':r_input,'overwrite':r_overwrite,'languages':r_languages, 'license':licence_info}
-						messages.info(request,"Processing resource with doc2tmx...")
-						
-						try:
-							response_doc=requests.post(settings.DOC2TMX_URL,json=doc_json)
-							if json_validator(response_doc):
-								if response_doc.json()["status"] == "Success":
-									successful += 1
-								else:
-									messages.error(request,"Something went wrong when processing the resource with the doc2tmx toolchain.\n "+response_doc.json()["info"])
-									error_msg=error_msg+"Something went wrong when processing the resource with the doc2tmx toolchain.\n "+response_doc.json()["info"]+"\n"
-									#ToDo: add timestamp info to error.log 
-									errors+=1
-							else:
-								messages.error(request,response_doc.text)
-								messages.error(request,"Invalid json response from doc2tmx toolchain: "+response_doc.text)
-								error_msg=error_msg+"Invalid json response from doc2tmx toolchain: "+response_doc.text+'\n'
-								#ToDo: add timestamp info to error.log 
-								errors+=1
-								
-						except:
+                    if response_tm != '' and json_validator(response_tm):
+                        add_files2zip(response_tm.json()["output"],processed_zip)
+                        add_rejected_files2zip(response_tm.json()["rejected"],processed_zip)
+                    
 
-							messages.error(request,"The POST request to the doc2tmx toolchain has failed.\n"+response_doc)
-							error_msg=error_msg+"The POST request to the doc2tmx toolchain has failed.\n "+response_doc+'\n'
-							#ToDo: add timestamp info to error.log 
-							errors+=1
-						
-				#if something success-> create new archive.zip and replace the old one uploaded by the user 	
-				# if any errors, then handle error reporting
-				if errors > 0 or error_msg!='':
-					#create the archive.zip with the original files and the error.log file
-					prepare_error_zip(error_msg,resource_path,request)
-				elif successful > 0:
-
-					#create the archive.zip with the processed resources
-					processed_zip=zipfile.ZipFile(resource_path+'/archive.zip',mode='w')
-
-					if response_doc != '' and json_validator(response_doc):
-						messages.info(request,response_doc.json()["info"])
-
-						#if any rejected file and !E file(s) in output --> add input/into rejected/inside archive.zip
-						if not os.listdir(response_doc.json()["output"]): 
-							add_rejected_files2zip(r_input,processed_zip)							
-						else: #if there are any produced output-> copy output and rejected file(s)
-							add_files2zip(response_doc.json()["output"],processed_zip)
-							add_rejected_files2zip(response_doc.json()["rejected"],processed_zip)
-
-					if response_tm != '' and json_validator(response_tm):
-						add_files2zip(response_tm.json()["output"],processed_zip)
-						add_rejected_files2zip(response_tm.json()["rejected"],processed_zip)
-					
-
-					#if there are other files: add them as well
-					add_files2zip(resource_other_path,processed_zip)
-					
-					#close zip file with processed resources
-					processed_zip.close()
-
-					
-				else:
-					if error_msg !='':
-						prepare_error_zip(error_msg,resource_path,request)
-					else:
-						messages.error(request,
-                           _('Only ingested resources can be re-processed.'))
+                    #if there are other files: add them as well
+                    add_files2zip(resource_other_path,processed_zip)
+                    
+                    #close zip file with processed resources
+                    processed_zip.close()
+                    #if pre_status == INGESTED or pre_status==ERROR :
+                    #change_resource_status(obj,status=INGESTED, precondition_status=PROCESSING)
+                        
+                    processing_status = processing_status and True
+                    
+                else:
+                    if error_msg !='':
+                        prepare_error_zip(error_msg,resource_path,request)
+                        processing_status = processing_status and False
+                    elif call_tm2tmx==0 or call_doc2tmx==0:
+                        #change_resource_status(obj,status=INGESTED, precondition_status=PROCESSING)
+                        processing_status = processing_status and True
+                    else:
+                        messages.error(request,
+                           _('Only ingested or error resources can be re-processed.'))
+                        processing_status = processing_status and True
+                        return processing_status
+                        
+            if processing_status and (pre_status==INGESTED or pre_status==ERROR) :# or pre_status==PROCESSING):
+                messages.info(request, _('Resource(s) re-processed correctly.'))
+                for obj in queryset:
+                    change_resource_status(obj,status=INGESTED, precondition_status=PROCESSING)
+                return processing_status
+            elif processing_status and pre_status==INTERNAL:
+                messages.info(request, _('Resource(s) processed correctly.'))
+                return processing_status
+            else:
+                messages.error(request,_("Something went wrong when processing the resource(s). Check the error.log file(s). You will receive a notification email."))
+                return processing_status
+            
+            return processing_status
+        
         else:
             messages.error(request, _('You do not have the permission to ' \
                             'perform this action for all selected resources.'))
+            return processing_status
 
-    process_action.short_description = _("Process selected ingested resources")
+    process_action.short_description = _("Re-process selected resources")
 
     def publish_action(self, request, queryset):
         if has_publish_permission(request, queryset):
@@ -653,19 +709,26 @@ class ResourceModelAdmin(SchemaModelAdmin):
 
             from metashare.xml_utils import to_xml_string
             for obj in queryset:
-                if change_resource_status(obj, status=PUBLISHED,
-                                          precondition_status=INGESTED):
+                if change_resource_status(obj, status=PUBLISHED, precondition_status=INGESTED):
                     successful += 1
                     saveLRStats(obj, UPDATE_STAT, request)
-
-                    resource_name=[u.find('resourceName').text for u in obj.export_to_elementtree().iter('identificationInfo')]
                     
                     #If successfully published, add to the archive.zip file the license documentation 
                     resource_info=obj.export_to_elementtree()
+                    ## DEBUG
+                    #LOGGER.info(to_xml_string(obj.export_to_elementtree(),encoding="utf-8").encode("utf-8"))
+
+                    resource_name=[u.find('resourceName').text for u in resource_info.iter('identificationInfo')]
+                    
                     licences_name=[]
+                    licences_restriction=[]
                     for lic in resource_info.iter('licenceInfo'):
                         lic_name=lic.find('licence').text
+                        lic_restriction='' 
+                        if lic.find('restrictionsOfUse') is not None:
+                            lic_restriction=lic.find('restrictionsOfUse').text
                         licences_name.append(lic_name)
+                        licences_restriction.append(lic_restriction)
                     user_membership = _get_user_membership(request.user)    
                     licences = _get_licences(obj,user_membership)    
                     resource_path=obj.storage_object._storage_folder()
@@ -676,15 +739,78 @@ class ResourceModelAdmin(SchemaModelAdmin):
                         licence_path=ROOT_PATH+access_links
                         path, filename = os.path.split(licence_path)
                         lr_archive_zip.write(licence_path,'license_'+filename)
+                    
+                    #get info for metadata file
+                    #iprHolder info
+                    iprHolder_name=[]
+                    iprHolder_surname=[]
+                    iprHolder_email=[]
+                    iprHolder_organization=[]
+                    for ipr in resource_info.iter('iprHolder'):
+                        for pI in ipr.iter('personInfo'):
+                            #LOGGER.info(to_xml_string(pI,encoding="utf-8").encode("utf-8"))
+                            if pI.find('givenName') is not None:
+                                #LOGGER.info(to_xml_string(pI.find('givenName'), encoding="utf-8"))
+                                iprHolder_name.append(pI.find('givenName').text)
+                            if pI.find('surname') is not None:
+                                iprHolder_surname.append(pI.find('surname').text)
+                            for cI in pI.iter('communicationInfo'):
+                                if cI.find('email') is not None:
+                                    iprHolder_email.append(cI.find('email').text)
+                            for aI in pI.iter('affiliation'):
+                                if aI.find('organizationName') is not None:
+                                    iprHolder_organization.append(aI.find('organizationName').text)
+                    #contact person info
+                    contact_name=[]
+                    contact_surname=[]
+                    contact_email=[]
+                    contact_organization=[]
+                    for cP in resource_info.iter('contactPerson'):
+                        if cP.find('givenName') is not None:
+                            contact_name.append(cP.find('givenName').text)
+                        if cP.find('surname') is not None:
+                            contact_surname.append(cP.find('surname').text)
+                        for cI in cP.iter('communicationInfo'):
+                            if cI.find('email') is not None:
+                                contact_email.append(cI.find('email').text)
+                        for aI in cP.iter('affiliation'):
+                            if aI.find('organizationName') is not None:
+                                    contact_organization.append(aI.find('organizationName').text)
+                    #write metadata LR file
+                    # LR name
+                    # License:
+                    # Restrictions of Use:
+                    # IPR Holder: Name Surname (email), Organization 
+                    # Contact Person: Name Surname (email), Organization 
+                    metadata_file_path=resource_path+'/'+resource_name[0]+'_metadata.txt'
+                    with open(metadata_file_path, 'w') as metadata_file:
+                        metadata_file.write(_('Resource_name: ')+resource_name[0]+'\n')
+                        for i,l in enumerate(licences_name):
+                            metadata_file.write(_('License: ')+l+'\n')
+                            if licences_restriction[i] =='':
+                                metadata_file.write(_('\t Restrictions of Use: None\n'))
+                            else:
+                                metadata_file.write(_('\t Restrictions of Use: ')+licences_restriction[i]+'\n')
+                        if len(iprHolder_name)>0:
+                            for i,h in enumerate(iprHolder_name):
+                                metadata_file.write(_('IPR Holder: ')+ h +' '+iprHolder_surname[i] + ' (' + iprHolder_email[i]+'), '+iprHolder_organization[i]+'\n')
+                        else:
+                            metadata_file.write(_('IPR Holder: N/A \n'))
+                        if len(contact_name)>0:
+                            for i,p in enumerate(contact_name):
+                                metadata_file.write(_('Contact Person: ')+p+' '+contact_surname[i]+' ('+contact_email[i]+'), '+contact_organization[i]+'\n')
+                        else:
+                            metadata_file.write(_('Contact Person: N/A \n'))
+                    lr_archive_zip.write(metadata_file_path,resource_name[0]+'_metadata.txt',)
                     lr_archive_zip.close()
+                    
                     #send corresponding emails
                     emails=obj.owners.all().values_list('email',flat=True)
                     name=obj.owners.all().values_list('first_name',flat=True)
                     surname=obj.owners.all().values_list('last_name',flat=True)
-                    
                     email_data={'resourcename':resource_name[0],'username':name[0], 'usersurname':surname[0]}
                     try:
-                        send_mail('Published Resource', render_to_string('repository/published_resource.email',email_data) , settings.EMAIL_ADDRESSES['elri-no-reply'],emails, fail_silently=False)
+                        send_mail(_('Published Resource'), render_to_string('repository/published_resource.email',email_data) , settings.EMAIL_ADDRESSES['elri-no-reply'],emails, fail_silently=False)
                     except:
                         # failed to send e-mail to superuser
                         # If the email could not be sent successfully, tell the user
@@ -692,6 +818,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                         messages.error(request,_("There was an error sending out the notification email to the resource owners. Please contact them directly."))
                         # Redirect the user to the front page. ?
                         #return redirect('metashare.views.frontpage')
+                    #write the metadatafile
+                    
             if successful > 0:
                 messages.info(request, ungettext(
                     'Successfully published %(ingested)s ingested resource.',
@@ -730,62 +858,82 @@ class ResourceModelAdmin(SchemaModelAdmin):
     suspend_action.short_description = \
         _("Suspend selected published resources")
 
-    def branch_lr(self, request,queryset):
+    
+    def branch_lr(self, request,queryset, from_ingest):
         #implements automatic processing for ingested lr
-        self.process_action(request,queryset)
+        return self.process_action(request,queryset, from_ingest)
 
     def ingest_action(self, request, queryset):
-
-        if has_publish_permission(request, queryset) or request.user.is_staff:
+        if has_publish_permission(request, queryset) or request.user.is_staff:            
             successful = 0
             resource_info=[]
             from metashare.xml_utils import to_xml_string
+            lr_reviewers=[]
+            resource_names=[]
+            
             for obj in queryset:
-                if change_resource_status(obj, status=INGESTED,
-                                          precondition_status=INTERNAL):
-					successful += 1
-					saveLRStats(obj, INGEST_STAT, request)
-					resource_info.append(obj.export_to_elementtree())
-					#get resource name to include in the email
-					resource_name=[u.find('resourceName').text for u in obj.export_to_elementtree().iter('identificationInfo')]
-					groups_name=[]
-					for g in obj.groups.all():
-						groups_name.append(g.name)
-					##DEBUG
-					#messages.info(request,groups_name)
-					##
-					#send an email to the reviewers related to the groups where the resource is published
-					#get the emails of those users that are reviewers
-					reviewers = [u.email for u in User.objects.filter(groups__name__in=['reviewers'])] #,groups__name__in=groups_name)]
-					##DEBUG
-					##group_users=[u.email for u in User.objects.filter(groups__name__in=groups_name)]
-					##
-					#get the emails of the reviewers that share groups with the resource
-					group_reviewers = [u.email for u in User.objects.filter(groups__name__in=groups_name, email__in=reviewers)]
-					#####DEBUG
-					##messages.info(request,reviewers)
-					##messages.info(request,group_users)
-					##messages.info(request,group_reviewers)
-					####
-					#send the ingested resource notification mail
-					email_data={'resourcename':resource_name[0]}
-					try:
-						send_mail("Ingested Resource", render_to_string('repository/ingested_resource.email',email_data),settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
-					except:
-						# failed to send e-mail to superuser
-						# If the email could not be sent successfully, tell the user
-						# about it and also give the confirmation URL.
-						messages.error(request,_("There was an error sending out the notification email to the group reviewers. Please contact them directly."))
-						# Redirect the user to the front page. ?
-						#return redirect('metashare.views.frontpage')
-            if successful > 0:
-                messages.info(request, ungettext(
-                    'Successfully ingested %(internal)s internal resource.',
-                    'Successfully ingested %(internal)s internal resources.',
-                    successful) % {'internal': successful})
-                #Implements the system branch 4 automatic lr processing
-                self.branch_lr(request,queryset)
+                #only ingest internal resources 
+                if check_resource_status(obj)== INTERNAL :
+                #change_resource_status(obj, status=PROCESSING, precondition_status=INTERNAL): 
+                    successful += 1
+                    saveLRStats(obj, INGEST_STAT, request)
+                    resource_info.append(obj.export_to_elementtree())
+                    #get resource name to include in the email
+                    resource_name=[u.find('resourceName').text for u in obj.export_to_elementtree().iter('identificationInfo')]
+                    resource_names.append(resource_name[0])
+                    groups_name=[]
+                    for g in obj.groups.all():
+                        groups_name.append(g.name)
+                    #send an email to the reviewers related to the groups where the resource is published
+                    #get the emails of those users that are reviewers
+                    reviewers = [u.email for u in User.objects.filter(groups__name__in=['reviewers'])] #,groups__name__in=groups_name)]
+                    ##DEBUG
+                    ##group_users=[u.email for u in User.objects.filter(groups__name__in=groups_name)]
+                    ##
+                    #get the emails of the reviewers that share groups with the resource
+                    group_reviewers = [u.email for u in User.objects.filter(groups__name__in=groups_name, email__in=reviewers)]
+                    lr_reviewers.append(group_reviewers)
 
+            if successful > 0:
+                info = {}
+                #Implements the system branch 4 automatic lr processing
+                if not self.branch_lr(request,queryset,1):
+                    info['status'] = "failed"
+                    info['message'] = _("""
+                        The ingestion process has been interrupted.
+                        Re-process the resource(s) with error status.
+                        """)
+                    messages.error(request,_("""
+                        The ingestion process has been interrupted.
+                        Re-process the resource(s) with error status.
+                        """))
+                    return
+                else:
+                    info['status'] = "succeded"
+                    info['message'] = _("""
+                        Successfully ingested {} internal resource(s). 
+                        You will be notified by email once the resource has been fully processed.
+                        """.format(successful))
+                    messages.info(request,_("""
+                        Successfully ingested {}(s) internal resource(s). 
+                        You will be notified by email once the resource(s) has been fully processed.
+                        """.format(successful))) 
+                    #send the ingested resource notification email
+                    for i,r in enumerate(resource_names):
+                        email_data={'resourcename':r}
+                        try:
+                            send_mail("Ingested Resource", render_to_string('repository/ingested_resource.email',email_data),settings.EMAIL_ADDRESSES['elri-no-reply'],lr_reviewers[i])
+                        except:
+                            # failed to send e-mail to superuser
+                            # If the email could not be sent successfully, tell the user
+                            # about it and also give the confirmation URL.
+                            messages.error(request,_("There was an error sending out the notification email to the group reviewers. Please contact them directly."))
+                            # Redirect the user to the front page. ?
+                            #return redirect('metashare.views.frontpage')
+                    for obj in queryset:
+                        if not change_resource_status(obj,status=INGESTED, precondition_status=PROCESSING):
+                            messages.error(request, _('You do not have the permission to ' \
+                                'perform this action for all selected resources.'))
             else:
                 messages.error(request,
                                _('Only internal resources can be ingested.'))
@@ -930,8 +1078,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         dictionary.update(create_breadcrumb_template_params(self.model, _('Delete resource')))
 
         return render_to_response('admin/repository/resourceinfotype_model/delete_selected_confirmation.html',
-                                  dictionary,
-                                  context_instance=RequestContext(request))
+                                  dictionary, context_instance=RequestContext(request))
 
     delete.short_description = _("Mark selected resources as deleted")
 
@@ -1368,7 +1515,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                                                       obj.identificationInfo.resourceName['en']
                                                                       .replace(u"/", u"_").replace(u" ", u"_"),
                                                                       _extension)
-					#_out_filename = u'{}/ELRC_VALREP_{}_{}.{}'.format(_storage_folder,
+                    #_out_filename = u'{}/ELRC_VALREP_{}_{}.{}'.format(_storage_folder,
                     #                                                  object_id,
                     #                                                  obj.identificationInfo.resourceName['en']
                     #                                                  .replace(u"/", u"_").replace(u" ", u"_"),

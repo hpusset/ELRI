@@ -85,8 +85,7 @@ class RegistrationRequestForm(Form):
                             % _("Organization address")))
     organization_phone_number = forms.CharField(
             UserProfile._meta.get_field('affiliation_phone_number').max_length,
-            label=mark_safe(u"%s<span style='color:red'>*</span>"
-                            % _("Organization phone number")))
+            label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Organization phone number")))
     position = forms.CharField(UserProfile._meta.get_field('position').max_length,
                                label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Position in the organization")))
                                
