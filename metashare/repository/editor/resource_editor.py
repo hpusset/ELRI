@@ -665,7 +665,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     #close zip file with processed resources
                     processed_zip.close()
                     #if pre_status == INGESTED or pre_status==ERROR :
-                    #change_resource_status(obj,status=INGESTED, precondition_status=PROCESSING)
+                    change_resource_status(obj,status=INGESTED, precondition_status=PROCESSING)
                         
                     processing_status = processing_status and True
                     
@@ -674,24 +674,21 @@ class ResourceModelAdmin(SchemaModelAdmin):
                         prepare_error_zip(error_msg,resource_path,request)
                         processing_status = processing_status and False
                     elif call_tm2tmx==0 or call_doc2tmx==0:
-                        #change_resource_status(obj,status=INGESTED, precondition_status=PROCESSING)
+                        change_resource_status(obj,status=INGESTED, precondition_status=PROCESSING)
                         processing_status = processing_status and True
                     else:
                         messages.error(request,
                            _('Only ingested or error resources can be re-processed.'))
-                        processing_status = processing_status and True
-                        return processing_status
+                        processing_status = processing_status and False
                         
             if processing_status and (pre_status==INGESTED or pre_status==ERROR) :# or pre_status==PROCESSING):
                 messages.info(request, _('Resource(s) re-processed correctly.'))
-                for obj in queryset:
-                    change_resource_status(obj,status=INGESTED, precondition_status=PROCESSING)
                 return processing_status
             elif processing_status and pre_status==INTERNAL:
                 messages.info(request, _('Resource(s) processed correctly.'))
                 return processing_status
             else:
-                messages.error(request,_("Something went wrong when processing the resource(s). Check the error.log file(s). You will receive a notification email."))
+                messages.error(request,_("Something went wrong when processing the resource(s). Re-process the error resources and check the error.log file(s). You will receive a notification email."))
                 return processing_status
             
             return processing_status
@@ -930,10 +927,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
                             messages.error(request,_("There was an error sending out the notification email to the group reviewers. Please contact them directly."))
                             # Redirect the user to the front page. ?
                             #return redirect('metashare.views.frontpage')
-                    for obj in queryset:
-                        if not change_resource_status(obj,status=INGESTED, precondition_status=PROCESSING):
-                            messages.error(request, _('You do not have the permission to ' \
-                                'perform this action for all selected resources.'))
             else:
                 messages.error(request,
                                _('Only internal resources can be ingested.'))
