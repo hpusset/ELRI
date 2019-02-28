@@ -1197,9 +1197,10 @@ def contribute(request):
 
             response['status'] = "succeded"
             response['message'] = _("""
-                Thank you for sharing! Your data have been successfully submitted.
-                You can now go on and contribute more data.""")
+                Thank you for sharing! Your data have been successfully submitted.""")
             return HttpResponse(json.dumps(response), content_type="application/json")
+            #messages.info(request,_("Thank you for sharing! Your data have been successfully submitted."))
+            #return HttpResponseRedirect('metashare.repository.contribute')
             
         else:
             response['status'] = "failed"
