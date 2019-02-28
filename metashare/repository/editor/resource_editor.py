@@ -442,7 +442,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
     hidden_fields = ('storage_object', 'owners', 'editor_groups',)
     search_fields = ("identificationInfo__resourceName", "identificationInfo__resourceShortName", "identificationInfo__description", "identificationInfo__identifier")
 
-    def process_action(self, request, queryset):
+    def process_action(self, request, queryset, from_ingest=None ):
         getext = lambda file_object: os.path.splitext(file_object)[-1]
         tmextensions=[".tmx", ".sdltm"]
         docextensions=[ ".pdf", ".doc", ".docx", ".rtf", ".txt", ".odt"]
@@ -459,8 +459,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 call_tm2tmx=-1
                 call_doc2tmx=-1
                 pre_status=check_resource_status(obj)
-                if change_resource_status(obj, status=PROCESSING, precondition_status=INGESTED) or change_resource_status(obj, status=PROCESSING, precondition_status=ERROR) or change_resource_status(obj, status=PROCESSING, precondition_status=INTERNAL): #or check_resource_status(obj)== PROCESSING:
-                    #only (re)process INGESTED or ERROR or PROCESSING resources, published are suposed to be ok 
+                LOGGER.info(pre_status)
+                if change_resource_status(obj, status=PROCESSING, precondition_status=INGESTED) or change_resource_status(obj, status=PROCESSING, precondition_status=ERROR) or (from_ingest and change_resource_status(obj, status=PROCESSING, precondition_status=INTERNAL)) : #or check_resource_status(obj)== PROCESSING:
+                    #only (re)process INGESTED or ERROR or INTERNAL resources, published are suposed to be ok 
                     
                     ################
                     ##GET INFO TO SEND NOTIFICATION EMAILS
@@ -664,7 +665,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     #close zip file with processed resources
                     processed_zip.close()
                     #if pre_status == INGESTED or pre_status==ERROR :
-                    change_resource_status(obj,status=INGESTED, precondition_status=PROCESSING)
+                    #change_resource_status(obj,status=INGESTED, precondition_status=PROCESSING)
                         
                     processing_status = processing_status and True
                     
@@ -673,24 +674,32 @@ class ResourceModelAdmin(SchemaModelAdmin):
                         prepare_error_zip(error_msg,resource_path,request)
                         processing_status = processing_status and False
                     elif call_tm2tmx==0 or call_doc2tmx==0:
-                        change_resource_status(obj,status=INGESTED, precondition_status=PROCESSING)
+                        #change_resource_status(obj,status=INGESTED, precondition_status=PROCESSING)
                         processing_status = processing_status and True
                     else:
                         messages.error(request,
                            _('Only ingested or error resources can be re-processed.'))
                         processing_status = processing_status and True
+                        return processing_status
                         
-            if processing_status and (pre_status==INGESTED or pre_status==ERROR):
+            if processing_status and (pre_status==INGESTED or pre_status==ERROR) :# or pre_status==PROCESSING):
                 messages.info(request, _('Resource(s) re-processed correctly.'))
+                for obj in queryset:
+                    change_resource_status(obj,status=INGESTED, precondition_status=PROCESSING)
+                return processing_status
             elif processing_status and pre_status==INTERNAL:
                 messages.info(request, _('Resource(s) processed correctly.'))
+                return processing_status
             else:
                 messages.error(request,_("Something went wrong when processing the resource(s). Check the error.log file(s). You will receive a notification email."))
+                return processing_status
+            
             return processing_status
+        
         else:
             messages.error(request, _('You do not have the permission to ' \
                             'perform this action for all selected resources.'))
-            return False
+            return processing_status
 
     process_action.short_description = _("Re-process selected resources")
 
@@ -850,9 +859,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
         _("Suspend selected published resources")
 
     
-    def branch_lr(self, request,queryset):
+    def branch_lr(self, request,queryset, from_ingest):
         #implements automatic processing for ingested lr
-        return self.process_action(request,queryset)
+        return self.process_action(request,queryset, from_ingest)
 
     def ingest_action(self, request, queryset):
         if has_publish_permission(request, queryset) or request.user.is_staff:            
@@ -888,7 +897,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
             if successful > 0:
                 info = {}
                 #Implements the system branch 4 automatic lr processing
-                if not self.branch_lr(request,queryset):
+                if not self.branch_lr(request,queryset,1):
                     info['status'] = "failed"
                     info['message'] = _("""
                         The ingestion process has been interrupted.
