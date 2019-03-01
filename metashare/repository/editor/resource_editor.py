@@ -4,6 +4,7 @@ from mimetypes import guess_type
 from shutil import copyfile
 import json
 import logging
+import codecs
 from django import forms
 from django.contrib import admin, messages
 from django.contrib.admin.utils import unquote
@@ -780,8 +781,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     # IPR Holder: Name Surname (email), Organization 
                     # Contact Person: Name Surname (email), Organization 
                     metadata_file_path=resource_path+'/'+resource_name[0]+'_metadata.txt'
-                    with open(metadata_file_path, 'w') as metadata_file:
-                        metadata_file.write(_('Resource_name: ')+resource_name[0]+'\n')
+                    with codecs.open(metadata_file_path, encoding='utf-8',mode='w') as metadata_file:
+                        metadata_file.write(_('Resource_name: %s  \n') % resource_name[0])
                         for i,l in enumerate(licences_name):
                             metadata_file.write(_('License: ')+l+'\n')
                             if licences_restriction[i] =='':

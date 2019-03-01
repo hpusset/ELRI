@@ -1036,7 +1036,7 @@ def contribute(request):
 
             'resourceInfo': {
                 'resourceTitle': request.POST['resourceTitle'],
-                'shortDescription': request.POST['shortDescription'] or _("N/A"),
+                'shortDescription': request.POST['shortDescription'], #or _("N/A"),
                 'licence': request.POST['licence'],
             },
             'administration': {
@@ -1199,6 +1199,7 @@ def contribute(request):
             response['message'] = _("""
                 Thank you for sharing! Your data have been successfully submitted.""")
             return HttpResponse(json.dumps(response), content_type="application/json")
+            #return render_to_response('repository/editor/contributions/contribute.html',  response, context_instance=RequestContext(request))
             #messages.info(request,_("Thank you for sharing! Your data have been successfully submitted."))
             #return HttpResponseRedirect('metashare.repository.contribute')
             
@@ -1268,10 +1269,11 @@ def create_description(xml_file, type, base, user):
         "resource_file": ''.join(doc.xpath("//resource/administration/resource_file/text()")),
         "dataset": doc.xpath("//resource/administration/dataset/uploaded_files/item/text()")
     }
+    LOGGER.info(info['title'])
     # Create a new Identification object
     identification = identificationInfoType_model.objects.create( \
-        resourceName={'en': info['title'].encode('utf-8')},
-        description={'en': info['description'].encode('utf-8')},
+        resourceName={'en': unicode(info['title'])}, #.encode('utf-8')},
+        description={'en': unicode(info['description'])},#.encode('utf-8')},
         appropriatenessForDSI=info['domains'])
     resource_creation = resourceCreationInfoType_model.objects.create(
         createdUsingELRCServices=False
