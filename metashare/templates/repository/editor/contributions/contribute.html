@@ -300,8 +300,9 @@
         <div class="percent">0%</div>
     </div>
     <div id="okbtn">
-        <button class="btn btn-success btn-sm" id="ok" onclick="resetMessages()">OK
-        </button>
+		<a id="ok" class="btn btn-success btn-sm" style="a:link" href="{% url 'contribute' %}" role="button">OK</a>
+		<!--<button class="btn btn-success btn-sm" id="ok" onclick="resetMessages();">OK
+        </button>-->
     </div>
 </div>
 {% include "footer.html" %}

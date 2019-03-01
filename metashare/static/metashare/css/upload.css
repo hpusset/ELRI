@@ -96,6 +96,10 @@
     display: block!important;
 }
 
+#ok {
+    color: #fff;
+}
+
 .contrib-help{
     font-size: 15px;
 }
