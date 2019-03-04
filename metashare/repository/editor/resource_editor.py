@@ -106,8 +106,10 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
     'NLOD-1.0': (STATIC_URL + 'metashare/licences/NLOD-1.0.pdf', MEMBER_TYPES.NON),
     'OGL-3.0': (STATIC_URL + 'metashare/licences/OGL-3.0.pdf', MEMBER_TYPES.NON),
     'NCGL-1.0': (STATIC_URL + 'metashare/licences/NCGL-1.0.pdf', MEMBER_TYPES.GOD),
-    'openUnder-PSI': (STATIC_URL + 'metashare/licences/openUnderPSI.txt', MEMBER_TYPES.NON),
-    'publicDomain': (STATIC_URL + 'metashare/licences/publicDomain.txt', MEMBER_TYPES.NON), #('', MEMBER_TYPES.NON),
+    'openUnder-PSI':('', MEMBER_TYPES.NON),
+    'publicDomain':('', MEMBER_TYPES.NON),
+    #'openUnder-PSI': (STATIC_URL + 'metashare/licences/openUnderPSI.txt', MEMBER_TYPES.NON),
+    #'publicDomain': (STATIC_URL + 'metashare/licences/publicDomain.txt', MEMBER_TYPES.NON), #('', MEMBER_TYPES.NON),
     'non-standard/Other_Licence/Terms': ('', MEMBER_TYPES.NON),
     'underReview': ('', MEMBER_TYPES.GOD),
 }
@@ -460,7 +462,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 call_tm2tmx=-1
                 call_doc2tmx=-1
                 pre_status=check_resource_status(obj)
-                LOGGER.info(pre_status)
+                
                 if change_resource_status(obj, status=PROCESSING, precondition_status=INGESTED) or change_resource_status(obj, status=PROCESSING, precondition_status=ERROR) or (from_ingest and change_resource_status(obj, status=PROCESSING, precondition_status=INTERNAL)) : #or check_resource_status(obj)== PROCESSING:
                     #only (re)process INGESTED or ERROR or INTERNAL resources, published are suposed to be ok 
                     
@@ -733,8 +735,14 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     lr_archive_zip=zipfile.ZipFile(resource_path+'/archive.zip', mode='a')
                     for l in licences_name:
                         l_info, access_links, access = licences[l]
+                        if l == 'publicDomain':
+                            access_links=STATIC_URL + 'metashare/licences/publicDomain.txt'
+                        if l == 'openUnderPSI':
+                            access_links=STATIC_URL + 'metashare/licences/openUnderPSI.txt'
+                        
                         #add access file to the lr.archive.zip file 
                         licence_path=ROOT_PATH+access_links
+                        
                         path, filename = os.path.split(licence_path)
                         lr_archive_zip.write(licence_path,'license_'+filename)
                     
@@ -1559,8 +1567,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
     ## VALIDATION REPORT
     @csrf_protect_m
     def reportdl(self, request, object_id, extra_context=None):
-
-        # return HttpResponse("OK")
         """
         Returns an HTTP response with a download of the given validation report.
         """
@@ -1588,8 +1594,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 response['Content-Length'] = getsize(dl_path)
                 response['Content-Disposition'] = 'attachment; filename={0}' \
                     .format(split(dl_path)[1])
-                # LOGGER.info("Offering a local editor download of resource #{0}." \
-                #             .format(object_id))
+                LOGGER.info("Offering a local editor download of resource #{0}." \
+                             .format(object_id))
                 return response
             except:
                 pass
@@ -1698,7 +1704,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
     ## LEGAL DOCUMENTATION
     @csrf_protect_m
     def legaldl(self, request, object_id, extra_context=None):
-
         # return HttpResponse("OK")
         """
         Returns an HTTP response with a download of the given legal documentation.
@@ -1727,8 +1732,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 response['Content-Length'] = getsize(dl_path)
                 response['Content-Disposition'] = 'attachment; filename={0}' \
                     .format(split(dl_path)[1])
-                # LOGGER.info("Offering a local editor download of resource #{0}." \
-                #             .format(object_id))
+                LOGGER.info("Offering a local editor download of resource #{0}." \
+                             .format(object_id))
                 return response
             except:
                 pass
@@ -1740,12 +1745,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
 
     @csrf_protect_m
     def datadl(self, request, object_id, extra_context=None):
-
-        # return HttpResponse("OK")
         """
         Returns an HTTP response with a download of the given resource.
         """
-
         model = self.model
         opts = model._meta
 
@@ -1753,6 +1755,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         if obj is not None:
             storage_object = obj.storage_object
             dl_path = storage_object.get_download()
+            
             if dl_path:
                 try:
                     def dl_stream_generator():
@@ -1770,8 +1773,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     response['Content-Length'] = getsize(dl_path)
                     response['Content-Disposition'] = 'attachment; filename={0}' \
                         .format(split(dl_path)[1])
-                    # LOGGER.info("Offering a local editor download of resource #{0}." \
-                    #             .format(object_id))
+                    LOGGER.info("Offering a local editor download of resource #{0}." \
+                                 .format(object_id))
                     return response
                 except:
                     pass

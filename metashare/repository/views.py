@@ -187,7 +187,7 @@ def download(request, object_id, **kwargs):
     if len(licences) == 1:
         # no need to manually choose amongst 1 license ...
         licence_choice = licences.iterkeys().next()
-
+    
     if licence_choice:
         l_info, access_links, access = licences[licence_choice]
         _dict = {'form': LicenseAgreementForm(licence_choice),
@@ -217,9 +217,8 @@ def _provide_download(request, resource, access_links, bypass_stats):
     Returns an HTTP response with a download of the given resource. AFTER ACCEPTING THE LICENSE IF THERE IS ANY...
     """
     dl_path = resource.storage_object.get_download()
-
+    
     if dl_path:
-
         try:
             def dl_stream_generator():
                 with open(dl_path, 'rb') as _local_data:
@@ -236,6 +235,7 @@ def _provide_download(request, resource, access_links, bypass_stats):
             response['Content-Length'] = getsize(dl_path)
             response['Content-Disposition'] = 'attachment; filename={0}' \
                 .format(split(dl_path)[1])
+            
             if not bypass_stats:
                 _update_download_stats(resource, request)
             LOGGER.info("Offering a local download of resource #{0}." \
@@ -274,7 +274,7 @@ def _provide_download(request, resource, access_links, bypass_stats):
                               context_instance=RequestContext(request))
 
 
-def update_download_stats(resource, request):
+def _update_download_stats(resource, request):
     """
     Updates all relevant statistics counters for a the given successful resource
     download request.
@@ -1269,7 +1269,7 @@ def create_description(xml_file, type, base, user):
         "resource_file": ''.join(doc.xpath("//resource/administration/resource_file/text()")),
         "dataset": doc.xpath("//resource/administration/dataset/uploaded_files/item/text()")
     }
-    LOGGER.info(info['title'])
+    
     # Create a new Identification object
     identification = identificationInfoType_model.objects.create( \
         resourceName={'en': unicode(info['title'])}, #.encode('utf-8')},
