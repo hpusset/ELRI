@@ -49,7 +49,7 @@ def confirm(request, uuid):
 
     # Render activation email template with correct values.
     data = {'firstname': user.first_name, 'lastname': user.last_name,
-      'shortname': user.username}
+      'shortname': user.username, 'nodeurl': DJANGO_URL}
     email = render_to_string('accounts/activation.email', data)
     try:
         # Send an activation email.
@@ -190,7 +190,8 @@ def create(request):
             # Add a message to the user after successful creation.
             messages.success(request,
               _("We have received your registration data and sent the "
-                  "administrators a notification email."))
+                  "administrators a notification email."
+                  "You will receive an email when your account has been activated."))
             
             # Redirect the user to the front page.
             return redirect('metashare.views.frontpage')
@@ -547,7 +548,7 @@ def reset(request, uuid=None):
                 
                 try:
                     # Send out reset email to the given email address.
-                    send_mail(_('Please confirm your ELRI reset request'),
+                    send_mail(_('Please confirm your ELRI password reset request'),
                     email, EMAIL_ADDRESSES['elri-no-reply'], [user.email],
                     fail_silently=False)
                 
@@ -558,8 +559,8 @@ def reset(request, uuid=None):
                 
                 # Add a message to the user after successful creation.
                 messages.success(request,
-                  _("We have received your reset request and sent you an " \
-                    "email with further reset instructions."))
+                  _("We have received your password reset request and sent you an " \
+                    "email with further instructions."))
                 
                 # Redirect the user to the front page.
                 return redirect('metashare.views.frontpage')

@@ -1146,7 +1146,7 @@ def contribute(request):
                         os.remove(ofile_path)
                         response['status'] = "failed"
                         response['message'] =  _("""
-                            Only files of type DOC(X), ODT, PDF, TMX, SDLTM, XML,
+                            Only files of type DOC(X), ODT, RTF, PDF, TMX, SDLTM, XML,
                             TBX , XLS(X), TXT and ZIP files are allowed.
                             The zip files can only contain files of the
                             specified types. Please consider removing the files
@@ -1197,7 +1197,7 @@ def contribute(request):
 
             response['status'] = "succeded"
             response['message'] = _("""
-                Thank you for sharing! Your data have been successfully submitted.""")
+                Thank you for sharing, your data have been successfully submitted. They will now be processed by our automated engines and reviewed by the ELRI team. You will be notified by email when the resulting resource is available for download.""")
             return HttpResponse(json.dumps(response), content_type="application/json")
             #return render_to_response('repository/editor/contributions/contribute.html',  response, context_instance=RequestContext(request))
             #messages.info(request,_("Thank you for sharing! Your data have been successfully submitted."))

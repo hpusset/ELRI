@@ -7,9 +7,6 @@
         <h2 style="text-align: center;">{% blocktrans %}<strong>ELRI NRS Privacy Policy</strong>{% endblocktrans %}</h2>
         
         <div id="Protection" class="anchor"></div>
-        <br>
-        <h3 style="color:red">WARNING: THIS IS THE TEMPLATE PRIVACY POLICY, NOT THE FINAL VERSION.</h3>
-        <br>
         
         <h3>{% blocktrans %}<b>ELRI National Relay Station Data Protection Notice</b>{% endblocktrans %}</h3>      
         <p align=justify>{% blocktrans %}Within  the  Connecting  Europe  Facility  Programme,  the  Commission  of  the  European 
@@ -40,9 +37,9 @@
         <div id="Controller" class="anchor"></div>
         <h3>{% blocktrans %}<b>Controller</b>{% endblocktrans %}</h3>
         <p align=justify>{% blocktrans %} 
-        HOSTING ORGANIZATION OF THE NRS{% endblocktrans %}</p>
+        [Name of hosting organisation of the NRS] {% endblocktrans %}</p>
         <ul>
-        <li> {% blocktrans %} Contact: CONTACT HOSTING ORGANISATION, Phone: PHONE, {% endblocktrans %}</li>
+        <li> {% blocktrans %} Contact: [Contact of hosting organisation],    Phone: [number] {% endblocktrans %}</li>
         <li> {% blocktrans %} E-Mail: {% endblocktrans %}<a href="mailto:{{ email_org }}" >{{ email_org }}</a> </li>
         </ul>
         
@@ -50,9 +47,9 @@
         <h3>{% blocktrans %}<b>Data Protection Officer</b>{% endblocktrans %}</h3>
        
         <p align=justify>{% blocktrans %} 
-        Name of the data protection officer at the hosting organisation of the NRS, if applicable{% endblocktrans %}</p>
+        [Name of the data protection officer at the hosting organisation of the NRS, if applicable]{% endblocktrans %}</p>
         <ul>
-        <li> {% blocktrans %} Contact: CONTACT/NAME OF THE DATA PROTECTION OFFICER, Phone: PHONE, {% endblocktrans %}</li>
+        <li> {% blocktrans %} Contact:  [Contact/name of the data protection officer],    Phone: [number], {% endblocktrans %}</li>
         <li> {% blocktrans %} E-Mail: {% endblocktrans %}<a href="mailto:{{ email_dpo }}" >{{ email_dpo }}</a> </li>
         </ul>
         
@@ -119,6 +116,6 @@
 
         <div id="Cookies" class="anchor"></div>
         <h3>{% blocktrans %}<b>Cookies policy</b>{% endblocktrans %}</h3>
-        <p align=justify>{% blocktrans %}We use cookies on this site to enhance your user experience. By clicking any link of this page you are giving your consent for us to set cookies.{% endblocktrans %}</p>
+        <p align=justify>{% blocktrans %}This website uses cookies to facilitate the operation of the service and enhance user experience{% endblocktrans %}</p>
     </div>
 {% endblock %}

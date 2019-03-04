@@ -81,7 +81,8 @@ class RegistrationRequestForm(Form):
                                    label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Organization name")))
     organization_address = forms.CharField(
             UserProfile._meta.get_field('affiliation_address').max_length,
-            label=mark_safe( _("Organization address")),required=False)
+            label=mark_safe(u"%s<span style='color:red'>*</span>"
+                            % _("Organization address")))
     organization_phone_number = forms.CharField(
             UserProfile._meta.get_field('affiliation_phone_number').max_length,
             label=mark_safe( _("Organization phone number")),required=False)
@@ -217,7 +218,7 @@ class UserProfileForm(ModelForm):
         Meta class connecting to UserProfile object model.
         """
         model = UserProfile
-        exclude = ('user', 'modified', 'uuid', 'default_editor_groups')
+        exclude = ('user', 'modified', 'uuid', 'default_editor_groups', 'country')
 
 
 class EditorGroupApplicationForm(ModelForm):

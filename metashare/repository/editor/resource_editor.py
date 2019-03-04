@@ -27,7 +27,7 @@ from django.views.decorators.csrf import csrf_protect
 
 
 from metashare import settings
-from metashare.settings import STATIC_URL,LOG_HANDLER,ROOT_PATH
+from metashare.settings import STATIC_URL,LOG_HANDLER,ROOT_PATH, DJANGO_URL
 
 from metashare.accounts.models import EditorGroup, EditorGroupManagers
 from metashare.repository.editor.editorutils import FilteredChangeList, AllChangeList
@@ -814,7 +814,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     emails=obj.owners.all().values_list('email',flat=True)
                     name=obj.owners.all().values_list('first_name',flat=True)
                     surname=obj.owners.all().values_list('last_name',flat=True)
-                    email_data={'resourcename':resource_name[0],'username':name[0], 'usersurname':surname[0]}
+                    email_data={'resourcename':resource_name[0],'username':name[0], 'usersurname':surname[0], 'nodeurl':DJANGO_URL}
                     try:
                         send_mail(_('Published Resource'), render_to_string('repository/published_resource.email',email_data) , settings.EMAIL_ADDRESSES['elri-no-reply'],emails, fail_silently=False)
                     except:
