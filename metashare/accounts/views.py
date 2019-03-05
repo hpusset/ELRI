@@ -645,8 +645,8 @@ def edelivery_application(request):
                           message="User '{}' has applied for membership in the ELRI eDelivery "
                                   "Network. Please review the application at "
                                   "https://elri.eu/admin/accounts/accesspointedeliveryapplication/ and "
-                                  "accept or reject the application.".format(request.user.username), from_email="elri@ilsp.gr",
-                          recipient_list=[EMAIL_ADDRESSES['elri-edelivery']], fail_silently=False
+                                  "accept or reject the application.".format(request.user.username), from_email="elri-ilsp@email.com",
+                          recipient_list=['elri-edelivery@email.com'], fail_silently=False
                       )
             # TODO: email admin??
             return redirect('metashare.views.frontpage')

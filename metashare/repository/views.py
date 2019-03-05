@@ -1720,7 +1720,7 @@ def repo_report(request):
                        "The ELRI group".format(datetime.datetime.now().strftime("%d, %b %Y"))
 
             msg = EmailMessage("[ELRI] ELRI weekly report", msg_body,
-                               from_email=EMAIL_ADDRESSES['elri-ilsp'], bcc=rp)
+                               from_email='elri-ilsp@email.com', bcc=rp)
 
             msg.attach("{}.xlsx".format(title), output.getvalue(),
                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
