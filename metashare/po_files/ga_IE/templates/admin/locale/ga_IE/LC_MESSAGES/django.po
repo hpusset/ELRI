@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-30 18:27+0100\n"
+"POT-Creation-Date: 2019-03-05 18:52+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,13 +17,25 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: templates/admin/base.html:32 templates/admin/delete_confirmation.html:6
+#: templates/admin/base.html:39
+msgid ""
+"\"We use cookies on this site to enhance your user experience. By clicking "
+"any link on this page you are giving your consent for us to set cookies.\" "
+msgstr ""
+
+#: templates/admin/base.html:40
+msgid "\"OK, I aggree \""
+msgstr ""
+
+#: templates/admin/base.html:54 templates/admin/delete_confirmation.html:6
 #: templates/admin/delete_selected_confirmation.html:6
 msgid "Home"
 msgstr "Baile"
 
 #: templates/admin/base_site.html:5
-msgid "ELRC-SHARE backend"
+#, fuzzy
+#| msgid "ELRC-SHARE backend"
+msgid "ELRI backend"
 msgstr "ELRC-SHARE cúil"
 
 #: templates/admin/delete_confirmation.html:10
@@ -38,8 +50,8 @@ msgid ""
 "related objects, but your account doesn't have permission to delete the "
 "following types of objects:"
 msgstr ""
-"Bheadh mar thoradh ar %(object_name)s '%(escaped_object)s' a scriosadh "
-"go ndéanfaí oibiachtaí gaolmhara a scriosadh, ach níl cead ag do chuntas "
+"Bheadh mar thoradh ar %(object_name)s '%(escaped_object)s' a scriosadh go "
+"ndéanfaí oibiachtaí gaolmhara a scriosadh, ach níl cead ag do chuntas "
 "oibiachtaí de na cineálacha a leanas a scriosadh:"
 
 #: templates/admin/delete_confirmation.html:25
@@ -48,8 +60,8 @@ msgid ""
 "Deleting the %(object_name)s '%(escaped_object)s' would require deleting the "
 "following protected related objects:"
 msgstr ""
-"Chun %(object_name)s '%(escaped_object)s' a scriosadh ní mór na "
-"hoibiachtaí gaolmhara cosanta a leanas a scriosadh:"
+"Chun %(object_name)s '%(escaped_object)s' a scriosadh ní mór na hoibiachtaí "
+"gaolmhara cosanta a leanas a scriosadh:"
 
 #: templates/admin/delete_confirmation.html:33
 #, python-format
@@ -57,8 +69,8 @@ msgid ""
 "Are you sure you want to delete the %(object_name)s \"%(escaped_object)s\"? "
 "All of the following related items will be deleted:"
 msgstr ""
-"An bhfuil tú cinnte go bhfuil fonn ort %(object_name)s \"%(escaped_object)s\" a scriosadh? "
-"Déanfar na míreanna gaolta go léir a leanas a scriosadh:"
+"An bhfuil tú cinnte go bhfuil fonn ort %(object_name)s \"%(escaped_object)s"
+"\" a scriosadh? Déanfar na míreanna gaolta go léir a leanas a scriosadh:"
 
 #: templates/admin/delete_confirmation.html:38
 #: templates/admin/delete_selected_confirmation.html:43
@@ -76,9 +88,9 @@ msgid ""
 "objects, but your account doesn't have permission to delete the following "
 "types of objects:"
 msgstr ""
-"Bheadh mar thoradh ar %(objects_name)s roghnaithe a scriosadh "
-"go ndéanfaí oibiachtaí gaolmhara a scriosadh, ach níl cead ag do chuntas "
-"oibiachtaí de na cineálacha a leanas a scriosadh:"
+"Bheadh mar thoradh ar %(objects_name)s roghnaithe a scriosadh go ndéanfaí "
+"oibiachtaí gaolmhara a scriosadh, ach níl cead ag do chuntas oibiachtaí de "
+"na cineálacha a leanas a scriosadh:"
 
 #: templates/admin/delete_selected_confirmation.html:24
 #, python-format
@@ -86,8 +98,8 @@ msgid ""
 "Deleting the selected %(objects_name)s would require deleting the following "
 "protected related objects:"
 msgstr ""
-"Chun %(objects_name)s roghnaithe a scriosadh ní mór na "
-"hoibiachtaí gaolmhara cosanta a leanas a scriosadh:"
+"Chun %(objects_name)s roghnaithe a scriosadh ní mór na hoibiachtaí gaolmhara "
+"cosanta a leanas a scriosadh:"
 
 #: templates/admin/delete_selected_confirmation.html:32
 #, python-format
@@ -95,8 +107,9 @@ msgid ""
 "Are you sure you want to delete the selected %(objects_name)s? All of the "
 "following objects and their related items will be deleted:"
 msgstr ""
-"An bhfuil tú cinnte go bhfuil fonn ort %(objects_name)s roghnaithe a scriosadh? "
-"Déanfar na hoibiachtaí a leanas agus a gcuid míreanna gaolta go léir a scriosadh:"
+"An bhfuil tú cinnte go bhfuil fonn ort %(objects_name)s roghnaithe a "
+"scriosadh? Déanfar na hoibiachtaí a leanas agus a gcuid míreanna gaolta go "
+"léir a scriosadh:"
 
 #: templates/admin/submit_line.html:3
 msgid "Save"

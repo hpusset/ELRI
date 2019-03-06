@@ -1147,7 +1147,7 @@ class EdeliveryApplicationAdmin(admin.ModelAdmin):
                               "Your eDelivery application has been rejected due to the"
                               "following reasons:\n"
                               "{}.".format(req.user.username, req.rejection_reason),
-                              EMAIL_ADDRESSES['elri-edelivery'], [req.user.email])
+                              "elri-edelivery@email.com", [req.user.email])
                     messages.success(request, "The selected applications have been rejected. "
                                               "The requesting users have been notified via email.")
                 else:
@@ -1195,7 +1195,7 @@ class EdeliveryApplicationAdmin(admin.ModelAdmin):
                               "Your eDelivery application has been revoked due to the"
                               "following reasons:\n"
                               "{}.".format(req.user.username, req.rejection_reason),
-                              EMAIL_ADDRESSES['elri-edelivery'], [req.user.email])
+                              "elri-edelivery@email.com", [req.user.email])
                     req.save()
                     messages.success(request, "The selected applications have been revoked. "
                                               "The requesting users have been notified via email.")

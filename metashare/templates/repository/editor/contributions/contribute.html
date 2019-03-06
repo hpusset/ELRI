@@ -187,16 +187,36 @@
                 <div class="domain">
                     <div id="tooltip_container"></div>
                     <select class="form-control" multiple style="padding: 6px; height:200px" name="domains[]">
-                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources in any field of activity." value="other">{% trans 'Other / Unknown' %}</option>
-                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources of European cultural heritage " value="Europeana">{% trans 'eCulture' %}</option>
-                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for European national social security systems " value="ElectronicExchangeOfSocialSecurityInformation">{% trans 'Electronic Exchange of Social Security Information' %}</option>
-                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for European health services. " value="eHealth">{% trans 'eHealth' %}</option>
-                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for European judicial services. " value="eJustice">{% trans 'eJustice' %}</option>
-                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for European procurement services. " value="eProcurement">{% trans 'eProcurement' %}</option>
-                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources that can be publically shared to contribute to data re-use in Europe. " value="OpenDataPortal">{% trans 'Public Open Data' %}</option>
-                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for the establishment of a safer internet for children. " value="saferInternet">{% trans 'Safer Internet' %}</option>
-                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for the interconnection of business registers. " value="BusinessRegistersInterconnectionSystem">{% trans 'Business Registers Interconnection System' %}</option>
-                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="Digital resources with relevant information for Cybersecurity. " value="Cybersecurity">{% trans 'Cybersecurity' %}</option>
+                    
+                        {% trans "Digital resources in any field of activity." as other_title %}
+                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="{{ other_title }}" value="other">{% trans 'Other / Unknown' %}</option>
+                        
+                        {% trans "Digital resources of European cultural heritage " as eCulture_title %}
+                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="{{ eCulture_title }}" value="Europeana">{% trans 'eCulture' %}</option>
+                        
+                        {% trans "Digital resources with relevant information for European national social security systems " as EESSI_title %}
+                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="{{ EESSI_title }}" value="ElectronicExchangeOfSocialSecurityInformation">{% trans 'Electronic Exchange of Social Security Information' %}</option>
+                        
+                        {% trans "Digital resources with relevant information for European health services. " as eHealth_title %}
+                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="{{ eHealth_title }}" value="eHealth">{% trans 'eHealth' %}</option>
+                        
+                        {% trans "Digital resources with relevant information for European judicial services. " as eJustice_title %}
+                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="{{ eJustice_title}}" value="eJustice">{% trans 'eJustice' %}</option>
+                        
+                        {% trans "Digital resources with relevant information for European procurement services." as eProcurement_title %}
+                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="{{ eProcurement_title }}" value="eProcurement">{% trans 'eProcurement' %}</option>
+                        
+                        {% trans "Digital resources that can be publically shared to contribute to data re-use in Europe." as OpenDataPortal_title %}
+                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="{{ OpenDataPortal_title }}" value="OpenDataPortal">{% trans 'Public Open Data' %}</option>
+                        
+                        {% trans "Digital resources with relevant information for the establishment of a safer internet for children." as saferInternet_title %}
+                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="{{ saferInternet_title }}" value="saferInternet">{% trans 'Safer Internet' %}</option>
+                        
+                        {% trans "Digital resources with relevant information for the interconnection of business registers. " as BRIS_title %}
+                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="{{ BRIS_title }}" value="BusinessRegistersInterconnectionSystem">{% trans 'Business Registers Interconnection System' %}</option>
+
+                        {% trans "Digital resources with relevant information for Cybersecurity." as Cybersecurity_title %}
+                        <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="{{ Cybersecurity_title }}" value="Cybersecurity">{% trans 'Cybersecurity' %}</option>
                     </select>
                     <span class="help-block contrib-help">
                         {% trans '[Optional] Domain refers to information that belongs to a specific field of activity (e.g., culture or health) and is related to one of the building blocks of the European digital services indicated in the provided list. Digital resources that do not clearly belong to one of the provided domains can be left as Other/Unknown.' %}
@@ -207,7 +227,7 @@
                 <label class="control-label" for="licence">{% trans 'Licensing conditions' %}</label>
                 <select required name="licence">
                     <option value="publicDomain">{% trans 'Public Domain' %}</option>
-                    <option value="openUnder-PSI">{% trans 'Open Under-PSI' %}</option>
+                    <option value="openUnder-PSI">{% trans 'Open Under PSI' %}</option>
                     <option value="CC0-1.0">{% trans 'Creative Commons Zero 1.0 (CC0-1.0)' %}</option>
                     <option value="CC-BY-4.0">{% trans 'Creative Commons - Attribution 4.0 (CC-BY-4.0)' %}</option>
                     <option value="CC-BY-SA-4.0">{% trans 'Creative Commons - Attribution - ShareAlike 4.0 (CC-BY-SA-4.0)' %}</option>
@@ -251,7 +271,7 @@
                 <label class="control-label" for="filebutton">{% trans 'Upload Resource' %}</label>
                 <input multiple accept=".zip,.doc,.docx,.odt,.rtf,.pdf,.tmx,.sdltm,.xml,.tbx,.xls,.xlsx,.txt" id="filebutton" name="filebutton" class="input-file" type="file"
                        required="">
-                <span class="help-block contrib-help">{% trans 'Please upload a single <strong>.zip</strong> file or any number of files of the following type: <strong>.doc(x), .odt, .rtf, .tmx, .sdltm, .xml, .tbx, .xls(x), or .txt file</strong> up to 100MB.' %}
+                <span class="help-block contrib-help">{% trans 'Please upload a single <strong>.zip</strong> file or any number of files of the following type: <strong>.doc(x), .odt, .rtf, .pdf, .tmx, .sdltm, .xml, .tbx, .xls(x), or .txt file</strong> up to 100MB.' %}
                     </br>
                     {% trans 'In case the data you wish to upload are larger than 100MB, please contact us to provide an SFTP link for direct download or consider uploading smaller files' %}
                 </span>
@@ -300,8 +320,9 @@
         <div class="percent">0%</div>
     </div>
     <div id="okbtn">
-        <button class="btn btn-success btn-sm" id="ok" onclick="resetMessages()">OK
-        </button>
+		<a id="ok" class="btn btn-success btn-sm" style="a:link" href="{% url 'contribute' %}" role="button">OK</a>
+		<!--<button class="btn btn-success btn-sm" id="ok" onclick="resetMessages();">OK
+        </button>-->
     </div>
 </div>
 {% include "footer.html" %}

@@ -7,67 +7,61 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-30 18:26+0100\n"
-"PO-Revision-Date: 2018-11-09 20:19+0100\n"
+"POT-Creation-Date: 2019-03-06 09:23+0100\n"
+"PO-Revision-Date: 2019-03-05 14:50+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 2.2.1\n"
 
-#: local_settings.py:35
-msgid "Spanish"
-msgstr "Español"
-
-#: local_settings.py:36
-msgid "English"
-msgstr "Inglés"
-
-#: local_settings.py:37
-msgid "French"
-msgstr "Francés"
-
-#: local_settings.py:38
-#, fuzzy
+#: local_settings.py:39 local_settings.py:43
 msgid "Gaelic"
 msgstr "Gaélico"
 
-#: local_settings.py:39
+#: local_settings.py:40
+msgid "Spanish"
+msgstr "Español"
+
+#: local_settings.py:41
+msgid "English"
+msgstr "Inglés"
+
+#: local_settings.py:42
+msgid "French"
+msgstr "Francés"
+
+#: local_settings.py:44
 msgid "Portuguese"
 msgstr "Portugués"
 
-#: storage/models.py:108
-#, fuzzy
+#: storage/models.py:113
 msgid "Can synchronize"
 msgstr "Puede sincronizar"
 
-#: storage/models.py:113
-#, fuzzy
+#: storage/models.py:118
 msgid ""
 "(Read-only) base URL for the server where the master copy of the associated "
 "language resource is located."
 msgstr ""
 "(Sólo lectura) URL base para el servidor donde se encuentra la copia maestra "
-"del recurso de idioma asociado."
+"del recurso lingüístico asociado."
 
-#: storage/models.py:117
-#, fuzzy
+#: storage/models.py:122
 msgid "(Read-only) unique identifier for this storage object instance."
 msgstr ""
 "(Sólo lectura) identificador único para esta instancia del objeto de "
 "almacenamiento."
 
-#: storage/models.py:121
-#, fuzzy
+#: storage/models.py:126
 msgid "(Read-only) creation date for this storage object instance."
 msgstr ""
 "(Sólo lectura) fecha de creación para esta instancia del objeto de "
 "almacenamiento."
 
-#: storage/models.py:124
-#, fuzzy
+#: storage/models.py:129
 msgid ""
 "(Read-only) last modification date of the metadata XML for this storage "
 "object instance."
@@ -75,16 +69,14 @@ msgstr ""
 "(Sólo lectura) fecha de última modificación del XML de metadatos para esta "
 "instancia del objeto de almacenamiento."
 
-#: storage/models.py:128
-#, fuzzy
+#: storage/models.py:133
 msgid ""
 "(Read-only) MD5 checksum of the binary data for this storage object instance."
 msgstr ""
 "(Sólo lectura) Suma de comprobación MD5 de los datos binarios de esta "
 "instancia del objeto de almacenamiento."
 
-#: storage/models.py:132
-#, fuzzy
+#: storage/models.py:137
 msgid ""
 "(Read-only) MD5 checksum of the digest zip file containing the global "
 "serialized storage object and the metadata XML for this storage object "
@@ -94,85 +86,76 @@ msgstr ""
 "el objeto de almacenamiento de información serializado global y el XML de "
 "metadatos para esta instancia del objeto de almacenamiento."
 
-#: storage/models.py:137
-#, fuzzy
+#: storage/models.py:142
 msgid ""
 "(Read-only) last modification date of digest zip for this storage object "
 "instance."
 msgstr ""
-"(Sólo lectura) fecha de última modificación del código postal de resumen "
-"para esta instancia del objeto de almacenamiento."
+"(Sólo lectura) fecha de última modificación del zip digest para esta "
+"instancia del objeto de almacenamiento."
 
-#: storage/models.py:141
-#, fuzzy
+#: storage/models.py:146
 msgid ""
 "(Read-only) last update check date of digest zip for this storage object "
 "instance."
 msgstr ""
-"(Sólo lectura) última actualización Compruebe la fecha de la recopilación "
-"zip para esta instancia del objeto de almacenamiento."
-
-#: storage/models.py:144
-#, fuzzy
-msgid "Revision or version information for this storage object instance."
-msgstr ""
-"Revisión o información de versión de esta instancia del objeto de "
-"almacenamiento."
+"(Sólo lectura) fecha de la última actualización del digest zip para esta "
+"instancia del objeto de almacenamiento."
 
 #: storage/models.py:149
-#, fuzzy
+msgid "Revision or version information for this storage object instance."
+msgstr ""
+"Información de revisión o versión de esta instancia del objeto de "
+"almacenamiento."
+
+#: storage/models.py:154
 msgid "(Read-only) META-SHARE version used with the storage object instance."
 msgstr ""
-"(Sólo lectura) Versión de META-compartir utilizada con la instancia del "
-"objeto de almacenamiento."
+"(Sólo lectura) Versión de META-SHARE utilizada con la instancia del objeto "
+"de almacenamiento."
 
-#: storage/models.py:152
+#: storage/models.py:158
 #, fuzzy
-msgid "Specifies whether the resource is collected by ELRC 1"
+#| msgid "Specifies whether the resource is collected by ELRC 1"
+msgid "Specifies whether the resource is collected by ELRI 1"
 msgstr "Especifica si el recurso es recopilado por ELRC 1"
 
-#: storage/models.py:167
-#, fuzzy
+#: storage/models.py:173
 msgid "Generalized copy status flag for this storage object instance."
 msgstr ""
 "Indicador de estado de copia generalizado para esta instancia del objeto de "
 "almacenamiento."
 
-#: storage/models.py:185
-#, fuzzy
+#: storage/models.py:191
 msgid "Generalized publication status flag for this storage object instance."
 msgstr ""
 "Indicador de estado de publicación generalizado para esta instancia del "
 "objeto de almacenamiento."
 
-#: storage/models.py:189
-#, fuzzy
+#: storage/models.py:195
 msgid ""
 "(Read-only) id of source node from which the resource originally stems as "
 "set in local_settings.py in CORE_NODES and PROXIED_NODES; empty if resource "
 "stems from this local node"
 msgstr ""
 "(Sólo lectura) ID del nodo de origen desde el que se origina el recurso como "
-"se establece en local_settings. py en CORE_NODES y PROXIED_NODES; vaciar si "
+"se establece en local_settings.py en CORE_NODES y PROXIED_NODES; vaciar si "
 "el recurso proviene de este nodo local"
 
-#: storage/models.py:193
-#, fuzzy
+#: storage/models.py:199
 msgid "Deletion status flag for this storage object instance."
 msgstr ""
 "Indicador de estado de eliminación para esta instancia de objeto de "
 "almacenamiento."
 
-#: storage/models.py:197
-#, fuzzy
+#: storage/models.py:203
 msgid ""
 "XML containing the metadata description for this storage object instance."
 msgstr ""
 "XML que contiene la descripción de metadatos para esta instancia del objeto "
 "de almacenamiento."
 
-#: storage/models.py:201
-#, fuzzy
+#: storage/models.py:207
 msgid ""
 "text containing the JSON serialization of global attributes for this storage "
 "object instance."
@@ -180,11 +163,23 @@ msgstr ""
 "texto que contiene la serialización JSON de atributos globales para esta "
 "instancia del objeto de almacenamiento."
 
-#: storage/models.py:205
-#, fuzzy
+#: storage/models.py:211
 msgid ""
 "text containing the JSON serialization of local attributes for this storage "
 "object instance."
 msgstr ""
 "texto que contiene la serialización JSON de atributos locales para esta "
 "instancia del objeto de almacenamiento."
+
+#: views.py:22
+#, python-format
+msgid ""
+"Please enter a correct %(username)s and password, Note that both fields may "
+"be case-sensitive."
+msgstr ""
+
+#: views.py:24
+msgid ""
+"This account has not been activated yet. Please contact us if there is any "
+"issue with an existing account."
+msgstr ""

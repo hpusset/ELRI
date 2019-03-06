@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-30 18:27+0100\n"
+"POT-Creation-Date: 2019-03-05 18:52+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,17 +21,17 @@ msgstr ""
 #: templates/admin/edit_inline_one2one/tabular.html:116
 #, python-format
 msgid "Add another %(verbose_name)s"
-msgstr ""
+msgstr "Cuir %(verbose_name)s eile leis"
 
 #: templates/admin/edit_inline_one2one/stacked.html:74
 #: templates/admin/edit_inline_one2one/tabular.html:119
 msgid "Remove"
-msgstr ""
+msgstr "Bain"
 
 #: templates/admin/edit_inline_one2one/tabular.html:16
 msgid "Delete?"
-msgstr ""
+msgstr "Scrios?"
 
 #: templates/admin/edit_inline_one2one/tabular.html:29
 msgid "View on site"
-msgstr ""
+msgstr "Amharc ar an suíomh"

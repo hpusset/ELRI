@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-30 18:27+0100\n"
+"POT-Creation-Date: 2019-03-05 18:52+0100\n"
 "PO-Revision-Date: 2018-11-12 13:24+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: ga_IE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=5; plural=(n==1 ? 0 : n==2 ? 1 : n>=3 && n<=6 ? 2 : n>=7 && n<=10 ? 3 : "
-"4);\n"
+"Plural-Forms: nplurals=5; plural=(n==1 ? 0 : n==2 ? 1 : n>=3 && n<=6 ? 2 : "
+"n>=7 && n<=10 ? 3 : 4);\n"
 "X-Generator: Poedit 2.2\n"
-"Last-Translator: \n"
-"Language-Team: \n"
 
 #: repository/editor/__init__.py:113
 msgid "Upload new resource description(s)"
@@ -54,19 +54,22 @@ msgstr "B’fhéidir nach bhfuil ach iontráil amháin leis an eochair \"{}\"."
 #: repository/editor/form_fields.py:69
 #, python-format
 msgid ""
-"The character at position %(char_pos)s (&#x%(char_code)04x;) must not be used. Enter a string "
-"consisting of only characters that match the Char production from XML 1.0 (Second Edition), cf. "
-"http://www.w3.org/TR/2000/WD-xml-2e-20000814#NT-Char."
+"The character at position %(char_pos)s (&#x%(char_code)04x;) must not be "
+"used. Enter a string consisting of only characters that match the Char "
+"production from XML 1.0 (Second Edition), cf. http://www.w3.org/TR/2000/WD-"
+"xml-2e-20000814#NT-Char."
 msgstr ""
-"Níor chóir an carachtar ag ionad %(char_pos)s (&#x%(char_code)04x;) a úsáid. Iontráil teaghrán "
-"gan ach carachtair arbh ionann iad agus an táirge Char ó XML 1.0 (Dara hEagrán) a bheith ann, "
-"cf. http://www.w3.org/TR/2000/WD-xml-2e-20000814#NT-Char."
+"Níor chóir an carachtar ag ionad %(char_pos)s (&#x%(char_code)04x;) a úsáid. "
+"Iontráil teaghrán gan ach carachtair arbh ionann iad agus an táirge Char ó "
+"XML 1.0 (Dara hEagrán) a bheith ann, cf. http://www.w3.org/TR/2000/WD-"
+"xml-2e-20000814#NT-Char."
 
 #: repository/editor/forms.py:25
 msgid "The maximum upload file size is {:.0f} MB!"
 msgstr "{:.0f} MB an comhad is mó is féidir a uaslódáil!"
 
-#: repository/editor/forms.py:35 repository/editor/forms.py:53 repository/editor/forms.py:70
+#: repository/editor/forms.py:35 repository/editor/forms.py:53
+#: repository/editor/forms.py:70
 msgid "Invalid upload file type. Valid file types are: {}"
 msgstr "Comhad neamhbhailí á uaslódáil. Cineálacha comhaid atá bailí: {}"
 
@@ -84,11 +87,11 @@ msgstr "Acmhainn"
 
 #: repository/editor/forms.py:114
 msgid ""
-"You can upload resource data (<{:.0f} MB) using this widget. Note that this will overwrite the "
-"current data!"
+"You can upload resource data (<{:.0f} MB) using this widget. Note that this "
+"will overwrite the current data!"
 msgstr ""
-"Is féidir sonraí acmhainní (<{:.0f} MB) a uaslódáil ag úsáid na giuirléide seo.Tabhair faoi "
-"deara go ndéanfaidh sé sin forscríobh ar na sonraí reatha!"
+"Is féidir sonraí acmhainní (<{:.0f} MB) a uaslódáil ag úsáid na giuirléide "
+"seo.Tabhair faoi deara go ndéanfaidh sé sin forscríobh ar na sonraí reatha!"
 
 #: repository/editor/forms.py:119 repository/editor/forms.py:133
 msgid "Upload Terms"
@@ -96,11 +99,11 @@ msgstr "Téarmaí Uaslódáilte"
 
 #: repository/editor/forms.py:120
 msgid ""
-"By clicking this checkbox, you confirm that you have cleared permissions for the file you intend "
-"to upload."
+"By clicking this checkbox, you confirm that you have cleared permissions for "
+"the file you intend to upload."
 msgstr ""
-"Trí chliceáil a dhéanamh sa ticbhosca seo, deimhníonn tú go bhfuil ceadanna glanta agat don "
-"chomhad a bhfuil sé i gceist agat a uaslódáil."
+"Trí chliceáil a dhéanamh sa ticbhosca seo, deimhníonn tú go bhfuil ceadanna "
+"glanta agat don chomhad a bhfuil sé i gceist agat a uaslódáil."
 
 #: repository/editor/forms.py:127
 msgid "Resource Description(s)"
@@ -108,20 +111,21 @@ msgstr "Cur síos ar acmhainn"
 
 #: repository/editor/forms.py:128
 msgid ""
-"You can upload a new resource description in XML format, or many resource descriptions in a ZIP "
-"file containing XML files. Please make sure the XML files are Schema-valid before proceeding."
+"You can upload a new resource description in XML format, or many resource "
+"descriptions in a ZIP file containing XML files. Please make sure the XML "
+"files are Schema-valid before proceeding."
 msgstr ""
-"Is féidir uaslódáil a dhéanamh ar chur síos ar acmhainn nua i bhformáid XML,nó go leor cur síos "
-"ar acmhainní i gcomhad ZIP ina bhfuil comhaid XML. Bí cinnte go bhfuil na comhaid bailí don "
-"scéimre sula dtosaíonn tú."
+"Is féidir uaslódáil a dhéanamh ar chur síos ar acmhainn nua i bhformáid XML,"
+"nó go leor cur síos ar acmhainní i gcomhad ZIP ina bhfuil comhaid XML. Bí "
+"cinnte go bhfuil na comhaid bailí don scéimre sula dtosaíonn tú."
 
 #: repository/editor/forms.py:134
 msgid ""
-"By clicking this checkbox, you confirm that you have cleared permissions for the description(s) "
-"you intend to upload."
+"By clicking this checkbox, you confirm that you have cleared permissions for "
+"the description(s) you intend to upload."
 msgstr ""
-"Trí chliceáil a dhéanamh sa ticbhosca seo, deimhníonn tú go bhfuil ceadanna glanta agat don chur "
-"síos a bhfuil sé i gceist agat a uaslódáil."
+"Trí chliceáil a dhéanamh sa ticbhosca seo, deimhníonn tú go bhfuil ceadanna "
+"glanta agat don chur síos a bhfuil sé i gceist agat a uaslódáil."
 
 #: repository/editor/forms.py:143
 msgid "Report"
@@ -129,11 +133,12 @@ msgstr "Tuairisc"
 
 #: repository/editor/forms.py:144
 msgid ""
-"You can upload your validation report in '.pdf' format using this widget. Note that this will "
-"overwrite the current report if it exists!"
+"You can upload your validation report in '.pdf' format using this widget. "
+"Note that this will overwrite the current report if it exists!"
 msgstr ""
-"Is féidir do thuairisc bhailíochtaithe a uaslódáil i bhformáid '.pdf' ag úsáid na giuirléide seo."
-"Tabhair faoi deara go ndéanfaidh sé sin forscríobh ar an tuairisc reatha, más ann di!"
+"Is féidir do thuairisc bhailíochtaithe a uaslódáil i bhformáid '.pdf' ag "
+"úsáid na giuirléide seo.Tabhair faoi deara go ndéanfaidh sé sin forscríobh "
+"ar an tuairisc reatha, más ann di!"
 
 #: repository/editor/forms.py:153
 msgid "Legal Documentation"
@@ -141,12 +146,13 @@ msgstr "Cáipéisíocht dhlíthiúil"
 
 #: repository/editor/forms.py:154
 msgid ""
-"You can upload a .zip file containing any additional legal documentation using this widget. Note "
-"that this will overwrite the current legal documentation zip file, if it exists!"
+"You can upload a .zip file containing any additional legal documentation "
+"using this widget. Note that this will overwrite the current legal "
+"documentation zip file, if it exists!"
 msgstr ""
-"Is féidir comhad .zip ina bhfuil aon cháipéisíocht dhlíthiúil sa bhreis a uaslódáil ag úsáid na "
-"giuirléide seo. Tabhair faoi deara go ndéanfaidh sé sin forscríobh ar zipchomhad reatha na "
-"cáipéisíochta reatha, más ann di!"
+"Is féidir comhad .zip ina bhfuil aon cháipéisíocht dhlíthiúil sa bhreis a "
+"uaslódáil ag úsáid na giuirléide seo. Tabhair faoi deara go ndéanfaidh sé "
+"sin forscríobh ar zipchomhad reatha na cáipéisíochta reatha, más ann di!"
 
 #: repository/editor/manual_admin_registration.py:72
 msgid "Person"
@@ -164,26 +170,31 @@ msgstr "Tionscadal"
 msgid "Document"
 msgstr "Doiciméad"
 
-#: repository/editor/manual_admin_registration.py:145 repository/editor/resource_editor.py:1550
+#: repository/editor/manual_admin_registration.py:145
+#: repository/editor/resource_editor.py:2155
 #: repository/editor/superadmin.py:268
 #, python-format
 msgid "%(name)s object with primary key %(key)r does not exist."
 msgstr "Ní hann d'oibiacht %(name)s le heochair phríomhúil %(key)r."
 
-#: repository/editor/manual_admin_registration.py:201 repository/editor/superadmin.py:364
+#: repository/editor/manual_admin_registration.py:201
+#: repository/editor/superadmin.py:364
 #, python-format
 msgid "Add %s"
 msgstr "Cuir %s leis"
 
-#: repository/editor/manual_admin_registration.py:201 repository/editor/superadmin.py:364
+#: repository/editor/manual_admin_registration.py:201
+#: repository/editor/superadmin.py:364
 #, python-format
 msgid "Change %s"
 msgstr "Athraigh %s"
 
 #: repository/editor/related_mixin.py:173
 #, python-format
-msgid "The %(name)s \"%(obj)s\" was saved successfully. You may edit it again below."
-msgstr "Sábháladh %(name)s \"%(obj)s\". Is féidir é a chur in eagar arís thíos."
+msgid ""
+"The %(name)s \"%(obj)s\" was saved successfully. You may edit it again below."
+msgstr ""
+"Sábháladh %(name)s \"%(obj)s\". Is féidir é a chur in eagar arís thíos."
 
 #: repository/editor/related_widget.py:70
 msgid "Edit related model"
@@ -197,7 +208,154 @@ msgstr "Cuir eolas leis"
 msgid "Delete related model"
 msgstr "Scrios samhail ghaolta"
 
-#: repository/editor/resource_editor.py:293
+#: repository/editor/resource_editor.py:564
+msgid ""
+"Something went wrong when processing the resource with the tm2tmx toolchain."
+msgstr ""
+
+#: repository/editor/resource_editor.py:569
+#: repository/editor/resource_editor.py:580
+#: repository/editor/resource_editor.py:591
+#: repository/editor/resource_editor.py:617
+#: repository/editor/resource_editor.py:627
+#: repository/editor/resource_editor.py:638
+#, python-format
+msgid "Error when processing resource %(rname)s"
+msgstr ""
+
+#: repository/editor/resource_editor.py:569
+#: repository/editor/resource_editor.py:580
+#: repository/editor/resource_editor.py:591
+#: repository/editor/resource_editor.py:617
+#: repository/editor/resource_editor.py:627
+#: repository/editor/resource_editor.py:638
+#, python-format
+msgid ""
+"An error occurred when processing the resource %(rname)s. Please check the "
+"error.log attached to the resource. Contact the ELRI NRS support team for "
+"more information at %(email)s"
+msgstr ""
+
+#: repository/editor/resource_editor.py:571
+#: repository/editor/resource_editor.py:582
+#: repository/editor/resource_editor.py:593
+#: repository/editor/resource_editor.py:619
+#: repository/editor/resource_editor.py:629
+#: repository/editor/resource_editor.py:640
+msgid ""
+"There was an error sending out the ERROR notification email to the group "
+"reviewers. Please contact them directly."
+msgstr ""
+
+#: repository/editor/resource_editor.py:575
+msgid "Invalid json response from tm2tmx toolchain: "
+msgstr ""
+
+#: repository/editor/resource_editor.py:586
+msgid "The POST request to the tm2tmx toolchain has failed."
+msgstr ""
+
+#: repository/editor/resource_editor.py:612
+msgid ""
+"Something went wrong when processing the resource with the doc2tmx "
+"toolchain.\n"
+" "
+msgstr ""
+
+#: repository/editor/resource_editor.py:622
+msgid "Invalid json response from doc2tmx toolchain: "
+msgstr ""
+
+#: repository/editor/resource_editor.py:633
+msgid ""
+"The POST request to the doc2tmx toolchain has failed.\n"
+" "
+msgstr ""
+
+#: repository/editor/resource_editor.py:684
+#, fuzzy
+#| msgid "Only ingested resources can be published."
+msgid "Only ingested or error resources can be re-processed."
+msgstr "Ní féidir ach acmhainní ionghafa a fhoilsiú."
+
+#: repository/editor/resource_editor.py:688
+msgid "Resource(s) re-processed correctly."
+msgstr ""
+
+#: repository/editor/resource_editor.py:691
+msgid "Resource(s) processed correctly."
+msgstr ""
+
+#: repository/editor/resource_editor.py:694
+msgid ""
+"Something went wrong when processing the resource(s). Re-process the error "
+"resources and check the error.log file(s). You will receive a notification "
+"email."
+msgstr ""
+
+#: repository/editor/resource_editor.py:700
+#: repository/editor/resource_editor.py:839
+#: repository/editor/resource_editor.py:861
+#: repository/editor/resource_editor.py:943
+msgid ""
+"You do not have the permission to perform this action for all selected "
+"resources."
+msgstr ""
+"Níl an cead agat an gníomh seo a dhéanamh do na hacmhainní roghnaithe go "
+"léir."
+
+#: repository/editor/resource_editor.py:704
+#, fuzzy
+#| msgid "Remove owners from selected resources"
+msgid "Re-process selected resources"
+msgstr "Bain úinéirí ó acmhainní roghnaithe"
+
+#: repository/editor/resource_editor.py:793
+#, python-format
+msgid "Resource_name: %s  \n"
+msgstr ""
+
+#: repository/editor/resource_editor.py:795
+msgid "License: "
+msgstr ""
+
+#: repository/editor/resource_editor.py:797
+msgid "\t Restrictions of Use: None\n"
+msgstr ""
+
+#: repository/editor/resource_editor.py:799
+msgid "\t Restrictions of Use: "
+msgstr ""
+
+#: repository/editor/resource_editor.py:802
+msgid "IPR Holder: "
+msgstr ""
+
+#: repository/editor/resource_editor.py:804
+msgid "IPR Holder: N/A \n"
+msgstr ""
+
+#: repository/editor/resource_editor.py:807
+msgid "Contact Person: "
+msgstr ""
+
+#: repository/editor/resource_editor.py:809
+msgid "Contact Person: N/A \n"
+msgstr ""
+
+#: repository/editor/resource_editor.py:819
+#, fuzzy
+#| msgid "Publish selected ingested resources"
+msgid "Published Resource"
+msgstr "Foilsigh acmhainní ionghafa roghnaithe"
+
+#: repository/editor/resource_editor.py:824
+msgid ""
+"There was an error sending out the notification email to the resource "
+"owners. Please contact them directly."
+msgstr ""
+
+#: repository/editor/resource_editor.py:831
 #, python-format
 msgid "Successfully published %(ingested)s ingested resource."
 msgid_plural "Successfully published %(ingested)s ingested resources."
@@ -207,205 +365,246 @@ msgstr[2] ""
 msgstr[3] ""
 msgstr[4] ""
 
-#: repository/editor/resource_editor.py:298
+#: repository/editor/resource_editor.py:836
 msgid "Only ingested resources can be published."
 msgstr "Ní féidir ach acmhainní ionghafa a fhoilsiú."
 
-#: repository/editor/resource_editor.py:300 repository/editor/resource_editor.py:322
-#: repository/editor/resource_editor.py:345
-msgid "You do not have the permission to perform this action for all selected resources."
-msgstr "Níl an cead agat an gníomh seo a dhéanamh do na hacmhainní roghnaithe go léir."
-
-#: repository/editor/resource_editor.py:303
+#: repository/editor/resource_editor.py:842
 msgid "Publish selected ingested resources"
 msgstr "Foilsigh acmhainní ionghafa roghnaithe"
 
-#: repository/editor/resource_editor.py:315
+#: repository/editor/resource_editor.py:854
 #, python-format
 msgid "Successfully suspended %s published resource."
 msgid_plural "Successfully suspended %s published resources."
 msgstr[0] "Acmhainn foilsithe %s curtha ar fionraí."
 msgstr[1] "Acmhainní foilsithe %s curtha ar fionraí."
 
-#: repository/editor/resource_editor.py:320
+#: repository/editor/resource_editor.py:859
 msgid "Only published resources can be suspended."
 msgstr "Ní féidir ach acmhainní foilsithe a chur ar fionraí."
 
-#: repository/editor/resource_editor.py:326
+#: repository/editor/resource_editor.py:865
 msgid "Suspend selected published resources"
 msgstr "Cuir acmhainní foilsithe roghnaithe ar fionraí"
 
-#: repository/editor/resource_editor.py:338
-#, python-format
-msgid "Successfully ingested %(internal)s internal resource."
-msgid_plural "Successfully ingested %(internal)s internal resources."
-msgstr[0] "Acmhainn inmheánach %(internal)s ionghafa."
-msgstr[1] "Acmhainní inmheánacha %(internal)s ionghafa."
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+#: repository/editor/resource_editor.py:908
+#: repository/editor/resource_editor.py:912
+msgid ""
+"\n"
+"                        The ingestion process has been interrupted.\n"
+"                        Re-process the resource(s) with error status.\n"
+"                        "
+msgstr ""
 
-#: repository/editor/resource_editor.py:343
+#: repository/editor/resource_editor.py:919
+msgid ""
+"\n"
+"                        Successfully ingested {} internal resource(s). \n"
+"                        You will be notified by email once the resource has "
+"been fully processed.\n"
+"                        "
+msgstr ""
+
+#: repository/editor/resource_editor.py:923
+msgid ""
+"\n"
+"                        Successfully ingested {}(s) internal resource(s). \n"
+"                        You will be notified by email once the resource(s) "
+"has been fully processed.\n"
+"                        "
+msgstr ""
+
+#: repository/editor/resource_editor.py:936
+msgid ""
+"There was an error sending out the notification email to the group "
+"reviewers. Please contact them directly."
+msgstr ""
+
+#: repository/editor/resource_editor.py:941
 msgid "Only internal resources can be ingested."
 msgstr "Ní féidir ach acmhainní inmheánacha a ionghabháil."
 
-#: repository/editor/resource_editor.py:348
+#: repository/editor/resource_editor.py:946
 msgid "Ingest selected internal resources"
 msgstr "Ionghabháil acmhainní inmheánacha roghnaithe"
 
-#: repository/editor/resource_editor.py:368 repository/editor/resource_editor.py:1220
+#: repository/editor/resource_editor.py:968
+#: repository/editor/resource_editor.py:1823
 #, python-format
 msgid "Could not export resource \"%(name)s\" with primary key %(key)s."
-msgstr "Ní rabhthas in ann acmhainn \"%(name)s\" a easpórtáil le heochair phríomhúil %(key)s."
+msgstr ""
+"Ní rabhthas in ann acmhainn \"%(name)s\" a easpórtáil le heochair phríomhúil "
+"%(key)s."
 
-#: repository/editor/resource_editor.py:383
+#: repository/editor/resource_editor.py:983
 msgid "Export selected resource descriptions to XML"
 msgstr "Easpórtáil cur síos acmhainní roghnaithe go dtí XML"
 
-#: repository/editor/resource_editor.py:439
+#: repository/editor/resource_editor.py:1039
 msgid "Cancelled deleting the selected resources."
 msgstr "Cuireadh scriosadh na n-acmhainní roghnaithe ar ceal."
 
-#: repository/editor/resource_editor.py:464
+#: repository/editor/resource_editor.py:1064
 #, python-format
 msgid "Successfully deleted %d resource."
 msgid_plural "Successfully deleted %d resources."
 msgstr[0] "Scriosadh acmhainn %d."
 msgstr[1] "Scriosadh acmhainní %d"
 
-#: repository/editor/resource_editor.py:473
+#: repository/editor/resource_editor.py:1073
 msgid "Are you sure?"
 msgstr "An bhfuil tú cinnte?"
 
-#: repository/editor/resource_editor.py:480
+#: repository/editor/resource_editor.py:1080
 msgid "Delete resource"
 msgstr "Scrios acmhainn"
 
-#: repository/editor/resource_editor.py:486
+#: repository/editor/resource_editor.py:1085
 msgid "Mark selected resources as deleted"
 msgstr "Marcáil go bhfuil acmhainní roghnaithe scriosta"
 
-#: repository/editor/resource_editor.py:496
+#: repository/editor/resource_editor.py:1095
 msgid "Cancelled adding editor groups."
 msgstr "Cuireadh grúpaí eagarthóirí a chur leis ar ceal."
 
-#: repository/editor/resource_editor.py:517
+#: repository/editor/resource_editor.py:1116
 #, python-format
 msgid ""
-"Successfully added editor groups to %(success)i of the selected resources. %(failure)i resource "
-"editor groups were left unchanged due to missing permissions."
+"Successfully added editor groups to %(success)i of the selected resources. "
+"%(failure)i resource editor groups were left unchanged due to missing "
+"permissions."
 msgstr ""
-"Cuireadh grúpaí eagarthóirí le %(success)i de na hacmhainní roghnaithe.Níor athraíodh "
-"%(failure)i de na grúpaí eagarthóirí toisc nach raibh fáil ar cheadanna."
+"Cuireadh grúpaí eagarthóirí le %(success)i de na hacmhainní roghnaithe.Níor "
+"athraíodh %(failure)i de na grúpaí eagarthóirí toisc nach raibh fáil ar "
+"cheadanna."
 
-#: repository/editor/resource_editor.py:522
+#: repository/editor/resource_editor.py:1121
 msgid "Successfully added editor groups to all selected resources."
 msgstr "Cuireadh grúpaí eagarthóirí le gach acmhainn roghnaithe."
 
-#: repository/editor/resource_editor.py:536
+#: repository/editor/resource_editor.py:1135
 msgid "Add editor group"
 msgstr "Cuir grúpa eagarthóirí leis"
 
-#: repository/editor/resource_editor.py:542
+#: repository/editor/resource_editor.py:1141
 msgid "Add editor groups to selected resources"
 msgstr "Cuir grúpaí eagarthóirí le hacmhainní roghnaithe"
 
-#: repository/editor/resource_editor.py:575
+#: repository/editor/resource_editor.py:1174
 msgid "Cancelled removing editor groups."
 msgstr "Cuireadh grúpaí eagarthóirí a bhaint ar ceal."
 
-#: repository/editor/resource_editor.py:585
+#: repository/editor/resource_editor.py:1184
 msgid "Successfully removed editor groups from the selected resources."
 msgstr "Baineadh grúpaí eagarthóirí ó na hacmhainní roghnaithe."
 
-#: repository/editor/resource_editor.py:598
+#: repository/editor/resource_editor.py:1197
 msgid "Remove editor group"
 msgstr "Bain grúpa eagarthóirí"
 
-#: repository/editor/resource_editor.py:605
+#: repository/editor/resource_editor.py:1204
 msgid "Remove editor groups from selected resources"
 msgstr "Bain grúpaí eagarthóirí ó acmhainní roghnaithe"
 
-#: repository/editor/resource_editor.py:615
+#: repository/editor/resource_editor.py:1214
 msgid "Cancelled adding owners."
 msgstr "Cuireadh úinéirí a chur leis ar ceal."
 
-#: repository/editor/resource_editor.py:631
+#: repository/editor/resource_editor.py:1230
 #, python-format
 msgid ""
-"Successfully added owners to %(success)i of the selected resources. %(failure)i resource owners "
-"were left unchanged due to missing permissions."
+"Successfully added owners to %(success)i of the selected resources. "
+"%(failure)i resource owners were left unchanged due to missing permissions."
 msgstr ""
-"Cuireadh úinéirí le %(success)i de na hacmhainní roghnaithe.Níor athraíodh %(failure)i de na "
-"húinéirí acmhainní toisc nach raibh fáil ar cheadanna."
+"Cuireadh úinéirí le %(success)i de na hacmhainní roghnaithe.Níor athraíodh "
+"%(failure)i de na húinéirí acmhainní toisc nach raibh fáil ar cheadanna."
 
-#: repository/editor/resource_editor.py:636
+#: repository/editor/resource_editor.py:1235
 msgid "Successfully added owners to all selected resources."
 msgstr "Cuireadh úinéirí le gach acmhainn roghnaithe."
 
-#: repository/editor/resource_editor.py:650
+#: repository/editor/resource_editor.py:1249
 msgid "Add owner"
 msgstr "Cuir úinéir leis"
 
-#: repository/editor/resource_editor.py:656
+#: repository/editor/resource_editor.py:1255
 msgid "Add owners to selected resources"
 msgstr "Cuir úinéirí le hacmhainní roghnaithe"
 
-#: repository/editor/resource_editor.py:668
+#: repository/editor/resource_editor.py:1267
 msgid "Cancelled removing owners."
 msgstr "Cuireadh úinéirí a bhaint ar ceal."
 
-#: repository/editor/resource_editor.py:678
+#: repository/editor/resource_editor.py:1277
 msgid "Successfully removed owners from the selected resources."
 msgstr "Baineadh úinéirí ó na hacmhainní roghnaithe."
 
-#: repository/editor/resource_editor.py:692
+#: repository/editor/resource_editor.py:1291
 msgid "Remove owner"
 msgstr "Bain úinéir"
 
-#: repository/editor/resource_editor.py:698
+#: repository/editor/resource_editor.py:1297
 msgid "Remove owners from selected resources"
 msgstr "Bain úinéirí ó acmhainní roghnaithe"
 
-#: repository/editor/resource_editor.py:786 repository/editor/resource_editor.py:877
-#: repository/editor/resource_editor.py:1021 repository/editor/resource_editor.py:1197
+#: repository/editor/resource_editor.py:1385
+#: repository/editor/resource_editor.py:1479
+#: repository/editor/resource_editor.py:1627
+#: repository/editor/resource_editor.py:1800
 #, python-format
 msgid "%(name)s object with primary key %(key)s does not exist."
 msgstr "Ní hann d'oibiacht %(name)s le heochair phríomhúil %(key)s."
 
-#: repository/editor/resource_editor.py:791 repository/editor/resource_editor.py:882
-#: repository/editor/resource_editor.py:1026 repository/editor/resource_editor.py:1201
+#: repository/editor/resource_editor.py:1390
+#: repository/editor/resource_editor.py:1484
+#: repository/editor/resource_editor.py:1632
+#: repository/editor/resource_editor.py:1804
 #, python-format
-msgid "%(name)s object with primary key %(key)s does not have a StorageObject attached."
-msgstr "Níl Oibiacht Stórála ceangailte le hoibiacht %(name)s le heochair phríomhúil %(key)s."
+msgid ""
+"%(name)s object with primary key %(key)s does not have a StorageObject "
+"attached."
+msgstr ""
+"Níl Oibiacht Stórála ceangailte le hoibiacht %(name)s le heochair phríomhúil "
+"%(key)s."
 
-#: repository/editor/resource_editor.py:795 repository/editor/resource_editor.py:886
-#: repository/editor/resource_editor.py:1030
+#: repository/editor/resource_editor.py:1394
+#: repository/editor/resource_editor.py:1488
+#: repository/editor/resource_editor.py:1636
 #, python-format
 msgid "%(name)s object with primary key %(key)s is not a master-copy."
 msgstr "Ní máistirchóip oibiacht %(name)s le heochair phríomhúil %(key)s."
 
-#: repository/editor/resource_editor.py:847
+#: repository/editor/resource_editor.py:1449
 #, python-format
 msgid "Upload resource: \"%s\""
 msgstr "Uaslódáil acmhainn: \"%s\""
 
-#: repository/editor/resource_editor.py:944
+#: repository/editor/resource_editor.py:1552
 #, python-format
 msgid "Upload validation report: \"%s\""
 msgstr "Uaslódáil tuairisc bhailíochtaithe: \"%s\""
 
-#: repository/editor/resource_editor.py:1083
+#: repository/editor/resource_editor.py:1689
 #, python-format
 msgid "Upload legal documentation: \"%s\""
 msgstr "Uaslódáil cáipéisíocht dhlíthiúil: \"%s\""
 
-#: repository/editor/resource_editor.py:1204
+#: repository/editor/resource_editor.py:1807
 #, python-format
 msgid "%(name)s object with primary key %(key)s does not exist anymore."
-msgstr "Ní hann do oibiacht %(name)s le heochair phríomhúil %(key)s a thuilleadh."
+msgstr ""
+"Ní hann do oibiacht %(name)s le heochair phríomhúil %(key)s a thuilleadh."
 
-#: repository/editor/resource_editor.py:1297
+#: repository/editor/resource_editor.py:1900
 #, python-format
 msgid "%s"
 msgstr "%s"
+
+#~ msgid "Successfully ingested %(internal)s internal resource."
+#~ msgid_plural "Successfully ingested %(internal)s internal resources."
+#~ msgstr[0] "Acmhainn inmheánach %(internal)s ionghafa."
+#~ msgstr[1] "Acmhainní inmheánacha %(internal)s ionghafa."
+#~ msgstr[2] ""
+#~ msgstr[3] ""
+#~ msgstr[4] ""

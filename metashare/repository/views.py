@@ -187,7 +187,7 @@ def download(request, object_id, **kwargs):
     if len(licences) == 1:
         # no need to manually choose amongst 1 license ...
         licence_choice = licences.iterkeys().next()
-
+    
     if licence_choice:
         l_info, access_links, access = licences[licence_choice]
         _dict = {'form': LicenseAgreementForm(licence_choice),
@@ -217,9 +217,8 @@ def _provide_download(request, resource, access_links, bypass_stats):
     Returns an HTTP response with a download of the given resource. AFTER ACCEPTING THE LICENSE IF THERE IS ANY...
     """
     dl_path = resource.storage_object.get_download()
-
+    
     if dl_path:
-
         try:
             def dl_stream_generator():
                 with open(dl_path, 'rb') as _local_data:
@@ -236,6 +235,7 @@ def _provide_download(request, resource, access_links, bypass_stats):
             response['Content-Length'] = getsize(dl_path)
             response['Content-Disposition'] = 'attachment; filename={0}' \
                 .format(split(dl_path)[1])
+            
             if not bypass_stats:
                 _update_download_stats(resource, request)
             LOGGER.info("Offering a local download of resource #{0}." \
@@ -274,7 +274,7 @@ def _provide_download(request, resource, access_links, bypass_stats):
                               context_instance=RequestContext(request))
 
 
-def update_download_stats(resource, request):
+def _update_download_stats(resource, request):
     """
     Updates all relevant statistics counters for a the given successful resource
     download request.
@@ -1036,7 +1036,7 @@ def contribute(request):
 
             'resourceInfo': {
                 'resourceTitle': request.POST['resourceTitle'],
-                'shortDescription': request.POST['shortDescription'] or _("N/A"),
+                'shortDescription': request.POST['shortDescription'], #or _("N/A"),
                 'licence': request.POST['licence'],
             },
             'administration': {
@@ -1146,7 +1146,7 @@ def contribute(request):
                         os.remove(ofile_path)
                         response['status'] = "failed"
                         response['message'] =  _("""
-                            Only files of type DOC(X), ODT, PDF, TMX, SDLTM, XML,
+                            Only files of type DOC(X), ODT, RTF, PDF, TMX, SDLTM, XML,
                             TBX , XLS(X), TXT and ZIP files are allowed.
                             The zip files can only contain files of the
                             specified types. Please consider removing the files
@@ -1197,8 +1197,9 @@ def contribute(request):
 
             response['status'] = "succeded"
             response['message'] = _("""
-                Thank you for sharing! Your data have been successfully submitted.""")
+                Thank you for sharing, your data have been successfully submitted. They will now be processed by our automated engines and reviewed by the ELRI team. You will be notified by email when the resulting resource is available for download.""")
             return HttpResponse(json.dumps(response), content_type="application/json")
+            #return render_to_response('repository/editor/contributions/contribute.html',  response, context_instance=RequestContext(request))
             #messages.info(request,_("Thank you for sharing! Your data have been successfully submitted."))
             #return HttpResponseRedirect('metashare.repository.contribute')
             
@@ -1268,10 +1269,11 @@ def create_description(xml_file, type, base, user):
         "resource_file": ''.join(doc.xpath("//resource/administration/resource_file/text()")),
         "dataset": doc.xpath("//resource/administration/dataset/uploaded_files/item/text()")
     }
+    
     # Create a new Identification object
     identification = identificationInfoType_model.objects.create( \
-        resourceName={'en': info['title'].encode('utf-8')},
-        description={'en': info['description'].encode('utf-8')},
+        resourceName={'en': unicode(info['title'])}, #.encode('utf-8')},
+        description={'en': unicode(info['description'])},#.encode('utf-8')},
         appropriatenessForDSI=info['domains'])
     resource_creation = resourceCreationInfoType_model.objects.create(
         createdUsingELRCServices=False
@@ -1718,7 +1720,7 @@ def repo_report(request):
                        "The ELRI group".format(datetime.datetime.now().strftime("%d, %b %Y"))
 
             msg = EmailMessage("[ELRI] ELRI weekly report", msg_body,
-                               from_email=EMAIL_ADDRESSES['elri-ilsp'], bcc=rp)
+                               from_email='elri-ilsp@email.com', bcc=rp)
 
             msg.attach("{}.xlsx".format(title), output.getvalue(),
                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")

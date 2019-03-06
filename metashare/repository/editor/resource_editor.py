@@ -4,6 +4,7 @@ from mimetypes import guess_type
 from shutil import copyfile
 import json
 import logging
+import codecs
 from django import forms
 from django.contrib import admin, messages
 from django.contrib.admin.utils import unquote
@@ -26,7 +27,7 @@ from django.views.decorators.csrf import csrf_protect
 
 
 from metashare import settings
-from metashare.settings import STATIC_URL,LOG_HANDLER,ROOT_PATH
+from metashare.settings import STATIC_URL,LOG_HANDLER,ROOT_PATH, DJANGO_URL
 
 from metashare.accounts.models import EditorGroup, EditorGroupManagers
 from metashare.repository.editor.editorutils import FilteredChangeList, AllChangeList
@@ -105,8 +106,10 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
     'NLOD-1.0': (STATIC_URL + 'metashare/licences/NLOD-1.0.pdf', MEMBER_TYPES.NON),
     'OGL-3.0': (STATIC_URL + 'metashare/licences/OGL-3.0.pdf', MEMBER_TYPES.NON),
     'NCGL-1.0': (STATIC_URL + 'metashare/licences/NCGL-1.0.pdf', MEMBER_TYPES.GOD),
-    'openUnder-PSI': (STATIC_URL + 'metashare/licences/openUnderPSI.txt', MEMBER_TYPES.NON),
-    'publicDomain': (STATIC_URL + 'metashare/licences/publicDomain.txt', MEMBER_TYPES.NON), #('', MEMBER_TYPES.NON),
+    'openUnder-PSI':('', MEMBER_TYPES.NON),
+    'publicDomain':('', MEMBER_TYPES.NON),
+    #'openUnder-PSI': (STATIC_URL + 'metashare/licences/openUnderPSI.txt', MEMBER_TYPES.NON),
+    #'publicDomain': (STATIC_URL + 'metashare/licences/publicDomain.txt', MEMBER_TYPES.NON), #('', MEMBER_TYPES.NON),
     'non-standard/Other_Licence/Terms': ('', MEMBER_TYPES.NON),
     'underReview': ('', MEMBER_TYPES.GOD),
 }
@@ -459,7 +462,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 call_tm2tmx=-1
                 call_doc2tmx=-1
                 pre_status=check_resource_status(obj)
-                LOGGER.info(pre_status)
+                
                 if change_resource_status(obj, status=PROCESSING, precondition_status=INGESTED) or change_resource_status(obj, status=PROCESSING, precondition_status=ERROR) or (from_ingest and change_resource_status(obj, status=PROCESSING, precondition_status=INTERNAL)) : #or check_resource_status(obj)== PROCESSING:
                     #only (re)process INGESTED or ERROR or INTERNAL resources, published are suposed to be ok 
                     
@@ -563,7 +566,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                     errors+=1
                                     #send notification email
                                     try:
-                                        send_mail(_("Error when processing resource %s") % r_name, _('An error occurred when processing the resource %s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %s') % (r_name,settings.EMAIL_ADDRESSES['elri-nrs-support']), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
+                                        send_mail(_("Error when processing resource %(rname)s") % ({'rname':r_name}), _('An error occurred when processing the resource %(rname)s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %(email)s') % ({'rname':r_name,'email':settings.EMAIL_ADDRESSES['elri-nrs-support']}), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
                                     except: 
                                         messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
                                                                                                                                                                                                                                                             
@@ -574,7 +577,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                 errors+=1
                                 #send notification email
                                 try:
-                                    send_mail(_("Error when processing resource %s") % r_name, _('An error occurred when processing the resource %s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %s') % (r_name,settings.EMAIL_ADDRESSES['elri-nrs-support']), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
+                                    send_mail(_("Error when processing resource %(rname)s") % ({'rname':r_name}), _('An error occurred when processing the resource %(rname)s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %(email)s') % ({'rname':r_name,'email':settings.EMAIL_ADDRESSES['elri-nrs-support']}), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
                                 except: 
                                     messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
                                 
@@ -585,7 +588,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                             errors+=1
                             #send notification email
                             try:
-                                send_mail(_("Error when processing resource %s") % r_name, _('An error occurred when processing the resource %s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %s') % (r_name,settings.EMAIL_ADDRESSES['elri-nrs-support']), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
+                                send_mail(_("Error when processing resource %(rname)s") % ({'rname':r_name}), _('An error occurred when processing the resource %(rname)s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %(email)s') % ({'rname':r_name,'email':settings.EMAIL_ADDRESSES['elri-nrs-support']}), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
                             except: 
                                 messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
                     response_doc=''    
@@ -611,7 +614,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                     errors+=1
                                     #send notification email
                                     try:
-                                        send_mail(_("Error when processing resource %s") % r_name, _('An error occurred when processing the resource %s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %s') % (r_name,settings.EMAIL_ADDRESSES['elri-nrs-support']), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
+                                        send_mail(_("Error when processing resource %(rname)s") % ({'rname':r_name}), _('An error occurred when processing the resource %(rname)s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %(email)s') % ({'rname':r_name,'email':settings.EMAIL_ADDRESSES['elri-nrs-support']}), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
                                     except: 
                                         messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
                             else:
@@ -621,7 +624,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                 errors+=1
                                 #send notification email
                                 try:
-                                    send_mail(_("Error when processing resource %s") % r_name, _('An error occurred when processing the resource %s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %s') % (r_name,settings.EMAIL_ADDRESSES['elri-nrs-support']), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
+                                    send_mail(_("Error when processing resource %(rname)s") % ({'rname':r_name}), _('An error occurred when processing the resource %(rname)s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %(email)s') % ({'rname':r_name,'email':settings.EMAIL_ADDRESSES['elri-nrs-support']}), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
                                 except: 
                                     messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
                                 
@@ -632,7 +635,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                             errors+=1
                             #send notification email
                             try:
-                                send_mail(_("Error when processing resource %s") % r_name, _('An error occurred when processing the resource %s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %s') % (r_name,settings.EMAIL_ADDRESSES['elri-nrs-support']), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
+                                send_mail(_("Error when processing resource %(rname)s") % ({'rname':r_name}), _('An error occurred when processing the resource %(rname)s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %(email)s') % ({'rname':r_name,'email':settings.EMAIL_ADDRESSES['elri-nrs-support']}), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
                             except: 
                                 messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
                             
@@ -732,8 +735,14 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     lr_archive_zip=zipfile.ZipFile(resource_path+'/archive.zip', mode='a')
                     for l in licences_name:
                         l_info, access_links, access = licences[l]
+                        if l == 'publicDomain':
+                            access_links=STATIC_URL + 'metashare/licences/publicDomain.txt'
+                        if l == 'openUnderPSI':
+                            access_links=STATIC_URL + 'metashare/licences/openUnderPSI.txt'
+                        
                         #add access file to the lr.archive.zip file 
                         licence_path=ROOT_PATH+access_links
+                        
                         path, filename = os.path.split(licence_path)
                         lr_archive_zip.write(licence_path,'license_'+filename)
                     
@@ -780,8 +789,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     # IPR Holder: Name Surname (email), Organization 
                     # Contact Person: Name Surname (email), Organization 
                     metadata_file_path=resource_path+'/'+resource_name[0]+'_metadata.txt'
-                    with open(metadata_file_path, 'w') as metadata_file:
-                        metadata_file.write(_('Resource_name: ')+resource_name[0]+'\n')
+                    with codecs.open(metadata_file_path, encoding='utf-8',mode='w') as metadata_file:
+                        metadata_file.write(_('Resource_name: %s  \n') % resource_name[0])
                         for i,l in enumerate(licences_name):
                             metadata_file.write(_('License: ')+l+'\n')
                             if licences_restriction[i] =='':
@@ -805,7 +814,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     emails=obj.owners.all().values_list('email',flat=True)
                     name=obj.owners.all().values_list('first_name',flat=True)
                     surname=obj.owners.all().values_list('last_name',flat=True)
-                    email_data={'resourcename':resource_name[0],'username':name[0], 'usersurname':surname[0]}
+                    email_data={'resourcename':resource_name[0],'username':name[0], 'usersurname':surname[0], 'nodeurl':DJANGO_URL}
                     try:
                         send_mail(_('Published Resource'), render_to_string('repository/published_resource.email',email_data) , settings.EMAIL_ADDRESSES['elri-no-reply'],emails, fail_silently=False)
                     except:
@@ -1558,8 +1567,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
     ## VALIDATION REPORT
     @csrf_protect_m
     def reportdl(self, request, object_id, extra_context=None):
-
-        # return HttpResponse("OK")
         """
         Returns an HTTP response with a download of the given validation report.
         """
@@ -1587,8 +1594,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 response['Content-Length'] = getsize(dl_path)
                 response['Content-Disposition'] = 'attachment; filename={0}' \
                     .format(split(dl_path)[1])
-                # LOGGER.info("Offering a local editor download of resource #{0}." \
-                #             .format(object_id))
+                LOGGER.info("Offering a local editor download of resource #{0}." \
+                             .format(object_id))
                 return response
             except:
                 pass
@@ -1697,7 +1704,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
     ## LEGAL DOCUMENTATION
     @csrf_protect_m
     def legaldl(self, request, object_id, extra_context=None):
-
         # return HttpResponse("OK")
         """
         Returns an HTTP response with a download of the given legal documentation.
@@ -1726,8 +1732,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 response['Content-Length'] = getsize(dl_path)
                 response['Content-Disposition'] = 'attachment; filename={0}' \
                     .format(split(dl_path)[1])
-                # LOGGER.info("Offering a local editor download of resource #{0}." \
-                #             .format(object_id))
+                LOGGER.info("Offering a local editor download of resource #{0}." \
+                             .format(object_id))
                 return response
             except:
                 pass
@@ -1739,12 +1745,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
 
     @csrf_protect_m
     def datadl(self, request, object_id, extra_context=None):
-
-        # return HttpResponse("OK")
         """
         Returns an HTTP response with a download of the given resource.
         """
-
         model = self.model
         opts = model._meta
 
@@ -1752,6 +1755,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         if obj is not None:
             storage_object = obj.storage_object
             dl_path = storage_object.get_download()
+            
             if dl_path:
                 try:
                     def dl_stream_generator():
@@ -1769,8 +1773,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     response['Content-Length'] = getsize(dl_path)
                     response['Content-Disposition'] = 'attachment; filename={0}' \
                         .format(split(dl_path)[1])
-                    # LOGGER.info("Offering a local editor download of resource #{0}." \
-                    #             .format(object_id))
+                    LOGGER.info("Offering a local editor download of resource #{0}." \
+                                 .format(object_id))
                     return response
                 except:
                     pass
