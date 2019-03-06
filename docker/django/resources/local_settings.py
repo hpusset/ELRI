@@ -34,13 +34,16 @@ USE_I18N = True
 LANGUAGE_CODE = environ['ELRI_LANGUAGE'] # one of the LANGUAGES language codes
 
 # Supported localisation languages
-LANGUAGES = (
+ALL_LANGUAGES = (
     ('es-es', _('Spanish')),
     ('en-ie', _('English')),
     ('fr-fr', _('French')),
     ('ga-ie', _('Gaelic')),
     ('pt-pt', _("Portuguese")),
 )
+#get preferred localized language(s)
+loc_langs= environ['ELRI_LOC_LANGUAGES']
+LANGUAGES=[(l[0],l[1]) for l in ALL_LANGUAGES if l[0] in loc_langs]
 
 # Supported processing languages
 lang_list = environ['ELRI_SUP_LANGUAGES']

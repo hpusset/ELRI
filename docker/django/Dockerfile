@@ -5,8 +5,8 @@ RUN tar xvfz /tmp/dockerize-alpine-linux-amd64-v0.5.0.tar.gz -C /tmp/
 
 FROM python:2.7.15-stretch
 
-#ARG RELEASE="trunk"
-ARG RELEASE="tags/R2.5"
+ARG RELEASE="trunk"
+#ARG RELEASE="tags/R2.5"
 #ARG RELEASE="branches/tempR25"
 ENV DB_HOST="postgres-server" \
     DB_PORT="5432" \
@@ -17,6 +17,7 @@ ENV DB_HOST="postgres-server" \
     DBELRI_NAME="elri_metashare" \
     ELRI_TIMEZONE="Europe/Lisbon" \
     ELRI_LANGUAGE="pt-pt" \
+    ELRI_LOC_LANGUAGES="en-ie,es-es,pt-pt,fr-fr,ga-ie"
     ELRI_SUP_LANGUAGES='[("English", "English"), ("French", "French"), ("German", "German"), ("Italian", "Italian"), ("Irish", "Irish"), ("Spanish; Castilian", "Spanish"), ("Portuguese", "Portuguese")]' \
     ELRI_COUNTRY="Portugal" \
     ELRI_SALT="e07fc77c1ecd3" \
