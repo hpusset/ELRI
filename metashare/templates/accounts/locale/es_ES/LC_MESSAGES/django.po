@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-06 17:30+0100\n"
-"PO-Revision-Date: 2019-03-06 12:21+0100\n"
+"PO-Revision-Date: 2019-03-06 18:28+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: templates/accounts/activation_email.html:3
 #: templates/accounts/confirmation_email.html:2
@@ -257,8 +257,8 @@ msgid ""
 "I accept the <a target=\"_blank\" href=\"%(elri_tos)s\">ELRI Terms of "
 "Service</a>."
 msgstr ""
-"Acepto los <a target=\"_blank\" href=\"%(elri_tos)s\">Términos de Servicio "
-"de ERLI /a>."
+"Acepto las <a target=\"_blank\" href=\"%(elri_tos)s\">Condiciones de "
+"Servicio de ERLI </a>."
 
 #: templates/accounts/delete_editor_group_application_selected_confirmation.html:6
 #: templates/accounts/delete_organization_application_selected_confirmation.html:6
