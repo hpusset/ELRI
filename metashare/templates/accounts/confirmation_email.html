@@ -1,0 +1,12 @@
+{% load i18n %}
+{% blocktrans %}Dear {% endblocktrans %} {{firstname}} {{lastname}},
+
+{% blocktrans %}we have received a registration request for a new ELRI user account "{{shortname}}" at [1]. You can confirm that registration request and create your account by clicking the following link:{% endblocktrans %}
+
+  {{confirmation_url}}
+
+{% blocktrans %}Please make sure to follow the link within three days. If you do not wish to create an account with this e-mail address, then please simply disregard this message.{% endblocktrans %}
+
+{% blocktrans %}Welcome to ELRI!{% endblocktrans %}
+
+[1] {{ node_url }}

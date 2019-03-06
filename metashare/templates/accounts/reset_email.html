@@ -1,0 +1,12 @@
+{% load i18n %}
+{% blocktrans %}Dear {{firstname}} {{lastname}},{% endblocktrans %}
+
+{% blocktrans %}We have received a password reset request for your ELRI user
+account "{{shortname}}". You can confirm this request and
+reset your password by clicking on the following link:
+- {{confirmation_url}}{% endblocktrans %}
+
+{% blocktrans %}If you do not wish to reset your account password, please 
+ignore this email.{% endblocktrans %}
+
+{% blocktrans %}Thank you for using ELRI!  {% endblocktrans %}

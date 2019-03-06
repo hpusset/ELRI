@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-05 18:50+0100\n"
+"POT-Creation-Date: 2019-03-06 13:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1361,6 +1361,10 @@ msgstr ""
 
 #: repository/validators.py:97
 msgid "Please edit the attribution text template"
+msgstr ""
+
+#: repository/views.py:340
+msgid "Request for information regarding a resource"
 msgstr ""
 
 #: repository/views.py:348

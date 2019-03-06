@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-05 18:50+0100\n"
+"POT-Creation-Date: 2019-03-06 13:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,24 +17,23 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: local_settings.py:39 local_settings.py:43
-msgid "Gaelic"
+#: edelivery/management/commands/get_new_edelivery_messages.py:23
+msgid "New contributions through eDelivery"
 msgstr ""
 
-#: local_settings.py:40
+#: edelivery/management/commands/get_new_edelivery_messages.py:24
+msgid ""
+"You have new unmanaged contributed resources on elri.eu, through eDelivery."
+msgstr ""
+
+#: edelivery/management/commands/get_new_edelivery_messages.py:29
+msgid ""
+"An error has occurred while trying to send email to contributions alert "
+"recipients."
+msgstr ""
+
+#: local_settings.py:39
 msgid "Spanish"
-msgstr ""
-
-#: local_settings.py:41
-msgid "English"
-msgstr ""
-
-#: local_settings.py:42
-msgid "French"
-msgstr ""
-
-#: local_settings.py:44
-msgid "Portuguese"
 msgstr ""
 
 #: storage/models.py:113

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-05 18:50+0100\n"
+"POT-Creation-Date: 2019-03-06 13:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -96,6 +96,10 @@ msgstr ""
 msgid "You must be superuser or group manager to accept applications."
 msgstr ""
 
+#: accounts/admin.py:311 accounts/admin.py:779
+msgid "Application accepted"
+msgstr ""
+
 #: accounts/admin.py:318 accounts/admin.py:786
 msgid "There was an error sending out an application acceptance e-mail."
 msgstr ""
@@ -120,6 +124,10 @@ msgstr ""
 
 #: accounts/admin.py:336
 msgid "Accept selected editor group applications"
+msgstr ""
+
+#: accounts/admin.py:370 accounts/admin.py:830
+msgid "Application turned down"
 msgstr ""
 
 #: accounts/admin.py:378 accounts/admin.py:838
@@ -309,6 +317,10 @@ msgstr ""
 
 #: accounts/admin.py:1135
 msgid "You must be superuser to reject eDelivery applications."
+msgstr ""
+
+#: accounts/admin.py:1145 accounts/admin.py:1193
+msgid "ELRI eDelivery application"
 msgstr ""
 
 #: accounts/admin.py:1157
@@ -556,6 +568,10 @@ msgstr ""
 msgid "An older application of yours for editor group \"%s\" is still pending."
 msgstr ""
 
+#: accounts/views.py:333
+msgid "New editor membership request"
+msgstr ""
+
 #: accounts/views.py:340
 msgid ""
 "There was an error sending out the request email for your editor group "
@@ -598,6 +614,10 @@ msgstr ""
 #: accounts/views.py:465
 #, python-format
 msgid "An older application of yours for organization \"%s\" is still pending."
+msgstr ""
+
+#: accounts/views.py:487
+msgid "New organization membership request"
 msgstr ""
 
 #: accounts/views.py:494

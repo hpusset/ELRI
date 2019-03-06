@@ -816,7 +816,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     surname=obj.owners.all().values_list('last_name',flat=True)
                     email_data={'resourcename':resource_name[0],'username':name[0], 'usersurname':surname[0], 'nodeurl':DJANGO_URL}
                     try:
-                        send_mail(_('Published Resource'), render_to_string('repository/published_resource.email',email_data) , settings.EMAIL_ADDRESSES['elri-no-reply'],emails, fail_silently=False)
+                        send_mail(_('Published Resource'), render_to_string('repository/published_resource_email.html',email_data) , settings.EMAIL_ADDRESSES['elri-no-reply'],emails, fail_silently=False)
                     except:
                         # failed to send e-mail to superuser
                         # If the email could not be sent successfully, tell the user
@@ -928,7 +928,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     for i,r in enumerate(resource_names):
                         email_data={'resourcename':r}
                         try:
-                            send_mail("Ingested Resource", render_to_string('repository/ingested_resource.email',email_data),settings.EMAIL_ADDRESSES['elri-no-reply'],lr_reviewers[i])
+                            send_mail(_("Ingested Resource"), render_to_string('repository/ingested_resource_email.html',email_data),settings.EMAIL_ADDRESSES['elri-no-reply'],lr_reviewers[i])
                         except:
                             # failed to send e-mail to superuser
                             # If the email could not be sent successfully, tell the user

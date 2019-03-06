@@ -1,0 +1,10 @@
+{% load i18n %}
+{% blocktrans %}Dear organization manager,{% endblocktrans %}
+
+{% blocktrans %}We have received an application to your organization "{{ organization }}"
+from the ELRI user account "{{ shortname }}".{% endblocktrans %}
+
+{% blocktrans %}You can confirm or reject that application by going to the following page in the administration section:
+- {{ confirmation_url }}{% endblocktrans %}
+
+{% blocktrans %}Best regards{% endblocktrans %}
