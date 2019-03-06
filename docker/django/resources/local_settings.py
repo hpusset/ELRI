@@ -11,7 +11,7 @@ ROOT_PATH = abspath(dirname(__file__))
 
 # The URL for this META-SHARE node django application.  Do not use trailing /.
 # This URL has to include DJANGO_BASE (without its trailing /)!
-DJANGO_URL = 'http://' + environ['ELRI_HOSTNAME'] + '.' + environ['ELRI_DOMAINNAME']
+DJANGO_URL = environ['ELRI_PROTOCOL'] + '://' + environ['ELRI_HOSTNAME'] + '.' + environ['ELRI_DOMAINNAME']
 
 # The base path under which django is deployed at DJANGO_URL.  Use trailing /.
 # Do not use leading / though.  Leave empty if META-SHARE is deployed directly
@@ -46,7 +46,6 @@ LANGUAGES = (
 lang_list = environ['ELRI_SUP_LANGUAGES']
 import ast
 SUPPORTED_LANGUAGES = ast.literal_eval(lang_list)
-
 
 # Directories containing the translations
 LOCALE_PATHS = tuple([
@@ -123,6 +122,9 @@ EMAIL_HOST = environ['ELRI_EMAIL_HOST']
 EMAIL_PORT = environ['ELRI_EMAIL_PORT']
 EMAIL_HOST_USER = environ['ELRI_EMAIL_USER']
 EMAIL_HOST_PASSWORD = environ['ELRI_EMAIL_PASS']
+EMAIL_ADDRESSES = {k:v for k,v in (s.split(':') for s in environ['ELRI_EMAIL_ADDRESSES'].split(','))}
+
+
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name

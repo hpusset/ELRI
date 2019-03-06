@@ -1,0 +1,20 @@
+server {
+    gzip                 on;
+    gzip_types           text/plain application/xml text/css;
+    gzip_min_length      1000;
+    gzip_static          on;
+    server_tokens        off;
+    listen               80;
+    server_name          {{ .Env.ELRI_HOSTNAME }}.{{ .Env.ELRI_DOMAINNAME }};
+    root                 /www/data;
+    client_max_body_size 100M;
+    
+    location /static/ {
+        try_files $uri $uri/ =404;
+    }
+
+    location / {
+        proxy_pass http://elri-node1:8000;
+        proxy_redirect http://elri-node1:8000 {{ .Env.ELRI_PROTOCOL }}://{{ .Env.ELRI_HOSTNAME }}.{{ .Env.ELRI_DOMAINNAME }};
+    }
+}

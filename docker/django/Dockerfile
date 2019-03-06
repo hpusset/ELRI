@@ -6,8 +6,8 @@ RUN tar xvfz /tmp/dockerize-alpine-linux-amd64-v0.5.0.tar.gz -C /tmp/
 FROM python:2.7.15-stretch
 
 #ARG RELEASE="trunk"
-ARG RELEASE="tags/R2"
-#ARG RELEASE="branches/VIC"
+ARG RELEASE="tags/R2.4"
+#ARG RELEASE="branches/temp2"
 ENV DB_HOST="postgres-server" \
     DB_PORT="5432" \
     SOLR_HOST="solr" \
@@ -21,7 +21,11 @@ ENV DB_HOST="postgres-server" \
     ELRI_COUNTRY="Portugal" \
     ELRI_SALT="e07fc77c1ecd3" \
     ELRI_ALERT_MAILS="noreply@elri.com" \
-    GIT_URL="https://github.com/ELDAELRA/ELRI/${RELEASE}"
+    GIT_URL="https://github.com/ELDAELRA/ELRI/${RELEASE}"\
+    ELRI_EMAIL_ADDRESSES="elri-nrs-support:elri-nrs-support@vicomtech.org,elri-no-reply:no-reply-elri@email.com,elri-ilsp:elri-ilsp@email.com,elri-edelivery:elri-edelivery@email.com"\
+    ELRI_WORKERS=2 \
+    ELRI_THREADS=4
+
 
 COPY --from=base /tmp/dockerize /usr/local/bin/
 COPY resources/env_secrets_expand.sh \
@@ -48,8 +52,6 @@ COPY resources/local_settings.py \
      resources/maintainers.dat \
      resources/wsgi.py /elri/metashare/
 
-#COPY /elri/elri_resources/config/web_service.cfg /elri/
-
 EXPOSE 8000
 
 WORKDIR /elri
@@ -57,10 +59,11 @@ WORKDIR /elri
 RUN useradd django \
     && usermod --shell /bin/false --uid 8283 --expiredate 1 --lock django \
     && groupmod --gid 8283 django \
-    && chown -R django:django /elri \
+    && mkdir -p /elri/static \
+    && chown -R 8283:8283 /elri \
     && chmod -R 774 /elri/elri_resources
 
-VOLUME [ "/certificates", "/elri/elri_resources" ]
+VOLUME [ "/certificates", "/elri/elri_resources", "/elri/static" ]
 
 USER django
 

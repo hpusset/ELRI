@@ -121,7 +121,8 @@ function addStatus(filter){
 
 <div class='tab-container'>
  <ul class='etabs'>
-   <li class='tab'><a href="{% url 'frontpage' %}stats/top/">{% trans 'ELRC-SHARE visits statistics' %}</a></li>
+   <!--<li class='tab'><a href="{% url 'frontpage' %}stats/top/">{% trans 'ELRC-SHARE visits statistics' %}</a></li>-->
+   <li class='tab'><a href="{% url 'frontpage' %}stats/top/">{% trans 'ELRI visits statistics' %}</a></li>
    <li class='tab tab-nobr'>{% trans 'Statistics on resource metadata' %}</li>
    {% if user.username and myres %}
         <li class='tab'><a href="{% url 'frontpage' %}stats/mystats/">{% trans 'My resources' %}</a></li>
@@ -141,13 +142,21 @@ function addStatus(filter){
             <h4>{% trans 'Filter by:' %} <img src="{% static "metashare/css/sexybuttons/images/icons/silk/help.png" %}" class=pointer onclick="showdiv('filtershelp')"></h4>
           </div>  
           <div id="filtershelp" class="warning" style="visibility: hidden; display: none">
-                {% blocktrans %}This panel shows which metadata have been used to describe the ELRC-SHARE linguistic resources.
-                Each metadata defined in the <a href="http://www.meta-share.org/knowledgebase/DetailedPresentationOfTheModel" target="metamodel">ELRC-SHARE model</a> can be either "required", "recommended" or "optional".
+                {% blocktrans %}This panel shows which metadata have been used to describe the ELRI linguistic resources.
+                Each metadata defined in the <a href="http://www.meta-share.org/knowledgebase/DetailedPresentationOfTheModel" target="metamodel">ELRI model</a> can be either "required", "recommended" or "optional".
                 The metadata usage statistics reports two counters. The first counter says how many times a metadata has been 
                 filled in with a certain value, while the second counter says the number of resources for which the metadata has been used.
                 For instance <div class="coverage required"> 28/12 </div> means that the corresponding required metadata has been filled in 28 times (possibly with 
                 redundant values), and that 12 different resources have been described with that metadata.
                 You can click on a metadata name to see a table with all the actual values used to fill in that metadata.{% endblocktrans %}
+
+<!--                {% blocktrans %}This panel shows which metadata have been used to describe the ELRC-SHARE linguistic resources.
+                Each metadata defined in the <a href="http://www.meta-share.org/knowledgebase/DetailedPresentationOfTheModel" target="metamodel">ELRC-SHARE model</a> can be either "required", "recommended" or "optional".
+                The metadata usage statistics reports two counters. The first counter says how many times a metadata has been 
+                filled in with a certain value, while the second counter says the number of resources for which the metadata has been used.
+                For instance <div class="coverage required"> 28/12 </div> means that the corresponding required metadata has been filled in 28 times (possibly with 
+                redundant values), and that 12 different resources have been described with that metadata.
+                You can click on a metadata name to see a table with all the actual values used to fill in that metadata.{% endblocktrans %} -->
           </div>
           
           <div id="colsubtab"><div class="accordion">{% blocktrans %}Metadata status{% endblocktrans %}</div>
@@ -187,8 +196,9 @@ function addStatus(filter){
        </ul>
       {% endif %}
 
-      {% blocktrans %}(the following lines are the metadata components and elements included in the <a href="http://www.meta-share.org/portal/knowledgebase/DetailedPresentationOfTheModel" target="metamodel">ELRC-SHARE model</a> grouped by different roles and alphabetically sorted){% endblocktrans %}
-         
+      {% blocktrans %}(the following lines are the metadata components and elements included in the <a href="http://www.meta-share.org/portal/knowledgebase
+/DetailedPresentationOfTheModel" target="metamodel">ELRI model</a> grouped by different roles and alphabetically sorted){% endblocktrans %}
+	  <!--{% blocktrans %}(the following lines are the metadata components and elements included in the <a href="http://www.meta-share.org/portal/knowledgebase/	DetailedPresentationOfTheModel" target="metamodel">ELRC-SHARE model</a> grouped by different roles and alphabetically sorted){% endblocktrans %}         -->
 <div style="float: right; padding: 5px; margin: 0px">[ <a href="javascript:expandAll();">{% blocktrans %}Expand all{% endblocktrans %}</a>
             | <a href="javascript:collapseAll();">{% blocktrans %}Collapse all{% endblocktrans %}</a> ]</div>
 </div>
