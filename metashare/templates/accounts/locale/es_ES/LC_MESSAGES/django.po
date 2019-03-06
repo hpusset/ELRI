@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-06 17:30+0100\n"
-"PO-Revision-Date: 2019-03-06 18:28+0100\n"
+"PO-Revision-Date: 2019-03-06 18:55+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -25,7 +25,7 @@ msgstr ""
 #: templates/accounts/notification_organization_application_turned_down_email.html:2
 #: templates/accounts/reactivation_email.html:2
 msgid "Dear "
-msgstr ""
+msgstr "Estimado "
 
 #: templates/accounts/activation_email.html:5
 #, python-format
@@ -33,6 +33,9 @@ msgid ""
 "We have activated your ELRI user account \"%(shortname)s\", welcome to ELRI! "
 "You can now access our services by logging into our website %(nodeurl)s."
 msgstr ""
+"Se ha activado su cuenta en  ELRI con usuario \"%(shortname)s\", ¡bienvenido "
+"a ELRI! Ahora puede acceder a nuestros servicios entrando en nuestra web "
+"%(nodeurl)s."
 
 #: templates/accounts/activation_email.html:7
 #: templates/accounts/contact_maintainers_email.html:12
@@ -41,11 +44,11 @@ msgstr ""
 #: templates/accounts/notification_organization_application_accepted_email.html:7
 #: templates/accounts/notification_organization_application_turned_down_email.html:7
 msgid "Best regards,"
-msgstr ""
+msgstr "Saludos,"
 
 #: templates/accounts/activation_email.html:9
 msgid "The ELRI team"
-msgstr ""
+msgstr "El equipo de ELRI"
 
 #: templates/accounts/add_user_profile_to_editor_group.html:13
 #: templates/accounts/remove_user_profile_from_editor_group.html:12
@@ -178,6 +181,9 @@ msgid ""
 "\"%(shortname)s\" at [1]. You can confirm that registration request and "
 "create your account by clicking the following link:"
 msgstr ""
+"hemos recibido una solicitud de registro de una nueva cuenta en ELRI con "
+"usuario  \"%(shortname)s\" en [1]. Puede confirmar esta solicitud y crear su "
+"cuenta haciendo click en el siguiente enlace:"
 
 #: templates/accounts/confirmation_email.html:8
 msgid ""
@@ -185,10 +191,12 @@ msgid ""
 "create an account with this e-mail address, then please simply disregard "
 "this message."
 msgstr ""
+"Por favor, asegúrese de visitar el enlace en tres días. Si no desea crear "
+"una cueneta con esta dirección de e-mail, por favor ignore este mensaje."
 
 #: templates/accounts/confirmation_email.html:10
 msgid "Welcome to ELRI!"
-msgstr ""
+msgstr "¡Bienvenido a ELRI!"
 
 #: templates/accounts/contact_maintainers.html:10
 msgid ""
@@ -217,7 +225,7 @@ msgstr ""
 
 #: templates/accounts/contact_maintainers_email.html:3
 msgid "Dear superuser,"
-msgstr ""
+msgstr "Estimado superusuario,"
 
 #: templates/accounts/contact_maintainers_email.html:5
 #, python-format
@@ -225,24 +233,28 @@ msgid ""
 "%(user_first_name)s %(user_last_name)s (user account: %(user_account_name)s) "
 "has sent you a message through the contact form of ELRI."
 msgstr ""
+"%(user_first_name)s %(user_last_name)s (user account: %(user_account_name)s) "
+"ha enviado un mensaje a través del formulario de contacto de ELRI."
 
 #: templates/accounts/contact_maintainers_email.html:7
 #, python-format
 msgid "Subject: %(subject)s"
-msgstr ""
+msgstr "Asunto: %(subject)s"
 
 #: templates/accounts/contact_maintainers_email.html:8
 msgid "Message: see below "
-msgstr ""
+msgstr "Mensaje: ver más abajo"
 
 #: templates/accounts/contact_maintainers_email.html:10
 #, python-format
 msgid "Please try to answer this request soon by responding to %(user_email)s."
 msgstr ""
+"Por favor, intente contestar la solicitud tan pronto le sea posible "
+"respondiendo a  %(user_email)s."
 
 #: templates/accounts/contact_maintainers_email.html:14
 msgid "The ELRI Team"
-msgstr ""
+msgstr "El equipo de ELRI"
 
 #: templates/accounts/create_account.html:14
 #: templates/accounts/create_account.html:15
@@ -413,6 +425,8 @@ msgid ""
 "The application to the editor group \"%(editor_group)s\"\n"
 "has been accepted by a manager of the group."
 msgstr ""
+"La solicitud de suscripción al grupo de editores \"%(editor_group)s\"\n"
+"ha sido aceptada por uno de los gestores del grupo."
 
 #: templates/accounts/notification_editor_group_application_turned_down_email.html:4
 #, python-format
@@ -420,12 +434,12 @@ msgid ""
 "The application to the editor group \"%(editor_group)s\"\n"
 "has been turned down by a manager of the group."
 msgstr ""
+"La solicitud de suscripción al grupo de editores\"%(editor_group)s\"\n"
+"ha sido rechazada por uno de los gestores del grupo."
 
 #: templates/accounts/notification_editor_group_managers_application_email.html:2
-#, fuzzy
-#| msgid "Apply for editor group membership"
 msgid "Dear editor group manager,"
-msgstr "Solicitar membresía en grupo editor"
+msgstr "Estimado gestor del grupo de editores"
 
 #: templates/accounts/notification_editor_group_managers_application_email.html:4
 #, python-format
@@ -433,6 +447,9 @@ msgid ""
 "We have received an application to your editor group \"%(editor_group)s\"\n"
 "from the ELRI user account \"%(shortname)s\"."
 msgstr ""
+"Hemos recibido una solicitud de suscripción a su grupo de editores"
+"\"%(editor_group)s\"\n"
+"del usuario ELRI  \"%(shortname)s\"."
 
 #: templates/accounts/notification_editor_group_managers_application_email.html:7
 #: templates/accounts/notification_organization_managers_application_email.html:7
@@ -442,11 +459,14 @@ msgid ""
 "the administration section:\n"
 "- %(confirmation_url)s"
 msgstr ""
+"Puede confirmar o desechar esta solicitud de suscripción yendo a la "
+"siguiente página de la sección de administración:\n"
+"- %(confirmation_url)s"
 
 #: templates/accounts/notification_editor_group_managers_application_email.html:10
 #: templates/accounts/notification_organization_managers_application_email.html:10
 msgid "Best regards"
-msgstr ""
+msgstr "Saludos"
 
 #: templates/accounts/notification_organization_application_accepted_email.html:4
 #, python-format
@@ -454,6 +474,8 @@ msgid ""
 "The application to the organization \"%(organization)s\"\n"
 "has been accepted by a manager of the organization."
 msgstr ""
+"La solicitud de suscripción a la organización \"%(organization)s\"\n"
+"ha sido aceptada por uno de los gestores de la organización."
 
 #: templates/accounts/notification_organization_application_turned_down_email.html:4
 #, python-format
@@ -461,12 +483,12 @@ msgid ""
 "The application to the organization \"%(organization)s\"\n"
 "has been turned down by a manager of the organization."
 msgstr ""
+"La solicitud de suscripción a la organización \"%(organization)s\"\n"
+"ha sido rechazada por uno de los gestores de la organización."
 
 #: templates/accounts/notification_organization_managers_application_email.html:2
-#, fuzzy
-#| msgid "Organization Managers"
 msgid "Dear organization manager,"
-msgstr "Administradores de organización"
+msgstr "Estimado administrador de una organización"
 
 #: templates/accounts/notification_organization_managers_application_email.html:4
 #, python-format
@@ -474,6 +496,9 @@ msgid ""
 "We have received an application to your organization \"%(organization)s\"\n"
 "from the ELRI user account \"%(shortname)s\"."
 msgstr ""
+"Hemos recibido una solicitud de suscripción a su organización "
+"\"%(organization)s\"\n"
+"del usuario ELRI  \"%(shortname)s\"."
 
 #: templates/accounts/organization_application.html:6
 msgid "Please give at least one organization."
@@ -486,56 +511,52 @@ msgstr "Solicitar membresía en organización"
 #: templates/accounts/reactivation_email.html:4
 #, python-format
 msgid "We have now reset your ELRI user account \"%(shortname)s\"."
-msgstr ""
+msgstr "Su cuenta de usuario ELRI  \"%(shortname)s\" ha sido reactivada."
 
 #: templates/accounts/reactivation_email.html:5
 #, python-format
 msgid "Your password is \"%(random_password)s\"."
-msgstr ""
+msgstr "Su contraseña es \"%(random_password)s\"."
 
 #: templates/accounts/reactivation_email.html:6
 msgid ""
 "We advise that you change your password the next time you login to ELRI. "
 msgstr ""
+"Le aconsejamos que cambie su contraseña la próxima vez que entre en ELRI."
 
 #: templates/accounts/reactivation_email.html:8
 msgid "Thank you for using ELRI!"
-msgstr ""
+msgstr "¡Muchas gracias por usar ELRI!"
 
 #: templates/accounts/registration_email.html:2
 #, python-format
 msgid "User %(username)s provided the following registration information:"
 msgstr ""
+"El usuario %(username)s ha facilitado la siguiente información de registro:"
 
 #: templates/accounts/registration_email.html:4
-#, fuzzy
-#| msgid "First name"
 msgid "- First name: "
-msgstr "Nombre"
+msgstr "-Nombre: "
 
 #: templates/accounts/registration_email.html:6
-#, fuzzy
-#| msgid "Last name"
 msgid "- Last name: "
-msgstr "Apellido"
+msgstr "-Apellido: "
 
 #: templates/accounts/registration_email.html:8
-#, fuzzy
-#| msgid "Email"
 msgid "- E-mail: "
-msgstr "Email"
+msgstr "-Email:"
 
 #: templates/accounts/registration_email.html:10
 msgid "- Telephone number: "
-msgstr ""
+msgstr "- Número de teléfono: "
 
 #: templates/accounts/registration_email.html:12
 msgid "- Affiliation: "
-msgstr ""
+msgstr "- Afiliación: "
 
 #: templates/accounts/registration_email.html:14
 msgid "- Position: "
-msgstr ""
+msgstr "- Puesto :"
 
 #: templates/accounts/registration_email.html:16
 #, python-format
@@ -544,6 +565,10 @@ msgid ""
 "%(confirmation_url)s, or review and activate the user's account from the\n"
 "back-office."
 msgstr ""
+"Puede confirmar esta cuenta de usuario siguiendo este enlace \n"
+"%(confirmation_url)s, o bien revisando y activando esta cuenta desde el "
+"panel \n"
+"de administración de usuarios."
 
 #: templates/accounts/remove_user_profile_from_editor_group.html:8
 #, python-format
@@ -610,7 +635,7 @@ msgstr "Restablecer cuenta"
 #: templates/accounts/reset_email.html:2
 #, python-format
 msgid "Dear %(firstname)s %(lastname)s,"
-msgstr ""
+msgstr "Estimado %(firstname)s %(lastname)s,"
 
 #: templates/accounts/reset_email.html:4
 #, python-format
@@ -620,16 +645,22 @@ msgid ""
 "reset your password by clicking on the following link:\n"
 "- %(confirmation_url)s"
 msgstr ""
+"Hemos recibido una solicitud de reinicio de contraseña para el usuario ELRI\n"
+" \"%(shortname)s\". Puede confirmar esta solicitud y \n"
+"reiniciar la contraseña haciendo click en el siguiente enlace:\n"
+"- %(confirmation_url)s"
 
 #: templates/accounts/reset_email.html:9
 msgid ""
 "If you do not wish to reset your account password, please \n"
 "ignore this email."
 msgstr ""
+"Si no desea reiniciar su contraseña, por favor\n"
+"ignore este email."
 
 #: templates/accounts/reset_email.html:12
 msgid "Thank you for using ELRI!  "
-msgstr ""
+msgstr "¡Muchas gracias por usar ELRI! "
 
 #: templates/accounts/update_default_editor_group.html:25
 msgid "Update"

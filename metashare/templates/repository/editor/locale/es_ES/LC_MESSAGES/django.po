@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-06 17:30+0100\n"
-"PO-Revision-Date: 2019-03-06 17:13+0100\n"
+"PO-Revision-Date: 2019-03-06 19:05+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: templates/repository/editor/contributions/contribute.html:9
 msgid "ELRI"
@@ -35,7 +35,7 @@ msgstr ""
 
 #: templates/repository/editor/contributions/contribute.html:95
 msgid "Uploading your data"
-msgstr "Subiendo datos"
+msgstr "Subir datos"
 
 #: templates/repository/editor/contributions/contribute.html:96
 msgid ""
@@ -230,8 +230,8 @@ msgid ""
 "The language(s) of the resource; for resources with multiple languages, hold "
 "down CTRL key to select multiple values"
 msgstr ""
-"El (los) idioma(s) del recurso; para recursos multilingües, mantenga pulsada "
-"la tecla CTRL para seleccionar varios valores de idioma"
+"Idioma(s) del recurso (para recursos multilingües, mantenga pulsada la tecla "
+"CTRL para seleccionar varios idiomas)"
 
 #: templates/repository/editor/contributions/contribute.html:186
 msgid "Domain(s)"
@@ -355,46 +355,36 @@ msgid "Licensing conditions"
 msgstr "Condiciones de licencia"
 
 #: templates/repository/editor/contributions/contribute.html:229
-#, fuzzy
-#| msgid "Public Open Data"
 msgid "Public Domain"
-msgstr "Datos públicos abiertos "
+msgstr "Dominio Público"
 
 #: templates/repository/editor/contributions/contribute.html:230
 msgid "Open Under PSI"
 msgstr "Abierto bajo PSI"
 
 #: templates/repository/editor/contributions/contribute.html:231
-#, fuzzy
-#| msgid "Creative Commons - Attribution 4.0"
 msgid "Creative Commons Zero 1.0 (CC0-1.0)"
-msgstr "Creative Commons - Attribution 4.0"
+msgstr "Creative Commons Zero 1.0 (CC0-1.0)"
 
 #: templates/repository/editor/contributions/contribute.html:232
-#, fuzzy
-#| msgid "Creative Commons - Attribution 4.0"
 msgid "Creative Commons - Attribution 4.0 (CC-BY-4.0)"
-msgstr "Creative Commons - Attribution 4.0"
+msgstr "Creative Commons - Attribution 4.0 (CC-BY-4.0)"
 
 #: templates/repository/editor/contributions/contribute.html:233
-#, fuzzy
-#| msgid "Creative Commons - Attribution - ShareAlike 4.0"
 msgid "Creative Commons - Attribution - ShareAlike 4.0 (CC-BY-SA-4.0)"
-msgstr "Creative Commons - Attribution - ShareAlike 4.0"
+msgstr "Creative Commons - Attribution - ShareAlike 4.0 (CC-BY-SA-4.0)"
 
 #: templates/repository/editor/contributions/contribute.html:234
-#, fuzzy
-#| msgid "Creative Commons - Attribution - NonCommercial 4.0"
 msgid "Creative Commons - Attribution - NonCommercial 4.0 (CC-BY-NC-4.0)"
-msgstr "Creative Commons - Attribution - NonCommercial 4.0"
+msgstr "Creative Commons - Attribution - NonCommercial 4.0 (CC-BY-NC-4.0)"
 
 #: templates/repository/editor/contributions/contribute.html:235
-#, fuzzy
-#| msgid "Creative Commons - Attribution - NonCommercial - ShareAlike 4.0"
 msgid ""
 "Creative Commons - Attribution - NonCommercial - ShareAlike 4.0 (CC-BY-NC-"
 "SA-4.0)"
-msgstr "Creative Commons - Attribution - NonCommercial - ShareAlike 4.0"
+msgstr ""
+"Creative Commons - Attribution - NonCommercial - ShareAlike 4.0 (CC-BY-NC-"
+"SA-4.0)"
 
 #: templates/repository/editor/contributions/contribute.html:236
 msgid "Non-Standard/Other_Licence/Terms"
@@ -445,16 +435,12 @@ msgid "Group(s)"
 msgstr "Grupo(s)"
 
 #: templates/repository/editor/contributions/contribute.html:290
-#, fuzzy
-#| msgid ""
-#| "The language(s) of the resource; for resources with multiple languages, "
-#| "hold down CTRL key to select multiple values"
 msgid ""
 "The group(s) the language resource can be shared with (hold down the CTRL "
 "key to select multiple groups)."
 msgstr ""
-"El (los) idioma(s) del recurso; para recursos multilingües, mantenga pulsada "
-"la tecla CTRL para seleccionar varios valores de idioma"
+"Idioma(s) del recurso (para recursos multilingües, mantenga pulsada la tecla "
+"CTRL para seleccionar varios idiomas)"
 
 #: templates/repository/editor/contributions/contribute.html:296
 #, python-format
@@ -530,8 +516,6 @@ msgid "Home"
 msgstr "Inicio"
 
 #: templates/repository/editor/logged_out.html:10
-#, fuzzy
-#| msgid "Thanks for using the ELRC-SHARE editor."
 msgid "Thanks for using the ELRI editor."
 msgstr "Gracias por usar el editor de ELRI."
 

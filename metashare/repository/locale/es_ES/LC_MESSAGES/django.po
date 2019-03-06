@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-06 17:30+0100\n"
-"PO-Revision-Date: 2019-03-06 11:48+0100\n"
+"PO-Revision-Date: 2019-03-06 19:10+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: repository/fields.py:38
 msgid "This value must be either True or False."
@@ -1694,10 +1694,8 @@ msgid "Please edit the attribution text template"
 msgstr "Por favor edite la plantilla de texto de atribución"
 
 #: repository/views.py:340
-#, fuzzy
-#| msgid "Groups together information needed to identify the resource"
 msgid "Request for information regarding a resource"
-msgstr "Agrupa la información necesaria para identificar el recurso"
+msgstr "Solicitud de información sobre un recurso"
 
 #: repository/views.py:348
 msgid "There was an error sending out the request email."

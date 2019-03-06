@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-06 17:30+0100\n"
-"PO-Revision-Date: 2019-03-06 10:39+0100\n"
+"PO-Revision-Date: 2019-03-06 19:13+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: accounts/admin.py:82
 msgid "Editor groups"
@@ -101,10 +101,8 @@ msgstr ""
 "solicitudes."
 
 #: accounts/admin.py:311 accounts/admin.py:779
-#, fuzzy
-#| msgid "Application Status"
 msgid "Application accepted"
-msgstr "Estado de la solicitud"
+msgstr "Solicitud aceptada"
 
 #: accounts/admin.py:318 accounts/admin.py:786
 msgid "There was an error sending out an application acceptance e-mail."
@@ -139,10 +137,8 @@ msgid "Accept selected editor group applications"
 msgstr "Aceptar solicitudes seleccionades de grupo editor "
 
 #: accounts/admin.py:370 accounts/admin.py:830
-#, fuzzy
-#| msgid "Application Status"
 msgid "Application turned down"
-msgstr "Estado de la solicitud"
+msgstr "Solicitud rechazada"
 
 #: accounts/admin.py:378 accounts/admin.py:838
 msgid ""
@@ -366,10 +362,8 @@ msgid "You must be superuser to reject eDelivery applications."
 msgstr "Debe ser superusuario para rechazar las solicitudes de eDelivery."
 
 #: accounts/admin.py:1145 accounts/admin.py:1193
-#, fuzzy
-#| msgid "Reject selected eDelivery applications"
 msgid "ELRI eDelivery application"
-msgstr "Rechazar las solicitudes de eDelivery seleccionadas"
+msgstr "Solicitud de eDelivery de ELRI"
 
 #: accounts/admin.py:1157
 msgid "{} cannot be rejected. Only \"PENDING\" applications can be rejected"
@@ -641,7 +635,7 @@ msgstr ""
 
 #: accounts/views.py:333
 msgid "New editor membership request"
-msgstr ""
+msgstr "Nueva solicitud de editor"
 
 #: accounts/views.py:340
 msgid ""
@@ -693,10 +687,8 @@ msgstr ""
 "Aún está pendiente una solicitud suya de organización \"%s\" más antigua."
 
 #: accounts/views.py:487
-#, fuzzy
-#| msgid "Apply for organization membership"
 msgid "New organization membership request"
-msgstr "Solicitar membresía en la organización"
+msgstr "Nueva solicitud de suscripción a una organización"
 
 #: accounts/views.py:494
 msgid ""

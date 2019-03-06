@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-06 17:30+0100\n"
-"PO-Revision-Date: 2019-03-06 17:40+0100\n"
+"PO-Revision-Date: 2019-03-06 19:18+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -2056,7 +2056,7 @@ msgstr "Descarga de recursos"
 
 #: templates/repository/ingested_resource_email.html:2
 msgid "There are new ingested resources to review "
-msgstr ""
+msgstr "Hay nuevos recursos ingeridos para revisar"
 
 #: templates/repository/legal_not_downloadable.html:4
 #: templates/repository/lr_not_downloadable.html:4
@@ -2196,7 +2196,7 @@ msgstr "Agregar otro campo"
 #: templates/repository/published_resource_email.html:3
 #: templates/repository/resource_download_information_email.html:2
 msgid "Dear "
-msgstr ""
+msgstr "Estimado "
 
 #: templates/repository/published_resource_email.html:5
 #, python-format
@@ -2205,21 +2205,26 @@ msgid ""
 "Station. You can now log into our website %(nodeurl)s and download your "
 "prepared resource via the Browse page. "
 msgstr ""
+"Su recurso %(resourcename)s está publicado en la Estación de Transmisión "
+"Nacional de ELRI. Ahora puede entrar en nuestra web %(nodeurl)s y descargar "
+"su recurso procesado a través del menú Explorar. "
 
 #: templates/repository/published_resource_email.html:7
 msgid ""
 "Thank you for using the ELRI services, do not hesitate to contact us for any "
 "enquiries."
 msgstr ""
+"Gracias por utilizar los servicios de ELRI, no dude en ponerse en contacto "
+"con nosotros. "
 
 #: templates/repository/published_resource_email.html:9
 #: templates/repository/resource_download_information_email.html:6
 msgid "Best regards,"
-msgstr ""
+msgstr "Saludos,"
 
 #: templates/repository/published_resource_email.html:11
 msgid "The ELRI team "
-msgstr ""
+msgstr "El equipo de ELRI"
 
 #: templates/repository/redirect.html:4 templates/repository/redirect.html:13
 msgid "Redirecting to Download Node"
@@ -2300,14 +2305,18 @@ msgid ""
 "“%(resource)s” ([1]). You can find the request below; please reply as soon "
 "as possible."
 msgstr ""
+"el usuario de ELRI %(user.username)s (%(user.first_name)s "
+"%(user.last_name)s, %(user_email)s) solicita información sobre el recurso "
+"lingüístico “%(resource)s” ([1]).  Puede encontrar la solicitud a "
+"continuación. Por favor, responda tan pronto como le sea posible."
 
 #: templates/repository/resource_download_information_email.html:7
 msgid "ELRI Repository at [2]"
-msgstr ""
+msgstr "Repositorio de ELRI en [2]"
 
 #: templates/repository/resource_new_contributions_email.html:2
 msgid "There are new submitted contributed resources on ELRI "
-msgstr ""
+msgstr "Hay nuevas aportaciones de recursos en ELRI"
 
 #: templates/repository/resource_view/annotation.html:10
 #: templates/repository/resource_view/input_output.html:74
