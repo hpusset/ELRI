@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-06 13:37+0100\n"
+"POT-Creation-Date: 2019-03-06 17:31+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,36 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: templates/accounts/activation_email.html:3
+#: templates/accounts/confirmation_email.html:2
+#: templates/accounts/notification_editor_group_application_accepted_email.html:2
+#: templates/accounts/notification_editor_group_application_turned_down_email.html:2
+#: templates/accounts/notification_organization_application_accepted_email.html:2
+#: templates/accounts/notification_organization_application_turned_down_email.html:2
+#: templates/accounts/reactivation_email.html:2
+msgid "Dear "
+msgstr ""
+
+#: templates/accounts/activation_email.html:5
+#, python-format
+msgid ""
+"We have activated your ELRI user account \"%(shortname)s\", welcome to ELRI! "
+"You can now access our services by logging into our website %(nodeurl)s."
+msgstr ""
+
+#: templates/accounts/activation_email.html:7
+#: templates/accounts/contact_maintainers_email.html:12
+#: templates/accounts/notification_editor_group_application_accepted_email.html:7
+#: templates/accounts/notification_editor_group_application_turned_down_email.html:7
+#: templates/accounts/notification_organization_application_accepted_email.html:7
+#: templates/accounts/notification_organization_application_turned_down_email.html:7
+msgid "Best regards,"
+msgstr ""
+
+#: templates/accounts/activation_email.html:9
+msgid "The ELRI team"
+msgstr ""
 
 #: templates/accounts/add_user_profile_to_editor_group.html:13
 #: templates/accounts/remove_user_profile_from_editor_group.html:12
@@ -130,6 +160,25 @@ msgstr ""
 msgid "Go back to your profile"
 msgstr ""
 
+#: templates/accounts/confirmation_email.html:4
+#, python-format
+msgid ""
+"we have received a registration request for a new ELRI user account "
+"\"%(shortname)s\" at [1]. You can confirm that registration request and "
+"create your account by clicking the following link:"
+msgstr ""
+
+#: templates/accounts/confirmation_email.html:8
+msgid ""
+"Please make sure to follow the link within three days. If you do not wish to "
+"create an account with this e-mail address, then please simply disregard "
+"this message."
+msgstr ""
+
+#: templates/accounts/confirmation_email.html:10
+msgid "Welcome to ELRI!"
+msgstr ""
+
 #: templates/accounts/contact_maintainers.html:10
 msgid ""
 "With this form you can send messages to the ELRI team. You can use this "
@@ -147,6 +196,35 @@ msgid ""
 "Note: along with your message, the ELRI team will automatically receive your "
 "name and the e-mail address which is set in <a href=\"%(edit_profile_url)s"
 "\">your user profile</a>."
+msgstr ""
+
+#: templates/accounts/contact_maintainers_email.html:3
+msgid "Dear superuser,"
+msgstr ""
+
+#: templates/accounts/contact_maintainers_email.html:5
+#, python-format
+msgid ""
+"%(user_first_name)s %(user_last_name)s (user account: %(user_account_name)s) "
+"has sent you a message through the contact form of ELRI."
+msgstr ""
+
+#: templates/accounts/contact_maintainers_email.html:7
+#, python-format
+msgid "Subject: %(subject)s"
+msgstr ""
+
+#: templates/accounts/contact_maintainers_email.html:8
+msgid "Message: see below "
+msgstr ""
+
+#: templates/accounts/contact_maintainers_email.html:10
+#, python-format
+msgid "Please try to answer this request soon by responding to %(user_email)s."
+msgstr ""
+
+#: templates/accounts/contact_maintainers_email.html:14
+msgid "The ELRI Team"
 msgstr ""
 
 #: templates/accounts/create_account.html:14
@@ -289,12 +367,132 @@ msgstr ""
 msgid "Apply"
 msgstr ""
 
+#: templates/accounts/notification_editor_group_application_accepted_email.html:4
+#, python-format
+msgid ""
+"The application to the editor group \"%(editor_group)s\"\n"
+"has been accepted by a manager of the group."
+msgstr ""
+
+#: templates/accounts/notification_editor_group_application_turned_down_email.html:4
+#, python-format
+msgid ""
+"The application to the editor group \"%(editor_group)s\"\n"
+"has been turned down by a manager of the group."
+msgstr ""
+
+#: templates/accounts/notification_editor_group_managers_application_email.html:2
+msgid "Dear editor group manager,"
+msgstr ""
+
+#: templates/accounts/notification_editor_group_managers_application_email.html:4
+#, python-format
+msgid ""
+"We have received an application to your editor group \"%(editor_group)s\"\n"
+"from the ELRI user account \"%(shortname)s\"."
+msgstr ""
+
+#: templates/accounts/notification_editor_group_managers_application_email.html:7
+#: templates/accounts/notification_organization_managers_application_email.html:7
+#, python-format
+msgid ""
+"You can confirm or reject that application by going to the following page in "
+"the administration section:\n"
+"- %(confirmation_url)s"
+msgstr ""
+
+#: templates/accounts/notification_editor_group_managers_application_email.html:10
+#: templates/accounts/notification_organization_managers_application_email.html:10
+msgid "Best regards"
+msgstr ""
+
+#: templates/accounts/notification_organization_application_accepted_email.html:4
+#, python-format
+msgid ""
+"The application to the organization \"%(organization)s\"\n"
+"has been accepted by a manager of the organization."
+msgstr ""
+
+#: templates/accounts/notification_organization_application_turned_down_email.html:4
+#, python-format
+msgid ""
+"The application to the organization \"%(organization)s\"\n"
+"has been turned down by a manager of the organization."
+msgstr ""
+
+#: templates/accounts/notification_organization_managers_application_email.html:2
+msgid "Dear organization manager,"
+msgstr ""
+
+#: templates/accounts/notification_organization_managers_application_email.html:4
+#, python-format
+msgid ""
+"We have received an application to your organization \"%(organization)s\"\n"
+"from the ELRI user account \"%(shortname)s\"."
+msgstr ""
+
 #: templates/accounts/organization_application.html:6
 msgid "Please give at least one organization."
 msgstr ""
 
 #: templates/accounts/organization_application.html:11
 msgid "Apply for organization membership"
+msgstr ""
+
+#: templates/accounts/reactivation_email.html:4
+#, python-format
+msgid "We have now reset your ELRI user account \"%(shortname)s\"."
+msgstr ""
+
+#: templates/accounts/reactivation_email.html:5
+#, python-format
+msgid "Your password is \"%(random_password)s\"."
+msgstr ""
+
+#: templates/accounts/reactivation_email.html:6
+msgid ""
+"We advise that you change your password the next time you login to ELRI. "
+msgstr ""
+
+#: templates/accounts/reactivation_email.html:8
+msgid "Thank you for using ELRI!"
+msgstr ""
+
+#: templates/accounts/registration_email.html:2
+#, python-format
+msgid "User %(username)s provided the following registration information:"
+msgstr ""
+
+#: templates/accounts/registration_email.html:4
+msgid "- First name: "
+msgstr ""
+
+#: templates/accounts/registration_email.html:6
+msgid "- Last name: "
+msgstr ""
+
+#: templates/accounts/registration_email.html:8
+msgid "- E-mail: "
+msgstr ""
+
+#: templates/accounts/registration_email.html:10
+msgid "- Telephone number: "
+msgstr ""
+
+#: templates/accounts/registration_email.html:12
+msgid "- Affiliation: "
+msgstr ""
+
+#: templates/accounts/registration_email.html:14
+msgid "- Position: "
+msgstr ""
+
+#: templates/accounts/registration_email.html:16
+#, python-format
+msgid ""
+"You can either confirm this user's account by clicking on the\n"
+"%(confirmation_url)s, or review and activate the user's account from the\n"
+"back-office."
 msgstr ""
 
 #: templates/accounts/remove_user_profile_from_editor_group.html:8
@@ -347,6 +545,30 @@ msgstr ""
 #: templates/accounts/reset_account.html:5
 #: templates/accounts/reset_account.html:12
 msgid "Reset Account"
+msgstr ""
+
+#: templates/accounts/reset_email.html:2
+#, python-format
+msgid "Dear %(firstname)s %(lastname)s,"
+msgstr ""
+
+#: templates/accounts/reset_email.html:4
+#, python-format
+msgid ""
+"We have received a password reset request for your ELRI user\n"
+"account \"%(shortname)s\". You can confirm this request and\n"
+"reset your password by clicking on the following link:\n"
+"- %(confirmation_url)s"
+msgstr ""
+
+#: templates/accounts/reset_email.html:9
+msgid ""
+"If you do not wish to reset your account password, please \n"
+"ignore this email."
+msgstr ""
+
+#: templates/accounts/reset_email.html:12
+msgid "Thank you for using ELRI!  "
 msgstr ""
 
 #: templates/accounts/update_default_editor_group.html:25

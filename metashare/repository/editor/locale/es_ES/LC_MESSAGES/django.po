@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-06 09:23+0100\n"
-"PO-Revision-Date: 2018-11-12 16:25+0100\n"
+"POT-Creation-Date: 2019-03-06 17:30+0100\n"
+"PO-Revision-Date: 2019-03-06 11:26+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -131,7 +131,7 @@ msgid ""
 "Note that this will overwrite the current report if it exists!"
 msgstr ""
 "Puede subir su informe de validación en formato '. pdf ' utilizando este "
-"widget. Tenga en cuenta que esto sobrescribirá el informe actual si existe"
+"widget. Tenga en cuenta que esto sobrescribirá el informe actual si existe!"
 
 #: repository/editor/forms.py:153
 msgid "Legal Documentation"
@@ -144,8 +144,8 @@ msgid ""
 "documentation zip file, if it exists!"
 msgstr ""
 "Puede subir un archivo .zip que contenga cualquier documentación legal "
-"adicional utilizando este widget. Tenga en cuenta que esto sobrescribirá el "
-"archivo zip de documentación legal actual, si existe."
+"adicional utilizando este widget. ¡Tenga en cuenta que esto sobrescribirá el "
+"archivo zip de documentación legal actual, si existe!"
 
 #: repository/editor/manual_admin_registration.py:72
 msgid "Person"
@@ -206,6 +206,7 @@ msgstr "Eliminar modelo relacionado"
 msgid ""
 "Something went wrong when processing the resource with the tm2tmx toolchain."
 msgstr ""
+"Ha ocurrido un error al procesarse el recurso con la herramienta tm2tmx."
 
 #: repository/editor/resource_editor.py:569
 #: repository/editor/resource_editor.py:580
@@ -215,7 +216,7 @@ msgstr ""
 #: repository/editor/resource_editor.py:638
 #, python-format
 msgid "Error when processing resource %(rname)s"
-msgstr ""
+msgstr "Ha ocurrido un error al procesarse el recurso %(rname)s"
 
 #: repository/editor/resource_editor.py:569
 #: repository/editor/resource_editor.py:580
@@ -229,6 +230,9 @@ msgid ""
 "error.log attached to the resource. Contact the ELRI NRS support team for "
 "more information at %(email)s"
 msgstr ""
+"Ha ocurrido un error procesando el recurso %(rname)s. Consulte el archivo "
+"error.log adjunto al recurso. Contacte el equipo de soporte de ELRU para más "
+"información a la siguiente dirección %(email)s"
 
 #: repository/editor/resource_editor.py:571
 #: repository/editor/resource_editor.py:582
@@ -240,14 +244,16 @@ msgid ""
 "There was an error sending out the ERROR notification email to the group "
 "reviewers. Please contact them directly."
 msgstr ""
+"Ha ocurrido un error al mandarse el correo de notificación de ERROR al grupo "
+"de revisores. Por favor contáctenles directamente."
 
 #: repository/editor/resource_editor.py:575
 msgid "Invalid json response from tm2tmx toolchain: "
-msgstr ""
+msgstr "Respuesta json invalida por parte de la herramienta tm2tmx:"
 
 #: repository/editor/resource_editor.py:586
 msgid "The POST request to the tm2tmx toolchain has failed."
-msgstr ""
+msgstr "No se ha logrado ejecutar la petición POST a la herramienta tm2tmx. "
 
 #: repository/editor/resource_editor.py:612
 msgid ""
@@ -255,30 +261,29 @@ msgid ""
 "toolchain.\n"
 " "
 msgstr ""
+"Ha ocurrido un error al procesarse el recurso con la herramienta doc2tmx."
 
 #: repository/editor/resource_editor.py:622
 msgid "Invalid json response from doc2tmx toolchain: "
-msgstr ""
+msgstr "Respuesta json invalida por parte de la herramienta doc2tmx:"
 
 #: repository/editor/resource_editor.py:633
 msgid ""
 "The POST request to the doc2tmx toolchain has failed.\n"
 " "
-msgstr ""
+msgstr "No se ha logrado ejecutar la petición POST a la herramienta doc2tmx. "
 
 #: repository/editor/resource_editor.py:684
-#, fuzzy
-#| msgid "Only ingested resources can be published."
 msgid "Only ingested or error resources can be re-processed."
-msgstr "Sólo se pueden publicar los recursos introducidos."
+msgstr "Sólo se pueden  los recursos introducidos."
 
 #: repository/editor/resource_editor.py:688
 msgid "Resource(s) re-processed correctly."
-msgstr ""
+msgstr "Recurso(s) reprocesados correctamente."
 
 #: repository/editor/resource_editor.py:691
 msgid "Resource(s) processed correctly."
-msgstr ""
+msgstr "Recurso(s) procesados correctamente."
 
 #: repository/editor/resource_editor.py:694
 msgid ""
@@ -286,6 +291,9 @@ msgid ""
 "resources and check the error.log file(s). You will receive a notification "
 "email."
 msgstr ""
+"Ha ocurrido un error al procesarse el recurso. Verifiquen el archivo error."
+"log y reprocesen el recurso. Recibirá un correo de notificación cuando se "
+"haya completado el proceso."
 
 #: repository/editor/resource_editor.py:700
 #: repository/editor/resource_editor.py:839
@@ -299,27 +307,25 @@ msgstr ""
 "seleccionados."
 
 #: repository/editor/resource_editor.py:704
-#, fuzzy
-#| msgid "Remove owners from selected resources"
 msgid "Re-process selected resources"
-msgstr "Eliminar propietarios de los recursos seleccionados"
+msgstr "Reprocesar los recursos seleccionados"
 
 #: repository/editor/resource_editor.py:793
 #, python-format
 msgid "Resource_name: %s  \n"
-msgstr ""
+msgstr "Nombre del recurso: %s\n"
 
 #: repository/editor/resource_editor.py:795
 msgid "License: "
-msgstr ""
+msgstr "Licencia:"
 
 #: repository/editor/resource_editor.py:797
 msgid "\t Restrictions of Use: None\n"
-msgstr ""
+msgstr "\t Restricciones de uso: Ninguna\n"
 
 #: repository/editor/resource_editor.py:799
 msgid "\t Restrictions of Use: "
-msgstr ""
+msgstr "\t Restricciones de uso:"
 
 #: repository/editor/resource_editor.py:802
 msgid "IPR Holder: "
@@ -338,10 +344,8 @@ msgid "Contact Person: N/A \n"
 msgstr ""
 
 #: repository/editor/resource_editor.py:819
-#, fuzzy
-#| msgid "Publish selected ingested resources"
 msgid "Published Resource"
-msgstr "Publicar recursos introducidos seleccionados"
+msgstr "Recurso Publicado"
 
 #: repository/editor/resource_editor.py:824
 msgid ""
@@ -353,17 +357,17 @@ msgstr ""
 #, python-format
 msgid "Successfully published %(ingested)s ingested resource."
 msgid_plural "Successfully published %(ingested)s ingested resources."
-msgstr[0] "El recurso introducido %(ingested)s se ha publicado correctamente."
+msgstr[0] "El recurso ingerido %(ingested)s se ha publicado correctamente."
 msgstr[1] ""
 "Los recursos introducidos %(ingested)s se han publicado correctamente."
 
 #: repository/editor/resource_editor.py:836
 msgid "Only ingested resources can be published."
-msgstr "Sólo se pueden publicar los recursos introducidos."
+msgstr "Sólo se pueden publicar los recursos ingeridos."
 
 #: repository/editor/resource_editor.py:842
 msgid "Publish selected ingested resources"
-msgstr "Publicar recursos introducidos seleccionados"
+msgstr "Publicar recursos ingeridos seleccionados"
 
 #: repository/editor/resource_editor.py:854
 #, python-format
@@ -388,6 +392,11 @@ msgid ""
 "                        Re-process the resource(s) with error status.\n"
 "                        "
 msgstr ""
+"\n"
+"                        El proceso de ingestión ha sido interrumpido.\n"
+"                        Verifique el error y reprocese los recursos con "
+"estado de publicación \"error\".\n"
+"                        "
 
 #: repository/editor/resource_editor.py:919
 msgid ""
@@ -397,6 +406,10 @@ msgid ""
 "been fully processed.\n"
 "                        "
 msgstr ""
+"\n"
+"                       Se han ingerido con éxito {} los recursos internos. \n"
+"                       Recibirá un correo de notificación una vez procesado "
+"el recurso."
 
 #: repository/editor/resource_editor.py:923
 msgid ""
@@ -406,20 +419,34 @@ msgid ""
 "has been fully processed.\n"
 "                        "
 msgstr ""
+"\n"
+"                        Se han ingerido {} con éxito los recursos internos "
+"seleccionados. \n"
+"                        Recibirá un correo de notificación una vez estén "
+"procesados por completo los recursos.\n"
+"                        "
+
+#: repository/editor/resource_editor.py:931
+#, fuzzy
+#| msgid "Delete resource"
+msgid "Ingested Resource"
+msgstr "Eliminar recurso"
 
 #: repository/editor/resource_editor.py:936
 msgid ""
 "There was an error sending out the notification email to the group "
 "reviewers. Please contact them directly."
 msgstr ""
+"Ha ocurrido un error al mandar el correo de notificación al grupo de "
+"revisores. Por favor, contáctenles directamente."
 
 #: repository/editor/resource_editor.py:941
 msgid "Only internal resources can be ingested."
-msgstr "Sólo se pueden introducir recursos internos."
+msgstr "Sólo se pueden ingerir recursos internos."
 
 #: repository/editor/resource_editor.py:946
 msgid "Ingest selected internal resources"
-msgstr "Introducir recursos internos seleccionados"
+msgstr "Ingerir los recursos internos seleccionados"
 
 #: repository/editor/resource_editor.py:968
 #: repository/editor/resource_editor.py:1823
