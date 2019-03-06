@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-30 18:27+0100\n"
+"POT-Creation-Date: 2019-03-05 18:52+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,22 +19,22 @@ msgstr ""
 
 #: templates/admin/repository/documentunstructuredstring_model/change_form.html:20
 msgid "Home"
-msgstr ""
+msgstr "Baile"
 
 #: templates/admin/repository/documentunstructuredstring_model/change_form.html:23
 msgid "Add"
-msgstr ""
+msgstr "Cuir le"
 
 #: templates/admin/repository/documentunstructuredstring_model/change_form.html:32
 msgid "History"
-msgstr ""
+msgstr "Stair"
 
 #: templates/admin/repository/documentunstructuredstring_model/change_form.html:33
 msgid "View on site"
-msgstr ""
+msgstr "Amharc ar an suíomh"
 
 #: templates/admin/repository/documentunstructuredstring_model/change_form.html:44
 msgid "Please correct the error below."
 msgid_plural "Please correct the errors below."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ceartaigh an earráid thíos."
+msgstr[1] "Ceartaigh na hearráidí thíos."

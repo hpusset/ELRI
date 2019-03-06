@@ -7,27 +7,26 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-30 18:27+0100\n"
-"PO-Revision-Date: 2018-11-09 20:22+0100\n"
+"POT-Creation-Date: 2019-03-06 09:23+0100\n"
+"PO-Revision-Date: 2019-03-04 13:15+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 2.2.1\n"
 
 #: templates/admin/edit_inline/stacked.html:14
 #: templates/admin/edit_inline/tabular.html:35
-#, fuzzy
 msgid "View on site"
 msgstr "Ver en el sitio"
 
 #: templates/admin/edit_inline/stacked.html:90
 #: templates/admin/edit_inline/tabular.html:122
-#, fuzzy, python-format
+#, python-format
 msgid "Add another %(verbose_name)s"
-msgstr "Agregar otro% (verbose_name) s"
+msgstr "Add another %(verbose_name)s"
 
 #: templates/admin/edit_inline/stacked.html:93
 #: templates/admin/edit_inline/tabular.html:125

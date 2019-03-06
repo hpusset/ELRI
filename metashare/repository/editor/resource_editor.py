@@ -566,7 +566,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                     errors+=1
                                     #send notification email
                                     try:
-                                        send_mail(_("Error when processing resource %s") % r_name, _('An error occurred when processing the resource %s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %s') % (r_name,settings.EMAIL_ADDRESSES['elri-nrs-support']), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
+                                        send_mail(_("Error when processing resource %(rname)s") % ({'rname':r_name}), _('An error occurred when processing the resource %(rname)s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %(email)s') % ({'rname':r_name,'email':settings.EMAIL_ADDRESSES['elri-nrs-support']}), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
                                     except: 
                                         messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
                                                                                                                                                                                                                                                             
@@ -577,7 +577,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                 errors+=1
                                 #send notification email
                                 try:
-                                    send_mail(_("Error when processing resource %s") % r_name, _('An error occurred when processing the resource %s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %s') % (r_name,settings.EMAIL_ADDRESSES['elri-nrs-support']), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
+                                    send_mail(_("Error when processing resource %(rname)s") % ({'rname':r_name}), _('An error occurred when processing the resource %(rname)s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %(email)s') % ({'rname':r_name,'email':settings.EMAIL_ADDRESSES['elri-nrs-support']}), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
                                 except: 
                                     messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
                                 
@@ -588,7 +588,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                             errors+=1
                             #send notification email
                             try:
-                                send_mail(_("Error when processing resource %s") % r_name, _('An error occurred when processing the resource %s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %s') % (r_name,settings.EMAIL_ADDRESSES['elri-nrs-support']), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
+                                send_mail(_("Error when processing resource %(rname)s") % ({'rname':r_name}), _('An error occurred when processing the resource %(rname)s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %(email)s') % ({'rname':r_name,'email':settings.EMAIL_ADDRESSES['elri-nrs-support']}), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
                             except: 
                                 messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
                     response_doc=''    
@@ -614,7 +614,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                     errors+=1
                                     #send notification email
                                     try:
-                                        send_mail(_("Error when processing resource %s") % r_name, _('An error occurred when processing the resource %s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %s') % (r_name,settings.EMAIL_ADDRESSES['elri-nrs-support']), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
+                                        send_mail(_("Error when processing resource %(rname)s") % ({'rname':r_name}), _('An error occurred when processing the resource %(rname)s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %(email)s') % ({'rname':r_name,'email':settings.EMAIL_ADDRESSES['elri-nrs-support']}), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
                                     except: 
                                         messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
                             else:
@@ -624,7 +624,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                 errors+=1
                                 #send notification email
                                 try:
-                                    send_mail(_("Error when processing resource %s") % r_name, _('An error occurred when processing the resource %s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %s') % (r_name,settings.EMAIL_ADDRESSES['elri-nrs-support']), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
+                                    send_mail(_("Error when processing resource %(rname)s") % ({'rname':r_name}), _('An error occurred when processing the resource %(rname)s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %(email)s') % ({'rname':r_name,'email':settings.EMAIL_ADDRESSES['elri-nrs-support']}), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
                                 except: 
                                     messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
                                 
@@ -635,7 +635,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                             errors+=1
                             #send notification email
                             try:
-                                send_mail(_("Error when processing resource %s") % r_name, _('An error occurred when processing the resource %s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %s') % (r_name,settings.EMAIL_ADDRESSES['elri-nrs-support']), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
+                                send_mail(_("Error when processing resource %(rname)s") % ({'rname':r_name}), _('An error occurred when processing the resource %(rname)s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %(email)s') % ({'rname':r_name,'email':settings.EMAIL_ADDRESSES['elri-nrs-support']}), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
                             except: 
                                 messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
                             

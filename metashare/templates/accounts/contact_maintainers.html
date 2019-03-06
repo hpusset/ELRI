@@ -7,7 +7,7 @@
 <div class="content_box">
 {% url 'editor_group_application' as editor_group_application %}
 {% url 'organization_application' as organization_application_url %}
-  <p>{% blocktrans %}With this form you can send messages to the ELRI team. You can use this form, for example, if you would like to suggest the creation of a new group for resource sharing purposes. </p>
+  <p>{% blocktrans %}With this form you can send messages to the ELRI team. You can use this form, for example, if you would like to suggest the creation of a new group for resource sharing purposes. {% endblocktrans %}</p>
   <form class="form_helper" method="post" action="{% url 'contact' %}">
     {% csrf_token %}
     <table>

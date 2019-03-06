@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-30 18:27+0100\n"
+"POT-Creation-Date: 2019-03-05 18:52+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,6 +27,12 @@ msgid ""
 "        \t\tby %(source)s.\n"
 "                "
 msgstr ""
+"\n"
+"    \t\t\tNí féidir leat meiteashonraí na hacmhainne\n"
+"\t\t\t&ldquo;%(resource)s&rdquo; a leasú.\n"
+"\t\t\tCruthaíodh ar dtús é\n"
+"        \t\tag %(source)s.\n"
+"                "
 
 #: templates/admin/repository/cannot_edit.html:16
 #, python-format
@@ -38,6 +44,12 @@ msgid ""
 "\t\t\tat %(source_url)s.\n"
 "\t\t"
 msgstr ""
+"\n"
+"\t\t\tNí féidir leat meiteashonraí na hacmhainne\n"
+"\t\t\t&ldquo;%(resource)s&rdquo; a leasú.\n"
+"\t\t\tCruthaíodh ar dtús é\n"
+"\t\t\tag %(source_url)s.\n"
+"\t\t"
 
 #: templates/admin/repository/cannot_edit.html:24
 #, python-format
@@ -46,12 +58,18 @@ msgid ""
 "\t\tYou cannot edit the metadata for the entity &ldquo;%(original)s&rdquo;.\n"
 "\t"
 msgstr ""
+"\n"
+"\t\tNí féidir leat meiteashonraí an aonáin &ldquo;%(original)s&rdquo; a "
+"leasú.\n"
+"\t"
 
 #: templates/admin/repository/cannot_edit.html:31
 msgid ""
 "You will now be redirected to the META-SHARE node where the resource "
 "metadata was originally created"
 msgstr ""
+"Déanfar tú a atreorú anois go dtí nód META-SHARE inar cruthaíodh "
+"meiteashonraí na hacmhainne ar dtús"
 
 #: templates/admin/repository/cannot_edit.html:36
 #, python-format
@@ -61,6 +79,10 @@ msgid ""
 "the\n"
 "      other node. "
 msgstr ""
+"\n"
+"      <a href=\"%(redirection_url)s\">Cliceáil anseo</a> chun dul díreach go "
+"dtí an\n"
+"      nód eile. "
 
 #: templates/admin/repository/cannot_edit.html:42
 #, python-format
@@ -68,26 +90,28 @@ msgid ""
 "The metadata for this entity was originally created\n"
 "      <a href=\"%(url)s\">here</a>."
 msgstr ""
+"Cruthaíodh meiteashonraí an aonáin seo ar dtús\n"
+"      <a href=\"%(url)s\">anseo</a>."
 
 #: templates/admin/repository/change_form.html:21
 msgid "Home"
-msgstr ""
+msgstr "Baile"
 
 #: templates/admin/repository/change_form.html:24
 msgid "Add"
-msgstr ""
+msgstr "Cuir le"
 
 #: templates/admin/repository/change_form.html:33
 msgid "History"
-msgstr ""
+msgstr "Stair"
 
 #: templates/admin/repository/change_form.html:34
 msgid "View on site"
-msgstr ""
+msgstr "Amharc ar an suíomh"
 
 #: templates/admin/repository/change_form.html:49
 #: templates/admin/repository/tabbed_change_form.html:47
 msgid "Please correct the error below."
 msgid_plural "Please correct the errors below."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ceartaigh an earráid thíos."
+msgstr[1] "Ceartaigh na hearráidí thíos."

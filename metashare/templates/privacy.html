@@ -9,8 +9,7 @@
         <div id="Protection" class="anchor"></div>
         
         <h3>{% blocktrans %}<b>ELRI National Relay Station Data Protection Notice</b>{% endblocktrans %}</h3>      
-        <p align=justify>{% blocktrans %}Within  the  Connecting  Europe  Facility  Programme,  the  Commission  of  the  European 
-        Communities (referred to as “the European Commission”) has awarded a grant under 
+        <p align=justify>{% blocktrans %}Within  the  Connecting  Europe  Facility  Programme,  the  European Commission has awarded a grant under 
         agreement No INEA/CEF/ICT/A2016/1330962 for the Action entitled “European Language Resource Infrastructure (ELRI)” 
         (Action number 2016-EU-IA-0111), whose purpose is the deployment  of  a  network  that  enables  accessible,  
         secure  and  reliable  sharing  of Language Resources (LRs) by different stakeholders at EU level.{% endblocktrans %}</p>
@@ -39,8 +38,8 @@
         <p align=justify>{% blocktrans %} 
         [Name of hosting organisation of the NRS] {% endblocktrans %}</p>
         <ul>
-        <li> {% blocktrans %} Contact: [Contact of hosting organisation],    Phone: [number] {% endblocktrans %}</li>
-        <li> {% blocktrans %} E-Mail: {% endblocktrans %}<a href="mailto:{{ email_org }}" >{{ email_org }}</a> </li>
+         {% blocktrans %}<li> Contact: [Contact of hosting organisation],    Phone: [number] </li>{% endblocktrans %}
+         {% blocktrans %} <li>  E-Mail: <a href="mailto:EMAIL_ORG" >EMAIL_ORG</a> </li> {% endblocktrans %}
         </ul>
         
         <div id="Officer" class="anchor"></div>
@@ -49,8 +48,9 @@
         <p align=justify>{% blocktrans %} 
         [Name of the data protection officer at the hosting organisation of the NRS, if applicable]{% endblocktrans %}</p>
         <ul>
-        <li> {% blocktrans %} Contact:  [Contact/name of the data protection officer],    Phone: [number], {% endblocktrans %}</li>
-        <li> {% blocktrans %} E-Mail: {% endblocktrans %}<a href="mailto:{{ email_dpo }}" >{{ email_dpo }}</a> </li>
+        {% blocktrans %} <li> Contact:  [Contact/name of the data protection officer],    Phone: [number], </li> {% endblocktrans %}
+        {% blocktrans %} <li>  E-Mail: <a href="mailto:EMAIL_OF" >EMAIL_OF</a> </li> {% endblocktrans %}
+
         </ul>
         
         <div id="Purpose" class="anchor"></div>
@@ -72,6 +72,9 @@
         except  on  the  basis  of  concrete  legal  obligations  or  contractual  obligations  within  the ELRI Action 2016-EU-IA-0111 
         under grant agreement No INEA/CEF/ICT/A2016/1330962. 
         Within our information offering, we do not embed information or service offerings of third party providers. {% endblocktrans %}</p>
+        <p>{% blocktrans %}
+        International Data Transfer may take place via storage services provided by Box, a company certified under the EU-U.S. Privacy Shield Framework.{% endblocktrans %}
+        </p>
         
         <div id="Access" class="anchor"></div>
         <h3>{% blocktrans %}<b>Access data</b>{% endblocktrans %}</h3>
@@ -107,7 +110,7 @@
             your particular situation{% endblocktrans %}</li>
         </ul>
         <p align=justify>{% blocktrans %} To   exercise   these   rights,   please   contact   us   at   the   following   email   address: 
-	{% endblocktrans %}<a href="mailto:{{ email_org }}" >{{ email_org }}</a>  </p>
+	<a href="mailto:EMAIL" >EMAIL</a> {% endblocktrans %} </p>
         
         <div id="Complaint" class="anchor"></div>
         <h3>{% blocktrans %}<b>Right to lodge a complaint</b>{% endblocktrans %}</h3>
@@ -116,6 +119,6 @@
 
         <div id="Cookies" class="anchor"></div>
         <h3>{% blocktrans %}<b>Cookies policy</b>{% endblocktrans %}</h3>
-        <p align=justify>{% blocktrans %}This website uses cookies to facilitate the operation of the service and enhance user experience{% endblocktrans %}</p>
+        <p align=justify>{% blocktrans %}This website uses cookies to facilitate the operation of the service and enhance user experience.{% endblocktrans %}</p>
     </div>
 {% endblock %}
