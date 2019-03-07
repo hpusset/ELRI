@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-07 15:32+0100\n"
-"PO-Revision-Date: 2019-03-06 19:10+0100\n"
+"POT-Creation-Date: 2019-03-07 17:25+0100\n"
+"PO-Revision-Date: 2019-03-07 17:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -73,6 +73,11 @@ msgstr "no hay descarga directa disponible"
 msgid "I agree to these licence terms and would like to download the resource."
 msgstr ""
 "Acepto estas condiciones de licencia y me gustaría descargar el recurso."
+
+#: repository/forms.py:208
+msgid "To download the resource, you have to accept the licence terms"
+msgstr ""
+"Debe aceptar los términos de la licencia para poder descargar el recurso"
 
 #: repository/forms.py:223
 msgid "Your e-mail"
