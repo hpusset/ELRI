@@ -454,7 +454,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         if has_publish_permission(request, queryset):
             successful = 0
             processing_status=True
-            #messages.info(request,queryset)
+            
             for obj in queryset:
                 #variables to control tc errors
                 errors=0
@@ -463,9 +463,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 call_doc2tmx=-1
                 pre_status=check_resource_status(obj)
                 
-                if change_resource_status(obj, status=PROCESSING, precondition_status=INGESTED) or change_resource_status(obj, status=PROCESSING, precondition_status=ERROR) or (from_ingest and change_resource_status(obj, status=PROCESSING, precondition_status=INTERNAL)) or check_resource_status(obj)== PROCESSING:
+                if change_resource_status(obj, status=PROCESSING, precondition_status=INGESTED) or change_resource_status(obj, status=PROCESSING, precondition_status=ERROR) or (from_ingest and change_resource_status(obj, status=PROCESSING, precondition_status=INTERNAL)) :#or check_resource_status(obj)== PROCESSING:
                     #only (re)process INGESTED or ERROR or INTERNAL resources, published are suposed to be ok 
-                    
                     ################
                     ##GET INFO TO SEND NOTIFICATION EMAILS
                     groups_name=[]
@@ -475,6 +474,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     group_reviewers = [u.email for u in User.objects.filter(groups__name__in=groups_name, email__in=reviewers)]
                     ####
                     resource_info=obj.export_to_elementtree()
+                    
                     r_languages=[]
                     for lang in resource_info.iter('languageInfo'):
                         lang_id=lang.find('languageId').text
@@ -491,11 +491,13 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     
                     licence_info=''
                     for l_info in resource_info.iter('licenceInfo'):
-                        licence_info+=l_info.find('licence').text+': '
-                        if l_info.find('otherLicenceName'):
+                        if l_info.find('licence') is not None:
+                            licence_info+=l_info.find('licence').text+': '
+                        if l_info.find('otherLicenceName') is not None:
                             licence_info+=l_info.find('otherLicenceName').text
                     ###    DEBUG    
                     #messages.info(request,'####'+licence_info)
+                    #LOGGER.info(licence_info)
                     
                     #get the resource storage folder path
                     resource_path=obj.storage_object._storage_folder()
