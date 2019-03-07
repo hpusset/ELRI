@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-07 13:17+0100\n"
+"POT-Creation-Date: 2019-03-07 15:32+0100\n"
 "PO-Revision-Date: 2019-03-06 12:32+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,9 +18,14 @@ msgstr ""
 "X-Generator: Poedit 2.2\n"
 
 #: templates/admin/base.html:39
+#, fuzzy
+#| msgid ""
+#| "\"We use cookies on this site to enhance your user experience. By "
+#| "clicking any link on this page you are giving your consent for us to set "
+#| "cookies.\" "
 msgid ""
-"\"We use cookies on this site to enhance your user experience. By clicking "
-"any link on this page you are giving your consent for us to set cookies.\" "
+"\"This site uses cookies to enhance your user experience. By clicking any "
+"link on this page you are giving your consent for us to set cookies.\" "
 msgstr ""
 "\"Usamos cookies en este sitio web para mejorar su experiencia de usuario.  "
 "Si continua navegando, consideramos que acepta su uso. \" "
@@ -29,7 +34,23 @@ msgstr ""
 msgid "\"OK, I aggree \""
 msgstr "Acepto"
 
-#: templates/admin/base.html:54 templates/admin/delete_confirmation.html:6
+#: templates/admin/base.html:41
+msgid "\"Decline \""
+msgstr ""
+
+#: templates/admin/base.html:42
+msgid "\"Allow cookies\""
+msgstr ""
+
+#: templates/admin/base.html:43
+msgid "\"Learn more\""
+msgstr ""
+
+#: templates/admin/base.html:44
+msgid "'Cookie Policy'"
+msgstr ""
+
+#: templates/admin/base.html:58 templates/admin/delete_confirmation.html:6
 #: templates/admin/delete_selected_confirmation.html:6
 msgid "Home"
 msgstr "Inicio"

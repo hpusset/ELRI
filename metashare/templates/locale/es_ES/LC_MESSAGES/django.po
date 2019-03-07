@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-07 13:17+0100\n"
-"PO-Revision-Date: 2019-03-07 13:38+0100\n"
+"POT-Creation-Date: 2019-03-07 15:30+0100\n"
+"PO-Revision-Date: 2019-03-07 15:32+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -60,15 +60,31 @@ msgstr "Estación de Transmisión Nacional ELRI"
 
 #: templates/base.html:54
 msgid ""
-"\"We use cookies on this site to enhance your user experience. By clicking "
-"any link on this page you are giving your consent for us to set cookies.\" "
+"\"This site uses cookies to enhance your user experience. By clicking any "
+"link on this page you are giving your consent for us to set cookies.\" "
 msgstr ""
-"\"Usamos cookies en este sitio web para mejorar su experiencia de usuario.  "
-"Si continúa navegando, consideramos que acepta su uso.\""
+"\"Este sitio web utiliza cookies para mejorar su experiencia de usuario. Si "
+"continúa navegando, consideramos que acepta su uso. \""
 
 #: templates/base.html:55
 msgid "\"OK, I aggree \""
 msgstr "\"Acepto\""
+
+#: templates/base.html:56
+msgid "\"Decline \""
+msgstr "\"Rechazar\""
+
+#: templates/base.html:57
+msgid "\"Allow cookies\""
+msgstr "\"Aceptar\""
+
+#: templates/base.html:58
+msgid "\"Learn more\""
+msgstr "\"Leer más\""
+
+#: templates/base.html:59
+msgid "'Cookie Policy'"
+msgstr "'Política de cookies'"
 
 #: templates/breadcrumbs.html:3 templates/header.html:11
 #: templates/header.html.py:12
@@ -897,13 +913,36 @@ msgstr ""
 msgid "<b>Cookies policy</b>"
 msgstr "<b>Política de cookies</b>"
 
-#: templates/legal.html:71
+#: templates/legal.html:71 templates/privacy.html:120
 msgid ""
-"This website uses functional cookies to facilitate the operation of the "
-"service and enhance user experience. "
+"This website uses cookies to facilitate the operation of the service and "
+"enhance user experience."
 msgstr ""
-"Este sitio web utiliza cookies para facilitar la operación del servicio y "
-"mejorar la experiencia de los usuarios."
+"Este  sitio  web  utiliza  cookies  para  facilitar  la  operación  del  "
+"servicio  y  mejorar  la experiencia de los usuarios.</p><br>\n"
+"<h3>¿Qué cookies utiliza este sitio web?</h3>\n"
+"<p>Este sitio web utiliza únicamente cookies técnicas. Las cookies técnicas "
+"son aquellas que  permiten  al  usuario  la  navegación  a  través  de  una  "
+"página  web,  plataforma  o aplicación y la utilización delas diferentes "
+"opciones o servicios que en ella existan como,  por  ejemplo,  controlar  "
+"el  tráfico  y  la  comunicación  de  datos,  identificar  la sesión, "
+"acceder a partes de acceso restringido, recordar los elementos que integran "
+"dicha   sesión   y,   en   definitiva,   permitir   cualquier   acción   "
+"relacionada   con   las funcionalidades del sitio web.</p>\n"
+"<p>Las siguientes cookies son las que utiliza este sitio web:</"
+"p><ul><li>sessionid :        datos de sesión y autenticación  </li><li> "
+"csrftoken:         seguridad de los campos de formularios  </li></ul><p> El "
+"Usuario acepta, por la utilización de este sitio web, el tratamiento de la "
+"información recabada  en  la  forma  y  con  los  fines  anteriormente  "
+"mencionados.  Y,  asimismo, reconoce estar al tantode la posibilidad de "
+"rechazar el tratamiento de tales datos o información rechazando el uso de "
+"Cookies mediante la selección de la configuración apropiada a tal fin en su "
+"navegador. Si bien esta opción de bloqueo de cookies en su navegador  puede  "
+"no  permitirle  el  uso  pleno  de  todas  las  funcionalidades  del  sitio "
+"web.</p><p>Recuerde que Usted puede eliminarlas en cualquier momento, o "
+"rechazarlas antes de su instalación configurando el programa de navegación "
+"que utiliza. Por favor, visite la página de ayuda de su navegador para "
+"aprender cómo gestionar las cookies en su equipo."
 
 #: templates/legal.html:74
 msgid "<b>ELRI Services misuse and notification regarding IPR infringement</b>"
@@ -1548,14 +1587,6 @@ msgstr ""
 "El usuario tendrá derecho a presentar una reclamación ante una autoridad de "
 "control si considera que el tratamiento de datos personales que le afectan "
 "infringe la normativa en materia de protección de datos."
-
-#: templates/privacy.html:120
-msgid ""
-"This website uses cookies to facilitate the operation of the service and "
-"enhance user experience."
-msgstr ""
-"Este sitio web usa cookies para mejorar su experiencia de usuario.  Si "
-"continua navegando, consideramos que acepta su uso. "
 
 #: templates/repository/api/help.html:25
 msgid "API help"
@@ -3498,6 +3529,13 @@ msgstr "contador de recursos"
 #: templates/stats/usagestats.html:283
 msgid "never used"
 msgstr "nunca utilizado"
+
+#~ msgid ""
+#~ "This website uses functional cookies to facilitate the operation of the "
+#~ "service and enhance user experience. "
+#~ msgstr ""
+#~ "Este sitio web utiliza cookies para facilitar la operación del servicio y "
+#~ "mejorar la experiencia de los usuarios."
 
 #~ msgid "Browse Resources"
 #~ msgstr "Explorar recursos"
