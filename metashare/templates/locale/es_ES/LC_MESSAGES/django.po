@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-06 17:30+0100\n"
-"PO-Revision-Date: 2019-03-06 19:18+0100\n"
+"POT-Creation-Date: 2019-03-07 13:17+0100\n"
+"PO-Revision-Date: 2019-03-07 13:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -64,11 +64,11 @@ msgid ""
 "any link on this page you are giving your consent for us to set cookies.\" "
 msgstr ""
 "\"Usamos cookies en este sitio web para mejorar su experiencia de usuario.  "
-"Si continua navegando, consideramos que acepta su uso. \" "
+"Si continúa navegando, consideramos que acepta su uso.\""
 
 #: templates/base.html:55
 msgid "\"OK, I aggree \""
-msgstr "Acepto"
+msgstr "\"Acepto\""
 
 #: templates/breadcrumbs.html:3 templates/header.html:11
 #: templates/header.html.py:12

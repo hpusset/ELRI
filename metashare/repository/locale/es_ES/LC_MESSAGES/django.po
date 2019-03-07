@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-06 17:30+0100\n"
+"POT-Creation-Date: 2019-03-07 13:17+0100\n"
 "PO-Revision-Date: 2019-03-06 19:10+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1705,6 +1705,10 @@ msgstr "Hubo un error al enviar la sol·licitud."
 msgid "You have successfully sent a message to the resource contact person."
 msgstr "Ha enviado un mensaje a la persona de contacto."
 
+#: repository/views.py:1039
+msgid "N/A"
+msgstr "N/A"
+
 #: repository/views.py:1100
 msgid ""
 "\n"
@@ -2428,9 +2432,6 @@ msgstr ""
 
 #~ msgid "Subdomain identifier"
 #~ msgstr "Identificador de subdominio"
-
-#~ msgid "N/A"
-#~ msgstr "N/A"
 
 #~ msgid "You have new submitted contributed resources on elrc-share.eu"
 #~ msgstr "Tiene nuevos recursos aportados en elrc-share.eu"
