@@ -1036,7 +1036,7 @@ def contribute(request):
 
             'resourceInfo': {
                 'resourceTitle': request.POST['resourceTitle'],
-                'shortDescription': request.POST['shortDescription'], #or _("N/A"),
+                'shortDescription': request.POST['shortDescription'] or _("N/A"),
                 'licence': request.POST['licence'],
             },
             'administration': {

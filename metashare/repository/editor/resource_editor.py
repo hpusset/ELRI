@@ -463,7 +463,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 call_doc2tmx=-1
                 pre_status=check_resource_status(obj)
                 
-                if change_resource_status(obj, status=PROCESSING, precondition_status=INGESTED) or change_resource_status(obj, status=PROCESSING, precondition_status=ERROR) or (from_ingest and change_resource_status(obj, status=PROCESSING, precondition_status=INTERNAL)) : #or check_resource_status(obj)== PROCESSING:
+                if change_resource_status(obj, status=PROCESSING, precondition_status=INGESTED) or change_resource_status(obj, status=PROCESSING, precondition_status=ERROR) or (from_ingest and change_resource_status(obj, status=PROCESSING, precondition_status=INTERNAL)) or check_resource_status(obj)== PROCESSING:
                     #only (re)process INGESTED or ERROR or INTERNAL resources, published are suposed to be ok 
                     
                     ################
