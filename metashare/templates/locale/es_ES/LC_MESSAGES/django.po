@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-07 15:30+0100\n"
-"PO-Revision-Date: 2019-03-07 15:32+0100\n"
+"PO-Revision-Date: 2019-03-07 16:55+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -56,7 +56,7 @@ msgstr ""
 
 #: templates/back.html:5
 msgid "ELRI National Relay Station"
-msgstr "Estación de Transmisión Nacional ELRI"
+msgstr "Estación Nacional de Transmisión ELRI"
 
 #: templates/base.html:54
 msgid ""
@@ -115,8 +115,8 @@ msgid ""
 "translation memories that will have been created automatically by our "
 "integrated data processing engines."
 msgstr ""
-"Los usuarios que se hayan registrado en una Estación de Transmisión "
-"Nacional  ELRI pueden subir sus datos y beneficiarse de recursos de "
+"Los usuarios que se hayan registrado en una Estación Nacional de Transmisión "
+"de datos  ELRI pueden subir sus datos y beneficiarse de recursos de "
 "traducción totalmente preparados. Por ejemplo, los usuarios pueden subir "
 "colecciones de documentos en diferentes idiomas y recuperar memorias de "
 "traducción creadas automáticamente por los motores de procesamiento "
@@ -300,7 +300,7 @@ msgstr "Licencias nacionales de datos"
 
 #: templates/footer.html:7
 msgid "ELRI National Relay Station "
-msgstr "Estación de Transmisión Nacional ELRI"
+msgstr "Estación Nacional de Transmisión ELRI"
 
 #: templates/footer.html:8
 msgid ""
@@ -314,7 +314,7 @@ msgstr ""
 
 #: templates/footer.html:12
 msgid "Privacy Policy"
-msgstr "Privacidad"
+msgstr "Política de Privacidad"
 
 #: templates/frontpage.html:14
 msgid "Welcome to ELRI in MyCountry!"
@@ -326,7 +326,7 @@ msgid ""
 "language resources can be collected, prepared and shared amongst public "
 "institutions and translation centres."
 msgstr ""
-"Este sitio web es la Estación de Transmisión Nacional de datos de ELRI en "
+"Este sitio web es la Estación Nacional de Transmisión de datos de ELRI en "
 "España, donde las instituciones públicas y los centros de traducción pueden "
 "recopilar, preparar y compartir recursos lingüísticos."
 
@@ -337,7 +337,7 @@ msgid ""
 "europa.eu/inea/en/connecting-europe-facility\">Connecting Europe Facility</"
 "a> programme."
 msgstr ""
-"Las estaciones de transmisión nacionales se desarrollan dentro del proyecto "
+"Las estaciones nacionales de transmisión se desarrollan dentro del proyecto "
 "europeo <a href=\"http://www.elri-project.eu\"> ELRI </a>, financiado por el "
 "programa <a href=\"http://ec.europa.eu/inea/en/connecting-europe-facility\"> "
 "Connecting Europe Facility </a>."
@@ -1407,7 +1407,7 @@ msgstr "llevar un registro de los usuarios."
 
 #: templates/privacy.html:63
 msgid "<b>Anonymous and protected usage</b>"
-msgstr "Uso de información anónima y protegida"
+msgstr "<b>Uso de información anónima y protegida</b>"
 
 #: templates/privacy.html:64
 msgid ""
@@ -2227,7 +2227,7 @@ msgstr "Agregar otro campo"
 #: templates/repository/published_resource_email.html:3
 #: templates/repository/resource_download_information_email.html:2
 msgid "Dear "
-msgstr "Estimado "
+msgstr "Estimado/a "
 
 #: templates/repository/published_resource_email.html:5
 #, python-format
@@ -2236,9 +2236,9 @@ msgid ""
 "Station. You can now log into our website %(nodeurl)s and download your "
 "prepared resource via the Browse page. "
 msgstr ""
-"Su recurso %(resourcename)s está publicado en la Estación de Transmisión "
-"Nacional de ELRI. Ahora puede entrar en nuestra web %(nodeurl)s y descargar "
-"su recurso procesado a través del menú Explorar. "
+"Su recurso %(resourcename)s está publicado en la Estación Nacional de "
+"Transmisión de datos de ELRI. Ahora puede entrar en nuestra web %(nodeurl)s "
+"y descargar su recurso procesado a través del menú Explorar. "
 
 #: templates/repository/published_resource_email.html:7
 msgid ""
@@ -3187,7 +3187,7 @@ msgstr "Herramienta/servicio:"
 msgid " %(cnt)s Language Resource "
 msgid_plural " %(cnt)s Language Resources "
 msgstr[0] " %(cnt)s Recurso lingüístico "
-msgstr[1] " %(cnt)s Recurso lingüísticos"
+msgstr[1] " %(cnt)s Recursos lingüísticos"
 
 #: templates/repository/search.html:122
 #, python-format
