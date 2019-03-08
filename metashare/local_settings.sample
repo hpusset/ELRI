@@ -122,10 +122,14 @@ EMAIL_HOST_PASSWORD=''
 
 # this variable is used by metashare/repository/templatetags/get_email.py
 EMAIL_ADDRESSES = {
+    #nrs support email list
     'elri-nrs-support': 'elri-nrs-support@vicomtech.org',
+    # no-reply email account
     'elri-no-reply': 'no-reply-elri@email.com',
-    'elri-ilsp': 'elri-ilsp@email.com',
-    'elri-edelivery': 'elri-edelivery@email.com',
+    # contact email of the NRS hosting organisation
+    'elri-nrs-org': 'elri-nrs-organization@email.com',
+    # contact email of the data protection officer
+    'elri-nrs-dpo': 'elri-nrs-dpo@email.com',
 }
 
 # Local time zone for this installation. Choices can be found here:

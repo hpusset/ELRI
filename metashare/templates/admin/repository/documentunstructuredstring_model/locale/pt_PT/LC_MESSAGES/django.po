@@ -3,38 +3,39 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-30 18:27+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2019-03-08 09:51+0100\n"
+"PO-Revision-Date: 2019-02-21 13:11+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pt_PT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: templates/admin/repository/documentunstructuredstring_model/change_form.html:20
 msgid "Home"
-msgstr ""
+msgstr "Início"
 
 #: templates/admin/repository/documentunstructuredstring_model/change_form.html:23
 msgid "Add"
-msgstr ""
+msgstr "Acrescentar"
 
 #: templates/admin/repository/documentunstructuredstring_model/change_form.html:32
 msgid "History"
-msgstr ""
+msgstr "Histórico"
 
 #: templates/admin/repository/documentunstructuredstring_model/change_form.html:33
 msgid "View on site"
-msgstr ""
+msgstr "Ver no sítio web"
 
 #: templates/admin/repository/documentunstructuredstring_model/change_form.html:44
 msgid "Please correct the error below."
 msgid_plural "Please correct the errors below."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Por favor, corrija o erro abaixo"
+msgstr[1] "Por favor, corrija os erros abaixo"

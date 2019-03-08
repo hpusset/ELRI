@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-30 18:26+0100\n"
+"POT-Creation-Date: 2019-03-08 09:52+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -96,6 +96,10 @@ msgstr ""
 msgid "You must be superuser or group manager to accept applications."
 msgstr ""
 
+#: accounts/admin.py:311 accounts/admin.py:779
+msgid "Application accepted"
+msgstr ""
+
 #: accounts/admin.py:318 accounts/admin.py:786
 msgid "There was an error sending out an application acceptance e-mail."
 msgstr ""
@@ -120,6 +124,10 @@ msgstr ""
 
 #: accounts/admin.py:336
 msgid "Accept selected editor group applications"
+msgstr ""
+
+#: accounts/admin.py:370 accounts/admin.py:830
+msgid "Application turned down"
 msgstr ""
 
 #: accounts/admin.py:378 accounts/admin.py:838
@@ -311,6 +319,10 @@ msgstr ""
 msgid "You must be superuser to reject eDelivery applications."
 msgstr ""
 
+#: accounts/admin.py:1145 accounts/admin.py:1193
+msgid "ELRI eDelivery application"
+msgstr ""
+
 #: accounts/admin.py:1157
 msgid "{} cannot be rejected. Only \"PENDING\" applications can be rejected"
 msgstr ""
@@ -360,70 +372,58 @@ msgstr ""
 msgid "E-mail"
 msgstr ""
 
-#: accounts/forms.py:76 accounts/models.py:288
-msgid "Country"
-msgstr ""
-
-#: accounts/forms.py:79
+#: accounts/forms.py:81
 msgid "Organization name"
 msgstr ""
 
-#: accounts/forms.py:83
+#: accounts/forms.py:85
 msgid "Organization address"
 msgstr ""
 
-#: accounts/forms.py:87
+#: accounts/forms.py:88
 msgid "Organization phone number"
 msgstr ""
 
-#: accounts/forms.py:89
+#: accounts/forms.py:90
 msgid "Position in the organization"
 msgstr ""
 
-#: accounts/forms.py:91
-msgid "Phone number"
-msgstr ""
-
-#: accounts/forms.py:93
+#: accounts/forms.py:97
 msgid "Password"
 msgstr ""
 
-#: accounts/forms.py:97
+#: accounts/forms.py:101
 msgid "Password confirmation"
 msgstr ""
 
-#: accounts/forms.py:100
-msgid "Contributor group"
-msgstr ""
-
-#: accounts/forms.py:119
+#: accounts/forms.py:127
 msgid "User account name already exists, please choose another one."
 msgstr ""
 
-#: accounts/forms.py:133 accounts/forms.py:136
+#: accounts/forms.py:141 accounts/forms.py:144
 msgid "There is already an account registered with this e-mail address."
 msgstr ""
 
-#: accounts/forms.py:147
+#: accounts/forms.py:155
 msgid "The two password fields did not match."
 msgstr ""
 
-#: accounts/forms.py:173
+#: accounts/forms.py:181
 msgid "Please provide a meaningful and sufficiently indicative subject."
 msgstr ""
 
-#: accounts/forms.py:176
+#: accounts/forms.py:184
 msgid ""
 "Your message appears to be rather short. Please make sure to phrase your "
 "request as precise as possible. This will help us to process it as quick as "
 "possible."
 msgstr ""
 
-#: accounts/forms.py:198
+#: accounts/forms.py:206
 msgid "Not a valid username-email combination."
 msgstr ""
 
-#: accounts/forms.py:244
+#: accounts/forms.py:252
 msgid "default editor groups"
 msgstr ""
 
@@ -464,201 +464,214 @@ msgstr ""
 msgid "editor group managers group"
 msgstr ""
 
-#: accounts/models.py:251
+#: accounts/models.py:250
 msgid "organization managers group"
 msgstr ""
 
-#: accounts/models.py:263
+#: accounts/models.py:262
 msgid "Not a valid phone number"
 msgstr ""
 
-#: accounts/models.py:275
+#: accounts/models.py:274
 msgid "Is a META-SHARE associate member."
 msgstr ""
 
-#: accounts/models.py:276
+#: accounts/models.py:275
 msgid "Is a META-SHARE full member."
 msgstr ""
 
-#: accounts/models.py:283
+#: accounts/models.py:282
 msgid "Date of birth"
 msgstr ""
 
-#: accounts/models.py:286
+#: accounts/models.py:285
 msgid "Phone Number"
 msgstr ""
 
-#: accounts/models.py:291
+#: accounts/models.py:287
+msgid "Country"
+msgstr ""
+
+#: accounts/models.py:290
 msgid "Affiliation(s)"
 msgstr ""
 
-#: accounts/models.py:292
+#: accounts/models.py:291
 msgid "Affiliation address"
 msgstr ""
 
-#: accounts/models.py:293
+#: accounts/models.py:292
 msgid "Affiliation phone number"
 msgstr ""
 
-#: accounts/views.py:53
-msgid "Your ELRC-SHARE user account has been activated"
+#: accounts/views.py:57
+msgid "Your ELRI user account has been activated"
 msgstr ""
 
-#: accounts/views.py:60
+#: accounts/views.py:64
 msgid "We have activated user account for user {}."
 msgstr ""
 
-#: accounts/views.py:88
+#: accounts/views.py:92
 #, python-format
-msgid "[ELRC-SHARE] Contact Form Request: %s"
+msgid "[ELRI] Contact Form Request: %s"
 msgstr ""
 
-#: accounts/views.py:95
+#: accounts/views.py:99
 #, python-format
 msgid ""
 "Oops, there was an error sending out your contact request. You can copy your "
 "message and try again later: <pre>%s</pre>"
 msgstr ""
 
-#: accounts/views.py:100
+#: accounts/views.py:104
 msgid ""
 "We have received your message and successfully sent it to the node "
 "maintainers. Please give them some days to get back to you."
 msgstr ""
 
-#: accounts/views.py:164
+#: accounts/views.py:176
 msgid "New user registration"
 msgstr ""
 
-#: accounts/views.py:172
+#: accounts/views.py:184
 msgid ""
 "There was an error sending out the notification email to the administrators. "
 "Please contact them directly."
 msgstr ""
 
-#: accounts/views.py:180
+#: accounts/views.py:192
 msgid ""
 "We have received your registration data and sent the administrators a "
-"notification email."
+"notification email.You will receive an email when your account has been "
+"activated."
 msgstr ""
 
-#: accounts/views.py:229
+#: accounts/views.py:248
 msgid "You have successfully updated your profile information."
 msgstr ""
 
-#: accounts/views.py:241
+#: accounts/views.py:260
 msgid "full member"
 msgstr ""
 
-#: accounts/views.py:243
+#: accounts/views.py:262
 msgid "associate member"
 msgstr ""
 
-#: accounts/views.py:246
+#: accounts/views.py:265
 msgid "Edit Profile Information"
 msgstr ""
 
-#: accounts/views.py:292
+#: accounts/views.py:311
 #, python-format
 msgid "An older application of yours for editor group \"%s\" is still pending."
 msgstr ""
 
-#: accounts/views.py:321
+#: accounts/views.py:333
+msgid "New editor membership request"
+msgstr ""
+
+#: accounts/views.py:340
 msgid ""
 "There was an error sending out the request email for your editor group "
 "application."
 msgstr ""
 
-#: accounts/views.py:324
+#: accounts/views.py:343
 #, python-format
 msgid "You have successfully applied for editor group \"%s\"."
 msgstr ""
 
-#: accounts/views.py:335
+#: accounts/views.py:354
 msgid ""
 "There are no editor groups in the database, yet, for which you could apply. "
 "Please ask the system administrator to create one."
 msgstr ""
 
-#: accounts/views.py:343
+#: accounts/views.py:362
 msgid "Apply for editor group membership"
 msgstr ""
 
-#: accounts/views.py:392
+#: accounts/views.py:411
 #, python-format
 msgid "You have successfully added default editor group \"%s\"."
 msgstr ""
 
-#: accounts/views.py:399
+#: accounts/views.py:418
 #, python-format
 msgid "You have successfully removed default editor group \"%s\"."
 msgstr ""
 
-#: accounts/views.py:411
+#: accounts/views.py:430
 msgid "There are no editor groups you could add to your default list."
 msgstr ""
 
-#: accounts/views.py:418
+#: accounts/views.py:437
 msgid "Update default editor groups"
 msgstr ""
 
-#: accounts/views.py:446
+#: accounts/views.py:465
 #, python-format
 msgid "An older application of yours for organization \"%s\" is still pending."
 msgstr ""
 
-#: accounts/views.py:475
+#: accounts/views.py:487
+msgid "New organization membership request"
+msgstr ""
+
+#: accounts/views.py:494
 msgid ""
 "There was an error sending out the request email for your organization "
 "application."
 msgstr ""
 
-#: accounts/views.py:478
+#: accounts/views.py:497
 #, python-format
 msgid "You have successfully applied for organization \"%s\"."
 msgstr ""
 
-#: accounts/views.py:489
+#: accounts/views.py:508
 msgid ""
 "There are no organizations in the database, yet, for which you could apply. "
 "Please ask the system administrator to create one."
 msgstr ""
 
-#: accounts/views.py:497
+#: accounts/views.py:516
 msgid "Apply for organization membership"
 msgstr ""
 
-#: accounts/views.py:532
-msgid "Please confirm your ELRC-SHARE reset request"
+#: accounts/views.py:551
+msgid "Please confirm your ELRI password reset request"
 msgstr ""
 
-#: accounts/views.py:543
+#: accounts/views.py:562
 msgid ""
-"We have received your reset request and sent you an email with further reset "
-"instructions."
+"We have received your password reset request and sent you an email with "
+"further instructions."
 msgstr ""
 
-#: accounts/views.py:553
+#: accounts/views.py:572
 msgid "Reset user account"
 msgstr ""
 
-#: accounts/views.py:579
-msgid "Your ELRC-SHARE user account has been re-activated"
+#: accounts/views.py:598
+msgid "Your ELRI user account has been re-activated"
 msgstr ""
 
-#: accounts/views.py:585
+#: accounts/views.py:604
 #, python-format
 msgid ""
 "There was an error sending out the activation email for your user account. "
 "Please contact the administrator at %s."
 msgstr ""
 
-#: accounts/views.py:594
+#: accounts/views.py:613
 msgid ""
 "We have re-activated your user account and sent you an email with your "
 "personal password which allows you to login to the website."
 msgstr ""
 
-#: accounts/views.py:639
+#: accounts/views.py:658
 msgid "Apply for eDelivery membership"
 msgstr ""
