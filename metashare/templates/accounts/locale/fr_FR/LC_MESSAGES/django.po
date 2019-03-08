@@ -3,25 +3,55 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-30 18:27+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2019-03-08 09:52+0100\n"
+"PO-Revision-Date: 2018-11-13 14:18+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2\n"
+
+#: templates/accounts/activation_email.html:3
+#: templates/accounts/confirmation_email.html:2
+#: templates/accounts/notification_editor_group_application_accepted_email.html:2
+#: templates/accounts/notification_editor_group_application_turned_down_email.html:2
+#: templates/accounts/notification_organization_application_accepted_email.html:2
+#: templates/accounts/notification_organization_application_turned_down_email.html:2
+#: templates/accounts/reactivation_email.html:2
+msgid "Dear "
+msgstr ""
+
+#: templates/accounts/activation_email.html:5
+#, python-format
+msgid ""
+"We have activated your ELRI user account \"%(shortname)s\", welcome to ELRI! "
+"You can now access our services by logging into our website %(nodeurl)s."
+msgstr ""
+
+#: templates/accounts/activation_email.html:7
+#: templates/accounts/contact_maintainers_email.html:12
+#: templates/accounts/notification_editor_group_application_accepted_email.html:7
+#: templates/accounts/notification_editor_group_application_turned_down_email.html:7
+#: templates/accounts/notification_organization_application_accepted_email.html:7
+#: templates/accounts/notification_organization_application_turned_down_email.html:7
+msgid "Best regards,"
+msgstr ""
+
+#: templates/accounts/activation_email.html:9
+msgid "The ELRI team"
+msgstr ""
 
 #: templates/accounts/add_user_profile_to_editor_group.html:13
 #: templates/accounts/remove_user_profile_from_editor_group.html:12
 #, python-format
 msgid "Editor Group%(selected_editorgroups|pluralize)s"
-msgstr ""
+msgstr "Groupe%(selected_editorgroups|pluralize)s d'édition"
 
 #: templates/accounts/add_user_profile_to_editor_group.html:13
 #: templates/accounts/add_user_profile_to_editor_group_managers.html:12
@@ -32,12 +62,12 @@ msgstr ""
 #: templates/accounts/remove_user_profile_from_organization.html:12
 #: templates/accounts/remove_user_profile_from_organization_managers.html:12
 msgid "Members"
-msgstr ""
+msgstr "Membres"
 
 #: templates/accounts/add_user_profile_to_editor_group.html:13
 #: templates/accounts/remove_user_profile_from_editor_group.html:12
 msgid "Managers"
-msgstr ""
+msgstr "Gestionnaires"
 
 #: templates/accounts/add_user_profile_to_editor_group_managers.html:8
 #, python-format
@@ -45,29 +75,35 @@ msgid ""
 "Add a user to the following editor group manager group"
 "%(selected_editorgroupmanagers|pluralize)s:"
 msgstr ""
+"Ajouter un utilsateur au groupe%(selected_editorgroupmanagers|pluralize)s de "
+"gestionnaire de groupe suivant:"
 
 #: templates/accounts/add_user_profile_to_editor_group_managers.html:12
 #: templates/accounts/remove_user_profile_from_editor_group_managers.html:12
 #, python-format
 msgid "Editor Group Manager Group%(selected_editorgroupmanagers|pluralize)s"
 msgstr ""
+"Groupe%(selected_editorgroupmanagers|pluralize)s de gestionnaire de groupe "
+"d'édition"
 
 #: templates/accounts/add_user_profile_to_organization.html:8
 #, python-format
 msgid ""
 "Add a user to the following organization%(selected_organizations|pluralize)s:"
 msgstr ""
+"Ajouter un utilisateur à l'organisme%(selected_organizations|pluralize)s "
+"suivant:"
 
 #: templates/accounts/add_user_profile_to_organization.html:12
 #: templates/accounts/remove_user_profile_from_organization.html:12
 #, python-format
 msgid "Organization%(selected_organizations|pluralize)s"
-msgstr ""
+msgstr "Organisme%(selected_organizations|pluralize)s"
 
 #: templates/accounts/add_user_profile_to_organization.html:14
 #: templates/accounts/remove_user_profile_from_organization.html:12
 msgid "Organization Managers"
-msgstr ""
+msgstr "Gestionnaires de l'organisme"
 
 #: templates/accounts/add_user_profile_to_organization_managers.html:8
 #, python-format
@@ -75,109 +111,169 @@ msgid ""
 "Add a user to the following organization manager group"
 "%(selected_organizationmanagers|pluralize)s:"
 msgstr ""
+"Ajouter un utilisateur au groupe%(selected_organizationmanagers|pluralize)s "
+"de gestionnaire de l'organisme suivant:"
 
 #: templates/accounts/add_user_profile_to_organization_managers.html:12
 #, python-format
 msgid "Organization Manager%(selected_organizationmanagers|pluralize)s"
-msgstr ""
+msgstr "Gestionnaire%(selected_organizationmanagers|pluralize)s d'organisme"
 
 #: templates/accounts/apply_for_edelivery.html:18
-msgid "Apply for ELRC-SHARE eDelivery membership"
-msgstr ""
+#, fuzzy
+#| msgid "Apply for ELRC-SHARE eDelivery membership"
+msgid "Apply for ELRI eDelivery membership"
+msgstr "Demander une adhésion à ELRC-SHARE eDelivery"
 
 #: templates/accounts/apply_for_edelivery.html:20
 msgid "MSH Endpoint"
-msgstr ""
+msgstr "MSH Endpoint"
 
 #: templates/accounts/apply_for_edelivery.html:29
 msgid "Access Point Gateway Party Name"
-msgstr ""
+msgstr "Nom du point d'accès Gateway Party"
 
 #: templates/accounts/apply_for_edelivery.html:48
 msgid "Public Certificate (.crt, .cert, .cer)"
-msgstr ""
+msgstr "Certificat public (.crt, .cert, .cer)"
 
 #: templates/accounts/change_password.html:3
 msgid "Change Your Password &ndash; ELRC-SHARE"
-msgstr ""
+msgstr "Changervotre mot de passe &ndash; ELRC-SHARE"
 
 #: templates/accounts/change_password.html:6
 #, python-format
 msgid "Please correct the error%(form.errors|pluralize)s below."
-msgstr ""
+msgstr "Merci de corriger l'erreur%(form.errors|pluralize)s ci dessous."
 
 #: templates/accounts/change_password.html:12
 msgid "Change your password"
-msgstr ""
+msgstr "Changez votre mot de passe"
 
 #: templates/accounts/change_password.html:20
 msgid "Change Password"
-msgstr ""
+msgstr "Changer le mot de passe"
 
 #: templates/accounts/change_password_done.html:3
-msgid "Password Change Successful &ndash; ELRC-SHARE"
-msgstr ""
+#, fuzzy
+#| msgid "Password Change Successful &ndash; ELRC-SHARE"
+msgid "Password Change Successful &ndash; ELRI"
+msgstr "Modification de mot de passe &ndash; ELRC-SHARE effectuée avec succès"
 
 #: templates/accounts/change_password_done.html:7
 msgid "Password change successful"
-msgstr ""
+msgstr "Mot de passe modifié avec succès"
 
 #: templates/accounts/change_password_done.html:11
 msgid "Your password was changed"
-msgstr ""
+msgstr "Votre mot de passe a été modifié"
 
 #: templates/accounts/change_password_done.html:15
 msgid "Go back to your profile"
+msgstr "Retourner à votre profil"
+
+#: templates/accounts/confirmation_email.html:4
+#, python-format
+msgid ""
+"we have received a registration request for a new ELRI user account "
+"\"%(shortname)s\" at [1]. You can confirm that registration request and "
+"create your account by clicking the following link:"
+msgstr ""
+
+#: templates/accounts/confirmation_email.html:8
+msgid ""
+"Please make sure to follow the link within three days. If you do not wish to "
+"create an account with this e-mail address, then please simply disregard "
+"this message."
+msgstr ""
+
+#: templates/accounts/confirmation_email.html:10
+msgid "Welcome to ELRI!"
 msgstr ""
 
 #: templates/accounts/contact_maintainers.html:10
-#, python-format
 msgid ""
-"With this form you can send messages to the node maintainers, for example, "
-"if you would like to suggest the creation of a new editor group or a new "
-"organization. There are extra forms available for applying for membership in "
-"existing \n"
-"\t  <a href=\"%(editor_group_application)s\">editor groups</a> or \n"
-"\t  <a href=\"%(organization_application_url)s\">organizations</a>."
+"With this form you can send messages to the ELRI team. You can use this "
+"form, for example, if you would like to suggest the creation of a new group "
+"for resource sharing purposes. "
 msgstr ""
+
+#: templates/accounts/contact_maintainers.html:16
+msgid "Send Message"
+msgstr "Envoyer un message"
 
 #: templates/accounts/contact_maintainers.html:19
-msgid "Send Message"
+#, fuzzy, python-format
+#| msgid ""
+#| "Note: along with your message, the node maintainers will automatically "
+#| "receive your name and the e-mail address which is set in <a href="
+#| "\"%(edit_profile_url)s\">your user profile</a>."
+msgid ""
+"Note: along with your message, the ELRI team will automatically receive your "
+"name and the e-mail address which is set in <a href=\"%(edit_profile_url)s"
+"\">your user profile</a>."
+msgstr ""
+"Note: En plus de votre message, le mainteneur de nœud recevra "
+"automatiquement votre nom et l'adresse email paramétrée dans <a href="
+"\"%(edit_profile_url)s\">votre profil utilisateur</a>."
+
+#: templates/accounts/contact_maintainers_email.html:3
+msgid "Dear superuser,"
 msgstr ""
 
-#: templates/accounts/contact_maintainers.html:22
+#: templates/accounts/contact_maintainers_email.html:5
 #, python-format
 msgid ""
-"Note: along with your message, the node maintainers will automatically "
-"receive your name and the e-mail address which is set in <a href="
-"\"%(edit_profile_url)s\">your user profile</a>."
+"%(user_first_name)s %(user_last_name)s (user account: %(user_account_name)s) "
+"has sent you a message through the contact form of ELRI."
 msgstr ""
 
-#: templates/accounts/create_account.html:8
-msgid "Please fill in all fields to create your account."
+#: templates/accounts/contact_maintainers_email.html:7
+#, python-format
+msgid "Subject: %(subject)s"
+msgstr ""
+
+#: templates/accounts/contact_maintainers_email.html:8
+msgid "Message: see below "
+msgstr ""
+
+#: templates/accounts/contact_maintainers_email.html:10
+#, python-format
+msgid "Please try to answer this request soon by responding to %(user_email)s."
+msgstr ""
+
+#: templates/accounts/contact_maintainers_email.html:14
+msgid "The ELRI Team"
 msgstr ""
 
 #: templates/accounts/create_account.html:14
-#: templates/accounts/create_account.html:28
+#: templates/accounts/create_account.html:15
+#: templates/accounts/create_account.html:35
 msgid "Create Account"
-msgstr ""
+msgstr "Créer un compte"
 
-#: templates/accounts/create_account.html:22
-#, python-format
+#: templates/accounts/create_account.html:25
+#: templates/accounts/create_account.html:27
+#, fuzzy, python-format
+#| msgid ""
+#| "I accept the <a target=\"_blank\" href=\"%(elrcshare_tos)s\">ERLC-SHARE "
+#| "Terms of Service for registered users</a>."
 msgid ""
-"I accept the <a target=\"_blank\" href=\"%(elrcshare_tos)s\">ERLC-SHARE "
-"Terms of Service for registered users</a>."
+"I accept the <a target=\"_blank\" href=\"%(elri_tos)s\">ELRI Terms of "
+"Service</a>."
 msgstr ""
+"J'accepte <a target=\"_blank\" href=\"%(elrcshare_tos)s\">les termes de "
+"service ERLC-SHARE pour les utilisateurs enregistrés</a>."
 
 #: templates/accounts/delete_editor_group_application_selected_confirmation.html:6
 #: templates/accounts/delete_organization_application_selected_confirmation.html:6
 msgid "Home"
-msgstr ""
+msgstr "Accueil"
 
 #: templates/accounts/delete_editor_group_application_selected_confirmation.html:9
 #: templates/accounts/delete_organization_application_selected_confirmation.html:9
 msgid "Turn down multiple objects"
-msgstr ""
+msgstr "Refuser plusieurs objets"
 
 #: templates/accounts/delete_editor_group_application_selected_confirmation.html:16
 #: templates/accounts/delete_organization_application_selected_confirmation.html:16
@@ -187,6 +283,9 @@ msgid ""
 "objects, but your account doesn't have permission to turn down the following "
 "types of objects:"
 msgstr ""
+"Refuser les objets %(objects_name)s sélectionné résulterait en la "
+"suppression des objets liés, mais votre compte n'a pas la permission de "
+"refuser les objets de types suivants:"
 
 #: templates/accounts/delete_editor_group_application_selected_confirmation.html:24
 #: templates/accounts/delete_organization_application_selected_confirmation.html:24
@@ -195,6 +294,8 @@ msgid ""
 "Turning down the selected %(objects_name)s would require deleting the "
 "following protected related objects:"
 msgstr ""
+"Refuser les objets %(objects_name)s sélectionnés nécessite de supprimer les "
+"objets liés, qui sont protégés, suivants:"
 
 #: templates/accounts/delete_editor_group_application_selected_confirmation.html:32
 #: templates/accounts/delete_organization_application_selected_confirmation.html:32
@@ -203,54 +304,65 @@ msgid ""
 "Are you sure you want to turn down the selected %(objects_name)s? All of the "
 "following objects and their related items will be turned down:"
 msgstr ""
+"Êtes vous sûr de vouloir supprimer les %(objects_name)s? sélectionnés ? Tous "
+"les objets suivants et leurs objets liés seront refusés:"
 
 #: templates/accounts/delete_editor_group_application_selected_confirmation.html:43
 #: templates/accounts/delete_organization_application_selected_confirmation.html:43
 msgid "Yes, I"
-msgstr ""
+msgstr "Oui, je"
 
 #: templates/accounts/edit_profile.html:8
 msgid "First name"
-msgstr ""
+msgstr "Prénom"
 
 #: templates/accounts/edit_profile.html:11
 msgid "Last name"
-msgstr ""
+msgstr "Nom"
 
 #: templates/accounts/edit_profile.html:14
 msgid "Email"
-msgstr ""
+msgstr "Adresse e-mail"
 
 #: templates/accounts/edit_profile.html:20
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "If you would like to change any of the above details, please <a href="
+#| "\"%(contact_url)s\">contact the maintainers of ELRC-SHARE Repository</a>."
 msgid ""
 "If you would like to change any of the above details, please <a href="
-"\"%(contact_url)s\">contact the maintainers of ELRC-SHARE Repository</a>."
+"\"%(contact_url)s\">contact the maintainers of ELRI Repository</a>."
 msgstr ""
+"Si vous souhaitez modifier un des détails ci-dessus, merci de <a href="
+"\"%(contact_url)s\">contacter les gestionnaires d'ELRC-SHARE Repository</a>."
 
 #: templates/accounts/edit_profile.html:22
 msgid "API KEY"
-msgstr ""
+msgstr "Clé API"
 
 #: templates/accounts/edit_profile.html:27
 #, python-format
 msgid "Editor Group Manager Group%(editor_group_managers_member_of|pluralize)s"
 msgstr ""
+"Modifier le groupe%(editor_group_managers_member_of|pluralize)s de "
+"gestionnaire de groupe"
 
 #: templates/accounts/edit_profile.html:34
 msgid ""
 "Displays all the editor groups you belong in. Editor groups that are applied "
 "by default to your resources, are shown in italic."
 msgstr ""
+"Affiche tous les groupes d'édition auxquels vous appartenez. Les groupes "
+"d'édition réglés par défaut dans vous ressources sont en italique."
 
 #: templates/accounts/edit_profile.html:34
 #, python-format
 msgid "Editor Group%(editor_groups_member_of|pluralize)s"
-msgstr ""
+msgstr "Groupe%(editor_groups_member_of|pluralize)s d'édition"
 
 #: templates/accounts/edit_profile.html:42
 msgid "This editor group is set by default to your resources."
-msgstr ""
+msgstr "Ce groupe d'édition est réglé par défaut dans vos ressources."
 
 #: templates/accounts/edit_profile.html:55
 #, python-format
@@ -258,16 +370,20 @@ msgid ""
 "You already applied for a membership of the following editor group"
 "%(groups_applied_for|pluralize)s: %(groups_applied_for|join:\", \")s"
 msgstr ""
+"Vous avez déjà demandé à adhérer au groupe%(groups_applied_for|pluralize)s: "
+"%(groups_applied_for|join:\", \")s d'édition suivant"
 
 #: templates/accounts/edit_profile.html:60
 #, python-format
 msgid "Organization Manager Group%(organization_managers_member_of|pluralize)s"
 msgstr ""
+"Groupe%(organization_managers_member_of|pluralize)s de gestionnaire de "
+"l'organisme"
 
 #: templates/accounts/edit_profile.html:66
 #, python-format
 msgid "Organization%(organizations_member_of|pluralize)s"
-msgstr ""
+msgstr "Organisme%(organizations_member_of|pluralize)s"
 
 #: templates/accounts/edit_profile.html:71
 #, python-format
@@ -276,31 +392,164 @@ msgid ""
 "%(organizations_applied_for|pluralize)s: "
 "%(organizations_applied_for|join:\", \")s"
 msgstr ""
+"Vous avez déjà demandé à adhérer à l'organisme"
+"%(organizations_applied_for|pluralize)s: "
+"%(organizations_applied_for|join:\", \")s suivant"
 
 #: templates/accounts/edit_profile.html:74
 msgid "Edit Profile"
-msgstr ""
+msgstr "Modifier le profil"
 
 #: templates/accounts/editor_group_application.html:6
 #: templates/accounts/update_default_editor_group.html:8
 msgid "Please give at least one editor group."
-msgstr ""
+msgstr "Merci de donner au moins un groupe d'édition."
 
 #: templates/accounts/editor_group_application.html:11
 msgid "Apply for editor group membership"
-msgstr ""
+msgstr "Demander un adhésion à un groupe d'édition"
 
 #: templates/accounts/editor_group_application.html:18
 #: templates/accounts/organization_application.html:18
 msgid "Apply"
+msgstr "Appliquer"
+
+#: templates/accounts/notification_editor_group_application_accepted_email.html:4
+#, python-format
+msgid ""
+"The application to the editor group \"%(editor_group)s\"\n"
+"has been accepted by a manager of the group."
+msgstr ""
+
+#: templates/accounts/notification_editor_group_application_turned_down_email.html:4
+#, python-format
+msgid ""
+"The application to the editor group \"%(editor_group)s\"\n"
+"has been turned down by a manager of the group."
+msgstr ""
+
+#: templates/accounts/notification_editor_group_managers_application_email.html:2
+#, fuzzy
+#| msgid "Apply for editor group membership"
+msgid "Dear editor group manager,"
+msgstr "Demander un adhésion à un groupe d'édition"
+
+#: templates/accounts/notification_editor_group_managers_application_email.html:4
+#, python-format
+msgid ""
+"We have received an application to your editor group \"%(editor_group)s\"\n"
+"from the ELRI user account \"%(shortname)s\"."
+msgstr ""
+
+#: templates/accounts/notification_editor_group_managers_application_email.html:7
+#: templates/accounts/notification_organization_managers_application_email.html:7
+#, python-format
+msgid ""
+"You can confirm or reject that application by going to the following page in "
+"the administration section:\n"
+"- %(confirmation_url)s"
+msgstr ""
+
+#: templates/accounts/notification_editor_group_managers_application_email.html:10
+#: templates/accounts/notification_organization_managers_application_email.html:10
+msgid "Best regards"
+msgstr ""
+
+#: templates/accounts/notification_organization_application_accepted_email.html:4
+#, python-format
+msgid ""
+"The application to the organization \"%(organization)s\"\n"
+"has been accepted by a manager of the organization."
+msgstr ""
+
+#: templates/accounts/notification_organization_application_turned_down_email.html:4
+#, python-format
+msgid ""
+"The application to the organization \"%(organization)s\"\n"
+"has been turned down by a manager of the organization."
+msgstr ""
+
+#: templates/accounts/notification_organization_managers_application_email.html:2
+#, fuzzy
+#| msgid "Organization Managers"
+msgid "Dear organization manager,"
+msgstr "Gestionnaires de l'organisme"
+
+#: templates/accounts/notification_organization_managers_application_email.html:4
+#, python-format
+msgid ""
+"We have received an application to your organization \"%(organization)s\"\n"
+"from the ELRI user account \"%(shortname)s\"."
 msgstr ""
 
 #: templates/accounts/organization_application.html:6
 msgid "Please give at least one organization."
-msgstr ""
+msgstr "Merci de donner au moins un organisme."
 
 #: templates/accounts/organization_application.html:11
 msgid "Apply for organization membership"
+msgstr "Demander un adhésion à un organisme"
+
+#: templates/accounts/reactivation_email.html:4
+#, python-format
+msgid "We have now reset your ELRI user account \"%(shortname)s\"."
+msgstr ""
+
+#: templates/accounts/reactivation_email.html:5
+#, python-format
+msgid "Your password is \"%(random_password)s\"."
+msgstr ""
+
+#: templates/accounts/reactivation_email.html:6
+msgid ""
+"We advise that you change your password the next time you login to ELRI. "
+msgstr ""
+
+#: templates/accounts/reactivation_email.html:8
+msgid "Thank you for using ELRI!"
+msgstr ""
+
+#: templates/accounts/registration_email.html:2
+#, python-format
+msgid "User %(username)s provided the following registration information:"
+msgstr ""
+
+#: templates/accounts/registration_email.html:4
+#, fuzzy
+#| msgid "First name"
+msgid "- First name: "
+msgstr "Prénom"
+
+#: templates/accounts/registration_email.html:6
+#, fuzzy
+#| msgid "Last name"
+msgid "- Last name: "
+msgstr "Nom"
+
+#: templates/accounts/registration_email.html:8
+#, fuzzy
+#| msgid "Email"
+msgid "- E-mail: "
+msgstr "Adresse e-mail"
+
+#: templates/accounts/registration_email.html:10
+msgid "- Telephone number: "
+msgstr ""
+
+#: templates/accounts/registration_email.html:12
+msgid "- Affiliation: "
+msgstr ""
+
+#: templates/accounts/registration_email.html:14
+msgid "- Position: "
+msgstr ""
+
+#: templates/accounts/registration_email.html:16
+#, python-format
+msgid ""
+"You can either confirm this user's account by clicking on the\n"
+"%(confirmation_url)s, or review and activate the user's account from the\n"
+"back-office."
 msgstr ""
 
 #: templates/accounts/remove_user_profile_from_editor_group.html:8
@@ -309,20 +558,22 @@ msgid ""
 "Remove a user from the following editor group"
 "%(selected_editorgroups|pluralize)s:"
 msgstr ""
+"Supprimer un utilisateur du groupe%(selected_editorgroups|pluralize)s: "
+"d'édition suivant:"
 
 #: templates/accounts/remove_user_profile_from_editor_group.html:26
 #: templates/accounts/remove_user_profile_from_editor_group_managers.html:26
 #: templates/accounts/remove_user_profile_from_organization.html:26
 #: templates/accounts/remove_user_profile_from_organization_managers.html:26
 msgid "Remove"
-msgstr ""
+msgstr "Supprimer"
 
 #: templates/accounts/remove_user_profile_from_editor_group.html:27
 #: templates/accounts/remove_user_profile_from_editor_group_managers.html:27
 #: templates/accounts/remove_user_profile_from_organization.html:27
 #: templates/accounts/remove_user_profile_from_organization_managers.html:27
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #: templates/accounts/remove_user_profile_from_editor_group_managers.html:8
 #, python-format
@@ -330,6 +581,8 @@ msgid ""
 "Remove a user from the following editor group manager group"
 "%(selected_editorgroupmanagers|pluralize)s:"
 msgstr ""
+"Supprimer un utilisateur du groupe de gestionnaire du groupe"
+"%(selected_editorgroupmanagers|pluralize)s d'édition suivant:"
 
 #: templates/accounts/remove_user_profile_from_organization.html:8
 #, python-format
@@ -337,6 +590,8 @@ msgid ""
 "Remove a user from the following organization"
 "%(selected_organizations|pluralize)s:"
 msgstr ""
+"Supprimer un utilisateur de l'organisme%(selected_organizations|pluralize)s "
+"suivant:"
 
 #: templates/accounts/remove_user_profile_from_organization_managers.html:8
 #, python-format
@@ -344,17 +599,65 @@ msgid ""
 "Remove a user from the following organization manager group"
 "%(selected_organizationmanagers|pluralize)s:"
 msgstr ""
+"Supprimer un utilisateur du groupe"
+"%(selected_organizationmanagers|pluralize)s de gestionnaire d'organisme "
+"suivant:"
 
 #: templates/accounts/remove_user_profile_from_organization_managers.html:12
 #, python-format
 msgid "Organization Manager Group%(selected_organizationmanagers|pluralize)s"
 msgstr ""
+"Groupe%(selected_organizationmanagers|pluralize)s de gestionnaire d'organisme"
 
 #: templates/accounts/reset_account.html:5
 #: templates/accounts/reset_account.html:12
 msgid "Reset Account"
+msgstr "Réinitialiser le compte"
+
+#: templates/accounts/reset_email.html:2
+#, python-format
+msgid "Dear %(firstname)s %(lastname)s,"
+msgstr ""
+
+#: templates/accounts/reset_email.html:4
+#, python-format
+msgid ""
+"We have received a password reset request for your ELRI user\n"
+"account \"%(shortname)s\". You can confirm this request and\n"
+"reset your password by clicking on the following link:\n"
+"- %(confirmation_url)s"
+msgstr ""
+
+#: templates/accounts/reset_email.html:9
+msgid ""
+"If you do not wish to reset your account password, please \n"
+"ignore this email."
+msgstr ""
+
+#: templates/accounts/reset_email.html:12
+msgid "Thank you for using ELRI!  "
 msgstr ""
 
 #: templates/accounts/update_default_editor_group.html:25
 msgid "Update"
-msgstr ""
+msgstr "Mise à jour"
+
+#~ msgid ""
+#~ "With this form you can send messages to the node maintainers, for "
+#~ "example, if you would like to suggest the creation of a new editor group "
+#~ "or a new organization. There are extra forms available for applying for "
+#~ "membership in existing \n"
+#~ "\t  <a href=\"%(editor_group_application)s\">editor groups</a> or \n"
+#~ "\t  <a href=\"%(organization_application_url)s\">organizations</a>."
+#~ msgstr ""
+#~ "Avec ce formulaire vous pouvez envoyer un message au mainteneur du nœud, "
+#~ "par exemple, si vous souhaitez suggérer la création d'un nouveau groupe "
+#~ "d'édition ou d'un nouvel organisme. Il y a d'autre formulaires "
+#~ "disponibles en demandant l'adhésion à \n"
+#~ "\t  <a href=\"%(editor_group_application)s\">des groupes d'édition "
+#~ "existants</a> or \n"
+#~ "\t  <a href=\"%(organization_application_url)s\">des organisme existants</"
+#~ "a>."
+
+#~ msgid "Please fill in all fields to create your account."
+#~ msgstr "Merci de remplir tous les champs pour créer un compte."

@@ -308,8 +308,8 @@ class EditorGroupApplicationAdmin(admin.ModelAdmin):
                         'shortname': req.user.get_full_name()}
                 try:
                     # Send out notification email to the user
-                    send_mail('Application accepted',
-                              render_to_string('accounts/notification_editor_group_application_accepted.email', data),
+                    send_mail(_('Application accepted'),
+                              render_to_string('accounts/notification_editor_group_application_accepted_email.html', data),
                               EMAIL_ADDRESSES['elri-no-reply'], (req.user.email,),
                               fail_silently=False)
                 except:  # SMTPException:
@@ -367,8 +367,8 @@ class EditorGroupApplicationAdmin(admin.ModelAdmin):
                 'shortname': obj.user.get_full_name()}
         try:
             # Send out notification email to the user
-            send_mail('Application turned down', render_to_string('accounts/'
-                                                                  'notification_editor_group_application_turned_down.email',
+            send_mail(_('Application turned down'), render_to_string('accounts/'
+                                                                  'notification_editor_group_application_turned_down_email.html',
                                                                   data),
                       EMAIL_ADDRESSES['elri-no-reply'], (obj.user.email,),
                       fail_silently=False)
@@ -776,8 +776,8 @@ class OrganizationApplicationAdmin(admin.ModelAdmin):
                         'shortname': req.user.get_full_name()}
                 try:
                     # Send out notification email to the user
-                    send_mail('Application accepted',
-                              render_to_string('accounts/notification_organization_application_accepted.email', data),
+                    send_mail(_('Application accepted'),
+                              render_to_string('accounts/notification_organization_application_accepted_email.html', data),
                               EMAIL_ADDRESSES['elri-no-reply'], (req.user.email,),
                               fail_silently=False)
                 except:  # SMTPException:
@@ -827,8 +827,8 @@ class OrganizationApplicationAdmin(admin.ModelAdmin):
                 'shortname': obj.user.get_full_name()}
         try:
             # Send out notification email to the user
-            send_mail('Application turned down', render_to_string('accounts/'
-                                                                  'notification_organization_application_turned_down.email',
+            send_mail(_('Application turned down'), render_to_string('accounts/'
+                                                                  'notification_organization_application_turned_down_email.html',
                                                                   data),
                       EMAIL_ADDRESSES['elri-no-reply'], (obj.user.email,),
                       fail_silently=False)
@@ -1142,12 +1142,12 @@ class EdeliveryApplicationAdmin(admin.ModelAdmin):
                 if req.rejection_reason:
                     req.status = "REJECTED"
                     req.save()
-                    send_mail("ELRI eDelivery application",
+                    send_mail(_("ELRI eDelivery application"),
                               "Dear {}, \n"
                               "Your eDelivery application has been rejected due to the"
                               "following reasons:\n"
                               "{}.".format(req.user.username, req.rejection_reason),
-                              EMAIL_ADDRESSES['elri-edelivery'], [req.user.email])
+                              "elri-edelivery@email.com", [req.user.email])
                     messages.success(request, "The selected applications have been rejected. "
                                               "The requesting users have been notified via email.")
                 else:
@@ -1190,12 +1190,12 @@ class EdeliveryApplicationAdmin(admin.ModelAdmin):
 
                     req.status = "REVOKED"
                     # TODO: remove pmode and certificate from access point
-                    send_mail("ELRI eDelivery application",
+                    send_mail(_("ELRI eDelivery application"),
                               "Dear {}, \n"
                               "Your eDelivery application has been revoked due to the"
                               "following reasons:\n"
                               "{}.".format(req.user.username, req.rejection_reason),
-                              EMAIL_ADDRESSES['elri-edelivery'], [req.user.email])
+                              "elri-edelivery@email.com", [req.user.email])
                     req.save()
                     messages.success(request, "The selected applications have been revoked. "
                                               "The requesting users have been notified via email.")
