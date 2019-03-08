@@ -48,18 +48,6 @@
         <li>{% blocktrans %}downloading of language resources in accordance to the relevant licensing terms.{% endblocktrans %}</li>
         </ol>    
         
-
-        <div id="Sharing" class="anchor"></div>
-        <h3>{% blocktrans %}<b>Sharing of Language Resources</b>{% endblocktrans %}</h3>        
-        <p>{% blocktrans %}By using the ELRI Services to upload and share one or more Language Resources you represent and warrant that:{% endblocktrans %}</p>   
-        <ul>        
-           <li>{% blocktrans %}you have the full authority to deposit the Resource;{% endblocktrans %}</li>
-           <li>{% blocktrans %}you have the necessary legal title in the Resource or you are permitted to make the deposition of the Resource;{% endblocktrans %}</li>
-           <li>{% blocktrans %}the deposition of the Resource will not violate or be considered a breach of any obligation or right of a third party;{% endblocktrans %}</li>
-           <li>{% blocktrans %}the deposition of the Resource will not violate any applicable law or regulation;{% endblocktrans %}</li>
-           <li>{% blocktrans %}you have used reasonable skill and care to ensure that the information you provide in the process of deposition does not contain any untrue statements of legal or material facts.{% endblocktrans %}</li>
-        </ul>
-        
         <div id="Privacy" class="anchor"></div>
         <h3>{% blocktrans %}<b>Privacy</b>{% endblocktrans %}</h3>        
         <p>{% blocktrans %}The ELRI website and services log certain information about every request sent to them. This information is used for system administration and for producing usage statistics. Summary statistics are extracted from this data and some of these may be made publicly available, but these do not include information from which individuals could be identified. Relevant subsets of this data may be used as part of investigations of computer misuse involving this site. Data may also on occasion be used to enable investigation of technical problems on the website. Otherwise logged information is not passed to any third party except if required by law.{% endblocktrans %}</p>        
@@ -72,15 +60,15 @@
         <h3>{% blocktrans %}<b>Data protection statement</b>{% endblocktrans %}</h3>        
         <p>{% blocktrans %}In using and submitting content on the ELRI Services, You agree that ELRI may use any personal data of Yours that You supply through contributing content or by filling in electronic forms. ELRI fully respects Your privacy and seeks to protect Your personal data:{% endblocktrans %}</p>        
             <ul> 
-            <li>{% blocktrans %}ELRI will only collect and use Your information to administer, support, improve and obtain feedback on its services.{% endblocktrans %}</li> 
-            <li>{% blocktrans %}ELRI may also contact You to obtain feedback on services and any improvements it can make.{% endblocktrans %}</li> 
-            <li>{% blocktrans %}ELRI will not disclose Your personal data to any other organization.{% endblocktrans %}</li> 
-            <li>{% blocktrans %}You can access and modify your personal data through the Registration Service.{% endblocktrans %}</li>
+            {% blocktrans %}<li>ELRI will only collect and use Your information to administer, support, improve and obtain feedback on its services.</li>{% endblocktrans %} 
+            {% blocktrans %}<li>ELRI may also contact You to obtain feedback on services and any improvements it can make.</li>{% endblocktrans %} 
+            {% blocktrans %}<li>ELRI will not disclose Your personal data to any other organization.</li>{% endblocktrans %} 
+            {% blocktrans %}<li>You can access and modify your personal data through the Registration Service.</li>{% endblocktrans %}
             </ul>
                            
         <div id="Cookies_policy" class="anchor"></div>
         <h3>{% blocktrans %}<b>Cookies policy</b>{% endblocktrans %}</h3>        
-        <p>{% blocktrans %}This website does not use cookies nor any other tracking information on this website.{% endblocktrans %}</p>        
+        <p>{% blocktrans %}This website uses cookies to facilitate the operation of the service and enhance user experience.{% endblocktrans %}</p>        
         
         <div id="Misuse" class="anchor"></div>
         <h3>{% blocktrans %}<b>ELRI Services misuse and notification regarding IPR infringement</b>{% endblocktrans %}</h3>        
@@ -103,6 +91,17 @@
         <h3>{% blocktrans %}<b>Termination</b>{% endblocktrans %}</h3>        
         <p>{% blocktrans %}The rights granted hereunder will terminate automatically upon any breach by You of the Terms of Service. Subject to the above terms and conditions, this agreement will be valid for as long as ELRI Services are in existence and will continue in full force and effect unless terminated as stated above.{% endblocktrans %}</p>        
         
+        <div id="Sharing" class="anchor"></div>
+        <h3>{% blocktrans %}<b>Sharing of Language Resources</b>{% endblocktrans %}</h3>        
+        <p>{% blocktrans %}By using the ELRI Services to upload and share one or more Language Resources you represent and warrant that:{% endblocktrans %}</p>   
+        <ul>        
+           <li>{% blocktrans %}you have the full authority to deposit the Resource;{% endblocktrans %}</li>
+           <li>{% blocktrans %}you have the necessary legal title in the Resource or you are permitted to make the deposition of the Resource;{% endblocktrans %}</li>
+           <li>{% blocktrans %}the deposition of the Resource will not violate or be considered a breach of any obligation or right of a third party;{% endblocktrans %}</li>
+           <li>{% blocktrans %}the deposition of the Resource will not violate any applicable law or regulation;{% endblocktrans %}</li>
+           <li>{% blocktrans %}you have used reasonable skill and care to ensure that the information you provide in the process of deposition does not contain any untrue statements of legal or material facts.{% endblocktrans %}</li>
+        </ul>
+
         <div id="Notice_take_down" class="anchor"></div>
         <h3>{% blocktrans %}<b>Appendix A. Notice and Take Down policy</b>{% endblocktrans %}</h3>        
         <p>{% blocktrans %}If a rights holder is concerned that s/he has found Language Resources (LRs) on the ELRI National Relay Station in [Member State], for which s/he has not given permission, granted a licence or is not covered by a limitation or exception in national law, such rights holder is asked to contact the Service Provider at [email address] in writing, stating the following:{% endblocktrans %}</p>
@@ -119,14 +118,14 @@
         <li>{% blocktrans %}Upon receipt of a valid complaint, the LR will be temporarily removed from the ELRI Services pending an agreed solution.{% endblocktrans %}</li>
         <li>{% blocktrans %}The Service Provider will contact the individual or organisation who deposited the material within ten working days from the reception of a valid complaint. The Depositor will be notified that the material is subject to a complaint, under what allegations, and will be encouraged to assuage the complaints concerned.{% endblocktrans %}</li>
         <li>{% blocktrans %}The complainant and the Depositor will be encouraged to resolve the issue swiftly and amicably and to the satisfaction of both parties, with the following possible outcomes:{% endblocktrans %}</li>
-            <ul type="a" style="padding-left:50px">
+            <ol type="a" style="padding-left:50px">
             <li>{% blocktrans %}The LR is replaced on the ELRI Services inventory unchanged.{% endblocktrans %}</li>
             <li>{% blocktrans %}The LR is replaced on the ELRI Services inventory with changes.{% endblocktrans %}</li>
             <li>{% blocktrans %}The LR is permanently removed from the ELRI Services inventory.{% endblocktrans %}</li>
-           </ul>            
+           </ol>            
         <li>{% blocktrans %}If the Depositor and the complainant are unable to agree on a solution, the LR will remain unavailable through the ELRI Services inventory until a time when a resolution has been reached.{% endblocktrans %}</li>            
        </ol>            
-            
+       {% blocktrans %}Appendix B{% endblocktrans %}
         
     </div>
 

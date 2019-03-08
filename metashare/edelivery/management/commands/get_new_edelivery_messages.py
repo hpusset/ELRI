@@ -20,14 +20,13 @@ class Command(BaseCommand):
             #contact the superusers of the NRS
             superuser_emails = User.objects.filter(is_superuser=True).values_list('email', flat=True)
             try:
-                send_mail("New contributions through eDelivery",
-                          "You have new unmanaged contributed resources on elri.eu, through eDelivery.",
+                send_mail(_("New contributions through eDelivery"),
+                          _("You have new unmanaged contributed resources on elri.eu, through eDelivery."),
                           recipient_list=superuser_emails,
                           from_email='no-reply@elri.eu', \
                           fail_silently=False)
             except:
-                LOGGER.error("An error has occurred while trying to send email to contributions "
-                             "alert recipients.")
+                LOGGER.error(_("An error has occurred while trying to send email to contributions alert recipients."))
 
         elif len(download_result) > 2:
             LOGGER.error("{}: {}".format(download_result[1], download_result[2]))

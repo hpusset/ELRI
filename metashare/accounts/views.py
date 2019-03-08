@@ -49,8 +49,8 @@ def confirm(request, uuid):
 
     # Render activation email template with correct values.
     data = {'firstname': user.first_name, 'lastname': user.last_name,
-      'shortname': user.username}
-    email = render_to_string('accounts/activation.email', data)
+      'shortname': user.username, 'nodeurl': DJANGO_URL}
+    email = render_to_string('accounts/activation_email.html', data)
     try:
         # Send an activation email.
         # TODO: add localisation and change email
@@ -83,7 +83,7 @@ def contact(request):
               'user_email': request.user.email,
               'node_url': DJANGO_URL, 'message': form.cleaned_data['message'],
               'subject': form.cleaned_data['subject']}
-            email_msg = render_to_string('accounts/contact_maintainers.email',
+            email_msg = render_to_string('accounts/contact_maintainers_email.html',
                                          data)
             # send out the email to all superusers
             superuser_emails = User.objects.filter(is_superuser=True) \
@@ -171,7 +171,7 @@ def create(request):
                 'position': _profile.position,
                 'confirmation_url': '{0}/accounts/confirm/{1}/'.format(
                     DJANGO_URL, new_object.uuid)}
-            email = render_to_string('accounts/registration.email', data)
+            email = render_to_string('accounts/registration_email.html', data)
             try:
                 send_mail(_('New user registration'),
                           email, EMAIL_ADDRESSES['elri-no-reply'], 
@@ -190,7 +190,8 @@ def create(request):
             # Add a message to the user after successful creation.
             messages.success(request,
               _("We have received your registration data and sent the "
-                  "administrators a notification email."))
+                  "administrators a notification email."
+                  "You will receive an email when your account has been activated."))
             
             # Redirect the user to the front page.
             return redirect('metashare.views.frontpage')
@@ -329,8 +330,8 @@ def editor_group_application(request):
                     DJANGO_URL)}
                 try:
                     # Send out notification email to the managers and superusers
-                    send_mail('New editor membership request',
-                        render_to_string('accounts/notification_editor_group_managers_application.email', data),
+                    send_mail(_('New editor membership request'),
+                        render_to_string('accounts/notification_editor_group_managers_application_email.html', data),
                         EMAIL_ADDRESSES['elri-no-reply'], emails, fail_silently=False)
                 except: #SMTPException:
                     # If the email could not be sent successfully, tell the user
@@ -483,8 +484,8 @@ def organization_application(request):
                     DJANGO_URL)}
                 try:
                     # Send out notification email to the organization managers and superusers
-                    send_mail('New organization membership request',
-                        render_to_string('accounts/notification_organization_managers_application.email', data),
+                    send_mail(_('New organization membership request'),
+                        render_to_string('accounts/notification_organization_managers_application_email.html', data),
                         EMAIL_ADDRESSES['elri-no-reply'], emails, fail_silently=False)
                 except: #SMTPException:
                     # If the email could not be sent successfully, tell the user
@@ -543,11 +544,11 @@ def reset(request, uuid=None):
                   'shortname': user.username,
                   'confirmation_url': '{0}/accounts/reset/{1}/'.format(
                     DJANGO_URL, new_object.uuid)}
-                email = render_to_string('accounts/reset.email', data)
+                email = render_to_string('accounts/reset_email.html', data)
                 
                 try:
                     # Send out reset email to the given email address.
-                    send_mail(_('Please confirm your ELRI reset request'),
+                    send_mail(_('Please confirm your ELRI password reset request'),
                     email, EMAIL_ADDRESSES['elri-no-reply'], [user.email],
                     fail_silently=False)
                 
@@ -558,8 +559,8 @@ def reset(request, uuid=None):
                 
                 # Add a message to the user after successful creation.
                 messages.success(request,
-                  _("We have received your reset request and sent you an " \
-                    "email with further reset instructions."))
+                  _("We have received your password reset request and sent you an " \
+                    "email with further instructions."))
                 
                 # Redirect the user to the front page.
                 return redirect('metashare.views.frontpage')
@@ -590,7 +591,7 @@ def reset(request, uuid=None):
       'lastname': user.last_name,
       'shortname': user.username,
       'random_password': random_password}
-    email = render_to_string('accounts/reactivation.email', data)
+    email = render_to_string('accounts/reactivation_email.html', data)
     
     try:
         # Send out re-activation email to the given email address.
@@ -644,8 +645,8 @@ def edelivery_application(request):
                           message="User '{}' has applied for membership in the ELRI eDelivery "
                                   "Network. Please review the application at "
                                   "https://elri.eu/admin/accounts/accesspointedeliveryapplication/ and "
-                                  "accept or reject the application.".format(request.user.username), from_email="elri@ilsp.gr",
-                          recipient_list=[EMAIL_ADDRESSES['elri-edelivery']], fail_silently=False
+                                  "accept or reject the application.".format(request.user.username), from_email="elri-ilsp@email.com",
+                          recipient_list=['elri-edelivery@email.com'], fail_silently=False
                       )
             # TODO: email admin??
             return redirect('metashare.views.frontpage')
