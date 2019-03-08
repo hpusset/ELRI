@@ -74,7 +74,8 @@ ELRI_EMAIL_HOST    | elri_mailserver                 | ELRI Mail server hostname
 ELRI_EMAIL_PORT    | 1025                            | ELRI Mail server port
 ELRI_EMAIL_USER    | elri_noreply_user@smtserver.com | ELRI Mail server auth user (if exists)
 ELRI_EMAIL_PASS    | xxxxxxxx                        | ELRI Mail server auth password (if exists)
-ELRI_SUP_LANGUAGES | [("English", "English"),(...)]  | ELRI Supported languages
+ELRI_LOC_LANGUAGES | pt-pt                           | ELRI Language(s) for Localisation (i.e. ga-ie, en-ie)
+ELRI_SUP_LANGUAGES | [("English", "English"),(...)]  | ELRI Supported languages for LR processing
 ELRI_WORKERS       | 4                               | Number of workers used
 ELRI_THREADS       | 8                               | Number of threads used
 
