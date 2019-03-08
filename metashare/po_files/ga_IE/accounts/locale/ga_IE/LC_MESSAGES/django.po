@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-05 18:52+0100\n"
+"POT-Creation-Date: 2019-03-08 09:52+0100\n"
 "PO-Revision-Date: 2018-11-12 12:04+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -101,6 +101,12 @@ msgstr ""
 "Ní mór a bheith i d’fhorúsáideoir nó bainisteoir grúpa chun glacadh le "
 "hiarratais."
 
+#: accounts/admin.py:311 accounts/admin.py:779
+#, fuzzy
+#| msgid "Application Status"
+msgid "Application accepted"
+msgstr "Stádas Iarratais"
+
 #: accounts/admin.py:318 accounts/admin.py:786
 msgid "There was an error sending out an application acceptance e-mail."
 msgstr "Tharla earráid agus rphost glactha iarratais á sheoladh amach."
@@ -129,6 +135,12 @@ msgstr "Glactha le gach iarratas."
 #: accounts/admin.py:336
 msgid "Accept selected editor group applications"
 msgstr "Glac le hiarratais roghnaithe don ghrúpa eagarthóirí"
+
+#: accounts/admin.py:370 accounts/admin.py:830
+#, fuzzy
+#| msgid "Application Status"
+msgid "Application turned down"
+msgstr "Stádas Iarratais"
 
 #: accounts/admin.py:378 accounts/admin.py:838
 msgid ""
@@ -338,6 +350,12 @@ msgstr "Glac le hiarratais roghnaithe eDelivery"
 #: accounts/admin.py:1135
 msgid "You must be superuser to reject eDelivery applications."
 msgstr "Ní mór a bheith i d’fhorúsáideoir chun diúltú d’iarratais eDelivery"
+
+#: accounts/admin.py:1145 accounts/admin.py:1193
+#, fuzzy
+#| msgid "Reject selected eDelivery applications"
+msgid "ELRI eDelivery application"
+msgstr "Diúltaigh d’iarratais roghnaithe eDelivery"
 
 #: accounts/admin.py:1157
 msgid "{} cannot be rejected. Only \"PENDING\" applications can be rejected"
@@ -612,6 +630,10 @@ msgid "An older application of yours for editor group \"%s\" is still pending."
 msgstr ""
 "Tá sean-iarratas a rinne tú ar an ngrúpa eagarthóirí \"%s\" fós ar feitheamh."
 
+#: accounts/views.py:333
+msgid "New editor membership request"
+msgstr ""
+
 #: accounts/views.py:340
 msgid ""
 "There was an error sending out the request email for your editor group "
@@ -661,6 +683,12 @@ msgstr "Déan uasdátú ar ghrúpaí eagarthóirí réamhshocraithe"
 #, python-format
 msgid "An older application of yours for organization \"%s\" is still pending."
 msgstr "Tá sean-iarratas a rinne tú ar an eagraíocht \"%s\" fós ar feitheamh."
+
+#: accounts/views.py:487
+#, fuzzy
+#| msgid "Apply for organization membership"
+msgid "New organization membership request"
+msgstr "Déan iarratas ar bhallraíocht in eagraíocht"
 
 #: accounts/views.py:494
 msgid ""

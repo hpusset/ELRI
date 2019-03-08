@@ -1,0 +1,14 @@
+{% load i18n %}
+{% blocktrans %}Dear {% endblocktrans %}{{ resourceContactName|join:", " }},
+
+{% blocktrans %}the ELRI user {{ user.username }} ({{ user.first_name }} {{ user.last_name }}, {{ user_email }}) requests information on the language resource “{{ resource }}” ([1]). You can find the request below; please reply as soon as possible.{% endblocktrans %}
+
+{% blocktrans %}Best regards,{% endblocktrans %}
+{% blocktrans %}ELRI Repository at [2]{% endblocktrans %}
+
+[1] {{ node_url }}/{{ resource.get_relative_url }}
+[2] {{ node_url }}
+
+======================================================================
+
+{{ message }}

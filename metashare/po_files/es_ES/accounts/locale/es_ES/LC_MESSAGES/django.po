@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-06 09:23+0100\n"
-"PO-Revision-Date: 2019-03-06 09:20+0100\n"
+"POT-Creation-Date: 2019-03-07 17:25+0100\n"
+"PO-Revision-Date: 2019-03-06 19:13+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -100,6 +100,10 @@ msgstr ""
 "Se requiere ser superusuario o administrador de grupo para aceptar "
 "solicitudes."
 
+#: accounts/admin.py:311 accounts/admin.py:779
+msgid "Application accepted"
+msgstr "Solicitud aceptada"
+
 #: accounts/admin.py:318 accounts/admin.py:786
 msgid "There was an error sending out an application acceptance e-mail."
 msgstr ""
@@ -131,6 +135,10 @@ msgstr "Ha aceptado correctamente todas las solicitudes."
 #: accounts/admin.py:336
 msgid "Accept selected editor group applications"
 msgstr "Aceptar solicitudes seleccionades de grupo editor "
+
+#: accounts/admin.py:370 accounts/admin.py:830
+msgid "Application turned down"
+msgstr "Solicitud rechazada"
 
 #: accounts/admin.py:378 accounts/admin.py:838
 msgid ""
@@ -353,6 +361,10 @@ msgstr "Aceptar las solicitudes de eDelivery seleccionadas"
 msgid "You must be superuser to reject eDelivery applications."
 msgstr "Debe ser superusuario para rechazar las solicitudes de eDelivery."
 
+#: accounts/admin.py:1145 accounts/admin.py:1193
+msgid "ELRI eDelivery application"
+msgstr "Solicitud de eDelivery de ELRI"
+
 #: accounts/admin.py:1157
 msgid "{} cannot be rejected. Only \"PENDING\" applications can be rejected"
 msgstr ""
@@ -548,8 +560,6 @@ msgid "Affiliation phone number"
 msgstr "Número de teléfono de afiliación"
 
 #: accounts/views.py:57
-#, fuzzy
-#| msgid "Your ELRC-SHARE user account has been activated"
 msgid "Your ELRI user account has been activated"
 msgstr "Su cuenta de usuario ELRI ha sido activada"
 
@@ -558,8 +568,7 @@ msgid "We have activated user account for user {}."
 msgstr "Hemos activado la cuenta de usuario para el usuario {}."
 
 #: accounts/views.py:92
-#, fuzzy, python-format
-#| msgid "[ELRC-SHARE] Contact Form Request: %s"
+#, python-format
 msgid "[ELRI] Contact Form Request: %s"
 msgstr "[ELRI] Solicitud de formulario de contacto: %s"
 
@@ -593,17 +602,14 @@ msgstr ""
 "administradores. Póngase en contacto con ellos directamente."
 
 #: accounts/views.py:192
-#, fuzzy
-#| msgid ""
-#| "We have received your registration data and sent the administrators a "
-#| "notification email."
 msgid ""
 "We have received your registration data and sent the administrators a "
 "notification email.You will receive an email when your account has been "
 "activated."
 msgstr ""
 "Hemos recibido sus datos de registro y enviado a los administradores un "
-"correo electrónico de notificación."
+"correo electrónico de notificación. Recibirá un correo electrónico cuando se "
+"haya activado su cuenta."
 
 #: accounts/views.py:248
 msgid "You have successfully updated your profile information."
@@ -626,6 +632,10 @@ msgstr "Editar información de perfil"
 msgid "An older application of yours for editor group \"%s\" is still pending."
 msgstr ""
 "Aún está pendiente una solicitud suya para grupo editor \"%s\" más antigua."
+
+#: accounts/views.py:333
+msgid "New editor membership request"
+msgstr "Nueva solicitud de editor"
 
 #: accounts/views.py:340
 msgid ""
@@ -676,6 +686,10 @@ msgid "An older application of yours for organization \"%s\" is still pending."
 msgstr ""
 "Aún está pendiente una solicitud suya de organización \"%s\" más antigua."
 
+#: accounts/views.py:487
+msgid "New organization membership request"
+msgstr "Nueva solicitud de suscripción a una organización"
+
 #: accounts/views.py:494
 msgid ""
 "There was an error sending out the request email for your organization "
@@ -703,30 +717,22 @@ msgid "Apply for organization membership"
 msgstr "Solicitar membresía en la organización"
 
 #: accounts/views.py:551
-#, fuzzy
-#| msgid "Please confirm your ELRC-SHARE reset request"
 msgid "Please confirm your ELRI password reset request"
-msgstr "Confirme su solicitud de restablecimiento de ELRI"
+msgstr "Confirme su solicitud de restablecimiento de su contraseña ELRI"
 
 #: accounts/views.py:562
-#, fuzzy
-#| msgid ""
-#| "We have received your reset request and sent you an email with further "
-#| "reset instructions."
 msgid ""
 "We have received your password reset request and sent you an email with "
 "further instructions."
 msgstr ""
-"Hemos recibido su solicitud de restablecimiento y le hemos enviado un correo "
-"electrónico con instrucciones adicionales."
+"Hemos recibido su solicitud de restablecimiento de contraseña y le hemos "
+"enviado un correo electrónico con instrucciones adicionales."
 
 #: accounts/views.py:572
 msgid "Reset user account"
 msgstr "Restablecer cuenta de usuario"
 
 #: accounts/views.py:598
-#, fuzzy
-#| msgid "Your ELRC-SHARE user account has been re-activated"
 msgid "Your ELRI user account has been re-activated"
 msgstr "Su cuenta de usuario ELRI ha sido reactivada"
 

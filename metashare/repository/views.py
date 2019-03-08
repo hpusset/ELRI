@@ -337,9 +337,9 @@ def download_contact(request, object_id):
                     'user_email': user_email, 'node_url': DJANGO_URL}
             try:
                 # Send out email to the resource contacts
-                send_mail('Request for information regarding a resource',
+                send_mail(_('Request for information regarding a resource'),
                           render_to_string('repository/' \
-                                           'resource_download_information.email', data),
+                                           'resource_download_information_email.html', data),
                           user_email, resource_emails, fail_silently=False)
             except:  # SMTPException:
                 # If the email could not be sent successfully, tell the user
@@ -1036,7 +1036,7 @@ def contribute(request):
 
             'resourceInfo': {
                 'resourceTitle': request.POST['resourceTitle'],
-                'shortDescription': request.POST['shortDescription'], #or _("N/A"),
+                'shortDescription': request.POST['shortDescription'] or _("N/A"),
                 'licence': request.POST['licence'],
             },
             'administration': {
@@ -1189,7 +1189,7 @@ def contribute(request):
             try:
                 mail_data={'resourcename':data['resourceInfo']['resourceTitle']}
                 send_mail(_("New submitted contributions"),
-                            render_to_string('repository/resource_new_contributions.email', mail_data),
+                            render_to_string('repository/resource_new_contributions_email.html', mail_data),
                           EMAIL_ADDRESSES['elri-no-reply'], group_reviewers,  fail_silently=False)
             except:
                 LOGGER.error("An error has occurred while trying to send email to contributions"

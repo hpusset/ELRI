@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-05 18:52+0100\n"
+"POT-Creation-Date: 2019-03-08 09:51+0100\n"
 "PO-Revision-Date: 2018-11-13 17:07+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -75,6 +75,10 @@ msgid "I agree to these licence terms and would like to download the resource."
 msgstr ""
 "Concordo com os termos desta licença e gostaria de fazer o download do "
 "recurso."
+
+#: repository/forms.py:208
+msgid "To download the resource, you have to accept the licence terms"
+msgstr ""
 
 #: repository/forms.py:223
 msgid "Your e-mail"
@@ -1660,6 +1664,12 @@ msgstr "Este campo aceita apenas valores numéricos (sem vírgulas)"
 msgid "Please edit the attribution text template"
 msgstr "Edite o modelo de texto de atribuição"
 
+#: repository/views.py:340
+#, fuzzy
+#| msgid "Groups together information needed to identify the resource"
+msgid "Request for information regarding a resource"
+msgstr "Agrupa informação necessária para identificar o recurso"
+
 #: repository/views.py:348
 msgid "There was an error sending out the request email."
 msgstr "Ocorreu um erro no envio do email com o pedido."
@@ -1667,6 +1677,10 @@ msgstr "Ocorreu um erro no envio do email com o pedido."
 #: repository/views.py:350
 msgid "You have successfully sent a message to the resource contact person."
 msgstr "Enviou com sucesso uma mensagem para a pessoa de contato do recurso."
+
+#: repository/views.py:1039
+msgid "N/A"
+msgstr "N/A"
 
 #: repository/views.py:1100
 msgid ""
@@ -2368,9 +2382,6 @@ msgstr ""
 
 #~ msgid "Subdomain identifier"
 #~ msgstr "Identificador de subdomínio"
-
-#~ msgid "N/A"
-#~ msgstr "N/A"
 
 #~ msgid "You have new submitted contributed resources on elrc-share.eu"
 #~ msgstr "Tem novos recursos contribuídos enviados em elrc-share.eu"

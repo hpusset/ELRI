@@ -1,0 +1,18 @@
+{% load i18n %}
+
+{% blocktrans %}Dear superuser,{% endblocktrans %}
+
+{% blocktrans %}{{ user_first_name }} {{ user_last_name }} (user account: {{ user_account_name }}) has sent you a message through the contact form of ELRI.{% endblocktrans %}
+
+{% blocktrans %}Subject: {{ subject }}{% endblocktrans %}
+{% blocktrans %}Message: see below {% endblocktrans %}
+
+{% blocktrans %}Please try to answer this request soon by responding to {{ user_email }}.{% endblocktrans %}
+
+{% blocktrans %}Best regards,{% endblocktrans %}
+
+{% blocktrans %}The ELRI Team{% endblocktrans %}
+
+====================================================================
+
+{{ message }}

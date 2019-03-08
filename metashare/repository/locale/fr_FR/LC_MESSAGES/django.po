@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-05 18:53+0100\n"
+"POT-Creation-Date: 2019-03-08 09:52+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,6 +69,10 @@ msgstr ""
 
 #: repository/forms.py:206
 msgid "I agree to these licence terms and would like to download the resource."
+msgstr ""
+
+#: repository/forms.py:208
+msgid "To download the resource, you have to accept the licence terms"
 msgstr ""
 
 #: repository/forms.py:223
@@ -1363,12 +1367,20 @@ msgstr ""
 msgid "Please edit the attribution text template"
 msgstr ""
 
+#: repository/views.py:340
+msgid "Request for information regarding a resource"
+msgstr ""
+
 #: repository/views.py:348
 msgid "There was an error sending out the request email."
 msgstr ""
 
 #: repository/views.py:350
 msgid "You have successfully sent a message to the resource contact person."
+msgstr ""
+
+#: repository/views.py:1039
+msgid "N/A"
 msgstr ""
 
 #: repository/views.py:1100

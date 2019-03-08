@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-06 09:23+0100\n"
-"PO-Revision-Date: 2019-03-04 13:09+0100\n"
+"POT-Creation-Date: 2019-03-07 17:25+0100\n"
+"PO-Revision-Date: 2019-03-07 16:55+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: templates/403.html:5
 msgid "Permission Denied (403)"
@@ -35,18 +35,13 @@ msgid "We&rsquo;re sorry, but the URL you requested was not found."
 msgstr "Lo sentimos, pero la URL que solicitó no fue encontrada."
 
 #: templates/404.html:12 templates/500.html:12
-#, fuzzy, python-format
-#| msgid ""
-#| "Please try again and, if the error persists, contact the ELRI NRS support "
-#| "group (<a href=\"mailto:elri-nrs-support@vicomtech.org\" >elri-nrs-"
-#| "support@vicomtech.org</a>)."
+#, python-format
 msgid ""
 "Please try again and, if the error persists, contact the ELRI NRS support "
 "group (<a href=\"mailto:%(email)s\" >%(email)s</a>)."
 msgstr ""
 "Inténtelo de nuevo y, si el error persiste, póngase en contacto con el "
-"equipo de soporte del repositorio ELRI (<a href=\"mailto:elri-nrs-"
-"support@vicomtech.org\" >elri-nrs-support@vicomtech.org</a>)."
+"equipo de soporte de ELRI  (<a href=\"mailto:%(email)s\" >%(email)s</a>)."
 
 #: templates/500.html:7
 msgid "Internal Server Error (500)"
@@ -61,17 +56,35 @@ msgstr ""
 
 #: templates/back.html:5
 msgid "ELRI National Relay Station"
-msgstr "Repositorio ELRI"
+msgstr "Estación Nacional de Transmisión ELRI"
 
-#: templates/base.html:63
+#: templates/base.html:54
 msgid ""
-"\"We use cookies on this site to enhance your user experience. By clicking "
-"any link on this page you are giving your consent for us to set cookies.\" "
+"\"This site uses cookies to enhance your user experience. By clicking any "
+"link on this page you are giving your consent for us to set cookies.\" "
 msgstr ""
+"\"Este sitio web utiliza cookies para mejorar su experiencia de usuario. Si "
+"continúa navegando, consideramos que acepta su uso. \""
 
-#: templates/base.html:64
+#: templates/base.html:55
 msgid "\"OK, I aggree \""
-msgstr ""
+msgstr "\"Acepto\""
+
+#: templates/base.html:56
+msgid "\"Decline \""
+msgstr "\"Rechazar\""
+
+#: templates/base.html:57
+msgid "\"Allow cookies\""
+msgstr "\"Aceptar\""
+
+#: templates/base.html:58
+msgid "\"Learn more\""
+msgstr "\"Leer más\""
+
+#: templates/base.html:59
+msgid "'Cookie Policy'"
+msgstr "'Política de cookies'"
 
 #: templates/breadcrumbs.html:3 templates/header.html:11
 #: templates/header.html.py:12
@@ -89,7 +102,7 @@ msgid ""
 "provided via National Relay Stations, websites based in the Member States "
 "that are part of the initiative."
 msgstr ""
-"El proyecto ELRI tiene comoobjetivo proporcionar servicios relacionados con "
+"El proyecto ELRI tiene como objetivo proporcionar servicios relacionados con "
 "la recopilación, preparación, almacenamiento y distribución de recursos "
 "lingüísticos. Estos servicios se prestan a través de repositorios de datos "
 "nacionales basados en los estados miembros que forman parte de la iniciativa."
@@ -102,12 +115,12 @@ msgid ""
 "translation memories that will have been created automatically by our "
 "integrated data processing engines."
 msgstr ""
-"Los usuarios que se hayan registrado en un repositorio ELRI nacional pueden "
-"subir sus datos y beneficiarse de recursos de traducción totalmente "
-"preparados. Por ejemplo, los usuarios pueden subir colecciones de documentos "
-"en diferentes idiomas y recuperar memorias de traducción creadas "
-"automáticamente por los motores de procesamiento integrados en el "
-"repositorio."
+"Los usuarios que se hayan registrado en una Estación Nacional de Transmisión "
+"de datos  ELRI pueden subir sus datos y beneficiarse de recursos de "
+"traducción totalmente preparados. Por ejemplo, los usuarios pueden subir "
+"colecciones de documentos en diferentes idiomas y recuperar memorias de "
+"traducción creadas automáticamente por los motores de procesamiento "
+"integrados en el repositorio."
 
 #: templates/elri-info.html:13
 msgid ""
@@ -271,18 +284,15 @@ msgstr "Licencias de datos internacionales/nacionales"
 #: templates/elri-info.html:67
 msgid "Used for resources that are free of all known legal restrictions "
 msgstr ""
+"Se utiliza para recursos que están libres de cualquier restricción legal "
 
 #: templates/elri-info.html:73
-#, fuzzy
-#| msgid ""
-#| "Used for resources that are PSI-compliant and no further information is "
-#| "required or available"
 msgid ""
 "Used for resources that are PSI-compliant and no further information is "
 "required or available "
 msgstr ""
 "Se utiliza para los recursos que son compatibles con PSI y no se requiere "
-"más información, o esta no está disponible"
+"más información, o esta no está disponible "
 
 #: templates/elri-info.html:112
 msgid "National Data Licences"
@@ -290,49 +300,35 @@ msgstr "Licencias nacionales de datos"
 
 #: templates/footer.html:7
 msgid "ELRI National Relay Station "
-msgstr "Repositorio nacional ELRI "
+msgstr "Estación Nacional de Transmisión ELRI"
 
 #: templates/footer.html:8
-#, fuzzy
-#| msgid ""
-#| "powered by <a href=\"http://meta-share.org/\" target=\"_blank\">META-"
-#| "SHARE</a> and <a href=\"https://elrc-share.eu/\" target=\"_blank\">ELRC-"
-#| "SHARE</a>"
 msgid ""
 "powered by <a href=\"http://www.meta-share.org/\" target=\"_blank\">META-"
 "SHARE</a> and <a href=\"https://elrc-share.eu/\" target=\"_blank\">ELRC-"
 "SHARE</a>"
 msgstr ""
-"desarrollado por <a href=\"http://meta-share.org/\" target=\"_blank\"> META-"
+"basado en <a href=\"http://www.meta-share.org/\" target=\"_blank\"> META-"
 "SHARE </a> y <a href=\"https://elrc-share.eu/\" target=\"_blank\"> ELRC-"
 "SHARE </a>"
 
 #: templates/footer.html:12
-#, fuzzy
-#| msgid "Privacy"
 msgid "Privacy Policy"
-msgstr "Privacidad"
+msgstr "Política de Privacidad"
 
 #: templates/frontpage.html:14
-#, fuzzy
-#| msgid "Welcome to ELRI in %(country)s!"
 msgid "Welcome to ELRI in MyCountry!"
-msgstr "Bienvenido a ELRI en %(country)s!"
+msgstr "¡Bienvenidos a ELRI en España!"
 
 #: templates/frontpage.html:15
-#, fuzzy
-#| msgid ""
-#| "This site is the official National Relay Station in %(country)s, where "
-#| "language resources can be collected, prepared and shared amongst public "
-#| "institutions and translation centres."
 msgid ""
 "This site is the official National Relay Station in MyCountry, where "
 "language resources can be collected, prepared and shared amongst public "
 "institutions and translation centres."
 msgstr ""
-"Este sitio web es el repositorio nacional en %(country)s, donde las "
-"instituciones públicas y los centros de traducción pueden recopilar, "
-"preparar y compartir recursos lingüísticos."
+"Este sitio web es la Estación Nacional de Transmisión de datos de ELRI en "
+"España, donde las instituciones públicas y los centros de traducción pueden "
+"recopilar, preparar y compartir recursos lingüísticos."
 
 #: templates/frontpage.html:17
 msgid ""
@@ -341,9 +337,9 @@ msgid ""
 "europa.eu/inea/en/connecting-europe-facility\">Connecting Europe Facility</"
 "a> programme."
 msgstr ""
-"Los repositorios nacionales se desarrollan dentro del proyecto europeo <a "
-"href=\"http://www.elri-project.eu\"> ELRI </a>, financiado por el programa "
-"<a href=\"http://ec.europa.eu/inea/en/connecting-europe-facility\"> "
+"Las estaciones nacionales de transmisión se desarrollan dentro del proyecto "
+"europeo <a href=\"http://www.elri-project.eu\"> ELRI </a>, financiado por el "
+"programa <a href=\"http://ec.europa.eu/inea/en/connecting-europe-facility\"> "
 "Connecting Europe Facility </a>."
 
 #: templates/frontpage.html:19
@@ -363,64 +359,48 @@ msgid ""
 "translation memories or other language resources automatically prepared by "
 "the ELRI engines."
 msgstr ""
-"Los miembros de las instituciones públicas y centros de traducción pueden "
-"unirse a grupos de usuarios para descargar recursos compartidos, aportar sus "
-"propios datos y beneficiarse de memorias de traducción u otros recursos "
-"lingüísticos preparados automáticamente por los motores de ELRI."
+"Los miembros de las instituciones públicas y centros de traducción públicos "
+"pueden unirse a grupos de usuarios para descargar recursos compartidos, "
+"aportar sus propios datos y beneficiarse de memorias de traducción u otros "
+"recursos lingüísticos preparados automáticamente por los motores de ELRI."
 
 #: templates/frontpage.html:24
-#, fuzzy
-#| msgid ""
-#| "<a href=\"/elri/accounts/create\">Register</a> to become a member of "
-#| "ELRI.\n"
-#| "                            <br>Already a member? <a href=\"/elri/login"
-#| "\">Sign in</a>."
 msgid ""
 "<a href=\"/accounts/create\">Register</a> to become a member of ELRI.\n"
 "                            <br>Already a member? <a href=\"/login\">Sign "
 "in</a>."
 msgstr ""
-"<a href=\"/elri/accounts/create\"> Regístrese </a> para convertirse en "
-"miembro de ELRI.\n"
-"                            <br> ¿Ya es miembro de ELRI? <a href=\"/elri/"
-"login\">Iniciar sesión</a>."
+"<a href=\"/accounts/create\"> Regístrese </a> para convertirse en miembro de "
+"ELRI.\n"
+"                            <br> ¿Ya es miembro de ELRI? <a href=\"/login"
+"\">Iniciar sesión</a>."
 
 #: templates/frontpage.html:27
 msgid "Search and share"
 msgstr "Buscar y compartir"
 
 #: templates/frontpage.html:28
-#, fuzzy
-#| msgid ""
-#| "<a href=\"/elri/repository/search\">Browse</a> available language "
-#| "resources.\n"
-#| "                            <br><a href=\"/elri/repository/contribute"
-#| "\">Contribute</a> your own data and retrieve prepared language resources."
 msgid ""
 "<a href=\"/repository/search\">Browse</a> available language resources.\n"
 "                            <br><a href=\"/repository/contribute"
 "\">Contribute</a> your own data and retrieve prepared language resources."
 msgstr ""
-"<a href=\"/elri/repository/search\">Explorar</a> recursos lingüísticos "
+"<a href=\"/repository/search\">Explorar</a> recursos lingüísticos "
 "disponibles.\n"
-"                            <br> <a href=\"/elri/repository/contribute\"> "
+"                            <br> <a href=\"/repository/contribute\"> "
 "Contribuir </a> datos y recuperar memorias de traducción."
 
 #: templates/header.html:14
-#, fuzzy
-#| msgid "Browse the resources of the META-SHARE catalogue"
 msgid "Browse the resources of the ELRI catalogue"
 msgstr "Explorar los recursos del catálogo de ELRI"
 
 #: templates/header.html:16
 msgid "Browse"
-msgstr ""
+msgstr "Explorar"
 
 #: templates/header.html:18
-#, fuzzy
-#| msgid "Contribute Resources"
 msgid "Contribute"
-msgstr "Contribuir recursos"
+msgstr "Contribuir"
 
 #: templates/header.html:21 templates/header.html.py:29
 msgid "Create/edit resource metadata or upload resource data"
@@ -428,7 +408,7 @@ msgstr "Crear/editar metadatos de recursos o subir datos de recursos"
 
 #: templates/header.html:22
 msgid "Manage"
-msgstr ""
+msgstr "Administrar"
 
 #: templates/header.html:24
 msgid "Create/edit your own resource metadata or upload resource data"
@@ -488,10 +468,8 @@ msgid "Upload resource descriptions"
 msgstr "Cargar descripciones de recursos"
 
 #: templates/header.html:63
-#, fuzzy
-#| msgid "Manage users and applications"
 msgid "Manage users and groups"
-msgstr "Administrar usuarios y aplicaciones"
+msgstr "Administrar usuarios y grupos"
 
 #: templates/header.html:64
 msgid "Administration"
@@ -499,7 +477,7 @@ msgstr "Administración"
 
 #: templates/header.html:88
 msgid "View various statistics for this META-SHARE Node"
-msgstr "Ver varias estadísticas para este nodo de ELRI"
+msgstr "Ver varias estadísticas para esta estación ELRI"
 
 #: templates/header.html:90
 msgid "Statistics"
@@ -511,7 +489,7 @@ msgstr "Uso"
 
 #: templates/header.html:102
 msgid "Terms of Service"
-msgstr "Términos de Servicio"
+msgstr "Condiciones de servicio"
 
 #: templates/header.html:104
 msgid "Use of ELRI Services"
@@ -591,20 +569,16 @@ msgid "Documentation"
 msgstr "Documentación"
 
 #: templates/help.html:11
-#, fuzzy
-#| msgid ""
-#| "The following guidelines provide detailed information on how to use this "
-#| "site:"
 msgid ""
 "The following guidelines provide detailed information on how to use the ELRI "
 "platform."
 msgstr ""
-"La siguiente guía proporciona información detallada sobre cómo utilizar este "
-"sitio web:"
+"La siguiente guía proporciona información detallada sobre cómo utilizar la "
+"plataforma ELRI."
 
 #: templates/help.html:16
 msgid "User guidelines"
-msgstr ""
+msgstr "Guía del usuario"
 
 #: templates/help.html:20
 msgid "Contact details"
@@ -620,22 +594,17 @@ msgstr ""
 "ELRI"
 
 #: templates/help.html:24
-#, fuzzy, python-format
-#| msgid ""
-#| "For technical help about this National Relay Station, you can contact us "
-#| "at <a href=\"mailto:eli-nrs-support@vicomtech.org\" >eli-nrs-"
-#| "support@vicomtech.org</a>."
+#, python-format
 msgid ""
 "For technical help about this National Relay Station, you can contact us at "
 "<a href=\"mailto:%(email)s\" >%(email)s</a>."
 msgstr ""
-"Para obtener ayuda técnica sobre este repositorio, puede ponerse en contacto "
-"con nosotros en <<a href=\"mailto:eli-nrs-support@vicomtech.org\" >eli-nrs-"
-"support@vicomtech.org</a>."
+"Para obtener ayuda técnica sobre este repositorio nacional, puede ponerse en "
+"contacto con nosotros en <a href=\"mailto:%(email)s\" >%(email)s</a>."
 
 #: templates/legal.html:7
 msgid "<strong>ELRI Terms of Service</strong>"
-msgstr "<strong> Términos de Servicio ELRI</strong>"
+msgstr "<strong>ELRI - Condiciones de servicio</strong>"
 
 #: templates/legal.html:8
 msgid ""
@@ -684,7 +653,7 @@ msgid ""
 "State], which is hosted by [NAME OF HOSTING ORGANISATION] as a member of "
 "ELRI."
 msgstr ""
-"c) Por «proveedor de servicios» se entenderá el repositorio nacional del "
+"c) Por «proveedor de servicios» se entenderá repositorio nacional del "
 "consorcio ELRI en España, alojado por la Secretaría de Estado para el Avance "
 "Digital, como miembro del consorcio ELRI."
 
@@ -697,33 +666,33 @@ msgstr ""
 
 #: templates/legal.html:20
 msgid "User registration, authentication and authorisation"
-msgstr "alta, autenticación y autorización de usuarios;"
+msgstr "Alta, autenticación y autorización de usuarios"
 
 #: templates/legal.html:21
 msgid ""
 "Archiving (storage and maintenance for preservation purposes) of language "
 "resources"
 msgstr ""
-"archivo de recursos lingüísticos (almacenamiento y mantenimiento con fines "
-"de conservación);"
+"Archivo de recursos lingüísticos (almacenamiento y mantenimiento con fines "
+"de conservación)"
 
 #: templates/legal.html:22
 msgid "Documentation (with metadata) of language resources"
-msgstr "documentación de recursos lingüísticos (mediante metadatos); "
+msgstr "Documentación de recursos lingüísticos (mediante metadatos) "
 
 #: templates/legal.html:23
 msgid "Searching, browsing and viewing of resource metadata"
 msgstr ""
-"búsqueda, consulta y visualización de metadatos asociados a los recursos; "
+"Búsqueda, consulta y visualización de metadatos asociados a los recursos"
 
 #: templates/legal.html:24
 msgid "Uploading and downloading of language resources"
-msgstr "carga y descarga de recursos lingüísticos;"
+msgstr "Carga y descarga de recursos lingüísticos"
 
 #: templates/legal.html:25
 msgid "Automatic and manual processing of uploaded language resources"
 msgstr ""
-"procesamiento automatizado y manual de los recursos lingüísticos cargados"
+"Procesamiento automatizado y manual de los recursos lingüísticos cargados"
 
 #: templates/legal.html:29
 msgid ""
@@ -786,7 +755,7 @@ msgstr ""
 "al usuario dichas modificaciones por correo electrónico o mediante los "
 "servicios del consorcio ELRI u otro medio oportuno. En caso de ampliación de "
 "los servicios del consorcio ELRI, podrán aplicarse otras condiciones, que "
-"pasarán a formar parte del presente Acuerdo."
+"pasarán a formar parte del presente Acuerdo. "
 
 #: templates/legal.html:42
 msgid "<b>Use of ELRI Services</b>"
@@ -820,8 +789,8 @@ msgid ""
 "access to all language resources in accordance to the relevant licensing "
 "terms granted for each resource;"
 msgstr ""
-"acceso a todos los recursos lingüísticos de conformidad con las condiciones "
-"de concesión de la licencia de cada recurso;"
+"Acceso a todos los recursos lingüísticos de conformidad con las condiciones "
+"de concesión de la licencia de cada recurso; "
 
 #: templates/legal.html:46
 msgid ""
@@ -894,7 +863,7 @@ msgstr ""
 "actividad de los servicios. Cuando así ocurra, comunicará a los usuarios el "
 "fin para el cual se recoge la información (en particular, su publicación) y "
 "estos podrán, a su entera discreción, cumplimentar y enviar los formularios "
-"utilizados en este sitio web. "
+"utilizados en este sitio web."
 
 #: templates/legal.html:60
 msgid "<b>Data protection statement</b>"
@@ -908,60 +877,72 @@ msgid ""
 "and seeks to protect Your personal data:"
 msgstr ""
 "Al utilizar los servicios del consorcio ELRI, el usuario consiente la "
-"recogida y tratamiento de los datos personales que facilite. "
+"recogida y tratamiento de los datos personales que facilite:"
 
 #: templates/legal.html:63
-#, fuzzy
-#| msgid ""
-#| "ELRI will only collect and use Your information to administer, support, "
-#| "improve and obtain feedback on its services."
 msgid ""
 "<li>ELRI will only collect and use Your information to administer, support, "
 "improve and obtain feedback on its services.</li>"
 msgstr ""
-"Estos datos solo se utilizarán para administrar, prestar y mejorar los "
-"servicios del consorcio ELRI. "
+"<li>Estos datos solo se utilizarán para administrar, prestar y mejorar los "
+"servicios del consorcio ELRI.</li>"
 
 #: templates/legal.html:64
-#, fuzzy
-#| msgid ""
-#| "ELRI may also contact You to obtain feedback on services and any "
-#| "improvements it can make."
 msgid ""
 "<li>ELRI may also contact You to obtain feedback on services and any "
 "improvements it can make.</li>"
 msgstr ""
-"ELRI también puede ponerse en contacto con usted para obtener información "
-"sobre los servicios y cualquier mejora que pueda hacerse."
+"<li>ELRI también puede ponerse en contacto con usted para obtener "
+"información sobre los servicios y cualquier mejora que pueda hacerse.</li>"
 
 #: templates/legal.html:65
-#, fuzzy
-#| msgid "ELRI will not disclose Your personal data to any other organization."
 msgid ""
 "<li>ELRI will not disclose Your personal data to any other organization.</li>"
-msgstr "ELRI no revelará sus datos personales a ninguna otra organización."
+msgstr ""
+"<li>ELRI no revelará sus datos personales a ninguna otra organización.</li>"
 
 #: templates/legal.html:66
-#, fuzzy
-#| msgid ""
-#| "You can access and modify your personal data through the Registration "
-#| "Service."
 msgid ""
 "<li>You can access and modify your personal data through the Registration "
 "Service.</li>"
 msgstr ""
-"El usuario tiene derecho a acceder, modificar y suprimir sus datos "
-"personales."
+"<li>El usuario tiene derecho a acceder, modificar y suprimir sus datos "
+"personales.</li>"
 
-#: templates/legal.html:70 templates/privacy.html:121
+#: templates/legal.html:70 templates/privacy.html:119
 msgid "<b>Cookies policy</b>"
 msgstr "<b>Política de cookies</b>"
 
-#: templates/legal.html:71
+#: templates/legal.html:71 templates/privacy.html:120
 msgid ""
-"This website uses functional cookies to facilitate the operation of the "
-"service and enhance user experience. "
+"This website uses cookies to facilitate the operation of the service and "
+"enhance user experience."
 msgstr ""
+"Este  sitio  web  utiliza  cookies  para  facilitar  la  operación  del  "
+"servicio  y  mejorar  la experiencia de los usuarios.</p><br>\n"
+"<h3>¿Qué cookies utiliza este sitio web?</h3>\n"
+"<p>Este sitio web utiliza únicamente cookies técnicas. Las cookies técnicas "
+"son aquellas que  permiten  al  usuario  la  navegación  a  través  de  una  "
+"página  web,  plataforma  o aplicación y la utilización delas diferentes "
+"opciones o servicios que en ella existan como,  por  ejemplo,  controlar  "
+"el  tráfico  y  la  comunicación  de  datos,  identificar  la sesión, "
+"acceder a partes de acceso restringido, recordar los elementos que integran "
+"dicha   sesión   y,   en   definitiva,   permitir   cualquier   acción   "
+"relacionada   con   las funcionalidades del sitio web.</p>\n"
+"<p>Las siguientes cookies son las que utiliza este sitio web:</"
+"p><ul><li>sessionid :        datos de sesión y autenticación  </li><li> "
+"csrftoken:         seguridad de los campos de formularios  </li></ul><p> El "
+"Usuario acepta, por la utilización de este sitio web, el tratamiento de la "
+"información recabada  en  la  forma  y  con  los  fines  anteriormente  "
+"mencionados.  Y,  asimismo, reconoce estar al tantode la posibilidad de "
+"rechazar el tratamiento de tales datos o información rechazando el uso de "
+"Cookies mediante la selección de la configuración apropiada a tal fin en su "
+"navegador. Si bien esta opción de bloqueo de cookies en su navegador  puede  "
+"no  permitirle  el  uso  pleno  de  todas  las  funcionalidades  del  sitio "
+"web.</p><p>Recuerde que Usted puede eliminarlas en cualquier momento, o "
+"rechazarlas antes de su instalación configurando el programa de navegación "
+"que utiliza. Por favor, visite la página de ayuda de su navegador para "
+"aprender cómo gestionar las cookies en su equipo."
 
 #: templates/legal.html:74
 msgid "<b>ELRI Services misuse and notification regarding IPR infringement</b>"
@@ -1154,22 +1135,22 @@ msgstr ""
 
 #: templates/legal.html:109
 msgid "His/Her contact details;"
-msgstr "Sus datos de contacto;"
+msgstr "Sus datos de contacto; "
 
 #: templates/legal.html:110
 msgid "The full bibliographic details of the LR;"
-msgstr "la referencia bibliográfica completa del recuso lingüístico;"
+msgstr "La referencia bibliográfica completa del recuso lingüístico;"
 
 #: templates/legal.html:111
 msgid "The exact and full URL where s/he found the LR;"
-msgstr "la URL exacta y completa en la que lo encontró; "
+msgstr "La URL exacta y completa en la que lo encontró; "
 
 #: templates/legal.html:112
 msgid ""
 "Proof that s/he is the rights holder and a statement that, under penalty of "
 "perjury, s/he is the rights holder or an authorised representative."
 msgstr ""
-"la acreditación de que es el titular de los derechos y una declaración en la "
+"La acreditación de que es el titular de los derechos y una declaración en la "
 "que, so pena de falsedad, asevere serlo o asegure ser representante "
 "autorizado del mismo."
 
@@ -1259,9 +1240,6 @@ msgid "User Authentication"
 msgstr "Autenticación de usuario"
 
 #: templates/login.html:26
-#, fuzzy
-#| msgid ""
-#| " Forgotten your username or password? Click here to reset your password. "
 msgid ""
 " Forgotten your username or password? Click here to reset your password, "
 msgstr ""
@@ -1273,16 +1251,14 @@ msgid "Don&rsquo;t have an account, yet? Click here to create one."
 msgstr "¿Aún no tiene una cuenta? Haga clic aquí para crear una."
 
 #: templates/privacy.html:7
-#, fuzzy
-#| msgid "<strong>ELRI Terms of Service</strong>"
 msgid "<strong>ELRI NRS Privacy Policy</strong>"
-msgstr "<strong> Términos de Servicio ELRI</strong>"
+msgstr ""
+"<strong>Política de protección de datos personales del repositorio nacional "
+"del consorcio ELRI</strong>"
 
 #: templates/privacy.html:11
-#, fuzzy
-#| msgid "ELRI National Relay Station "
 msgid "<b>ELRI National Relay Station Data Protection Notice</b>"
-msgstr "Repositorio nacional ELRI "
+msgstr "<b>Repositorio nacional ELRI Protección de Datos</b>"
 
 #: templates/privacy.html:12
 msgid ""
@@ -1295,6 +1271,12 @@ msgid ""
 "        secure  and  reliable  sharing  of Language Resources (LRs) by "
 "different stakeholders at EU level."
 msgstr ""
+"La Comisión Europea, en el marco del Mecanismo «Conectar Europa», ha "
+"concedido una subvención en virtud del acuerdo n.º INEA/CEF/ICT/"
+"A2016/1330962 a la acción «European Language Resource Infrastructure "
+"(ELRI)» (acción n.º 2016-EU-IA-0111), que tiene por objeto la creación de "
+"una red que permita compartir recursos lingüísticos de forma accesible, "
+"segura y fiable a distintos actores en el ámbito de la UE."
 
 #: templates/privacy.html:16
 msgid ""
@@ -1330,93 +1312,118 @@ msgid ""
 "the  services  of  this  National \n"
 "        Relay Station."
 msgstr ""
+"El consorcio ELRI, formado por la Fundación Centro de Tecnologías de "
+"Interacción Visual\n"
+" \n"
+"y Comunicaciones ( <a href=\"http://www.vicomtech.org\">VICOMTECH</a>), la "
+"Agência para a Modernização Administrativa \n"
+"(<a href=\"https://www.ama.gov.pt/\">AMA</a>), la Dublin City University "
+"School of Computing \n"
+" (<a href=\"https://www.computing.dcu.ie\">DCU</a>),, la Evaluations and "
+"Language Resource Distribution \n"
+"Agency (<a href=\"http://www.elda.org\">ELDA</a>),  la Faculdade de Ciências "
+"da Universidade de Lisboa (<a href=\"https://ciencias.ulisboa.pt\">FCUL</"
+"a>), \n"
+"Linkare TI – Tecnologias de Informação, Lda. (<a href=\"http://www.linkare."
+"com\">Linkare</a>) \n"
+" y el Reino de España, representado por la Secretaría de Estado para la "
+"Sociedad de la Información y la Agenda Digital (<a href=\"https://www."
+"mincotur.gob.es/telecomunicaciones\">SESIAD</a>) , son conjuntamente "
+"responsables de la recogida y el tratamiento de datos personales. El "
+"consorcio ELRI y todos sus miembros manifiestan su compromiso con la "
+"protección la privacidad de la información con fines específicos y frente a "
+"cualquier riesgo, así como con el derecho fundamental a la protección de los "
+"datos personales. La acción ELRI pone en marcha una serie de sitios web "
+"(«repositorios nacionales») dedicados a la recogida, al tratamiento y al "
+"intercambio de recursos lingüísticos en distintos Estados miembros de la "
+"Unión Europea. Mediante la presente política de protección de datos, se "
+"informa al usuario del tratamiento de sus datos personales que se realiza "
+"cuando visita el sitio web o utiliza los servicios del repositorio."
 
-#: templates/privacy.html:37
+#: templates/privacy.html:35
 msgid "<b>Controller</b>"
-msgstr ""
+msgstr " <b> Responsable del tratamiento y protección de datos </b>"
 
-#: templates/privacy.html:38
+#: templates/privacy.html:36
 msgid ""
 " \n"
 "        [Name of hosting organisation of the NRS] "
-msgstr ""
+msgstr "Secretaría de Estado para el Avance Digital"
 
-#: templates/privacy.html:41
+#: templates/privacy.html:39
 msgid ""
 "<li> Contact: [Contact of hosting organisation],    Phone: [number] </li>"
 msgstr ""
+"<li>Persona de contacto:  David Pérez Fernández (Gabinete del Secretario de "
+"Estado para el Avance Digital)</li>"
 
-#: templates/privacy.html:42
+#: templates/privacy.html:40
 msgid " <li>  E-Mail: <a href=\"mailto:EMAIL_ORG\" >EMAIL_ORG</a> </li> "
 msgstr ""
+" <li>  E-Mail: <a href=\"mailto:soporte_plantl_elri@mineco.es \" "
+">soporte_plantl_elri@mineco.es </a>  </li>"
+
+#: templates/privacy.html:44
+msgid "<b>Data Protection Officer</b>"
+msgstr " "
 
 #: templates/privacy.html:46
-#, fuzzy
-#| msgid "<b>Data protection</b>"
-msgid "<b>Data Protection Officer</b>"
-msgstr "<b> Protección de datos </b>"
-
-#: templates/privacy.html:48
 msgid ""
 " \n"
 "        [Name of the data protection officer at the hosting organisation of "
 "the NRS, if applicable]"
-msgstr ""
+msgstr " "
 
-#: templates/privacy.html:51
+#: templates/privacy.html:49
 msgid ""
 " <li> Contact:  [Contact/name of the data protection officer],    Phone: "
 "[number], </li> "
-msgstr ""
+msgstr " "
 
-#: templates/privacy.html:52
+#: templates/privacy.html:50
 msgid " <li>  E-Mail: <a href=\"mailto:EMAIL_OF\" >EMAIL_OF</a> </li> "
-msgstr ""
+msgstr " "
 
-#: templates/privacy.html:57
-#, fuzzy
-#| msgid "<b>Privacy</b>"
+#: templates/privacy.html:55
 msgid "<b>Purpose</b>"
-msgstr "<b>Privacidad</b>"
+msgstr "<b>Finalidad del tratamiento</b>"
 
-#: templates/privacy.html:58
-#, fuzzy
-#| msgid ""
-#| "To benefit from the services of this ELRI National Relay Station, users "
-#| "should follow the following procedure:"
+#: templates/privacy.html:56
 msgid ""
 " Within an ELRI National Relay Station, personal data are only processed for "
 "the following purposes:"
 msgstr ""
-"Para beneficiarse de los servicios de este repositorio ELRI, los usuarios "
-"deben seguir el siguiente procedimiento:"
+"Repositorio nacional ELRI solamente realiza el tratamiento de los datos "
+"personales con las siguientes finalidades:"
 
-#: templates/privacy.html:60
+#: templates/privacy.html:58
 msgid " Establishment of contact and correspondence with visitors and users "
 msgstr ""
+"entablar contacto e intercambiar correspondencia con visitantes y usuarios;"
 
-#: templates/privacy.html:61
+#: templates/privacy.html:59
 msgid " Registration of users."
-msgstr ""
+msgstr "llevar un registro de los usuarios."
 
-#: templates/privacy.html:65
+#: templates/privacy.html:63
 msgid "<b>Anonymous and protected usage</b>"
-msgstr ""
+msgstr "<b>Uso de información anónima y protegida</b>"
 
-#: templates/privacy.html:66
+#: templates/privacy.html:64
 msgid ""
 " Personal  data  are  only  collected  via  our  contact  page,  where  "
 "users  can  contact  us \n"
 "        electronically, and via our registration page."
 msgstr ""
+"Los datos personales solamente se recogen a través de la página de contacto, "
+"desde la cual los usuarios pueden dirigirse al consorcio ELRI por vía "
+"electrónica, y a través de la página de suscripción."
 
-#: templates/privacy.html:70
-#, fuzzy
-#| msgid "<b>Termination</b>"
+#: templates/privacy.html:68
 msgid "<b>Recipients</b>"
-msgstr "<b>Terminación</b>"
+msgstr "<b>Destinatarios</b>"
 
-#: templates/privacy.html:71
+#: templates/privacy.html:69
 msgid ""
 "  The  processed  data  will  not  be  transmitted  to  any  third  parties  "
 "or  otherwise  disclosed,\n"
@@ -1426,20 +1433,30 @@ msgid ""
 "        Within our information offering, we do not embed information or "
 "service offerings of third party providers. "
 msgstr ""
+"Los datos tratados no se transmitirán a ningún tercero ni se comunicarán de "
+"ninguna otra forma, salvo en cumplimiento de obligaciones legales o "
+"contractuales concretas en el marco de la Acción ELRI 2016-EU-IA-0111, con "
+"arreglo al acuerdo de subvención n.º INEA/CEF/ICT/A2016/1330962. En cuanto a "
+"la información que ofrece el consorcio ELRI, este no incorpora datos ni "
+"ofertas de servicios de otros proveedores."
 
-#: templates/privacy.html:75
+#: templates/privacy.html:73
 msgid ""
 "\n"
 "        International Data Transfer may take place via storage services "
 "provided by Box, a company certified under the EU-U.S. Privacy Shield "
 "Framework."
 msgstr ""
+"\n"
+"       Podrán realizarse transferencias internacionales de datos a través de "
+"servicios de almacenamiento prestados por BOX, empresa acreditada con el "
+"Escudo de la privacidad UE-EE. UU."
 
-#: templates/privacy.html:80
+#: templates/privacy.html:78
 msgid "<b>Access data</b>"
-msgstr ""
+msgstr "<b>Datos de acceso</b>"
 
-#: templates/privacy.html:81
+#: templates/privacy.html:79
 msgid ""
 "The legitimate interests pursued by ELRI include, among others, also the "
 "adaptation and \n"
@@ -1447,19 +1464,12 @@ msgid ""
 "detection and prosecution \n"
 "        of illegal activities in connection with the usage of our website."
 msgstr ""
+"Entre los intereses legítimos del consorcio ELRI se encuentran la adaptación "
+"y optimización de la oferta de información, así como la investigación, la "
+"detección y la persecución penal de actividades ilegales asociadas al uso de "
+"su sitio web."
 
-#: templates/privacy.html:84
-#, fuzzy
-#| msgid ""
-#| "The ELRI website and services log certain information about every request "
-#| "sent to them. This information is used for system administration and for "
-#| "producing usage statistics. Summary statistics are extracted from this "
-#| "data and some of these may be made publicly available, but these do not "
-#| "include information from which individuals could be identified. Relevant "
-#| "subsets of this data may be used as part of investigations of computer "
-#| "misuse involving this site. Data may also on occasion be used to enable "
-#| "investigation of technical problems on the website. Otherwise logged "
-#| "information is not passed to any third party except if required by law."
+#: templates/privacy.html:82
 msgid ""
 "The ELRI National Relay Station and services log certain information about "
 "every request \n"
@@ -1470,29 +1480,14 @@ msgid ""
 "        but  these  do  not  include  information  from  which  individuals "
 "could be identified."
 msgstr ""
-"El sitio web y los servicios del consorcio ELRI registran cierta información "
-"de todas las solicitudes que reciben; se utiliza para administrar el sistema "
-"y generar estadísticas de uso. De esos datos se extraen estadísticas "
-"globales, algunas de las cuales pueden ponerse a disposición del público, "
-"pero sin datos que permitan identificar a una persona física. No obstante, "
-"podrán utilizarse determinados subconjuntos de dichos datos cuando se "
-"investigue el uso indebido de este sitio web. Asimismo, en algunas "
-"ocasiones, podrán utilizarse para resolver problemas técnicos. Por lo demás, "
-"la información registrada no se transmitirá a ningún tercero, salvo que sea "
-"legalmente obligatorio hacerlo. "
+"El repositorio nacional y los servicios del consorcio ELRI registran cierta "
+"información de todas las solicitudes que reciben, que se utiliza para "
+"administrar el sistema y generar estadísticas de uso. De esos datos se "
+"extraen estadísticas globales, algunas de las cuales pueden ponerse a "
+"disposición general, pero sin datos que permitan identificar a una persona "
+"física."
 
-#: templates/privacy.html:88
-#, fuzzy
-#| msgid ""
-#| "The ELRI website and services log certain information about every request "
-#| "sent to them. This information is used for system administration and for "
-#| "producing usage statistics. Summary statistics are extracted from this "
-#| "data and some of these may be made publicly available, but these do not "
-#| "include information from which individuals could be identified. Relevant "
-#| "subsets of this data may be used as part of investigations of computer "
-#| "misuse involving this site. Data may also on occasion be used to enable "
-#| "investigation of technical problems on the website. Otherwise logged "
-#| "information is not passed to any third party except if required by law."
+#: templates/privacy.html:86
 msgid ""
 " Relevant subsets of this data may be used as part of investigations of "
 "computer misuse \n"
@@ -1501,24 +1496,17 @@ msgid ""
 "        problems on the website. Otherwise logged information is not passed "
 "to any third party except if required by law. "
 msgstr ""
-"El sitio web y los servicios del consorcio ELRI registran cierta información "
-"de todas las solicitudes que reciben; se utiliza para administrar el sistema "
-"y generar estadísticas de uso. De esos datos se extraen estadísticas "
-"globales, algunas de las cuales pueden ponerse a disposición del público, "
-"pero sin datos que permitan identificar a una persona física. No obstante, "
-"podrán utilizarse determinados subconjuntos de dichos datos cuando se "
-"investigue el uso indebido de este sitio web. Asimismo, en algunas "
+"No obstante, podrán utilizarse determinados subconjuntos de dichos datos "
+"cuando se investigue el uso indebido de este sitio web. Asimismo, en algunas "
 "ocasiones, podrán utilizarse para resolver problemas técnicos. Por lo demás, "
 "la información registrada no se transmitirá a ningún tercero, salvo que sea "
 "legalmente obligatorio hacerlo. "
 
-#: templates/privacy.html:94
-#, fuzzy
-#| msgid "<b>Cookies policy</b>"
+#: templates/privacy.html:92
 msgid "<b>Correspondence</b>"
-msgstr "<b>Política de cookies</b>"
+msgstr "<b>Correspondencia</b>"
 
-#: templates/privacy.html:95
+#: templates/privacy.html:93
 msgid ""
 "You have the option to contact us by e-mail. We will use your e-mail address "
 "and other \n"
@@ -1530,64 +1518,75 @@ msgid ""
 "corresponding  information  on  the  processing  of  your  contact \n"
 "        data."
 msgstr ""
+"El usuario puede ponerse en contacto por correo electrónico con el consorcio "
+"ELRI, que utilizará dicha dirección y otros datos personales de contacto con "
+"fines de correspondencia. La ley obliga a archivar todos los intercambios de "
+"correos electrónicos. Por razones de interés legítimo, el consorcio ELRI "
+"podrá almacenar los correos electrónicos y otros datos personales de "
+"contacto en su base de datos de contactos, en cuyo caso se informará "
+"oportunamente al usuario del tratamiento de sus datos de contacto."
 
-#: templates/privacy.html:102
-#, fuzzy
-#| msgid "<b>Interpretation</b>"
+#: templates/privacy.html:100
 msgid "<b>Access and Intervention</b>"
-msgstr "<b> Interpretación </b>"
+msgstr "<b> Acceso e intervención</b>"
 
-#: templates/privacy.html:103
+#: templates/privacy.html:101
 msgid ""
 " Besides the information in this data protection policy you have the right "
 "of access to your \n"
 "        personal data. To ensure fair data processing, you have the "
 "following rights: "
 msgstr ""
+"Además de la información recogida en el presente texto, el usuario tiene "
+"derecho a acceder a sus datos personales. Para garantizar un tratamiento "
+"leal de los datos, se reconocen al usuario los siguientes derechos:"
+
+#: templates/privacy.html:104
+msgid " The right to rectification and completion of your personal data "
+msgstr "derecho a rectificar y completar sus datos personales;"
+
+#: templates/privacy.html:105
+msgid " The right to erasure of your personal data "
+msgstr "el derecho a suprimir sus datos personales;"
 
 #: templates/privacy.html:106
-msgid " The right to rectification and completion of your personal data "
-msgstr ""
+msgid " The right to restriction of the processing of your personal data "
+msgstr " el derecho a restringir el tratamiento de sus datos personales;"
 
 #: templates/privacy.html:107
-msgid " The right to erasure of your personal data "
-msgstr ""
-
-#: templates/privacy.html:108
-msgid " The right to restriction of the processing of your personal data "
-msgstr ""
-
-#: templates/privacy.html:109
 msgid ""
 " The right to object to the processing of your personal data on grounds "
 "related to \n"
 "            your particular situation"
 msgstr ""
+"el derecho a oponerse al tratamiento de sus datos personales por motivos "
+"relacionados con su situación particular."
 
-#: templates/privacy.html:112
+#: templates/privacy.html:110
 msgid ""
 " To   exercise   these   rights,   please   contact   us   at   the   "
 "following   email   address: \n"
 "\t<a href=\"mailto:EMAIL\" >EMAIL</a> "
 msgstr ""
+"Para ejercer estos derechos, el usuario debe ponerse en contacto con el "
+"consorcio ELRI a través de la siguiente dirección de correo electrónico: "
+"\t<a href=\"mailto:soporte_plantl_elri@mineco.es \" "
+">soporte_plantl_elri@mineco.es </a>  "
 
-#: templates/privacy.html:116
+#: templates/privacy.html:114
 msgid "<b>Right to lodge a complaint</b>"
-msgstr ""
+msgstr "<b>Derecho a presentar una reclamación</b>"
 
-#: templates/privacy.html:117
+#: templates/privacy.html:115
 msgid ""
 "You have the right to lodge a complaint with a supervisory authority if you "
 "consider that \n"
 "        the processing of your personal data infringes statutory data "
 "protection regulations."
 msgstr ""
-
-#: templates/privacy.html:122
-msgid ""
-"This website uses cookies to facilitate the operation of the service and "
-"enhance user experience."
-msgstr ""
+"El usuario tendrá derecho a presentar una reclamación ante una autoridad de "
+"control si considera que el tratamiento de datos personales que le afectan "
+"infringe la normativa en materia de protección de datos."
 
 #: templates/repository/api/help.html:25
 msgid "API help"
@@ -1625,7 +1624,7 @@ msgstr "O"
 
 #: templates/repository/api/help.html:48
 msgid " to enable advanced search features."
-msgstr "para habilitar las funciones de búsqueda avanzadas."
+msgstr " para habilitar las funciones de búsqueda avanzadas."
 
 #: templates/repository/api/help.html:51
 msgid ""
@@ -2039,13 +2038,12 @@ msgstr ""
 #: templates/repository/container.html:4
 #: templates/repository/multi_field_widget.html:9
 msgid "Delete This"
-msgstr "Eliminar?"
+msgstr "Eliminar"
 
 #: templates/repository/download_contact_form.html:4
-#, fuzzy, python-format
-#| msgid "%(resource)s &ndash; Contact Resource Maintainer &ndash; ELRC-SHARE"
+#, python-format
 msgid "%(resource)s &ndash; Contact Resource Maintainer &ndash; ELRI"
-msgstr "%(resource)s &ndash; Contact Resource Maintainer &ndash; ELRC-SHARE"
+msgstr "%(resource)s &ndash; Contact Resource Maintainer &ndash; ELRI"
 
 #: templates/repository/download_contact_form.html:7
 #: templates/repository/legal_not_downloadable.html:28
@@ -2073,7 +2071,7 @@ msgstr "Resource contact email%(resourceContactEmail|pluralize)s"
 
 #: templates/repository/download_contact_form.html:25
 msgid "Your username"
-msgstr "Nombre de Usuario "
+msgstr "Nombre de Usuario"
 
 #: templates/repository/download_contact_form.html:29
 msgid "Your name"
@@ -2087,6 +2085,10 @@ msgstr "Enviar"
 msgid "Resource Download"
 msgstr "Descarga de recursos"
 
+#: templates/repository/ingested_resource_email.html:2
+msgid "There are new ingested resources to review "
+msgstr "Hay nuevos recursos ingeridos para revisar"
+
 #: templates/repository/legal_not_downloadable.html:4
 #: templates/repository/lr_not_downloadable.html:4
 #: templates/repository/report_not_downloadable.html:4
@@ -2095,7 +2097,7 @@ msgstr "No es posible la descarga"
 
 #: templates/repository/legal_not_downloadable.html:10
 msgid "Legal Documentation Access Restricted"
-msgstr "Acceso restringido a la documentación legal "
+msgstr "Acceso restringido a la documentación legal"
 
 #: templates/repository/legal_not_downloadable.html:11
 msgid "Access to the selected legal documentation is restricted."
@@ -2155,17 +2157,12 @@ msgid "View licence"
 msgstr "Ver licencia"
 
 #: templates/repository/licence_agreement.html:52
-#, fuzzy
-#| msgid ""
-#| "Stay in touch with ELRC!\n"
-#| "                    Register <a target=\"_blank\" href=\"/accounts/create"
-#| "\">here</a>."
 msgid ""
 "Stay in touch with ELRI!\n"
 "                    Register <a target=\"_blank\" href=\"/accounts/create"
 "\">here</a>."
 msgstr ""
-"Stay in touch with ELRC!\n"
+"¡Mantenga el contacto con ELRI!\n"
 "                    Register <a target=\"_blank\" href=\"/accounts/create"
 "\">here</a>."
 
@@ -2227,6 +2224,39 @@ msgstr ""
 msgid "Add Another Field"
 msgstr "Agregar otro campo"
 
+#: templates/repository/published_resource_email.html:3
+#: templates/repository/resource_download_information_email.html:2
+msgid "Dear "
+msgstr "Estimado/a "
+
+#: templates/repository/published_resource_email.html:5
+#, python-format
+msgid ""
+"Your resource %(resourcename)s has been published on the ELRI National Relay "
+"Station. You can now log into our website %(nodeurl)s and download your "
+"prepared resource via the Browse page. "
+msgstr ""
+"Su recurso %(resourcename)s está publicado en la Estación Nacional de "
+"Transmisión de datos de ELRI. Ahora puede entrar en nuestra web %(nodeurl)s "
+"y descargar su recurso procesado a través del menú Explorar. "
+
+#: templates/repository/published_resource_email.html:7
+msgid ""
+"Thank you for using the ELRI services, do not hesitate to contact us for any "
+"enquiries."
+msgstr ""
+"Gracias por utilizar los servicios de ELRI, no dude en ponerse en contacto "
+"con nosotros. "
+
+#: templates/repository/published_resource_email.html:9
+#: templates/repository/resource_download_information_email.html:6
+msgid "Best regards,"
+msgstr "Saludos,"
+
+#: templates/repository/published_resource_email.html:11
+msgid "The ELRI team "
+msgstr "El equipo de ELRI"
+
 #: templates/repository/redirect.html:4 templates/repository/redirect.html:13
 msgid "Redirecting to Download Node"
 msgstr "Redireccionando al nodo de descarga"
@@ -2272,7 +2302,7 @@ msgstr ""
 
 #: templates/repository/report_not_downloadable.html:10
 msgid "Validation Report Access Restricted"
-msgstr "Acceso restringido al informe de validación "
+msgstr "Acceso restringido al informe de validación"
 
 #: templates/repository/report_not_downloadable.html:11
 msgid "Access to the selected validation report is restricted."
@@ -2297,6 +2327,27 @@ msgstr ""
 "available for download. This problem\n"
 "                may be temporary due to network connection problems or "
 "internal errors. Trying again later might solve"
+
+#: templates/repository/resource_download_information_email.html:4
+#, python-format
+msgid ""
+"the ELRI user %(user.username)s (%(user.first_name)s %(user.last_name)s, "
+"%(user_email)s) requests information on the language resource "
+"“%(resource)s” ([1]). You can find the request below; please reply as soon "
+"as possible."
+msgstr ""
+"el usuario de ELRI %(user.username)s (%(user.first_name)s "
+"%(user.last_name)s, %(user_email)s) solicita información sobre el recurso "
+"lingüístico “%(resource)s” ([1]).  Puede encontrar la solicitud a "
+"continuación. Por favor, responda tan pronto como le sea posible."
+
+#: templates/repository/resource_download_information_email.html:7
+msgid "ELRI Repository at [2]"
+msgstr "Repositorio de ELRI en [2]"
+
+#: templates/repository/resource_new_contributions_email.html:2
+msgid "There are new submitted contributed resources on ELRI "
+msgstr "Hay nuevas aportaciones de recursos en ELRI"
 
 #: templates/repository/resource_view/annotation.html:10
 #: templates/repository/resource_view/input_output.html:74
@@ -2836,10 +2887,8 @@ msgid "Creation ended"
 msgstr "Creación terminada"
 
 #: templates/repository/resource_view/resource_creation.html:55
-#, fuzzy
-#| msgid "Created using ELRC Services"
 msgid "Created using ELRI Services"
-msgstr "Creado con servicios ELRC"
+msgstr "Creado con servicios ELRI"
 
 #: templates/repository/resource_view/resource_creation.html:63
 msgid "Anonymized"
@@ -3137,8 +3186,8 @@ msgstr "Herramienta/servicio:"
 #, python-format
 msgid " %(cnt)s Language Resource "
 msgid_plural " %(cnt)s Language Resources "
-msgstr[0] " %(cnt)s Recurso lingüístico"
-msgstr[1] " %(cnt)s Recurso lingüísticos"
+msgstr[0] " %(cnt)s Recurso lingüístico "
+msgstr[1] " %(cnt)s Recursos lingüísticos"
 
 #: templates/repository/search.html:122
 #, python-format
@@ -3215,10 +3264,8 @@ msgstr "No se hallaron resultados para búsqueda &ldquo;%(query)s&rdquo;."
 
 #: templates/stats/mystats.html:14 templates/stats/topstats.html:113
 #: templates/stats/usagestats.html:125
-#, fuzzy
-#| msgid "ELRC-SHARE visits statistics"
 msgid "ELRI visits statistics"
-msgstr "ELRC-SHARE visits statistics"
+msgstr "ELRI visits statistics"
 
 #: templates/stats/mystats.html:15 templates/stats/topstats.html:114
 #: templates/stats/usagestats.html:124
@@ -3342,25 +3389,6 @@ msgid "Number of views"
 msgstr "Numero de vistas"
 
 #: templates/stats/usagestats.html:145
-#, fuzzy
-#| msgid ""
-#| "This panel shows which metadata have been used to describe the ELRC-SHARE "
-#| "linguistic resources.\n"
-#| "                Each metadata defined in the <a href=\"http://www.meta-"
-#| "share.org/knowledgebase/DetailedPresentationOfTheModel\" target="
-#| "\"metamodel\">ELRC-SHARE model</a> can be either \"required\", "
-#| "\"recommended\" or \"optional\".\n"
-#| "                The metadata usage statistics reports two counters. The "
-#| "first counter says how many times a metadata has been \n"
-#| "                filled in with a certain value, while the second counter "
-#| "says the number of resources for which the metadata has been used.\n"
-#| "                For instance <div class=\"coverage required\"> 28/12 </"
-#| "div> means that the corresponding required metadata has been filled in 28 "
-#| "times (possibly with \n"
-#| "                redundant values), and that 12 different resources have "
-#| "been described with that metadata.\n"
-#| "                You can click on a metadata name to see a table with all "
-#| "the actual values used to fill in that metadata."
 msgid ""
 "This panel shows which metadata have been used to describe the ELRI "
 "linguistic resources.\n"
@@ -3379,7 +3407,7 @@ msgid ""
 "                You can click on a metadata name to see a table with all the "
 "actual values used to fill in that metadata."
 msgstr ""
-"This panel shows which metadata have been used to describe the ELRC-SHARE "
+"This panel shows which metadata have been used to describe the ELRI "
 "linguistic resources.\n"
 "                Each metadata defined in the <a href=\"http://www.meta-share."
 "org/knowledgebase/DetailedPresentationOfTheModel\" target=\"metamodel\">ELRC-"
@@ -3450,12 +3478,6 @@ msgid "Found %(fields_count)s metadata"
 msgstr "Found %(fields_count)s metadata"
 
 #: templates/stats/usagestats.html:199
-#, fuzzy
-#| msgid ""
-#| "(the following lines are the metadata components and elements included in "
-#| "the <a href=\"http://www.meta-share.org/portal/knowledgebase/"
-#| "DetailedPresentationOfTheModel\" target=\"metamodel\">ELRC-SHARE model</"
-#| "a> grouped by different roles and alphabetically sorted)"
 msgid ""
 "(the following lines are the metadata components and elements included in "
 "the <a href=\"http://www.meta-share.org/portal/knowledgebase\n"
@@ -3468,12 +3490,6 @@ msgstr ""
 "grouped by different roles and alphabetically sorted)"
 
 #: templates/stats/usagestats.html:201
-#, fuzzy
-#| msgid ""
-#| "(the following lines are the metadata components and elements included in "
-#| "the <a href=\"http://www.meta-share.org/portal/knowledgebase/"
-#| "DetailedPresentationOfTheModel\" target=\"metamodel\">ELRC-SHARE model</"
-#| "a> grouped by different roles and alphabetically sorted)"
 msgid ""
 "(the following lines are the metadata components and elements included in "
 "the <a href=\"http://www.meta-share.org/portal/knowledgebase/"
@@ -3513,6 +3529,13 @@ msgstr "contador de recursos"
 #: templates/stats/usagestats.html:283
 msgid "never used"
 msgstr "nunca utilizado"
+
+#~ msgid ""
+#~ "This website uses functional cookies to facilitate the operation of the "
+#~ "service and enhance user experience. "
+#~ msgstr ""
+#~ "Este sitio web utiliza cookies para facilitar la operación del servicio y "
+#~ "mejorar la experiencia de los usuarios."
 
 #~ msgid "Browse Resources"
 #~ msgstr "Explorar recursos"

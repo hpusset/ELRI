@@ -1,7 +1,0 @@
-Dear {{firstname}} {{lastname}},
-
-We have now reset your ELRI user account "{{shortname}}".
-Your password is "{{random_password}}".
-We advise that you change your password the next time you login to ELRI. 
-
-Thank you for using ELRI!
