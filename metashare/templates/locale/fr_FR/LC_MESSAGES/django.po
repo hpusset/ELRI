@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-05 18:53+0100\n"
+"POT-Creation-Date: 2019-03-08 09:52+0100\n"
 "PO-Revision-Date: 2018-11-15 18:12+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -63,15 +63,33 @@ msgstr ""
 msgid "ELRI National Relay Station"
 msgstr "Station de Relais National ELRI "
 
-#: templates/base.html:63
+#: templates/base.html:54
 msgid ""
-"\"We use cookies on this site to enhance your user experience. By clicking "
-"any link on this page you are giving your consent for us to set cookies.\" "
+"\"This site uses cookies to enhance your user experience. By clicking any "
+"link on this page you are giving your consent for us to set cookies.\" "
 msgstr ""
 
-#: templates/base.html:64
+#: templates/base.html:55
 msgid "\"OK, I aggree \""
 msgstr ""
+
+#: templates/base.html:56
+msgid "\"Decline \""
+msgstr ""
+
+#: templates/base.html:57
+msgid "\"Allow cookies\""
+msgstr ""
+
+#: templates/base.html:58
+msgid "\"Learn more\""
+msgstr ""
+
+#: templates/base.html:59
+#, fuzzy
+#| msgid "<b>Cookies policy</b>"
+msgid "'Cookie Policy'"
+msgstr "<b>Politique de cookies</b>"
 
 #: templates/breadcrumbs.html:3 templates/header.html:11
 #: templates/header.html.py:12
@@ -803,14 +821,14 @@ msgid ""
 "Service.</li>"
 msgstr ""
 
-#: templates/legal.html:70 templates/privacy.html:121
+#: templates/legal.html:70 templates/privacy.html:119
 msgid "<b>Cookies policy</b>"
 msgstr "<b>Politique de cookies</b>"
 
-#: templates/legal.html:71
+#: templates/legal.html:71 templates/privacy.html:120
 msgid ""
-"This website uses functional cookies to facilitate the operation of the "
-"service and enhance user experience. "
+"This website uses cookies to facilitate the operation of the service and "
+"enhance user experience."
 msgstr ""
 
 #: templates/legal.html:74
@@ -1084,55 +1102,55 @@ msgid ""
 "        Relay Station."
 msgstr ""
 
-#: templates/privacy.html:37
+#: templates/privacy.html:35
 msgid "<b>Controller</b>"
 msgstr ""
 
-#: templates/privacy.html:38
+#: templates/privacy.html:36
 msgid ""
 " \n"
 "        [Name of hosting organisation of the NRS] "
 msgstr ""
 
-#: templates/privacy.html:41
+#: templates/privacy.html:39
 msgid ""
 "<li> Contact: [Contact of hosting organisation],    Phone: [number] </li>"
 msgstr ""
 
-#: templates/privacy.html:42
+#: templates/privacy.html:40
 msgid " <li>  E-Mail: <a href=\"mailto:EMAIL_ORG\" >EMAIL_ORG</a> </li> "
 msgstr ""
 
-#: templates/privacy.html:46
+#: templates/privacy.html:44
 #, fuzzy
 #| msgid "<b>Data protection</b>"
 msgid "<b>Data Protection Officer</b>"
 msgstr "<b>Protection des données</b>"
 
-#: templates/privacy.html:48
+#: templates/privacy.html:46
 msgid ""
 " \n"
 "        [Name of the data protection officer at the hosting organisation of "
 "the NRS, if applicable]"
 msgstr ""
 
-#: templates/privacy.html:51
+#: templates/privacy.html:49
 msgid ""
 " <li> Contact:  [Contact/name of the data protection officer],    Phone: "
 "[number], </li> "
 msgstr ""
 
-#: templates/privacy.html:52
+#: templates/privacy.html:50
 msgid " <li>  E-Mail: <a href=\"mailto:EMAIL_OF\" >EMAIL_OF</a> </li> "
 msgstr ""
 
-#: templates/privacy.html:57
+#: templates/privacy.html:55
 #, fuzzy
 #| msgid "<b>Privacy</b>"
 msgid "<b>Purpose</b>"
 msgstr "<b>Vie Privée</b>"
 
-#: templates/privacy.html:58
+#: templates/privacy.html:56
 #, fuzzy
 #| msgid ""
 #| "To benefit from the services of this ELRI National Relay Station, users "
@@ -1144,32 +1162,32 @@ msgstr ""
 "Pour bénéficier des services des Station de Relai Nationaux, le utilisateurs "
 "doivent suivre la procédure suivante:"
 
-#: templates/privacy.html:60
+#: templates/privacy.html:58
 msgid " Establishment of contact and correspondence with visitors and users "
 msgstr ""
 
-#: templates/privacy.html:61
+#: templates/privacy.html:59
 msgid " Registration of users."
 msgstr ""
 
-#: templates/privacy.html:65
+#: templates/privacy.html:63
 msgid "<b>Anonymous and protected usage</b>"
 msgstr ""
 
-#: templates/privacy.html:66
+#: templates/privacy.html:64
 msgid ""
 " Personal  data  are  only  collected  via  our  contact  page,  where  "
 "users  can  contact  us \n"
 "        electronically, and via our registration page."
 msgstr ""
 
-#: templates/privacy.html:70
+#: templates/privacy.html:68
 #, fuzzy
 #| msgid "<b>Termination</b>"
 msgid "<b>Recipients</b>"
 msgstr "<b>Résiliation</b>"
 
-#: templates/privacy.html:71
+#: templates/privacy.html:69
 msgid ""
 "  The  processed  data  will  not  be  transmitted  to  any  third  parties  "
 "or  otherwise  disclosed,\n"
@@ -1180,7 +1198,7 @@ msgid ""
 "service offerings of third party providers. "
 msgstr ""
 
-#: templates/privacy.html:75
+#: templates/privacy.html:73
 msgid ""
 "\n"
 "        International Data Transfer may take place via storage services "
@@ -1188,11 +1206,11 @@ msgid ""
 "Framework."
 msgstr ""
 
-#: templates/privacy.html:80
+#: templates/privacy.html:78
 msgid "<b>Access data</b>"
 msgstr ""
 
-#: templates/privacy.html:81
+#: templates/privacy.html:79
 msgid ""
 "The legitimate interests pursued by ELRI include, among others, also the "
 "adaptation and \n"
@@ -1201,7 +1219,7 @@ msgid ""
 "        of illegal activities in connection with the usage of our website."
 msgstr ""
 
-#: templates/privacy.html:84
+#: templates/privacy.html:82
 msgid ""
 "The ELRI National Relay Station and services log certain information about "
 "every request \n"
@@ -1213,7 +1231,7 @@ msgid ""
 "could be identified."
 msgstr ""
 
-#: templates/privacy.html:88
+#: templates/privacy.html:86
 msgid ""
 " Relevant subsets of this data may be used as part of investigations of "
 "computer misuse \n"
@@ -1223,13 +1241,13 @@ msgid ""
 "to any third party except if required by law. "
 msgstr ""
 
-#: templates/privacy.html:94
+#: templates/privacy.html:92
 #, fuzzy
 #| msgid "<b>Cookies policy</b>"
 msgid "<b>Correspondence</b>"
 msgstr "<b>Politique de cookies</b>"
 
-#: templates/privacy.html:95
+#: templates/privacy.html:93
 msgid ""
 "You have the option to contact us by e-mail. We will use your e-mail address "
 "and other \n"
@@ -1242,13 +1260,13 @@ msgid ""
 "        data."
 msgstr ""
 
-#: templates/privacy.html:102
+#: templates/privacy.html:100
 #, fuzzy
 #| msgid "<b>Interpretation</b>"
 msgid "<b>Access and Intervention</b>"
 msgstr "<b>Interprétaion</b>"
 
-#: templates/privacy.html:103
+#: templates/privacy.html:101
 msgid ""
 " Besides the information in this data protection policy you have the right "
 "of access to your \n"
@@ -1256,48 +1274,42 @@ msgid ""
 "following rights: "
 msgstr ""
 
-#: templates/privacy.html:106
+#: templates/privacy.html:104
 msgid " The right to rectification and completion of your personal data "
 msgstr ""
 
-#: templates/privacy.html:107
+#: templates/privacy.html:105
 msgid " The right to erasure of your personal data "
 msgstr ""
 
-#: templates/privacy.html:108
+#: templates/privacy.html:106
 msgid " The right to restriction of the processing of your personal data "
 msgstr ""
 
-#: templates/privacy.html:109
+#: templates/privacy.html:107
 msgid ""
 " The right to object to the processing of your personal data on grounds "
 "related to \n"
 "            your particular situation"
 msgstr ""
 
-#: templates/privacy.html:112
+#: templates/privacy.html:110
 msgid ""
 " To   exercise   these   rights,   please   contact   us   at   the   "
 "following   email   address: \n"
 "\t<a href=\"mailto:EMAIL\" >EMAIL</a> "
 msgstr ""
 
-#: templates/privacy.html:116
+#: templates/privacy.html:114
 msgid "<b>Right to lodge a complaint</b>"
 msgstr ""
 
-#: templates/privacy.html:117
+#: templates/privacy.html:115
 msgid ""
 "You have the right to lodge a complaint with a supervisory authority if you "
 "consider that \n"
 "        the processing of your personal data infringes statutory data "
 "protection regulations."
-msgstr ""
-
-#: templates/privacy.html:122
-msgid ""
-"This website uses cookies to facilitate the operation of the service and "
-"enhance user experience."
 msgstr ""
 
 #: templates/repository/api/help.html:25
@@ -1806,6 +1818,10 @@ msgstr "Envoyer"
 msgid "Resource Download"
 msgstr "Télécharger des ressources"
 
+#: templates/repository/ingested_resource_email.html:2
+msgid "There are new ingested resources to review "
+msgstr ""
+
 #: templates/repository/legal_not_downloadable.html:4
 #: templates/repository/lr_not_downloadable.html:4
 #: templates/repository/report_not_downloadable.html:4
@@ -1952,6 +1968,34 @@ msgstr ""
 msgid "Add Another Field"
 msgstr "Ajouter un nouveau champ"
 
+#: templates/repository/published_resource_email.html:3
+#: templates/repository/resource_download_information_email.html:2
+msgid "Dear "
+msgstr ""
+
+#: templates/repository/published_resource_email.html:5
+#, python-format
+msgid ""
+"Your resource %(resourcename)s has been published on the ELRI National Relay "
+"Station. You can now log into our website %(nodeurl)s and download your "
+"prepared resource via the Browse page. "
+msgstr ""
+
+#: templates/repository/published_resource_email.html:7
+msgid ""
+"Thank you for using the ELRI services, do not hesitate to contact us for any "
+"enquiries."
+msgstr ""
+
+#: templates/repository/published_resource_email.html:9
+#: templates/repository/resource_download_information_email.html:6
+msgid "Best regards,"
+msgstr ""
+
+#: templates/repository/published_resource_email.html:11
+msgid "The ELRI team "
+msgstr ""
+
 #: templates/repository/redirect.html:4 templates/repository/redirect.html:13
 msgid "Redirecting to Download Node"
 msgstr "Redirection vers le nœud de téléchargement"
@@ -2024,6 +2068,23 @@ msgstr ""
 "                problème est peut-être temporairement du a un problème de "
 "connexion au réseau ou à une erreur interne. Réessayer plus\n"
 "                résoudra peut-être le problème."
+
+#: templates/repository/resource_download_information_email.html:4
+#, python-format
+msgid ""
+"the ELRI user %(user.username)s (%(user.first_name)s %(user.last_name)s, "
+"%(user_email)s) requests information on the language resource "
+"“%(resource)s” ([1]). You can find the request below; please reply as soon "
+"as possible."
+msgstr ""
+
+#: templates/repository/resource_download_information_email.html:7
+msgid "ELRI Repository at [2]"
+msgstr ""
+
+#: templates/repository/resource_new_contributions_email.html:2
+msgid "There are new submitted contributed resources on ELRI "
+msgstr ""
 
 #: templates/repository/resource_view/annotation.html:10
 #: templates/repository/resource_view/input_output.html:74

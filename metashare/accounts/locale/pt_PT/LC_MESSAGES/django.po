@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-05 18:52+0100\n"
+"POT-Creation-Date: 2019-03-08 09:51+0100\n"
 "PO-Revision-Date: 2018-11-13 17:02+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -99,6 +99,12 @@ msgid "You must be superuser or group manager to accept applications."
 msgstr ""
 "Tem que ser um super-utilizador ou gestor do grupo para aceitar aplicações."
 
+#: accounts/admin.py:311 accounts/admin.py:779
+#, fuzzy
+#| msgid "Application Status"
+msgid "Application accepted"
+msgstr "Estado da aplicação"
+
 #: accounts/admin.py:318 accounts/admin.py:786
 msgid "There was an error sending out an application acceptance e-mail."
 msgstr "Existe um erro no envio de um email de aceitação de candidatura."
@@ -129,6 +135,12 @@ msgstr "Sucesso. Aceitou com êxito todos os pedidos."
 #: accounts/admin.py:336
 msgid "Accept selected editor group applications"
 msgstr "Aceitar candidaturas ao grupo de edição selecionado"
+
+#: accounts/admin.py:370 accounts/admin.py:830
+#, fuzzy
+#| msgid "Application Status"
+msgid "Application turned down"
+msgstr "Estado da aplicação"
 
 #: accounts/admin.py:378 accounts/admin.py:838
 msgid ""
@@ -337,6 +349,12 @@ msgstr "Aceitar aplicações eDelivery selecionadas"
 #: accounts/admin.py:1135
 msgid "You must be superuser to reject eDelivery applications."
 msgstr "Tem que ser um super utilizador para rejeitar aplicações eDelivery."
+
+#: accounts/admin.py:1145 accounts/admin.py:1193
+#, fuzzy
+#| msgid "Reject selected eDelivery applications"
+msgid "ELRI eDelivery application"
+msgstr "Rejeitar aplicações eDelivery selecionadas"
 
 #: accounts/admin.py:1157
 msgid "{} cannot be rejected. Only \"PENDING\" applications can be rejected"
@@ -610,6 +628,10 @@ msgid "An older application of yours for editor group \"%s\" is still pending."
 msgstr ""
 "Uma aplicação sua antiga para o grupo “%s” de edição ainda está pendente."
 
+#: accounts/views.py:333
+msgid "New editor membership request"
+msgstr ""
+
 #: accounts/views.py:340
 msgid ""
 "There was an error sending out the request email for your editor group "
@@ -658,6 +680,12 @@ msgstr "Actualizar grupos de edição por defeito"
 #, python-format
 msgid "An older application of yours for organization \"%s\" is still pending."
 msgstr "Uma aplicação sua antiga para a organização “%s” ainda está pendente."
+
+#: accounts/views.py:487
+#, fuzzy
+#| msgid "Apply for organization membership"
+msgid "New organization membership request"
+msgstr "Candidatar-se para uma organização"
 
 #: accounts/views.py:494
 msgid ""

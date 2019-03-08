@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-05 18:53+0100\n"
+"POT-Creation-Date: 2019-03-08 09:52+0100\n"
 "PO-Revision-Date: 2018-11-13 17:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -101,6 +101,12 @@ msgstr ""
 "Vous devez être un super-utilisateur ou un gestionnaire de groupe pour "
 "accepter des demandes."
 
+#: accounts/admin.py:311 accounts/admin.py:779
+#, fuzzy
+#| msgid "Application Status"
+msgid "Application accepted"
+msgstr "Etat de la demande"
+
 #: accounts/admin.py:318 accounts/admin.py:786
 msgid "There was an error sending out an application acceptance e-mail."
 msgstr "Une erreur a été rencontrée lors de l'envoi de l'email d'acceptation."
@@ -130,6 +136,12 @@ msgstr "Vous avez accepté toutes les demandes."
 #: accounts/admin.py:336
 msgid "Accept selected editor group applications"
 msgstr "Vous avez accepté les demandes du groupe d'édition sélectionné."
+
+#: accounts/admin.py:370 accounts/admin.py:830
+#, fuzzy
+#| msgid "Application Status"
+msgid "Application turned down"
+msgstr "Etat de la demande"
 
 #: accounts/admin.py:378 accounts/admin.py:838
 msgid ""
@@ -351,6 +363,12 @@ msgstr "Accepter les demandes eDelivery sélectionnées"
 msgid "You must be superuser to reject eDelivery applications."
 msgstr ""
 "Vous devez être un super-utilisateur pour refuser des demandes eDelivery."
+
+#: accounts/admin.py:1145 accounts/admin.py:1193
+#, fuzzy
+#| msgid "Reject selected eDelivery applications"
+msgid "ELRI eDelivery application"
+msgstr "Refuser les demande eDelivery sélectionnées"
 
 #: accounts/admin.py:1157
 msgid "{} cannot be rejected. Only \"PENDING\" applications can be rejected"
@@ -627,6 +645,10 @@ msgstr ""
 "Une de vos anciennes demandes demande pour le groupe d'édition \"%s\" est "
 "toujours en cours de traitement."
 
+#: accounts/views.py:333
+msgid "New editor membership request"
+msgstr ""
+
 #: accounts/views.py:340
 msgid ""
 "There was an error sending out the request email for your editor group "
@@ -679,6 +701,12 @@ msgid "An older application of yours for organization \"%s\" is still pending."
 msgstr ""
 "Une de vos anciennes demandes demande pour l'organisation \"%s\" est "
 "toujours en cours de traitement."
+
+#: accounts/views.py:487
+#, fuzzy
+#| msgid "Apply for organization membership"
+msgid "New organization membership request"
+msgstr "Demander un adhésion à un organisme"
 
 #: accounts/views.py:494
 msgid ""
