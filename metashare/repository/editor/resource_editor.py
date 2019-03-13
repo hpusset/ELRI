@@ -718,7 +718,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     #If successfully published, add to the archive.zip file the license documentation 
                     resource_info=obj.export_to_elementtree()
                     ## DEBUG
-                    #LOGGER.info(to_xml_string(obj.export_to_elementtree(),encoding="utf-8").encode("utf-8"))
+                    LOGGER.info(to_xml_string(obj.export_to_elementtree(),encoding="utf-8").encode("utf-8"))
 
                     resource_name=[u.find('resourceName').text for u in resource_info.iter('identificationInfo')]
                     
@@ -747,6 +747,12 @@ class ResourceModelAdmin(SchemaModelAdmin):
                         
                         path, filename = os.path.split(licence_path)
                         lr_archive_zip.write(licence_path,'license_'+filename)
+                        
+                    #attribution text
+                    attr_text=''
+                    for at in resource_info.iter('attributionText'):
+                        attr_text=attr_text+at.text
+                        LOGGER.info(at.text)
                     
                     #get info for metadata file
                     #iprHolder info
@@ -788,6 +794,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     # LR name
                     # License:
                     # Restrictions of Use:
+                    # (Attribution text:)
                     # IPR Holder: Name Surname (email), Organization 
                     # Contact Person: Name Surname (email), Organization 
                     metadata_file_path=resource_path+'/'+resource_name[0]+'_metadata.txt'
@@ -799,6 +806,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                 metadata_file.write(_('\t Restrictions of Use: None\n'))
                             else:
                                 metadata_file.write(_('\t Restrictions of Use: ')+licences_restriction[i]+'\n')
+                        if attr_text!='':
+                            metadata_file.write(_('Attribution text: ')+attr_text+'\n')
                         if len(iprHolder_name)>0:
                             for i,h in enumerate(iprHolder_name):
                                 metadata_file.write(_('IPR Holder: ')+ h +' '+iprHolder_surname[i] + ' (' + iprHolder_email[i]+'), '+iprHolder_organization[i]+'\n')
