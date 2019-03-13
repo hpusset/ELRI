@@ -422,7 +422,7 @@ def prepare_error_zip(error_msg,resource_path,request):
     add_files2zip(resource_path+'/tm/input',errorzip)
     add_files2zip(resource_path+'/other',errorzip)
     error_log = open(os.path.join(resource_path,'error.log'), 'w')
-    error_log.write(error_msg)
+    error_log.write(error_msg.encode("utf-8"))
     error_log.close()
     errorzip.write(os.path.join(resource_path,'error.log'), 'error.log')
     #close zip file with processed resources
