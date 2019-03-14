@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-07 17:25+0100\n"
-"PO-Revision-Date: 2019-03-06 18:55+0100\n"
+"POT-Creation-Date: 2019-03-14 14:12+0100\n"
+"PO-Revision-Date: 2019-03-14 13:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -256,6 +256,10 @@ msgstr ""
 msgid "The ELRI Team"
 msgstr "El equipo de ELRI"
 
+#: templates/accounts/create_account.html:8
+msgid "Please fill in all fields to create your account."
+msgstr "Por favor complete todos los campos para crear su cuenta de usuario."
+
 #: templates/accounts/create_account.html:14
 #: templates/accounts/create_account.html:15
 #: templates/accounts/create_account.html:35
@@ -270,7 +274,7 @@ msgid ""
 "Service</a>."
 msgstr ""
 "Acepto las <a target=\"_blank\" href=\"%(elri_tos)s\">Condiciones de "
-"Servicio de ERLI </a>."
+"Servicio de ELRI </a>."
 
 #: templates/accounts/delete_editor_group_application_selected_confirmation.html:6
 #: templates/accounts/delete_organization_application_selected_confirmation.html:6
@@ -681,7 +685,3 @@ msgstr "Actualizar"
 #~ "\t  <a href=\"%(editor_group_application)s\">grupos editores</a> o \n"
 #~ "\t  <a href=\"%(organization_application_url)s\">organizaciones</a> ya "
 #~ "existentes."
-
-#~ msgid "Please fill in all fields to create your account."
-#~ msgstr ""
-#~ "Por favor complete todos los campos para crear su cuenta de usuario."
