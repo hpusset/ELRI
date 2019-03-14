@@ -79,7 +79,7 @@ services:
   # Toolchain image
   toolchain:
     container_name: elri_toolchain
-    image: elrinrs/toolchain:R3
+    image: elrinrs/toolchain:R3.1
     volumes:   
       - elri-shared-resources:/elri/elri_resources:rw
     environment:
