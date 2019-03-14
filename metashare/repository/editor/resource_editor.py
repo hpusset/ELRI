@@ -718,7 +718,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     #If successfully published, add to the archive.zip file the license documentation 
                     resource_info=obj.export_to_elementtree()
                     ## DEBUG
-                    LOGGER.info(to_xml_string(obj.export_to_elementtree(),encoding="utf-8").encode("utf-8"))
+                    #LOGGER.info(to_xml_string(obj.export_to_elementtree(),encoding="utf-8").encode("utf-8"))
 
                     resource_name=[u.find('resourceName').text for u in resource_info.iter('identificationInfo')]
                     
@@ -751,9 +751,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     #attribution text
                     attr_text=''
                     for at in resource_info.iter('attributionText'):
-                        attr_text=attr_text+at.text
-                        LOGGER.info(at.text)
-                    
+                        attr_text=attr_text+at.text+' \n'
+                        
                     #get info for metadata file
                     #iprHolder info
                     iprHolder_name=[]
