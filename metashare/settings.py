@@ -141,6 +141,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django_password_validation.DjangoPasswordValidationMiddleware', # must come before AuthenticationMiddleware
     'django.contrib.auth.middleware.AuthenticationMiddleware',
 )
 
@@ -305,3 +306,17 @@ CACHES = {
 TASTYPIE_ALLOW_MISSING_SLASH = True
 TASTYPIE_DEFAULT_FORMATS = ['json']
 
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django_password_validation.UserAttributeSimilarityValidator',
+    }, {
+        'NAME': 'django_password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 9,
+        }
+    }, {
+        'NAME': 'django_password_validation.CommonPasswordValidator',
+    }, {
+        'NAME': 'django_password_validation.NumericPasswordValidator',
+    },
+]

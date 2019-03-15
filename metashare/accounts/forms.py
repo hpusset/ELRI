@@ -6,10 +6,13 @@ from django.core.exceptions import ValidationError
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
+from django_password_validation import validate_password
+
 from metashare.accounts.models import UserProfile, EditorGroupApplication, \
     OrganizationApplication, Organization, OrganizationManagers, EditorGroup, \
     EditorGroupManagers, AccessPointEdeliveryApplication
 from metashare.accounts.validators import validate_wsdl_url
+
 
 
 class ModelForm(forms.ModelForm):
@@ -89,10 +92,11 @@ class RegistrationRequestForm(Form):
     position = forms.CharField(UserProfile._meta.get_field('position').max_length,
                                label=mark_safe(_("Position in the organization")),required=False)
                                
+
     #Removing user phone number for now: user email and organisation phone number should be sufficient
     #phone_number = forms.CharField(UserProfile._meta.get_field('phone_number').max_length,
                                    #label=mark_safe(u"%s<span style='color:grey'>*</span>" % _("Phone number")))
-                                   
+
     password = forms.CharField(User._meta.get_field('password').max_length,
                                label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Password")),
                                widget=forms.PasswordInput())
@@ -100,20 +104,20 @@ class RegistrationRequestForm(Form):
         User._meta.get_field('password').max_length,
         label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Password confirmation")), widget=forms.PasswordInput())
 
-        
+
 	#Commenting from now, as it might be more functional to handle group assignment for logged in users
-	## In ELRI we need users to be able to join more than one group	
+	## In ELRI we need users to be able to join more than one group
     #contributor_group = forms.MultipleChoiceField(
         #label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Contributor group"))
         #)
-     
+
     accepted_tos = forms.BooleanField()
 
     def __init__(self, *args, **kwargs):
         group_choices = kwargs.pop("group_choices")
-        super(RegistrationRequestForm, self).__init__(*args, **kwargs)        
+        super(RegistrationRequestForm, self).__init__(*args, **kwargs)
         #self.fields["contributor_group"].choices = group_choices
- 
+
     def clean_shortname(self):
         """
         Make sure that the user name is still available.
@@ -153,6 +157,7 @@ class RegistrationRequestForm(Form):
         pswrd_conf = self.cleaned_data['confirm_password']
         if pswrd != pswrd_conf:
             raise ValidationError(_('The two password fields did not match.'))
+        validate_password(pswrd)
         return pswrd
 
         # cfedermann: possible extensions for future improvements.
