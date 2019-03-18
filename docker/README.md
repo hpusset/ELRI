@@ -186,7 +186,7 @@ Maintenance
 
 In production environment the following steps are suggested for persisted data safety :
 
-- Backup:
+**Backup:**
 
 01. Shutdown all containers:
 
@@ -194,7 +194,7 @@ In production environment the following steps are suggested for persisted data s
 $ docker-compose stop
 ```
 
-02. Backup the volumes that are used for filesystem persisted data:
+02. Backup the volumes that are used for filesystem persisted data with whatever desired backup method (e.g. tar, zip, backup tool, etc) but just be sure to preserve owner:group and permissions:
 
 [Link to volume table](#VolumePersistenceTable)
 
@@ -203,6 +203,26 @@ $ docker-compose stop
 
 ```
 $ docker-compose start
+```
+
+**Restore:**
+
+01. Remove all containers and existing persisted volumes:
+
+```
+# Use this command with caution, because persisted data is deleted
+$ docker-compose down --volume
+```
+
+02. Restore the backups to the same location maintaining user:group and permissions:
+
+[Link to volume table](#VolumePersistenceTable)
+
+
+03. Recreate all containers
+
+```
+$ docker-compose up -d
 ```
 
 Deploy new versions
