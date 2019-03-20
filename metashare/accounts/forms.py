@@ -6,13 +6,17 @@ from django.core.exceptions import ValidationError
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
-#from django_password_validation import validate_password
+from django_password_validation import validate_password
 
 from metashare.accounts.models import UserProfile, EditorGroupApplication, \
     OrganizationApplication, Organization, OrganizationManagers, EditorGroup, \
     EditorGroupManagers, AccessPointEdeliveryApplication
 from metashare.accounts.validators import validate_wsdl_url
-
+from metashare.settings import LOG_HANDLER
+#import logging
+## Setup logging support.
+#LOGGER = logging.getLogger(__name__)
+#LOGGER.addHandler(LOG_HANDLER)
 
 
 class ModelForm(forms.ModelForm):
@@ -157,7 +161,19 @@ class RegistrationRequestForm(Form):
         pswrd_conf = self.cleaned_data['confirm_password']
         if pswrd != pswrd_conf:
             raise ValidationError(_('The two password fields did not match.'))
-        validate_password(pswrd)
+        try:  
+            validate_password(pswrd)
+        except ValidationError as error:
+            #LOGGER.info(error)
+            messages=[]
+            if 'This password is entirely numeric.' in error:
+                messages.append(_(u'This password is entirely numeric.'))
+            if 'This password is too common.' in error:
+                messages.append(_(u'This password is too common.'))
+            if 'This password is too short. It must contain at least 9 characters.' in error:
+                messages.append(_(u'This password is too short. It must contain at least 9 characters.'))
+            
+            raise ValidationError(messages)
         return pswrd
 
         # cfedermann: possible extensions for future improvements.
