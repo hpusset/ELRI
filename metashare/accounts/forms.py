@@ -13,7 +13,7 @@ from metashare.accounts.models import UserProfile, EditorGroupApplication, \
     EditorGroupManagers, AccessPointEdeliveryApplication
 from metashare.accounts.validators import validate_wsdl_url
 from metashare.settings import LOG_HANDLER
-#import logging
+import logging
 ## Setup logging support.
 #LOGGER = logging.getLogger(__name__)
 #LOGGER.addHandler(LOG_HANDLER)
@@ -167,11 +167,11 @@ class RegistrationRequestForm(Form):
             #LOGGER.info(error)
             messages=[]
             if 'This password is entirely numeric.' in error:
-                messages.append(_(u'This password is entirely numeric.'))
+                messages.append(_(u'This password is entirely numeric. '))
             if 'This password is too common.' in error:
-                messages.append(_(u'This password is too common.'))
+                messages.append(_(u'This password is too common. '))
             if 'This password is too short. It must contain at least 9 characters.' in error:
-                messages.append(_(u'This password is too short. It must contain at least 9 characters.'))
+                messages.append(_(u'This password is too short. It must contain at least 9 characters. '))
             
             raise ValidationError(messages)
         return pswrd

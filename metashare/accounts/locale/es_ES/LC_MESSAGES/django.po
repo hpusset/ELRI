@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-20 17:58+0100\n"
-"PO-Revision-Date: 2019-03-20 18:00+0100\n"
+"POT-Creation-Date: 2019-03-20 18:05+0100\n"
+"PO-Revision-Date: 2019-03-20 18:05+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -460,15 +460,15 @@ msgid "The two password fields did not match."
 msgstr "Los dos campos de la contraseña no coinciden."
 
 #: accounts/forms.py:170
-msgid "This password is entirely numeric."
+msgid "This password is entirely numeric. "
 msgstr "La contraseña solo está formada por números."
 
 #: accounts/forms.py:172
-msgid "This password is too common."
+msgid "This password is too common. "
 msgstr "La contraseña es demasiado común."
 
 #: accounts/forms.py:174
-msgid "This password is too short. It must contain at least 9 characters."
+msgid "This password is too short. It must contain at least 9 characters. "
 msgstr "La contraseña es demasiado corta. Debe contener al menos 9 caracteres."
 
 #: accounts/forms.py:202
