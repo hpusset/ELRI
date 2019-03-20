@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-08 09:52+0100\n"
-"PO-Revision-Date: 2018-11-12 13:24+0000\n"
+"PO-Revision-Date: 2019-03-12 14:35+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ga_IE\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=5; plural=(n==1 ? 0 : n==2 ? 1 : n>=3 && n<=6 ? 2 : "
 "n>=7 && n<=10 ? 3 : 4);\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 2.2.1\n"
 
 #: repository/editor/__init__.py:113
 msgid "Upload new resource description(s)"
@@ -33,9 +33,9 @@ msgid "0 of %(count)d selected"
 msgid_plural "of %(count)d selected"
 msgstr[0] "0 de %(count)d roghnaithe"
 msgstr[1] "de %(count)d roghnaithe"
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[2] "de %(count)d roghnaithe"
+msgstr[3] "de %(count)d roghnaithe"
+msgstr[4] "de %(count)d roghnaithe"
 
 #: repository/editor/editorutils.py:274
 #, python-format
@@ -43,9 +43,9 @@ msgid "%(total_count)s selected"
 msgid_plural "All %(total_count)s selected"
 msgstr[0] "%(total_count)s roghnaithe"
 msgstr[1] "Gach %(total_count)s roghnaithe"
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[2] "Gach %(total_count)s roghnaithe"
+msgstr[3] "Gach %(total_count)s roghnaithe"
+msgstr[4] "Gach %(total_count)s roghnaithe"
 
 #: repository/editor/form_fields.py:18
 msgid "There may be only one entry with key \"{}\"."
@@ -211,7 +211,7 @@ msgstr "Scrios samhail ghaolta"
 #: repository/editor/resource_editor.py:566
 msgid ""
 "Something went wrong when processing the resource with the tm2tmx toolchain."
-msgstr ""
+msgstr "Níor éirigh leis an acmhainn a phróiseáil leis an toolchain tm2tmx."
 
 #: repository/editor/resource_editor.py:571
 #: repository/editor/resource_editor.py:582
@@ -221,7 +221,7 @@ msgstr ""
 #: repository/editor/resource_editor.py:640
 #, python-format
 msgid "Error when processing resource %(rname)s"
-msgstr ""
+msgstr "Tharla earráid i rith próiseáil na hacmhainne %(rname)s"
 
 #: repository/editor/resource_editor.py:571
 #: repository/editor/resource_editor.py:582
@@ -235,6 +235,9 @@ msgid ""
 "error.log attached to the resource. Contact the ELRI NRS support team for "
 "more information at %(email)s"
 msgstr ""
+"Tharla earráid i rith próiseáil na hacmhainne %(rname)s. Seiceáil loga na "
+"hearráide atá ceangailte leis an acmhainn. Déan teagmháil le foireann "
+"tacaíochta SAN ELRI le haghaidh tuilleadh eolais ag %(email)s"
 
 #: repository/editor/resource_editor.py:573
 #: repository/editor/resource_editor.py:584
@@ -246,14 +249,16 @@ msgid ""
 "There was an error sending out the ERROR notification email to the group "
 "reviewers. Please contact them directly."
 msgstr ""
+"Tharla earráid agus an rphost fógartha á sheoladh amach chuig na riarthóirí. "
+"Déan teagmháil díreach leo, le do thoil."
 
 #: repository/editor/resource_editor.py:577
 msgid "Invalid json response from tm2tmx toolchain: "
-msgstr ""
+msgstr "Freagra neamhbhailí json ó toolchain tm2tmx "
 
 #: repository/editor/resource_editor.py:588
 msgid "The POST request to the tm2tmx toolchain has failed."
-msgstr ""
+msgstr "Theip ar an iarratas POST chuig an toolchain tm2tmx."
 
 #: repository/editor/resource_editor.py:614
 msgid ""
@@ -261,30 +266,31 @@ msgid ""
 "toolchain.\n"
 " "
 msgstr ""
+"Níor éirigh leis an acmhainn a phróiseáil leis an toolchain doc2tmx\n"
+" "
 
 #: repository/editor/resource_editor.py:624
 msgid "Invalid json response from doc2tmx toolchain: "
-msgstr ""
+msgstr "Freagra neamhbhailí json ó toolchain doc2tmx "
 
 #: repository/editor/resource_editor.py:635
 msgid ""
 "The POST request to the doc2tmx toolchain has failed.\n"
 " "
-msgstr ""
+msgstr "Theip ar an iarratas POST chuig an toolchain doc2tmx "
 
 #: repository/editor/resource_editor.py:686
-#, fuzzy
-#| msgid "Only ingested resources can be published."
 msgid "Only ingested or error resources can be re-processed."
-msgstr "Ní féidir ach acmhainní ionghafa a fhoilsiú."
+msgstr ""
+"Ní féidir ach acmhainní ionghafa nó acmhainní le hearráidí a athphróiseáil."
 
 #: repository/editor/resource_editor.py:690
 msgid "Resource(s) re-processed correctly."
-msgstr ""
+msgstr "Acmhainn(í) athphróiseáilte i gceart."
 
 #: repository/editor/resource_editor.py:693
 msgid "Resource(s) processed correctly."
-msgstr ""
+msgstr "Acmhainn(í) próiseáilte i gceart."
 
 #: repository/editor/resource_editor.py:696
 msgid ""
@@ -292,6 +298,8 @@ msgid ""
 "resources and check the error.log file(s). You will receive a notification "
 "email."
 msgstr ""
+"Níor éirigh leis an acmhainn a phróiseáil. Triall arís an acmhainn a "
+"phróiseáil agus seiceáil loga na hearráide. Gheobhaidh tú rphost fógartha."
 
 #: repository/editor/resource_editor.py:702
 #: repository/editor/resource_editor.py:841
@@ -305,65 +313,63 @@ msgstr ""
 "léir."
 
 #: repository/editor/resource_editor.py:706
-#, fuzzy
-#| msgid "Remove owners from selected resources"
 msgid "Re-process selected resources"
-msgstr "Bain úinéirí ó acmhainní roghnaithe"
+msgstr "Athphróiseáil acmhainní roghnaithe"
 
 #: repository/editor/resource_editor.py:795
 #, python-format
 msgid "Resource_name: %s  \n"
-msgstr ""
+msgstr "Ainm_acmhainne %s  \n"
 
 #: repository/editor/resource_editor.py:797
 msgid "License: "
-msgstr ""
+msgstr "Ceadúnas: "
 
 #: repository/editor/resource_editor.py:799
 msgid "\t Restrictions of Use: None\n"
-msgstr ""
+msgstr "\t Cúngú úsáide: níl aon\n"
 
 #: repository/editor/resource_editor.py:801
 msgid "\t Restrictions of Use: "
-msgstr ""
+msgstr "\t Cúngú úsáide: "
 
 #: repository/editor/resource_editor.py:804
 msgid "IPR Holder: "
-msgstr ""
+msgstr "Sealbhóir IPR: "
 
 #: repository/editor/resource_editor.py:806
 msgid "IPR Holder: N/A \n"
-msgstr ""
+msgstr "Sealbhóir IPR: neamhábhartha \n"
 
 #: repository/editor/resource_editor.py:809
 msgid "Contact Person: "
-msgstr ""
+msgstr "Pointe teagmhála: "
 
 #: repository/editor/resource_editor.py:811
 msgid "Contact Person: N/A \n"
-msgstr ""
+msgstr "Pointe teagmhála: neamhábhartha \n"
 
 #: repository/editor/resource_editor.py:821
-#, fuzzy
-#| msgid "Publish selected ingested resources"
 msgid "Published Resource"
-msgstr "Foilsigh acmhainní ionghafa roghnaithe"
+msgstr "Acmhainn foilsithe"
 
 #: repository/editor/resource_editor.py:826
 msgid ""
 "There was an error sending out the notification email to the resource "
 "owners. Please contact them directly."
 msgstr ""
+"Tharla earráid agus an rphost fógartha á sheoladh amach chuig úinéirí na "
+"hacmhainne. Téigh i dteagmháil leo go díreach."
 
 #: repository/editor/resource_editor.py:833
 #, python-format
 msgid "Successfully published %(ingested)s ingested resource."
 msgid_plural "Successfully published %(ingested)s ingested resources."
-msgstr[0] "Acmhainn ionghafa %(ingested)s foilsithe."
-msgstr[1] "Acmhainní ionghafa %(ingested)s foilsithe."
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
+msgstr[0] "%(ingested)s acmhainn ionghafa foilsithe."
+msgstr[1] "%(ingested)s acmhainn ionghafa foilsithe."
+msgstr[2] "%(ingested)s acmhainn ionghafa foilsithe."
+msgstr[3] "%(ingested)s acmhainn ionghafa foilsithe."
+msgstr[4] "%(ingested)s acmhainn ionghafa foilsithe."
 
 #: repository/editor/resource_editor.py:838
 msgid "Only ingested resources can be published."
@@ -377,8 +383,11 @@ msgstr "Foilsigh acmhainní ionghafa roghnaithe"
 #, python-format
 msgid "Successfully suspended %s published resource."
 msgid_plural "Successfully suspended %s published resources."
-msgstr[0] "Acmhainn foilsithe %s curtha ar fionraí."
-msgstr[1] "Acmhainní foilsithe %s curtha ar fionraí."
+msgstr[0] "%s acmhainn foilsithe curtha ar fionraí."
+msgstr[1] "%s acmhainn foilsithe curtha ar fionraí."
+msgstr[2] "%s acmhainn foilsithe curtha ar fionraí."
+msgstr[3] "%s acmhainn foilsithe curtha ar fionraí."
+msgstr[4] "%s acmhainn foilsithe curtha ar fionraí."
 
 #: repository/editor/resource_editor.py:861
 msgid "Only published resources can be suspended."
@@ -396,6 +405,10 @@ msgid ""
 "                        Re-process the resource(s) with error status.\n"
 "                        "
 msgstr ""
+"\n"
+"                        Cuireadh isteach ar an bpróiseas ionghabhála.\n"
+"                        Athphróiseáil na hacmhainní le stádas earráide\n"
+"                        "
 
 #: repository/editor/resource_editor.py:921
 msgid ""
@@ -405,6 +418,11 @@ msgid ""
 "been fully processed.\n"
 "                        "
 msgstr ""
+"\n"
+"                        {} acmhainn inmheánach ionghafa  \n"
+"                        Gheobhaidh tú rphost nuair a bheas an acmhainn "
+"próiseáilte.\n"
+"                        "
 
 #: repository/editor/resource_editor.py:925
 msgid ""
@@ -414,18 +432,23 @@ msgid ""
 "has been fully processed.\n"
 "                        "
 msgstr ""
+"\n"
+"                        {} acmhainn inmheánach ionghafa \n"
+"                        Gheobhaidh tú rphost nuair a bheas an acmhainn "
+"próiseáilte.\n"
+"                        "
 
 #: repository/editor/resource_editor.py:933
-#, fuzzy
-#| msgid "Delete resource"
 msgid "Ingested Resource"
-msgstr "Scrios acmhainn"
+msgstr "Acmhainn ionghafa"
 
 #: repository/editor/resource_editor.py:938
 msgid ""
 "There was an error sending out the notification email to the group "
 "reviewers. Please contact them directly."
 msgstr ""
+"Tharla earráid agus an rphost fógartha á sheoladh amach chuig na riarthóirí. "
+"Téigh i dteagmháil leo go díreach."
 
 #: repository/editor/resource_editor.py:943
 msgid "Only internal resources can be ingested."
@@ -455,8 +478,11 @@ msgstr "Cuireadh scriosadh na n-acmhainní roghnaithe ar ceal."
 #, python-format
 msgid "Successfully deleted %d resource."
 msgid_plural "Successfully deleted %d resources."
-msgstr[0] "Scriosadh acmhainn %d."
-msgstr[1] "Scriosadh acmhainní %d"
+msgstr[0] "Scriosadh %d acmhainn."
+msgstr[1] "Scriosadh %d acmhainn."
+msgstr[2] "Scriosadh %d acmhainn."
+msgstr[3] "Scriosadh %d acmhainn."
+msgstr[4] "Scriosadh %d acmhainn."
 
 #: repository/editor/resource_editor.py:1075
 msgid "Are you sure?"

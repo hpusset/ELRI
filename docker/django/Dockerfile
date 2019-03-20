@@ -6,8 +6,8 @@ RUN tar xvfz /tmp/dockerize-alpine-linux-amd64-v0.5.0.tar.gz -C /tmp/
 FROM python:2.7.15-stretch
 
 #ARG RELEASE="trunk"
-ARG RELEASE="tags/R3"
-#ARG RELEASE="branches/tempR3"
+ARG RELEASE="tags/R3.1"
+#ARG RELEASE="branches/tempmasterR31"
 ENV DB_HOST="postgres-server" \
     DB_PORT="5432" \
     SOLR_HOST="solr" \
