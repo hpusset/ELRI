@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-14 14:12+0100\n"
+"POT-Creation-Date: 2019-03-20 13:44+0100\n"
 "PO-Revision-Date: 2019-03-06 12:32+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -31,26 +31,10 @@ msgstr ""
 "Si continua navegando, consideramos que acepta su uso. \" "
 
 #: templates/admin/base.html:40
-msgid "\"OK, I aggree \""
-msgstr "Acepto"
-
-#: templates/admin/base.html:41
-msgid "\"Decline \""
+msgid "\"OK\""
 msgstr ""
 
-#: templates/admin/base.html:42
-msgid "\"Allow cookies\""
-msgstr ""
-
-#: templates/admin/base.html:43
-msgid "\"Learn more\""
-msgstr ""
-
-#: templates/admin/base.html:44
-msgid "'Cookie Policy'"
-msgstr ""
-
-#: templates/admin/base.html:58 templates/admin/delete_confirmation.html:6
+#: templates/admin/base.html:54 templates/admin/delete_confirmation.html:6
 #: templates/admin/delete_selected_confirmation.html:6
 msgid "Home"
 msgstr "Inicio"
@@ -154,3 +138,6 @@ msgstr "Cancelar"
 #: templates/admin/submit_line.html:8
 msgid "Abort editing and discard any changes"
 msgstr "Abortar la edición y descartar cualquier cambio"
+
+#~ msgid "\"OK, I aggree \""
+#~ msgstr "Acepto"

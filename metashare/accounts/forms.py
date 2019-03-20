@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
-from django_password_validation import validate_password
+#from django_password_validation import validate_password
 
 from metashare.accounts.models import UserProfile, EditorGroupApplication, \
     OrganizationApplication, Organization, OrganizationManagers, EditorGroup, \
