@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-08 09:52+0100\n"
-"PO-Revision-Date: 2018-11-12 14:18+0000\n"
+"PO-Revision-Date: 2019-03-13 11:08+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ga_IE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 2.2.1\n"
 
 #: templates/repository/editor/contributions/contribute.html:9
 msgid "ELRI"
@@ -240,7 +240,7 @@ msgstr "Feara(i)nn"
 
 #: templates/repository/editor/contributions/contribute.html:191
 msgid "Digital resources in any field of activity."
-msgstr ""
+msgstr "Acmhainní digiteacha in aon réimse gníomhaíochta."
 
 #: templates/repository/editor/contributions/contribute.html:192
 msgid "Other / Unknown"
@@ -248,7 +248,7 @@ msgstr "Eile / Ní fios"
 
 #: templates/repository/editor/contributions/contribute.html:194
 msgid "Digital resources of European cultural heritage "
-msgstr ""
+msgstr "Acmhainní digiteacha um oidhreacht cultúrtha na hEorpa "
 
 #: templates/repository/editor/contributions/contribute.html:195
 msgid "eCulture"
@@ -259,6 +259,8 @@ msgid ""
 "Digital resources with relevant information for European national social "
 "security systems "
 msgstr ""
+"Acmhainní digiteacha le heolas ábhartha do chórais slándála sóisialta "
+"náisiúnta na hEorpa "
 
 #: templates/repository/editor/contributions/contribute.html:198
 msgid "Electronic Exchange of Social Security Information"
@@ -268,6 +270,7 @@ msgstr "Malartú Leictreonach d'Eolas Slándála Sóisialta"
 msgid ""
 "Digital resources with relevant information for European health services. "
 msgstr ""
+"Acmhainní digiteacha le heolas ábhartha do sheirbhísí sláinte Eorpacha. "
 
 #: templates/repository/editor/contributions/contribute.html:201
 msgid "eHealth"
@@ -277,6 +280,8 @@ msgstr "eHealth"
 msgid ""
 "Digital resources with relevant information for European judicial services. "
 msgstr ""
+"Acmhainní digiteacha le heolas ábhartha do sheirbhísí breithiúnacha "
+"Eorpacha. "
 
 #: templates/repository/editor/contributions/contribute.html:204
 msgid "eJustice"
@@ -287,6 +292,7 @@ msgid ""
 "Digital resources with relevant information for European procurement "
 "services."
 msgstr ""
+"Acmhainní digiteacha le heolas ábhartha do sheirbhísí soláthair Eorpacha."
 
 #: templates/repository/editor/contributions/contribute.html:207
 msgid "eProcurement"
@@ -297,6 +303,8 @@ msgid ""
 "Digital resources that can be publically shared to contribute to data re-use "
 "in Europe."
 msgstr ""
+"Acmhainní digiteacha ar féidir a roinnt go poiblí chun chur le hathúsáid "
+"sonraí san Eoraip."
 
 #: templates/repository/editor/contributions/contribute.html:210
 msgid "Public Open Data"
@@ -307,6 +315,8 @@ msgid ""
 "Digital resources with relevant information for the establishment of a safer "
 "internet for children."
 msgstr ""
+"Acmhainní digiteacha le heolas ábhartha chun idirlíon níos sábháilte do "
+"leanaí a bhunú."
 
 #: templates/repository/editor/contributions/contribute.html:213
 msgid "Safer Internet"
@@ -316,7 +326,7 @@ msgstr "Idirlíon níos Sábháilte"
 msgid ""
 "Digital resources with relevant information for the interconnection of "
 "business registers. "
-msgstr ""
+msgstr "Acmhainní digiteacha le heolas ábhartha don idirnascadh clár ghnó. "
 
 #: templates/repository/editor/contributions/contribute.html:216
 msgid "Business Registers Interconnection System"
@@ -324,7 +334,7 @@ msgstr "Córas Idirnasctha Clár Gnó"
 
 #: templates/repository/editor/contributions/contribute.html:218
 msgid "Digital resources with relevant information for Cybersecurity."
-msgstr ""
+msgstr "Acmhainní digiteacha le heolas ábhartha um cibearshlándáil."
 
 #: templates/repository/editor/contributions/contribute.html:219
 msgid "Cybersecurity"
@@ -349,58 +359,49 @@ msgid "Licensing conditions"
 msgstr "Coinníollacha ceadúnaithe"
 
 #: templates/repository/editor/contributions/contribute.html:229
-#, fuzzy
-#| msgid "Public Open Data"
 msgid "Public Domain"
-msgstr "Sonraí Oscailte don Phobal"
+msgstr "Fearann Poiblí"
 
 #: templates/repository/editor/contributions/contribute.html:230
 msgid "Open Under PSI"
-msgstr ""
+msgstr "Oscailte faoi Cheadúnas Faisnéise de chuid na hEarnála Poiblí (PSI)"
 
 #: templates/repository/editor/contributions/contribute.html:231
-#, fuzzy
-#| msgid "Creative Commons - Attribution 4.0"
 msgid "Creative Commons Zero 1.0 (CC0-1.0)"
-msgstr "Creative Commons - Attribution 4.0"
+msgstr "Creative Commons Saorcheadúnas 1.0 (CC0-1.0)"
 
 #: templates/repository/editor/contributions/contribute.html:232
-#, fuzzy
-#| msgid "Creative Commons - Attribution 4.0"
 msgid "Creative Commons - Attribution 4.0 (CC-BY-4.0)"
-msgstr "Creative Commons - Attribution 4.0"
+msgstr "Creative Commons – Ceadúnas Sannta 4.0 (CC-BY-4.0)"
 
 #: templates/repository/editor/contributions/contribute.html:233
-#, fuzzy
-#| msgid "Creative Commons - Attribution - ShareAlike 4.0"
 msgid "Creative Commons - Attribution - ShareAlike 4.0 (CC-BY-SA-4.0)"
-msgstr "Creative Commons - Attribution - ShareAlike 4.0"
+msgstr "Creative Commons – Ceadúnas Sannta - Comhroinnte 4.0 (CC-BY-SA-4.0)"
 
 #: templates/repository/editor/contributions/contribute.html:234
-#, fuzzy
-#| msgid "Creative Commons - Attribution - NonCommercial 4.0"
 msgid "Creative Commons - Attribution - NonCommercial 4.0 (CC-BY-NC-4.0)"
-msgstr "Creative Commons - Attribution - NonCommercial 4.0"
+msgstr ""
+"Creative Commons – Ceadúnas Sannta – Neamhthráchtála 4.0 (CC-BY-NC-4.0)"
 
 #: templates/repository/editor/contributions/contribute.html:235
-#, fuzzy
-#| msgid "Creative Commons - Attribution - NonCommercial - ShareAlike 4.0"
 msgid ""
 "Creative Commons - Attribution - NonCommercial - ShareAlike 4.0 (CC-BY-NC-"
 "SA-4.0)"
-msgstr "Creative Commons - Attribution - NonCommercial - ShareAlike 4.0"
+msgstr ""
+"Creative Commons – Ceadúnas Sannta – Neamhthráchtála – Comhroinnte 4.0 (CC-"
+"BY-NC-SA-4.0)"
 
 #: templates/repository/editor/contributions/contribute.html:236
 msgid "Non-Standard/Other_Licence/Terms"
-msgstr ""
+msgstr "Ceadúnas/Téarmaí Neamhchaighdeánach(a)/Eile"
 
 #: templates/repository/editor/contributions/contribute.html:238
 msgid "The licensing conditions for the resource."
-msgstr "Coinníollacha ceadúnaithe don acmhainn."
+msgstr "Na coinníollacha ceadúnaithe don acmhainn."
 
 #: templates/repository/editor/contributions/contribute.html:239
 msgid " More information about the available licences."
-msgstr ""
+msgstr " Tuilleadh eolais faoina ceadúnais atá ar fáil."
 
 #: templates/repository/editor/contributions/contribute.html:242
 msgid "License file"
@@ -415,19 +416,14 @@ msgid "Upload Resource"
 msgstr "Uaslódáil Acmhainn"
 
 #: templates/repository/editor/contributions/contribute.html:274
-#, fuzzy
-#| msgid ""
-#| "Please upload a single <strong>.zip</strong> file or any number of files "
-#| "of the following type: <strong>.doc(x), .odt, .tmx, .sdltm, .xml, .tbx, ."
-#| "xls(x), or .txt file</strong> up to 100MB."
 msgid ""
 "Please upload a single <strong>.zip</strong> file or any number of files of "
 "the following type: <strong>.doc(x), .odt, .rtf, .pdf, .tmx, .sdltm, .xml, ."
 "tbx, .xls(x), or .txt file</strong> up to 100MB."
 msgstr ""
 "Uaslódáil comhad <strong>.zip</strong> amháin nó iliomad comhad de na "
-"cineálacha a leanas: <strong>.doc(x), .odt, .tmx, .sdltm, .xml, .tbx, ."
-"xls(x), nó .txt file</strong> suas go 100MB."
+"cineálacha a leanas: <strong>.doc(x), .odt, .rtf, .pdf, .tmx, .sdltm, .xml, ."
+"tbx, .xls(x), nó .txt file</strong> suas go 100MB."
 
 #: templates/repository/editor/contributions/contribute.html:276
 msgid ""
@@ -444,16 +440,12 @@ msgid "Group(s)"
 msgstr "Grúpa(í)"
 
 #: templates/repository/editor/contributions/contribute.html:290
-#, fuzzy
-#| msgid ""
-#| "The language(s) of the resource; for resources with multiple languages, "
-#| "hold down CTRL key to select multiple values"
 msgid ""
 "The group(s) the language resource can be shared with (hold down the CTRL "
 "key to select multiple groups)."
 msgstr ""
-"Teanga(cha) na hacmhainne, d'acmhainní le hilteangacha, brúigh eochair CTRL "
-"chun luachanna iolracha a roghnú"
+"An grúpa / na grúpaí ar féidir an acmhainne teanga a roinnt leis / leo "
+"(brúigh eochair CTRL chun grúpaí iolracha a roghnú)."
 
 #: templates/repository/editor/contributions/contribute.html:296
 #, python-format
@@ -528,10 +520,8 @@ msgid "Home"
 msgstr "Baile"
 
 #: templates/repository/editor/logged_out.html:10
-#, fuzzy
-#| msgid "Thanks for using the ELRC-SHARE editor."
 msgid "Thanks for using the ELRI editor."
-msgstr "Go raibh maith agat as eagarthóir ELRC-SHARE a úsáid."
+msgstr "Go raibh maith agat as eagarthóir ELRI a úsáid."
 
 #: templates/repository/editor/logged_out.html:14
 msgid "Log in again"
@@ -604,7 +594,7 @@ msgstr "tuairisc theanga"
 #: templates/repository/editor/select_resource_type.html:54
 #: templates/repository/editor/select_resource_type.html:61
 msgid "for resources such as:"
-msgstr "d'acmhainní cosúil le:"
+msgstr "d'acmhainní mar shampla:"
 
 #: templates/repository/editor/select_resource_type.html:56
 msgid "grammars, i.e. sets of rules that formalize a language"

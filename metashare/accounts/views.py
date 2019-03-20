@@ -108,7 +108,7 @@ def contact(request):
             return redirect('metashare.views.frontpage')
     else:
         form = ContactForm()
-    dictionary = {'title': 'Contact Node Maintainers', 'form': form}
+    dictionary = {'title': _('Contact Node Maintainers'), 'form': form}
     return render_to_response('accounts/contact_maintainers.html', dictionary,
                               context_instance=RequestContext(request))
 

@@ -50,52 +50,7 @@ $ docker-compose -f docker-compose-runner.yml -f docker-compose-runner-dev.yml c
 
 03. Change the following property files to match the destination country requirements:
 
-### db_secret.properties:
-
-Property          | Default value     | Description
--------------     | -------------     | -------------
-DBELRI_USER       | elri_user         | ELRI database user
-DBELRI_PASS       | elri_pass         | ELRI database pass
-DBELRI_NAME       | elri_metashare_db | ELRI database name
-POSTGRES_USER     | root              | ELRI database root user
-POSTGRES_PASSWORD | rootpass          | ELRI database root pass
-
-### nrs_secret.properties:
-
-Property           | Default value                   | Description
--------------      | -------------                   | -------------
-ELRI_TIMEZONE      | Europe/Lisbon                   | ELRI country timezone
-ELRI_LANGUAGE      | pt-pt*                          | ELRI country language code
-ELRI_SALT          | e07fc77c1ec(...)                | ELRI salt used with encryption
-ELRI_ALERT_MAILS   | elri-nrs-support@vicomtech.org  | ELRI alert mails 'from' field
-ELRI_COUNTRY       | Portugal                        | ELRI country value
-ELRI_EMAIL_TLS     | True                            | ELRI Mail server TLS usage
-ELRI_EMAIL_HOST    | elri_mailserver                 | ELRI Mail server hostname
-ELRI_EMAIL_PORT    | 1025                            | ELRI Mail server port
-ELRI_EMAIL_USER    | elri_noreply_user@smtserver.com | ELRI Mail server auth user (if exists)
-ELRI_EMAIL_PASS    | xxxxxxxx                        | ELRI Mail server auth password (if exists)
-ELRI_LOC_LANGUAGES | pt-pt                           | ELRI Language(s) for Localisation (i.e. ga-ie, en-ie)
-ELRI_SUP_LANGUAGES | [("English", "English"),(...)]  | ELRI Supported languages for LR processing
-ELRI_WORKERS       | 4                               | Number of workers used
-ELRI_THREADS       | 8                               | Number of threads used
-
-```
-* Countries:
-    es-es (Spanish)
-    en-ie (English)
-    fr-fr (French)
-    ga-ie (Gaelic)
-    pt-pt (Portuguese)
-
-```
-
-### web_secret.properties:
-
-Property          | Default value     | Description
--------------     | -------------     | -------------
-ELRI_HOSTNAME     | dev               | ELRI hostname
-ELRI_DOMAINNAME   | elri-nrs.eu       | ELRI domain name
-ELRI_PROTOCOL     | http              | General protocol used by the web server (when Nginx is in charge of SSL offloading)
+[Link to secret files table](#SecretFilesTable)
 
 04. Start the project:
 
@@ -122,15 +77,37 @@ $ useradd --shell /bin/false --uid 6263 --no-create-home --expiredate 1 postgres
 $ useradd --shell /bin/false --uid 7273 --no-create-home --expiredate 1 solr # No login and no shell user to match solr container user
 ```
 
-02. Execute the development procedure above replacing `docker-compose-runner-dev.yml` with `docker-compose-runner-prd.yml` in step `02`
+02. Checkout `compose` directory from this project
 
-03. Start the project in detached mode:
+03. Merge `docker-compose-runner.yml` and `docker-compose-runner-dev.yml` files:
+
+```        
+$ docker-compose -f docker-compose-runner.yml -f docker-compose-runner-prd.yml config > docker-compose.yml
+```
+
+04. Change the following property files to match the destination country requirements:
+
+[Link to secret files table](#SecretFilesTable)
+
+05. Start the project:
+
+```
+$ docker-compose up
+```
+
+06. Super user creation for application login:
+
+```
+$ docker exec -ti elri_app /elri/create_super_user.sh
+```
+
+07. Start the project in detached mode:
 
 ```
 $ docker-compose up -d
 ```
 
-04. (Optional) To allow SSL termination at the Nginx Web Server:
+08. (Optional) To allow SSL termination at the Nginx Web Server:
 
 * Stop the project:
 
@@ -209,7 +186,7 @@ Maintenance
 
 In production environment the following steps are suggested for persisted data safety :
 
-- Backup:
+**Backup:**
 
 01. Shutdown all containers:
 
@@ -217,7 +194,83 @@ In production environment the following steps are suggested for persisted data s
 $ docker-compose stop
 ```
 
-02. Backup the volumes that are used for filesystem persisted data:
+02. Backup the volumes that are used for filesystem persisted data with whatever desired backup method (e.g. tar, zip, backup tool, etc) but just be sure to preserve owner:group and permissions:
+
+[Link to volume table](#VolumePersistenceTable)
+
+
+03. Startup all containers
+
+```
+$ docker-compose start
+```
+
+**Restore:**
+
+01. Remove all containers and existing persisted volumes:
+
+```
+# Use this command with caution, because persisted data is deleted
+$ docker-compose down --volume
+```
+
+02. Restore the backups to the same location maintaining user:group and permissions:
+
+[Link to volume table](#VolumePersistenceTable)
+
+
+03. Recreate all containers
+
+```
+$ docker-compose up -d
+```
+
+Deploy new versions
+-----
+
+To deploy new versions the following steps should be made:
+
+01. Shutdown all containers:
+
+```
+$ docker-compose stop
+```
+
+02. Checkout newer `docker-compose-runner.yml` existent at `compose` directory
+
+03. Check image version in the `docker-compose-runner.yml` :
+
+[Link to docker image table](#DockerImageTable)
+
+
+04. Merge `docker-compose-runner.yml` and `docker-compose-runner-<env>.yml` files:
+
+```        
+$ docker-compose -f docker-compose-runner.yml -f docker-compose-runner-prd.yml config > docker-compose.yml
+```
+
+05. Backup the volumes that are used for filesystem persisted data:
+
+[Link to volume table](#VolumePersistenceTable)
+
+06. Delete existing containers
+
+```
+$ docker-compose down
+```
+
+07. Startup new containers
+
+```
+$ docker-compose up -d
+```
+
+Tables:
+-----
+
+<a name="VolumePersistenceTable"></a>
+
+### Volume Persistence Table
 
 Volume Name   | Location                             | Description
 ------------- | -------------                        | -------------
@@ -228,11 +281,68 @@ web-keys      | /var/lib/docker/volumes/web-keys     | Keys used by the webserve
 elri-shared   | /var/lib/docker/volumes/elri-shared  | elri_resources shared by the toolchain and the metashare app
 elri-db       | /var/lib/docker/volumes/elri-db      | Postgres database data
 
-03. Startup all containers
+<a name="DockerImageTable"></a>
+
+### Docker Image Table
+
+Service name   | Image Name                   | Default value | Description
+-------------  | -------------                | ------------- | -------------
+elri-node1     | elrinrs/nationalrelaystation | MASTER		  | Replace `MASTER` for the desired release
+toolchain      | elrinrs/toolchain | MASTER					| Replace `MASTER` for the desired release
+postgres-server | elrinrs/postgres-server | MASTER			| Replace `MASTER` for the desired release
+nginx			| elrinrs/nginx			  | MASTER			| Replace `MASTER` for the desired release
+solr			| elrinrs/solr			  | MASTER			| Replace `MASTER` for the desired release
+
+<a name="SecretFilesTable"></a>
+
+### Secret Files Table
+
+##### db_secret.properties:
+
+Property          | Default value     | Description
+-------------     | -------------     | -------------
+DBELRI_USER       | elri_user         | ELRI database user
+DBELRI_PASS       | elri_pass         | ELRI database pass
+DBELRI_NAME       | elri_metashare_db | ELRI database name
+POSTGRES_USER     | root              | ELRI database root user
+POSTGRES_PASSWORD | rootpass          | ELRI database root pass
+
+##### nrs_secret.properties:
+
+Property           | Default value                   | Description
+-------------      | -------------                   | -------------
+ELRI_TIMEZONE      | Europe/Lisbon                   | ELRI country timezone
+ELRI_LANGUAGE      | pt-pt*                          | ELRI country language code
+ELRI_SALT          | e07fc77c1ec(...)                | ELRI salt used with encryption
+ELRI_ALERT_MAILS   | elri-nrs-support@vicomtech.org  | ELRI alert mails 'from' field
+ELRI_COUNTRY       | Portugal                        | ELRI country value
+ELRI_EMAIL_TLS     | True                            | ELRI Mail server TLS usage
+ELRI_EMAIL_HOST    | elri_mailserver                 | ELRI Mail server hostname
+ELRI_EMAIL_PORT    | 1025                            | ELRI Mail server port
+ELRI_EMAIL_USER    | elri_noreply_user@smtserver.com | ELRI Mail server auth user (if exists)
+ELRI_EMAIL_PASS    | xxxxxxxx                        | ELRI Mail server auth password (if exists)
+ELRI_LOC_LANGUAGES | pt-pt                           | ELRI Language(s) for Localisation (i.e. ga-ie, en-ie)
+ELRI_SUP_LANGUAGES | [("English", "English"),(...)]  | ELRI Supported languages for LR processing
+ELRI_WORKERS       | 4                               | Number of workers used
+ELRI_THREADS       | 8                               | Number of threads used
 
 ```
-$ docker-compose start
+* Countries:
+    es-es (Spanish)
+    en-ie (English)
+    fr-fr (French)
+    ga-ie (Gaelic)
+    pt-pt (Portuguese)
+
 ```
+
+##### web_secret.properties:
+
+Property          | Default value     | Description
+-------------     | -------------     | -------------
+ELRI_HOSTNAME     | dev               | ELRI hostname
+ELRI_DOMAINNAME   | elri-nrs.eu       | ELRI domain name
+ELRI_PROTOCOL     | http              | General protocol used by the web server (when Nginx is in charge of SSL offloading)
 
 Reminders
 -----
