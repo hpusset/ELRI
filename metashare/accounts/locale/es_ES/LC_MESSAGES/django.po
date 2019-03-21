@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-20 18:05+0100\n"
-"PO-Revision-Date: 2019-03-20 18:05+0100\n"
+"POT-Creation-Date: 2019-03-21 10:08+0100\n"
+"PO-Revision-Date: 2019-03-21 10:10+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -471,10 +471,18 @@ msgstr "La contraseña es demasiado común."
 msgid "This password is too short. It must contain at least 9 characters. "
 msgstr "La contraseña es demasiado corta. Debe contener al menos 9 caracteres."
 
+#: accounts/forms.py:201
+msgid "Subject"
+msgstr "Asunto"
+
 #: accounts/forms.py:202
 msgid "Please provide a meaningful and sufficiently indicative subject."
 msgstr ""
 "Por favor proporcione un tema significativo y suficientemente indicativo."
+
+#: accounts/forms.py:204
+msgid "Message"
+msgstr "Mensaje"
 
 #: accounts/forms.py:205
 msgid ""
@@ -570,6 +578,14 @@ msgstr "Dirección de afiliación"
 #: accounts/models.py:292
 msgid "Affiliation phone number"
 msgstr "Número de teléfono de afiliación"
+
+#: accounts/models.py:294
+msgid "Position"
+msgstr "Posición en la organización"
+
+#: accounts/models.py:295
+msgid "Homepage"
+msgstr "Página web"
 
 #: accounts/views.py:57
 msgid "Your ELRI user account has been activated"
