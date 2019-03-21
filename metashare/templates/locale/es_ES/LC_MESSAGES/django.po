@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-21 10:32+0100\n"
-"PO-Revision-Date: 2019-03-21 10:36+0100\n"
+"PO-Revision-Date: 2019-03-21 10:37+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -2573,11 +2573,11 @@ msgstr "Cobertura geográfica"
 
 #: templates/repository/resource_view/distribution.html:5
 msgid "Distribution"
-msgstr "Distribución"
+msgstr "Distribución "
 
 #: templates/repository/resource_view/distribution.html:9
 msgid "Availability:"
-msgstr "Disponibilidad"
+msgstr "Disponibilidad: "
 
 #: templates/repository/resource_view/distribution.html:17
 msgid "Availability Start date:"
