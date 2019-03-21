@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-21 16:39+0100\n"
-"PO-Revision-Date: 2019-03-21 16:43+0100\n"
+"POT-Creation-Date: 2019-03-21 16:49+0100\n"
+"PO-Revision-Date: 2019-03-21 16:52+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -59,10 +59,6 @@ msgid "ELRI National Relay Station"
 msgstr "Estación Nacional de Transmisión ELRI"
 
 #: templates/base.html:54
-msgid "Learn more"
-msgstr "Aprender más"
-
-#: templates/base.html:55
 msgid ""
 "\"This site uses cookies to enhance your user experience. By clicking any "
 "link on this page you are giving your consent for us to set cookies.\" "
@@ -70,9 +66,13 @@ msgstr ""
 "\"Este sitio web utiliza cookies para mejorar su experiencia de usuario. Si "
 "continúa navegando, consideramos que acepta su uso. \""
 
-#: templates/base.html:56
+#: templates/base.html:55
 msgid "\"OK\""
 msgstr "\"OK\""
+
+#: templates/base.html:56
+msgid "\"Learn more\""
+msgstr "\"Leer más\""
 
 #: templates/breadcrumbs.html:3 templates/header.html:11
 #: templates/header.html.py:12
