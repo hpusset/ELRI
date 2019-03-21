@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-21 10:08+0100\n"
-"PO-Revision-Date: 2019-03-21 10:19+0100\n"
+"PO-Revision-Date: 2019-03-21 10:23+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -2759,7 +2759,7 @@ msgstr "Validar recurso"
 #: templates/repository/resource_view/lr_view.html:277
 #, python-format
 msgid "Contact Person%(contact_person_dicts|length|pluralize)s"
-msgstr "Contact Person%(contact_person_dicts|length|pluralize)s"
+msgstr "Persona de Contacto%(contact_person_dicts|length|pluralize)s"
 
 #: templates/repository/resource_view/lr_view.html:288
 msgid "toolService"
@@ -2785,7 +2785,7 @@ msgstr "Para miembros de %(institution)s"
 
 #: templates/repository/resource_view/metadata.html:5
 msgid "Metadata"
-msgstr "Metadata"
+msgstr "Metadatos"
 
 #: templates/repository/resource_view/metadata.html:10
 msgid "Created"
