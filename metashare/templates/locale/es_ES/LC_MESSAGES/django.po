@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-21 10:08+0100\n"
-"PO-Revision-Date: 2019-03-21 10:23+0100\n"
+"POT-Creation-Date: 2019-03-21 10:32+0100\n"
+"PO-Revision-Date: 2019-03-21 10:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -250,6 +250,7 @@ msgstr ""
 "través de ELRI."
 
 #: templates/elri-info.html:49
+#: templates/repository/resource_view/distribution.html:31
 msgid "Licences"
 msgstr "Licencias"
 
@@ -2570,47 +2571,63 @@ msgstr "Cobertura de tiempo"
 msgid "Geographic coverage"
 msgstr "Cobertura geográfica"
 
-#: templates/repository/resource_view/distribution.html:43
+#: templates/repository/resource_view/distribution.html:5
+msgid "Distribution"
+msgstr "Distribución"
+
+#: templates/repository/resource_view/distribution.html:9
+msgid "Availability:"
+msgstr "Disponibilidad"
+
+#: templates/repository/resource_view/distribution.html:17
+msgid "Availability Start date:"
+msgstr "Disponible desde:"
+
+#: templates/repository/resource_view/distribution.html:25
+msgid "Availability End Date:"
+msgstr "Disponible hasta:"
+
+#: templates/repository/resource_view/distribution.html:41
 msgid "Distribution Details"
 msgstr "Detalles de la distribución"
 
-#: templates/repository/resource_view/distribution.html:49
+#: templates/repository/resource_view/distribution.html:47
 msgid "Distribution Medium"
 msgstr "Medio de distribución"
 
-#: templates/repository/resource_view/distribution.html:57
+#: templates/repository/resource_view/distribution.html:55
 msgid "Download location"
 msgstr "Ubicación de descarga"
 
-#: templates/repository/resource_view/distribution.html:66
+#: templates/repository/resource_view/distribution.html:64
 msgid "Execution locations"
 msgstr "Ubicaciones de ejecución"
 
-#: templates/repository/resource_view/distribution.html:66
+#: templates/repository/resource_view/distribution.html:64
 msgid "Execution location"
 msgstr "Ubicación de ejecución"
 
-#: templates/repository/resource_view/distribution.html:75
+#: templates/repository/resource_view/distribution.html:73
 msgid "Fee"
 msgstr "Cuota"
 
-#: templates/repository/resource_view/distribution.html:83
+#: templates/repository/resource_view/distribution.html:81
 msgid "Attribution Details"
 msgstr "Detalles de atribución"
 
-#: templates/repository/resource_view/distribution.html:91
+#: templates/repository/resource_view/distribution.html:89
 msgid "Distribution Rights Holders"
 msgstr "Titulares de derechos de distribución"
 
-#: templates/repository/resource_view/distribution.html:101
+#: templates/repository/resource_view/distribution.html:99
 msgid "IPR Holders"
 msgstr "Titulares de DPI"
 
-#: templates/repository/resource_view/distribution.html:116
+#: templates/repository/resource_view/distribution.html:114
 msgid "Personal Data"
 msgstr "Datos personales"
 
-#: templates/repository/resource_view/distribution.html:117
+#: templates/repository/resource_view/distribution.html:115
 #: templates/stats/mystats.html:45
 msgid "YES"
 msgstr "SÍ"
