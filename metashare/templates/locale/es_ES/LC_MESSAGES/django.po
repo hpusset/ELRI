@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-21 10:08+0100\n"
-"PO-Revision-Date: 2019-03-20 17:11+0100\n"
+"PO-Revision-Date: 2019-03-21 10:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -1890,7 +1890,7 @@ msgstr "Obtener todos los recursos que contienen inglés e italiano"
 #: templates/repository/api/help.html:225
 #: templates/repository/resource_view/linguality.html:3
 msgid "Linguality"
-msgstr "Linguality"
+msgstr "Lingüismo"
 
 #: templates/repository/api/help.html:240
 msgid "Get all bilingual resources"
