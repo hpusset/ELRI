@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-22 10:09+0100\n"
+"POT-Creation-Date: 2019-03-22 11:19+0100\n"
 "PO-Revision-Date: 2019-03-22 10:12+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -493,6 +493,16 @@ msgstr ""
 "Su mensaje parece ser bastante corto. Por favor, asegúrese de expresar su "
 "solicitud de la forma más precisa posible. Esto nos ayudará a procesarla lo "
 "más rápido posible."
+
+#: accounts/forms.py:215
+msgid "Username"
+msgstr ""
+
+#: accounts/forms.py:216
+#, fuzzy
+#| msgid "E-mail"
+msgid "Email"
+msgstr "E-mail"
 
 #: accounts/forms.py:227
 msgid "Not a valid username-email combination."

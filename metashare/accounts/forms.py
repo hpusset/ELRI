@@ -212,8 +212,8 @@ class ResetRequestForm(Form):
     """
     Form used to reset an existing user account.
     """
-    username = forms.CharField(max_length=30)
-    email = forms.EmailField()
+    username = forms.CharField(max_length=30, label=_(u'Username'))
+    email = forms.EmailField(label=_(u'Email'))
 
     def clean(self):
         cleaned_data = self.cleaned_data
