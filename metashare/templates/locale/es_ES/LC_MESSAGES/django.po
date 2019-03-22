@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-22 11:19+0100\n"
-"PO-Revision-Date: 2019-03-21 16:52+0100\n"
+"PO-Revision-Date: 2019-03-22 13:53+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -68,7 +68,7 @@ msgstr ""
 
 #: templates/base.html:55
 msgid "\"OK\""
-msgstr "\"OK\""
+msgstr "\"Entendido\""
 
 #: templates/base.html:56
 msgid "\"Learn more\""
@@ -1400,7 +1400,7 @@ msgstr ""
 #: templates/privacy.html:40
 msgid " <li>  E-Mail: <a href=\"mailto:EMAIL_ORG\" >EMAIL_ORG</a> </li> "
 msgstr ""
-" <li>  E-Mail: <a href=\"mailto:soporte_plantl_elri@mineco.es \" "
+" <li>  Correo de contacto: <a href=\"mailto:soporte_plantl_elri@mineco.es \" "
 ">soporte_plantl_elri@mineco.es </a>  </li>"
 
 #: templates/privacy.html:44
@@ -1434,7 +1434,7 @@ msgid ""
 "the following purposes:"
 msgstr ""
 "El repositorio ELRI solamente realiza el tratamiento de los datos personales "
-"con las siguientes finalidades:Podrán realizars"
+"con las siguientes finalidades:"
 
 #: templates/privacy.html:58
 msgid " Establishment of contact and correspondence with visitors and users "
