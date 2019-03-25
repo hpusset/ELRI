@@ -187,7 +187,8 @@
     cc.status = {
         deny: 'deny',
         allow: 'allow',
-        dismiss: 'dismiss'
+        understood: 'understood' //add new understood cookie value
+        //dismiss: 'dismiss'
     };
 
     // detects the `transitionend` event name
@@ -256,6 +257,7 @@
                 var didConsent = this.hasConsented();
                 if (didConsent) {
                     gaEnable();
+                    //gaDisable();
                 }
                 if (!didConsent) {
                     gaDisable();
@@ -265,6 +267,7 @@
                 var didConsent = this.hasConsented();
                 if (didConsent) {
                     gaEnable();
+                    //gaDisable();
                 }
 
                 if (!didConsent) {
@@ -282,9 +285,9 @@
                 header: 'Cookies used on the website!',
                 message:
                     'This website uses cookies to ensure you get the best experience on our website.',
-                dismiss: 'Got it!',
+                //dismiss: 'Got it!',
                 allow: 'Allow cookies',
-                deny: 'Decline',
+                //deny: 'Decline',
                 link: 'Learn more',
                 href: '/privacy',
                 close: '&#x274c;',
@@ -303,8 +306,8 @@
                     '<span id="cookieconsent:desc" class="cc-message">{{message}}</span>',
                 messagelink:
                     '<span id="cookieconsent:desc" class="cc-message">{{message}} <a aria-label="learn more about cookies" role=button tabindex="0" class="cc-link" href="{{href}}" rel="noopener noreferrer nofollow" target="{{target}}">{{link}}</a></span>',
-                dismiss:
-                    '<a aria-label="dismiss cookie message" role=button tabindex="0" class="cc-btn cc-dismiss">{{dismiss}}</a>',
+                //dismiss:
+                //    '<a aria-label="dismiss cookie message" role=button tabindex="0" class="cc-btn cc-dismiss">{{dismiss}}</a>',
                 allow:
                     '<a aria-label="allow cookies" role=button tabindex="0"  class="cc-btn cc-allow">{{allow}}</a>',
                 deny:
@@ -329,7 +332,7 @@
 
             // define types of 'compliance' here. '{{value}}' strings in here are linked to `elements`
             compliance: {
-                info: '<div class="cc-compliance">{{dismiss}}</div>',
+                'info': '<div class="cc-compliance">{{allow}}</div>',
                 'opt-in':
                     '<div class="cc-compliance cc-highlight">{{deny}}{{allow}}</div>',
                 'opt-out':
@@ -490,7 +493,7 @@
                 this.element = appendMarkup.call(this, cookiePopup);
             }
 
-            applyAutoDismiss.call(this);
+            //applyAutoDismiss.call(this);
 
             applyRevokeButton.call(this);
 
@@ -664,7 +667,7 @@
         // returns true if the cookie indicates that consent has been given
         CookiePopup.prototype.hasConsented = function (options) {
             var val = this.getStatus();
-            return val == cc.status.allow || val == cc.status.dismiss;
+            return val == cc.status.allow ; //|| val == cc.status.dismiss;
         };
 
         // opens the popup if no answer has been given
@@ -882,12 +885,13 @@
                 var match = (matches && matches[1]) || false;
 
                 if (match) {
-                    this.setStatus(match);
+                    this.setStatus(cc.status.understood);
                     this.close(true);
                 }
             }
+            
             if (util.hasClass(btn, 'cc-close')) {
-                this.setStatus(cc.status.dismiss);
+                this.setStatus(cc.status.understood); //dismiss);
                 this.close(true);
             }
             if (util.hasClass(btn, 'cc-revoke')) {
@@ -1059,7 +1063,7 @@
             var delay = this.options.dismissOnTimeout;
             if (typeof delay == 'number' && delay >= 0) {
                 this.dismissTimeout = window.setTimeout(function () {
-                    setStatus(cc.status.dismiss);
+                    setStatus(cc.status.understood);//dismiss);
                     close(true);
                 }, Math.floor(delay));
             }
@@ -1068,7 +1072,7 @@
             if (typeof scrollRange == 'number' && scrollRange >= 0) {
                 var onWindowScroll = function (evt) {
                     if (window.pageYOffset > Math.floor(scrollRange)) {
-                        setStatus(cc.status.dismiss);
+                        setStatus(cc.status.understood);//dismiss);
                         close(true);
 
                         window.removeEventListener('scroll', onWindowScroll);
@@ -1100,7 +1104,7 @@
                     }
 
                     if (!isIgnored) {
-                        setStatus(cc.status.dismiss);
+                        setStatus(cc.status.understood);//dismiss);
                         close(true);
 
                         window.removeEventListener('click', onWindowClick);

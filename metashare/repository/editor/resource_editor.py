@@ -449,7 +449,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         getext = lambda file_object: os.path.splitext(file_object)[-1]
         tmextensions=[".tmx", ".sdltm"]
         docextensions=[ ".pdf", ".doc", ".docx", ".rtf", ".txt", ".odt"]
-        
+        #not processed: xml, tbx, xls, xlsx
         from metashare.xml_utils import to_xml_string
         if has_publish_permission(request, queryset):
             successful = 0
