@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-25 14:42+0100\n"
-"PO-Revision-Date: 2019-03-25 14:38+0100\n"
+"POT-Creation-Date: 2019-03-25 15:41+0100\n"
+"PO-Revision-Date: 2019-03-25 15:45+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -2110,12 +2110,14 @@ msgid "Resource name"
 msgstr "Nombre del recurso"
 
 #: templates/repository/download_contact_form.html:17
-msgid "Resource contact name"
-msgstr "Nombre del responsable del recurso"
+#, python-format
+msgid "Resource contact name%(resourceContactName|pluralize)s"
+msgstr "Nombre de la persona de contacto%(resourceContactName|pluralize)s"
 
 #: templates/repository/download_contact_form.html:21
-msgid "Resource contact email"
-msgstr "Email del responsable del recurso"
+#, python-format
+msgid "Resource contact email%(resourceContactEmail|pluralize)s"
+msgstr "Email de la persona de contacto%(resourceContactEmail|pluralize)s"
 
 #: templates/repository/download_contact_form.html:25
 msgid "Your username"
@@ -3598,11 +3600,11 @@ msgstr "contador de recursos"
 msgid "never used"
 msgstr "nunca utilizado"
 
-#~ msgid "Resource contact name%(resourceContactName|pluralize)s"
-#~ msgstr "Resource contact name%(resourceContactName|pluralize)s"
+#~ msgid "Resource contact name"
+#~ msgstr "Nombre del responsable del recurso"
 
-#~ msgid "Resource contact email%(resourceContactEmail|pluralize)s"
-#~ msgstr "Resource contact email%(resourceContactEmail|pluralize)s"
+#~ msgid "Resource contact email"
+#~ msgstr "Email del responsable del recurso"
 
 #~ msgid "\"OK, I aggree \""
 #~ msgstr "\"Acepto\""

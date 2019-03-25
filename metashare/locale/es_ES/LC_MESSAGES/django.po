@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-25 14:42+0100\n"
+"POT-Creation-Date: 2019-03-25 15:41+0100\n"
 "PO-Revision-Date: 2019-03-06 19:08+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -37,6 +37,10 @@ msgstr ""
 #: local_settings.py:43
 msgid "Spanish"
 msgstr "Español"
+
+#: local_settings.py:46
+msgid "Gaelic"
+msgstr "Gaélico"
 
 #: storage/models.py:113
 msgid "Can synchronize"
@@ -186,9 +190,6 @@ msgid ""
 msgstr ""
 "Esta cuenta no ha sido activada aún. Contáctenos si hubiese cualquier "
 "problema con una cuenta existente."
-
-#~ msgid "Gaelic"
-#~ msgstr "Gaélico"
 
 #~ msgid "English"
 #~ msgstr "Inglés"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-25 14:42+0100\n"
+"POT-Creation-Date: 2019-03-25 15:41+0100\n"
 "PO-Revision-Date: 2019-03-25 14:48+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1698,48 +1698,23 @@ msgstr "Este campo sólo acepta valores numéricos (sin comas)"
 msgid "Please edit the attribution text template"
 msgstr "Por favor edite la plantilla de texto de atribución"
 
-#: repository/views.py:301
-msgid ""
-"We are interested in using the above mentioned resource. Please provide us "
-"with all the relevant information (e.g., licensing provisions and "
-"restrictions, any fees required etc.) which is necessary for concluding a "
-"deal for getting a license. We are happy to provide any more information on "
-"our request and our envisaged usage of your resource.\n"
-"\n"
-"[Please include here any other request you may have regarding this resource "
-"or change this message altogether]\n"
-"\n"
-"Please kindly use the above mentioned e-mail address for any further "
-"communication."
-msgstr ""
-"Tenemos interés en utilizar el recurso especificado más arriba. \n"
-"Por favor, solicitamos que nos proporcione toda la información relevante (p."
-"ej., provisiones de licencia y restricciones, si tiene asociada algún cargo, "
-"etc.) que sería necesaria para cerrar la obtención de una licencia. \n"
-"Estaremos encantados de proveer cualquier información adicional que "
-"requieran así como la previsión de uso de su recurso.\n"
-"[Por favor, incluya aquí cualquier otra petición que quiera realizar con "
-"respecto a este recurso o cambie el mensaje entero]\n"
-"Le animamos a utilizar el email indicado más arriba para cualquier "
-"comunicación adicional."
-
-#: repository/views.py:340
+#: repository/views.py:341
 msgid "Request for information regarding a resource"
 msgstr "Solicitud de información sobre un recurso"
 
-#: repository/views.py:348
+#: repository/views.py:349
 msgid "There was an error sending out the request email."
 msgstr "Hubo un error al enviar la sol·licitud."
 
-#: repository/views.py:350
+#: repository/views.py:351
 msgid "You have successfully sent a message to the resource contact person."
 msgstr "Ha enviado un mensaje a la persona de contacto."
 
-#: repository/views.py:1039
+#: repository/views.py:1040
 msgid "N/A"
 msgstr "N/A"
 
-#: repository/views.py:1100
+#: repository/views.py:1101
 msgid ""
 "\n"
 "                Only files of type DOC(X), ODT, RTF, PDF, TMX, SDLTM, XML,\n"
@@ -1756,7 +1731,7 @@ msgstr ""
 "                los formatos permitidos.  Remueva por favor los archivos\n"
 "                que no estén entre los permitidos."
 
-#: repository/views.py:1139
+#: repository/views.py:1140
 msgid ""
 "\n"
 "                            Your request could not be completed.\"\n"
@@ -1770,7 +1745,7 @@ msgstr ""
 "                            Los archivos que se ha intentado subir a la "
 "aplicación no son válidos."
 
-#: repository/views.py:1148
+#: repository/views.py:1149
 msgid ""
 "\n"
 "                            Only files of type DOC(X), ODT, RTF, PDF, TMX, "
@@ -1789,11 +1764,11 @@ msgstr ""
 "                los formatos permitidos. Remueva por favor los archivos\n"
 "                que no estén entre los permitidos."
 
-#: repository/views.py:1191
+#: repository/views.py:1192
 msgid "New submitted contributions"
 msgstr "Nuevas contribuciones enviadas"
 
-#: repository/views.py:1199
+#: repository/views.py:1200
 msgid ""
 "\n"
 "                Thank you for sharing, your data have been successfully "
@@ -1807,7 +1782,7 @@ msgstr ""
 "herramientas integradas y  revisados por el equipo ELRI. Recibirá un correo "
 "de notificación cuando  el recurso final se pueda descargar."
 
-#: repository/views.py:1208
+#: repository/views.py:1209
 msgid ""
 "\n"
 "                The file you are trying to upload exceeds the size limit. If "
@@ -1823,6 +1798,31 @@ msgstr ""
 "proporcionar un enlace SFTP link que permita\n"
 "                descargar directamente el archivo, o considere subir "
 "archivos de menor tamaño."
+
+#~ msgid ""
+#~ "We are interested in using the above mentioned resource. Please provide "
+#~ "us with all the relevant information (e.g., licensing provisions and "
+#~ "restrictions, any fees required etc.) which is necessary for concluding a "
+#~ "deal for getting a license. We are happy to provide any more information "
+#~ "on our request and our envisaged usage of your resource.\n"
+#~ "\n"
+#~ "[Please include here any other request you may have regarding this "
+#~ "resource or change this message altogether]\n"
+#~ "\n"
+#~ "Please kindly use the above mentioned e-mail address for any further "
+#~ "communication."
+#~ msgstr ""
+#~ "Tenemos interés en utilizar el recurso especificado más arriba. \n"
+#~ "Por favor, solicitamos que nos proporcione toda la información relevante "
+#~ "(p.ej., provisiones de licencia y restricciones, si tiene asociada algún "
+#~ "cargo, etc.) que sería necesaria para cerrar la obtención de una "
+#~ "licencia. \n"
+#~ "Estaremos encantados de proveer cualquier información adicional que "
+#~ "requieran así como la previsión de uso de su recurso.\n"
+#~ "[Por favor, incluya aquí cualquier otra petición que quiera realizar con "
+#~ "respecto a este recurso o cambie el mensaje entero]\n"
+#~ "Le animamos a utilizar el email indicado más arriba para cualquier "
+#~ "comunicación adicional."
 
 #~ msgid "Resource"
 #~ msgstr "Recurso"

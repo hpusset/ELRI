@@ -14,11 +14,11 @@
                     <td class="readonly">{{ resource }}</td>
                 </tr>
                 <tr>
-                    <th><label>{% blocktrans %}Resource contact name{% endblocktrans %}</label></th>
+                    <th><label>{% blocktrans %}Resource contact name{{ resourceContactName|pluralize }}{% endblocktrans %}</label></th>
                     <td class="readonly">{{ resourceContactName|join:", " }}</td>
                 </tr>
                 <tr>
-                    <th><label>{% blocktrans %}Resource contact email{% endblocktrans %}</label></th>
+                    <th><label>{% blocktrans %}Resource contact email{{ resourceContactEmail|pluralize }}{% endblocktrans %}</label></th>
                     <td class="readonly">{{ resourceContactEmail|join:", " }}</td>
                 </tr>
                 <tr>
