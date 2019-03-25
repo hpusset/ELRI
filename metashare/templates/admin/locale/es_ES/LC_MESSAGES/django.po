@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-22 11:19+0100\n"
+"POT-Creation-Date: 2019-03-25 14:42+0100\n"
 "PO-Revision-Date: 2019-03-22 13:46+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -25,15 +25,15 @@ msgstr ""
 "\"Este sitio web utiliza cookies para mejorar su experiencia de usuario. Si "
 "continúa navegando, consideramos que acepta su uso.\" "
 
-#: templates/admin/base.html:40
+#: templates/admin/base.html:40 templates/admin/base.html.py:43
 msgid "\"OK\""
 msgstr "\"OK\""
 
-#: templates/admin/base.html:41
+#: templates/admin/base.html:42
 msgid "\"Learn more\""
 msgstr "\"Leer más\""
 
-#: templates/admin/base.html:55 templates/admin/delete_confirmation.html:6
+#: templates/admin/base.html:57 templates/admin/delete_confirmation.html:6
 #: templates/admin/delete_selected_confirmation.html:6
 msgid "Home"
 msgstr "Inicio"

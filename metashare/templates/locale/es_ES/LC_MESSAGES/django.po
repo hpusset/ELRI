@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-22 11:19+0100\n"
-"PO-Revision-Date: 2019-03-25 14:24+0100\n"
+"POT-Creation-Date: 2019-03-25 14:42+0100\n"
+"PO-Revision-Date: 2019-03-25 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -66,11 +66,11 @@ msgstr ""
 "\"Este sitio web utiliza cookies para mejorar su experiencia de usuario. Si "
 "continúa navegando, consideramos que acepta su uso. \""
 
-#: templates/base.html:55
+#: templates/base.html:55 templates/base.html.py:58
 msgid "\"OK\""
 msgstr "\"Entendido\""
 
-#: templates/base.html:56
+#: templates/base.html:57
 msgid "\"Learn more\""
 msgstr "\"Leer más\""
 
@@ -2102,7 +2102,7 @@ msgstr "%(resource)s &ndash; Contact Resource Maintainer &ndash; ELRI"
 #: templates/repository/lr_not_downloadable.html:29
 #: templates/repository/report_not_downloadable.html:28
 msgid "Contact Resource Maintainer"
-msgstr "Contacto conel mantenedor de recursos"
+msgstr "Contacta con el responsable del recurso"
 
 #: templates/repository/download_contact_form.html:13
 #: templates/stats/mystats.html:29
@@ -2110,14 +2110,12 @@ msgid "Resource name"
 msgstr "Nombre del recurso"
 
 #: templates/repository/download_contact_form.html:17
-#, python-format
-msgid "Resource contact name%(resourceContactName|pluralize)s"
-msgstr "Resource contact name%(resourceContactName|pluralize)s"
+msgid "Resource contact name"
+msgstr "Nombre del responsable del recurso"
 
 #: templates/repository/download_contact_form.html:21
-#, python-format
-msgid "Resource contact email%(resourceContactEmail|pluralize)s"
-msgstr "Resource contact email%(resourceContactEmail|pluralize)s"
+msgid "Resource contact email"
+msgstr "Email del responsable del recurso"
 
 #: templates/repository/download_contact_form.html:25
 msgid "Your username"
@@ -3599,6 +3597,12 @@ msgstr "contador de recursos"
 #: templates/stats/usagestats.html:283
 msgid "never used"
 msgstr "nunca utilizado"
+
+#~ msgid "Resource contact name%(resourceContactName|pluralize)s"
+#~ msgstr "Resource contact name%(resourceContactName|pluralize)s"
+
+#~ msgid "Resource contact email%(resourceContactEmail|pluralize)s"
+#~ msgstr "Resource contact email%(resourceContactEmail|pluralize)s"
 
 #~ msgid "\"OK, I aggree \""
 #~ msgstr "\"Acepto\""
