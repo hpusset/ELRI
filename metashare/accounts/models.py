@@ -291,8 +291,8 @@ class UserProfile(models.Model):
     affiliation_address = models.TextField(_("Affiliation address"), blank=True)
     affiliation_phone_number = models.TextField(_("Affiliation phone number"),
                                                 blank=True)
-    position = models.CharField(max_length=50, blank=True)
-    homepage = models.URLField(blank=True)
+    position = models.CharField(_("Position"),max_length=50, blank=True)
+    homepage = models.URLField(_("Homepage"),blank=True)
 
     default_editor_groups = models.ManyToManyField(EditorGroup, blank=True)
 

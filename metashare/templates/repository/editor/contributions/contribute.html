@@ -57,10 +57,12 @@
                         }
                     },
                     "type": "opt-out",
-                    "content": {
-                        "message": "We use cookies on this site to enhance your user experience. " +
-                            "By clicking any link on this page you are giving your consent for us to set cookies.",
-                        "dismiss": "OK, I aggree"
+                     "content": {
+                        "message": {% blocktrans %}"This site uses cookies to enhance your user experience. By clicking any link on this page you are giving your consent for us to set cookies." {% endblocktrans %},
+                        "allow": {% blocktrans %}"OK"{% endblocktrans %},
+                        //"dismiss": "",
+                        "link":  {% blocktrans %}"Learn more"{% endblocktrans %},
+                        //"close": {% blocktrans %}"OK"{% endblocktrans %},
                     }
                 })
             });

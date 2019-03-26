@@ -2,11 +2,11 @@
 {% load humanize %}
 {% load i18n %}
 {% spaceless %}
-    <label class='component'>Distribution</label>
+    <label class='component'>{% trans 'Distribution' %}</label>
     {% if distribution.Distribution.Availability %}
         <div class="dataline indented">
             <label>
-                <strong>Availability: </strong>{{ distribution.Distribution.Availability }}
+                <strong>{% trans 'Availability:' %}</strong>{{ distribution.Distribution.Availability }}
             </label>
         </div>
     {% endif %}
@@ -14,8 +14,7 @@
     {% if distribution.Distribution.Availability_start_date %}
         <div class="dataline indented">
             <label>
-                <strong>Availability Start
-                    date: </strong>{{ distribution.Distribution.Availability_start_date|date:"SHORT_DATE_FORMAT" }}
+                <strong>{% trans 'Availability Start date:' %}</strong>{{ distribution.Distribution.Availability_start_date|date:"SHORT_DATE_FORMAT" }}
             </label>
         </div>
     {% endif %}
@@ -23,14 +22,13 @@
     {% if distribution.Distribution.Availability_end_date %}
         <div class="dataline indented">
             <label>
-                <strong>Availability End
-                    Date: </strong>{{ distribution.Distribution.Availability_end_date|date:"SHORT_DATE_FORMAT" }}
+                <strong>{% trans 'Availability End Date:' %}</strong>{{ distribution.Distribution.Availability_end_date|date:"SHORT_DATE_FORMAT" }}
             </label>
         </div>
     {% endif %}
 
     {% if "Licences" in distribution.Distribution %}
-        <label class="title">Licences</label>
+        <label class="title">{% trans 'Licences' %}</label>
         {% for key, value in distribution.Distribution.items %}
             {% if "Licence" in key %}
                 {% include "repository/resource_view/licence.html" with licence=value %}

@@ -447,9 +447,10 @@ class ResourceModelAdmin(SchemaModelAdmin):
 
     def process_action(self, request, queryset, from_ingest=None ):
         getext = lambda file_object: os.path.splitext(file_object)[-1]
+        getname = lambda file_object: os.path.splitext(file_object)[0].split('/')[-1]
         tmextensions=[".tmx", ".sdltm"]
         docextensions=[ ".pdf", ".doc", ".docx", ".rtf", ".txt", ".odt"]
-        
+        #not processed: xml, tbx, xls, xlsx
         from metashare.xml_utils import to_xml_string
         if has_publish_permission(request, queryset):
             successful = 0
@@ -463,7 +464,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 call_doc2tmx=-1
                 pre_status=check_resource_status(obj)
                 
-                if change_resource_status(obj, status=PROCESSING, precondition_status=INGESTED) or change_resource_status(obj, status=PROCESSING, precondition_status=ERROR) or (from_ingest and change_resource_status(obj, status=PROCESSING, precondition_status=INTERNAL)) :#or check_resource_status(obj)== PROCESSING:
+                if change_resource_status(obj, status=PROCESSING, precondition_status=INGESTED) or change_resource_status(obj, status=PROCESSING, precondition_status=ERROR) or (from_ingest and change_resource_status(obj, status=PROCESSING, precondition_status=INTERNAL)):#or check_resource_status(obj)== PROCESSING:
                     #only (re)process INGESTED or ERROR or INTERNAL resources, published are suposed to be ok 
                     ################
                     ##GET INFO TO SEND NOTIFICATION EMAILS
@@ -525,11 +526,14 @@ class ResourceModelAdmin(SchemaModelAdmin):
                         #check the extension of the files
                         #if it is a tm file:
                         filext=getext(r)
+                        filename=getname(r)
                         if filext in tmextensions:
                             if  not os.path.isdir(resource_tm_path):
                                 os.makedirs(resource_tm_path)
                                 os.makedirs(resource_tm_path+'/input')
                             resource_zip.extract(r,resource_tm_path+'/input')
+                            if '/' in r: #handle files from a folder inside a .zip
+                                os.rename(resource_tm_path+'/input/'+r, resource_tm_path+'/input/'+filename+filext)
                             tmx_files.append(r)
                             call_tm2tmx = call_tm2tmx + 1
                         elif filext in docextensions: #if it is a doc file
@@ -537,6 +541,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                 os.makedirs(resource_doc_path)
                                 os.makedirs(resource_doc_path+'/input')
                             resource_zip.extract(r,resource_doc_path+'/input')
+                            if '/' in r: #handle files from a folder inside a .zip
+                                os.rename(resource_doc_path+'/input/'+r, resource_doc_path+'/input/'+filename+filext)
                             call_doc2tmx = call_doc2tmx + 1
                         else : #either case...
                             if not os.path.isdir(resource_other_path):
@@ -739,7 +745,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                         l_info, access_links, access = licences[l]
                         if l == 'publicDomain':
                             access_links=STATIC_URL + 'metashare/licences/publicDomain.txt'
-                        if l == 'openUnderPSI':
+                        if l == 'openUnder-PSI':
                             access_links=STATIC_URL + 'metashare/licences/openUnderPSI.txt'
                         
                         #add access file to the lr.archive.zip file 

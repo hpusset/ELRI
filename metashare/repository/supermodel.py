@@ -476,7 +476,12 @@ class SchemaModel(models.Model):
                                 _element.attrib["pretty"] = self.get_verbose_name(_model_field)
                                 if self.is_choice(_model_field):
                                     _element_text = prettify_camel_case_string(_element_text)
-                            _element.text = _element_text
+                            #_element.text = _element_text
+                            try:
+                                _element.text = _element_text.decode("utf-8")
+                            except:
+                                _element.text = _element_text
+
                             parent_dict[_element] = _current_node
                             _current_node.append(_element)
 
@@ -514,7 +519,11 @@ class SchemaModel(models.Model):
                         if pretty:
                             if self.is_choice(_model_field):
                                 _element_text = prettify_camel_case_string(_element_text)
-                        _element.text = _element_text
+                        #_element.text = _element_text
+                        try:
+                            _element.text = _element_text.decode("utf-8")
+                        except:
+                            _element.text = _element_text
                         parent_dict[_element] = _current_node
                         _current_node.append(_element)
 

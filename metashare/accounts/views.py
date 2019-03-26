@@ -61,8 +61,7 @@ def confirm(request, uuid):
         pass
 
     # Add a message to the user after successful creation.
-    messages.success(request, _("We have activated user account for user {}."\
-                                .format(user.username)))
+    messages.success(request, _("We have activated user account for user {}.").format(user.username))
     
     # Redirect the user to the front page.
     return redirect('metashare.views.frontpage')

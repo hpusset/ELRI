@@ -298,7 +298,8 @@ def download_contact(request, object_id):
                                  storage_object__identifier=object_id,
                                  storage_object__publication_status=PUBLISHED)
 
-    default_message = "We are interested in using the above mentioned " \
+    default_message = ""
+    """_("We are interested in using the above mentioned " \
                       "resource. Please provide us with all the relevant information (e.g.," \
                       " licensing provisions and restrictions, any fees required etc.) " \
                       "which is necessary for concluding a deal for getting a license. We " \
@@ -307,8 +308,8 @@ def download_contact(request, object_id):
                       "[Please include here any other request you may have regarding this " \
                       "resource or change this message altogether]\n\n" \
                       "Please kindly use the above mentioned e-mail address for any " \
-                      "further communication."
-
+                      "further communication.")
+"""
     # Find out the relevant resource contact emails and names
     resource_emails = []
     resource_contacts = []

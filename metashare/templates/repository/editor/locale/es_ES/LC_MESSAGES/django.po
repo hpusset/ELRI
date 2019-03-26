@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-14 14:12+0100\n"
-"PO-Revision-Date: 2019-03-06 19:05+0100\n"
+"POT-Creation-Date: 2019-03-25 15:41+0100\n"
+"PO-Revision-Date: 2019-03-21 16:51+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -21,11 +21,28 @@ msgstr ""
 msgid "ELRI"
 msgstr "ELRI"
 
-#: templates/repository/editor/contributions/contribute.html:81
+#: templates/repository/editor/contributions/contribute.html:61
+msgid ""
+"\"This site uses cookies to enhance your user experience. By clicking any "
+"link on this page you are giving your consent for us to set cookies.\" "
+msgstr ""
+"\"Este sitio web utiliza cookies para mejorar su experiencia de usuario. Si "
+"continúa navegando, consideramos que acepta su uso.\""
+
+#: templates/repository/editor/contributions/contribute.html:62
+#: templates/repository/editor/contributions/contribute.html:65
+msgid "\"OK\""
+msgstr "\"OK\""
+
+#: templates/repository/editor/contributions/contribute.html:64
+msgid "\"Learn more\""
+msgstr "\"Leer más\""
+
+#: templates/repository/editor/contributions/contribute.html:83
 msgid "Your browser does not support JavaScript!"
 msgstr "¡Su navegador no soporta JavaScript!"
 
-#: templates/repository/editor/contributions/contribute.html:83
+#: templates/repository/editor/contributions/contribute.html:85
 msgid ""
 "Please make sure that you have javascript enabled and refresh the page "
 "before proceeding with your contribution."
@@ -33,11 +50,11 @@ msgstr ""
 "Por favor, asegúrese de que tiene JavaScript activado y actualice la página "
 "antes de continuar con su contribución."
 
-#: templates/repository/editor/contributions/contribute.html:95
+#: templates/repository/editor/contributions/contribute.html:97
 msgid "Uploading your data"
 msgstr "Subir datos"
 
-#: templates/repository/editor/contributions/contribute.html:96
+#: templates/repository/editor/contributions/contribute.html:98
 msgid ""
 "Please provide the required information below for the data you wish to "
 "upload. Once uploaded, the ELRI engines will process your data with the goal "
@@ -55,11 +72,11 @@ msgstr ""
 "procesado, se le notificará por correo electrónico y podrá bajárselo desde "
 "este repositorio."
 
-#: templates/repository/editor/contributions/contribute.html:103
+#: templates/repository/editor/contributions/contribute.html:105
 msgid "Resource Title"
 msgstr "Título del recurso"
 
-#: templates/repository/editor/contributions/contribute.html:108
+#: templates/repository/editor/contributions/contribute.html:110
 msgid ""
 "The name by which the resource is already known or by which you would like "
 "it to be known; e.g. \"The GSRT bilingual corpus of Greek-English bulletins\""
@@ -67,11 +84,11 @@ msgstr ""
 "El nombre por el que el recurso es conocido o por el que desea que se "
 "conozca; p.e. \"El corpus bilingüe GSRT de noticias griego-inglés\""
 
-#: templates/repository/editor/contributions/contribute.html:114
+#: templates/repository/editor/contributions/contribute.html:116
 msgid "Resource short description"
 msgstr "Descripción breve del recurso "
 
-#: templates/repository/editor/contributions/contribute.html:116
+#: templates/repository/editor/contributions/contribute.html:118
 msgid ""
 "[Optional] A short description, including any information considered useful "
 "about the resource, e.g. whether it's a dataset (collection of documents) or "
@@ -85,25 +102,25 @@ msgstr ""
 "etc., su tamaño, idioma(s), clasificación (por ejemplo, informes clínicos, "
 "boletines de noticias, glosario de terminología deportiva, etc.)"
 
-#: templates/repository/editor/contributions/contribute.html:120
+#: templates/repository/editor/contributions/contribute.html:122
 #: templates/repository/editor/select_resource_type.html:12
 msgid "Resource type"
 msgstr "Tipo de recurso"
 
-#: templates/repository/editor/contributions/contribute.html:123
+#: templates/repository/editor/contributions/contribute.html:125
 #: templates/repository/editor/select_resource_type.html:16
 msgid "Corpus"
 msgstr "Corpus"
 
-#: templates/repository/editor/contributions/contribute.html:124
+#: templates/repository/editor/contributions/contribute.html:126
 msgid "Language Description"
 msgstr "Descripción de lengua"
 
-#: templates/repository/editor/contributions/contribute.html:125
+#: templates/repository/editor/contributions/contribute.html:127
 msgid "Lexical Conceptual Resource"
 msgstr "Recurso conceptual léxico"
 
-#: templates/repository/editor/contributions/contribute.html:127
+#: templates/repository/editor/contributions/contribute.html:129
 msgid ""
 "[Optional] The type of the resource: can be Corpus, Lexicon, or Language "
 "Description. Do not choose anything if you are not sure."
@@ -111,121 +128,121 @@ msgstr ""
 "[Opcional] El tipo del recurso puede ser: corpus, léxico o descripción "
 "lingüística. No elija nada si no está seguro."
 
-#: templates/repository/editor/contributions/contribute.html:133
-#: templates/repository/editor/contributions/contribute.html:172
+#: templates/repository/editor/contributions/contribute.html:135
+#: templates/repository/editor/contributions/contribute.html:174
 msgid "Language(s)"
 msgstr "Idioma(s)"
 
-#: templates/repository/editor/contributions/contribute.html:138
+#: templates/repository/editor/contributions/contribute.html:140
 msgid "Bulgarian"
 msgstr "Búlgaro"
 
-#: templates/repository/editor/contributions/contribute.html:139
+#: templates/repository/editor/contributions/contribute.html:141
 msgid "Czech"
 msgstr "Checo"
 
-#: templates/repository/editor/contributions/contribute.html:140
+#: templates/repository/editor/contributions/contribute.html:142
 msgid "Croatian"
 msgstr "Croata"
 
-#: templates/repository/editor/contributions/contribute.html:141
+#: templates/repository/editor/contributions/contribute.html:143
 msgid "Danish"
 msgstr "Danés"
 
-#: templates/repository/editor/contributions/contribute.html:142
+#: templates/repository/editor/contributions/contribute.html:144
 msgid "Dutch; Flemish"
 msgstr "Holandés; Flamenco"
 
-#: templates/repository/editor/contributions/contribute.html:143
+#: templates/repository/editor/contributions/contribute.html:145
 msgid "English"
 msgstr "Inglés"
 
-#: templates/repository/editor/contributions/contribute.html:144
+#: templates/repository/editor/contributions/contribute.html:146
 msgid "Estonian"
 msgstr "Estonio"
 
-#: templates/repository/editor/contributions/contribute.html:145
+#: templates/repository/editor/contributions/contribute.html:147
 msgid "Finnish"
 msgstr "Finlandés"
 
-#: templates/repository/editor/contributions/contribute.html:146
+#: templates/repository/editor/contributions/contribute.html:148
 msgid "French"
 msgstr "Francés"
 
-#: templates/repository/editor/contributions/contribute.html:147
+#: templates/repository/editor/contributions/contribute.html:149
 msgid "German"
 msgstr "Alemán"
 
-#: templates/repository/editor/contributions/contribute.html:148
+#: templates/repository/editor/contributions/contribute.html:150
 msgid "Hungarian"
 msgstr "Húngaro"
 
-#: templates/repository/editor/contributions/contribute.html:149
+#: templates/repository/editor/contributions/contribute.html:151
 msgid "Icelandic"
 msgstr "Islandés"
 
-#: templates/repository/editor/contributions/contribute.html:150
+#: templates/repository/editor/contributions/contribute.html:152
 msgid "Irish"
 msgstr "Irlandés"
 
-#: templates/repository/editor/contributions/contribute.html:151
+#: templates/repository/editor/contributions/contribute.html:153
 msgid "Italian"
 msgstr "Italiano"
 
-#: templates/repository/editor/contributions/contribute.html:152
+#: templates/repository/editor/contributions/contribute.html:154
 msgid "Latvian"
 msgstr "Letón"
 
-#: templates/repository/editor/contributions/contribute.html:153
+#: templates/repository/editor/contributions/contribute.html:155
 msgid "Lithuanian"
 msgstr "Lituano"
 
-#: templates/repository/editor/contributions/contribute.html:154
+#: templates/repository/editor/contributions/contribute.html:156
 msgid "Maltese"
 msgstr "Maltés"
 
-#: templates/repository/editor/contributions/contribute.html:155
+#: templates/repository/editor/contributions/contribute.html:157
 msgid "Modern Greek (1453-)"
 msgstr "Griego moderno (1453-)"
 
-#: templates/repository/editor/contributions/contribute.html:156
+#: templates/repository/editor/contributions/contribute.html:158
 msgid "Norwegian Bokmål (nb)"
 msgstr "Noruego Bokmål (NB)"
 
-#: templates/repository/editor/contributions/contribute.html:157
+#: templates/repository/editor/contributions/contribute.html:159
 msgid "Norwegian Nynorsk (nn)"
 msgstr "Noruego Nynorsk (NN)"
 
-#: templates/repository/editor/contributions/contribute.html:158
+#: templates/repository/editor/contributions/contribute.html:160
 msgid "Polish"
 msgstr "Polaco"
 
-#: templates/repository/editor/contributions/contribute.html:159
+#: templates/repository/editor/contributions/contribute.html:161
 msgid "Portuguese"
 msgstr "Portugués"
 
-#: templates/repository/editor/contributions/contribute.html:160
+#: templates/repository/editor/contributions/contribute.html:162
 msgid "Romanian; Moldavian; Moldovan"
 msgstr "Rumano; Moldavo "
 
-#: templates/repository/editor/contributions/contribute.html:161
+#: templates/repository/editor/contributions/contribute.html:163
 msgid "Slovak"
 msgstr "Eslovaco"
 
-#: templates/repository/editor/contributions/contribute.html:162
+#: templates/repository/editor/contributions/contribute.html:164
 msgid "Slovenian"
 msgstr "Esloveno"
 
-#: templates/repository/editor/contributions/contribute.html:163
+#: templates/repository/editor/contributions/contribute.html:165
 msgid "Spanish; Castilian"
 msgstr "Español; Castellano"
 
-#: templates/repository/editor/contributions/contribute.html:164
+#: templates/repository/editor/contributions/contribute.html:166
 msgid "Swedish"
 msgstr "Sueco"
 
-#: templates/repository/editor/contributions/contribute.html:166
-#: templates/repository/editor/contributions/contribute.html:181
+#: templates/repository/editor/contributions/contribute.html:168
+#: templates/repository/editor/contributions/contribute.html:183
 msgid ""
 "The language(s) of the resource; for resources with multiple languages, hold "
 "down CTRL key to select multiple values"
@@ -233,27 +250,27 @@ msgstr ""
 "Idioma(s) del recurso (para recursos multilingües, mantenga pulsada la tecla "
 "CTRL para seleccionar varios idiomas)"
 
-#: templates/repository/editor/contributions/contribute.html:186
+#: templates/repository/editor/contributions/contribute.html:188
 msgid "Domain(s)"
 msgstr "Dominio(s)"
 
-#: templates/repository/editor/contributions/contribute.html:191
+#: templates/repository/editor/contributions/contribute.html:193
 msgid "Digital resources in any field of activity."
 msgstr "Recursos digitales en cualquier campo de actividad."
 
-#: templates/repository/editor/contributions/contribute.html:192
+#: templates/repository/editor/contributions/contribute.html:194
 msgid "Other / Unknown"
 msgstr "Otro/desconocido"
 
-#: templates/repository/editor/contributions/contribute.html:194
+#: templates/repository/editor/contributions/contribute.html:196
 msgid "Digital resources of European cultural heritage "
 msgstr "Recursos digitales del patrimonio cultural europeo."
 
-#: templates/repository/editor/contributions/contribute.html:195
+#: templates/repository/editor/contributions/contribute.html:197
 msgid "eCulture"
 msgstr "eCulture"
 
-#: templates/repository/editor/contributions/contribute.html:197
+#: templates/repository/editor/contributions/contribute.html:199
 msgid ""
 "Digital resources with relevant information for European national social "
 "security systems "
@@ -261,50 +278,50 @@ msgstr ""
 "Recursos digitales relevantes para los sistemas de seguridad social "
 "nacionales en Europa"
 
-#: templates/repository/editor/contributions/contribute.html:198
+#: templates/repository/editor/contributions/contribute.html:200
 msgid "Electronic Exchange of Social Security Information"
 msgstr "Intercambio electrónico de información de la Seguridad Social"
 
-#: templates/repository/editor/contributions/contribute.html:200
+#: templates/repository/editor/contributions/contribute.html:202
 msgid ""
 "Digital resources with relevant information for European health services. "
 msgstr "Recursos digitales relevantes para los servicios de salud europeos"
 
-#: templates/repository/editor/contributions/contribute.html:201
+#: templates/repository/editor/contributions/contribute.html:203
 msgid "eHealth"
 msgstr "eHealth"
 
-#: templates/repository/editor/contributions/contribute.html:203
+#: templates/repository/editor/contributions/contribute.html:205
 msgid ""
 "Digital resources with relevant information for European judicial services. "
 msgstr "Recursos digitales relevantes para los servicios jurídicos europeos"
 
-#: templates/repository/editor/contributions/contribute.html:204
+#: templates/repository/editor/contributions/contribute.html:206
 msgid "eJustice"
 msgstr "eJustice"
 
-#: templates/repository/editor/contributions/contribute.html:206
+#: templates/repository/editor/contributions/contribute.html:208
 msgid ""
 "Digital resources with relevant information for European procurement "
 "services."
 msgstr ""
 "Recursos digitales relevantes para los servicios de adquisición europeos"
 
-#: templates/repository/editor/contributions/contribute.html:207
+#: templates/repository/editor/contributions/contribute.html:209
 msgid "eProcurement"
 msgstr "eProcurement"
 
-#: templates/repository/editor/contributions/contribute.html:209
+#: templates/repository/editor/contributions/contribute.html:211
 msgid ""
 "Digital resources that can be publically shared to contribute to data re-use "
 "in Europe."
 msgstr "Recursos digitales que se puedan compartir y reusar en Europa "
 
-#: templates/repository/editor/contributions/contribute.html:210
+#: templates/repository/editor/contributions/contribute.html:212
 msgid "Public Open Data"
 msgstr "Datos públicos abiertos "
 
-#: templates/repository/editor/contributions/contribute.html:212
+#: templates/repository/editor/contributions/contribute.html:214
 msgid ""
 "Digital resources with relevant information for the establishment of a safer "
 "internet for children."
@@ -312,11 +329,11 @@ msgstr ""
 "Recursos digitales relevantes para el establecimiento de un internet más "
 "seguro para niños"
 
-#: templates/repository/editor/contributions/contribute.html:213
+#: templates/repository/editor/contributions/contribute.html:215
 msgid "Safer Internet"
 msgstr "Internet más seguro"
 
-#: templates/repository/editor/contributions/contribute.html:215
+#: templates/repository/editor/contributions/contribute.html:217
 msgid ""
 "Digital resources with relevant information for the interconnection of "
 "business registers. "
@@ -324,19 +341,19 @@ msgstr ""
 "Recursos digitales relevantes para la interconectividad de registros "
 "comerciales"
 
-#: templates/repository/editor/contributions/contribute.html:216
+#: templates/repository/editor/contributions/contribute.html:218
 msgid "Business Registers Interconnection System"
 msgstr "Sistema de interconexión de registros mercantiles"
 
-#: templates/repository/editor/contributions/contribute.html:218
+#: templates/repository/editor/contributions/contribute.html:220
 msgid "Digital resources with relevant information for Cybersecurity."
 msgstr "Recursos digitales relevantes para ciberseguridad"
 
-#: templates/repository/editor/contributions/contribute.html:219
+#: templates/repository/editor/contributions/contribute.html:221
 msgid "Cybersecurity"
 msgstr "Ciberseguridad"
 
-#: templates/repository/editor/contributions/contribute.html:222
+#: templates/repository/editor/contributions/contribute.html:224
 msgid ""
 "[Optional] Domain refers to information that belongs to a specific field of "
 "activity (e.g., culture or health) and is related to one of the building "
@@ -350,35 +367,35 @@ msgstr ""
 "indicados en la lista. Los recursos digitales que no pertenecen claramente a "
 "uno de los dominios proporcionados se pueden dejar como Otros/desconocidos."
 
-#: templates/repository/editor/contributions/contribute.html:227
+#: templates/repository/editor/contributions/contribute.html:229
 msgid "Licensing conditions"
 msgstr "Condiciones de licencia"
 
-#: templates/repository/editor/contributions/contribute.html:229
+#: templates/repository/editor/contributions/contribute.html:231
 msgid "Public Domain"
 msgstr "Dominio Público"
 
-#: templates/repository/editor/contributions/contribute.html:230
+#: templates/repository/editor/contributions/contribute.html:232
 msgid "Open Under PSI"
 msgstr "Abierto bajo PSI"
 
-#: templates/repository/editor/contributions/contribute.html:231
+#: templates/repository/editor/contributions/contribute.html:233
 msgid "Creative Commons Zero 1.0 (CC0-1.0)"
 msgstr "Creative Commons Zero 1.0 (CC0-1.0)"
 
-#: templates/repository/editor/contributions/contribute.html:232
+#: templates/repository/editor/contributions/contribute.html:234
 msgid "Creative Commons - Attribution 4.0 (CC-BY-4.0)"
 msgstr "Creative Commons - Attribution 4.0 (CC-BY-4.0)"
 
-#: templates/repository/editor/contributions/contribute.html:233
+#: templates/repository/editor/contributions/contribute.html:235
 msgid "Creative Commons - Attribution - ShareAlike 4.0 (CC-BY-SA-4.0)"
 msgstr "Creative Commons - Attribution - ShareAlike 4.0 (CC-BY-SA-4.0)"
 
-#: templates/repository/editor/contributions/contribute.html:234
+#: templates/repository/editor/contributions/contribute.html:236
 msgid "Creative Commons - Attribution - NonCommercial 4.0 (CC-BY-NC-4.0)"
 msgstr "Creative Commons - Attribution - NonCommercial 4.0 (CC-BY-NC-4.0)"
 
-#: templates/repository/editor/contributions/contribute.html:235
+#: templates/repository/editor/contributions/contribute.html:237
 msgid ""
 "Creative Commons - Attribution - NonCommercial - ShareAlike 4.0 (CC-BY-NC-"
 "SA-4.0)"
@@ -386,31 +403,31 @@ msgstr ""
 "Creative Commons - Attribution - NonCommercial - ShareAlike 4.0 (CC-BY-NC-"
 "SA-4.0)"
 
-#: templates/repository/editor/contributions/contribute.html:236
+#: templates/repository/editor/contributions/contribute.html:238
 msgid "Non-Standard/Other_Licence/Terms"
 msgstr "No-estándar/Otra licencia/Términos"
 
-#: templates/repository/editor/contributions/contribute.html:238
+#: templates/repository/editor/contributions/contribute.html:240
 msgid "The licensing conditions for the resource."
 msgstr "Las condiciones de licencia para el recurso."
 
-#: templates/repository/editor/contributions/contribute.html:239
+#: templates/repository/editor/contributions/contribute.html:241
 msgid " More information about the available licences."
 msgstr "Más información sobre las licencias disponbiles"
 
-#: templates/repository/editor/contributions/contribute.html:242
+#: templates/repository/editor/contributions/contribute.html:244
 msgid "License file"
 msgstr "Archivo de licencia"
 
-#: templates/repository/editor/contributions/contribute.html:246
+#: templates/repository/editor/contributions/contribute.html:248
 msgid "Please upload license file in the <b>.pdf format</b>."
 msgstr "Por favor, cargue el archivo de licencia en formato <b>. pdf </b>."
 
-#: templates/repository/editor/contributions/contribute.html:271
+#: templates/repository/editor/contributions/contribute.html:273
 msgid "Upload Resource"
 msgstr "Subir recurso"
 
-#: templates/repository/editor/contributions/contribute.html:274
+#: templates/repository/editor/contributions/contribute.html:276
 msgid ""
 "Please upload a single <strong>.zip</strong> file or any number of files of "
 "the following type: <strong>.doc(x), .odt, .rtf, .pdf, .tmx, .sdltm, .xml, ."
@@ -420,7 +437,7 @@ msgstr ""
 "cantidad de archivos del siguiente tipo: <strong> .doc(x), .odt, .rtf, ."
 "pdf, .tmx, .sdltm, .xml, .tbx, .xls(x) o .txt </strong> hasta 100MB."
 
-#: templates/repository/editor/contributions/contribute.html:276
+#: templates/repository/editor/contributions/contribute.html:278
 msgid ""
 "In case the data you wish to upload are larger than 100MB, please contact us "
 "to provide an SFTP link for direct download or consider uploading smaller "
@@ -430,11 +447,11 @@ msgstr ""
 "póngase en contacto con nosotros para proporcionar un enlace SFTP de carga "
 "directa o contemple la posibilidad de subir archivos más pequeños."
 
-#: templates/repository/editor/contributions/contribute.html:281
+#: templates/repository/editor/contributions/contribute.html:283
 msgid "Group(s)"
 msgstr "Grupo(s)"
 
-#: templates/repository/editor/contributions/contribute.html:290
+#: templates/repository/editor/contributions/contribute.html:292
 msgid ""
 "The group(s) the language resource can be shared with (hold down the CTRL "
 "key to select multiple groups)."
@@ -442,7 +459,7 @@ msgstr ""
 "Idioma(s) del recurso (para recursos multilingües, mantenga pulsada la tecla "
 "CTRL para seleccionar varios idiomas)"
 
-#: templates/repository/editor/contributions/contribute.html:296
+#: templates/repository/editor/contributions/contribute.html:298
 #, python-format
 msgid ""
 "I agree with the <a target=\"_blank\" href=\"%(legal_url)s#Sharing"
@@ -452,11 +469,11 @@ msgstr ""
 "\"> Términos de servicio de subida de recursos lingüísticos para los "
 "titulares de datos </a>"
 
-#: templates/repository/editor/contributions/contribute.html:308
+#: templates/repository/editor/contributions/contribute.html:310
 msgid "Submit"
 msgstr "Enviar"
 
-#: templates/repository/editor/contributions/contribute.html:309
+#: templates/repository/editor/contributions/contribute.html:311
 msgid "Reset"
 msgstr "Reiniciar"
 

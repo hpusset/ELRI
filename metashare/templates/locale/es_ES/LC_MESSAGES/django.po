@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-14 14:12+0100\n"
-"PO-Revision-Date: 2019-03-14 14:21+0100\n"
+"POT-Creation-Date: 2019-03-25 15:41+0100\n"
+"PO-Revision-Date: 2019-03-26 10:48+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -66,25 +66,13 @@ msgstr ""
 "\"Este sitio web utiliza cookies para mejorar su experiencia de usuario. Si "
 "continúa navegando, consideramos que acepta su uso. \""
 
-#: templates/base.html:55
-msgid "\"OK, I aggree \""
-msgstr "\"Acepto\""
-
-#: templates/base.html:56
-msgid "\"Decline \""
-msgstr "\"Rechazar\""
+#: templates/base.html:55 templates/base.html.py:58
+msgid "\"OK\""
+msgstr "\"Entendido\""
 
 #: templates/base.html:57
-msgid "\"Allow cookies\""
-msgstr "\"Aceptar\""
-
-#: templates/base.html:58
 msgid "\"Learn more\""
 msgstr "\"Leer más\""
-
-#: templates/base.html:59
-msgid "'Cookie Policy'"
-msgstr "'Política de cookies'"
 
 #: templates/breadcrumbs.html:3 templates/header.html:11
 #: templates/header.html.py:12
@@ -164,10 +152,10 @@ msgid ""
 "search (via the Browse Resources menu) or contribute ((via the Contribute "
 "Resources menu) language resources."
 msgstr ""
-"Los usuarios nuevos deben registrarse <a href=\"../accounts/create/\"> aquí "
-"</a>. Una vez validadas las credenciales de su cuenta, se puede iniciar "
-"sesión y explorar recursos lingüísticos (mediante el menú Explorar recursos) "
-"o bien contribuir a ellos (a través del menú Contribuir recursos)."
+"Los nuevos usuarios deben registrarse <a href=\"../accounts/create/\">aquí</"
+"a>. Una vez validadas las credenciales de su cuenta, se puede iniciar sesión "
+"y explorar recursos lingüísticos (mediante el menú Explorar recursos) o bien "
+"contribuir a ellos (a través del menú Contribuir recursos)."
 
 #: templates/elri-info.html:25
 msgid ""
@@ -266,6 +254,7 @@ msgstr ""
 "través de ELRI."
 
 #: templates/elri-info.html:49
+#: templates/repository/resource_view/distribution.html:31
 msgid "Licences"
 msgstr "Licencias"
 
@@ -327,8 +316,8 @@ msgid ""
 "institutions and translation centres."
 msgstr ""
 "Este sitio web es la Estación Nacional de Transmisión de datos de ELRI en "
-"España, donde las instituciones públicas y los centros de traducción pueden "
-"recopilar, preparar y compartir recursos lingüísticos."
+"España, donde las instituciones públicas y los centros de traducción "
+"públicos pueden recopilar, preparar y compartir recursos lingüísticos."
 
 #: templates/frontpage.html:17
 msgid ""
@@ -338,9 +327,9 @@ msgid ""
 "a> programme."
 msgstr ""
 "Las estaciones nacionales de transmisión se desarrollan dentro del proyecto "
-"europeo <a href=\"http://www.elri-project.eu\"> ELRI </a>, financiado por el "
+"europeo <a href=\"http://www.elri-project.eu\">ELRI</a>, financiado por el "
 "programa <a href=\"http://ec.europa.eu/inea/en/connecting-europe-facility\"> "
-"Connecting Europe Facility </a>."
+"Connecting Europe Facility</a>."
 
 #: templates/frontpage.html:19
 msgid "Help promote language equality in Europe by joining the ELRI network!"
@@ -840,8 +829,8 @@ msgstr ""
 "podrán utilizarse determinados subconjuntos de dichos datos cuando se "
 "investigue el uso indebido de este sitio web. Asimismo, en algunas "
 "ocasiones, podrán utilizarse para resolver problemas técnicos. Por lo demás, "
-"la información registrada no se transmitirá a ningún tercero, salvo que sea "
-"legalmente obligatorio hacerlo. "
+"la información registrada no se transmitirá a ningún tercero, salvo que "
+"exista obligación legal de hacerlo."
 
 #: templates/legal.html:56
 msgid "<b>Data protection</b>"
@@ -919,30 +908,89 @@ msgid ""
 "enhance user experience."
 msgstr ""
 "Este  sitio  web  utiliza  cookies  para  facilitar  la  operación  del  "
-"servicio  y  mejorar  la experiencia de los usuarios.</p><br>\n"
-"<h3>¿Qué cookies utiliza este sitio web?</h3>\n"
+"servicio  y  mejorar  la experiencia de los usuarios. Una cookie es un "
+"pequeño archivo de texto que un sitio web guarda en su ordenador o "
+"dispositivo móvil cuando usted visita el sitio. Permite que el sitio web "
+"recuerde sus acciones y preferencias (como el inicio de sesión, el idioma y "
+"otras preferencias de visualización) durante un período de tiempo, por lo "
+"que no tendrá que volver a introducirlas cada vez que regrese al sitio o que "
+"navegue de una página a otra.</p><br>\n"
+"<h4>¿Qué cookies utiliza este sitio web?</h4>\n"
 "<p>Este sitio web utiliza únicamente cookies técnicas. Las cookies técnicas "
-"son aquellas que  permiten  al  usuario  la  navegación  a  través  de  una  "
-"página  web,  plataforma  o aplicación y la utilización delas diferentes "
-"opciones o servicios que en ella existan como,  por  ejemplo,  controlar  "
-"el  tráfico  y  la  comunicación  de  datos,  identificar  la sesión, "
-"acceder a partes de acceso restringido, recordar los elementos que integran "
-"dicha   sesión   y,   en   definitiva,   permitir   cualquier   acción   "
-"relacionada   con   las funcionalidades del sitio web.</p>\n"
-"<p>Las siguientes cookies son las que utiliza este sitio web:</"
-"p><ul><li>sessionid :        datos de sesión y autenticación  </li><li> "
-"csrftoken:         seguridad de los campos de formularios  </li></ul><p> El "
-"Usuario acepta, por la utilización de este sitio web, el tratamiento de la "
-"información recabada  en  la  forma  y  con  los  fines  anteriormente  "
-"mencionados.  Y,  asimismo, reconoce estar al tantode la posibilidad de "
-"rechazar el tratamiento de tales datos o información rechazando el uso de "
-"Cookies mediante la selección de la configuración apropiada a tal fin en su "
-"navegador. Si bien esta opción de bloqueo de cookies en su navegador  puede  "
-"no  permitirle  el  uso  pleno  de  todas  las  funcionalidades  del  sitio "
-"web.</p><p>Recuerde que Usted puede eliminarlas en cualquier momento, o "
-"rechazarlas antes de su instalación configurando el programa de navegación "
-"que utiliza. Por favor, visite la página de ayuda de su navegador para "
-"aprender cómo gestionar las cookies en su equipo."
+"son aquellas que  permiten  al  usuario\n"
+" la  navegación  a  través  de  una  página  web,  plataforma  o aplicación "
+"y la utilización de las diferentes opciones o servicios que en ella existan "
+"como,  por  ejemplo,  controlar  el  tráfico  y  la  comunicación  de  "
+"datos,  identificar  la sesión, acceder a partes de acceso restringido, "
+"recordar los elementos que integran dicha   sesión   y,   en   definitiva,   "
+"permitir   cualquier   acción   relacionada   con   las funcionalidades del "
+"sitio web.</p>\n"
+"<p>Las siguientes cookies son las que utiliza este sitio web:</p>\n"
+"<table style=\"border : 1px solid black;border-collapse:collapse;"
+"\"><thead><tr>\n"
+"<th style=\"text-align : left; vertical-align : middle; border-bottom : 1px "
+"solid black; padding-left: 5px;\">Nombre</th>\n"
+"<th style=\"text-align : left; vertical-align : middle; border-bottom : 1px "
+"solid black;padding-left: 5px;\">Tipo</th>\n"
+"<th style=\"text-align : left; vertical-align : middle; border-bottom : 1px "
+"solid black;padding-left: 5px;\">Propósito</th>\n"
+"<th style=\"text-align : left; vertical-align : bottom; border-bottom : 1px "
+"solid black;padding-left: 5px;\">Fecha de Expiración</th>\n"
+"</tr></thead>\n"
+"<tbody>\n"
+"<tr ><td style=\"text-align : left; vertical-align : middle; border-bottom : "
+"1px solid black;color : black;\">sessionid: datos de sesión y autenticación "
+"</td>\n"
+"<td style=\"text-align : left; vertical-align : middle; border-bottom : 1px "
+"solid black;color : black;\">Funcional</td>\n"
+"<td style=\"text-align : left; vertical-align : middle; border-bottom : 1px "
+"solid black;color : black;\">Mejorar la navegación del usuario y la "
+"funcionalidad del sitio web.</td>\n"
+"<td style=\"text-align : left; vertical-align : middle; border-bottom : 1px "
+"solid black;color : black;\">2 semanas</td></tr>\n"
+"<tr ><td style=\"text-align : left; vertical-align : middle; border-bottom : "
+"1px solid black;color : black;\">csrftoken: formulario campos seguridad</"
+"td>\n"
+"<td style=\"text-align : left; vertical-align : middle; border-bottom : 1px "
+"solid black;color : black;\">Rendimiento</td>\n"
+"<td style=\"text-align : left; vertical-align : middle; border-bottom : 1px "
+"solid black;color : black;\"> Proteger el sitio web de ataques maliciosos y "
+"asegurar que el sitio web funciona correctamente.</td>\n"
+"<td style=\"text-align : left; vertical-align : middle; border-bottom : 1px "
+"solid black;color : black;\">12 meses</td></tr>\n"
+"<tr ><td style=\"text-align : left; vertical-align : middle; border-bottom : "
+"1px solid black;color : black;\">cookieconsent_status</td>\n"
+"<td style=\"text-align : left; vertical-align : middle; border-bottom : 1px "
+"solid black;color : black;\">Funcional</td>\n"
+"<td style=\"text-align : left; vertical-align : middle; border-bottom : 1px "
+"solid black;color : black;\"> Para registrar el reconocimiento del usuario "
+"en cuanto a la política de cookies.</td>\n"
+"<td style=\"text-align : left; vertical-align : middle; border-bottom : 1px "
+"solid black;color : black;\">12 meses</td></tr>\n"
+"</tbody></table>\n"
+"<br>\n"
+"<p>Al utilizar este sitio web, el usuario acepta el uso de la\n"
+"información antes mencionada y reconoce la posibilidad de rechazar dicho uso "
+"de información y datos rechazando el uso de cookies a través de la\n"
+"correspondiente configuración del navegador de Internet. El bloqueo del uso "
+"de cookies puede limitar la funcionalidad de este sitio web.</p>\n"
+"<p>Recuerde que usted podrá, en todo momento, eliminar o configurar las "
+"cookies mediante la configuración de su navegador de Internet. \n"
+"Por favor, visite las secciones de ayuda específicas de su navegador para "
+"obtener más información:</p>\n"
+"<ul><li>Configuración de cookies en<a href=\"https://support.microsoft.com/"
+"es-es/help/17442/windows-internet-explorer-delete-manage-cookies\", target="
+"\"_blank\"> Internet Explorer</a></li>\n"
+"<li>Configuración de cookies en <a href=\"https://support.mozilla.org/es/kb/"
+"cookies-information-websites-store-on-your-computer\", target=\"_blank"
+"\">Firefox</a></li>\n"
+"<li>Configuración de cookies en <a href=\"https://support.google.com/chrome/"
+"answer/95647?hl=es&ref_topic=14666\", target=\"_blank\">Chrome</a></li>\n"
+"<li>Configuración de cookies en <a href=\"https://support.apple.com/es-es/"
+"guide/safari/manage-cookies-and-website-data-sfri11471/mac\", target=\"_blank"
+"\">Safari web </a> y <a href=\"https://support.apple.com/es-es/HT201265\", "
+"target=\"_blank\">Safari para iOS.</a></li>\n"
+"</ul>"
 
 #: templates/legal.html:74
 msgid "<b>ELRI Services misuse and notification regarding IPR infringement</b>"
@@ -1258,7 +1306,9 @@ msgstr ""
 
 #: templates/privacy.html:11
 msgid "<b>ELRI National Relay Station Data Protection Notice</b>"
-msgstr "<b>Repositorio nacional ELRI Protección de Datos</b>"
+msgstr ""
+"<b>Aviso de protección de datos del repositorio nacional del consorcio ELRI</"
+"b>"
 
 #: templates/privacy.html:12
 msgid ""
@@ -1271,8 +1321,8 @@ msgid ""
 "        secure  and  reliable  sharing  of Language Resources (LRs) by "
 "different stakeholders at EU level."
 msgstr ""
-"La Comisión Europea, en el marco del Mecanismo «Conectar Europa», ha "
-"concedido una subvención en virtud del acuerdo n.º INEA/CEF/ICT/"
+"La Comisión Europea, en el marco del Mecanismo «Connecting Europe Facility», "
+"ha concedido una subvención en virtud del acuerdo n.º INEA/CEF/ICT/"
 "A2016/1330962 a la acción «European Language Resource Infrastructure "
 "(ELRI)» (acción n.º 2016-EU-IA-0111), que tiene por objeto la creación de "
 "una red que permita compartir recursos lingüísticos de forma accesible, "
@@ -1319,7 +1369,7 @@ msgstr ""
 "Agência para a Modernização Administrativa \n"
 "(<a href=\"https://www.ama.gov.pt/\">AMA</a>), la Dublin City University "
 "School of Computing \n"
-" (<a href=\"https://www.computing.dcu.ie\">DCU</a>),, la Evaluations and "
+" (<a href=\"https://www.computing.dcu.ie\">DCU</a>), la Evaluations and "
 "Language Resource Distribution \n"
 "Agency (<a href=\"http://www.elda.org\">ELDA</a>),  la Faculdade de Ciências "
 "da Universidade de Lisboa (<a href=\"https://ciencias.ulisboa.pt\">FCUL</"
@@ -1328,14 +1378,14 @@ msgstr ""
 "com\">Linkare</a>) \n"
 " y el Reino de España, representado por la Secretaría de Estado para la "
 "Sociedad de la Información y la Agenda Digital (<a href=\"https://www."
-"mincotur.gob.es/telecomunicaciones\">SESIAD</a>) , son conjuntamente "
+"mincotur.gob.es/telecomunicaciones\">SESIAD</a>), son conjuntamente "
 "responsables de la recogida y el tratamiento de datos personales. El "
 "consorcio ELRI y todos sus miembros manifiestan su compromiso con la "
 "protección la privacidad de la información con fines específicos y frente a "
 "cualquier riesgo, así como con el derecho fundamental a la protección de los "
 "datos personales. La acción ELRI pone en marcha una serie de sitios web "
 "(«repositorios nacionales») dedicados a la recogida, al tratamiento y al "
-"intercambio de recursos lingüísticos en distintos Estados miembros de la "
+"intercambio de recursos lingüísticos en distintos Estados Miembros de la "
 "Unión Europea. Mediante la presente política de protección de datos, se "
 "informa al usuario del tratamiento de sus datos personales que se realiza "
 "cuando visita el sitio web o utiliza los servicios del repositorio."
@@ -1360,7 +1410,7 @@ msgstr ""
 #: templates/privacy.html:40
 msgid " <li>  E-Mail: <a href=\"mailto:EMAIL_ORG\" >EMAIL_ORG</a> </li> "
 msgstr ""
-" <li>  E-Mail: <a href=\"mailto:soporte_plantl_elri@mineco.es \" "
+" <li>  Correo de contacto: <a href=\"mailto:soporte_plantl_elri@mineco.es \" "
 ">soporte_plantl_elri@mineco.es </a>  </li>"
 
 #: templates/privacy.html:44
@@ -1393,8 +1443,8 @@ msgid ""
 " Within an ELRI National Relay Station, personal data are only processed for "
 "the following purposes:"
 msgstr ""
-"Repositorio nacional ELRI solamente realiza el tratamiento de los datos "
-"personales con las siguientes finalidades:"
+"El repositorio ELRI solamente realiza el tratamiento de los datos personales "
+"con las siguientes finalidades:"
 
 #: templates/privacy.html:58
 msgid " Establishment of contact and correspondence with visitors and users "
@@ -1864,7 +1914,7 @@ msgstr "Obtener todos los recursos que contienen inglés e italiano"
 #: templates/repository/api/help.html:225
 #: templates/repository/resource_view/linguality.html:3
 msgid "Linguality"
-msgstr "Linguality"
+msgstr "Lingüismo"
 
 #: templates/repository/api/help.html:240
 msgid "Get all bilingual resources"
@@ -2052,7 +2102,7 @@ msgstr "%(resource)s &ndash; Contact Resource Maintainer &ndash; ELRI"
 #: templates/repository/lr_not_downloadable.html:29
 #: templates/repository/report_not_downloadable.html:28
 msgid "Contact Resource Maintainer"
-msgstr "Contacto conel mantenedor de recursos"
+msgstr "Contacta con el responsable del recurso"
 
 #: templates/repository/download_contact_form.html:13
 #: templates/stats/mystats.html:29
@@ -2062,12 +2112,12 @@ msgstr "Nombre del recurso"
 #: templates/repository/download_contact_form.html:17
 #, python-format
 msgid "Resource contact name%(resourceContactName|pluralize)s"
-msgstr "Resource contact name%(resourceContactName|pluralize)s"
+msgstr "Nombre de la persona de contacto%(resourceContactName|pluralize)s"
 
 #: templates/repository/download_contact_form.html:21
 #, python-format
 msgid "Resource contact email%(resourceContactEmail|pluralize)s"
-msgstr "Resource contact email%(resourceContactEmail|pluralize)s"
+msgstr "Email de la persona de contacto%(resourceContactEmail|pluralize)s"
 
 #: templates/repository/download_contact_form.html:25
 msgid "Your username"
@@ -2544,47 +2594,63 @@ msgstr "Cobertura de tiempo"
 msgid "Geographic coverage"
 msgstr "Cobertura geográfica"
 
-#: templates/repository/resource_view/distribution.html:43
+#: templates/repository/resource_view/distribution.html:5
+msgid "Distribution"
+msgstr "Distribución "
+
+#: templates/repository/resource_view/distribution.html:9
+msgid "Availability:"
+msgstr "Disponibilidad: "
+
+#: templates/repository/resource_view/distribution.html:17
+msgid "Availability Start date:"
+msgstr "Disponible desde:"
+
+#: templates/repository/resource_view/distribution.html:25
+msgid "Availability End Date:"
+msgstr "Disponible hasta:"
+
+#: templates/repository/resource_view/distribution.html:41
 msgid "Distribution Details"
 msgstr "Detalles de la distribución"
 
-#: templates/repository/resource_view/distribution.html:49
+#: templates/repository/resource_view/distribution.html:47
 msgid "Distribution Medium"
 msgstr "Medio de distribución"
 
-#: templates/repository/resource_view/distribution.html:57
+#: templates/repository/resource_view/distribution.html:55
 msgid "Download location"
 msgstr "Ubicación de descarga"
 
-#: templates/repository/resource_view/distribution.html:66
+#: templates/repository/resource_view/distribution.html:64
 msgid "Execution locations"
 msgstr "Ubicaciones de ejecución"
 
-#: templates/repository/resource_view/distribution.html:66
+#: templates/repository/resource_view/distribution.html:64
 msgid "Execution location"
 msgstr "Ubicación de ejecución"
 
-#: templates/repository/resource_view/distribution.html:75
+#: templates/repository/resource_view/distribution.html:73
 msgid "Fee"
 msgstr "Cuota"
 
-#: templates/repository/resource_view/distribution.html:83
+#: templates/repository/resource_view/distribution.html:81
 msgid "Attribution Details"
 msgstr "Detalles de atribución"
 
-#: templates/repository/resource_view/distribution.html:91
+#: templates/repository/resource_view/distribution.html:89
 msgid "Distribution Rights Holders"
 msgstr "Titulares de derechos de distribución"
 
-#: templates/repository/resource_view/distribution.html:101
+#: templates/repository/resource_view/distribution.html:99
 msgid "IPR Holders"
 msgstr "Titulares de DPI"
 
-#: templates/repository/resource_view/distribution.html:116
+#: templates/repository/resource_view/distribution.html:114
 msgid "Personal Data"
 msgstr "Datos personales"
 
-#: templates/repository/resource_view/distribution.html:117
+#: templates/repository/resource_view/distribution.html:115
 #: templates/stats/mystats.html:45
 msgid "YES"
 msgstr "SÍ"
@@ -2670,7 +2736,7 @@ msgstr "Condiciones"
 
 #: templates/repository/resource_view/linguality.html:7
 msgid "Linguality type"
-msgstr "Linguality type"
+msgstr "Tipo de Lingüismo"
 
 #: templates/repository/resource_view/linguality.html:15
 msgid "Multi-linguality type"
@@ -2714,6 +2780,10 @@ msgstr "Ver la descripción del recurso en todos los idiomas disponibles"
 msgid "DSI Relevance"
 msgstr "Relevancia DSI"
 
+#: templates/repository/resource_view/lr_view.html:238
+msgid "Back"
+msgstr "Atrás"
+
 #: templates/repository/resource_view/lr_view.html:251
 msgid "Edit Resource"
 msgstr "Editar Recurso"
@@ -2729,7 +2799,7 @@ msgstr "Validar recurso"
 #: templates/repository/resource_view/lr_view.html:277
 #, python-format
 msgid "Contact Person%(contact_person_dicts|length|pluralize)s"
-msgstr "Contact Person%(contact_person_dicts|length|pluralize)s"
+msgstr "Persona de Contacto%(contact_person_dicts|length|pluralize)s"
 
 #: templates/repository/resource_view/lr_view.html:288
 msgid "toolService"
@@ -2755,7 +2825,7 @@ msgstr "Para miembros de %(institution)s"
 
 #: templates/repository/resource_view/metadata.html:5
 msgid "Metadata"
-msgstr "Metadata"
+msgstr "Metadatos"
 
 #: templates/repository/resource_view/metadata.html:10
 msgid "Created"
@@ -3529,6 +3599,24 @@ msgstr "contador de recursos"
 #: templates/stats/usagestats.html:283
 msgid "never used"
 msgstr "nunca utilizado"
+
+#~ msgid "Resource contact name"
+#~ msgstr "Nombre del responsable del recurso"
+
+#~ msgid "Resource contact email"
+#~ msgstr "Email del responsable del recurso"
+
+#~ msgid "\"OK, I aggree \""
+#~ msgstr "\"Acepto\""
+
+#~ msgid "\"Decline \""
+#~ msgstr "\"Rechazar\""
+
+#~ msgid "\"Allow cookies\""
+#~ msgstr "\"Aceptar\""
+
+#~ msgid "'Cookie Policy'"
+#~ msgstr "'Política de cookies'"
 
 #~ msgid ""
 #~ "This website uses functional cookies to facilitate the operation of the "
