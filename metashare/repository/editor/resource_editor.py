@@ -739,7 +739,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                         l_info, access_links, access = licences[l]
                         if l == 'publicDomain':
                             access_links=STATIC_URL + 'metashare/licences/publicDomain.txt'
-                        if l == 'openUnderPSI':
+                        if l == 'openUnder-PSI':
                             access_links=STATIC_URL + 'metashare/licences/openUnderPSI.txt'
                         
                         #add access file to the lr.archive.zip file 
