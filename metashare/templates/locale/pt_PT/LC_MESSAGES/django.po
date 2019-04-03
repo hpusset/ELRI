@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-03 13:50+0200\n"
-"PO-Revision-Date: 2019-04-03 14:17+0200\n"
+"PO-Revision-Date: 2019-04-03 16:20+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_PT\n"
@@ -1195,14 +1195,10 @@ msgid "Don&rsquo;t have an account, yet? Click here to create one."
 msgstr "Ainda não tem um conta? Clique aqui para criar uma."
 
 #: templates/privacy.html:7
-#, fuzzy
-#| msgid "<strong>ELRI Terms of Service</strong>"
 msgid "<strong>ELRI NRS Privacy Policy</strong>"
 msgstr "<strong>Termos de Serviço ELRI</strong>"
 
 #: templates/privacy.html:11
-#, fuzzy
-#| msgid "ELRI National Relay Station "
 msgid "<b>ELRI National Relay Station Data Protection Notice</b>"
 msgstr "Estação de Transmissão Nacional ELRI "
 
@@ -2556,24 +2552,20 @@ msgid "Geographic coverage"
 msgstr "Cobertura Geográfica"
 
 #: templates/repository/resource_view/distribution.html:5
-#, fuzzy
-#| msgid "Distribution Medium"
 msgid "Distribution"
-msgstr "Meio de Distribuição"
+msgstr "Distribuição"
 
 #: templates/repository/resource_view/distribution.html:9
-#, fuzzy
-#| msgid "Available Filters"
 msgid "Availability:"
-msgstr "Filtros Disponíveis"
+msgstr "Disponibilidade"
 
 #: templates/repository/resource_view/distribution.html:17
 msgid "Availability Start date:"
-msgstr ""
+msgstr "Data de início da disponibilidade:"
 
 #: templates/repository/resource_view/distribution.html:25
 msgid "Availability End Date:"
-msgstr ""
+msgstr "Data de fim da disponibilidade:"
 
 #: templates/repository/resource_view/distribution.html:41
 msgid "Distribution Details"
@@ -2745,7 +2737,7 @@ msgstr "Relevância para o DSI"
 
 #: templates/repository/resource_view/lr_view.html:238
 msgid "Back"
-msgstr ""
+msgstr "Voltar"
 
 #: templates/repository/resource_view/lr_view.html:251
 msgid "Edit Resource"
