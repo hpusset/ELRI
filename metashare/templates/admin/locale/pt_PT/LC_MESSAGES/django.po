@@ -7,52 +7,41 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-08 09:51+0100\n"
-"PO-Revision-Date: 2019-02-21 13:19+0000\n"
+"POT-Creation-Date: 2019-04-03 13:50+0200\n"
+"PO-Revision-Date: 2019-04-03 14:15+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_PT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: templates/admin/base.html:39
 msgid ""
 "\"This site uses cookies to enhance your user experience. By clicking any "
 "link on this page you are giving your consent for us to set cookies.\" "
 msgstr ""
+"\"Este site usa cookies para melhorar a experiencia do utilizador. Ao clicar "
+"em qualquer link desta página está a dar o seu consentimento para que "
+"possamos definir cookies.\" "
 
-#: templates/admin/base.html:40
-msgid "\"OK, I aggree \""
-msgstr ""
-
-#: templates/admin/base.html:41
-msgid "\"Decline \""
-msgstr ""
+#: templates/admin/base.html:40 templates/admin/base.html.py:43
+msgid "\"OK\""
+msgstr "\"OK\""
 
 #: templates/admin/base.html:42
-msgid "\"Allow cookies\""
-msgstr ""
-
-#: templates/admin/base.html:43
 msgid "\"Learn more\""
-msgstr ""
+msgstr "\"Saber mais\""
 
-#: templates/admin/base.html:44
-msgid "'Cookie Policy'"
-msgstr ""
-
-#: templates/admin/base.html:58 templates/admin/delete_confirmation.html:6
+#: templates/admin/base.html:57 templates/admin/delete_confirmation.html:6
 #: templates/admin/delete_selected_confirmation.html:6
 msgid "Home"
 msgstr "Início"
 
 #: templates/admin/base_site.html:5
-#, fuzzy
-#| msgid "ELRC-SHARE backend"
 msgid "ELRI backend"
-msgstr "Backend do ELRC-SHARE"
+msgstr "Backend do ELRI"
 
 #: templates/admin/delete_confirmation.html:10
 #: templates/admin/submit_line.html:4
@@ -85,8 +74,8 @@ msgid ""
 "Are you sure you want to delete the %(object_name)s \"%(escaped_object)s\"? "
 "All of the following related items will be deleted:"
 msgstr ""
-"Tem a certeza que quer apagar os %(object_name)s “%(escaped_object)s”? Todos "
-"os objectos relacionados serão apagados:"
+"Tem a certeza que quer apagar os %(object_name)s \"%(escaped_object)s\"? "
+"Todos os objectos relacionados serão apagados:"
 
 #: templates/admin/delete_confirmation.html:38
 #: templates/admin/delete_selected_confirmation.html:43
@@ -149,3 +138,15 @@ msgstr "Cancelar"
 #: templates/admin/submit_line.html:8
 msgid "Abort editing and discard any changes"
 msgstr "Aborta a edição e descartar as alterações"
+
+#~ msgid "\"OK, I aggree \""
+#~ msgstr "\"Ok, concordo\""
+
+#~ msgid "\"Decline \""
+#~ msgstr "\"Negar\""
+
+#~ msgid "\"Allow cookies\""
+#~ msgstr "\"Permitir cookies\""
+
+#~ msgid "'Cookie Policy'"
+#~ msgstr "'Politica de Cookies'"

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-08 09:51+0100\n"
-"PO-Revision-Date: 2018-11-09 12:01+0100\n"
+"POT-Creation-Date: 2019-04-03 13:50+0200\n"
+"PO-Revision-Date: 2019-04-03 14:04+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_PT\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: repository/editor/__init__.py:113
 msgid "Upload new resource description(s)"
@@ -42,7 +42,7 @@ msgstr[1] "Todos %(total_count)s selecionados"
 
 #: repository/editor/form_fields.py:18
 msgid "There may be only one entry with key \"{}\"."
-msgstr "Só pode existir uma entrada com a chave “{}”."
+msgstr "Só pode existir uma entrada com a chave \"{}\"."
 
 #: repository/editor/form_fields.py:69
 #, python-format
@@ -167,7 +167,7 @@ msgstr "Documento"
 # Please confirm, revise and advise please!
 # Thanks!
 #: repository/editor/manual_admin_registration.py:145
-#: repository/editor/resource_editor.py:2157
+#: repository/editor/resource_editor.py:2171
 #: repository/editor/superadmin.py:268
 #, python-format
 msgid "%(name)s object with primary key %(key)r does not exist."
@@ -190,7 +190,7 @@ msgstr "Mudar %s"
 msgid ""
 "The %(name)s \"%(obj)s\" was saved successfully. You may edit it again below."
 msgstr ""
-"O %(name)s “%(obj)s” foi gravado com sucesso. Pode editar novamente abaixo."
+"O %(name)s \"%(obj)s\" foi gravado com sucesso. Pode editar novamente abaixo."
 
 #: repository/editor/related_widget.py:70
 msgid "Edit related model"
@@ -204,95 +204,101 @@ msgstr "Acrescentar informações"
 msgid "Delete related model"
 msgstr "Remover modelo relacionado"
 
-#: repository/editor/resource_editor.py:566
+#: repository/editor/resource_editor.py:572
 msgid ""
 "Something went wrong when processing the resource with the tm2tmx toolchain."
-msgstr ""
+msgstr "Ocorreu um erro ao processar o recurso com a toolchain tm2tmx."
 
-#: repository/editor/resource_editor.py:571
-#: repository/editor/resource_editor.py:582
-#: repository/editor/resource_editor.py:593
-#: repository/editor/resource_editor.py:619
-#: repository/editor/resource_editor.py:629
-#: repository/editor/resource_editor.py:640
+#: repository/editor/resource_editor.py:577
+#: repository/editor/resource_editor.py:588
+#: repository/editor/resource_editor.py:599
+#: repository/editor/resource_editor.py:625
+#: repository/editor/resource_editor.py:635
+#: repository/editor/resource_editor.py:646
 #, python-format
 msgid "Error when processing resource %(rname)s"
-msgstr ""
+msgstr "Erro ao processar o recurso %(rname)s"
 
-#: repository/editor/resource_editor.py:571
-#: repository/editor/resource_editor.py:582
-#: repository/editor/resource_editor.py:593
-#: repository/editor/resource_editor.py:619
-#: repository/editor/resource_editor.py:629
-#: repository/editor/resource_editor.py:640
+#: repository/editor/resource_editor.py:577
+#: repository/editor/resource_editor.py:588
+#: repository/editor/resource_editor.py:599
+#: repository/editor/resource_editor.py:625
+#: repository/editor/resource_editor.py:635
+#: repository/editor/resource_editor.py:646
 #, python-format
 msgid ""
 "An error occurred when processing the resource %(rname)s. Please check the "
 "error.log attached to the resource. Contact the ELRI NRS support team for "
 "more information at %(email)s"
 msgstr ""
+"Ocorreu um erro ao processar o recurso %(rname)s. Por favor verifique o "
+"error.log anexado ao recurso. Contacte o suporte da equipa do NRS ELRI para "
+"mais informações no %(email)s"
 
-#: repository/editor/resource_editor.py:573
-#: repository/editor/resource_editor.py:584
-#: repository/editor/resource_editor.py:595
-#: repository/editor/resource_editor.py:621
-#: repository/editor/resource_editor.py:631
-#: repository/editor/resource_editor.py:642
+#: repository/editor/resource_editor.py:579
+#: repository/editor/resource_editor.py:590
+#: repository/editor/resource_editor.py:601
+#: repository/editor/resource_editor.py:627
+#: repository/editor/resource_editor.py:637
+#: repository/editor/resource_editor.py:648
 msgid ""
 "There was an error sending out the ERROR notification email to the group "
 "reviewers. Please contact them directly."
 msgstr ""
+"Ocorreu um erro ao enviar a notificação ERROR ao grupo dos revisores. Por "
+"favor contacte-os diretamente."
 
-#: repository/editor/resource_editor.py:577
+#: repository/editor/resource_editor.py:583
 msgid "Invalid json response from tm2tmx toolchain: "
-msgstr ""
+msgstr "Resposta inválida json da toolchain tm2tmx:"
 
-#: repository/editor/resource_editor.py:588
+#: repository/editor/resource_editor.py:594
 msgid "The POST request to the tm2tmx toolchain has failed."
-msgstr ""
+msgstr "O pedido POST à toolchain tm2tmx falhou."
 
-#: repository/editor/resource_editor.py:614
+#: repository/editor/resource_editor.py:620
 msgid ""
 "Something went wrong when processing the resource with the doc2tmx "
 "toolchain.\n"
 " "
-msgstr ""
+msgstr "Ocorreu um erro ao processar o recurso com a toolchain doc2tmx"
 
-#: repository/editor/resource_editor.py:624
+#: repository/editor/resource_editor.py:630
 msgid "Invalid json response from doc2tmx toolchain: "
-msgstr ""
+msgstr "Resposta inválida json da toolchain doc2tmx:"
 
-#: repository/editor/resource_editor.py:635
+#: repository/editor/resource_editor.py:641
 msgid ""
 "The POST request to the doc2tmx toolchain has failed.\n"
 " "
-msgstr ""
+msgstr "O pedido POST à toolchain doc2tmx falhou."
 
-#: repository/editor/resource_editor.py:686
-#, fuzzy
-#| msgid "Only ingested resources can be published."
+#: repository/editor/resource_editor.py:692
 msgid "Only ingested or error resources can be re-processed."
-msgstr "Só recursos ingeridos podem ser publicados."
-
-#: repository/editor/resource_editor.py:690
-msgid "Resource(s) re-processed correctly."
-msgstr ""
-
-#: repository/editor/resource_editor.py:693
-msgid "Resource(s) processed correctly."
-msgstr ""
+msgstr "Só recursos ingeridos podem ser reprocessados."
 
 #: repository/editor/resource_editor.py:696
+msgid "Resource(s) re-processed correctly."
+msgstr "Recurso(s) reprocessados corretamente."
+
+#: repository/editor/resource_editor.py:699
+msgid "Resource(s) processed correctly."
+msgstr "Recurso(s) processado(s) corretamente."
+
+#: repository/editor/resource_editor.py:702
 msgid ""
 "Something went wrong when processing the resource(s). Re-process the error "
 "resources and check the error.log file(s). You will receive a notification "
 "email."
 msgstr ""
+"Ocorreu um erro no processamento do(s) recurso(s). Re-processe o recurso que "
+"deu erro e veja os ficheiros error.log. Irá receber uma notificação por e-"
+"mail."
 
-#: repository/editor/resource_editor.py:702
-#: repository/editor/resource_editor.py:841
-#: repository/editor/resource_editor.py:863
-#: repository/editor/resource_editor.py:945
+#: repository/editor/resource_editor.py:708
+#: repository/editor/resource_editor.py:855
+#: repository/editor/resource_editor.py:877
+#: repository/editor/resource_editor.py:959
 msgid ""
 "You do not have the permission to perform this action for all selected "
 "resources."
@@ -300,97 +306,104 @@ msgstr ""
 "Não tem permissões para executar esta acção para todos os recursos "
 "selecionados."
 
-#: repository/editor/resource_editor.py:706
-#, fuzzy
-#| msgid "Remove owners from selected resources"
+#: repository/editor/resource_editor.py:712
 msgid "Re-process selected resources"
-msgstr "Remover proprietários dos recursos selecionados"
+msgstr "Reprocessar recursos selecionados"
 
-#: repository/editor/resource_editor.py:795
+#: repository/editor/resource_editor.py:807
 #, python-format
 msgid "Resource_name: %s  \n"
-msgstr ""
-
-#: repository/editor/resource_editor.py:797
-msgid "License: "
-msgstr ""
-
-#: repository/editor/resource_editor.py:799
-msgid "\t Restrictions of Use: None\n"
-msgstr ""
-
-#: repository/editor/resource_editor.py:801
-msgid "\t Restrictions of Use: "
-msgstr ""
-
-#: repository/editor/resource_editor.py:804
-msgid "IPR Holder: "
-msgstr ""
-
-#: repository/editor/resource_editor.py:806
-msgid "IPR Holder: N/A \n"
-msgstr ""
+msgstr "Nome_recurso: %s \n"
 
 #: repository/editor/resource_editor.py:809
-msgid "Contact Person: "
-msgstr ""
+msgid "License: "
+msgstr "Licença:"
 
 #: repository/editor/resource_editor.py:811
+msgid "\t Restrictions of Use: None\n"
+msgstr "\t Restrições de Uso: None\n"
+
+#: repository/editor/resource_editor.py:813
+msgid "\t Restrictions of Use: "
+msgstr "\t Restrições de Uso:"
+
+#: repository/editor/resource_editor.py:815
+msgid "Attribution text: "
+msgstr "Texto de atribuição: "
+
+#: repository/editor/resource_editor.py:818
+msgid "IPR Holder: "
+msgstr "Detentor dos Direitos de Propriedade Intelectual:"
+
+#: repository/editor/resource_editor.py:820
+msgid "IPR Holder: N/A \n"
+msgstr "Detentor dos Direitos de Propriedade Intelectual: N/A\n"
+
+#: repository/editor/resource_editor.py:823
+msgid "Contact Person: "
+msgstr "Pessoa de Contacto:"
+
+#: repository/editor/resource_editor.py:825
 msgid "Contact Person: N/A \n"
-msgstr ""
+msgstr "Pessoa de Contacto: N/A \n"
 
-#: repository/editor/resource_editor.py:821
-#, fuzzy
-#| msgid "Publish selected ingested resources"
+#: repository/editor/resource_editor.py:835
 msgid "Published Resource"
-msgstr "Publicar os recursos ingeridos selecionados"
+msgstr "Recurso Publicado"
 
-#: repository/editor/resource_editor.py:826
+#: repository/editor/resource_editor.py:840
 msgid ""
 "There was an error sending out the notification email to the resource "
 "owners. Please contact them directly."
 msgstr ""
+"Ocorreu um erro no envio do e-mail de notificação ao proprietário do "
+"recurso. Por favor contacte-o diretamente."
 
-#: repository/editor/resource_editor.py:833
+#: repository/editor/resource_editor.py:847
 #, python-format
 msgid "Successfully published %(ingested)s ingested resource."
 msgid_plural "Successfully published %(ingested)s ingested resources."
 msgstr[0] "%(ingested)s do recurso ingerido publicado com sucesso."
 msgstr[1] "%(ingested)s dos recursos ingeridos publicados com sucesso."
 
-#: repository/editor/resource_editor.py:838
+#: repository/editor/resource_editor.py:852
 msgid "Only ingested resources can be published."
 msgstr "Só recursos ingeridos podem ser publicados."
 
-#: repository/editor/resource_editor.py:844
+#: repository/editor/resource_editor.py:858
 msgid "Publish selected ingested resources"
 msgstr "Publicar os recursos ingeridos selecionados"
 
-#: repository/editor/resource_editor.py:856
+#: repository/editor/resource_editor.py:870
 #, python-format
 msgid "Successfully suspended %s published resource."
 msgid_plural "Successfully suspended %s published resources."
 msgstr[0] "Suspendeu com sucesso %s recurso publicado."
 msgstr[1] "Suspendeu com sucesso %s recursos publicados."
 
-#: repository/editor/resource_editor.py:861
+#: repository/editor/resource_editor.py:875
 msgid "Only published resources can be suspended."
 msgstr "Só recursos publicados podem ser suspendidos."
 
-#: repository/editor/resource_editor.py:867
+#: repository/editor/resource_editor.py:881
 msgid "Suspend selected published resources"
 msgstr "Suspende os recursos publicados selectionados"
 
-#: repository/editor/resource_editor.py:910
-#: repository/editor/resource_editor.py:914
+#: repository/editor/resource_editor.py:924
+#: repository/editor/resource_editor.py:928
 msgid ""
 "\n"
 "                        The ingestion process has been interrupted.\n"
 "                        Re-process the resource(s) with error status.\n"
 "                        "
 msgstr ""
+"\n"
+"                        O processo ingerir foi interrompido.\n"
+"                        Re-processamento do(s) recurso(s) com erro no "
+"estado.\n"
+"                        "
 
-#: repository/editor/resource_editor.py:921
+#: repository/editor/resource_editor.py:935
 msgid ""
 "\n"
 "                        Successfully ingested {} internal resource(s). \n"
@@ -398,8 +411,12 @@ msgid ""
 "been fully processed.\n"
 "                        "
 msgstr ""
+"\n"
+"                        Ingerido com sucesso {} recurso(s) interno(s). \n"
+"                        Será notificado quando o recurso for totalmente "
+"processado."
 
-#: repository/editor/resource_editor.py:925
+#: repository/editor/resource_editor.py:939
 msgid ""
 "\n"
 "                        Successfully ingested {}(s) internal resource(s). \n"
@@ -407,66 +424,70 @@ msgid ""
 "has been fully processed.\n"
 "                        "
 msgstr ""
+"\n"
+"                        Ingerido com sucesso {}(s) recurso(s) interno(s). \n"
+"                        Será notificado quando o recurso(s) for(em) "
+"totalmente processado(s)."
 
-#: repository/editor/resource_editor.py:933
-#, fuzzy
-#| msgid "Delete resource"
+#: repository/editor/resource_editor.py:947
 msgid "Ingested Resource"
-msgstr "Remover recurso"
+msgstr "Recurso Ingerido"
 
-#: repository/editor/resource_editor.py:938
+#: repository/editor/resource_editor.py:952
 msgid ""
 "There was an error sending out the notification email to the group "
 "reviewers. Please contact them directly."
 msgstr ""
+"Ocorreu um erro no envio de e-mail ao grupo de revisores. por favor contacte-"
+"os diretamente."
 
-#: repository/editor/resource_editor.py:943
+#: repository/editor/resource_editor.py:957
 msgid "Only internal resources can be ingested."
 msgstr "Só recursos internos podem ser ingeridos."
 
-#: repository/editor/resource_editor.py:948
+#: repository/editor/resource_editor.py:962
 msgid "Ingest selected internal resources"
 msgstr "Ingerir os recursos selecionados"
 
 # Please pay attention to the formula %(Keys)s.
-#: repository/editor/resource_editor.py:970
-#: repository/editor/resource_editor.py:1825
-#, fuzzy, python-format
+#: repository/editor/resource_editor.py:984
+#: repository/editor/resource_editor.py:1839
+#, python-format
 msgid "Could not export resource \"%(name)s\" with primary key %(key)s."
 msgstr "Não foi possível exportar o recurso %(name)s” com a chave %(key)s."
 
-#: repository/editor/resource_editor.py:985
+#: repository/editor/resource_editor.py:999
 msgid "Export selected resource descriptions to XML"
 msgstr "Exportar as descrições do recurso selecionado para XML"
 
-#: repository/editor/resource_editor.py:1041
+#: repository/editor/resource_editor.py:1055
 msgid "Cancelled deleting the selected resources."
 msgstr "Remoção cancelada para os recursos selecionados."
 
-#: repository/editor/resource_editor.py:1066
+#: repository/editor/resource_editor.py:1080
 #, python-format
 msgid "Successfully deleted %d resource."
 msgid_plural "Successfully deleted %d resources."
 msgstr[0] "Remoção %d do recurso com sucesso."
 msgstr[1] "Remoção %d dos recursos com sucesso."
 
-#: repository/editor/resource_editor.py:1075
+#: repository/editor/resource_editor.py:1089
 msgid "Are you sure?"
 msgstr "Tem certeza?"
 
-#: repository/editor/resource_editor.py:1082
+#: repository/editor/resource_editor.py:1096
 msgid "Delete resource"
 msgstr "Remover recurso"
 
-#: repository/editor/resource_editor.py:1087
+#: repository/editor/resource_editor.py:1101
 msgid "Mark selected resources as deleted"
 msgstr "Marcar os recursos selecionados como removidos"
 
-#: repository/editor/resource_editor.py:1097
+#: repository/editor/resource_editor.py:1111
 msgid "Cancelled adding editor groups."
 msgstr "Cancelou acrescentar grupos de edição."
 
-#: repository/editor/resource_editor.py:1118
+#: repository/editor/resource_editor.py:1132
 #, python-format
 msgid ""
 "Successfully added editor groups to %(success)i of the selected resources. "
@@ -477,40 +498,40 @@ msgstr ""
 "selecionados. %(failure)i grupos de edição de recursos permanecem "
 "inalterados devido à falta de permissões."
 
-#: repository/editor/resource_editor.py:1123
+#: repository/editor/resource_editor.py:1137
 msgid "Successfully added editor groups to all selected resources."
 msgstr ""
 "Acrescentou com sucesso aos grupos de edição todos os recursos selecionados."
 
-#: repository/editor/resource_editor.py:1137
+#: repository/editor/resource_editor.py:1151
 msgid "Add editor group"
 msgstr "Acrescentar grupo de edição"
 
-#: repository/editor/resource_editor.py:1143
+#: repository/editor/resource_editor.py:1157
 msgid "Add editor groups to selected resources"
 msgstr "Acrescentar grupos de edição aos recursos selecionados"
 
-#: repository/editor/resource_editor.py:1176
+#: repository/editor/resource_editor.py:1190
 msgid "Cancelled removing editor groups."
 msgstr "Cancelado. Remoção de grupos de editor cancelada."
 
-#: repository/editor/resource_editor.py:1186
+#: repository/editor/resource_editor.py:1200
 msgid "Successfully removed editor groups from the selected resources."
 msgstr "Removeu com sucesso os grupos de edição aos recursos selecionados."
 
-#: repository/editor/resource_editor.py:1199
+#: repository/editor/resource_editor.py:1213
 msgid "Remove editor group"
 msgstr "Remover grupo de editores"
 
-#: repository/editor/resource_editor.py:1206
+#: repository/editor/resource_editor.py:1220
 msgid "Remove editor groups from selected resources"
 msgstr "Remover grupos de edição dos recursos selecionados"
 
-#: repository/editor/resource_editor.py:1216
+#: repository/editor/resource_editor.py:1230
 msgid "Cancelled adding owners."
 msgstr "Cancelado. Adição proprietários cancelada."
 
-#: repository/editor/resource_editor.py:1232
+#: repository/editor/resource_editor.py:1246
 #, python-format
 msgid ""
 "Successfully added owners to %(success)i of the selected resources. "
@@ -520,80 +541,80 @@ msgstr ""
 "selcionados. %(failure)i proprietários dos recursos inalterados devido à "
 "falta de permissões."
 
-#: repository/editor/resource_editor.py:1237
+#: repository/editor/resource_editor.py:1251
 msgid "Successfully added owners to all selected resources."
 msgstr "Acrescentou com sucesso os proprietários aos recursos selecionados."
 
-#: repository/editor/resource_editor.py:1251
+#: repository/editor/resource_editor.py:1265
 msgid "Add owner"
 msgstr "Acrescentar propretários"
 
-#: repository/editor/resource_editor.py:1257
+#: repository/editor/resource_editor.py:1271
 msgid "Add owners to selected resources"
 msgstr "Acrescentar proprietários a recursos selectionados"
 
-#: repository/editor/resource_editor.py:1269
+#: repository/editor/resource_editor.py:1283
 msgid "Cancelled removing owners."
 msgstr "Cancelado. Remoção proprietários cancelada."
 
-#: repository/editor/resource_editor.py:1279
+#: repository/editor/resource_editor.py:1293
 msgid "Successfully removed owners from the selected resources."
 msgstr "Removeu com sucesso os proprietários dos recursos selecionados."
 
-#: repository/editor/resource_editor.py:1293
+#: repository/editor/resource_editor.py:1307
 msgid "Remove owner"
 msgstr "Remover proprietário"
 
-#: repository/editor/resource_editor.py:1299
+#: repository/editor/resource_editor.py:1313
 msgid "Remove owners from selected resources"
 msgstr "Remover proprietários dos recursos selecionados"
 
-#: repository/editor/resource_editor.py:1387
-#: repository/editor/resource_editor.py:1481
-#: repository/editor/resource_editor.py:1629
-#: repository/editor/resource_editor.py:1802
-#, fuzzy, python-format
+#: repository/editor/resource_editor.py:1401
+#: repository/editor/resource_editor.py:1495
+#: repository/editor/resource_editor.py:1643
+#: repository/editor/resource_editor.py:1816
+#, python-format
 msgid "%(name)s object with primary key %(key)s does not exist."
 msgstr "%(name)s objectos com a chave %(key)s não existem."
 
-#: repository/editor/resource_editor.py:1392
-#: repository/editor/resource_editor.py:1486
-#: repository/editor/resource_editor.py:1634
-#: repository/editor/resource_editor.py:1806
+#: repository/editor/resource_editor.py:1406
+#: repository/editor/resource_editor.py:1500
+#: repository/editor/resource_editor.py:1648
+#: repository/editor/resource_editor.py:1820
 #, python-format
 msgid ""
 "%(name)s object with primary key %(key)s does not have a StorageObject "
 "attached."
 msgstr "%(name)s objectos com a chave %(key)s não têm StorageObjects ligados."
 
-#: repository/editor/resource_editor.py:1396
-#: repository/editor/resource_editor.py:1490
-#: repository/editor/resource_editor.py:1638
+#: repository/editor/resource_editor.py:1410
+#: repository/editor/resource_editor.py:1504
+#: repository/editor/resource_editor.py:1652
 #, python-format
 msgid "%(name)s object with primary key %(key)s is not a master-copy."
 msgstr "%(name)s objectos com a chave %(key)s não té uma cópia original."
 
-#: repository/editor/resource_editor.py:1451
+#: repository/editor/resource_editor.py:1465
 #, python-format
 msgid "Upload resource: \"%s\""
-msgstr "Enviar recurso: “%s”"
+msgstr "Enviar recurso: \"%s\""
 
-#: repository/editor/resource_editor.py:1554
+#: repository/editor/resource_editor.py:1568
 #, python-format
 msgid "Upload validation report: \"%s\""
-msgstr "Enviar relatório de validação: “%s”"
+msgstr "Enviar relatório de validação: \"%s\""
 
-#: repository/editor/resource_editor.py:1691
+#: repository/editor/resource_editor.py:1705
 #, python-format
 msgid "Upload legal documentation: \"%s\""
-msgstr "Enviar documentação legal: “%s”"
+msgstr "Enviar documentação legal: \"%s\""
 
-#: repository/editor/resource_editor.py:1809
+#: repository/editor/resource_editor.py:1823
 #, python-format
 msgid "%(name)s object with primary key %(key)s does not exist anymore."
 msgstr "%(name)s objectos com a chave %(key)s não existe mais."
 
-#: repository/editor/resource_editor.py:1902
+#: repository/editor/resource_editor.py:1916
 #, python-format
 msgid "%s"
 msgstr "%s"
