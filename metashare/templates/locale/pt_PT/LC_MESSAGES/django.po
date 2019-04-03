@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-03 13:50+0200\n"
-"PO-Revision-Date: 2019-04-03 17:18+0200\n"
+"PO-Revision-Date: 2019-04-03 17:20+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_PT\n"
@@ -1247,7 +1247,7 @@ msgstr ""
 
 #: templates/legal.html:128
 msgid "Appendix B"
-msgstr "Anexo B"
+msgstr " "
 
 #: templates/login.html:9
 msgid "User Authentication"
