@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-03 13:50+0200\n"
-"PO-Revision-Date: 2019-04-03 16:17+0200\n"
+"POT-Creation-Date: 2019-04-04 16:42+0200\n"
+"PO-Revision-Date: 2019-04-04 16:43+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_PT\n"
@@ -455,19 +455,24 @@ msgid "This password is too short. It must contain at least 9 characters. "
 msgstr ""
 "A palavra-passe é demasiado curta. Tem de conter pelo menos 9 caracteres."
 
-#: accounts/forms.py:201
+#: accounts/forms.py:176
+#, python-format
+msgid "The password is too similar to the %s"
+msgstr "A palavra passe é demasiado parecida com o %s"
+
+#: accounts/forms.py:202
 msgid "Subject"
 msgstr "Assunto"
 
-#: accounts/forms.py:202
+#: accounts/forms.py:203
 msgid "Please provide a meaningful and sufficiently indicative subject."
 msgstr "Por favor, indique um tema significativo e suficientemente indicativo."
 
-#: accounts/forms.py:204
+#: accounts/forms.py:205
 msgid "Message"
 msgstr "Mensagem"
 
-#: accounts/forms.py:205
+#: accounts/forms.py:206
 msgid ""
 "Your message appears to be rather short. Please make sure to phrase your "
 "request as precise as possible. This will help us to process it as quick as "
@@ -477,20 +482,20 @@ msgstr ""
 "transmite o seu pedido do modo mais preciso possível. Isto ajudar-nos-á a "
 "processa-lo o mais rapidamente possível."
 
-#: accounts/forms.py:215
+#: accounts/forms.py:216
 msgid "Username"
 msgstr "Nome de Utilizador"
 
-#: accounts/forms.py:216
+#: accounts/forms.py:217
 msgid "Email"
 msgstr "Endereço electrónico"
 
-#: accounts/forms.py:227
+#: accounts/forms.py:228
 msgid "Not a valid username-email combination."
 msgstr ""
 "Não é uma combinação de nome de utilizador/endereço electrónico válida."
 
-#: accounts/forms.py:273
+#: accounts/forms.py:274
 msgid "default editor groups"
 msgstr "grupos de edição por defeito"
 
@@ -633,7 +638,7 @@ msgid ""
 "activated."
 msgstr ""
 "Recebemos os seus dados de registo e enviámos um email de notificação para "
-"os administradores."
+"os administradores. Receberá um email quando a sua conta estiver ativada."
 
 #: accounts/views.py:208
 msgid "Create Account"
