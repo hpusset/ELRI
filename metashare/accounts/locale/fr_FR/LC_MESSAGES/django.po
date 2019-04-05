@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-05 10:45+0200\n"
-"PO-Revision-Date: 2019-04-05 10:50+0200\n"
+"PO-Revision-Date: 2019-04-05 12:32+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -619,7 +619,7 @@ msgstr "Votre compte utilisateur d'ELRI a été activé"
 
 #: accounts/views.py:64
 msgid "We have activated user account for user {}."
-msgstr "Nous avons activé le compte utilisateur pour l'utilisateur {}."
+msgstr "Le compte a été activé pour l'utilisateur  {}"
 
 #: accounts/views.py:91
 #, python-format
