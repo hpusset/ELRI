@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-25 15:41+0100\n"
-"PO-Revision-Date: 2019-03-22 10:12+0100\n"
+"POT-Creation-Date: 2019-04-05 13:59+0200\n"
+"PO-Revision-Date: 2019-04-05 14:13+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -471,20 +471,25 @@ msgstr "La contraseña es demasiado común."
 msgid "This password is too short. It must contain at least 9 characters. "
 msgstr "La contraseña es demasiado corta. Debe contener al menos 9 caracteres."
 
-#: accounts/forms.py:201
+#: accounts/forms.py:176
+#, python-format
+msgid "The password is too similar to the %s"
+msgstr "La contraseña es demasiado parecida al campo %s"
+
+#: accounts/forms.py:202
 msgid "Subject"
 msgstr "Asunto"
 
-#: accounts/forms.py:202
+#: accounts/forms.py:203
 msgid "Please provide a meaningful and sufficiently indicative subject."
 msgstr ""
 "Por favor proporcione un tema significativo y suficientemente indicativo."
 
-#: accounts/forms.py:204
+#: accounts/forms.py:205
 msgid "Message"
 msgstr "Mensaje"
 
-#: accounts/forms.py:205
+#: accounts/forms.py:206
 msgid ""
 "Your message appears to be rather short. Please make sure to phrase your "
 "request as precise as possible. This will help us to process it as quick as "
@@ -494,21 +499,21 @@ msgstr ""
 "solicitud de la forma más precisa posible. Esto nos ayudará a procesarla lo "
 "más rápido posible."
 
-#: accounts/forms.py:215
+#: accounts/forms.py:216
 msgid "Username"
 msgstr ""
 
-#: accounts/forms.py:216
+#: accounts/forms.py:217
 #, fuzzy
 #| msgid "E-mail"
 msgid "Email"
 msgstr "E-mail"
 
-#: accounts/forms.py:227
+#: accounts/forms.py:228
 msgid "Not a valid username-email combination."
 msgstr "No es una combinación válida de nombre de usuario-correo electrónico."
 
-#: accounts/forms.py:273
+#: accounts/forms.py:274
 msgid "default editor groups"
 msgstr "grupos editores predeterminados"
 
@@ -652,6 +657,10 @@ msgstr ""
 "Hemos recibido sus datos de registro y enviado a los administradores un "
 "correo electrónico de notificación. Recibirá un correo electrónico cuando se "
 "haya activado su cuenta."
+
+#: accounts/views.py:208
+msgid "Create Account"
+msgstr "Crear Cuenta"
 
 #: accounts/views.py:247
 msgid "You have successfully updated your profile information."

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-25 15:41+0100\n"
-"PO-Revision-Date: 2019-03-06 12:23+0100\n"
+"POT-Creation-Date: 2019-04-05 13:59+0200\n"
+"PO-Revision-Date: 2019-04-05 14:09+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: templates/admin/edit_inline/stacked.html:14
 #: templates/admin/edit_inline/tabular.html:35
@@ -35,4 +35,4 @@ msgstr "Eliminar"
 
 #: templates/admin/edit_inline/tabular.html:22
 msgid "Delete?"
-msgstr "Eliminar?"
+msgstr "¿Eliminar?"
