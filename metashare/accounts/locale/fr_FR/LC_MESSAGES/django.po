@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-08 09:52+0100\n"
-"PO-Revision-Date: 2018-11-13 17:35+0100\n"
+"POT-Creation-Date: 2019-04-05 10:45+0200\n"
+"PO-Revision-Date: 2019-04-05 10:50+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: accounts/admin.py:82
@@ -24,15 +24,15 @@ msgstr "Groupes d'édition"
 
 #: accounts/admin.py:94
 msgid "Managed Editor Groups"
-msgstr "Gérer les groupes d'édition"
+msgstr "Groupes d'édition gérés"
 
 #: accounts/admin.py:105
 msgid "Organizations"
-msgstr "Organismes"
+msgstr "Organisations"
 
 #: accounts/admin.py:117
 msgid "Managed organizations"
-msgstr "Gérer les organismes"
+msgstr "Organisations gérées"
 
 #: accounts/admin.py:137 accounts/admin.py:475 accounts/admin.py:627
 #: accounts/admin.py:935
@@ -41,7 +41,7 @@ msgstr "Membres"
 
 #: accounts/admin.py:147 accounts/admin.py:637
 msgid "Managing groups"
-msgstr "Gérer les groupes"
+msgstr "Groupes de gestion"
 
 #: accounts/admin.py:158 accounts/admin.py:648
 msgid "Managers"
@@ -59,7 +59,7 @@ msgstr ""
 
 #: accounts/admin.py:214
 msgid "Successfully added users to editor group."
-msgstr "Utilisateurs ajoutés au groupe d'édition avec succès."
+msgstr "L'ajout d'utilisateurs au groupe d'édition a été effectué avec succès."
 
 #: accounts/admin.py:223
 msgid "Add Users to Editor Group"
@@ -72,19 +72,21 @@ msgstr "Ajouter un utilisateur"
 
 #: accounts/admin.py:234
 msgid "Add users to selected editor groups"
-msgstr "Ajouter des utilisateur au groupe d'édition sélectionné"
+msgstr "Ajouter des utilisateurs aux groupes d'édition sélectionnés"
 
 #: accounts/admin.py:240
 msgid "Cancelled removing users from the editor group."
-msgstr "La suppression d'utilisateurs au groupe d'édition a été annulé."
+msgstr "La suppression d'utilisateurs du groupe d'édition a été annulée."
 
 #: accounts/admin.py:250
 msgid "Successfully removed users from editor group."
-msgstr "Suppression d'utilisateur du groupe d'édition effectué avec succès."
+msgstr ""
+"La suppression d'utilisateurs du groupe d'édition a été effectuée avec "
+"succès."
 
 #: accounts/admin.py:259
 msgid "Remove Users from Editor Group"
-msgstr "Supprimer des utilisateur du group d'édition"
+msgstr "Supprimer des utilisateurs du group d'édition"
 
 #: accounts/admin.py:264 accounts/admin.py:597 accounts/admin.py:735
 #: accounts/admin.py:1053
@@ -93,7 +95,7 @@ msgstr "Supprimer un utilisateur"
 
 #: accounts/admin.py:270
 msgid "Remove users from selected editor groups"
-msgstr "Supprimer un utilisateur du groupe d'édition sélectionné"
+msgstr "Supprimer des utilisateurs des groupes d'édition sélectionnés"
 
 #: accounts/admin.py:287
 msgid "You must be superuser or group manager to accept applications."
@@ -102,14 +104,14 @@ msgstr ""
 "accepter des demandes."
 
 #: accounts/admin.py:311 accounts/admin.py:779
-#, fuzzy
-#| msgid "Application Status"
 msgid "Application accepted"
-msgstr "Etat de la demande"
+msgstr "La demande a été acceptée"
 
 #: accounts/admin.py:318 accounts/admin.py:786
 msgid "There was an error sending out an application acceptance e-mail."
-msgstr "Une erreur a été rencontrée lors de l'envoi de l'email d'acceptation."
+msgstr ""
+"Une erreur a été rencontrée lors de l'envoi de l'email d'acceptation de la "
+"demande."
 
 #: accounts/admin.py:321
 #, python-format
@@ -118,7 +120,7 @@ msgid ""
 "\"%(group)s\"."
 msgstr ""
 "Vous avez accepté \"%(user)s\" comme membre du groupe d'édition \"%(group)s"
-"\"."
+"\" avec succès."
 
 #: accounts/admin.py:326 accounts/admin.py:794
 #, python-format
@@ -126,22 +128,20 @@ msgid ""
 "Successfully accepted %(accepted)d of %(total)d applications. You have no "
 "permissions to accept the remaining applications."
 msgstr ""
-"Vous avez accepté %(accepted)d fes %(total)d demandes. Vous n'avez pas les "
-"autorisations pour acceptés les demandes restantes."
+"Vous avez accepté %(accepted)d des %(total)d demandes. Vous n'avez pas "
+"d'autorisation pour accepter les demandes restantes."
 
 #: accounts/admin.py:332 accounts/admin.py:800
 msgid "Successfully accepted all requests."
-msgstr "Vous avez accepté toutes les demandes."
+msgstr "Vous avez accepté toutes les demandes avec succès."
 
 #: accounts/admin.py:336
 msgid "Accept selected editor group applications"
-msgstr "Vous avez accepté les demandes du groupe d'édition sélectionné."
+msgstr "Accepter les demandes du groupe d'édition sélectionnées"
 
 #: accounts/admin.py:370 accounts/admin.py:830
-#, fuzzy
-#| msgid "Application Status"
 msgid "Application turned down"
-msgstr "Etat de la demande"
+msgstr "La demande a été refusée"
 
 #: accounts/admin.py:378 accounts/admin.py:838
 msgid ""
@@ -156,17 +156,17 @@ msgid ""
 "You have successfully turned down \"%(user)s\" from the editor group "
 "\"%(group)s\"."
 msgstr ""
-"Vous avez refusé \"%(user)s\" comme membre du groupe d'édition \"%(group)s\"."
+"Vous avez refusé \"%(user)s\" du groupe d'édition \"%(group)s\" avec succès."
 
 #: accounts/admin.py:423 accounts/admin.py:883
 #, python-format
 msgid "Successfully turned down %(count)d %(items)s."
-msgstr "Vous avez refusé \"%(count)d %(items)s."
+msgstr "Vous avez refusé \"%(count)d %(items)s avec succès."
 
 #: accounts/admin.py:435 accounts/admin.py:895
 #, python-format
 msgid "Cannot turn down %(name)s"
-msgstr "Vous ne pouvez pas refuse %(name)s"
+msgstr "Vous ne pouvez pas refuser %(name)s"
 
 #: accounts/admin.py:437 accounts/admin.py:897
 msgid "Are you sure?"
@@ -174,7 +174,7 @@ msgstr "Êtes-vous sûr ?"
 
 #: accounts/admin.py:456
 msgid "Turn down selected editor group applications"
-msgstr "Vous avez refusé les demandes du groupe d'édition sélectionné."
+msgstr "Refuser les demandes du groupe d'édition sélectionnées"
 
 #: accounts/admin.py:531
 msgid "Cancelled adding users to the editor group managers."
@@ -184,90 +184,92 @@ msgstr ""
 #: accounts/admin.py:541
 msgid "Successfully added users to editor group managers."
 msgstr ""
-"Vous avez ajouté les utilisateurs comme gestionnaire du groupe d'édition "
+"L'ajout d'utilisateurs aux gestionnaires du groupe d'édition a été effectué "
 "avec succès."
 
 #: accounts/admin.py:550
 msgid "Add Users to Editor Group Managers"
-msgstr "Ajouter des utilisateurs comme manager du groupe d'édition."
+msgstr "Ajouter des utilisateurs aux gestionnaires du groupe d'édition"
 
 #: accounts/admin.py:561
 msgid ""
 "You need to be a superuser to add a user to these editor group managers."
 msgstr ""
-"Vous devez-être super-utilisateur pour ajouter un utilisateur à ces groupes "
-"d'édition."
+"Vous devez-être super-utilisateur pour ajouter un utilisateur aux "
+"gestionnaires de ces groupes d'édition."
 
 #: accounts/admin.py:565
 msgid "Add users to selected editor group managers"
-msgstr "Ajouter des utilisateurs aux gestionnaires du groupe d'édition."
+msgstr ""
+"Ajouter des utilisateurs aux gestionnaires du groupe d'édition sélectionné"
 
 #: accounts/admin.py:571
 msgid "Cancelled removing users from editor group managers."
 msgstr ""
-"La suppression d'utilisateurs aux gestionnaires du groupe d'édition a été "
-"annulé."
+"La suppression d'utilisateurs des gestionnaires du groupe d'édition a été "
+"annulée."
 
 #: accounts/admin.py:582
 msgid "Successfully removed users from editor group managers."
 msgstr ""
-"Vous avez supprimé les utilisateurs comme gestionnaire du groupe d'édition "
-"avec succès."
+"La suppression d'utilisateurs des gestionnaires du groupe d'édition a été "
+"effectuée avec succès."
 
 #: accounts/admin.py:592
 msgid "Remove Users from Editor Group Managers"
-msgstr "Supprimer les utilisateurs des gestionnaires du groupe d'édition."
+msgstr "Supprimer des utilisateurs des gestionnaires du groupe d'édition"
 
 #: accounts/admin.py:603
 msgid ""
 "You need to be a superuser to remove a user from these editor group managers."
 msgstr ""
-"Vous devez-être super-utilisateur pour supprimer un utilisateur de ces "
+"Vous devez être un super-utilisateur pour supprimer un utilisateur de ces "
 "gestionnaires de groupe d'édition."
 
 #: accounts/admin.py:607
 msgid "Remove users from selected editor group managers"
 msgstr ""
-"Supprimer des utilisateurs du gestionnaire du groupe d'édition sélectionné."
+"Supprimer des utilisateurs des gestionnaires du groupe d'édition sélectionné"
 
 #: accounts/admin.py:669
 msgid "Cancelled adding users to the organization."
-msgstr "L'ajout d'utilisateurs à l'organisme a été annulé."
+msgstr "L'ajout d'utilisateurs à l'organisation a été annulé."
 
 #: accounts/admin.py:683
 msgid ""
 "You need to be organization managers to add a user to this organization."
 msgstr ""
-"Vous devez-être gestionnaire de l'organisme pour ajouter un utilisateur à "
-"cet organisme."
+"Vous devez être gestionnaires de l'organisation pour ajouter un utilisateur "
+"à cet organisation."
 
 #: accounts/admin.py:685
 msgid "Successfully added users to organization."
-msgstr "Utilisateurs ajoutés à l'organisme avec succès."
+msgstr "L'ajout d'utilisateurs à l'organisation a été effectué avec succès."
 
 #: accounts/admin.py:694
 msgid "Add Users to Organization"
-msgstr "Ajouter des utilisateurs à l'organisme"
+msgstr "Ajouter des utilisateurs à l'organisation"
 
 #: accounts/admin.py:705
 msgid "Add users to selected organizations"
-msgstr "Ajouter des utilisateur aux organismes sélectionné"
+msgstr "Ajouter des utilisateurs aux organisations sélectionnées"
 
 #: accounts/admin.py:711
 msgid "Cancelled removing users from the organization."
-msgstr "La suppression d'utilisateurs de l'organisme a été annulé."
+msgstr "La suppression d'utilisateurs de l'organisation a été annulée."
 
 #: accounts/admin.py:721
 msgid "Successfully removed users from organization."
-msgstr "Suppression d'utilisateur de l'organisme effectué avec succès"
+msgstr ""
+"La suppression d'utilisateurs de l'organisation a été effectuée avec succès."
 
 #: accounts/admin.py:730
 msgid "Remove Users from Organization"
-msgstr "Supprimer des utilisateurs de l'organisme"
+msgstr "Supprimer des utilisateurs de l'organisation"
 
 #: accounts/admin.py:741
 msgid "Remove users from selected organizations"
-msgstr "Supprimer un utilisateur de l'organisation sélectionnée"
+msgstr "Supprimer des utilisateurs de l'organisation sélectionnée"
 
 #: accounts/admin.py:758
 msgid "You must be superuser or organization manager to accept applications."
@@ -281,11 +283,11 @@ msgid ""
 "You have successfully accepted \"%(user)s\" as member of the organization "
 "\"%(group)s\"."
 msgstr ""
-"Vous avez accepté \"%(user)s\" comme membre de l'organisme \"%(group)s\"."
+"Vous avez accepté \"%(user)s\" comme membre de l'organisation \"%(group)s\"."
 
 #: accounts/admin.py:804
 msgid "Accept selected organization applications"
-msgstr "Accepter les demandes des organismes sélectionnés"
+msgstr "Accepter les demandes des organisations sélectionnées"
 
 #: accounts/admin.py:841
 #, python-format
@@ -293,62 +295,69 @@ msgid ""
 "You have turned down the application of \"%(user)s\" for membership in the "
 "organization \"%(group)s\"."
 msgstr ""
-"Vous avez refusé les demande de\"%(user)s\" comme membre de l'oganisme "
+"Vous avez refusé la demande de\"%(user)s\" comme membre de l'organisation "
 "\"%(group)s\"."
 
 #: accounts/admin.py:916
 msgid "Turn down selected organization applications"
-msgstr "Vous avez refusé les demandes de l'organisme sélectionné"
+msgstr "Refuser les demandes de l'organisation sélectionnée"
 
 #: accounts/admin.py:986
 msgid "Cancelled adding users to the organization managers."
 msgstr ""
-"L'ajout d'utilisateurs au groupe de gestionnaire de l'organisme a été annulé."
+"L'ajout d'utilisateurs au groupe de gestionnaires de l'organisation a été "
+"annulé."
 
 #: accounts/admin.py:998
 msgid "Successfully added users to organization managers."
-msgstr "Utilisateurs ajoutés aux gestionnaires de l'organisme avec succès."
+msgstr ""
+"L'ajout d'utilisateurs aux gestionnaires de l'organisation a été effectué "
+"avec succès."
 
 #: accounts/admin.py:1007
 msgid "Add Users to Organization Manager Group"
-msgstr "Ajouter des utilisateurs au groupe de gestionnaire de l'organisme"
+msgstr "Ajouter des utilisateurs au groupe de gestionnaires de l'organisation"
 
 #: accounts/admin.py:1018
 msgid ""
 "You need to be a superuser to add a user to these organization managers."
 msgstr ""
-"Vous devez-être super-utilisateur pour ajouter un utilisateur à ces "
-"gestionnaires d'organisme."
+"Vous devez être un super-utilisateur pour ajouter un utilisateur à ces "
+"gestionnaires de l'organisation."
 
 #: accounts/admin.py:1022
 msgid "Add users to selected organization managers"
-msgstr "Ajouter des utilisateurs aux gestionnaires de l'organisme sélectionné."
+msgstr ""
+"Ajouter des utilisateurs aux gestionnaires de l'organisation sélectionnée"
 
 #: accounts/admin.py:1028
 msgid "Cancelled removing users from the organization managers."
 msgstr ""
-"La suppression d'utilisateurs aux gestionnaires de l'organisme a été annulé."
+"La suppression d'utilisateurs des gestionnaires de l'organisation a été "
+"annulée."
 
 #: accounts/admin.py:1038
 msgid "Successfully removed users from organization managers."
 msgstr ""
-"Vous avez supprimé les utilisateurs des gestionnaires de l'organisme avec "
-"succès."
+"La suppression d'utilisateurs des gestionnaires de l'organisation a été "
+"effectuée avec succès."
 
 #: accounts/admin.py:1048
 msgid "Remove Users from Organization Manager Group"
-msgstr "Supprimer des utilisateurs du groupe de gestionnaire de l'organisme"
+msgstr ""
+"Supprimer des utilisateurs du groupe de gestionnaires de l'organisation"
 
 #: accounts/admin.py:1059
 msgid ""
 "You need to be a superuser to remove a user from these organization managers."
 msgstr ""
-"Vous devez-être super-utilisateur pour supprimer un utilisateur de ces "
-"gestionnaires d'organismes"
+"Vous devez être un super-utilisateur pour supprimer un utilisateur de ces "
+"gestionnaires d'organisation."
 
 #: accounts/admin.py:1063
 msgid "Remove users from selected organization managers"
-msgstr "Supprimer des utilisateurs de l'organisme sélectionné."
+msgstr ""
+"Supprimer des utilisateurs des gestionnaires de l'organisation sélectionnée"
 
 #: accounts/admin.py:1116
 msgid "You must be superuser to accept eDelivery applications."
@@ -365,26 +374,24 @@ msgstr ""
 "Vous devez être un super-utilisateur pour refuser des demandes eDelivery."
 
 #: accounts/admin.py:1145 accounts/admin.py:1193
-#, fuzzy
-#| msgid "Reject selected eDelivery applications"
 msgid "ELRI eDelivery application"
-msgstr "Refuser les demande eDelivery sélectionnées"
+msgstr "Demande d'eDelivery ELRI"
 
 #: accounts/admin.py:1157
 msgid "{} cannot be rejected. Only \"PENDING\" applications can be rejected"
 msgstr ""
 "{} ne peut pas être rejeté. Seul les demandes \"EN COURS\" peuvent être "
-"rejetées."
+"rejetées"
 
 #: accounts/admin.py:1161
 msgid "Reject selected eDelivery applications"
-msgstr "Refuser les demande eDelivery sélectionnées"
+msgstr "Refuser les demandes d'eDelivery sélectionnées"
 
 #: accounts/admin.py:1166
 msgid "You must be superuser to revoke active eDelivery applications."
 msgstr ""
-"Vous devez être un super-utilisateur pour activer une des demande eDelivery "
-"qui a été révoquée."
+"Vous devez être un super-utilisateur pour révoquer des demandes d'eDelivery "
+"actives."
 
 #: accounts/admin.py:1206
 msgid "{} cannot be rejected. Only \"ACTIVE\" applications can be revoked."
@@ -394,13 +401,13 @@ msgstr ""
 
 #: accounts/admin.py:1210
 msgid "Revoke selected eDelivery applications"
-msgstr "Révoquer les demande eDelivery sélectionnées"
+msgstr "Révoquer les demandes d'eDelivery sélectionnées"
 
 #: accounts/admin.py:1215
 msgid "You must be superuser to reactivate revoked eDelivery applications."
 msgstr ""
-"Vous devez être un super-utilisateur pour réactivé une demande eDelivery qui "
-"a été révoque."
+"Vous devez être un super-utilisateur pour réactiver une demande d'eDelivery "
+"qui a été révoquée."
 
 #: accounts/admin.py:1226
 msgid ""
@@ -411,81 +418,115 @@ msgstr ""
 
 #: accounts/admin.py:1230
 msgid "Reactivate selected eDelivery applications"
-msgstr "Réactiver les demande eDelivery sélectionnées"
+msgstr "Réactiver les demandes d'eDelivery sélectionnées"
 
-#: accounts/forms.py:68
+#: accounts/forms.py:75
 msgid "Desired account name"
-msgstr "Nom de compte souhaité"
+msgstr "Nom du compte souhaité"
 
-#: accounts/forms.py:70
+#: accounts/forms.py:77
 msgid "First name"
 msgstr "Prénom"
 
-#: accounts/forms.py:72
+#: accounts/forms.py:79
 msgid "Last name"
 msgstr "Nom"
 
-#: accounts/forms.py:73
+#: accounts/forms.py:80
 msgid "E-mail"
 msgstr "Adresse mail"
 
-#: accounts/forms.py:81
-msgid "Organization name"
-msgstr "Nom de l'organisme"
-
-#: accounts/forms.py:85
-msgid "Organization address"
-msgstr "Adresse de l'organisme"
-
 #: accounts/forms.py:88
-msgid "Organization phone number"
-msgstr "Numéro de téléphone de l'organisme"
+msgid "Organization name"
+msgstr "Nom de l'organisation"
 
-#: accounts/forms.py:90
-msgid "Position in the organization"
-msgstr "Rôle dans l'organisme"
+#: accounts/forms.py:92
+msgid "Organization address"
+msgstr "Adresse de l'organisation"
+
+#: accounts/forms.py:95
+msgid "Organization phone number"
+msgstr "Numéro de téléphone de l'organisation"
 
 #: accounts/forms.py:97
+msgid "Position in the organization"
+msgstr "Rôle dans l'organisation"
+
+#: accounts/forms.py:105
 msgid "Password"
 msgstr "Mot de passe"
 
-#: accounts/forms.py:101
+#: accounts/forms.py:109
 msgid "Password confirmation"
 msgstr "Confirmation du mot de passe"
 
-#: accounts/forms.py:127
+#: accounts/forms.py:135
 msgid "User account name already exists, please choose another one."
 msgstr "Ce nom d'utilisateur existe déjà, merci d'en choisir un autre."
 
-#: accounts/forms.py:141 accounts/forms.py:144
+#: accounts/forms.py:149 accounts/forms.py:152
 msgid "There is already an account registered with this e-mail address."
 msgstr "Il existe déjà un compte associé à cette adresse email."
 
-#: accounts/forms.py:155
+#: accounts/forms.py:163
 msgid "The two password fields did not match."
 msgstr "Les deux mots de passe ne correspondent pas."
 
-#: accounts/forms.py:181
-msgid "Please provide a meaningful and sufficiently indicative subject."
-msgstr "Merci d'indiquer un objet suffisamment parlant."
+#: accounts/forms.py:170
+msgid "This password is entirely numeric. "
+msgstr "Ce mot de passe est entièrement numérique. "
 
-#: accounts/forms.py:184
+#: accounts/forms.py:172
+msgid "This password is too common. "
+msgstr "Ce mot de passe est trop commun."
+
+#: accounts/forms.py:174
+msgid "This password is too short. It must contain at least 9 characters. "
+msgstr ""
+"Ce mot de passe est trop court. Il doit contenir au moins 9 caractères."
+
+#: accounts/forms.py:176
+#, python-format
+msgid "The password is too similar to the %s"
+msgstr ""
+
+#: accounts/forms.py:202
+msgid "Subject"
+msgstr "Sujet"
+
+#: accounts/forms.py:203
+msgid "Please provide a meaningful and sufficiently indicative subject."
+msgstr "Veuillez fournir un sujet suffisamment parlant."
+
+#: accounts/forms.py:205
+msgid "Message"
+msgstr "Message"
+
+#: accounts/forms.py:206
 msgid ""
 "Your message appears to be rather short. Please make sure to phrase your "
 "request as precise as possible. This will help us to process it as quick as "
 "possible."
 msgstr ""
 "Il semblerait que votre message soit trop court. Merci de vous assurer que "
-"votre demande est aussi précise que possible. Ce la nous aidera à la traiter "
+"votre demande est aussi précise que possible. Cela nous aidera à la traiter "
 "dans les meilleurs délais."
 
-#: accounts/forms.py:206
-msgid "Not a valid username-email combination."
-msgstr "Ce n'est pas un combinaison nom d'utilisateur/adresse mail valide."
+#: accounts/forms.py:216
+msgid "Username"
+msgstr "Nom d'utilisateur"
 
-#: accounts/forms.py:252
+#: accounts/forms.py:217
+msgid "Email"
+msgstr "Adresse mail"
+
+#: accounts/forms.py:228
+msgid "Not a valid username-email combination."
+msgstr "Ce n'est pas une combinaison nom d'utilisateur - adresse mail valide."
+
+#: accounts/forms.py:274
 msgid "default editor groups"
-msgstr "groupe d'édition par défaut"
+msgstr "groupes d'édition par défaut"
 
 #: accounts/models.py:132
 msgid "MSH Endpoint"
@@ -493,11 +534,11 @@ msgstr "MSH Endpoint"
 
 #: accounts/models.py:133
 msgid "Gateway Party Name"
-msgstr "Nom Gateway Party"
+msgstr "Nom de Gateway Party"
 
 #: accounts/models.py:134
 msgid "Gateway Party ID"
-msgstr "ID Gateway Party"
+msgstr "ID de Gateway Party"
 
 #: accounts/models.py:135
 msgid "Public Cetificate"
@@ -522,11 +563,11 @@ msgstr "Demande eDelivery pour l'utilisateur: \"{0}\""
 
 #: accounts/models.py:206
 msgid "editor group managers group"
-msgstr "groupe de gestionnaire du groupe d'édition."
+msgstr "Groupe de gestionnaires du groupe d'édition"
 
 #: accounts/models.py:250
 msgid "organization managers group"
-msgstr "groupe de gestionnaires de l'organisme"
+msgstr "groupe de gestionnaires de l'organisation"
 
 #: accounts/models.py:262
 msgid "Not a valid phone number"
@@ -534,11 +575,11 @@ msgstr "Ce n'est pas un numéro de téléphone valide"
 
 #: accounts/models.py:274
 msgid "Is a META-SHARE associate member."
-msgstr "Est un membre associé META-SHARE"
+msgstr "Est un membre associé META-SHARE."
 
 #: accounts/models.py:275
 msgid "Is a META-SHARE full member."
-msgstr "Est un membre titulaire META-SHARE"
+msgstr "Est un membre titulaire META-SHARE."
 
 #: accounts/models.py:282
 msgid "Date of birth"
@@ -564,23 +605,28 @@ msgstr "Adresse de l'affiliation"
 msgid "Affiliation phone number"
 msgstr "Numéro de téléphone de l'affiliation"
 
+#: accounts/models.py:294
+msgid "Position"
+msgstr "Poste"
+
+#: accounts/models.py:295
+msgid "Homepage"
+msgstr "Page Web"
+
 #: accounts/views.py:57
-#, fuzzy
-#| msgid "Your ELRC-SHARE user account has been activated"
 msgid "Your ELRI user account has been activated"
-msgstr "Votre compte utilisateur ELRC-SHARE a été activé"
+msgstr "Votre compte utilisateur d'ELRI a été activé"
 
 #: accounts/views.py:64
 msgid "We have activated user account for user {}."
-msgstr "Nous avons activé le compte utilisateur pour {}."
+msgstr "Nous avons activé le compte utilisateur pour l'utilisateur {}."
 
-#: accounts/views.py:92
-#, fuzzy, python-format
-#| msgid "[ELRC-SHARE] Contact Form Request: %s"
+#: accounts/views.py:91
+#, python-format
 msgid "[ELRI] Contact Form Request: %s"
-msgstr "[ELRC-SHARE] Demande de formulaire de contact: %s"
+msgstr "[ELRI] Demande du formulaire de contact: %s"
 
-#: accounts/views.py:99
+#: accounts/views.py:98
 #, python-format
 msgid ""
 "Oops, there was an error sending out your contact request. You can copy your "
@@ -589,7 +635,7 @@ msgstr ""
 "Oups, il y a eu une erreur lors de l'envoi de votre demande de contact. Vous "
 "pouvez copier ce message et réessayer plus tard: <pre>%s</pre>"
 
-#: accounts/views.py:104
+#: accounts/views.py:103
 msgid ""
 "We have received your message and successfully sent it to the node "
 "maintainers. Please give them some days to get back to you."
@@ -597,11 +643,15 @@ msgstr ""
 "Nous avons reçu votre message et il a été transmis au mainteneur du nœud. "
 "Merci de leur donner quelques jours pour revenir vers vous."
 
-#: accounts/views.py:176
+#: accounts/views.py:110
+msgid "Contact Node Maintainers"
+msgstr "Contacter les Administrateurs de la Station Relais Nationale"
+
+#: accounts/views.py:175
 msgid "New user registration"
 msgstr "Enregistrement d'un nouvel utilisateur"
 
-#: accounts/views.py:184
+#: accounts/views.py:183
 msgid ""
 "There was an error sending out the notification email to the administrators. "
 "Please contact them directly."
@@ -609,119 +659,118 @@ msgstr ""
 "Il y a eu une erreur lors de l'envoi du mail de notification aux "
 "administrateurs. Merci de les contacter directement."
 
-#: accounts/views.py:192
-#, fuzzy
-#| msgid ""
-#| "We have received your registration data and sent the administrators a "
-#| "notification email."
+#: accounts/views.py:191
 msgid ""
 "We have received your registration data and sent the administrators a "
 "notification email.You will receive an email when your account has been "
 "activated."
 msgstr ""
 "Nous avons reçu vos informations d'enregistrement et avons envoyé un mail de "
-"notification aux administrateurs."
+"notification aux administrateurs. Vous recevrez un mail lorsque votre compte "
+"aura été activé."
 
-#: accounts/views.py:248
+#: accounts/views.py:208
+msgid "Create Account"
+msgstr "Créer un compte"
+
+#: accounts/views.py:247
 msgid "You have successfully updated your profile information."
-msgstr "Vous avez mis à jour de vos information de profil avec succès."
+msgstr "Vous avez mis à jour vos information de profil avec succès."
 
-#: accounts/views.py:260
+#: accounts/views.py:259
 msgid "full member"
 msgstr "membre titulaire"
 
-#: accounts/views.py:262
+#: accounts/views.py:261
 msgid "associate member"
 msgstr "membre associé"
 
-#: accounts/views.py:265
+#: accounts/views.py:264
 msgid "Edit Profile Information"
 msgstr "Modifier les informations de profil"
 
-#: accounts/views.py:311
+#: accounts/views.py:310
 #, python-format
 msgid "An older application of yours for editor group \"%s\" is still pending."
 msgstr ""
-"Une de vos anciennes demandes demande pour le groupe d'édition \"%s\" est "
-"toujours en cours de traitement."
+"Une de vos anciennes demandes pour le groupe d'édition \"%s\" est toujours "
+"en cours de traitement."
 
-#: accounts/views.py:333
+#: accounts/views.py:332
 msgid "New editor membership request"
-msgstr ""
+msgstr "Nouvelle demande d'adhésion d'éditeur"
 
-#: accounts/views.py:340
+#: accounts/views.py:339
 msgid ""
 "There was an error sending out the request email for your editor group "
 "application."
 msgstr ""
-"Il y a eu une erreur lors de l'envoi de votre mail de requête au groupe "
+"Il y a eu une erreur lors de l'envoi de votre mail de demande au groupe "
 "d'édition."
 
-#: accounts/views.py:343
+#: accounts/views.py:342
 #, python-format
 msgid "You have successfully applied for editor group \"%s\"."
-msgstr "Votre demande pour le groupe d'édition \"%s\" a été reçue."
+msgstr "Votre demande pour le groupe d'édition \"%s\" a été reçue avec succès."
 
-#: accounts/views.py:354
+#: accounts/views.py:353
 msgid ""
 "There are no editor groups in the database, yet, for which you could apply. "
 "Please ask the system administrator to create one."
 msgstr ""
-"Il n'y a pas encore de groupe d'édition dans la base de données pour "
+"Il n'y a pas encore des groupes d'édition dans la base de données pour "
 "lesquels vous pouvez postuler. Merci de demander à l'administrateur système "
 "d'en créer un."
 
-#: accounts/views.py:362
+#: accounts/views.py:361
 msgid "Apply for editor group membership"
-msgstr "Demander un adhésion à un groupe d'édition"
+msgstr "Demander une adhésion au groupe d'édition"
 
-#: accounts/views.py:411
+#: accounts/views.py:410
 #, python-format
 msgid "You have successfully added default editor group \"%s\"."
 msgstr "Vous avez ajouté le groupe d'édition par défaut \"%s\" avec succès."
 
-#: accounts/views.py:418
+#: accounts/views.py:417
 #, python-format
 msgid "You have successfully removed default editor group \"%s\"."
 msgstr "Vous avez supprimé le groupe d'édition par défaut \"%s\" avec succès."
 
-#: accounts/views.py:430
+#: accounts/views.py:429
 msgid "There are no editor groups you could add to your default list."
 msgstr ""
-"Il n'y a pas de groupe d'édition que vous pouvez ajouter à votre liste par "
+"Il n'y a pas des groupes d'édition que vous pouvez ajouter à votre liste par "
 "défaut."
 
-#: accounts/views.py:437
+#: accounts/views.py:436
 msgid "Update default editor groups"
 msgstr "Mettre à jour les groupes d'édition par défaut"
 
-#: accounts/views.py:465
+#: accounts/views.py:464
 #, python-format
 msgid "An older application of yours for organization \"%s\" is still pending."
 msgstr ""
-"Une de vos anciennes demandes demande pour l'organisation \"%s\" est "
-"toujours en cours de traitement."
+"Une de vos anciennes demandes pour l'organisation \"%s\" est toujours en "
+"cours de traitement."
 
-#: accounts/views.py:487
-#, fuzzy
-#| msgid "Apply for organization membership"
+#: accounts/views.py:486
 msgid "New organization membership request"
-msgstr "Demander un adhésion à un organisme"
+msgstr "Nouvelle demande d'adhésion à une organisation"
 
-#: accounts/views.py:494
+#: accounts/views.py:493
 msgid ""
 "There was an error sending out the request email for your organization "
 "application."
 msgstr ""
-"Il y a eu une erreur lors de l'envoi de votre mail de requête à votre "
-"organisation."
+"Il y a eu une erreur lors de l'envoi du mail de demande pour l'application "
+"de votre organisation."
 
-#: accounts/views.py:497
+#: accounts/views.py:496
 #, python-format
 msgid "You have successfully applied for organization \"%s\"."
-msgstr "Votre demande pour l'organisme \"%s\" a été reçue."
+msgstr "Votre demande pour l'organisme \"%s\" a été reçue avec succès."
 
-#: accounts/views.py:508
+#: accounts/views.py:507
 msgid ""
 "There are no organizations in the database, yet, for which you could apply. "
 "Please ask the system administrator to create one."
@@ -729,39 +778,32 @@ msgstr ""
 "Il n'y a pas encore d'organisme dans la base de données pour lesquels vous "
 "pouvez postuler. Merci de demander à l'administrateur système d'en créer un."
 
-#: accounts/views.py:516
+#: accounts/views.py:515
 msgid "Apply for organization membership"
-msgstr "Demander un adhésion à un organisme"
+msgstr "Demander une adhésion à l'organisation"
 
-#: accounts/views.py:551
-#, fuzzy
-#| msgid "Please confirm your ELRC-SHARE reset request"
+#: accounts/views.py:550
 msgid "Please confirm your ELRI password reset request"
-msgstr "Merci de confirmer cotre demande de réinitialisation d'ELRC-SHARE"
+msgstr ""
+"Merci de confirmer votre demande de réinitialisation du mot de passe d'ELRI"
 
-#: accounts/views.py:562
-#, fuzzy
-#| msgid ""
-#| "We have received your reset request and sent you an email with further "
-#| "reset instructions."
+#: accounts/views.py:561
 msgid ""
 "We have received your password reset request and sent you an email with "
 "further instructions."
 msgstr ""
-"Nous avons reçu votre demande de réinitialisation et vous enverrons un email "
-"avec les instructions suivantes."
+"Nous avons reçu votre demande de réinitialisation du mot de passe et nous "
+"vous avons envoyé un email avec d'autres instructions."
 
-#: accounts/views.py:572
+#: accounts/views.py:571
 msgid "Reset user account"
 msgstr "Réinitialiser le compte utilisateur"
 
-#: accounts/views.py:598
-#, fuzzy
-#| msgid "Your ELRC-SHARE user account has been re-activated"
+#: accounts/views.py:597
 msgid "Your ELRI user account has been re-activated"
-msgstr "Votre compte utilisateur ELRC-SHARE a été réactivé"
+msgstr "Votre compte utilisateur d'ELRI a été réactivé"
 
-#: accounts/views.py:604
+#: accounts/views.py:603
 #, python-format
 msgid ""
 "There was an error sending out the activation email for your user account. "
@@ -770,16 +812,16 @@ msgstr ""
 "Il y a eu une erreur lors de l'envoi du mail d'activation de votre compte "
 "utilisateur. Merci de contacte l'administrateur au %s."
 
-#: accounts/views.py:613
+#: accounts/views.py:612
 msgid ""
 "We have re-activated your user account and sent you an email with your "
 "personal password which allows you to login to the website."
 msgstr ""
-"Nous avons réactivé votre compte utilisateur et vous avons envoyé un mail "
-"avec votre mot de passe personnalisé qui vous permettra de vous connecter au "
-"site."
+"Nous avons réactivé votre compte utilisateur et nous vous avons envoyé un "
+"mail avec un mot de passe personnalisé qui vous permettra de vous connecter "
+"au site."
 
-#: accounts/views.py:658
+#: accounts/views.py:657
 msgid "Apply for eDelivery membership"
 msgstr "Demander une adhésion à eDelivery"
 
