@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-05 10:45+0200\n"
-"PO-Revision-Date: 2019-04-05 12:32+0200\n"
+"PO-Revision-Date: 2019-04-05 12:35+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -488,7 +488,7 @@ msgstr ""
 #: accounts/forms.py:176
 #, python-format
 msgid "The password is too similar to the %s"
-msgstr ""
+msgstr "Le mot de passe est trop semblable au champ %s"
 
 #: accounts/forms.py:202
 msgid "Subject"
