@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-05 10:45+0200\n"
-"PO-Revision-Date: 2019-04-05 10:53+0200\n"
+"PO-Revision-Date: 2019-04-05 12:27+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -1578,7 +1578,7 @@ msgstr "Type de support"
 
 #: repository/search_indexes.py:115
 msgid "Licence"
-msgstr "License"
+msgstr "Licence"
 
 #: repository/search_indexes.py:118
 msgid "Conditions of Use"

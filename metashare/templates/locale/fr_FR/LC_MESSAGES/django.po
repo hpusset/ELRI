@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-05 10:45+0200\n"
-"PO-Revision-Date: 2019-04-05 12:06+0200\n"
+"PO-Revision-Date: 2019-04-05 12:28+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -2232,7 +2232,7 @@ msgstr "Contrat de licence"
 #: templates/repository/licence_agreement.html:22
 #: templates/repository/licence_agreement.html:26
 msgid "View licence"
-msgstr "Voir la license"
+msgstr "Voir la licence"
 
 #: templates/repository/licence_agreement.html:52
 msgid ""
