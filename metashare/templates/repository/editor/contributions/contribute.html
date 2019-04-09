@@ -1,6 +1,7 @@
 {% load i18n %}
 {% load static from staticfiles %}
 
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
 <head>
@@ -225,6 +226,7 @@
                     </span>
                 </div>
             </div>
+           
             <div class="form-group required" id="licence">
                 <label class="control-label" for="licence">{% trans 'Licensing conditions' %}</label>
                 <select required name="licence">
@@ -235,8 +237,10 @@
                     <option value="CC-BY-SA-4.0">{% trans 'Creative Commons - Attribution - ShareAlike 4.0 (CC-BY-SA-4.0)' %}</option>
                     <option value="CC-BY-NC-4.0">{% trans 'Creative Commons - Attribution - NonCommercial 4.0 (CC-BY-NC-4.0)' %}</option>
                     <option value="CC-BY-NC-SA-4.0">{% trans 'Creative Commons - Attribution - NonCommercial - ShareAlike 4.0 (CC-BY-NC-SA-4.0)' %}</option>
-                    <option value="LO-OL-v2"> Licence Ouverte / Open LIcence v2.0 (LO-OL-v2) </option>
+                    {% if country == "France" %}
+                    <option value="LO-OL-v2"> Licence Ouverte / Open LIcense v2.0 (LO-OL-v2) </option>
                     <option value="ODbL-1.0"> Open Database License (ODbL) </option>
+                    {% endif %}
                     <option value="non-standard/Other_Licence/Terms">{% trans 'Non-Standard/Other_Licence/Terms' %}</option>
                 </select>
                 <span class="help-block contrib-help">{% blocktrans %}The licensing conditions for the resource.{% endblocktrans %} 
