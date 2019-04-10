@@ -1117,7 +1117,8 @@ def contribute(request):
             licence_file_object = request.FILES.get('licenceFile')
             if licence_file_object:
                 # a licence file has been uploaded
-                licence_filename = filename + "_licence.pdf"
+                lfilename = u'_'.join(request.POST['resourceTitle'].split())
+                licence_filename = lfilename + "_licence.pdf"
                 licence_filepath = os.path.sep.join((unprocessed_dir,
                                                      licence_filename))
                 with open(licence_filepath, 'wb+') as licence_destination:
