@@ -1121,6 +1121,7 @@ def contribute(request):
                 licence_filename = lfilename + "_licence.pdf"
                 licence_filepath = os.path.sep.join((unprocessed_dir,
                                                      licence_filename))
+                #TODO:que pasa si ya existe el archivo? que pasa si dos recursos se llaman igual y suben una licencia adhoc?
                 with open(licence_filepath, 'wb+') as licence_destination:
                     for chunk in licence_file_object.chunks():
                         licence_destination.write(chunk)
