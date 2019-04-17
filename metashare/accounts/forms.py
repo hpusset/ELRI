@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
-
+from django.core.validators import RegexValidator
 from django_password_validation import validate_password
 
 from metashare.accounts.models import UserProfile, EditorGroupApplication, \
@@ -71,7 +71,8 @@ class RegistrationRequestForm(Form):
     """
     Form used to create user account requests from new users.
     """
-    shortname = forms.CharField(User._meta.get_field('username').max_length,
+    alphanumeric = RegexValidator(r'^[0-9a-zA-Z@.+\-_]*$', _(u'username can only contain letters, numbers and @ . + - _'))
+    shortname = forms.CharField(max_length=User._meta.get_field('username').max_length,validators=[alphanumeric],
                                 label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Desired account name")))
     first_name = forms.CharField(User._meta.get_field('first_name').max_length,
                                  label=mark_safe(u"%s<span style='color:red'>*</span>" % _("First name")))
