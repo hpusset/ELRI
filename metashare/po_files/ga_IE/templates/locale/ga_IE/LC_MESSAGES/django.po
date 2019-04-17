@@ -1,0 +1,3791 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-04-04 13:42+0200\n"
+"PO-Revision-Date: 2019-04-08 14:19+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ga_IE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=5; plural=(n==1 ? 0 : n==2 ? 1 : n>=3 && n<=6 ? 2 : "
+"n>=7 && n<=10 ? 3 : 4);\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#: templates/403.html:5
+msgid "Permission Denied (403)"
+msgstr "Cead á Diúltú (403)"
+
+#: templates/403.html:10
+msgid "You don't have the sufficient rights to access this resource."
+msgstr "Níl na cearta cuí agat le rochtain a fháil ar an acmhainn seo."
+
+#: templates/404.html:7
+msgid "Page not Found (404)"
+msgstr "Níor aimsíodh an leathanach (404)"
+
+#: templates/404.html:9
+msgid "We&rsquo;re sorry, but the URL you requested was not found."
+msgstr "Tá brón orainn, níor aimsíodh an URL a d'iarr tú."
+
+#: templates/404.html:12 templates/500.html:12
+#, python-format
+msgid ""
+"Please try again and, if the error persists, contact the ELRI NRS support "
+"group (<a href=\"mailto:%(email)s\" >%(email)s</a>)."
+msgstr ""
+"Triail arís é le do thoil, agus má leanann an earráid ar aghaidh, bí i "
+"dteagmháil le grúpa tacaíochta an SAN ELRI (<a href=\"mailto:%(email)s\" >"
+"%(email)s</a>)."
+
+#: templates/500.html:7
+msgid "Internal Server Error (500)"
+msgstr "Earráid sa Fhreastalaí Inmheánach (500)"
+
+#: templates/500.html:9
+msgid ""
+"We&rsquo;re sorry, but an internal error occurred when processing your "
+"request."
+msgstr ""
+"Tá brón orainn, tharla earráid inmheánach agus d'iarratas á phróiseáil."
+
+#: templates/back.html:5
+msgid "ELRI National Relay Station"
+msgstr "Stáisiún Athsheachadta Náisiúnta na hÉireann ELRI"
+
+#: templates/base.html:54
+msgid ""
+"\"This site uses cookies to enhance your user experience. By clicking any "
+"link on this page you are giving your consent for us to set cookies.\" "
+msgstr ""
+"\"Baineann an suíomh gréasáin seo úsáid as fianáin chun eispéireas an "
+"úsáideora a fheabhsú. Má chliceálann tú ar aon nasc ar an leathnach seo, "
+"beidh tú ag tabhairt do thola dúinn fianáin a chur i bhfeidhm.\""
+
+#: templates/base.html:55 templates/base.html.py:58
+msgid "\"OK\""
+msgstr "\"Tuigim\""
+
+#: templates/base.html:57
+msgid "\"Learn more\""
+msgstr "\"Léigh níos mó faoi\""
+
+#: templates/breadcrumbs.html:3 templates/header.html:79
+#: templates/header.html.py:80
+msgid "Home"
+msgstr "Baile"
+
+#: templates/elri-info.html:7 templates/header.html:163
+msgid "ELRI Services"
+msgstr "Seirbhísí ELRI"
+
+#: templates/elri-info.html:9
+msgid ""
+"The ELRI project is intended to provide services related to the collection, "
+"preparation, storage and sharing of language resources. These services are "
+"provided via National Relay Stations, websites based in the Member States "
+"that are part of the initiative."
+msgstr ""
+"Tá i gceist le tionscadal an ELRI seirbhísí a sholáthar i dtaca le "
+"hacmhainní teanga a bhailiú, a réiteach, a stóráil agus a roinnt. Cuirtear "
+"na seirbhísí sin ar fáil trí Stáisiúin Athsheachadta Náisiúnta, suímh "
+"idirlín bunaithe sna Ballstáit a bhfuil páirt acu sa tionscnamh."
+
+#: templates/elri-info.html:11
+msgid ""
+"Users that have registered to an ELRI National Relay Stations can upload "
+"their data and benefit from fully prepared resources. For instance, users "
+"can upload collections of documents in different languages and retrieve "
+"translation memories that will have been created automatically by our "
+"integrated data processing engines."
+msgstr ""
+"Is féidir le húsáideoirí atá cláraithe le Stáisiún Athsheachadta Náisiúnta "
+"de chuid ELRI a gcuid sonraí a uaslódáil agus tairbhe a bhaint as acmhainní "
+"atá lánréitithe. Mar shampla, is féidir le húsáideoirí bailiúcháin doiciméad "
+"a uaslódáil i dteangacha éagsúla agus cuimhní aistriúcháin a aisghabháil a "
+"gcruthófar go huathoibríoch ag ár gcuid inneall comhtháite próiseáilte "
+"sonraí."
+
+#: templates/elri-info.html:13
+msgid ""
+"Users can decide to share a given resource with a specific group of users, "
+"at the national level between similar public organisations, with the "
+"European Commission to help improve European public translation services, or "
+"with the community at large for data that can be shared without restrictions."
+msgstr ""
+"Is féidir le húsáideoirí acmhainn ar leith a roinnt le grúpa sonraithe "
+"úsáideoirí, idir eagraíochtaí poiblí cosúla ag an leibhéal náisiúnta, leis "
+"an gCoimisiún Eorpach mar áis chun cabhrú le seirbhísí aistriúcháin poiblí "
+"Eorpacha, nó leis an bpobal i gcoitinne do shonraí ar féidir iad a roinnt "
+"gan srianta."
+
+#: templates/elri-info.html:15
+msgid ""
+"Only registered users can browse and download those resources that have been "
+"made available to the groups to which they belong, according to the "
+"licensing terms under which the resources are provided."
+msgstr ""
+"Úsáideoirí cláraithe amháin atá ábalta na hacmhainní sin atá curtha ar fáil "
+"do na grúpaí lena mbaineann siad a bhrabhsáil agus a íoslódáil, de réir na "
+"dtéarmaí ceadúnaithe faoina gcuirtear na hacmhainní ar fáil."
+
+#: templates/elri-info.html:19 templates/header.html:164
+msgid "Managing Language Resources"
+msgstr "Acmhainní Teanga a Bhainistiú"
+
+#: templates/elri-info.html:21
+msgid ""
+"To benefit from the services of this ELRI National Relay Station, users "
+"should follow the following procedure:"
+msgstr ""
+"Chun tairbhe a bhaint as seirbhísí an Stáisiúin Athsheachadta Náisiúnta ELRI "
+"seo, ba chóir d'úsáideoirí an nós imeachta a leanas a leanúint:"
+
+#: templates/elri-info.html:23
+msgid ""
+"New users should first register <a href=\"../accounts/create/\">here</a>. "
+"Once your account credentials have been validated, you can log in and either "
+"search (via the Browse Resources menu) or contribute ((via the Contribute "
+"Resources menu) language resources."
+msgstr ""
+"Ba chóir d'úsáideoirí nua clárú <a href=\"../accounts/create/\">anseo</a> ar "
+"dtús. Nuair atá dintiúir do chuntais deimhnithe, is féidir leat logáil "
+"isteach agus cuardach (tríd an roghchlár Brabhsáil Acmhainní) nó acmhainní "
+"teanga a chur ar fáil (tríd an roghchlár Cuir Acmhainní ar Fáil)."
+
+#: templates/elri-info.html:25
+msgid ""
+"For each language resource, you will be asked to provide the languages of "
+"its content, a short title, the group with which you wish to share the "
+"resource, and the associated licensing conditions (see <a href="
+"\"#Licensing_LRs\">below</a>)."
+msgstr ""
+"Do gach acmhainn teanga, iarrfar ort teangacha a inneachair a chlárú, mar "
+"aon le teideal gearr, an grúpa is mian leat an acmhainn a roinnt leis, agus "
+"na coinníollacha ceadúnaithe a bhaineann leis (féach <a href=\"#Licensing_LRs"
+"\">thíos</a>)."
+
+#: templates/elri-info.html:27
+msgid ""
+"Users who require the creation of a specific group of users for sharing "
+"purposes, beyong the available user groups, can contact us via the Contact "
+"menu."
+msgstr ""
+"Na húsáideoirí sin ar mian leo go gcruthófaí grúpa ar leith úsáideoirí chun "
+"ábhar a roinnt orthu, seachas na grúpaí úsáideoirí atá ar fáil cheana, is "
+"féidir leo dul i dteagmháil linn tríd an roghchlár Teagmhála."
+
+#: templates/elri-info.html:29
+msgid ""
+"Once the resource has been fully prepared by our data processing engines, "
+"you will receive a notification email and will be able to download the "
+"prepared resource. If further information were needed about the resource and "
+"its licensing conditions, you may be contacted by an ELRI responsible."
+msgstr ""
+"Nuair atá an acmhainn lánréitithe ag ár gcuid inneall próiseála sonraí, "
+"cuirfear ríomhphost fógartha chugat agus beidh tú ábalta an acmhainn "
+"réitithe a íoslódáil. Má tharlaíonn sé go mbeidh eolas sa bhreis faoin "
+"acmhainn agus a coinníollacha ceadúnaithe ag teastáil, seans go mbeadh "
+"ionadaí ón ELRI i dteagmháil leat."
+
+#: templates/elri-info.html:31
+msgid ""
+"Until clearance has been granted, the resource can only be viewed by "
+"authorised reviewers of the National Relay Station. Once clearing is "
+"granted, the prepared resource will be downloadable by users of the "
+"authorised group of users, in accordance to its licensing conditions."
+msgstr ""
+"Go dtí go mbeidh cead faighte, ní bheidh ach athbhreithneoirí údaraithe den "
+"Stáisiún Athsheachadta Náisiúnta ábalta an acmhainn a fheiceáil. Ach cead a "
+"bheith tugtha, beidh úsáideoirí ón ngrúpa údaraithe úsáideoirí ábalta an "
+"acmhainn réitithe a íoslódáil, de réir a coinníollacha ceadúnaithe."
+
+#: templates/elri-info.html:37 templates/header.html:165
+msgid "Licensing Language Resources"
+msgstr "Acmhainní Teanga a cheadúnú"
+
+#: templates/elri-info.html:39
+msgid ""
+"Any grant of access to language resources via this National Relay Station "
+"should include not only the right to read\n"
+"                the relevant content but also to allow transformative uses, "
+"dissemination and distribution of such\n"
+"                resources and their derivatives, according to the needs and "
+"policies of language resource owners and users."
+msgstr ""
+"Aon chead rochtana a thugtar ar acmhainní teanga tríd an Stáisiún "
+"Athsheachadta Náisiúnta seo, ba chóir a bheith san áireamh leis ní hamháin "
+"cead\n"
+"                an t-ábhar ábhartha a léamh ach úsáid chlaochlaitheach a "
+"bhaint as, mar aon le scaipeadh agus dáileadh a leithéid\n"
+"                ábhar agus a ndíorthaigh, de réir riachtanas agus "
+"pholasaithe sealbhóirí agus úsáideoirí acmhainní teanga."
+
+#: templates/elri-info.html:43
+msgid ""
+"To limit the complexity of licensing, we strongly advise data providers to "
+"use one of the standard\n"
+"                licences, i.e. <b>Creative Commons</b> and open national "
+"licences indicated below, which are pre-selected in the data upload form for "
+"convenience."
+msgstr ""
+"Chun castacht an cheadúnaithe a mhaolú, molaimid go láidir do sholáthróirí "
+"sonraí úsáid a bhaint as ceann de na ceadúnais\n"
+"                chaighdeánacha, i.e. <b>Creative Commons</b> agus ceadúnais "
+"náisiúnta oscailte mar atá thíos, atá réamhroghnaithe san fhoirm uaslódáilte "
+"sonraí ar mhaithe le háisiúlacht."
+
+#: templates/elri-info.html:46
+msgid ""
+"Users can also provide a licence of their choice by uploading a PDF file "
+"detailing the licensing conditions. These user-specific licenses will be "
+"reviewed by responsibles from the ELRI National Relay Station to assess "
+"whether this specific license meets the required terms of conditions for "
+"sharing via ELRI."
+msgstr ""
+"Is féidir le húsáideoirí ceadúnas dá rogha féin a sholáthar freisin trí "
+"chomhad PDF a uaslódáil a shonraíonn na coinníollacha ceadúnaithe. Déanfar "
+"na ceadúnais sainúsáideora seo a scrúdú ag daoine freagracha ón Stáisiún "
+"Athsheachadta Náisiúnta ELRI chun a mheas cé an gcomhlánaíonn na ceadúnais "
+"áirithe sin na téarmaí agus coinníollacha atá leagtha síos chun ábhar a "
+"roinnt trí ELRI."
+
+#: templates/elri-info.html:49
+#: templates/repository/resource_view/distribution.html:31
+msgid "Licences"
+msgstr "Ceadúnais"
+
+#: templates/elri-info.html:53
+msgid "Value"
+msgstr "Luach"
+
+#: templates/elri-info.html:54
+msgid "Full name with link to licence text or Definition"
+msgstr "Ainm iomlán le nasc go dtí téacs nó sainmhíniú an cheadúnais"
+
+#: templates/elri-info.html:61
+msgid "International/National Data Licences"
+msgstr "Ceadúnais Sonraí Idirnáisiúnta/Náisiúnta"
+
+#: templates/elri-info.html:67
+msgid "Used for resources that are free of all known legal restrictions "
+msgstr "Úsáidtear do acmhainní atá saor ó gach srianta dlíthiúla aitheanta "
+
+#: templates/elri-info.html:73
+msgid ""
+"Used for resources that are PSI-compliant and no further information is "
+"required or available "
+msgstr ""
+"Úsáidtear d'acmhainní atá FEP-comhlíontach (Faisnéis ón Earnáil Phoiblí) "
+"agus nach bhfuil eolas sa bhreis ag teastáil ná le fáil "
+
+#: templates/elri-info.html:112
+msgid "National Data Licences"
+msgstr "Ceadúnais Sonraí Náisiúnta"
+
+#: templates/footer.html:7
+msgid "ELRI National Relay Station "
+msgstr "Stáisiún Athsheachadta Náisiúnta na hÉireann ELRI"
+
+#: templates/footer.html:8
+msgid ""
+"powered by <a href=\"http://www.meta-share.org/\" target=\"_blank\">META-"
+"SHARE</a> and <a href=\"https://elrc-share.eu/\" target=\"_blank\">ELRC-"
+"SHARE</a>"
+msgstr ""
+"Bainistithe ag <a href=\"https://www.adaptcentre.ie\">ADAPT</a> agus "
+"óstaithe in <a href=\"https://www.computing.dcu.ie/\">OCBÁC</a>\n"
+"<br>cumhachtaithe ag <a href=\"http://meta-share.org/\" target=\"_blank"
+"\">META-SHARE</a> agus <a href=\"https://elrc-share.eu/\" target=\"_blank"
+"\">ELRC-SHARE</a>"
+
+#: templates/footer.html:12
+msgid "Privacy Policy"
+msgstr "Polasaí Príobháideachais"
+
+#: templates/frontpage.html:14
+msgid "Welcome to ELRI in MyCountry!"
+msgstr "Fáilte chuig ELRI na hÉireann!"
+
+#: templates/frontpage.html:15
+msgid ""
+"This site is the official National Relay Station in MyCountry, where "
+"language resources can be collected, prepared and shared amongst public "
+"institutions and translation centres."
+msgstr ""
+"Is é an suíomh seo an Stáisiún Athsheachadta Náisiúnta oifigiúil in Éirinn, "
+"áit ar féidir acmhainní teanga a bhailiú, a réiteach agus a roinnt ar "
+"institiúidí poiblí agus lárionaid aistriúcháin."
+
+#: templates/frontpage.html:17
+msgid ""
+"National Relay Stations are developed within the  <a href=\"http://www.elri-"
+"project.eu\">ELRI</a> European project, supported by the <a href=\"http://ec."
+"europa.eu/inea/en/connecting-europe-facility\">Connecting Europe Facility</"
+"a> programme."
+msgstr ""
+"Déantar Stáisiúin Athsheachadta Náisiúnta a fhorbairt taobh istigh den "
+"tionscadal Eorpach <a href=\"http://www.elri-project.eu\">ELRI</a>, le "
+"tacaíocht ón gclár <a href=\"http://ec.europa.eu/inea/en/connecting-europe-"
+"facility\">Saoráid um Chónascadh na hEorpa</a>."
+
+#: templates/frontpage.html:19
+msgid "Help promote language equality in Europe by joining the ELRI network!"
+msgstr ""
+"Cuir le comhionannas teanga san Eoraip trí bhallraíocht a ghlacadh i "
+"ngréasán an ELRI!"
+
+#: templates/frontpage.html:21
+msgid "Join ELRI"
+msgstr "Glac Ballraíocht san ELRI"
+
+#: templates/frontpage.html:22
+msgid ""
+"Members of public institutions and translation centres can join user groups "
+"to download shared resources, contribute their own data and benefit from "
+"translation memories or other language resources automatically prepared by "
+"the ELRI engines."
+msgstr ""
+"Is féidir le comhaltaí in institiúidí poiblí agus lárionaid aistriúcháin "
+"ballraíocht a ghlacadh i ngrúpaí úsáideoirí chun acmhainní roinnte a "
+"íoslódáil, a gcuid sonraí féin a chur ar fáil agus tairbhe a bhaint as "
+"cuimhní aistriúcháin nó acmhainní teanga eile a réitíonn innill an ELRI go "
+"huathoibríoch."
+
+#: templates/frontpage.html:24
+msgid ""
+"<a href=\"/accounts/create\">Register</a> to become a member of ELRI.\n"
+"                            <br>Already a member? <a href=\"/login\">Sign "
+"in</a>."
+msgstr ""
+"<a href=\"/accounts/create\">Cláraigh</a> le ballraíocht a ghlacadh san "
+"ELRI.\n"
+"                            <br>An ball tú cheana? <a href=\"/login\">Sínigh "
+"isteach</a>."
+
+#: templates/frontpage.html:27
+msgid "Search and share"
+msgstr "Cuardaigh agus roinn"
+
+#: templates/frontpage.html:28
+msgid ""
+"<a href=\"/repository/search\">Browse</a> available language resources.\n"
+"                            <br><a href=\"/repository/contribute"
+"\">Contribute</a> your own data and retrieve prepared language resources."
+msgstr ""
+"<a href=\"/repository/search\">Brabhsáil</a> acmhainní teanga atá ar fáil.\n"
+"                            <br><a href=\"/repository/contribute\">Cuir ar "
+"fáil</a> do chuid sonraí féin agus athghabháil acmhainní teanga réitithe."
+
+#: templates/header.html:34 templates/header.html.py:46
+msgid "Gaeilge"
+msgstr ""
+
+#: templates/header.html:39 templates/header.html.py:49
+msgid "English"
+msgstr ""
+
+#: templates/header.html:82
+msgid "Browse the resources of the ELRI catalogue"
+msgstr "Brabhsáil na hacmhainní don chatalóg ELRI"
+
+#: templates/header.html:84
+msgid "Browse"
+msgstr "Brabhsáil"
+
+#: templates/header.html:86
+msgid "Contribute"
+msgstr "Cuir Acmhainní ar Fáil"
+
+#: templates/header.html:89 templates/header.html.py:97
+msgid "Create/edit resource metadata or upload resource data"
+msgstr ""
+"Cruthaigh/leasaigh meiteashonraí acmhainne nó uaslódáil sonraí acmhainne"
+
+#: templates/header.html:90
+msgid "Manage"
+msgstr "Bainistigh"
+
+#: templates/header.html:92
+msgid "Create/edit your own resource metadata or upload resource data"
+msgstr ""
+"Cruthaigh/leasaigh do mheiteashonraí acmhainne féin nó uaslódáil sonraí "
+"acmhainne"
+
+#: templates/header.html:94
+msgid "Manage your own resources"
+msgstr "Bainistigh d'acmhainní féin"
+
+#: templates/header.html:99
+msgid "Manage all resources"
+msgstr "Bainistigh gach acmhainn"
+
+#: templates/header.html:105 templates/header.html.py:106
+msgid "Manage LRs by ELRC deliverables"
+msgstr "Bainistigh Acmhainní Teanga de réir tháirgí insoláthartha ELRC"
+
+#: templates/header.html:111
+msgid "Create/edit person object metadata"
+msgstr "Cruthaigh/leasaigh meiteashonraí duine oibiachta"
+
+#: templates/header.html:113
+msgid "Manage person objects"
+msgstr "Bainistigh duine oibiachtaí"
+
+#: templates/header.html:114
+msgid "Create/edit organization object metadata"
+msgstr "Cruthaigh/leasaigh meiteashonraí eagraíochta oibiachta"
+
+#: templates/header.html:116
+msgid "Manage organization objects"
+msgstr "Bainistigh eagraíocht oibiachtaí"
+
+#: templates/header.html:117
+msgid "Create/edit project object metadata"
+msgstr "Cruthaigh/leasaigh meiteashonraí tionscadail oibiachta"
+
+#: templates/header.html:119
+msgid "Manage project objects"
+msgstr "Bainistigh tionscadal oibiachtaí"
+
+#: templates/header.html:120
+msgid "Create/edit document/paper object metadata"
+msgstr "Cruthaigh/leasaigh meiteashonraí doiciméid/páipéir oibiachta"
+
+#: templates/header.html:122
+msgid "Manage document objects"
+msgstr "Bainistigh doiciméad oibiachtaí"
+
+#: templates/header.html:124
+msgid "Upload XML resource descriptions"
+msgstr "Uaslódáil tuairiscí acmhainne XML"
+
+#: templates/header.html:125
+msgid "Upload resource descriptions"
+msgstr "Uaslódáil tuairiscí acmhainne"
+
+#: templates/header.html:131
+msgid "Manage users and groups"
+msgstr "Bainistigh úsáideoirí agus grúpaí"
+
+#: templates/header.html:132
+msgid "Administration"
+msgstr "Riarachán"
+
+#: templates/header.html:156
+msgid "View various statistics for this META-SHARE Node"
+msgstr "Amharc ar staitisticí éagsúla don nód META-SHARE seo"
+
+#: templates/header.html:158
+msgid "Statistics"
+msgstr "Staitisticí"
+
+#: templates/header.html:161 templates/repository/resource_view/usage.html:3
+msgid "Usage"
+msgstr "Úsáid"
+
+#: templates/header.html:170
+msgid "Terms of Service"
+msgstr "Téarmaí Seirbhíse"
+
+#: templates/header.html:172
+msgid "Use of ELRI Services"
+msgstr "Úsáid Seirbhísí ELRI"
+
+#: templates/header.html:173
+msgid "Sharing of Language Resources"
+msgstr "Roinnt Acmhainní Teanga"
+
+#: templates/header.html:174
+msgid "Privacy"
+msgstr "Príobháideachas"
+
+#: templates/header.html:175
+msgid "Data Protection"
+msgstr "Cosaint Sonraí"
+
+#: templates/header.html:176
+msgid "Data Protection Statement"
+msgstr "Ráiteas Cosanta Sonraí"
+
+#: templates/header.html:177
+msgid "Notice and Takedown Policy"
+msgstr "Polasaí Fógartha agus Tógála Síos"
+
+#: templates/header.html:181 templates/header.html.py:182 templates/help.html:8
+msgid "Help"
+msgstr "Cabhair"
+
+#: templates/header.html:185
+msgid "Profile settings and actions"
+msgstr "Socruithe agus gníomhartha próifíle"
+
+#: templates/header.html:193
+msgid "View your recent actions"
+msgstr "Amharc ar do ghníomhartha deireanacha"
+
+#: templates/header.html:194
+msgid "View or edit your personal details"
+msgstr "Amharc ar nó leasaigh do shonraí pearsanta"
+
+#: templates/header.html:195
+msgid "Edit your profile"
+msgstr "Cuir do phróifíl in eagar"
+
+#: templates/header.html:196
+msgid "Change your password"
+msgstr "Athraigh do phasfhocal"
+
+#: templates/header.html:208
+msgid "Apply for eDelivery membership"
+msgstr "Cuir isteach ar bhallraíocht eDelivery"
+
+#: templates/header.html:208
+msgid "Apply for ELRC-SHARE eDelivery membership"
+msgstr "Cuir isteach ar bhallraíocht eDelivery ELRC-SHARE"
+
+#: templates/header.html:213 templates/header.html.py:214
+#: templates/repository/api/help.html:31
+msgid "ELRC-SHARE RESTful API"
+msgstr "API ELRC-SHARE RESTful"
+
+#: templates/header.html:223
+msgid "Logout"
+msgstr "Logáil amach"
+
+#: templates/header.html:226
+msgid "Register"
+msgstr "Cláraigh"
+
+#: templates/header.html:228 templates/login.html:19
+msgid "Login"
+msgstr "Logáil isteach"
+
+#: templates/help.html:10 templates/repository/resource_view/lr_view.html:348
+msgid "Documentation"
+msgstr "Doiciméadacht"
+
+#: templates/help.html:11
+msgid ""
+"The following guidelines provide detailed information on how to use the ELRI "
+"platform."
+msgstr ""
+"Tugann na treoirlínte a leanas mionsonraí ar conas an suíomh seo ELRI a "
+"úsáid."
+
+#: templates/help.html:16
+msgid "User guidelines"
+msgstr "Treoirlínte d’úsáideoirí"
+
+#: templates/help.html:20
+msgid "Contact details"
+msgstr "Sonraí teagmhála"
+
+#: templates/help.html:22
+msgid ""
+"For enquiries related to the project, please refer to the <a href=\"http://"
+"www.elri-project.eu/contact-us.html\" target=\"_blank\">list of ELRI Contacts"
+msgstr ""
+"I dtaca le fiosrúcháin a bhaineann leis an tionscadal, déan tagairt don <a "
+"href=\"http://www.elri-project.eu/contact-us.html\" target=\"_blank\">liosta "
+"de Theagmhálaithe an ELRI"
+
+#: templates/help.html:24
+#, python-format
+msgid ""
+"For technical help about this National Relay Station, you can contact us at "
+"<a href=\"mailto:%(email)s\" >%(email)s</a>."
+msgstr ""
+"Do chabhair theicniúil faoin Stáisiún Athsheachadta Náisiúnta, déan "
+"teagmháil linn ag <a href=\"mailto:%(email)s\" >%(email)s</a>."
+
+#: templates/legal.html:7
+msgid "<strong>ELRI Terms of Service</strong>"
+msgstr "<strong>Téarmaí Seirbhíse an ELRI</strong>"
+
+#: templates/legal.html:8
+msgid ""
+"These are the Terms of Use and Provision of the ELRI Services for all "
+"registered Users of the ELRI National Relay Station in [Member State]. By "
+"using ELRI Services, you are agreeing to these Terms. Please read them "
+"carefully, as you are bound by them."
+msgstr ""
+"Is iad seo Téarmaí Úsáide agus Soláthair Sheirbhísí an ELRI do gach "
+"Úsáideoir cláraithe de chuid an Stáisiúin Athsheachadta Náisiúnta ELRI i "
+"[Ballstát]. Trí úsáid a bhaint as Seirbhísí ELRI tá tú ag glacadh leis na "
+"téarmaí seo. Léigh go cúramach iad, mar nach mór duit cloí leo."
+
+#: templates/legal.html:11
+msgid "<b>Interpretation</b>"
+msgstr "<b>Léirmhíniú</b>"
+
+#: templates/legal.html:12
+msgid ""
+"a) “User” or “You”: means an individual or entity who is exercising rights "
+"or undertaking legal obligations under this Service Agreement and who has "
+"not previously violated these Terms of Service or who has received express "
+"permission from the Service Provider despite a previous violation. "
+"Registered Users’ details are OR have been obtained through registration "
+"with the ELRI Services."
+msgstr ""
+"a) \"Úsáideoir\" nó \"Tú”: duine nó aonán atá ag cur cearta i bhfeidhm nó ag "
+"glacadh dualgais dhlíthiúla faoin gComhaontú Seirbhíse seo agus nár sháraigh "
+"na Téarmaí Seirbhíse seo cheana nó a fuair cead soiléir ón Soláthraí "
+"Seirbhíse in ainneoin sárú a tharla roimhe. Faightear NÓ fuarthas sonraí na "
+"nÚsáideoirí Cláraithe trí chlárú leSheirbhísí an ELRI."
+
+#: templates/legal.html:14
+msgid ""
+"b) “ELRI”: means all organisations that form part of the ELRI consortium."
+msgstr ""
+"b) “ELRI”: gach eagraíocht atá ina chomhpháirt de chuibhreannas an ELRI."
+
+#: templates/legal.html:16
+msgid ""
+"c) “Service Provider”: means the ELRI National Relay Station in [Member "
+"State], which is hosted by [NAME OF HOSTING ORGANISATION] as a member of "
+"ELRI."
+msgstr ""
+"c) “Soláthraí Seirbhíse”: an Stáisiún Athsheachadta Náisiúnta ELRI in "
+"[Ballstát], a óstálann [AINM NA HEAGRAÍOCHTA OSTÁLA] mar bhall den ELRI."
+
+#: templates/legal.html:18
+msgid ""
+"d) “ELRI Services”: These are the services offered by ELRI, which include:"
+msgstr ""
+"d) “Seirbhísí ELRI”: Seirbhísí a chuireann an ELRI ar fáil, iad seo a leanas "
+"san áireamh:"
+
+#: templates/legal.html:20
+msgid "User registration, authentication and authorisation"
+msgstr "Clárú, fíordheimhniú agus údarú úsáideoirí"
+
+#: templates/legal.html:21
+msgid ""
+"Archiving (storage and maintenance for preservation purposes) of language "
+"resources"
+msgstr ""
+"Cartlannú (stóráil agus cothabháil ar chúiseanna caomhnaithe) acmhainní "
+"teanga"
+
+#: templates/legal.html:22
+msgid "Documentation (with metadata) of language resources"
+msgstr "Doiciméadú (le meiteashonraí) acmhainní teanga"
+
+#: templates/legal.html:23
+msgid "Searching, browsing and viewing of resource metadata"
+msgstr "Cuardach, brabhsáil agus amharc ar mheiteashonraí acmhainne"
+
+#: templates/legal.html:24
+msgid "Uploading and downloading of language resources"
+msgstr "Uaslódáil agus íoslódáil acmhainní teanga"
+
+#: templates/legal.html:25
+msgid "Automatic and manual processing of uploaded language resources"
+msgstr "Próiseáil uathoibríoch agus de láimh ar acmhainní teanga uaslódáilte"
+
+#: templates/legal.html:29
+msgid ""
+"e) “ELRI Registration Service”: means the service through which the Service "
+"Provider obtains your name and contact details."
+msgstr ""
+"e) “Seirbhís Clárúcháin an ELRI”: an tseirbhís trína bhfaigheann an "
+"Soláthraí Seirbhíse d'ainm agus do shonraí teagmhála."
+
+#: templates/legal.html:31
+msgid ""
+"f) “Depositor”: any individual or organisation who deposits material using "
+"ELRI Services."
+msgstr ""
+"f) “Taisceoir”: aon duine nó eagraíocht a chuireann ábhar ar taisce ag úsáid "
+"Sheirbhísí an ELRI."
+
+#: templates/legal.html:33
+msgid ""
+"g) Headings contained in this Terms of Service Agreement are for reference "
+"purposes only and shall not be deemed to be an indication of the meaning of "
+"the clause to which they relate."
+msgstr ""
+"g) Na ceannteidil sa Chomhaontú Téarmaí Seirbhíse seo, is chun críche "
+"tagartha amháin iad agus ní mheasfar go dtugann siad le fios brí an chlásail "
+"lena mbaineann siad."
+
+#: templates/legal.html:35
+msgid ""
+"h) Where the context so implies, words importing the singular number shall "
+"include the plural and vice versa and words importing the masculine shall "
+"include the feminine and vice versa."
+msgstr ""
+"h) Nuair is léir sin ón gcomhthéacs, beidh sé le tuiscint go n-áiríonn "
+"focail atá ag tagairt don uatha an chiall iolra agus a mhalairt, agus go n-"
+"áiríonn focail atá ag tagairt don fhirinscne an bhaininscne agus a mhalairt."
+
+#: templates/legal.html:38
+msgid "<b>Modifications</b>"
+msgstr "<b>Mionathruithe</b>"
+
+#: templates/legal.html:39
+msgid ""
+"The Service Provider may change these Terms at any time by posting changes "
+"online. Please review these Terms regularly to ensure You are aware of any "
+"changes made. Your continued use of the ELRI Services after changes are "
+"posted means You agree to be legally bound by these Terms as updated and/ or "
+"amended. The Service Provider agrees to notify You regarding any such change "
+"by email or through the ELRI Services or any other appropriate means. If "
+"additional services are added to the ELRI Services, then additional terms "
+"may apply which will become part of this agreement. "
+msgstr ""
+"Is féidir leis an Soláthraí Seirbhíse na Téarmaí seo a athrú ag aon am trí "
+"athruithe a phostáil ar líne. Ba chóir na Téarmaí seo a athbhreithniú go "
+"rialta chun cinntiú go bhfuil Tú ar an eolas maidir le haon athrú. Is ionann "
+"úsáid leanúnach a bhaint as Seirbhísí an ELRI i ndiaidh athruithe agus aontú "
+"go bhfuil ceangal dlí na dTéarmaí seo ort mar atá siad uasdátaithe agus/nó "
+"leasaithe. Toileann an Soláthraí Seirbhíse Tú a chur ar an eolas maidir le "
+"haon athrú dá leithéid trí ríomhphost nó trí Sheirbhísí an ELRI nó bealach "
+"cuí ar bith eile. Má chuirtear seirbhísí ar bith eile le Seirbhísí an ELRI, "
+"b'fhéidir go mbeadh téarmaí sa bhreis i gceist a gcuirfear leis an "
+"gcomhaontú seo. "
+
+#: templates/legal.html:42
+msgid "<b>Use of ELRI Services</b>"
+msgstr "<b>Úsáid Sheirbhísí an ELRI</b>"
+
+#: templates/legal.html:43
+msgid ""
+" Access to and use of the ELRI Services is provided subject to the following "
+"terms, which shall take effect upon Your access to and use of the ELRI "
+"Services. You agree to use the ELRI Services only for lawful purposes and in "
+"a way that does not infringe the rights of, restrict or inhibit anyone "
+"else’s use of such resources."
+msgstr ""
+" Cuirtear rochtain agus úsáid Sheirbhísí an ELRI ar fáil faoi réir na "
+"dtéarmaí a leanas, a thiocfaidh i bhfeidhm nuair a dhéanann Tú Seirbhísí an "
+"ELRI a rochtain agus a úsáid. Toileann tú Seirbhísí an ELRI a úsáid chun "
+"críche dleathacha amháin agus ar bhealach nach dtagann salach ar chearta, "
+"nach bhfágann srian ná cosc ar úsáid na n-acmhainní céanna ag aon duine eile."
+
+#: templates/legal.html:44
+msgid ""
+"If you are an ELRI Registered User, then You have unlimited access to all "
+"ELRI Services offered by the Service Provider; more specifically:"
+msgstr ""
+"Más úsáideoir cláraithe ELRI thú, tá rochtain gan srian agat ar gach "
+"seirbhís de chuid an ELRI a chuireann an Soláthraí Seirbhíse ar fáil; go "
+"sonrach:"
+
+#: templates/legal.html:45
+msgid ""
+"access to all language resources in accordance to the relevant licensing "
+"terms granted for each resource;"
+msgstr ""
+"rochtain ar gach acmhainn teanga de réir na dtéarmaí ábhartha ceadúnaithe a "
+"mbronntar ar gach acmhainn;"
+
+#: templates/legal.html:46
+msgid ""
+"access to language resources documentation, upload, processing and storage "
+"services;"
+msgstr ""
+"fáil ar sheirbhísí doiciméadaithe, uaslódáilte, próiseáilte agus stórála "
+"d'acmhainní teanga;"
+
+#: templates/legal.html:47
+msgid ""
+"searching, browsing and viewing of the ELRI inventory and of the language "
+"resources metadata;"
+msgstr ""
+"cuardach, brabhsáil agus amharc ar fhardal an ELRI agus ar mheiteashonraí na "
+"n-acmhainní teanga;"
+
+#: templates/legal.html:48
+msgid ""
+"downloading of language resources in accordance to the relevant licensing "
+"terms."
+msgstr ""
+"íoslódáil ar acmhainní teanga de réir na dtéarmaí ábhartha ceadúnaithe."
+
+#: templates/legal.html:52
+msgid "<b>Privacy</b>"
+msgstr "<b>Príobháideachas</b>"
+
+#: templates/legal.html:53
+msgid ""
+"The ELRI website and services log certain information about every request "
+"sent to them. This information is used for system administration and for "
+"producing usage statistics. Summary statistics are extracted from this data "
+"and some of these may be made publicly available, but these do not include "
+"information from which individuals could be identified. Relevant subsets of "
+"this data may be used as part of investigations of computer misuse involving "
+"this site. Data may also on occasion be used to enable investigation of "
+"technical problems on the website. Otherwise logged information is not "
+"passed to any third party except if required by law."
+msgstr ""
+"Logálann suíomh idirlín agus seirbhísí an ELRI eolas áirithe maidir le gach "
+"iarratas a seoltar chucu. Úsáidtear an t-eolas sin i riarachán córais agus "
+"chun staitisticí úsáide a chur i dtoll a chéile. Baintear staitisticí "
+"achoimre ó na sonraí sin agus b'fhéidir go mbeadh cuid acu sin le fáil ag an "
+"bpobal, ach ní bheidh eolas a bhféadfaí duine a lua leo orthu sin. B'fhéidir "
+"go mbeadh fothacair de na sonraí sin úsáidte mar chuid fhiosrúcháin faoi mhí-"
+"úsáid ríomhairí a bhaineann leis an suíomh seo. B'fhéidir sonraí a úsáid in "
+"amanna freisin chun cuidiú le himscrúduithe ar fhadhbanna teicniúla ar an "
+"suíomh idirlíon. Taobh amuidh de sin ní thugtar eolas logáilte ar láimh do "
+"thríú páirtí ar bith ach de réir dlí."
+
+#: templates/legal.html:56
+msgid "<b>Data protection</b>"
+msgstr "<b>Cosaint sonraí</b>"
+
+#: templates/legal.html:57
+msgid ""
+"From time to time the ELRI Service Providers may use electronic forms on "
+"this site to gather personal information for purposes directly related to a "
+"service, function or activity of the ELRI Services. When the Service "
+"Provider will do so it will let users know the purpose for which the "
+"information is being collected (including if the information is to be "
+"published). Completion of and submission of any form on this website is "
+"entirely at the discretion of the user."
+msgstr ""
+"Ó huair go chéile, b'fhéidir go mbainfeadh Soláthraithe Seirbhíse an ELRI "
+"úsáid as fhoirmeacha leictreonacha ar an suíomh seo chun eolas pearsanta a "
+"chruinniú ar mhaithe go díreach le seirbhís, feidhm nó gníomh de chuid "
+"Sheirbhísí an ELRI. Nuair a dhéanfaidh an Soláthraí Seirbhíse amhlaidh "
+"cuirfidh sé in iúl d'úsáideoirí an fáth a bhfuil an t-eolas á gcruinniú (má "
+"tá an t-eolas le foilsiú, san áireamh). Rogha an úsáideora féin go hiomlán "
+"atá i gcomhlánú agus i gcur isteach aon fhoirm ar an suíomh idirlín seo."
+
+#: templates/legal.html:60
+msgid "<b>Data protection statement</b>"
+msgstr "<b>Ráiteas cosanta sonraí</b>"
+
+#: templates/legal.html:61
+msgid ""
+"In using and submitting content on the ELRI Services, You agree that ELRI "
+"may use any personal data of Yours that You supply through contributing "
+"content or by filling in electronic forms. ELRI fully respects Your privacy "
+"and seeks to protect Your personal data:"
+msgstr ""
+"Trí inneachar ar Sheirbhísí an ELRI a úsáid agus a chur isteach, toilíonn Tú "
+"gur féidir leis an ELRI sonraí pearsanta ar bith de do chuidse a "
+"sholáthraíonn Tú trí ábhar a chur isteach nó trí fhoirmeacha leictreonacha a "
+"chomhlánú. Tá meas iomlán ag an ELRI ar do phríobháideachas agus tá faoi do "
+"shonraí pearsanta a chosaint:"
+
+#: templates/legal.html:63
+msgid ""
+"<li>ELRI will only collect and use Your information to administer, support, "
+"improve and obtain feedback on its services.</li>"
+msgstr ""
+"<li>Ní bhailóidh ELRI d'eolas ná é úsáid ach amháin ar mhaithe le riarachán, "
+"tacaíocht, feabhas a chur ar agus aiseolas a lorg faoi a sheirbhísí.</li>"
+
+#: templates/legal.html:64
+msgid ""
+"<li>ELRI may also contact You to obtain feedback on services and any "
+"improvements it can make.</li>"
+msgstr ""
+"<li>B'fhéidir go mbeadh ELRI i dteagmháil leat chun aiseolas a fháil faoina "
+"sheirbhísí agus feabhas ar bith a d'fhéadfaí a chur orthu.</li>"
+
+#: templates/legal.html:65
+msgid ""
+"<li>ELRI will not disclose Your personal data to any other organization.</li>"
+msgstr ""
+"<li>Ní scaoilfidh ELRI do shonraí pearsanta chuig aon eagraíocht eile.</li>"
+
+#: templates/legal.html:66
+msgid ""
+"<li>You can access and modify your personal data through the Registration "
+"Service.</li>"
+msgstr ""
+"<li>Is féidir do shonraí pearsanta a rochtain agus a chur in eagar tríd an "
+"tSeirbhís Clárúcháin.</li>"
+
+#: templates/legal.html:70 templates/privacy.html:119
+msgid "<b>Cookies policy</b>"
+msgstr "<b>Beartas Fianán</b>"
+
+#: templates/legal.html:71 templates/privacy.html:120
+msgid ""
+"This website uses cookies to facilitate the operation of the service and "
+"enhance user experience."
+msgstr ""
+"<html>\n"
+"<body>\n"
+"\n"
+"<p>Úsáideann an suíomh gréasáin seo fianáin d’fhonn oibriú na seirbhíse a "
+"éascú agus taithí an úsáideora a fheabhsú. Is comhad beag téacs é fianán a "
+"shábhálann suíomh gréasáin ar do ríomhaire nó ar do ghaireas móibíleach "
+"nuair a dhéanann tú cuairt air. Cuireann sé ar chumas an tsuímh ghréasáin "
+"cuimhneamh ar do ghníomhartha agus ar do roghanna (ar nós logáil isteach, "
+"teanga agus roghanna eile taispeána) thar tréimhse ama, ionas nach gá duit "
+"iad a athchur isteach tráth a dtagann tú ar ais go dtí an suíomh nó a "
+"dhéanann tú brabhsáil ó leathanach amháin go dtí leathanach eile.</p><br>\n"
+"\n"
+"<h4>Cad iad na fianáin a úsáidtear ar an suíomh gréasáin seo?</h4>\n"
+"\n"
+"<p>Ní úsáideann an suíomh gréasáin seo ach fianáin fheidhmiúla, a éascaíonn "
+"nascleanúint úsáideora ar an suíomh agus a chumasaíonn úsáid roghanna nó "
+"seirbhísí éagsúla ón bhfeidhmchlár, ar nós, mar shampla, sainaithint an "
+"tseisiúin nó srianta rochtana agus, i gcoitinne, go gcumasófar na "
+"gníomhartha sin a bhaineann le feidhmiúlacht an tsuímh ghréasáin.</p>\n"
+"\n"
+"<p>Na fianáin a úsáideann an suíomh gréasáin seo:</p>\n"
+"\n"
+"<table style=\"border : 1px solid black;border-collapse:collapse;\"><thead>\n"
+"  <tr>\n"
+"    <th style=\"text-align: left;vertical-align : middle; border-bottom : "
+"1px solid black; padding-left: 5px;\": left>Ainm</th>\n"
+"    <th style=\"text-align: left;vertical-align : middle; border-bottom : "
+"1px solid black; padding-left: 5px;\">Cineál</th>\n"
+"    <th style=\"text-align: left;vertical-align : middle; border-bottom : "
+"1px solid black; padding-left: 5px;\">Cuspóir</th>\n"
+"    <th style=\"text-align: left;vertical-align : middle; border-bottom : "
+"1px solid black; padding-left: 5px;\">Dul in Éag</th>      \n"
+"  </tr></thead>\n"
+"  <tbody>\n"
+"  <tr>\n"
+"    <td style=\"text-align: left;vertical-align : middle; border-bottom : "
+"1px solid black; padding-left: 5px;color : black\">sessionid: sonraí seisiún "
+"agus fíordheimhnithe</td>\n"
+"    <td style=\"text-align: left;vertical-align : middle; border-bottom : "
+"1px solid black; padding-left: 5px;color : black\">Feidhmiúil</td>\n"
+"    <td style=\"text-align: left;vertical-align : middle; border-bottom : "
+"1px solid black; padding-left: 5px;color : black\">Chun nascleanúint "
+"úsáideora agus feidhmiúlacht an tsuímh ghréasáin a fheabhsú.</td>\n"
+"    <td style=\"text-align: left;vertical-align : middle; border-bottom : "
+"1px solid black; padding-left: 5px;color : black\">2 sheachtaine</td>      \n"
+"  </tr>\n"
+"  <tr>\n"
+"    <td style=\"text-align: left;vertical-align : middle; border-bottom : "
+"1px solid black; padding-left: 5px;color : black\">csrftoken: slándáil "
+"réimsí foirme</td>\n"
+"    <td style=\"text-align: left;vertical-align : middle; border-bottom : "
+"1px solid black; padding-left: 5px;color : black\">Feidhmíocht</td>\n"
+"    <td style=\"text-align: left;vertical-align : middle; border-bottom : "
+"1px solid black; padding-left: 5px;color : black\">Chun an suíomh a chosaint "
+"ó ionsaithe mailíseacha agus a chinntiú go bhfuil an suíomh ag feidhmiú i "
+"gceart.</td>\n"
+"    <td style=\"text-align: left;vertical-align : middle; border-bottom : "
+"1px solid black; padding-left: 5px;color : black\">12 mhí</td>      \n"
+"  </tr>\n"
+"  <tr>\n"
+"    <td style=\"text-align: left;vertical-align : middle; border-bottom : "
+"1px solid black; padding-left: 5px;color : black\">cookieconsent_status</"
+"td>\n"
+"    <td style=\"text-align: left;vertical-align : middle; border-bottom : "
+"1px solid black; padding-left: 5px;color : black\">Feidhmiúil</td>\n"
+"    <td style=\"text-align: left;vertical-align : middle; border-bottom : "
+"1px solid black; padding-left: 5px;color : black\">Chun admháil an úsáideora "
+"don mbeartas fianán a chlárú. </td>\n"
+"    <td style=\"text-align: left;vertical-align : middle; border-bottom : "
+"1px solid black; padding-left: 5px;color : black\">12 mhí</td>      \n"
+"  </tr>\n"
+"<tr>\n"
+"    <td style=\"text-align: left;vertical-align : middle; border-bottom : "
+"1px solid black; padding-left: 5px;color : black\">django_language: fianán "
+"teanga</td>\n"
+"    <td style=\"text-align: left;vertical-align : middle; border-bottom : "
+"1px solid black; padding-left: 5px;color : black\">Feidhmiúil</td>\n"
+"    <td style=\"text-align: left;vertical-align : middle; border-bottom : "
+"1px solid black; padding-left: 5px;color : black\">Chun cuimhneamh ar "
+"shainrogha teanga an úsáideora nuair a bhrabhsálann sé/sí an suíomh</td>\n"
+"    <td style=\"text-align: left;vertical-align : middle; border-bottom : "
+"1px solid black; padding-left: 5px;color : black\">An seisiún</td>      \n"
+"  </tr>\n"
+"\n"
+"  </tbody>\n"
+"</table> \n"
+"<br>\n"
+"<p> Le linn duit an suíomh gréasáin seo a úsáid, glacann an Úsáideoir le "
+"húsáid na faisnéise thuasluaite agus admhaíonn sé nó sí an fhéidearthacht "
+"úsáid réamhráite faisnéise agus sonraí a dhiúltú le húsáid fianán tríd an "
+"gcumraíocht brabhsálaí idirlín iomchuí a eiteach. D’fhéadfaí go gcuirfear "
+"blocáil ar úsáid fianán teorainn ar fheidhmiúlacht an tsuímh ghréasáin seo.</"
+"p><p>Cuimhnigh go bhféadfaidh Tú, aon tráth, fianáin a scriosadh nó a chumrú "
+"trí chumrú a dhéanamh ar do bhrabhsálaí idirlín. Déan cuairt, le do thoil, "
+"ar na míreanna tiomnaithe cabhrach de do bhrabhsálaí chun tuilleadh "
+"faisnéise a fháil:</p>\n"
+"<ul>\n"
+"<li><a href=\"https://support.microsoft.com/en-ie/help/17442/windows-"
+"internet-explorer-delete-manage-cookies\", target=\"_blank\">Socruithe "
+"fianán in Internet Explorer</a></li>\n"
+"\n"
+"<li><a href=\"https://support.mozilla.org/ga-IE/kb/cookies-information-"
+"websites-store-on-your-computer\", target=\"_blank\">Socruithe fianán in "
+"Firefox</a></li>\n"
+"\n"
+"<li><a href=\"https://support.google.com/chrome/answer/95647?"
+"hl=en&ref_topic=14666\", target=\"_blank\">Socruithe fianán in Chrome</a></"
+"li>\n"
+"\n"
+"<li><a href=\"https://support.apple.com/ga-ie/guide/safari/manage-cookies-"
+"and-website-data-sfri11471/mac\", target=\"_blank\">Socruithe fianán in "
+"Safari web</a> agus <a href=\"https://support.apple.com/ga-ie/HT201265\", "
+"target=\"_blank\">Safari le haghaidh iOS.</a></li>\n"
+"</ul>\n"
+"\n"
+"</body>\n"
+"</html>"
+
+#: templates/legal.html:74
+msgid "<b>ELRI Services misuse and notification regarding IPR infringement</b>"
+msgstr "<b>Mí-úsáid Seirbhísí an ELRI agus fógra maidir le sárú CMI</b>"
+
+#: templates/legal.html:75
+msgid ""
+"You should not misuse the ELRI Services, e.g. by interfering with them or by "
+"trying to access them using a method different from the one suggested in the "
+"ELRI instructions. You may use the ELRI Services only as permitted by law, "
+"including applicable export and control laws, regulations and licenses. The "
+"Service Provider may suspend or stop providing ELRI Services to You if You "
+"do not comply with ELRI Terms or policies or if the Service Provider is "
+"investigating suspected misconduct.</p>\n"
+" \n"
+"        <p>ELRI maintains usage statistics as a measure of readership and "
+"other use of the ELRI Services by users. It is a violation of ELRI policy "
+"for a party to directly or indirectly use ELRI with a view to affect "
+"download and other usage statistics, or to encourage others to do so. As "
+"part of its general right to refuse or terminate service and remove or edit "
+"the content of the ELRI Services, ELRI reserves the right in its sole "
+"discretion to limit access, remove content, and adjust usage statistics to "
+"respond to any activity that appears likely to have such an effect.</p>\n"
+"\n"
+"        <p>In case You identify language resources that violate Your "
+"Intellectual Property Rights, You may follow the ELRI Notice and Take Down "
+"procedure found in Appendix A.\n"
+"        "
+msgstr ""
+"Níor chóir duit mí-úsáid a bhaint as Seirbhísí an ELRI, e.g. trí chur "
+"isteach orthu nó trí iarracht a dhéanamh rochtain a fháil orthu ar bhealach "
+"éagsúil seachas a bhfuil molta i dtreoracha an ELRI. De réir mar a "
+"cheadaíonn an dlí amháin atá cead agat Seirbhísí an ELRI a úsáid, dlíthe "
+"ábhartha easpórtála agus rialaithe, rialacháin agus ceadúnais san áireamh. "
+"Is féidir leis an Soláthraí Seirbhíse an rochtain atá agat ar Sheirbhísí an "
+"ELRI a chur ar fionraí nó a stopadh mura bhfuil tú ag cloí le Téarmaí nó "
+"polasaithe an ELRI nó má tá fiosrúchán á dhéanamh ag an Soláthraí Seirbhíse "
+"ar mhí-iompar amhrasta.</p>\n"
+"  \n"
+"        <p>Coinníonn an ELRI staitisticí úsáide mar thomhais léitheoireachta "
+"agus úsáid eile ar Sheirbhísí ELRI ag úsáideoirí. Is sárú ar pholasaí an "
+"ELRI é go ndéanfadh páirtí an ELRI a úsáid go díreach nó go hindíreach agus "
+"é i gceist staitisticí íoslódáilte agus úsáide eile a chlaonadh, nó go "
+"spreagfaí daoine eile amhlaidh. Mar chuid dá cheart ginearálta seirbhís a "
+"dhiúltú nó a chríochnú agus inneachar Sheirbhís an ELRI a bhaint nó a leasú, "
+"coimeádann an ELRI an ceart aige féin mar a bheartaíonn sé féin rochtain a "
+"shrianadh, inneachar a bhaint, agus staitisticí úsáide a choigeartú mar "
+"fhreagra ar aon ghníomhaíocht a bhfuil an chuma uirthi go mbeidh tionchar dá "
+"leithéid aici.</p>\n"
+"\n"
+"        <p>Má aithníonn Tú acmhainní teanga a sáraíonn do Chearta Maoine "
+"Intleachtúla is féidir nós imeachta an ELRI maidir le Fógra agus Tógáil Síos "
+"atá le fáil in Aguisín A a leanúint. "
+
+#: templates/legal.html:83
+msgid "<b>Disclaimers and Limitation of Liability</b>"
+msgstr "<b>Séanta agus Teorainn le Dliteanas</b>"
+
+#: templates/legal.html:84
+msgid ""
+"ELRI Services, content and metadata are provided “AS IS” and on an “ΑS "
+"AVAILABLE” basis without any representations or any kind of warranty made "
+"(whether express or implied by law) to the extent permitted by law, "
+"including the implied warranties of satisfactory quality, fitness for a "
+"particular purpose, noninfringement, compatibility, security and accuracy.</"
+"p>\n"
+" \n"
+"        <p>Under no circumstances will ELRI be liable for any of the "
+"following losses or damage (whether such losses where foreseen, foreseeable, "
+"known or otherwise): (a) loss of data; (b) loss of opportunity; (c) loss of "
+"goodwill or injury to reputation; (d) losses suffered by third parties; or "
+"(e) any direct, indirect, consequential, special or exemplary damages "
+"arising from the use of the ELRI regardless of the form of action.</p>\n"
+" \n"
+"        <p>ELRI does not warrant that functions contained in the ELRI "
+"Services will be uninterrupted or error free, that defects will be "
+"corrected, or that the ELRI databases or the delivery mechanism that make it "
+"available are free of viruses and bugs."
+msgstr ""
+"Cuirtear Seirbhísí, inneachar agus meiteashonraí an ELRI ar fáil “MAR ATÁ” "
+"agus ar bhonn “MAR ATÁ AR FÁIL” gan aon uiríoll ná aon chineál baránta "
+"déanta (bíodh sin sainráite nó intuigthe de réir dlí) a mhéid a cheadaíonn "
+"an dlí, na barántaí intuigthe maidir le cáilíocht, feiliúnacht chun críche "
+"áirithe, neamh-shárú, comhoiriúnacht, slándáil agus cruinneas.</p>\n"
+" \n"
+"        <p>Ní bheidh dliteanas ar an ELRI in imthoscca ar bith maidir le "
+"ceann ar bith de na caillteanais nó dochair a leanas (cibé na caillteanais "
+"sin tuartha, intuartha, aitheanta nó eile): (a) sonraí a chailleadh; (b) "
+"deis a chailleadh; (c) cáilmheas a chailleadh nó clú a smálú; (d) "
+"caillteanais do thríú páirtithe; nó (e) damáistí ar bith, bíodh siad "
+"díreach, indíreach, iarmhartaach, speisialta nó samplach ag eascairt as "
+"úsáid an ELRI cibé foirm an ghnímh.</p>\n"
+" \n"
+"        <p>Ní bharántaíonn an ELRI go mbeidh feidhmeanna atá ina gcuid de "
+"Sheirbhís an ELRI gan bhriseadh nó gan earráid, go ndéanfar fabhtanna a "
+"cheartú, ná go bhfuil bunachair sonraí an ELRI nó an mheicníocht soláthartha "
+"a chuireann ar fáil é saor ó víris agus ó fhabhtanna."
+
+#: templates/legal.html:91
+msgid "<b>Termination</b>"
+msgstr "<b>Críochnú</b>"
+
+#: templates/legal.html:92
+msgid ""
+"The rights granted hereunder will terminate automatically upon any breach by "
+"You of the Terms of Service. Subject to the above terms and conditions, this "
+"agreement will be valid for as long as ELRI Services are in existence and "
+"will continue in full force and effect unless terminated as stated above."
+msgstr ""
+"Críochnóidh na cearta atá bronnta anseo thíos go huathoibríoch má sháraíonn "
+"Tú na Téarmaí Seirbhísí. Faoi réir na dtéarmaí agus na gcoinníollacha thuas, "
+"beidh an comhaontú seo bailí a fhad agus a bheidh Seirbhísí an ELRI ar "
+"marthain agus leanfaidh sé i lán-fheidhm agus i lán-éifeacht mura gcuirfear "
+"deireadh leis mar atá sonraithe thuas."
+
+#: templates/legal.html:95
+msgid "<b>Sharing of Language Resources</b>"
+msgstr "<b>Acmhainní Teanga a Roinnt</b>"
+
+#: templates/legal.html:96
+msgid ""
+"By using the ELRI Services to upload and share one or more Language "
+"Resources you represent and warrant that:"
+msgstr ""
+"Trí úsáid a bhaint as Seirbhísí an ELRI chun Acmhainn Teanga amháin nó níos "
+"mó a uaslódáil agus a roinnt faisnéiseann agus barántaíonn tú:"
+
+#: templates/legal.html:98
+msgid "you have the full authority to deposit the Resource;"
+msgstr "go bhfuil lánúdarás agat an Acmhainn a thaisceadh;"
+
+#: templates/legal.html:99
+msgid ""
+"you have the necessary legal title in the Resource or you are permitted to "
+"make the deposition of the Resource;"
+msgstr ""
+"go bhfuil an teideal dleathach riachtanach agat ar an Acmhainn nó go bhfuil "
+"cead agat an Acmhainn a thaisceadh;"
+
+#: templates/legal.html:100
+msgid ""
+"the deposition of the Resource will not violate or be considered a breach of "
+"any obligation or right of a third party;"
+msgstr ""
+"nach sáraíonn taisceadh na hAcmhainne dualgas ná ceart ar bith tríú páirtí "
+"ná nach bhféachfar amhlaidh air;"
+
+#: templates/legal.html:101
+msgid ""
+"the deposition of the Resource will not violate any applicable law or "
+"regulation;"
+msgstr "nach sárú ar aon dlí ná rialachán infheidhme taisceadh na hAcmhaine;"
+
+#: templates/legal.html:102
+msgid ""
+"you have used reasonable skill and care to ensure that the information you "
+"provide in the process of deposition does not contain any untrue statements "
+"of legal or material facts."
+msgstr ""
+"go bhfuil scil agus cúram réasúnta úsáidte agat lena chinntiú nach bhfuil "
+"aon ráiteas bréagach maidir le fíorais dhlíthiúla ná ábhartha san eolas a "
+"chuireann tú ar fáil agus an taisceadh ar bun."
+
+#: templates/legal.html:106
+msgid "<b>Appendix A. Notice and Take Down policy</b>"
+msgstr "<b>Foscríbhinn A. </b> <br> <b>Fógra agus beartas Bainte Anuas </b>"
+
+#: templates/legal.html:107
+msgid ""
+"If a rights holder is concerned that s/he has found Language Resources (LRs) "
+"on the ELRI National Relay Station in [Member State], for which s/he has not "
+"given permission, granted a licence or is not covered by a limitation or "
+"exception in national law, such rights holder is asked to contact the "
+"Service Provider at [email address] in writing, stating the following:"
+msgstr ""
+"Má tá imní ar shealbhóir cearta go bhfuil Acmhainní Teanga (AT) faighte aige/"
+"aici ar Stáisiún Athsheachadta Náisiúnta an ESRI in [Ballstát], nár thug sé/"
+"sí cead ina dtaobh, bhronn sé/sí ceadúnas ná nach bhfuil clúdaithe ag "
+"teorainn nó eisceacht sa dlí náisiúnta, iarrtar ar an sealbhóir cearta sin "
+"teagmháil a dhéanamh leis an Soláthraí Seirbhíse ag [seoladh ríomhphoist] i "
+"scríbhinn, ag tabhairt a leanas le fios:"
+
+#: templates/legal.html:109
+msgid "His/Her contact details;"
+msgstr "A c(h)uid sonraí teagmhála;"
+
+#: templates/legal.html:110
+msgid "The full bibliographic details of the LR;"
+msgstr "Sonraí bibleagrafacha iomlána an Acmhainn Teanga;"
+
+#: templates/legal.html:111
+msgid "The exact and full URL where s/he found the LR;"
+msgstr "URL beacht agus iomlán inar tháinig sé/sí ar an Acmhainn Teanga;"
+
+#: templates/legal.html:112
+msgid ""
+"Proof that s/he is the rights holder and a statement that, under penalty of "
+"perjury, s/he is the rights holder or an authorised representative."
+msgstr ""
+"Cruthúnas gurb é/í an sealbhóir cearta agus ráiteas, faoi phionós an mhionna "
+"éithigh, gurb é/í an sealbhóir cearta nó ionadaí údaraithe."
+
+#: templates/legal.html:115
+msgid ""
+"Upon receipt of notification, the ‘Notice and Take Down’ procedure is then "
+"invoked as follows:"
+msgstr ""
+"Ar fhógra a fháil, cuirtear an nós imeachta 'Fógra agus Tógáil Síos' i "
+"bhfeidhm mar a leanas:"
+
+#: templates/legal.html:117
+msgid ""
+"The Service Provider will acknowledge receipt of the complaint by email or "
+"letter and will make an initial assessment of its validity and plausibility."
+msgstr ""
+"Admhóidh an Soláthraí Seirbhíse go bhfuil an gearán faighte acu le "
+"ríomhphost nó litir agus déanfar measúnú tosaigh maidir lena bhailíocht agus "
+"iontaofacht."
+
+#: templates/legal.html:118
+msgid ""
+"Upon receipt of a valid complaint, the LR will be temporarily removed from "
+"the ELRI Services pending an agreed solution."
+msgstr ""
+"Ar ghearán bailí a fháil, déanfar an Acmhainn Teanga a bhaint ó Sheirbhísí "
+"an ELRI go sealadach go socrófar ar chomhréiteach."
+
+#: templates/legal.html:119
+msgid ""
+"The Service Provider will contact the individual or organisation who "
+"deposited the material within ten working days from the reception of a valid "
+"complaint. The Depositor will be notified that the material is subject to a "
+"complaint, under what allegations, and will be encouraged to assuage the "
+"complaints concerned."
+msgstr ""
+"Déanfaidh an Soláthraí Seirbhíse teagmháil leis an duine nó eagraíocht a "
+"thaisc an t-ábhar laistigh de dheich lá oibre ó ghearán bailí a fháil. "
+"Cuirfear fógra chuig an Taisceoir go bhfuil gearán déanta faoin ábhar, cad "
+"iad na líomhaintí, agus tathantófar air aghaidh a thabhairt ar na gearáin "
+"atá i gceist."
+
+#: templates/legal.html:120
+msgid ""
+"The complainant and the Depositor will be encouraged to resolve the issue "
+"swiftly and amicably and to the satisfaction of both parties, with the "
+"following possible outcomes:"
+msgstr ""
+"Tathantófar ar an ngearánaí agus ar an Taisceoir an cheist a réiteach gan "
+"mhoill agus go go cairdiúil agus chun sástachta an dá pháirtí, leis na "
+"torthaí féideartha a leanas:"
+
+#: templates/legal.html:122
+msgid "The LR is replaced on the ELRI Services inventory unchanged."
+msgstr ""
+"Cuirfear an Acmhainn Teanga ar ais ar fhardal Sheirbhísí an ELRI gan athrú."
+
+#: templates/legal.html:123
+msgid "The LR is replaced on the ELRI Services inventory with changes."
+msgstr ""
+"Cuirfear an Acmhainn Teanga ar ais ar fhardal Sheirbhísí an ELRI le "
+"hathruithe."
+
+#: templates/legal.html:124
+msgid "The LR is permanently removed from the ELRI Services inventory."
+msgstr "Bainfear an Acmhainn Teanga go buan ó fhardal Sheirbhísí an ELRI."
+
+#: templates/legal.html:126
+msgid ""
+"If the Depositor and the complainant are unable to agree on a solution, the "
+"LR will remain unavailable through the ELRI Services inventory until a time "
+"when a resolution has been reached."
+msgstr ""
+"Mura bhfuil an Taisceoir agus an gearánaí ábalta teacht ar réiteach, ní "
+"bheidh fáil ar an AT trí fhardal Sheirbhísí an ELRI go dtí go dtiocfar ar "
+"réiteach."
+
+#: templates/legal.html:128
+msgid "Appendix B"
+msgstr ""
+"<h3><b>Foscríbhinn B.</b><br><b>Fógra Cosanta Sonraí</b></h3>\n"
+"<p>Le linn duit ábhar a chur isteach ar Sheirbhísí BATE agus an céanna a "
+"úsáid, comhaontaíonn Tú go bhféadfaidh BATE aon sonraí pearsanta a úsáid ar "
+"Leat iad a sholáthraíonn Tú trí ábhar a thabhairt nó trí fhoirmeacha "
+"leictreonacha a chomhlánú. Tá meas iomlán ag BATE ar Do phríobháideacht agus "
+"iarann sé Do shonraí pearsanta a chosaint:</p>\n"
+"<ul>\n"
+"<li>Ní dhéanfaidh BATE D’fhaisnéis a bhailiú agus a úsáid ach amháin chun a "
+"chuid seirbhísí a riaradh, a thacú, a fheabhsú agus d’fhonn aiseolas a fháil "
+"orthu.</li>\n"
+"<li>Féadfaidh BATE teagmháil a dhéanamh Ort freisin d’fhonn aiseolas a fháil "
+"ar sheirbhísí agus ar aon fheabhsuithe a d’fhéadfadh sé a dhéanamh</li>\n"
+"<li>Ní nochtfaidh BATE Do shonraí pearsanta d’aon eagraíocht eile.</li>\n"
+"<li>Féadfaidh Tú rochtain a fháil agus do shonraí pearsanta a mhodhnú tríd "
+"an tSeirbhís Clárúcháin.</li>\n"
+"</ul>"
+
+#: templates/login.html:9
+msgid "User Authentication"
+msgstr "Fíordheimhniú Úsáideora"
+
+#: templates/login.html:26
+msgid ""
+" Forgotten your username or password? Click here to reset your password, "
+msgstr ""
+" Ar dhearmad tú do phasfhocal? Cliceáil anseo chun do phasfhocal a "
+"athshocrú. "
+
+#: templates/login.html:28
+msgid "Don&rsquo;t have an account, yet? Click here to create one."
+msgstr "An bhfuil cuntas agat fós? Cliceáil anseo chun ceann a chruthú."
+
+#: templates/privacy.html:7
+msgid "<strong>ELRI NRS Privacy Policy</strong>"
+msgstr ""
+"<strong>Ráiteas Príobháideachta le haghaidh Stáisiún Athsheachadáin "
+"Náisiúnta de chuid Bhonneagar Acmhainní na dTeangacha Eorpacha (BATE)</"
+"strong>"
+
+#: templates/privacy.html:11
+msgid "<b>ELRI National Relay Station Data Protection Notice</b>"
+msgstr ""
+"<b>Fógra um Chosaint Sonraí de chuid Stáisiún Athsheachadáin Náisiúnta BATE\n"
+" </b>"
+
+#: templates/privacy.html:12
+msgid ""
+"Within  the  Connecting  Europe  Facility  Programme,  the  European "
+"Commission has awarded a grant under \n"
+"        agreement No INEA/CEF/ICT/A2016/1330962 for the Action entitled "
+"“European Language Resource Infrastructure (ELRI)” \n"
+"        (Action number 2016-EU-IA-0111), whose purpose is the deployment  "
+"of  a  network  that  enables  accessible,  \n"
+"        secure  and  reliable  sharing  of Language Resources (LRs) by "
+"different stakeholders at EU level."
+msgstr ""
+"Laistigh de Chlár na Saoráide um Chónascadh na hEorpa, tá an Coimisiún na "
+"gComhpobal Eorpach (dá dtagraítear “an Coimisiún Eorpach”) tar éis deontas "
+"faoi chomhaontú Uimh. INEA/CEF/ICT/A2016/1330962 a dhámhachtain le haghaidh "
+"Gníomh dar teideal “Bonneagar Acmhainní na dTeangacha Eorpacha "
+"(BATE)” (Uimhir Ghnímh 2016-EU-IA-0111), ar chuspóir dó líonra a imlonnú a "
+"gcumasaíonn roinnt inrochtana, slán agus iontaofa a dhéanamh ar Acmhainní "
+"Teanga (AT) ag geallsealbhóirí éagsúla ar leibhéal AE.\n"
+"iontaofa a dhéanamh ar Acmhainní Teanga (AT) ag geallsealbhóirí éagsúla ar "
+"leibhéal\n"
+"AE."
+
+#: templates/privacy.html:16
+msgid ""
+"The ELRI Consortium consisting of Fundación Centro de Tecnologías de "
+"Interacción Visual \n"
+"        y  Comunicaciones  (<a href=\"http://www.vicomtech.org\">VICOMTECH</"
+"a>),  the  Administrative  Modernization \n"
+"        Agency  (<a href=\"https://www.ama.gov.pt/\">AMA</a>),  Dublin  "
+"City  University  School  of  Computing \n"
+"        (<a href=\"https://www.computing.dcu.ie\">DCU</a>),  the  "
+"Evaluations  and  Language  Resource  Distribution \n"
+"        Agency (<a href=\"http://www.elda.org\">ELDA</a>),  Faculdade de "
+"Ciências da Universidade de Lisboa (<a href=\"https://ciencias.ulisboa.pt"
+"\">FCUL</a>),    \n"
+"        Linkare TI – Tecnologias de Informação, Lda. (<a href=\"http://www."
+"linkare.com\">Linkare</a>) \n"
+"        and  the Kingdom  of Spain, represented by the Secretary  of State "
+"for \n"
+"        Digital Progress (<a href=\"https://www.mincotur.gob.es/"
+"telecomunicaciones\">SEAD</a>) \n"
+"        are  jointly  responsible  for  the  collection  and \n"
+"        processing of personal data. ELRI and all its members are committed "
+"to goal- and risk-oriented  \n"
+"        information  privacy  and  the  fundamental  right  to  the  "
+"protection  of  personal \n"
+"        data. The  ELRI  Action  deploys  websites  (“National  Relay  "
+"Stations”)  dedicated  to  the \n"
+"        collection, processing and sharing of  Language Resources in "
+"different  Member States of \n"
+"        the European Union. In this data protection policy, we inform you "
+"about the processing of \n"
+"        your  personal  data  when  visiting  the  website  and/or  using  "
+"the  services  of  this  National \n"
+"        Relay Station."
+msgstr ""
+"Tá na comhlachtaí seo a leanas Fundación Centro de Tecnologías de "
+"Interacción Visual y Comunicaciones (<a href=\"http://www.vicomtech.org"
+"\">VICOMTECH</a>), the  Administrative  Modernization Agency (<a href="
+"\"https://www.ama.gov.pt/\">AMA</a>), Scoil Ríomhaireachta Ollscoil Chathair "
+"Bhaile Átha Cliath (<a href=\"https://www.computing.dcu.ie\">OCBÁC</a>), the "
+"Evaluations and Language Resource Distribution Agency (<a href=\"http://www."
+"elda.org\">GDMAT</a>),  Faculdade de Ciências da Universidade de Lisboa (<a "
+"href=\"https://ciencias.ulisboa.pt\">FCUL</a>), Linkare TI – Tecnologias de "
+"Informação, Lda. (<a href=\"http://www.linkare.com\">Linkare</a>) agus "
+"Ríocht na Spáinne, arna hionadú ag an Rúnaí Stáit um an tSochaí Faisnéise "
+"agus an Clár Digiteach (<a href=\"https://www.mincotur.gob.es/"
+"telecomunicaciones\">SEAD</a>) freagrach go comhpháirteach as an mbailiú "
+"agus as an bpróiseáil a dhéanamh ar shonraí pearsanta. Tá ELRI agus a "
+"chomhaltaí go léir tiomanta ar phríobháideacht faisnéise atá oiriúnaithe ar "
+"spriocanna agus priacail agus ar an gceart bunúsach maidir le sonraí "
+"pearsanta a chosaint. Imlonnaíonn Gníomh ELRI suíomhanna gréasáin "
+"(“Stáisiúin Athsheachadáin Náisiúnta”) atá dírithe ar bhailiú, ar "
+"phróiseáil, agus ar roinnt a dhéanamh ar acmhainní teanga i mBallstáit "
+"éagsúla de chuid an Aontais Eorpaigh. San bheartas um chosaint sonraí seo, "
+"coinnímid ar an eolas tú maidir leis an bpróiseáil a dhéantar ar do shonraí "
+"pearsanta le linn duit cuairt a dhéanamh ar an suíomh gréasáin agus/nó úsáid "
+"a bhaint as seirbhísí an Stáisiúin Athsheachadáin Náisiúnta seo."
+
+#: templates/privacy.html:35
+msgid "<b>Controller</b>"
+msgstr "<b>Rialtóir</b>"
+
+#: templates/privacy.html:36
+msgid ""
+" \n"
+"        [Name of hosting organisation of the NRS] "
+msgstr ""
+" \n"
+"\tOllscoil Chathair Bhaile Átha Cliath (OCBÁC)"
+
+#: templates/privacy.html:39
+msgid ""
+"<li> Contact: [Contact of hosting organisation],    Phone: [number] </li>"
+msgstr " "
+
+#: templates/privacy.html:40
+msgid " <li>  E-Mail: <a href=\"mailto:EMAIL_ORG\" >EMAIL_ORG</a> </li> "
+msgstr " "
+
+#: templates/privacy.html:44
+msgid "<b>Data Protection Officer</b>"
+msgstr "<b>An tOifigeach um Chosaint Sonraí</b>"
+
+#: templates/privacy.html:46
+msgid ""
+" \n"
+"        [Name of the data protection officer at the hosting organisation of "
+"the NRS, if applicable]"
+msgstr ""
+"  \n"
+"       "
+
+#: templates/privacy.html:49
+msgid ""
+" <li> Contact:  [Contact/name of the data protection officer],    Phone: "
+"[number], </li> "
+msgstr ""
+" <li> Déan teagmháil le: An tUas. Martin Ward,    Glaoigh: 01-700 5118  </"
+"li> "
+
+#: templates/privacy.html:50
+msgid " <li>  E-Mail: <a href=\"mailto:EMAIL_OF\" >EMAIL_OF</a> </li> "
+msgstr ""
+" <li>  Rphost: <a href=\"mailto:data.protection@dcu.ie\" >data."
+"protection@dcu.ie</a> </li> "
+
+#: templates/privacy.html:55
+msgid "<b>Purpose</b>"
+msgstr ""
+"<b>Beartas Príobháideachta</b></h3>\n"
+"<p align=\"justify\">Tugtar tosaíocht do Bheartas Príobháideachta OCBÁC ar "
+"gach beartas príobháideachta eile.<br> \n"
+"<a href=\"https://www.dcu.ie/sites/default/files/info/25_-"
+"_data_privacy_policy_v3.1.pdf\">https://www.dcu.ie/sites/default/files/"
+"info/25_-_data_privacy_policy_v3.1.pdf</a>\n"
+"</p>\n"
+"<h3><b>Cuspóir</b>"
+
+#: templates/privacy.html:56
+msgid ""
+" Within an ELRI National Relay Station, personal data are only processed for "
+"the following purposes:"
+msgstr ""
+" Laistigh de Stáisiún Athsheachadáin Náisiúnta ELRI, ní dhéantar próiseáil "
+"ar shonraí pearsanta ach chun na críoch seo a leanas:"
+
+#: templates/privacy.html:58
+msgid " Establishment of contact and correspondence with visitors and users "
+msgstr ""
+" Teagmháil agus comhfhreagras a thionscnamh le cuairteoirí agus le "
+"húsáideoirí "
+
+#: templates/privacy.html:59
+msgid " Registration of users."
+msgstr "Úsáideoirí a chlárú."
+
+#: templates/privacy.html:63
+msgid "<b>Anonymous and protected usage</b>"
+msgstr "<b>Bailiú Sonraí</b>"
+
+#: templates/privacy.html:64
+msgid ""
+" Personal  data  are  only  collected  via  our  contact  page,  where  "
+"users  can  contact  us \n"
+"        electronically, and via our registration page."
+msgstr ""
+" Ní bhailítear sonraí pearsanta ach amháin ar ár leathanach teagmhála, áit a "
+"bhféadfadh úsáideoirí teagmháil a dhéanamh linn go leictreonach, agus ar ár "
+"leathanach clárúcháin."
+
+#: templates/privacy.html:68
+msgid "<b>Recipients</b>"
+msgstr "<b>Faighteoirí</b>"
+
+#: templates/privacy.html:69
+msgid ""
+"  The  processed  data  will  not  be  transmitted  to  any  third  parties  "
+"or  otherwise  disclosed,\n"
+"        except  on  the  basis  of  concrete  legal  obligations  or  "
+"contractual  obligations  within  the ELRI Action 2016-EU-IA-0111 \n"
+"        under grant agreement No INEA/CEF/ICT/A2016/1330962. \n"
+"        Within our information offering, we do not embed information or "
+"service offerings of third party providers. "
+msgstr ""
+"Ní dhéanfar na sonraí próiseáilte a tharchur chuig aon tríú páirtí nó a "
+"nochtadh ar shlí eile, ach amháin ar bhonn oibleagáidí dlíthiúla nithiúla nó "
+"oibleagáidí conartha  laistigh de Ghníomh BATE 2016-EU-IA-0111 faoi "
+"chomhaontú deontais Uimh. INEA/CEF/ICT/A2016/1330962. Laistigh dár "
+"tairiscint faisnéise ní dhéanaimid faisnéis nó tairiscintí seirbhíse de "
+"chuid soláthraithe tríú páirtí a leabú."
+
+#: templates/privacy.html:73
+msgid ""
+"\n"
+"        International Data Transfer may take place via storage services "
+"provided by Box, a company certified under the EU-U.S. Privacy Shield "
+"Framework."
+msgstr ""
+"\n"
+"Leagtar amach an beartas i leith Aistriú Sonraí go hIdirnáisiúnta i mBeartas "
+"Príobháideachta OCBÁC.<br>\n"
+"<a href=\"https://www.dcu.ie/sites/default/files/info/25_-"
+"_data_privacy_policy_v3.1.pdf\">https://www.dcu.ie/sites/default/files/"
+"info/25_-_data_privacy_policy_v3.1.pdf</a>"
+
+#: templates/privacy.html:78
+msgid "<b>Access data</b>"
+msgstr "<b>Sonraí rochtana</b>"
+
+#: templates/privacy.html:79
+msgid ""
+"The legitimate interests pursued by ELRI include, among others, also the "
+"adaptation and \n"
+"        optimisation of the information offering and the investigation, "
+"detection and prosecution \n"
+"        of illegal activities in connection with the usage of our website."
+msgstr ""
+"I measc na bhforas dlisteanach a thugann BATE faoi freisin áirítear modhnú "
+"agus optamú  a dhéanamh ar an tairiscint faisnéise agus imscrúdú, brath agus "
+"ionchúiseamh maidir le gníomhaíochtaí mídhleathacha i dtaca le húsáid ár "
+"suímh ghréasáin."
+
+#: templates/privacy.html:82
+msgid ""
+"The ELRI National Relay Station and services log certain information about "
+"every request \n"
+"        sent to them. This information is used for system administration and "
+"for producing usage statistics.  \n"
+"        Summary  statistics  are  extracted  from  this  data and  some  of  "
+"these  may  be made  publicly  available,  \n"
+"        but  these  do  not  include  information  from  which  individuals "
+"could be identified."
+msgstr ""
+"Déanann an Stáisiún Athsheachadáin Náisiúnta BATE faisnéis áirithe a logáil "
+"maidir le gach iarratas a sheoltar chucu. Úsáidtear an fhaisnéis seo le "
+"haghaidh riaradh an chórais agus chun staitisticí úsáide a ghiniúint. "
+"Baintear staitisticí achoimre ó na sonraí seo agus d’fhéadfaí go gcuirfí "
+"roinnt díobh seo ar fáil go poiblí, ach ní áireofaí iontu seo faisnéis lena "
+"bhféadfaí daoine aonair a aithint."
+
+#: templates/privacy.html:86
+msgid ""
+" Relevant subsets of this data may be used as part of investigations of "
+"computer misuse \n"
+"        involving this site. Data may also on occasion be used to enable "
+"investigation of technical \n"
+"        problems on the website. Otherwise logged information is not passed "
+"to any third party except if required by law. "
+msgstr ""
+"D’fhéadfaí fothacair iomchuí de na sonraí seo a úsáid mar chuid "
+"d’imscrúduithe ar mhí‑úsáid ríomhaireachta a bhaineann leis an suíomh seo. "
+"D’fhéadfaí sonraí a úsáid freisin ó am go chéile d’fhonn imscrúdú a chumasú "
+"ar fhadhbanna teicniúla ar an suíomh gréasáin. Ní thugtar faisnéis logáilte "
+"d’aon tríú páirtí murach sin ach amháin má cheanglaítear é sin a dhéanamh "
+"faoin dlí. "
+
+#: templates/privacy.html:92
+msgid "<b>Correspondence</b>"
+msgstr "<b>Comhfhreagras</b>"
+
+#: templates/privacy.html:93
+msgid ""
+"You have the option to contact us by e-mail. We will use your e-mail address "
+"and other \n"
+"        personal contact data for the correspondence with you. Due to legal "
+"obligation, every e-mail  correspondence  will  be  archived.  \n"
+"        Subject  to  our  legitimate  interests  your  e-mail address  and  "
+"other  personal  contact  data  can  be  stored  in  our  \n"
+"        contact  database.  In  this case,  you  will  receive  a  "
+"corresponding  information  on  the  processing  of  your  contact \n"
+"        data."
+msgstr ""
+"Tá an rogha agat teagmháil a dhéanamh linn trí ríomhphost. Bainfimid úsáid "
+"as do sheoladh ríomhphoist agus sonraí pearsanta teagmhála eile i gcomhair "
+"an chomhfhreagrais leat. Faoi cheangal dlí déanfar gach comhfhreagras "
+"ríomhphoist a chartlannú. Faoi réir ár bhforas dlisteanach d’fhéadfaí do "
+"sheoladh ríomhphoist agus sonraí pearsanta teagmhála eile a stóráil in ár "
+"mbunachar sonraí teagmhála. Sa chás seo gheobhaidh tú faisnéis "
+"chomhfhreagrach maidir leis an bpróiseáil atá arna déanamh ar do shonraí "
+"pearsanta."
+
+#: templates/privacy.html:100
+msgid "<b>Access and Intervention</b>"
+msgstr "<b>Rochtain agus Idirghabháil</b>"
+
+#: templates/privacy.html:101
+msgid ""
+" Besides the information in this data protection policy you have the right "
+"of access to your \n"
+"        personal data. To ensure fair data processing, you have the "
+"following rights: "
+msgstr ""
+"Seachas an fhaisnéis sa bheartas cosanta sonraí seo tá an ceart agat "
+"rochtain a dhéanamh ar do shonraí pearsanta. D’fhonn próiseáil sonraí "
+"chothrom a áirithiú, tá na cearta seo a leanas agat: "
+
+#: templates/privacy.html:104
+msgid " The right to rectification and completion of your personal data "
+msgstr " An ceart do shonraí pearsanta a cheartú agus a iomlánú "
+
+#: templates/privacy.html:105
+msgid " The right to erasure of your personal data "
+msgstr " An ceart do shonraí pearsanta a léirscriosadh "
+
+#: templates/privacy.html:106
+msgid " The right to restriction of the processing of your personal data "
+msgstr " An ceart srian a chur ar phróiseáil do shonraí pearsanta "
+
+#: templates/privacy.html:107
+msgid ""
+" The right to object to the processing of your personal data on grounds "
+"related to \n"
+"            your particular situation"
+msgstr ""
+" An ceart agóid a dhéanamh in aghaidh phróiseáil do shonraí pearsanta ar "
+"fhorais a bhaineann leis an staid ar leith a bhaineann leat"
+
+#: templates/privacy.html:110
+msgid ""
+" To   exercise   these   rights,   please   contact   us   at   the   "
+"following   email   address: \n"
+"\t<a href=\"mailto:EMAIL\" >EMAIL</a> "
+msgstr ""
+" D’fhonn úsáid a bhaint as na cearta seo, déan teagmháil linn le do thoil ag "
+"an seoladh ríomhphoist seo a leanas: \n"
+"\t<a href=\"mailto:elri@computing.dcu.ie\" >elri@computing.dcu.ie</a> "
+
+#: templates/privacy.html:114
+msgid "<b>Right to lodge a complaint</b>"
+msgstr "<b>An ceart gearán a chur isteach</b>"
+
+#: templates/privacy.html:115
+msgid ""
+"You have the right to lodge a complaint with a supervisory authority if you "
+"consider that \n"
+"        the processing of your personal data infringes statutory data "
+"protection regulations."
+msgstr ""
+"Tá an ceart agat gearán a chur isteach chuig údarás maoirseachta má mheasann "
+"tú go sáraíonn an phróiseáil ar do shonraí pearsanta rialacháin reachtúla "
+"maidir le cosaint sonraí."
+
+#: templates/repository/api/help.html:25
+msgid "API help"
+msgstr "Cabhair API"
+
+#: templates/repository/api/help.html:33
+msgid ""
+"ELRC-SHARE provides a RESTful API which returns Language Resource Metadata "
+"in JSON format."
+msgstr ""
+"Cuireann ELRI API RESTful ar fáil a thugann Meiteashonraí Acmhainne Teanga "
+"ar ais i bhfoirm JSON."
+
+#: templates/repository/api/help.html:37
+msgid "API ACCESS"
+msgstr "ROCHTAIN API"
+
+#: templates/repository/api/help.html:39
+msgid ""
+"Access is granted by default to repository administrators and to EC members "
+"registered and <strong>logged in</strong> the ELRC-SHARE repository."
+msgstr ""
+"Bronntar rochtain mar réamhshocrú ar riarthóirí stórais agus ar bhaill CE "
+"atá cláraithe agus <strong>logáilte isteach</strong> ar stór ELRI."
+
+#: templates/repository/api/help.html:41
+msgid "The API can be accessed through the <strong>SEARCH_API_URL</strong>:"
+msgstr "Is féidir an API a rochtain tríd an <strong>SEARCH_API_URL</strong>:"
+
+#: templates/repository/api/help.html:45
+msgid "OR"
+msgstr "NÓ"
+
+#: templates/repository/api/help.html:48
+msgid " to enable advanced search features."
+msgstr " chun gnéithe chuardaigh chasta a chumasú."
+
+#: templates/repository/api/help.html:51
+msgid ""
+"<strong>External access</strong>, for example through a <code>cURL</code> "
+"request, requires an\n"
+"                    <strong>API key</strong>, given either in the request "
+"url as an authorization (<code>auth</code>)\n"
+"                    parameter, or in the request header:"
+msgstr ""
+"<strong>Rochtain sheachtrach</strong>, mar shampla trí <code>cURL</code> "
+"iarratas, ní mór\n"
+"                    <strong>eochair API</strong>, tugtha i url an iarratais "
+"mar pharaiméadar údaraithe, (<code>auth</code>)\n"
+"                    nó i gceanntásc an iarratais:"
+
+#: templates/repository/api/help.html:55
+msgid "As url parameter"
+msgstr "Mar pharaiméadar url"
+
+#: templates/repository/api/help.html:58
+msgid "As header (cURL)"
+msgstr "Mar cheanntásc (cURL)"
+
+#: templates/repository/api/help.html:63
+msgid ""
+"The <strong>API_KEY</strong> is available in the profile page of all EC "
+"members (<em>on the main menu: Your profile > Edit your profile</em>)."
+msgstr ""
+"Tá an <strong>API_KEY</strong> ar fáil i leathanach próifíle gach ball den "
+"CE (<em>ar an bpríomh-roghchlár: Do phróifíl > Leasaigh do phróifíl</em>)."
+
+#: templates/repository/api/help.html:69
+msgid "Haystack Filters"
+msgstr "Scagairí Haystack"
+
+#: templates/repository/api/help.html:72
+msgid ""
+"The API leverages the existing ELRC-SHARE repository search functionality "
+"using a condensed version of the preconfigured Haystack filters."
+msgstr ""
+"Treisíonn an API an fheidhm chuardaigh atá ar stóras ELRC-SHARE cheana féin "
+"trí leagan dlúth de na scagairí réamhchumraithe Haystack a úsáid."
+
+#: templates/repository/api/help.html:75
+msgid ""
+"All filters are passed as key-value pairs in the <code>q</code> dictionary"
+msgstr ""
+"Pasáiltear gach scagaire mar phéirí eochair-luacha san fhoclóir <code>q</"
+"code>"
+
+#: templates/repository/api/help.html:79
+msgid "Additional filters can be added to the dictionary like:"
+msgstr "Is féidir scagairí sa bhreis a chur leis an bhfoclóir, ar nós:"
+
+#: templates/repository/api/help.html:83
+msgid "Available Filters"
+msgstr "Scagairí ar Fáil"
+
+#: templates/repository/api/help.html:88
+#: templates/repository/licence_agreement.html:38
+msgid "Conditions of Use"
+msgstr "Coinníollacha Úsáide / Conditions of Use"
+
+#: templates/repository/api/help.html:91 templates/repository/api/help.html:120
+#: templates/repository/api/help.html:165
+#: templates/repository/api/help.html:197
+#: templates/repository/api/help.html:228
+#: templates/repository/api/help.html:251
+#: templates/repository/api/help.html:296
+#: templates/repository/api/help.html:320
+#: templates/repository/api/help.html:344
+#: templates/repository/api/help.html:367
+#: templates/repository/api/help.html:398
+msgid "Applied Filter"
+msgstr "Scagaire Feidhmeach"
+
+#: templates/repository/api/help.html:93 templates/repository/api/help.html:122
+#: templates/repository/api/help.html:167
+#: templates/repository/api/help.html:230
+#: templates/repository/api/help.html:253
+#: templates/repository/api/help.html:298
+#: templates/repository/api/help.html:322
+#: templates/repository/api/help.html:346
+#: templates/repository/api/help.html:369
+#: templates/repository/api/help.html:400
+msgid "Values"
+msgstr "Luachanna"
+
+#: templates/repository/api/help.html:96 templates/repository/api/help.html:97
+#: templates/repository/api/help.html:98 templates/repository/api/help.html:99
+#: templates/repository/api/help.html:100
+#: templates/repository/api/help.html:101
+#: templates/repository/api/help.html:102
+#: templates/repository/api/help.html:103
+#: templates/repository/api/help.html:125
+#: templates/repository/api/help.html:126
+#: templates/repository/api/help.html:128
+#: templates/repository/api/help.html:129
+#: templates/repository/api/help.html:130
+#: templates/repository/api/help.html:131
+#: templates/repository/api/help.html:133
+#: templates/repository/api/help.html:134
+#: templates/repository/api/help.html:135
+#: templates/repository/api/help.html:136
+#: templates/repository/api/help.html:137
+#: templates/repository/api/help.html:138
+#: templates/repository/api/help.html:139
+#: templates/repository/api/help.html:140
+#: templates/repository/api/help.html:141
+#: templates/repository/api/help.html:142
+#: templates/repository/api/help.html:143
+#: templates/repository/api/help.html:145
+#: templates/repository/api/help.html:146
+#: templates/repository/api/help.html:147
+#: templates/repository/api/help.html:148
+#: templates/repository/api/help.html:170
+#: templates/repository/api/help.html:172
+#: templates/repository/api/help.html:173
+#: templates/repository/api/help.html:176
+#: templates/repository/api/help.html:177
+#: templates/repository/api/help.html:178
+#: templates/repository/api/help.html:179
+#: templates/repository/api/help.html:180
+#: templates/repository/api/help.html:181
+#: templates/repository/api/help.html:233
+#: templates/repository/api/help.html:234
+#: templates/repository/api/help.html:235
+#: templates/repository/api/help.html:256
+#: templates/repository/api/help.html:257
+#: templates/repository/api/help.html:258
+#: templates/repository/api/help.html:259
+#: templates/repository/api/help.html:260
+#: templates/repository/api/help.html:261
+#: templates/repository/api/help.html:262
+#: templates/repository/api/help.html:263
+#: templates/repository/api/help.html:264
+#: templates/repository/api/help.html:265
+#: templates/repository/api/help.html:266
+#: templates/repository/api/help.html:267
+#: templates/repository/api/help.html:268
+#: templates/repository/api/help.html:269
+#: templates/repository/api/help.html:270
+#: templates/repository/api/help.html:271
+#: templates/repository/api/help.html:272
+#: templates/repository/api/help.html:273
+#: templates/repository/api/help.html:274
+#: templates/repository/api/help.html:275
+#: templates/repository/api/help.html:276
+#: templates/repository/api/help.html:277
+#: templates/repository/api/help.html:278
+#: templates/repository/api/help.html:279
+#: templates/repository/api/help.html:301
+#: templates/repository/api/help.html:302
+#: templates/repository/api/help.html:303
+#: templates/repository/api/help.html:325
+#: templates/repository/api/help.html:326
+#: templates/repository/api/help.html:327
+#: templates/repository/api/help.html:403
+#: templates/repository/api/help.html:404
+#: templates/repository/api/help.html:405
+#: templates/repository/api/help.html:406
+#: templates/repository/api/help.html:408
+#: templates/repository/api/help.html:409
+#: templates/repository/api/help.html:410
+#: templates/repository/api/help.html:412
+#: templates/repository/api/help.html:413
+#: templates/repository/api/help.html:417
+#: templates/repository/api/help.html:418
+msgid "or"
+msgstr "nó"
+
+#: templates/repository/api/help.html:106
+#: templates/repository/api/help.html:151
+#: templates/repository/api/help.html:184
+#: templates/repository/api/help.html:207
+#: templates/repository/api/help.html:238
+#: templates/repository/api/help.html:282
+#: templates/repository/api/help.html:306
+#: templates/repository/api/help.html:330
+#: templates/repository/api/help.html:353
+#: templates/repository/api/help.html:384
+#: templates/repository/api/help.html:422
+msgid "Examples"
+msgstr "Samplaí"
+
+#: templates/repository/api/help.html:108
+msgid "Get all resources restricted for non commercial use"
+msgstr "Srianaigh gach acmhainn d'úsáid neamhthráchtála"
+
+#: templates/repository/api/help.html:117
+#: templates/repository/resource_view/input_output.html:90
+msgid "Domain"
+msgstr "Fearann"
+
+#: templates/repository/api/help.html:153
+msgid "Get all resources from the science domain"
+msgstr "Faigh gach acmhainn ó fhearann na heolaíochta"
+
+#: templates/repository/api/help.html:162
+msgid "DSI"
+msgstr "DSI"
+
+#: templates/repository/api/help.html:186
+msgid "Get all resources appropriate for use in the Europeana DSI"
+msgstr "Faigh gach acmhainn atá oiriúnach d'úsáid in DSI Europeana"
+
+#: templates/repository/api/help.html:194
+msgid "Language"
+msgstr "Teanga / Language"
+
+#: templates/repository/api/help.html:201
+msgid ""
+"Any language name or language code as defined by\n"
+"                                the <a\n"
+"                                    href=\"https://www.iana.org/assignments/"
+"language-subtag-registry/language-subtag-registry\"\n"
+"                                    target=\"_blank\">IANA Language Subtag "
+"Registry</a> in the <em>Description</em>\n"
+"                                property, is a valid value for this filter."
+msgstr ""
+"Aon ainm teanga nó cód teanga de réir sainmhínithe\n"
+"                                an <a\n"
+"                                    href=\"https://www.iana.org/assignments/"
+"language-subtag-registry/language-subtag-registry\"\n"
+"                                    target=\"_blank\">IANA Language Subtag "
+"Registry</a> san airí <em>Tuairisc</em>\n"
+"                                is ea luach bailí don scagaire seo."
+
+#: templates/repository/api/help.html:209
+msgid "Get all resources that contain English"
+msgstr "Faigh gach acmhainn ina bhfuil Béarla"
+
+#: templates/repository/api/help.html:216
+msgid "Get all resources that contain English and Italian"
+msgstr "Faigh gach acmhainn ina bhfuil Béarla agus Iodáilis"
+
+#: templates/repository/api/help.html:225
+#: templates/repository/resource_view/linguality.html:3
+msgid "Linguality"
+msgstr "Teangachas"
+
+#: templates/repository/api/help.html:240
+msgid "Get all bilingual resources"
+msgstr "Faigh gach acmhainn dhátheangach"
+
+#: templates/repository/api/help.html:248
+msgid "Mimetype"
+msgstr "Cineál mime"
+
+#: templates/repository/api/help.html:284
+msgid "Get all resources that contain tmx files"
+msgstr "Faigh gach acmhainn ina bhfuil comhaid tmx"
+
+#: templates/repository/api/help.html:293
+msgid "Multi-linguality"
+msgstr "Breisteangachas"
+
+#: templates/repository/api/help.html:308
+msgid "Get all Parallel resources"
+msgstr "Faigh gach acmhainn chomhthreomhar"
+
+#: templates/repository/api/help.html:317
+msgid "Resource Type"
+msgstr "Cineál Acmhainne / Resource Type"
+
+#: templates/repository/api/help.html:332
+#: templates/repository/api/help.html:355
+msgid "Get all corpora"
+msgstr "Faigh gach corpas"
+
+#: templates/repository/api/help.html:341
+msgid "Publication Status"
+msgstr "Stádas Foilsithe / Publication Status"
+
+#: templates/repository/api/help.html:364
+msgid "Text Genre"
+msgstr "Seánra Téacs / Text Genre"
+
+#: templates/repository/api/help.html:386
+msgid "Get all resources of fiction genre"
+msgstr "Faigh gach acmhainn sa seánra ficsin"
+
+#: templates/repository/api/help.html:395
+msgid "Text Type"
+msgstr "Cineál Téacs / Text Type"
+
+#: templates/repository/api/help.html:424
+msgid "Get all resources that contain tweets"
+msgstr "Faigh gach acmhainn ina bhfuil giolcacha"
+
+#: templates/repository/api/help.html:432
+msgid "Union Queries"
+msgstr "Iarratas Aontais"
+
+#: templates/repository/api/help.html:435
+msgid ""
+"The API performs <em>AND</em> search operations by default. For example, the "
+"following query <br/>\n"
+"                    <code>SEARCH_API_URL/?q=language:Norwegian&q=language:"
+"Norwegian Nynorsk</code><br>\n"
+"                    will search for resources that contain both Norwegian "
+"<strong>and</strong> Norwegian Nynorsk\n"
+"                    languages.\n"
+"                    In order to return all resources that meet either of the "
+"specified criteria, we can use the\n"
+"                    parameter\n"
+"                    <code>or</code>."
+msgstr ""
+"Déanann an API oibríochtaí cuardaigh <em>AGUS</em> mar réamhshocrú. Mar "
+"shampla, an t-iarratas a leanas <br/>\n"
+"                    <code>SEARCH_API_URL/?q=language:Norwegian&q=language:"
+"Nua-Ioruais</code><br>\n"
+"                    a dhéanfaidh cuardach ar acmhainní ina bhfuil Ioruais "
+"<strong>agus</strong> Nua-Ioruais\n"
+"                    araon.\n"
+"                    Chun gach acmhainn a thagann le ceachtar ceann de na "
+"critéir shonraithe a aischur, is féidir úsáid a bhaint as an\n"
+"                    bparaiméadar\n"
+"                    <code>nó</code>."
+
+#: templates/repository/api/help.html:447
+msgid "Post search filters"
+msgstr "Postáil scagairí cuardaigh"
+
+#: templates/repository/api/help.html:450
+msgid "Search results can be further narrowed down using custom filters."
+msgstr ""
+"Is féidir torthaí a chúngú a thuilleadh fós trí scagairí saincheaptha a "
+"úsáid."
+
+#: templates/repository/api/help.html:453
+msgid ""
+"Filters resources created on the specified date formatted as <code>yyyy-mm-"
+"dd</code>."
+msgstr ""
+"Scagann acmhainní a cruthaíodh ar an dáta sonraithe formáidithe mar "
+"<code>yyyy-mm-dd</code>."
+
+#: templates/repository/api/help.html:454
+#: templates/repository/api/help.html:458
+#: templates/repository/api/help.html:462
+#: templates/repository/api/help.html:467
+#: templates/repository/api/help.html:471
+#: templates/repository/api/help.html:475
+#: templates/repository/api/help.html:479
+#: templates/repository/api/help.html:483
+#: templates/repository/api/help.html:487
+#: templates/repository/api/help.html:491
+msgid "e.g."
+msgstr "m.s."
+
+#: templates/repository/api/help.html:457
+msgid "Filters resources created before the specified date."
+msgstr "Scagann acmhainní a cruthaíodh roimh an dáta sonraithe."
+
+#: templates/repository/api/help.html:461
+msgid "Filters resources created before the specified date (inclusive)."
+msgstr "Scagann acmhainní a cruthaíodh roimh an dáta sonraithe (san áireamh)."
+
+#: templates/repository/api/help.html:466
+msgid "Filters resources created after the specified date."
+msgstr "Scagann acmhainní a cruthaíodh i ndiaidh an dáta sonraithe."
+
+#: templates/repository/api/help.html:470
+msgid "Filters resources created after the specified date (inclusive)."
+msgstr ""
+"Scagann acmhainní a cruthaíodh i ndiaidh an dáta sonraithe (san áireamh)."
+
+#: templates/repository/api/help.html:474
+msgid ""
+"Filters resources created within the specified timespan (comma seperated)."
+msgstr ""
+"Scagann acmhainní a cruthaíodh laistigh den tréimhse ama sonraithe "
+"(camógdheighilte)."
+
+#: templates/repository/api/help.html:478
+msgid "Filters resources that are products of processing."
+msgstr "Scagann acmhainní ar táirgí de phróiseáil iad."
+
+#: templates/repository/api/help.html:482
+msgid ""
+"Filters resources that have been validated (contain a validation report)."
+msgstr ""
+"Scagann acmhainní atá bailíochtaithe (ina bhfuil tuairisc bhailíochtaithe)."
+
+#: templates/repository/api/help.html:486
+msgid "Filters resources for which legal clearance is finalized."
+msgstr "Scagann acmhainní a bhfuil cead dlíthiúil réitithe dóibh."
+
+#: templates/repository/api/help.html:490
+msgid ""
+"The API paginates results for faster responses. Each page limits results to "
+"20 by default, unless stated otherwise using the <code>limit</code> filter."
+msgstr ""
+"Cuireann an API uimhir leathanaigh ar thorthaí do fhreagraí níos tapúla. Tá "
+"teorainn 20 toradh ar gach leathanach mar réamhshocrú, mura ndeirtear a "
+"mhalairt ag úsáid an scagaire <code>teorann</code>."
+
+#: templates/repository/api/help.html:495
+msgid ""
+"The results returned by the API can also be sorted by creation date, using "
+"the <code>sort</code>\n"
+"                parameter with values <em>latest</em> or <em>earliest</em>. "
+"e.g <code>&sort=latest</code>"
+msgstr ""
+"Is féidir na torthaí a thugann an API a shórtáil de réir dáta cruthaithe "
+"freisin, ag baint úsáid as an bparaiméadar <code>sórtáil</code>\n"
+"                le luachanna <em>is déanaí</em> nó <em>is luaithe</em>. e.g "
+"<code>&sort=latest</code>"
+
+#: templates/repository/container.html:4
+#: templates/repository/multi_field_widget.html:9
+msgid "Delete This"
+msgstr "Scrios é seo"
+
+#: templates/repository/download_contact_form.html:4
+#, python-format
+msgid "%(resource)s &ndash; Contact Resource Maintainer &ndash; ELRI"
+msgstr ""
+"%(resource)s &ndash; Déan Teagmháil le Cothabhálaí Acmhainne &ndash; ELRI"
+
+#: templates/repository/download_contact_form.html:7
+#: templates/repository/legal_not_downloadable.html:28
+#: templates/repository/licence_agreement.html:77
+#: templates/repository/licence_selection.html:13
+#: templates/repository/lr_not_downloadable.html:29
+#: templates/repository/report_not_downloadable.html:28
+msgid "Contact Resource Maintainer"
+msgstr "Déan Teagmháil le Cothabhálaí Acmhainne"
+
+#: templates/repository/download_contact_form.html:13
+#: templates/stats/mystats.html:29
+msgid "Resource name"
+msgstr "Ainm acmhainne"
+
+#: templates/repository/download_contact_form.html:17
+#, python-format
+msgid "Resource contact name%(resourceContactName|pluralize)s"
+msgstr "Ainm teagmhálaí na hacmhainne%(resourceContactName|pluralize)s"
+
+#: templates/repository/download_contact_form.html:21
+#, python-format
+msgid "Resource contact email%(resourceContactEmail|pluralize)s"
+msgstr "Ríomhphost teagmhálaí na hacmhainne%(resourceContactEmail|pluralize)s"
+
+#: templates/repository/download_contact_form.html:25
+msgid "Your username"
+msgstr "D’ainm úsáideora"
+
+#: templates/repository/download_contact_form.html:29
+msgid "Your name"
+msgstr "D’ainm"
+
+#: templates/repository/download_contact_form.html:37
+msgid "Send"
+msgstr "Seol"
+
+#: templates/repository/download_contact_form.html:46
+msgid "Resource Download"
+msgstr "Íoslódáil Acmhainne"
+
+#: templates/repository/ingested_resource_email.html:2
+msgid "There are new ingested resources to review "
+msgstr ""
+"Tá acmhainní nua ionghabhála le hathbhreithniú \n"
+"________________________________\n"
+"There are new ingested resources to review "
+
+#: templates/repository/legal_not_downloadable.html:4
+#: templates/repository/lr_not_downloadable.html:4
+#: templates/repository/report_not_downloadable.html:4
+msgid "Download not Possible"
+msgstr "Ní féidir íoslódáil"
+
+#: templates/repository/legal_not_downloadable.html:10
+msgid "Legal Documentation Access Restricted"
+msgstr "Srian ar rochtain ar Dhoiciméadacht Dhlíthiúil"
+
+#: templates/repository/legal_not_downloadable.html:11
+msgid "Access to the selected legal documentation is restricted."
+msgstr "Tá srian ar rochtain ar an doiciméadacht dhlíthiúil roghnaithe."
+
+#: templates/repository/legal_not_downloadable.html:12
+msgid ""
+"Please contact the resource maintainer for information on how to obtain a "
+"copy of this documentation."
+msgstr ""
+"Déan teagmháil le cothabhálaí na hacmhainne d'eolas ar conas cóip den "
+"doiciméadacht seo a fháil."
+
+#: templates/repository/legal_not_downloadable.html:14
+#: templates/repository/lr_not_downloadable.html:14
+#: templates/repository/report_not_downloadable.html:14
+msgid "No Download Available"
+msgstr "Níl íoslódáil ar fáil"
+
+#: templates/repository/legal_not_downloadable.html:15
+msgid ""
+"We&rsquo;re afraid, the selected legal documentation is currently not "
+"available for download. This\n"
+"                problem may be temporary due to network connection problems "
+"or internal errors. Trying again later might\n"
+"                solve the problem."
+msgstr ""
+"Is oth linn a rá nach bhfuil fáil le híoslódáil i láthair na huaire ar an "
+"doiciméadacht dhlíthiúil roghnaithe. B'fhéidir\n"
+"                gur fadhb shealadach í seo de bharr fadhbanna leis an nasc "
+"líonra nó earráidí inmheánacha. B'fhéidir go mbeadh réiteach\n"
+"                ar an bhfadhb má thriaileann tú arís níos déanaí."
+
+#: templates/repository/legal_not_downloadable.html:18
+#: templates/repository/lr_not_downloadable.html:18
+#: templates/repository/report_not_downloadable.html:18
+msgid "Please contact the resource maintainer if this problem should persist."
+msgstr ""
+"Déan teagmháil leis an gcothabhálaí acmhainne má leanann an fhadhb seo."
+
+#: templates/repository/legal_not_downloadable.html:23
+#: templates/repository/licence_agreement.html:72
+#: templates/repository/lr_not_downloadable.html:24
+#: templates/repository/report_not_downloadable.html:23
+msgid "Resource View"
+msgstr "Amharc acmhainne"
+
+#: templates/repository/licence_agreement.html:4
+msgid "Download Licence Agreement"
+msgstr "Íoslódáil Comhaontú Ceadúnais"
+
+#: templates/repository/licence_agreement.html:11
+msgid "Licence Agreement"
+msgstr "Comhaontú Ceadúnais"
+
+#: templates/repository/licence_agreement.html:22
+#: templates/repository/licence_agreement.html:26
+msgid "View licence"
+msgstr "Amharc ar cheadúnas"
+
+#: templates/repository/licence_agreement.html:52
+msgid ""
+"Stay in touch with ELRI!\n"
+"                    Register <a target=\"_blank\" href=\"/accounts/create"
+"\">here</a>."
+msgstr ""
+"Fan i dteagmháil le hELRI!\n"
+"                    Cláraigh <a target=\"_blank\" href=\"/accounts/create"
+"\">anseo</a>."
+
+#: templates/repository/licence_agreement.html:57
+msgid ""
+"Please contact the resource maintainer for more information on how to\n"
+"                        obtain the selected resource under these license "
+"terms"
+msgstr ""
+"Bí i dteagmháil leis an gcothabhálaí acmhainne d'eolas sa bhreis ar conas\n"
+"                        an acmhainn roghnaithe a fháil faoi na téarmaí "
+"ceadúnais seo"
+
+#: templates/repository/licence_agreement.html:66
+#: templates/repository/resource_view/lr_view.html:245
+msgid "Download"
+msgstr "Íoslódáil"
+
+#: templates/repository/licence_selection.html:4
+msgid "Download Licence Selection"
+msgstr "Íoslódáil Rogha Ceadúnais"
+
+#: templates/repository/licence_selection.html:9
+msgid "Choose a Licence for the Resource Download"
+msgstr "Roghnaigh Ceadúnas don Íoslódáil Acmhainne"
+
+#: templates/repository/licence_selection.html:13
+msgid "Select Licence"
+msgstr "Roghnaigh Ceadúnas"
+
+#: templates/repository/lr_not_downloadable.html:10
+msgid "Resource Access Restricted"
+msgstr "Rochtain ar acmhainn srianta"
+
+#: templates/repository/lr_not_downloadable.html:11
+msgid "Access to the selected resource is restricted."
+msgstr "Tá srian ar rochtain ar an acmhainn roghnaithe."
+
+#: templates/repository/lr_not_downloadable.html:12
+msgid ""
+"Please contact the resource maintainer for information on how to obtain a "
+"copy of this resource."
+msgstr ""
+"Déan teagmháil leis an gcothabhálaí acmhainne d'eolas ar conas cóip den "
+"acmhainn seo a fháil."
+
+#: templates/repository/lr_not_downloadable.html:15
+msgid ""
+"We&rsquo;re afraid the selected resource is currently not available for "
+"download. This problem may be\n"
+"                temporary due to network connection problems or internal "
+"errors. Trying again later might solve the\n"
+"                problem."
+msgstr ""
+"Is oth linn a rá nach bhfuil fáil do íoslódáil i láthair na huaire ar an "
+"acmhainn roghnaithe. B'fhéidir\n"
+"                gur fadhb shealadach í seo de bharr fadhbanna leis an nasc "
+"líonra nó earráidí inmheánacha. B'fhéidir go mbeadh réiteach ar an bhfadhb\n"
+"                má thriaileann tú arís níos déanaí."
+
+#: templates/repository/multi_field_widget.html:6
+msgid "Add Another Field"
+msgstr "Cuir réimse eile leis"
+
+#: templates/repository/published_resource_email.html:3
+#, python-format
+msgid ""
+"Dear %(username)s %(usersurname)s,\n"
+"\n"
+"Your resource %(resourcename)s has been published on the ELRI National Relay "
+"Station. You can now log into our website %(nodeurl)s and download your "
+"prepared resource via the Browse page. \n"
+"\n"
+"Thank you for using the ELRI services, do not hesitate to contact us for any "
+"enquiries.\n"
+"\n"
+"Best regards,\n"
+"\n"
+"The ELRI team "
+msgstr ""
+"A chara,\n"
+"\n"
+"Tá d’acmhainn %(resourcename)s  foilsithe ar an Stáisiún Athsheachadta "
+"Náisiúnta ELRI. Is féidir leat logáil isteach anois ar ár suíomh gréasáin "
+"%(nodeurl)s  agus d'acmhainn ullmhaithe a íoslódáil ón leathanach "
+"Brabhsála. \n"
+"\n"
+"Go raibh maith agat as na seirbhísí ELRI a úsáid. Ná bíodh leisce ort "
+"teagmháil a dhéanamh linn má tá fiosruithe ar bith agat.\n"
+"\n"
+"Beannacht,\n"
+"\n"
+"An fhoireann ELRI\n"
+"___________________________________\n"
+"\n"
+"Dear %(username)s %(usersurname)s,\n"
+"\n"
+"Your resource %(resourcename)s has been published on the ELRI National Relay "
+"Station. You can now log into our website %(nodeurl)s and download your "
+"prepared resource via the Browse page. \n"
+"\n"
+"Thank you for using the ELRI services, do not hesitate to contact us for any "
+"enquiries.\n"
+"\n"
+"Best regards,\n"
+"\n"
+"The ELRI team "
+
+#: templates/repository/redirect.html:4 templates/repository/redirect.html:13
+msgid "Redirecting to Download Node"
+msgstr "Ag atreorú go dtí nód íoslódáilte"
+
+#: templates/repository/redirect.html:17
+#, python-format
+msgid ""
+"You cannot download the selected resource on the current META-SHARE node as\n"
+"        it has originally been provided\n"
+"        by %(storage_source)s.\n"
+"      You will now be redirected to the META-SHARE Node where the resource "
+"data is\n"
+"      available."
+msgstr ""
+"Ní féidir an acmhainn roghnaithe a íoslódáil ar an nód reatha META-SHARE "
+"mar\n"
+"        gur soláthraíodh é ar dtús\n"
+"        ó %(storage_source)s.\n"
+"      Déanfar tú a atreorú anois go dtí Nód META-SHARE áit a bhfuil sonraí "
+"na hacmhainne\n"
+"      ar fáil."
+
+#: templates/repository/redirect.html:24
+#, python-format
+msgid ""
+"You cannot download the selected resource on the current META-SHARE node as\n"
+"        it has originally been provided at %(storage_url)s. You will now be "
+"redirected to the META-SHARE Node where the resource data is\n"
+"      available."
+msgstr ""
+"Ní féidir an acmhainn roghnaithe a íoslódáil ar an nód reatha META-SHARE "
+"mar\n"
+"        gur soláthraíodh é ar dtús ag %(storage_url)s. Déanfar tú a atreorú "
+"anois go dtí Nód META-SHARE áit a bhfuil sonraí na hacmhainne\n"
+"      ar fáil."
+
+#: templates/repository/redirect.html:31
+#, python-format
+msgid ""
+"<a href=\"%(redirection_url)s\">Click here</a> to immediately go to the\n"
+"    other node."
+msgstr ""
+"<a href=\"%(redirection_url)s\">Cliceáil anseo</a> chun dul díreach go dtí\n"
+"    an nód eile."
+
+#: templates/repository/report_not_downloadable.html:10
+msgid "Validation Report Access Restricted"
+msgstr "Srian ar Rochtain go dtí Tuairisc Bhailíochtaithe"
+
+#: templates/repository/report_not_downloadable.html:11
+msgid "Access to the selected validation report is restricted."
+msgstr "Tá srian ar an rochtain ar an tuairisc bhailíochtaithe roghnaithe."
+
+#: templates/repository/report_not_downloadable.html:12
+msgid ""
+"Please contact the resource maintainer for information on how to obtain a "
+"copy of this report."
+msgstr ""
+"Bí i dteagmháil leis an gcothabhálaí acmhainne d'eolas ar conas cóip den "
+"tuairisc seo a fháil."
+
+#: templates/repository/report_not_downloadable.html:15
+msgid ""
+"We&rsquo;re afraid, the selected validation report is currently not "
+"available for download. This problem\n"
+"                may be temporary due to network connection problems or "
+"internal errors. Trying again later might solve"
+msgstr ""
+"Is oth linn a rá nach bhfuil fáil do íoslódáil i láthair na huaire ar an "
+"tuairisc bhailíochtaithe roghnaithe. B'fhéidir\n"
+"                gur fadhb shealadach í seo de bharr fadhbanna leis an nasc "
+"líonra nó earráidí inmheánacha. B'fhéidir go mbeadh réiteach ar an bhfadhb\n"
+"                má thriaileann tú arís níos déanaí"
+
+#: templates/repository/resource_download_information_email.html:2
+#, python-format
+msgid ""
+"Dear %(resourceContactName|join:\", \")s,\n"
+"\n"
+"the ELRI user %(user.username)s (%(user.first_name)s %(user.last_name)s, "
+"%(user_email)s) requests information on the language resource "
+"“%(resource)s” ([1]). You can find the request below; please reply as soon "
+"as possible.\n"
+"\n"
+"Best regards,\n"
+"ELRI Repository at [2]"
+msgstr ""
+"A chara,\n"
+"\n"
+"Iarrann an t-úsáideoir ELRI %(user.username)s (%(user.first_name)s "
+"%(user.last_name)s, %(user_email)s) eolas ar an acmhainn teanga "
+"\"%(resource)s\" ([1]). Tá an t-iarratas ar fháil thíos; tabhair freagra "
+"chomh luath agus is féidir, le do thoil.\n"
+"\n"
+"Beannacth,\n"
+"\n"
+"Stór ELRI ag [2]\n"
+"\n"
+"_______________________________________\n"
+"\n"
+"Dear %(resourceContactName|join:\", \")s,\n"
+"\n"
+"the ELRI user %(user.username)s (%(user.first_name)s %(user.last_name)s, "
+"%(user_email)s) requests information on the language resource "
+"“%(resource)s” ([1]). You can find the request below; please reply as soon "
+"as possible.\n"
+"\n"
+"Best regards,\n"
+"ELRI Repository at [2]"
+
+#: templates/repository/resource_new_contributions_email.html:2
+msgid "There are new submitted contributed resources on ELRI "
+msgstr ""
+"Tá acmhainní nua curtha ar ELRI \n"
+"_________________________________\n"
+"New resources have been contributed to ELRI "
+
+#: templates/repository/resource_view/annotation.html:10
+#: templates/repository/resource_view/input_output.html:74
+msgid "Tagset"
+msgstr "Tacar clibeanna"
+
+#: templates/repository/resource_view/annotation.html:17
+msgid "Annotated elements"
+msgstr "Eilimintí anótáilte"
+
+#: templates/repository/resource_view/annotation.html:24
+msgid "StandOff"
+msgstr "Ó Chian"
+
+#: templates/repository/resource_view/annotation.html:32
+#: templates/repository/resource_view/input_output.html:82
+msgid "Segmentation level"
+msgstr "Leibhéal deighilte"
+
+#: templates/repository/resource_view/annotation.html:39
+msgid "Format"
+msgstr "Formáid"
+
+#: templates/repository/resource_view/annotation.html:46
+msgid "Standard practices conformance"
+msgstr "Comhréireacht le dea-chleachtais"
+
+#: templates/repository/resource_view/annotation.html:53
+msgid "Theoretic Model"
+msgstr "Samhail Theoiriciúil"
+
+#: templates/repository/resource_view/annotation.html:61
+msgid "Annotation Mode"
+msgstr "Mód Anótáilte"
+
+#: templates/repository/resource_view/annotation.html:68
+msgid "Annotation Tools"
+msgstr "Uirlisí Anótáilte"
+
+#: templates/repository/resource_view/annotation.html:82
+msgid "Start date"
+msgstr "Túsdháta"
+
+#: templates/repository/resource_view/annotation.html:90
+msgid "End date"
+msgstr "Críochdháta"
+
+#: templates/repository/resource_view/annotation.html:102
+msgid "Annotation Manual"
+msgstr "Treoirleabhar anótáilte"
+
+#: templates/repository/resource_view/annotation.html:127
+msgid "Interannotator Agreement"
+msgstr "Comhaontú idiranótálaithe"
+
+#: templates/repository/resource_view/annotation.html:135
+msgid "Intraannotator Agreement"
+msgstr "Comhaontú Ionanótálaithe"
+
+#: templates/repository/resource_view/annotation.html:143
+msgid "Annotators"
+msgstr "Anótálaithe"
+
+#: templates/repository/resource_view/capture.html:6
+msgid "Capture"
+msgstr "Glac"
+
+#: templates/repository/resource_view/capture.html:15
+msgid "Person SourceSet"
+msgstr "Tacar Daoine Foinsí"
+
+#: templates/repository/resource_view/capture.html:27
+msgid "Participant Information"
+msgstr "Eolas i dtaobh Rannpháirtithe"
+
+#: templates/repository/resource_view/citation.html:30
+#: templates/repository/resource_view/documentation.html:38
+msgid "In"
+msgstr "I"
+
+#: templates/repository/resource_view/citation.html:36
+#: templates/repository/resource_view/documentation.html:44
+msgid "pp"
+msgstr "pp"
+
+#: templates/repository/resource_view/citation.html:53
+#: templates/repository/resource_view/documentation.html:61
+msgid "Editor"
+msgstr "Eagarthóir"
+
+#: templates/repository/resource_view/citation.html:61
+#: templates/repository/resource_view/documentation.html:69
+msgid "Publisher"
+msgstr "Foilsitheoir"
+
+#: templates/repository/resource_view/citation.html:69
+#: templates/repository/resource_view/documentation.html:77
+msgid "Book Title"
+msgstr "Teideal leabhair"
+
+#: templates/repository/resource_view/citation.html:77
+#: templates/repository/resource_view/documentation.html:85
+msgid "Series"
+msgstr "Sraith"
+
+#: templates/repository/resource_view/citation.html:85
+#: templates/repository/resource_view/documentation.html:93
+msgid "Edition"
+msgstr "Eagrán"
+
+#: templates/repository/resource_view/citation.html:94
+#: templates/repository/resource_view/documentation.html:102
+msgid "Digital Object Identifier - DOI"
+msgstr "Aitheantóir Oibiachta Digití - DOI"
+
+#: templates/repository/resource_view/citation.html:102
+#: templates/repository/resource_view/documentation.html:110
+msgid "ISSN"
+msgstr "ISSN"
+
+#: templates/repository/resource_view/citation.html:110
+#: templates/repository/resource_view/documentation.html:118
+msgid "ISBN"
+msgstr "ISBN"
+
+#: templates/repository/resource_view/citation.html:118
+#: templates/repository/resource_view/documentation.html:126
+msgid "Keywords"
+msgstr "Eochairfhocail"
+
+#: templates/repository/resource_view/classification.html:7
+msgid "Eurovoc Classification"
+msgstr "Rangú Eurovoc"
+
+#: templates/repository/resource_view/classification.html:15
+#: templates/repository/resource_view/size.html:5
+#: templates/repository/resource_view/size.html:9
+msgid "Size"
+msgstr "Méid"
+
+#: templates/repository/resource_view/content.html:3
+#: templates/repository/resource_view/image_content.html:6
+#: templates/repository/resource_view/video_content.html:6
+msgid "Content"
+msgstr "Inneachar"
+
+#: templates/repository/resource_view/content.html:9
+msgid "Speech items"
+msgstr "Míreanna cainte"
+
+#: templates/repository/resource_view/content.html:16
+msgid "Non-speech items"
+msgstr "Míreanna neamhchainte"
+
+#: templates/repository/resource_view/content.html:24
+msgid "Description"
+msgstr "Tuairisc"
+
+#: templates/repository/resource_view/content.html:32
+msgid "Noise Level"
+msgstr "Leibhéal fuaime"
+
+#: templates/repository/resource_view/creation.html:6
+#: templates/repository/resource_view/tool_service.html:182
+msgid "Creation"
+msgstr "Cruthú"
+
+#: templates/repository/resource_view/creation.html:18
+msgid "Original Sources"
+msgstr "Bunfhoinsí"
+
+#: templates/repository/resource_view/creation.html:31
+msgid "Creation Tools"
+msgstr "Uirlisí cruthaithe"
+
+#: templates/repository/resource_view/detailed_media_info.html:43
+#: templates/repository/resource_view/input_output.html:50
+msgid "Character encoding"
+msgstr "Ionchódú carachtar"
+
+#: templates/repository/resource_view/detailed_media_info.html:69
+msgid "Annotation"
+msgstr "Anótáil"
+
+#: templates/repository/resource_view/detailed_media_info.html:89
+msgid "Audio Formats"
+msgstr "Formáidí fuaime"
+
+#: templates/repository/resource_view/detailed_media_info.html:98
+msgid "Time Coverage"
+msgstr "Clúdach ama"
+
+#: templates/repository/resource_view/detailed_media_info.html:107
+msgid "Geographic coverage"
+msgstr "Clúdach tíreolaíoch"
+
+#: templates/repository/resource_view/distribution.html:5
+msgid "Distribution"
+msgstr "Dáileachán"
+
+#: templates/repository/resource_view/distribution.html:9
+msgid "Availability:"
+msgstr "Stádas na hacmhainne:"
+
+#: templates/repository/resource_view/distribution.html:17
+msgid "Availability Start date:"
+msgstr "Ar fáil ó:"
+
+#: templates/repository/resource_view/distribution.html:25
+msgid "Availability End Date:"
+msgstr "Ar fáil go dtí:"
+
+#: templates/repository/resource_view/distribution.html:41
+msgid "Distribution Details"
+msgstr "Sonraí dáileacháin"
+
+#: templates/repository/resource_view/distribution.html:47
+msgid "Distribution Medium"
+msgstr "Meán dáileacháin"
+
+#: templates/repository/resource_view/distribution.html:55
+msgid "Download location"
+msgstr "Suíomh íoslódála"
+
+#: templates/repository/resource_view/distribution.html:64
+msgid "Execution locations"
+msgstr "Suímh reatha"
+
+#: templates/repository/resource_view/distribution.html:64
+msgid "Execution location"
+msgstr "Suíomh reatha"
+
+#: templates/repository/resource_view/distribution.html:73
+msgid "Fee"
+msgstr "Táille"
+
+#: templates/repository/resource_view/distribution.html:81
+msgid "Attribution Details"
+msgstr "Sonraí admhála"
+
+#: templates/repository/resource_view/distribution.html:89
+msgid "Distribution Rights Holders"
+msgstr "Sealbhóirí Cearta Dáileacháin"
+
+#: templates/repository/resource_view/distribution.html:99
+msgid "IPR Holders"
+msgstr "Sealbhóirí CMI"
+
+#: templates/repository/resource_view/distribution.html:114
+msgid "Personal Data"
+msgstr "Sonraí Pearsanta"
+
+#: templates/repository/resource_view/distribution.html:115
+#: templates/stats/mystats.html:45
+msgid "YES"
+msgstr "TÁ"
+
+#: templates/repository/resource_view/documentation.html:19
+msgid "Document Type"
+msgstr "Cineál doiciméid"
+
+#: templates/repository/resource_view/domain.html:4
+msgid "Domains"
+msgstr "Fearainn"
+
+#: templates/repository/resource_view/image_content.html:12
+#: templates/repository/resource_view/video_content.html:11
+msgid "Content Type"
+msgstr "Cineál inneachair"
+
+#: templates/repository/resource_view/image_content.html:20
+#: templates/repository/resource_view/video_content.html:19
+msgid "Text included"
+msgstr "Téacs san áireamh"
+
+#: templates/repository/resource_view/image_content.html:28
+msgid "Static Element"
+msgstr "Eilimint statach"
+
+#: templates/repository/resource_view/input_output.html:9
+msgid "Media type"
+msgstr "Cineál meáin"
+
+#: templates/repository/resource_view/input_output.html:17
+msgid "Resource type"
+msgstr "Cineál acmhainne"
+
+#: templates/repository/resource_view/input_output.html:25
+msgid "Modality"
+msgstr "Módúlacht"
+
+#: templates/repository/resource_view/input_output.html:31
+#: templates/repository/resource_view/language.html:5
+msgid "Languages"
+msgstr "Teangacha"
+
+#: templates/repository/resource_view/input_output.html:42
+msgid "Mime type"
+msgstr "Cineál mime"
+
+#: templates/repository/resource_view/input_output.html:58
+msgid "Annotation type"
+msgstr "Cineál anótáilte"
+
+#: templates/repository/resource_view/input_output.html:66
+msgid "Annotation format"
+msgstr "Formáid anótáilte"
+
+#: templates/repository/resource_view/input_output.html:98
+msgid "Conformance to standards best practices"
+msgstr "Comhréireacht le caighdeáin dea-chleachtais"
+
+#: templates/repository/resource_view/language.html:25
+msgid "Language Script"
+msgstr "Script Teanga"
+
+#: templates/repository/resource_view/language.html:33
+msgid "Region"
+msgstr "Réigiún"
+
+#: templates/repository/resource_view/language.html:41
+msgid "Variants"
+msgstr "Leaganacha"
+
+#: templates/repository/resource_view/language.html:51
+msgid "Variety"
+msgstr "Cineál"
+
+#: templates/repository/resource_view/language.html:54
+msgid "Type"
+msgstr "Cineál"
+
+#: templates/repository/resource_view/licence.html:23
+msgid "Conditions"
+msgstr "Coinníollacha"
+
+#: templates/repository/resource_view/linguality.html:7
+msgid "Linguality type"
+msgstr "Cineál teangachais"
+
+#: templates/repository/resource_view/linguality.html:15
+msgid "Multi-linguality type"
+msgstr "Cineál breisteangachais"
+
+#: templates/repository/resource_view/linktoothermedia.html:6
+msgid "Link to Other Media"
+msgstr "Nasc le meáin eile"
+
+#: templates/repository/resource_view/lr_view.html:141
+msgid "Last modified"
+msgstr "Mionathraithe go deireanach"
+
+#: templates/repository/resource_view/lr_view.html:156
+msgid "View resource name in all available languages"
+msgstr "Amharc ar ainm acmhainne i ngach teanga atá ar fáil"
+
+#: templates/repository/resource_view/lr_view.html:168
+msgid "Attribution details"
+msgstr "Sonraí admhála"
+
+#: templates/repository/resource_view/lr_view.html:175
+msgid "Please, acknowledge use of the resource with the following citation"
+msgstr "Admhaigh úsáid na hacmhainne leis an tagairt a leanas"
+
+#: templates/repository/resource_view/lr_view.html:193
+msgid "ISLRN"
+msgstr "ISLRN"
+
+#: templates/repository/resource_view/lr_view.html:212
+msgid "ID"
+msgstr "Aitheantas"
+
+#: templates/repository/resource_view/lr_view.html:222
+msgid "View resource description in all available languages"
+msgstr "Amharc ar thuairisc acmhainne i ngach teanga atá ar fáil"
+
+#: templates/repository/resource_view/lr_view.html:230
+msgid "DSI Relevance"
+msgstr "Ábharthacht DSI"
+
+#: templates/repository/resource_view/lr_view.html:238
+msgid "Back"
+msgstr "Siar"
+
+#: templates/repository/resource_view/lr_view.html:251
+msgid "Edit Resource"
+msgstr "Leasaigh acmhainn"
+
+#: templates/repository/resource_view/lr_view.html:257
+msgid "Download Resource"
+msgstr "Íoslódáil acmhainn"
+
+#: templates/repository/resource_view/lr_view.html:263
+msgid "Validate Resource"
+msgstr "Bailíochtaigh acmhainn"
+
+#: templates/repository/resource_view/lr_view.html:277
+#, python-format
+msgid "Contact Person%(contact_person_dicts|length|pluralize)s"
+msgstr "Teagmhálaí%(contact_person_dicts|length|pluralize)s"
+
+#: templates/repository/resource_view/lr_view.html:288
+msgid "toolService"
+msgstr "Seirbhís Uirlise"
+
+#: templates/repository/resource_view/lr_view.html:354
+msgid "Samples Location"
+msgstr "Suíomh samplaí"
+
+#: templates/repository/resource_view/lr_view.html:361
+msgid "Tool Documentation"
+msgstr "Doiciméadacht Uirlise"
+
+#: templates/repository/resource_view/membership.html:8
+#, python-format
+msgid "For Non Members of %(institution)s"
+msgstr "Do Dhaoine Nach Baill Iad de %(institution)s"
+
+#: templates/repository/resource_view/membership.html:10
+#, python-format
+msgid "For Members of %(institution)s"
+msgstr "Do Bhaill de %(institution)s"
+
+#: templates/repository/resource_view/metadata.html:5
+msgid "Metadata"
+msgstr "Meiteashonraí"
+
+#: templates/repository/resource_view/metadata.html:10
+msgid "Created"
+msgstr "Cruthaithe"
+
+#: templates/repository/resource_view/metadata.html:18
+#: templates/repository/resource_view/version.html:22
+msgid "Last Updated"
+msgstr "Uasdátaithe go deireanach"
+
+#: templates/repository/resource_view/metadata.html:27
+msgid "Source"
+msgstr "Foinse"
+
+#: templates/repository/resource_view/metadata.html:35
+msgid "Source Repository"
+msgstr "Stór Foinseach"
+
+#: templates/repository/resource_view/metadata.html:57
+msgid "Metadata Language"
+msgstr "Teanga Mheiteashonraí"
+
+#: templates/repository/resource_view/metadata.html:67
+#: templates/repository/resource_view/version.html:14
+msgid "Revision"
+msgstr "Athbhreithniú"
+
+#: templates/repository/resource_view/metadata.html:76
+msgid "Metadata Creator"
+msgstr "Cruthaitheoir Meiteashonraí"
+
+#: templates/repository/resource_view/modality.html:3
+msgid "Modalities"
+msgstr "Módúlacht"
+
+#: templates/repository/resource_view/ngram.html:6
+msgid "N-Gram"
+msgstr "N-Gram"
+
+#: templates/repository/resource_view/person.html:20
+msgid "Click to view contact card"
+msgstr "Cliceáil le hamharc ar chárta inneachair"
+
+#: templates/repository/resource_view/person.html:146
+#: templates/repository/resource_view/person.html:228
+msgid "Tel."
+msgstr "Uimhir"
+
+#: templates/repository/resource_view/person.html:153
+#: templates/repository/resource_view/person.html:235
+msgid "Fax"
+msgstr "Facs"
+
+#: templates/repository/resource_view/project.html:30
+msgid "Funding Type"
+msgstr "Cineál Maoinithe"
+
+#: templates/repository/resource_view/project.html:37
+msgid "Funder"
+msgstr "Maoinitheoir"
+
+#: templates/repository/resource_view/project.html:47
+msgid "Funding Countries"
+msgstr "Tíortha Maoinithe"
+
+#: templates/repository/resource_view/project.html:49
+msgid "Funding Country"
+msgstr "Tír Mhaoinithe"
+
+#: templates/repository/resource_view/project.html:60
+msgid "Project duration"
+msgstr "Fad tionscadail"
+
+#: templates/repository/resource_view/project.html:67
+msgid "Project started"
+msgstr "Tús tionscadail"
+
+#: templates/repository/resource_view/project.html:75
+msgid "Project ended"
+msgstr "Deireadh tionscadail"
+
+#: templates/repository/resource_view/recomm_view.html:7
+msgid "People who looked at this resource also viewed the following:"
+msgstr "D'fhéach daoine a d'fhéach ar an acmhainn seo ar a leanas freisin:"
+
+#: templates/repository/resource_view/recomm_view.html:17
+msgid "People who downloaded this resource also downloaded the following:"
+msgstr "D'íoslódáil daoine a d'íoslódáil an acmhainn seo a leanas freisin:"
+
+#: templates/repository/resource_view/recomm_view.html:26
+msgid "Resources from the same project"
+msgstr "Acmhainní ón tionscadal céanna"
+
+#: templates/repository/resource_view/recomm_view.html:29
+msgid "Resources from the same creators"
+msgstr "Acmhainní ó na cruthaitheoirí céanna"
+
+#: templates/repository/resource_view/recording.html:5
+msgid "Recording"
+msgstr "Taifead"
+
+#: templates/repository/resource_view/recording.html:7
+msgid "Recorders"
+msgstr "Taifeadóirí"
+
+#: templates/repository/resource_view/relation.html:10
+msgid "Relation Type"
+msgstr "Cineál Gaoil"
+
+#: templates/repository/resource_view/resource_creation.html:5
+msgid "Resource Creation"
+msgstr "Cruthú Acmhainne"
+
+#: templates/repository/resource_view/resource_creation.html:16
+msgid "Resource Creator"
+msgstr "Cruthaitheoir Acmhainne"
+
+#: templates/repository/resource_view/resource_creation.html:32
+msgid "Creation lasted"
+msgstr "Mhair cruthú"
+
+#: templates/repository/resource_view/resource_creation.html:40
+msgid "Creation started"
+msgstr "Thosaigh cruthú"
+
+#: templates/repository/resource_view/resource_creation.html:47
+msgid "Creation ended"
+msgstr "Chríochnaigh cruthú"
+
+#: templates/repository/resource_view/resource_creation.html:55
+msgid "Created using ELRI Services"
+msgstr "Cruthaithe ag Seirbhísí ELRI"
+
+#: templates/repository/resource_view/resource_creation.html:63
+msgid "Anonymized"
+msgstr "Anaitnidithe"
+
+#: templates/repository/resource_view/resource_creation.html:71
+msgid "Funding Project"
+msgstr "Tionscadal Maoinithe"
+
+#: templates/repository/resource_view/resource_type.html:5
+msgid "Lexical Conceptual Resource"
+msgstr "Acmhainn Foclóireachta Choincheapúil"
+
+#: templates/repository/resource_view/resource_type.html:5
+msgid "Language Description"
+msgstr "Tuairisc Teanga"
+
+#: templates/repository/resource_view/resource_type.html:5
+msgid "General Information"
+msgstr "Eolas Ginearálta"
+
+#: templates/repository/resource_view/resource_type.html:16
+msgid "Encoding"
+msgstr "Ionchódú"
+
+#: templates/repository/resource_view/resource_type.html:31
+msgid "Performance"
+msgstr "Feidhmíocht"
+
+#: templates/repository/resource_view/resource_type.html:46
+#: templates/repository/resource_view/tool_service.html:36
+msgid "Required Software"
+msgstr "Bogearraí Riachtanacha"
+
+#: templates/repository/resource_view/resource_type.html:61
+#: templates/repository/resource_view/tool_service.html:51
+msgid "Required hardware"
+msgstr "Crua-earraí Riachtanacha"
+
+#: templates/repository/resource_view/resource_type.html:67
+#: templates/repository/resource_view/tool_service.html:59
+msgid "Required LRs"
+msgstr "ATanna Riachtanacha"
+
+#: templates/repository/resource_view/resource_type.html:82
+#: templates/repository/resource_view/tool_service.html:76
+msgid "Running environment details"
+msgstr "Sonraí faoi Thimpeallacht Reatha"
+
+#: templates/repository/resource_view/resource_type.html:87
+msgid "Related Lexicon"
+msgstr "Foclóir Gaolta"
+
+#: templates/repository/resource_view/setting.html:4
+msgid "Setting"
+msgstr "Suíomh"
+
+#: templates/repository/resource_view/setting.html:9
+msgid "Naturality"
+msgstr "Nádúrthacht"
+
+#: templates/repository/resource_view/setting.html:16
+msgid "Conversational type"
+msgstr "Cineál comhrá"
+
+#: templates/repository/resource_view/setting.html:24
+msgid "Scenario"
+msgstr "Cnámha scéil"
+
+#: templates/repository/resource_view/setting.html:32
+msgid "Audience"
+msgstr "Lucht féachana/éisteachta"
+
+#: templates/repository/resource_view/setting.html:40
+msgid "Interactivity"
+msgstr "Idirghníomhaíocht"
+
+#: templates/repository/resource_view/setting.html:48
+msgid "Interaction"
+msgstr "Idirghníomhaíocht"
+
+#: templates/repository/resource_view/size.html:50
+msgid "Effective speech duration"
+msgstr "Fad cainte iarbhír"
+
+#: templates/repository/resource_view/size.html:63
+msgid "Audio duration"
+msgstr "Fad fuaime"
+
+#: templates/repository/resource_view/text_type.html:6
+msgid "Text Format"
+msgstr "Formáid Téacs"
+
+#: templates/repository/resource_view/tool_service.html:12
+msgid "Language Dependent"
+msgstr "Spleách ar Theanga"
+
+#: templates/repository/resource_view/tool_service.html:12
+msgid "Language Independent"
+msgstr "Neamhspleách ar Theanga"
+
+#: templates/repository/resource_view/tool_service.html:26
+msgid "Operation"
+msgstr "Oibríocht"
+
+#: templates/repository/resource_view/tool_service.html:30
+msgid "Operating system"
+msgstr "Córas oibriúcháin"
+
+#: templates/repository/resource_view/tool_service.html:85
+msgid "Running time"
+msgstr "Am reatha"
+
+#: templates/repository/resource_view/tool_service.html:92
+msgid "Evaluation"
+msgstr "Measúnú"
+
+#: templates/repository/resource_view/tool_service.html:96
+msgid "Evaluated"
+msgstr "Measta"
+
+#: templates/repository/resource_view/tool_service.html:104
+msgid "Evaluation level"
+msgstr "Leibhéal measúnaithe"
+
+#: templates/repository/resource_view/tool_service.html:112
+msgid "Evaluation type"
+msgstr "Cineál measúnaithe"
+
+#: templates/repository/resource_view/tool_service.html:120
+msgid "Evaluation criteria"
+msgstr "Critéir mheasúnaithe"
+
+#: templates/repository/resource_view/tool_service.html:128
+msgid "Evaluation measure"
+msgstr "Gníomh measúnaithe"
+
+#: templates/repository/resource_view/tool_service.html:140
+msgid "Evaluation Report"
+msgstr "Tuairisc Mheasúnaithe"
+
+#: templates/repository/resource_view/tool_service.html:148
+msgid "Evaluation Tool"
+msgstr "Uirlis Mheasúnaithe"
+
+#: templates/repository/resource_view/tool_service.html:163
+msgid "Evaluation details"
+msgstr "Sonraí measúnaithe"
+
+#: templates/repository/resource_view/tool_service.html:186
+msgid "Programming language"
+msgstr "Teanga ríomhchlárúcháin"
+
+#: templates/repository/resource_view/tool_service.html:194
+msgid "Formalism"
+msgstr "Foirmiúlachas"
+
+#: templates/repository/resource_view/tool_service.html:200
+msgid "Original Source"
+msgstr "Bunfhoinse"
+
+#: templates/repository/resource_view/tool_service.html:215
+#: templates/repository/resource_view/usage.html:60
+msgid "Details"
+msgstr "Sonraí"
+
+#: templates/repository/resource_view/usage.html:6
+msgid "Access tools"
+msgstr "Uirlisí rochtana"
+
+#: templates/repository/resource_view/usage.html:17
+msgid "Associated resources"
+msgstr "Acmhainní gaolta"
+
+#: templates/repository/resource_view/usage.html:29
+msgid "Foreseen Use"
+msgstr "Úsáid Thuartha"
+
+#: templates/repository/resource_view/usage.html:36
+#: templates/repository/resource_view/usage.html:53
+msgid "Use specific to NLP"
+msgstr "Úsáid sonraithe do NLP"
+
+#: templates/repository/resource_view/usage.html:49
+msgid "Actual Use"
+msgstr "Úsáid Iarbhír"
+
+#: templates/repository/resource_view/usage.html:67
+msgid "Usage Report"
+msgstr "Tuairisc Úsáide"
+
+#: templates/repository/resource_view/usage.html:85
+msgid "Derived Resources"
+msgstr "Acmhainní Díorthaithe"
+
+#: templates/repository/resource_view/usage.html:98
+msgid "Used in"
+msgstr "Úsáidte in"
+
+#: templates/repository/resource_view/validation.html:6
+msgid "Validated"
+msgstr "Bailíochtaithe"
+
+#: templates/repository/resource_view/validation.html:6
+msgid "Not Validated"
+msgstr "Gan bailíochtú"
+
+#: templates/repository/resource_view/validation.html:11
+msgid "Type of Validation"
+msgstr "Cineál Bailíochtaithe"
+
+#: templates/repository/resource_view/validation.html:19
+msgid "Validation Mode"
+msgstr "Mód Bailíochtaithe"
+
+#: templates/repository/resource_view/validation.html:27
+msgid "Mode Details"
+msgstr "Sonraí Móid"
+
+#: templates/repository/resource_view/validation.html:35
+msgid "Extent"
+msgstr "Fairsinge"
+
+#: templates/repository/resource_view/validation.html:43
+msgid "Extent Details"
+msgstr "Sonraí Fairsinge"
+
+#: templates/repository/resource_view/validation.html:54
+msgid "Validation Reports"
+msgstr "Tuairiscí Bailíochtaithe"
+
+#: templates/repository/resource_view/validation.html:62
+msgid "Validation Tools"
+msgstr "Uirlisí Bailíochtaithe"
+
+#: templates/repository/resource_view/validation.html:76
+msgid "Validator"
+msgstr "Bailíochtóir"
+
+#: templates/repository/resource_view/version.html:3
+#: templates/repository/resource_view/version.html:7
+msgid "Version"
+msgstr "Leagan"
+
+#: templates/repository/resource_view/version.html:30
+msgid "Update Frequency"
+msgstr "Minicíocht Uasdátaithe"
+
+#: templates/repository/resource_view/video_content.html:27
+msgid "Dynamic Element"
+msgstr "Eilimint Dhinimiciúil"
+
+#: templates/repository/resource_view/video_format.html:32
+msgid "Resolution"
+msgstr "Taifeach"
+
+#: templates/repository/resource_view/video_format.html:48
+msgid "Compression"
+msgstr "Comhbhrú"
+
+#: templates/repository/search.html:5
+msgid "Search and Browse"
+msgstr "Cuardaigh agus Brabhsáil"
+
+#: templates/repository/search.html:77
+msgid "Search"
+msgstr "Cuardaigh"
+
+#: templates/repository/search.html:86 templates/stats/topstats.html:174
+#: templates/stats/usagestats.html:142
+msgid "Filter by:"
+msgstr "Scag de réir:"
+
+#: templates/repository/search.html:96
+msgid "Resource Type:"
+msgstr "Cineál Acmhainne:"
+
+#: templates/repository/search.html:99
+msgid "Corpus:"
+msgstr "Corpas:"
+
+#: templates/repository/search.html:103
+msgid "Lexical/Conceptual:"
+msgstr "Foclóireachta/Coincheapúil:"
+
+#: templates/repository/search.html:107
+msgid "Language Description:"
+msgstr "Tuairisc Teanga:"
+
+#: templates/repository/search.html:111
+msgid "Tool/Service:"
+msgstr "Uirlis/Seirbhís:"
+
+#: templates/repository/search.html:121
+#, python-format
+msgid " %(cnt)s Language Resource "
+msgid_plural " %(cnt)s Language Resources "
+msgstr[0] " %(cnt)s acmhainn teanga "
+msgstr[1] " %(cnt)s acmhainn teanga "
+msgstr[2] " %(cnt)s acmhainn teanga "
+msgstr[3] " %(cnt)s acmhainn teanga "
+msgstr[4] " %(cnt)s acmhainn teanga "
+
+#: templates/repository/search.html:122
+#, python-format
+msgid "(Page %(pgnum)s of %(numpgs)s)"
+msgstr "(Leathanach %(pgnum)s de %(numpgs)s)"
+
+#: templates/repository/search.html:128 templates/repository/search.html:155
+#: templates/stats/topstats.html:241 templates/stats/topstats.html.py:243
+msgid "Previous"
+msgstr "Roimhe"
+
+#: templates/repository/search.html:129 templates/repository/search.html:156
+#: templates/stats/topstats.html:247 templates/stats/topstats.html.py:249
+msgid "Next"
+msgstr "Ar aghaidh"
+
+#: templates/repository/search.html:131
+msgid "Order by:"
+msgstr "Cuir in ord:"
+
+#: templates/repository/search.html:133
+msgid "Resource Name A-Z"
+msgstr "Ainm Acmhainne A-Z"
+
+#: templates/repository/search.html:134
+msgid "Resource Name Z-A"
+msgstr "Ainm Acmhainne Z-A"
+
+#: templates/repository/search.html:135
+msgid "Resource Type A-Z"
+msgstr "Cineál Acmhainne A-Z"
+
+#: templates/repository/search.html:136
+msgid "Resource Type Z-A"
+msgstr "Cineál Acmhainne Z-A"
+
+#: templates/repository/search.html:137
+msgid "Media Type A-Z"
+msgstr "Cineál Meáin A-Z"
+
+#: templates/repository/search.html:138
+msgid "Media Type Z-A"
+msgstr "Cineál Meáin Z-A"
+
+#: templates/repository/search.html:139
+msgid "Language Name A-Z"
+msgstr "Ainm Teanga A-Z"
+
+#: templates/repository/search.html:140
+msgid "Language Name Z-A"
+msgstr "Ainm Teanga Z-A"
+
+#: templates/repository/search.html:141
+msgid "Number of Downloads"
+msgstr "Líon na nUaslódálacha"
+
+#: templates/repository/search.html:142
+msgid "Number of Views"
+msgstr "Líon na nAmharc"
+
+#: templates/repository/search.html:163
+#, python-format
+msgid ""
+"No results were found for search query &ldquo;%(query)s&rdquo; and filters "
+"%(filters)s."
+msgstr ""
+"Ní bhfuarthas toradh ar bith don iarratas cuardaigh &ldquo;%(query)s&rdquo; "
+"agus scagairí %(filters)s."
+
+#: templates/repository/search.html:165
+#, python-format
+msgid "No results were found for search query &ldquo;%(query)s&rdquo;."
+msgstr ""
+"Ní bhfuarthas toradh ar bith don iarratas cuardaigh &ldquo;%(query)s&rdquo;."
+
+#: templates/stats/mystats.html:14 templates/stats/topstats.html:113
+#: templates/stats/usagestats.html:125
+msgid "ELRI visits statistics"
+msgstr "Staitisticí tadhaill ELRI"
+
+#: templates/stats/mystats.html:15 templates/stats/topstats.html:114
+#: templates/stats/usagestats.html:124
+msgid "ELRC-SHARE visits statistics"
+msgstr "Staitisticí tadhaill ELRC-SHARE"
+
+#: templates/stats/mystats.html:16 templates/stats/topstats.html:115
+#: templates/stats/usagestats.html:126
+msgid "Statistics on resource metadata"
+msgstr "Staitisticí ar mheiteashonraí acmhainní"
+
+#: templates/stats/mystats.html:17 templates/stats/topstats.html:117
+#: templates/stats/usagestats.html:128
+msgid "My resources"
+msgstr "Mo acmhainní"
+
+#: templates/stats/mystats.html:24 templates/stats/topstats.html:169
+#: templates/stats/usagestats.html:317
+msgid "No data found"
+msgstr "Ní bhfuarthas sonraí ar bith"
+
+#: templates/stats/mystats.html:30
+msgid "Published"
+msgstr "Foilsithe"
+
+#: templates/stats/mystats.html:31
+msgid "Actions"
+msgstr "Gníomhartha"
+
+#: templates/stats/mystats.html:32
+msgid "Seen by users"
+msgstr "Feicthe ag úsáideoirí"
+
+#: templates/stats/mystats.html:33
+msgid "Last access"
+msgstr "Rochtain dheireanach"
+
+#: templates/stats/mystats.html:47
+msgid "NO"
+msgstr "NÍL"
+
+#: templates/stats/topstats.html:5
+msgid ""
+"It seems JavaScript is either disabled or not supported by your browser."
+msgstr ""
+"Is cosúil go bhfuil Javascript díchumasaithe nó nach dtacaítear leis ar do "
+"bhrabhsálaí."
+
+#: templates/stats/topstats.html:6
+msgid ""
+"JavaScript should be enabled in order to support all functionalities.\n"
+"        Enable JavaScript by changing your browser options, and then try "
+"again."
+msgstr ""
+"Ba chóir go mbeadh Javascript cumasaithe chun tacú le gach feidhmiúlacht.\n"
+"        Cumasaigh JavaScript trí do chuid roghanna brabhálaithe, agus ansin "
+"triail arís é."
+
+#: templates/stats/topstats.html:125
+msgid "Show the"
+msgstr "Taispeáin"
+
+#: templates/stats/topstats.html:129
+msgid "Most Viewed Resources"
+msgstr "Na hAcmhainní is Mó Amharc"
+
+#: templates/stats/topstats.html:137
+msgid "Top Queries"
+msgstr "Na hIarratais is Mó Éileamh"
+
+#: templates/stats/topstats.html:145
+msgid "Latest Queries"
+msgstr "Na hIarratais is Déanaí"
+
+#: templates/stats/topstats.html:153
+msgid "Top Downloaded Resources"
+msgstr "Na hAcmhainní is Mó Íoslódálacha"
+
+#: templates/stats/topstats.html:161
+msgid "Latest Updated Resources"
+msgstr "Na hUasdátaithe Acmhainní is Déanaí"
+
+#: templates/stats/topstats.html:177
+msgid "Date"
+msgstr "Dáta"
+
+#: templates/stats/topstats.html:198
+msgid "Provenance"
+msgstr "Foinse"
+
+#: templates/stats/topstats.html:221
+msgid ""
+"* This product includes GeoLite data\n"
+"                                        created by MaxMind, available from "
+"http://maxmind.com/ and a Google Maps chart."
+msgstr ""
+"* Tá sonraí GeoLite san áireamh sa táirge seo\n"
+"                                        cruthaite ag MaxMind, ar fáil ó "
+"http://maxmind.com/ agus cairt Google Maps."
+
+#: templates/stats/topstats.html:232
+msgid "No data matched"
+msgstr "Níorbh ionann sonraí ar bith"
+
+#: templates/stats/topstats.html:280
+#, python-format
+msgid "result%(object.3|pluralize)s"
+msgstr "toradh%(object.3|pluralize)s"
+
+#: templates/stats/topstats.html:283
+#, python-format
+msgid "time%(object.3|pluralize)s"
+msgstr "am%(object.3|pluralize)s"
+
+#: templates/stats/topstats.html:303 templates/stats/topstats.html.py:304
+msgid "Number of downloads"
+msgstr "Líon na n-íoslódálacha"
+
+#: templates/stats/topstats.html:305 templates/stats/topstats.html.py:306
+msgid "Number of views"
+msgstr "Líon na n-amharc"
+
+#: templates/stats/usagestats.html:145
+msgid ""
+"This panel shows which metadata have been used to describe the ELRI "
+"linguistic resources.\n"
+"                Each metadata defined in the <a href=\"http://www.meta-share."
+"org/knowledgebase/DetailedPresentationOfTheModel\" target=\"metamodel\">ELRI "
+"model</a> can be either \"required\", \"recommended\" or \"optional\".\n"
+"                The metadata usage statistics reports two counters. The "
+"first counter says how many times a metadata has been \n"
+"                filled in with a certain value, while the second counter "
+"says the number of resources for which the metadata has been used.\n"
+"                For instance <div class=\"coverage required\"> 28/12 </div> "
+"means that the corresponding required metadata has been filled in 28 times "
+"(possibly with \n"
+"                redundant values), and that 12 different resources have been "
+"described with that metadata.\n"
+"                You can click on a metadata name to see a table with all the "
+"actual values used to fill in that metadata."
+msgstr ""
+"Taispeánann an painéal seo cé acu meiteashonraí ar baineadh úsáid astu chun "
+"cur síos a dhéanamh ar acmhainní teangeolaíocha ELRI.\n"
+"                Is féidir gach meiteashonra a shainítear sa <a href=\"http://"
+"www.meta-share.org/knowledgebase/DetailedPresentationOfTheModel\" target="
+"\"metamodel\">samhail ELRI</a> a bheith \"riachtanach\", \"molta\" nó "
+"\"roghnach\".\n"
+"                Déanann na staitisticí i dtaca le húsáid mheiteashonraí "
+"tuairisciú ar dhá áiritheoir.Deir an chéad áiritheoir an oiread babhtaí a "
+"líonadh meiteashonra \n"
+"                le luach áirithe, agus deir an dara áiritheoir an líon "
+"acmhainní ar a mbaineadh úsáid as na meiteashonraí.\n"
+"                Mar shampla, is é is brí le <div class=\"clúdach de dhíth\"> "
+"28/12 </div> ná go bhfuil na meiteashonraí comhfhreagracha riachtanacha "
+"líonta isteach 28 babhta (b'fhéidir le \n"
+"                luachanna iomarcacha), agus go ndearnadh cur síos ar 12 "
+"acmhainní éagsúla leis na meiteashonraí sin.\n"
+"                Is féidir leat cliceáil ar ainm meiteashonra chun tábla a "
+"fheiceáil leis na luachanna iarbhír uile a úsáideadh chun na meiteashonraí "
+"sin a líonadh isteach."
+
+#: templates/stats/usagestats.html:153
+msgid ""
+"This panel shows which metadata have been used to describe the ELRC-SHARE "
+"linguistic resources.\n"
+"                Each metadata defined in the <a href=\"http://www.meta-share."
+"org/knowledgebase/DetailedPresentationOfTheModel\" target=\"metamodel\">ELRC-"
+"SHARE model</a> can be either \"required\", \"recommended\" or \"optional"
+"\".\n"
+"                The metadata usage statistics reports two counters. The "
+"first counter says how many times a metadata has been \n"
+"                filled in with a certain value, while the second counter "
+"says the number of resources for which the metadata has been used.\n"
+"                For instance <div class=\"coverage required\"> 28/12 </div> "
+"means that the corresponding required metadata has been filled in 28 times "
+"(possibly with \n"
+"                redundant values), and that 12 different resources have been "
+"described with that metadata.\n"
+"                You can click on a metadata name to see a table with all the "
+"actual values used to fill in that metadata."
+msgstr ""
+"Taispeánann an painéal seo cé acu meiteashonraí ar baineadh úsáid astu chun "
+"cur síos a dhéanamh ar acmhainní teangeolaíocha ELRC-SHARE.\n"
+"                Is féidir gach meiteashonra a shainítear sa <a href=\"http://"
+"www.meta-share.org/knowledgebase/DetailedPresentationOfTheModel\" target="
+"\"metamodel\">samhail ELRC-SHARE</a> a bheith \"riachtanach\", \"molta\" nó "
+"\"roghnach\".\n"
+"                Déanann na staitisticí i dtaca le húsáid mheiteashonraí "
+"tuairisciú ar dhá áiritheoir.Deir an chéad áiritheoir an oiread babhtaí a "
+"líonadh meiteashonra \n"
+"                le luach áirithe, agus deir an dara áiritheoir an líon "
+"acmhainní ar a mbaineadh úsáid as na meiteashonraí.\n"
+"                Mar shampla, is é is brí le <div class=\"clúdach de dhíth\"> "
+"28/12 </div> ná go bhfuil na meiteashonraí comhfhreagracha riachtanacha "
+"líonta isteach 28 babhta (b'fhéidir le \n"
+"                luachanna iomarcacha), agus go ndearnadh cur síos ar 12 "
+"acmhainní éagsúla leis na meiteashonraí sin.\n"
+"                Is féidir leat cliceáil ar ainm meiteashonra chun tábla a "
+"fheiceáil leis na luachanna iarbhír uile a úsáideadh chun na meiteashonraí "
+"sin a líonadh isteach."
+
+#: templates/stats/usagestats.html:162
+msgid "Metadata status"
+msgstr "Stádas meiteashonraí"
+
+#: templates/stats/usagestats.html:173
+#, python-format
+msgid "Metadata usage in %(lr_count)s resource%(lr_count|pluralize)s"
+msgstr "Úsáid mheiteashonraí in %(lr_count)s resource%(lr_count|pluralize)s"
+
+#: templates/stats/usagestats.html:192
+#, python-format
+msgid "Found %(fields_count)s metadata"
+msgstr "Meiteashonraí %(fields_count)s faighte"
+
+#: templates/stats/usagestats.html:199
+msgid ""
+"(the following lines are the metadata components and elements included in "
+"the <a href=\"http://www.meta-share.org/portal/knowledgebase\n"
+"/DetailedPresentationOfTheModel\" target=\"metamodel\">ELRI model</a> "
+"grouped by different roles and alphabetically sorted)"
+msgstr ""
+"(Is iad na línte a leanas na comhpháirteanna agus eilimintí meiteashonraí "
+"san áireamh sa <a href=\"http://www.meta-share.org/portal/knowledgebase/"
+"DetailedPresentationOfTheModel\" target=\"metamodel\">samhail ELRI</a> "
+"grúpáilte de réir róil agus sórtáilte de réir aibítre)"
+
+#: templates/stats/usagestats.html:201
+msgid ""
+"(the following lines are the metadata components and elements included in "
+"the <a href=\"http://www.meta-share.org/portal/knowledgebase/"
+"\tDetailedPresentationOfTheModel\" target=\"metamodel\">ELRC-SHARE model</a> "
+"grouped by different roles and alphabetically sorted)"
+msgstr ""
+"(Is iad na línte a leanas na comhpháirteanna agus eilimintí meiteashonraí "
+"san áireamh sa <a href=\"http://www.meta-share.org/portal/knowledgebase/"
+"DetailedPresentationOfTheModel\" target=\"metamodel\">samhail ELRI</a> "
+"grúpáilte de réir róil agus sórtáilte de réir aibítre)"
+
+#: templates/stats/usagestats.html:202
+msgid "Expand all"
+msgstr "Fairsingigh an t-iomlán"
+
+#: templates/stats/usagestats.html:203
+msgid "Collapse all"
+msgstr "Leacaigh an t-iomlán"
+
+#: templates/stats/usagestats.html:217
+msgid "Close"
+msgstr "Dún"
+
+#: templates/stats/usagestats.html:217
+#, python-format
+msgid " used values for <h4>%(selected_class)s/%(selected_field)s</h4>"
+msgstr " luachanna úsáidte do <h4>%(selected_class)s/%(selected_field)s</h4>"
+
+#: templates/stats/usagestats.html:218
+msgid "value counter"
+msgstr "áiritheoir luachanna"
+
+#: templates/stats/usagestats.html:219
+msgid "resources counter"
+msgstr "áiritheoir acmhainní"
+
+#: templates/stats/usagestats.html:283
+msgid "never used"
+msgstr "níor úsáideadh"
+
+#~ msgid "Dear "
+#~ msgstr " "
+
+#~ msgid "Best regards,"
+#~ msgstr "Beannacht,"
+
+#~ msgid "ELRI Repository at [2]"
+#~ msgstr "Stór ELRI ag [2]"
+
+#~ msgid ""
+#~ "Thank you for using the ELRI services, do not hesitate to contact us for "
+#~ "any enquiries."
+#~ msgstr ""
+#~ "Go raibh maith agat as na seirbhísí ELRI a úsáid. Ná bíodh leisce ort "
+#~ "teagmháil a dhéanamh linn má tá fiosruithe ar bith agat."
+
+#~ msgid "The ELRI team "
+#~ msgstr "An fhoireann ELRI "
+
+#~ msgid "\"OK, I aggree \""
+#~ msgstr "“Tuigim”"
+
+#~ msgid "\"Decline \""
+#~ msgstr "“Diúltaigh”"
+
+#~ msgid "\"Allow cookies\""
+#~ msgstr "\"Ceadaigh fianáin\""
+
+#~ msgid "'Cookie Policy'"
+#~ msgstr "<b>Beartas Fianán</b>"
+
+#, fuzzy
+#~ msgid " E-Mail: "
+#~ msgstr "R-phost:"
+
+#~ msgid ""
+#~ "This website does not use cookies nor any other tracking information on "
+#~ "this website."
+#~ msgstr ""
+#~ "Ní úsáideann an suíomh idirlín seo fianáin ná aon eolas rianaithe eile ar "
+#~ "an suíomh idirlín seo."
+
+#~ msgid "Browse Resources"
+#~ msgstr "Brabhsáil Acmhainní"
+
+#~ msgid "Manage Resources"
+#~ msgstr "Bainistigh Acmhainní"
+
+#~ msgid "eDelivery membership applications"
+#~ msgstr "Iarratais ar bhallraíocht eDelivery"
+
+#~ msgid "Your Profile,"
+#~ msgstr "Do Phróifíl,"
+
+#~ msgid "Documentation on the ELRI National Relay Station"
+#~ msgstr "Doiciméadacht ar an Stáisiún Athsheachadta Náisiúnta ELRI"
+
+#~ msgid "Walkthrough for contributors"
+#~ msgstr "Iniúchadh do rannpháirtithe"
+
+#~ msgid "Walkthrough for reviewers"
+#~ msgstr "Iniúchadh do athbhreithneoirí"
+
+#~ msgid "ELRC-SHARE schema"
+#~ msgstr "Scéimre ELRC-SHARE"
+
+#~ msgid "ELRC-SHARE schema XSD"
+#~ msgstr "XSD scéimre ELRC-SHARE"
+
+#~ msgid "(based on the META-SHARE Schema)"
+#~ msgstr "(bunaithe ar Scéimre META-SHARE)"
+
+#~ msgid "Documentation about the schema"
+#~ msgstr "Doiciméadacht faoin scéimre"
+
+#~ msgid "Your username and password didn't match. Please try again."
+#~ msgstr ""
+#~ "Níor tháinig d'ainm úsáideora agus do phasfhocal le chéile. Bain triail "
+#~ "eile as."

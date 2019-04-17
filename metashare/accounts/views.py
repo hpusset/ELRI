@@ -205,7 +205,7 @@ def create(request):
     
     elri_tos='/static/metashare/ELRI_ToS_'+lang+'.pdf'
         
-    dictionary = {'title': 'Create Account', 'form': form, 'elri_tos': elri_tos }
+    dictionary = {'title': _('Create Account'), 'form': form, 'elri_tos': elri_tos }
     return render_to_response('accounts/create_account.html', dictionary,
       context_instance=RequestContext(request))
 

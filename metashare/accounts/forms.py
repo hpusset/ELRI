@@ -172,7 +172,8 @@ class RegistrationRequestForm(Form):
                 messages.append(_(u'This password is too common. '))
             if 'This password is too short. It must contain at least 9 characters.' in error:
                 messages.append(_(u'This password is too short. It must contain at least 9 characters. '))
-            
+            if 'The password is too similar to the' in error:
+                messages.append(_(u'The password is too similar to the %s') % error.split('the')[1])
             raise ValidationError(messages)
         return pswrd
 

@@ -1,0 +1,694 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-04-04 13:42+0200\n"
+"PO-Revision-Date: 2019-04-08 12:30+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ga_IE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#: templates/repository/editor/contributions/contribute.html:9
+msgid "ELRI"
+msgstr "ELRI"
+
+#: templates/repository/editor/contributions/contribute.html:61
+msgid ""
+"\"This site uses cookies to enhance your user experience. By clicking any "
+"link on this page you are giving your consent for us to set cookies.\" "
+msgstr ""
+"\"Baineann an suíomh gréasáin seo úsáid as fianáin chun eispéireas an "
+"úsáideora a fheabhsú. Má chliceálann tú ar aon nasc ar an leathnach seo, "
+"beidh tú ag tabhairt do thola dúinn fianáin a chur i bhfeidhm.\""
+
+#: templates/repository/editor/contributions/contribute.html:62
+#: templates/repository/editor/contributions/contribute.html:65
+msgid "\"OK\""
+msgstr "\"Tuigim\""
+
+#: templates/repository/editor/contributions/contribute.html:64
+msgid "\"Learn more\""
+msgstr "\"Léigh níos mó faoi\""
+
+#: templates/repository/editor/contributions/contribute.html:83
+msgid "Your browser does not support JavaScript!"
+msgstr "Ní thacaíonn do bhrabhsálaí le JavaScript!"
+
+#: templates/repository/editor/contributions/contribute.html:85
+msgid ""
+"Please make sure that you have javascript enabled and refresh the page "
+"before proceeding with your contribution."
+msgstr ""
+"Bí cinnte go bhfuil javascript cumasaithe agat agus athnuaigh an leathanach "
+"sula gcuireann tú do chuid ar fáil."
+
+#: templates/repository/editor/contributions/contribute.html:97
+msgid "Uploading your data"
+msgstr "Ag uaslódáil do chuid sonraí"
+
+#: templates/repository/editor/contributions/contribute.html:98
+msgid ""
+"Please provide the required information below for the data you wish to "
+"upload. Once uploaded, the ELRI engines will process your data with the goal "
+"of providing you, and users of the group of your choice, with a fully "
+"prepared language resource.\n"
+"                <br>\n"
+"                Once your resource has been fully processed, you will be "
+"notified via email and will be able to download it from this repository."
+msgstr ""
+"Cuir an t-eolas atá de dhíth ar fáil thíos do na sonraí ar mian leat iad a "
+"uaslódáil. Nuair atá an uaslódáil déanta déanfaidh innill ELRI do shonraí a "
+"phróiseáil agus é mar sprioc acmhainn teanga lánréitithe a chur ar fáil "
+"duitse agus d'úsáideoirí grúpa a roghnaíonn tú.\n"
+"                <br>\n"
+"                Nuair atá d'acmhainn próiseáilte go hiomlán, cuirfear ar an "
+"eolas le ríomhphost tú agus beidh tú ábalta é a íoslódáil ón stór seo."
+
+#: templates/repository/editor/contributions/contribute.html:105
+msgid "Resource Title"
+msgstr "Teideal acmhainne"
+
+#: templates/repository/editor/contributions/contribute.html:110
+msgid ""
+"The name by which the resource is already known or by which you would like "
+"it to be known; e.g. \"The GSRT bilingual corpus of Greek-English bulletins\""
+msgstr ""
+"An t-ainm faoina bhfuil aithne ar an acmhainn cheana féin nó ar mhaith leat "
+"go mbeadh aithne uirthe faoi; e.g. \"Preasráiteas ón Roinn ------ Feabhra "
+"2018\""
+
+#: templates/repository/editor/contributions/contribute.html:116
+msgid "Resource short description"
+msgstr "Tuairisc ghearr ar an acmhainn"
+
+#: templates/repository/editor/contributions/contribute.html:118
+msgid ""
+"[Optional] A short description, including any information considered useful "
+"about the resource, e.g. whether it's a dataset (collection of documents) or "
+"a lexicon, glossary, terminological resource, etc., its size, language(s), "
+"classification information (e.g. health reports, news bulletins, lexicon of "
+"sports terminology etc.)"
+msgstr ""
+"[Roghnach] Tuairisc ghearr, aon eolas faoin acmhainn a meastar é a bheith "
+"úsáideach san áireamh, e.g. cé an tacar sonraí (bailiúchán doiciméad) nó "
+"foclóir, gluais, acmhainn téarmeolaíochta, etc., a méid, teanga(cha), eolas "
+"rangúcháin (e.g. tuairiscí sláinte, feasacháin nuachta, foclóir de "
+"théarmeolaíocht spóirt etc.)"
+
+#: templates/repository/editor/contributions/contribute.html:122
+#: templates/repository/editor/select_resource_type.html:12
+msgid "Resource type"
+msgstr "Cineál acmhainne"
+
+#: templates/repository/editor/contributions/contribute.html:125
+#: templates/repository/editor/select_resource_type.html:16
+msgid "Corpus"
+msgstr "Corpas"
+
+#: templates/repository/editor/contributions/contribute.html:126
+msgid "Language Description"
+msgstr "Tuairisc theanga"
+
+#: templates/repository/editor/contributions/contribute.html:127
+msgid "Lexical Conceptual Resource"
+msgstr "Acmhainn Foclóireachta Choincheapúil"
+
+#: templates/repository/editor/contributions/contribute.html:129
+msgid ""
+"[Optional] The type of the resource: can be Corpus, Lexicon, or Language "
+"Description. Do not choose anything if you are not sure."
+msgstr ""
+"[Roghnach] Cineál na hacmhainne: is féidir leis a bheith ina Corpas, "
+"Foclóir, nó Tuairisc Theanga. Ná roghnaigh aon ní mura bhfuil tú cinnte."
+
+#: templates/repository/editor/contributions/contribute.html:135
+#: templates/repository/editor/contributions/contribute.html:174
+msgid "Language(s)"
+msgstr "Teanga(cha)"
+
+#: templates/repository/editor/contributions/contribute.html:140
+msgid "Bulgarian"
+msgstr "Bulgáiris"
+
+#: templates/repository/editor/contributions/contribute.html:141
+msgid "Czech"
+msgstr "Seicis"
+
+#: templates/repository/editor/contributions/contribute.html:142
+msgid "Croatian"
+msgstr "Cróitis"
+
+#: templates/repository/editor/contributions/contribute.html:143
+msgid "Danish"
+msgstr "Danmhairgis"
+
+#: templates/repository/editor/contributions/contribute.html:144
+msgid "Dutch; Flemish"
+msgstr "Ísiltíris; Pléimeannais"
+
+#: templates/repository/editor/contributions/contribute.html:145
+msgid "English"
+msgstr "Béarla"
+
+#: templates/repository/editor/contributions/contribute.html:146
+msgid "Estonian"
+msgstr "Eastóinis"
+
+#: templates/repository/editor/contributions/contribute.html:147
+msgid "Finnish"
+msgstr "Fionlainnis"
+
+#: templates/repository/editor/contributions/contribute.html:148
+msgid "French"
+msgstr "Fraincis"
+
+#: templates/repository/editor/contributions/contribute.html:149
+msgid "German"
+msgstr "Gearmáinis"
+
+#: templates/repository/editor/contributions/contribute.html:150
+msgid "Hungarian"
+msgstr "Ungáiris"
+
+#: templates/repository/editor/contributions/contribute.html:151
+msgid "Icelandic"
+msgstr "Íoslainnis"
+
+#: templates/repository/editor/contributions/contribute.html:152
+msgid "Irish"
+msgstr "Gaeilge"
+
+#: templates/repository/editor/contributions/contribute.html:153
+msgid "Italian"
+msgstr "Iodáilis"
+
+#: templates/repository/editor/contributions/contribute.html:154
+msgid "Latvian"
+msgstr "Laitvis"
+
+#: templates/repository/editor/contributions/contribute.html:155
+msgid "Lithuanian"
+msgstr "Liotuáinis"
+
+#: templates/repository/editor/contributions/contribute.html:156
+msgid "Maltese"
+msgstr "Máltais"
+
+#: templates/repository/editor/contributions/contribute.html:157
+msgid "Modern Greek (1453-)"
+msgstr "Gréigis Nua (1453-)"
+
+#: templates/repository/editor/contributions/contribute.html:158
+msgid "Norwegian Bokmål (nb)"
+msgstr "Ioruais Bocmál"
+
+#: templates/repository/editor/contributions/contribute.html:159
+msgid "Norwegian Nynorsk (nn)"
+msgstr "Nua-Ioruais"
+
+#: templates/repository/editor/contributions/contribute.html:160
+msgid "Polish"
+msgstr "Polainnis"
+
+#: templates/repository/editor/contributions/contribute.html:161
+msgid "Portuguese"
+msgstr "Portaingéilis"
+
+#: templates/repository/editor/contributions/contribute.html:162
+msgid "Romanian; Moldavian; Moldovan"
+msgstr "Rómáinis; Moldáivis; Moldóivis"
+
+#: templates/repository/editor/contributions/contribute.html:163
+msgid "Slovak"
+msgstr "Slóvaicis"
+
+#: templates/repository/editor/contributions/contribute.html:164
+msgid "Slovenian"
+msgstr "Slóivéinis"
+
+#: templates/repository/editor/contributions/contribute.html:165
+msgid "Spanish; Castilian"
+msgstr "Spáinnis; Caistílis"
+
+#: templates/repository/editor/contributions/contribute.html:166
+msgid "Swedish"
+msgstr "Sualainnis"
+
+#: templates/repository/editor/contributions/contribute.html:168
+#: templates/repository/editor/contributions/contribute.html:183
+msgid ""
+"The language(s) of the resource; for resources with multiple languages, hold "
+"down CTRL key to select multiple values"
+msgstr ""
+"Teanga(cha) na hacmhainne, d'acmhainní le hilteangacha, brúigh eochair CTRL "
+"chun luachanna iolracha a roghnú"
+
+#: templates/repository/editor/contributions/contribute.html:188
+msgid "Domain(s)"
+msgstr "Feara(i)nn"
+
+#: templates/repository/editor/contributions/contribute.html:193
+msgid "Digital resources in any field of activity."
+msgstr "Acmhainní digiteacha in aon réimse gníomhaíochta."
+
+#: templates/repository/editor/contributions/contribute.html:194
+msgid "Other / Unknown"
+msgstr "Eile / Ní fios"
+
+#: templates/repository/editor/contributions/contribute.html:196
+msgid "Digital resources of European cultural heritage "
+msgstr "Acmhainní digiteacha um oidhreacht cultúrtha na hEorpa "
+
+#: templates/repository/editor/contributions/contribute.html:197
+msgid "eCulture"
+msgstr "eCulture"
+
+#: templates/repository/editor/contributions/contribute.html:199
+msgid ""
+"Digital resources with relevant information for European national social "
+"security systems "
+msgstr ""
+"Acmhainní digiteacha le heolas ábhartha do chórais slándála sóisialta "
+"náisiúnta na hEorpa "
+
+#: templates/repository/editor/contributions/contribute.html:200
+msgid "Electronic Exchange of Social Security Information"
+msgstr "Malartú Leictreonach d'Eolas Slándála Sóisialta"
+
+#: templates/repository/editor/contributions/contribute.html:202
+msgid ""
+"Digital resources with relevant information for European health services. "
+msgstr ""
+"Acmhainní digiteacha le heolas ábhartha do sheirbhísí sláinte Eorpacha. "
+
+#: templates/repository/editor/contributions/contribute.html:203
+msgid "eHealth"
+msgstr "eHealth"
+
+#: templates/repository/editor/contributions/contribute.html:205
+msgid ""
+"Digital resources with relevant information for European judicial services. "
+msgstr ""
+"Acmhainní digiteacha le heolas ábhartha do sheirbhísí breithiúnacha "
+"Eorpacha. "
+
+#: templates/repository/editor/contributions/contribute.html:206
+msgid "eJustice"
+msgstr "eJustice"
+
+#: templates/repository/editor/contributions/contribute.html:208
+msgid ""
+"Digital resources with relevant information for European procurement "
+"services."
+msgstr ""
+"Acmhainní digiteacha le heolas ábhartha do sheirbhísí soláthair Eorpacha."
+
+#: templates/repository/editor/contributions/contribute.html:209
+msgid "eProcurement"
+msgstr "eProcurement"
+
+#: templates/repository/editor/contributions/contribute.html:211
+msgid ""
+"Digital resources that can be publically shared to contribute to data re-use "
+"in Europe."
+msgstr ""
+"Acmhainní digiteacha ar féidir a roinnt go poiblí chun chur le hathúsáid "
+"sonraí san Eoraip."
+
+#: templates/repository/editor/contributions/contribute.html:212
+msgid "Public Open Data"
+msgstr "Sonraí Oscailte don Phobal"
+
+#: templates/repository/editor/contributions/contribute.html:214
+msgid ""
+"Digital resources with relevant information for the establishment of a safer "
+"internet for children."
+msgstr ""
+"Acmhainní digiteacha le heolas ábhartha chun idirlíon níos sábháilte do "
+"leanaí a bhunú."
+
+#: templates/repository/editor/contributions/contribute.html:215
+msgid "Safer Internet"
+msgstr "Idirlíon níos Sábháilte"
+
+#: templates/repository/editor/contributions/contribute.html:217
+msgid ""
+"Digital resources with relevant information for the interconnection of "
+"business registers. "
+msgstr "Acmhainní digiteacha le heolas ábhartha don idirnascadh clár ghnó. "
+
+#: templates/repository/editor/contributions/contribute.html:218
+msgid "Business Registers Interconnection System"
+msgstr "Córas Idirnasctha Clár Gnó"
+
+#: templates/repository/editor/contributions/contribute.html:220
+msgid "Digital resources with relevant information for Cybersecurity."
+msgstr "Acmhainní digiteacha le heolas ábhartha um cibearshlándáil."
+
+#: templates/repository/editor/contributions/contribute.html:221
+msgid "Cybersecurity"
+msgstr "Cibearshlándáil"
+
+#: templates/repository/editor/contributions/contribute.html:224
+msgid ""
+"[Optional] Domain refers to information that belongs to a specific field of "
+"activity (e.g., culture or health) and is related to one of the building "
+"blocks of the European digital services indicated in the provided list. "
+"Digital resources that do not clearly belong to one of the provided domains "
+"can be left as Other/Unknown."
+msgstr ""
+"[Roghnach] Tagraíonn fearann d'eolas a bhaineann le réimse sonrach "
+"gníomhaíochta (e.g., cultúr nó sláinte) agus tá baint aige le ceann de "
+"bhonnchlocha sheirbhísí digiteacha Eorpacha a dtagraítear dóibh sa liosta "
+"atá ar fáil. Is féidir acmhainní digiteacha nach mbaineann go soiléir le "
+"ceann ar leith de na fearainn atá ar fáil a fhágáil mar Eile/Ní fios."
+
+#: templates/repository/editor/contributions/contribute.html:229
+msgid "Licensing conditions"
+msgstr "Coinníollacha ceadúnaithe"
+
+#: templates/repository/editor/contributions/contribute.html:231
+msgid "Public Domain"
+msgstr "Fearann Poiblí"
+
+#: templates/repository/editor/contributions/contribute.html:232
+msgid "Open Under PSI"
+msgstr "Oscailte faoi Cheadúnas Faisnéise de chuid na hEarnála Poiblí (PSI)"
+
+#: templates/repository/editor/contributions/contribute.html:233
+msgid "Creative Commons Zero 1.0 (CC0-1.0)"
+msgstr "Creative Commons Saorcheadúnas 1.0 (CC0-1.0)"
+
+#: templates/repository/editor/contributions/contribute.html:234
+msgid "Creative Commons - Attribution 4.0 (CC-BY-4.0)"
+msgstr "Creative Commons – Ceadúnas Sannta 4.0 (CC-BY-4.0)"
+
+#: templates/repository/editor/contributions/contribute.html:235
+msgid "Creative Commons - Attribution - ShareAlike 4.0 (CC-BY-SA-4.0)"
+msgstr "Creative Commons – Ceadúnas Sannta - Comhroinnte 4.0 (CC-BY-SA-4.0)"
+
+#: templates/repository/editor/contributions/contribute.html:236
+msgid "Creative Commons - Attribution - NonCommercial 4.0 (CC-BY-NC-4.0)"
+msgstr ""
+"Creative Commons – Ceadúnas Sannta – Neamhthráchtála 4.0 (CC-BY-NC-4.0)"
+
+#: templates/repository/editor/contributions/contribute.html:237
+msgid ""
+"Creative Commons - Attribution - NonCommercial - ShareAlike 4.0 (CC-BY-NC-"
+"SA-4.0)"
+msgstr ""
+"Creative Commons – Ceadúnas Sannta – Neamhthráchtála – Comhroinnte 4.0 (CC-"
+"BY-NC-SA-4.0)"
+
+#: templates/repository/editor/contributions/contribute.html:238
+msgid "Non-Standard/Other_Licence/Terms"
+msgstr "Ceadúnas/Téarmaí Neamhchaighdeánach(a)/Eile"
+
+#: templates/repository/editor/contributions/contribute.html:240
+msgid "The licensing conditions for the resource."
+msgstr "Na coinníollacha ceadúnaithe don acmhainn."
+
+#: templates/repository/editor/contributions/contribute.html:241
+msgid " More information about the available licences."
+msgstr " Tuilleadh eolais faoina ceadúnais atá ar fáil."
+
+#: templates/repository/editor/contributions/contribute.html:244
+msgid "License file"
+msgstr "Comhad ceadúnais"
+
+#: templates/repository/editor/contributions/contribute.html:248
+msgid "Please upload license file in the <b>.pdf format</b>."
+msgstr "Uaslódáil an comhad ceadúnais san <b>.pdf format</b>."
+
+#: templates/repository/editor/contributions/contribute.html:273
+msgid "Upload Resource"
+msgstr "Uaslódáil Acmhainn"
+
+#: templates/repository/editor/contributions/contribute.html:276
+msgid ""
+"Please upload a single <strong>.zip</strong> file or any number of files of "
+"the following type: <strong>.doc(x), .odt, .rtf, .pdf, .tmx, .sdltm, .xml, ."
+"tbx, .xls(x), or .txt file</strong> up to 100MB."
+msgstr ""
+"Uaslódáil comhad <strong>.zip</strong> amháin nó iliomad comhad de na "
+"cineálacha a leanas: <strong>.doc(x), .odt, .rtf, .pdf, .tmx, .sdltm, .xml, ."
+"tbx, .xls(x), nó .txt file</strong> suas go 100MB."
+
+#: templates/repository/editor/contributions/contribute.html:278
+msgid ""
+"In case the data you wish to upload are larger than 100MB, please contact us "
+"to provide an SFTP link for direct download or consider uploading smaller "
+"files"
+msgstr ""
+"Má tá na sonraí is mian leat a uaslódáil níos mó ná 100MB, téigh i "
+"dteagmháil linn chun nasc SFTP a sholáthar d'íoslódáil dhíreach nó smaoinigh "
+"ar chomhaid níos lú a uasódáil"
+
+#: templates/repository/editor/contributions/contribute.html:283
+msgid "Group(s)"
+msgstr "Grúpa(í)"
+
+#: templates/repository/editor/contributions/contribute.html:292
+msgid ""
+"The group(s) the language resource can be shared with (hold down the CTRL "
+"key to select multiple groups)."
+msgstr ""
+"An grúpa / na grúpaí ar féidir an acmhainne teanga a roinnt leis / leo "
+"(brúigh eochair CTRL chun grúpaí iolracha a roghnú)."
+
+#: templates/repository/editor/contributions/contribute.html:298
+#, python-format
+msgid ""
+"I agree with the <a target=\"_blank\" href=\"%(legal_url)s#Sharing"
+"\">Language Resource upload Terms of Service for Data Holders</a> "
+msgstr ""
+"Glacaim leis na <a target=\"_blank\" href=\"%(legal_url)s#Sharing\">Language "
+"Resource upload Terms of Service for Data Holders</a> "
+
+#: templates/repository/editor/contributions/contribute.html:310
+msgid "Submit"
+msgstr "Cuir isteach"
+
+#: templates/repository/editor/contributions/contribute.html:311
+msgid "Reset"
+msgstr "Athshocraigh"
+
+#: templates/repository/editor/dict_widget.html:4
+#: templates/repository/editor/dict_widget.html:8
+#: templates/repository/editor/lang_dict_widget.html:4
+#: templates/repository/editor/lang_dict_widget.html:8
+msgid "Delete Field"
+msgstr "Scrios Réimse"
+
+#: templates/repository/editor/dict_widget.html:6
+#: templates/repository/editor/lang_dict_widget.html:6
+msgid "Add Another Field"
+msgstr "Cuir Réimse Eile leis"
+
+#: templates/repository/editor/index.html:28
+msgid "Recent Actions"
+msgstr "Gníomhartha Deireanacha"
+
+#: templates/repository/editor/index.html:29
+msgid "My Actions"
+msgstr "Mo Ghníomhartha"
+
+#: templates/repository/editor/index.html:33
+msgid "None available"
+msgstr "Dada ar fáil"
+
+#: templates/repository/editor/index.html:47
+msgid "Unknown content"
+msgstr "Inneachar anaithnid"
+
+#: templates/repository/editor/lang_dict_widget.html:4
+#: templates/repository/editor/lang_dict_widget.html:8
+msgid ""
+"Language of this entry (<a href=\"http://tools.ietf.org/html/"
+"rfc3066#section-2\" target=\"_blank\">RFC 3066 code</a>, preferably from <a "
+"href=\"http://www.loc.gov/standards/iso639-2/php/code_list.php\" target="
+"\"_blank\">ISO 639-1</a>)"
+msgstr ""
+"Teanga na hiontrála seo (<a href=\"http://tools.ietf.org/html/"
+"rfc3066#section-2\" target=\"_blank\">RFC 3066 code</a>, preferably from <a "
+"href=\"http://www.loc.gov/standards/iso639-2/php/code_list.php\" target="
+"\"_blank\">ISO 639-1</a>)"
+
+#: templates/repository/editor/langdesc_info.html:10
+#: templates/repository/editor/lexicon_info.html:11
+#: templates/repository/editor/multi_corpus_info.html:8
+#: templates/repository/editor/multi_corpus_info.html:22
+#: templates/repository/editor/multi_corpus_info.html:35
+#: templates/repository/editor/one_media_info.html:9
+#: templates/repository/editor/toolservice_info.html:10
+msgid "Edit"
+msgstr "Leasaigh"
+
+#: templates/repository/editor/logged_out.html:4
+msgid "Home"
+msgstr "Baile"
+
+#: templates/repository/editor/logged_out.html:10
+msgid "Thanks for using the ELRI editor."
+msgstr "Go raibh maith agat as eagarthóir ELRI a úsáid."
+
+#: templates/repository/editor/logged_out.html:14
+msgid "Log in again"
+msgstr "Logáil isteach arís"
+
+#: templates/repository/editor/multi_corpus_info.html:18
+#: templates/repository/editor/multi_corpus_info.html:31
+#: templates/repository/editor/one_media_info.html:13
+msgid "Add"
+msgstr "Cuir le"
+
+#: templates/repository/editor/select_resource_type.html:17
+msgid "Language description"
+msgstr "Tuairisc theanga"
+
+#: templates/repository/editor/select_resource_type.html:18
+msgid "Lexical conceptual resource"
+msgstr "Acmhainn foclóireachta choincheapúil"
+
+#: templates/repository/editor/select_resource_type.html:19
+msgid "Tool / Service"
+msgstr "Uirlis / Seirbhís"
+
+#: templates/repository/editor/select_resource_type.html:41
+msgid "Please, use one of the values"
+msgstr "Úsáid ceann de na luachanna, le do thoil"
+
+#: templates/repository/editor/select_resource_type.html:44
+msgid "corpus"
+msgstr "corpas"
+
+#: templates/repository/editor/select_resource_type.html:44
+msgid ""
+"for sets of documents in one or more\n"
+"                            languages, including, for instance,"
+msgstr ""
+"do thacair doiciméad i gceann nó níos mó\n"
+"                            de theangacha, ar a n-áirítear, mar shampla,"
+
+#: templates/repository/editor/select_resource_type.html:47
+msgid ""
+"sets of public administration official documents (e.g. ministerial "
+"decisions, legal acts, Board decisions etc.),"
+msgstr ""
+"tacair de dhoiciméid oifigiúla maidir le riarachán poiblí (e.g. cinntí aire, "
+"achtanna dlí, cinntí Boird etc.),"
+
+#: templates/repository/editor/select_resource_type.html:48
+msgid "sets of journal, newspaper, bulletin, blog articles, etc."
+msgstr "tacair d'ailt irise, nuachtáin, feasacháin, blag, etc."
+
+#: templates/repository/editor/select_resource_type.html:49
+msgid ""
+"parallel corpora, i.e. sets of original document with its translations "
+"(without any processing)"
+msgstr ""
+"corpais chomhthreomhara, i.e. tacair de dhoiciméad bunaidh mar aon lena "
+"aistriúchán (gan próiseáil a bheith déanta)"
+
+#: templates/repository/editor/select_resource_type.html:50
+msgid ""
+"translation memories, i.e. translated documents aligned with their originals."
+msgstr ""
+"cuimhní aistriúcháin, i.e. doiciméid aistrithe ailínithe lena mbunfhoinsí."
+
+#: templates/repository/editor/select_resource_type.html:54
+msgid "language description"
+msgstr "tuairisc theanga"
+
+#: templates/repository/editor/select_resource_type.html:54
+#: templates/repository/editor/select_resource_type.html:61
+msgid "for resources such as:"
+msgstr "d'acmhainní mar shampla:"
+
+#: templates/repository/editor/select_resource_type.html:56
+msgid "grammars, i.e. sets of rules that formalize a language"
+msgstr "graiméir, i.e. tacair rialacha a leagan bonn foirmiúil faoi theanga"
+
+#: templates/repository/editor/select_resource_type.html:57
+msgid ""
+"language and translation models, which contain statistical information that "
+"assigns a probability to a piece of unseen text (based on some training "
+"data)."
+msgstr ""
+"samhlacha teanga agus aistriúcháin, ina bhfuil faisnéis staitistiúil a "
+"shanann dóchúlacht le píosa téacs neamhfheicthe (bunaithe ar shonraí "
+"oiliúna)."
+
+#: templates/repository/editor/select_resource_type.html:61
+msgid "lexical/conceptual resource"
+msgstr "acmhainn foclóireachta/choincheapúil"
+
+#: templates/repository/editor/select_resource_type.html:63
+msgid ""
+"terminological lexica, glossaries etc., i.e. including lists of terms, with "
+"or\n"
+"                                    without any other information (e.g. "
+"definition, examples, translation equivalents,\n"
+"                                    linguistic information etc.)"
+msgstr ""
+"foclóirí téarmeolaíochta, gluaiseanna etc., i.e. liostaí téarmaí san "
+"áireamh, le nó\n"
+"                                    gan aon eolas sa bhreis (e.g. "
+"sainmhíniú, samplaí, coibhéisí aistriúcháin,\n"
+"                                    eolas teangeolaíochta etc.)"
+
+#: templates/repository/editor/select_resource_type.html:67
+msgid ""
+"lists of words, such as person names, names of places, names of products etc."
+msgstr ""
+"liostaí focal, ainmneacha daoine, ainmneacha áiteanna, ainmneacha táirgí "
+"etc. agus a leithéidí."
+
+#: templates/repository/editor/select_resource_type.html:68
+msgid ""
+"lexica and dictionaries containing words with linguistic information (e.g. "
+"part of\n"
+"                                    speech, inflectional information, etc.)."
+msgstr ""
+"léacsacain agus foclóirí ina bhfuil focail le heolas teangeolaíoch (e.g. "
+"roinn\n"
+"                                    chainte, eolas faoi infhilleadh, etc.)."
+
+#: templates/repository/editor/select_resource_type.html:74
+msgid "Tool/Service"
+msgstr "Uirlis/Seirbhís"
+
+#: templates/repository/editor/select_resource_type.html:77
+msgid ""
+"language processing tools, web services, applications such as linguistic "
+"annotators\n"
+"                                    (e.g. Part-of-speech taggers, parsers, "
+"etc.), semantic annotators (e.g. Named Entity\n"
+"                                    Recognisers), aligners, etc."
+msgstr ""
+"uirlisí próiseála teanga, seirbhísí gréasán, feidhmchláir cosúil le "
+"hanótálaithe teangeolaíocha\n"
+"                                    (e.g. clibeoirí ranna cainte, "
+"parsálaithe, etc.), anótálaithe séimeantacha (e.g. Aitheantóirí Aonán\n"
+"                                    Ainmnithe), ailíneoirí, etc."
+
+#~ msgid "License-free"
+#~ msgstr "Saor ó cheadúnas"
+
+#~ msgid "Use External License"
+#~ msgstr "Úsáid Ceadúnas Seachtrach"
+
+#~ msgid " %(group_name)s "
+#~ msgstr " %(group_name)s "
+
+#~ msgid "The group(s) the language resource is shared with."
+#~ msgstr "Grúpa(í) a roinntear an acmhainn teanga leo."
