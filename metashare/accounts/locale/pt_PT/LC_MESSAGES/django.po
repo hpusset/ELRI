@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-08 09:51+0100\n"
-"PO-Revision-Date: 2018-11-13 17:02+0100\n"
+"POT-Creation-Date: 2019-04-04 16:42+0200\n"
+"PO-Revision-Date: 2019-04-04 16:43+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_PT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: accounts/admin.py:82
 msgid "Editor groups"
@@ -100,8 +100,6 @@ msgstr ""
 "Tem que ser um super-utilizador ou gestor do grupo para aceitar aplicações."
 
 #: accounts/admin.py:311 accounts/admin.py:779
-#, fuzzy
-#| msgid "Application Status"
 msgid "Application accepted"
 msgstr "Estado da aplicação"
 
@@ -115,8 +113,8 @@ msgid ""
 "You have successfully accepted \"%(user)s\" as member of the editor group "
 "\"%(group)s\"."
 msgstr ""
-"Aceitou com sucesso \"%(user)s\" como membro do grupo de editores "
-"“%(group)s”."
+"Aceitou com sucesso \"%(user)s\" como membro do grupo de editores \"%(group)s"
+"\"."
 
 # Please double check formulas for accepted and total. Thanks!
 #: accounts/admin.py:326 accounts/admin.py:794
@@ -137,8 +135,6 @@ msgid "Accept selected editor group applications"
 msgstr "Aceitar candidaturas ao grupo de edição selecionado"
 
 #: accounts/admin.py:370 accounts/admin.py:830
-#, fuzzy
-#| msgid "Application Status"
 msgid "Application turned down"
 msgstr "Estado da aplicação"
 
@@ -153,7 +149,7 @@ msgstr "Ocorreu um erro no envio do email de rejeição da candidatura."
 msgid ""
 "You have successfully turned down \"%(user)s\" from the editor group "
 "\"%(group)s\"."
-msgstr "Recusou com sucesso “%(user)s” do grupo de edição “%(group)s”."
+msgstr "Recusou com sucesso \"%(user)s\" do grupo de edição \"%(group)s\"."
 
 #: accounts/admin.py:423 accounts/admin.py:883
 #, python-format
@@ -274,7 +270,7 @@ msgid ""
 "\"%(group)s\"."
 msgstr ""
 "Aceitou com sucesso \"%(user)s\" como membros do grupo de editores "
-"“%(group)s”."
+"\"%(group)s\"."
 
 #: accounts/admin.py:804
 msgid "Accept selected organization applications"
@@ -286,7 +282,8 @@ msgid ""
 "You have turned down the application of \"%(user)s\" for membership in the "
 "organization \"%(group)s\"."
 msgstr ""
-"Rejeito as candidaturas de “%(user)s” para membro da organização “%(group)s”."
+"Rejeito as candidaturas de \"%(user)s\" para membro da organização "
+"\"%(group)s\"."
 
 #: accounts/admin.py:916
 msgid "Turn down selected organization applications"
@@ -351,10 +348,8 @@ msgid "You must be superuser to reject eDelivery applications."
 msgstr "Tem que ser um super utilizador para rejeitar aplicações eDelivery."
 
 #: accounts/admin.py:1145 accounts/admin.py:1193
-#, fuzzy
-#| msgid "Reject selected eDelivery applications"
 msgid "ELRI eDelivery application"
-msgstr "Rejeitar aplicações eDelivery selecionadas"
+msgstr "Candidatar-se como membro do ELRI eDelivery"
 
 #: accounts/admin.py:1157
 msgid "{} cannot be rejected. Only \"PENDING\" applications can be rejected"
@@ -389,69 +384,95 @@ msgstr ""
 msgid ""
 "{} cannot be reactivated. Only \"REVOKED\" applications can be reactivated."
 msgstr ""
-"{} não pode ser reactivado. Só aplicações “REVOKED” podem ser reactivadas."
+"{} não pode ser reactivado. Só aplicações \"REVOKED\" podem ser reactivadas."
 
 #: accounts/admin.py:1230
 msgid "Reactivate selected eDelivery applications"
 msgstr "Reactivar as aplicações eDelivery selecionadas"
 
-#: accounts/forms.py:68
+#: accounts/forms.py:75
 msgid "Desired account name"
 msgstr "Nome de conta desejado"
 
-#: accounts/forms.py:70
+#: accounts/forms.py:77
 msgid "First name"
 msgstr "Primeiro nome"
 
-#: accounts/forms.py:72
+#: accounts/forms.py:79
 msgid "Last name"
 msgstr "Último nome"
 
-#: accounts/forms.py:73
+#: accounts/forms.py:80
 msgid "E-mail"
 msgstr "Endereço electrónico"
 
-#: accounts/forms.py:81
+#: accounts/forms.py:88
 msgid "Organization name"
 msgstr "Nome da organização"
 
-#: accounts/forms.py:85
+#: accounts/forms.py:92
 msgid "Organization address"
 msgstr "Morada da Organização"
 
-#: accounts/forms.py:88
+#: accounts/forms.py:95
 msgid "Organization phone number"
 msgstr "Numero de telefone da organização"
 
-#: accounts/forms.py:90
+#: accounts/forms.py:97
 msgid "Position in the organization"
 msgstr "Cargo na organização"
 
-#: accounts/forms.py:97
+#: accounts/forms.py:105
 msgid "Password"
 msgstr "Palavra-passe"
 
-#: accounts/forms.py:101
+#: accounts/forms.py:109
 msgid "Password confirmation"
 msgstr "Confirmação da palavra-passe"
 
-#: accounts/forms.py:127
+#: accounts/forms.py:135
 msgid "User account name already exists, please choose another one."
 msgstr "Nome de conta já existente, por favor, escolha outro."
 
-#: accounts/forms.py:141 accounts/forms.py:144
+#: accounts/forms.py:149 accounts/forms.py:152
 msgid "There is already an account registered with this e-mail address."
 msgstr "Já existe uma conta registada com este endereço electrónico."
 
-#: accounts/forms.py:155
+#: accounts/forms.py:163
 msgid "The two password fields did not match."
 msgstr "As duas palavras-passe não correspondem."
 
-#: accounts/forms.py:181
+#: accounts/forms.py:170
+msgid "This password is entirely numeric. "
+msgstr "Esta palavra-passe é inteiramente numérica"
+
+#: accounts/forms.py:172
+msgid "This password is too common. "
+msgstr "Esta palavra-passe é demasiado comum."
+
+#: accounts/forms.py:174
+msgid "This password is too short. It must contain at least 9 characters. "
+msgstr ""
+"A palavra-passe é demasiado curta. Tem de conter pelo menos 9 caracteres."
+
+#: accounts/forms.py:176
+#, python-format
+msgid "The password is too similar to the %s"
+msgstr "A palavra passe é demasiado parecida com o %s"
+
+#: accounts/forms.py:202
+msgid "Subject"
+msgstr "Assunto"
+
+#: accounts/forms.py:203
 msgid "Please provide a meaningful and sufficiently indicative subject."
 msgstr "Por favor, indique um tema significativo e suficientemente indicativo."
 
-#: accounts/forms.py:184
+#: accounts/forms.py:205
+msgid "Message"
+msgstr "Mensagem"
+
+#: accounts/forms.py:206
 msgid ""
 "Your message appears to be rather short. Please make sure to phrase your "
 "request as precise as possible. This will help us to process it as quick as "
@@ -461,12 +482,20 @@ msgstr ""
 "transmite o seu pedido do modo mais preciso possível. Isto ajudar-nos-á a "
 "processa-lo o mais rapidamente possível."
 
-#: accounts/forms.py:206
+#: accounts/forms.py:216
+msgid "Username"
+msgstr "Nome de Utilizador"
+
+#: accounts/forms.py:217
+msgid "Email"
+msgstr "Endereço electrónico"
+
+#: accounts/forms.py:228
 msgid "Not a valid username-email combination."
 msgstr ""
 "Não é uma combinação de nome de utilizador/endereço electrónico válida."
 
-#: accounts/forms.py:252
+#: accounts/forms.py:274
 msgid "default editor groups"
 msgstr "grupos de edição por defeito"
 
@@ -547,23 +576,28 @@ msgstr "Morada da afiliação"
 msgid "Affiliation phone number"
 msgstr "Numero de telefone da afiliação"
 
+#: accounts/models.py:294
+msgid "Position"
+msgstr "Cargo"
+
+#: accounts/models.py:295
+msgid "Homepage"
+msgstr "Pagina web"
+
 #: accounts/views.py:57
-#, fuzzy
-#| msgid "Your ELRC-SHARE user account has been activated"
 msgid "Your ELRI user account has been activated"
-msgstr "A sua conta ELRC-Share está ativada"
+msgstr "A sua conta ELRI está ativada"
 
 #: accounts/views.py:64
 msgid "We have activated user account for user {}."
-msgstr "Ativamos a conta do utilizador {}."
+msgstr "Ativamos a conta com o nome de utilizador {}."
 
-#: accounts/views.py:92
-#, fuzzy, python-format
-#| msgid "[ELRC-SHARE] Contact Form Request: %s"
+#: accounts/views.py:91
+#, python-format
 msgid "[ELRI] Contact Form Request: %s"
-msgstr "[ELRC-SHARE] Pedido de formulário de contacto: %s"
+msgstr "[ELRI] Pedido de formulário de contacto: %s"
 
-#: accounts/views.py:99
+#: accounts/views.py:98
 #, python-format
 msgid ""
 "Oops, there was an error sending out your contact request. You can copy your "
@@ -572,7 +606,7 @@ msgstr ""
 "Oops, ocorreu um erro ao enviar o seu pedido de contacto. Pode copiar a sua "
 "mensagem e tentar de novo: <pre>%s</pre>"
 
-#: accounts/views.py:104
+#: accounts/views.py:103
 msgid ""
 "We have received your message and successfully sent it to the node "
 "maintainers. Please give them some days to get back to you."
@@ -581,11 +615,15 @@ msgstr ""
 "la para a equipa de manutenção deste nódulo. Por favor, permita-nos alguns "
 "dias para darmo-vos uma resposta."
 
-#: accounts/views.py:176
+#: accounts/views.py:110
+msgid "Contact Node Maintainers"
+msgstr "Entre em contacto com os responsáveis pela NRS"
+
+#: accounts/views.py:175
 msgid "New user registration"
 msgstr "Registo de novo utilizador"
 
-#: accounts/views.py:184
+#: accounts/views.py:183
 msgid ""
 "There was an error sending out the notification email to the administrators. "
 "Please contact them directly."
@@ -593,46 +631,46 @@ msgstr ""
 "Ocorreu um erro no envio do email de notificação para os adminiastradores. "
 "Por favor, entre em contacto com eles directamente."
 
-#: accounts/views.py:192
-#, fuzzy
-#| msgid ""
-#| "We have received your registration data and sent the administrators a "
-#| "notification email."
+#: accounts/views.py:191
 msgid ""
 "We have received your registration data and sent the administrators a "
 "notification email.You will receive an email when your account has been "
 "activated."
 msgstr ""
 "Recebemos os seus dados de registo e enviámos um email de notificação para "
-"os administradores."
+"os administradores. Receberá um email quando a sua conta estiver ativada."
 
-#: accounts/views.py:248
+#: accounts/views.py:208
+msgid "Create Account"
+msgstr "Criar Conta"
+
+#: accounts/views.py:247
 msgid "You have successfully updated your profile information."
 msgstr "Actualizou as informações de perfil com sucesso."
 
-#: accounts/views.py:260
+#: accounts/views.py:259
 msgid "full member"
 msgstr "membro"
 
-#: accounts/views.py:262
+#: accounts/views.py:261
 msgid "associate member"
 msgstr "membro associado"
 
-#: accounts/views.py:265
+#: accounts/views.py:264
 msgid "Edit Profile Information"
 msgstr "Editar informações de Perfil"
 
-#: accounts/views.py:311
+#: accounts/views.py:310
 #, python-format
 msgid "An older application of yours for editor group \"%s\" is still pending."
 msgstr ""
-"Uma aplicação sua antiga para o grupo “%s” de edição ainda está pendente."
+"Uma aplicação sua antiga para o grupo \"%s\" de edição ainda está pendente."
 
-#: accounts/views.py:333
+#: accounts/views.py:332
 msgid "New editor membership request"
-msgstr ""
+msgstr "Pedido de adesão de novo editor"
 
-#: accounts/views.py:340
+#: accounts/views.py:339
 msgid ""
 "There was an error sending out the request email for your editor group "
 "application."
@@ -640,12 +678,12 @@ msgstr ""
 "Ocorreu um erro no envio do email com a sua candidatura para o grupo de "
 "edição."
 
-#: accounts/views.py:343
+#: accounts/views.py:342
 #, python-format
 msgid "You have successfully applied for editor group \"%s\"."
-msgstr "Candidatou-se com sucesso para o grupo de edição “%s”."
+msgstr "Candidatou-se com sucesso para o grupo de edição \"%s\"."
 
-#: accounts/views.py:354
+#: accounts/views.py:353
 msgid ""
 "There are no editor groups in the database, yet, for which you could apply. "
 "Please ask the system administrator to create one."
@@ -653,41 +691,41 @@ msgstr ""
 "Ainda não existem grupos de edição na base de dados para os quais se possa "
 "candidatar. Por favor, peça ao administrador do sistema que crie um."
 
-#: accounts/views.py:362
+#: accounts/views.py:361
 msgid "Apply for editor group membership"
 msgstr "Candidatar-se ao grupo de editores"
 
-#: accounts/views.py:411
+#: accounts/views.py:410
 #, python-format
 msgid "You have successfully added default editor group \"%s\"."
-msgstr "Sucesso. Acrescentou com êxito “%s” do grupo de editores por defeito."
+msgstr ""
+"Sucesso. Acrescentou com êxito \"%s\" do grupo de editores por defeito."
 
-#: accounts/views.py:418
+#: accounts/views.py:417
 #, python-format
 msgid "You have successfully removed default editor group \"%s\"."
-msgstr "Removeu com êxito “%s” do grupo de editores por defeito."
+msgstr "Removeu com êxito \"%s\" do grupo de editores por defeito."
 
-#: accounts/views.py:430
+#: accounts/views.py:429
 msgid "There are no editor groups you could add to your default list."
 msgstr ""
 "Não existem grupos de ediçao que possa acrescentar á sua lista por defeito."
 
-#: accounts/views.py:437
+#: accounts/views.py:436
 msgid "Update default editor groups"
 msgstr "Actualizar grupos de edição por defeito"
 
-#: accounts/views.py:465
+#: accounts/views.py:464
 #, python-format
 msgid "An older application of yours for organization \"%s\" is still pending."
-msgstr "Uma aplicação sua antiga para a organização “%s” ainda está pendente."
+msgstr ""
+"Uma aplicação sua antiga para a organização \"%s\" ainda está pendente."
 
-#: accounts/views.py:487
-#, fuzzy
-#| msgid "Apply for organization membership"
+#: accounts/views.py:486
 msgid "New organization membership request"
 msgstr "Candidatar-se para uma organização"
 
-#: accounts/views.py:494
+#: accounts/views.py:493
 msgid ""
 "There was an error sending out the request email for your organization "
 "application."
@@ -695,12 +733,12 @@ msgstr ""
 "Ocorreu um erro no envio do email com o pedido de candidatura para a "
 "organização."
 
-#: accounts/views.py:497
+#: accounts/views.py:496
 #, python-format
 msgid "You have successfully applied for organization \"%s\"."
-msgstr "Sucesso. Candidatou-se com sucesso para a organização “%s”."
+msgstr "Sucesso. Candidatou-se com sucesso para a organização \"%s\"."
 
-#: accounts/views.py:508
+#: accounts/views.py:507
 msgid ""
 "There are no organizations in the database, yet, for which you could apply. "
 "Please ask the system administrator to create one."
@@ -708,37 +746,29 @@ msgstr ""
 "Ainda não existem organizações na base de dados para as quais se possa "
 "candidatar. Por favor, peça ao administrador do sistema que crie um."
 
-#: accounts/views.py:516
+#: accounts/views.py:515
 msgid "Apply for organization membership"
 msgstr "Candidatar-se para uma organização"
 
-#: accounts/views.py:551
-#, fuzzy
-#| msgid "Please confirm your ELRC-SHARE reset request"
+#: accounts/views.py:550
 msgid "Please confirm your ELRI password reset request"
-msgstr "Por favor, confirme o seu pedido de reset do ELRC-SHARE"
+msgstr "Por favor, confirme o seu pedido de reset do ELRI"
 
-#: accounts/views.py:562
-#, fuzzy
-#| msgid ""
-#| "We have received your reset request and sent you an email with further "
-#| "reset instructions."
+#: accounts/views.py:561
 msgid ""
 "We have received your password reset request and sent you an email with "
 "further instructions."
 msgstr "Recebemos um pedido de reset e enviamos um email com mais instruções."
 
-#: accounts/views.py:572
+#: accounts/views.py:571
 msgid "Reset user account"
 msgstr "Reset da conta de utilizador"
 
-#: accounts/views.py:598
-#, fuzzy
-#| msgid "Your ELRC-SHARE user account has been re-activated"
+#: accounts/views.py:597
 msgid "Your ELRI user account has been re-activated"
-msgstr "A sua conta ELRC-SHARE foi reactivada"
+msgstr "A sua conta ELRI foi reactivada"
 
-#: accounts/views.py:604
+#: accounts/views.py:603
 #, python-format
 msgid ""
 "There was an error sending out the activation email for your user account. "
@@ -747,7 +777,7 @@ msgstr ""
 "Ocorreu um erro no envio do email de activação da sua conta de utilizador. "
 "Por favor, contacte o administrador em %s."
 
-#: accounts/views.py:613
+#: accounts/views.py:612
 msgid ""
 "We have re-activated your user account and sent you an email with your "
 "personal password which allows you to login to the website."
@@ -755,7 +785,7 @@ msgstr ""
 "Reactivamos a sua conta de utilizador e enviamos um email com a sua palavra-"
 "chave pessoal."
 
-#: accounts/views.py:658
+#: accounts/views.py:657
 msgid "Apply for eDelivery membership"
 msgstr "Candidatar-se como membro eDelivery"
 

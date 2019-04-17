@@ -52,16 +52,15 @@
                     "type": "opt-out",
                      "content": {
                         "message": {% blocktrans %}"This site uses cookies to enhance your user experience. By clicking any link on this page you are giving your consent for us to set cookies." {% endblocktrans %},
-                        "dismiss": {% blocktrans %}"OK, I aggree "{% endblocktrans %},
-                        "deny":{% blocktrans %}"Decline "{% endblocktrans %},
-                        "allow": {% blocktrans %}"Allow cookies"{% endblocktrans %},
-                        "link": {% blocktrans %}"Learn more"{% endblocktrans %},
-                        "policy": {% blocktrans %}'Cookie Policy'{% endblocktrans %}
+                        "allow": {% blocktrans %}"OK"{% endblocktrans %},
+                        //"dismiss": "",
+                        "link":  {% blocktrans %}"Learn more"{% endblocktrans %},
+                        //"close": {% blocktrans %}"OK"{% endblocktrans %},
                     }
-                })
+                });
             });
         </script>
-        
+
     </head>
     <body>
     {% analytical_body_top %}

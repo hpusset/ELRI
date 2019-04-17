@@ -12,7 +12,11 @@ from metashare.accounts.models import UserProfile, EditorGroupApplication, \
     OrganizationApplication, Organization, OrganizationManagers, EditorGroup, \
     EditorGroupManagers, AccessPointEdeliveryApplication
 from metashare.accounts.validators import validate_wsdl_url
-
+from metashare.settings import LOG_HANDLER
+import logging
+## Setup logging support.
+#LOGGER = logging.getLogger(__name__)
+#LOGGER.addHandler(LOG_HANDLER)
 
 
 class ModelForm(forms.ModelForm):
@@ -157,7 +161,20 @@ class RegistrationRequestForm(Form):
         pswrd_conf = self.cleaned_data['confirm_password']
         if pswrd != pswrd_conf:
             raise ValidationError(_('The two password fields did not match.'))
-        validate_password(pswrd)
+        try:  
+            validate_password(pswrd)
+        except ValidationError as error:
+            #LOGGER.info(error)
+            messages=[]
+            if 'This password is entirely numeric.' in error:
+                messages.append(_(u'This password is entirely numeric. '))
+            if 'This password is too common.' in error:
+                messages.append(_(u'This password is too common. '))
+            if 'This password is too short. It must contain at least 9 characters.' in error:
+                messages.append(_(u'This password is too short. It must contain at least 9 characters. '))
+            if 'The password is too similar to the' in error:
+                messages.append(_(u'The password is too similar to the %s') % error.split('the')[1])
+            raise ValidationError(messages)
         return pswrd
 
         # cfedermann: possible extensions for future improvements.
@@ -182,10 +199,10 @@ class ContactForm(Form):
     """
     Form used to contact the superusers of the META-SHARE node.
     """
-    subject = forms.CharField(min_length=6, max_length=80,
+    subject = forms.CharField(min_length=6, max_length=80,label=_(u'Subject'),
                               error_messages={'min_length': _('Please provide a meaningful and '
                                                               'sufficiently indicative subject.')})
-    message = forms.CharField(min_length=30, max_length=2500,
+    message = forms.CharField(min_length=30, max_length=2500,label=_(u'Message'),
                               widget=forms.Textarea, error_messages={'min_length': _('Your message '
                                                                                      'appears to be rather short. Please make sure to phrase your '
                                                                                      'request as precise as possible. This will help us to process it '
@@ -196,8 +213,8 @@ class ResetRequestForm(Form):
     """
     Form used to reset an existing user account.
     """
-    username = forms.CharField(max_length=30)
-    email = forms.EmailField()
+    username = forms.CharField(max_length=30, label=_(u'Username'))
+    email = forms.EmailField(label=_(u'Email'))
 
     def clean(self):
         cleaned_data = self.cleaned_data

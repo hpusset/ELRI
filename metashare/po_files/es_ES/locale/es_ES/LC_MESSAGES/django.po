@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-14 14:11+0100\n"
-"PO-Revision-Date: 2019-03-06 19:08+0100\n"
+"POT-Creation-Date: 2019-04-05 13:59+0200\n"
+"PO-Revision-Date: 2019-04-05 14:02+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -34,9 +34,9 @@ msgstr ""
 "Ha ocurrido un error al intentar enviar el email a los gestores de las "
 "alertas de nuevas contribuciones."
 
-#: local_settings.py:42
-msgid "Gaelic"
-msgstr "Gaélico"
+#: local_settings.py:45
+msgid "French"
+msgstr "Francés"
 
 #: storage/models.py:113
 msgid "Can synchronize"
@@ -190,11 +190,11 @@ msgstr ""
 #~ msgid "Spanish"
 #~ msgstr "Español"
 
+#~ msgid "Gaelic"
+#~ msgstr "Gaélico"
+
 #~ msgid "English"
 #~ msgstr "Inglés"
-
-#~ msgid "French"
-#~ msgstr "Francés"
 
 #~ msgid "Portuguese"
 #~ msgstr "Portugués"
