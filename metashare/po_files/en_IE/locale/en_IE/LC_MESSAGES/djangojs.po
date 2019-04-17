@@ -1,0 +1,181 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-10-30 18:37+0100\n"
+"PO-Revision-Date: 2019-03-14 15:51+0000\n"
+"Language: en_IE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.2.1\n"
+
+#: static/admin/js/SelectFilter2.js:47
+#, c-format
+msgid "Available %s"
+msgstr ""
+
+#: static/admin/js/SelectFilter2.js:54
+msgid "Filter"
+msgstr ""
+
+#: static/admin/js/SelectFilter2.js:61
+msgid "Choose all"
+msgstr ""
+
+#: static/admin/js/SelectFilter2.js:67
+msgid "Add"
+msgstr ""
+
+#: static/admin/js/SelectFilter2.js:69
+msgid "Remove"
+msgstr ""
+
+#: static/admin/js/SelectFilter2.js:75
+#, c-format
+msgid "Chosen %s"
+msgstr ""
+
+#: static/admin/js/SelectFilter2.js:76
+msgid "Select your choice(s) and click "
+msgstr ""
+
+#: static/admin/js/SelectFilter2.js:81
+msgid "Clear all"
+msgstr ""
+
+#: static/admin/js/actions.js:22 static/admin/js/actions.min.js:1
+msgid "%(sel)s of %(cnt)s selected"
+msgid_plural "%(sel)s of %(cnt)s selected"
+msgstr[0] ""
+msgstr[1] ""
+
+#: static/admin/js/actions.js:114 static/admin/js/actions.min.js:5
+msgid ""
+"You have unsaved changes on individual editable fields. If you run an "
+"action, your unsaved changes will be lost."
+msgstr ""
+
+#: static/admin/js/actions.js:126 static/admin/js/actions.min.js:6
+msgid ""
+"You have selected an action, but you haven't saved your changes to "
+"individual fields yet. Please click OK to save. You'll need to re-run the "
+"action."
+msgstr ""
+
+#: static/admin/js/actions.js:128 static/admin/js/actions.min.js:6
+msgid ""
+"You have selected an action, and you haven't made any changes on individual "
+"fields. You're probably looking for the Go button rather than the Save "
+"button."
+msgstr ""
+
+#: static/admin/js/admin/DateTimeShortcuts.js:49
+#: static/admin/js/admin/DateTimeShortcuts.js:85
+msgid "Now"
+msgstr ""
+
+#: static/admin/js/admin/DateTimeShortcuts.js:53
+msgid "Clock"
+msgstr ""
+
+#: static/admin/js/admin/DateTimeShortcuts.js:81
+msgid "Choose a time"
+msgstr ""
+
+#: static/admin/js/admin/DateTimeShortcuts.js:86
+msgid "Midnight"
+msgstr ""
+
+#: static/admin/js/admin/DateTimeShortcuts.js:87
+msgid "6 a.m."
+msgstr ""
+
+#: static/admin/js/admin/DateTimeShortcuts.js:88
+msgid "Noon"
+msgstr ""
+
+#: static/admin/js/admin/DateTimeShortcuts.js:92
+#: static/admin/js/admin/DateTimeShortcuts.js:197
+msgid "Cancel"
+msgstr ""
+
+#: static/admin/js/admin/DateTimeShortcuts.js:137
+#: static/admin/js/admin/DateTimeShortcuts.js:190
+msgid "Today"
+msgstr ""
+
+#: static/admin/js/admin/DateTimeShortcuts.js:141
+msgid "Calendar"
+msgstr ""
+
+#: static/admin/js/admin/DateTimeShortcuts.js:188
+msgid "Yesterday"
+msgstr ""
+
+#: static/admin/js/admin/DateTimeShortcuts.js:192
+msgid "Tomorrow"
+msgstr ""
+
+#: static/admin/js/calendar.js:8 static/admin/js/dateparse.js:32
+msgid ""
+"January February March April May June July August September October November "
+"December"
+msgstr ""
+
+#: static/admin/js/calendar.js:9
+msgid "S M T W T F S"
+msgstr ""
+
+#: static/admin/js/collapse.js:8 static/admin/js/collapse.js.c:19
+#: static/admin/js/collapse.min.js:8 static/admin/js/collapse.min.js.c:19
+msgid "Show"
+msgstr ""
+
+#: static/admin/js/collapse.js:16 static/admin/js/collapse.min.js:16
+msgid "Hide"
+msgstr ""
+
+#: static/admin/js/dateparse.js:33
+msgid "Sunday Monday Tuesday Wednesday Thursday Friday Saturday"
+msgstr ""
+
+#: static/metashare/js/choice-type-widget.js:18
+msgid ""
+"Could not open popup window!\n"
+"Maybe there's a popup "
+msgstr ""
+
+#: static/metashare/js/upload.js:75
+msgid "The file(s) you are trying to upload exceed(s) the size limit. "
+msgstr ""
+
+#: static/metashare/js/upload.js:99 static/metashare/js/upload.js.c:167
+msgid "Only files of type "
+msgstr ""
+
+#: static/metashare/js/upload.js:100 static/metashare/js/upload.js.c:168
+msgid ""
+" are allowed. The .zip files can only contain files of the specified types. "
+"Please consider removing the files that do not belong to one of these types."
+msgstr ""
+
+#: static/metashare/js/upload.js:103
+msgid " Uploading file: \""
+msgstr ""
+
+#: static/metashare/js/upload.js:123
+msgid "There was an error uploading this file.\n"
+msgstr ""
+
+#: static/metashare/js/upload.js:172
+msgid "Uploading file: \""
+msgstr ""

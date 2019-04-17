@@ -1,0 +1,1012 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-04-04 13:42+0200\n"
+"PO-Revision-Date: 2019-04-04 17:53+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ga_IE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#: templates/accounts/activation_email.html:3
+#, python-format
+msgid ""
+"Dear %(firstname)s %(lastname)s,\n"
+"\n"
+"We have activated your ELRI user account \"%(shortname)s\", welcome to ELRI! "
+"You can now access our services by logging into our website %(nodeurl)s.\n"
+"\n"
+"Best regards,\n"
+"\n"
+"The ELRI team"
+msgstr ""
+"A chara,\n"
+"\n"
+"Táimid tar éis do chuntas úsáideora ELRI \"%(shortname)s\" a ghníomhachtú – "
+"fáilte chuig ELRI! Logáil isteach ar ár suíomh gréasáin %(nodeurl)s chun "
+"rochtain a fháil ar ár seirbhísí.\n"
+"\n"
+"Beannacht,\n"
+"\n"
+"An Fhoireann ELRI\n"
+"\n"
+"___________________________________\n"
+"\n"
+"Dear %(firstname)s %(lastname)s,\n"
+"\n"
+"We have activated your ELRI user account \"%(shortname)s\", welcome to ELRI! "
+"You can now access our services by logging into our website %(nodeurl)s.\n"
+"\n"
+"Best regards,\n"
+"\n"
+"The ELRI team"
+
+#: templates/accounts/add_user_profile_to_editor_group.html:13
+#: templates/accounts/remove_user_profile_from_editor_group.html:12
+#, python-format
+msgid "Editor Group%(selected_editorgroups|pluralize)s"
+msgstr "Grúpa eagarthóirí%(selected_editorgroups|pluralize)s"
+
+#: templates/accounts/add_user_profile_to_editor_group.html:13
+#: templates/accounts/add_user_profile_to_editor_group_managers.html:12
+#: templates/accounts/add_user_profile_to_organization.html:13
+#: templates/accounts/add_user_profile_to_organization_managers.html:12
+#: templates/accounts/remove_user_profile_from_editor_group.html:12
+#: templates/accounts/remove_user_profile_from_editor_group_managers.html:12
+#: templates/accounts/remove_user_profile_from_organization.html:12
+#: templates/accounts/remove_user_profile_from_organization_managers.html:12
+msgid "Members"
+msgstr "Baill"
+
+#: templates/accounts/add_user_profile_to_editor_group.html:13
+#: templates/accounts/remove_user_profile_from_editor_group.html:12
+msgid "Managers"
+msgstr "Bainisteoirí"
+
+#: templates/accounts/add_user_profile_to_editor_group_managers.html:8
+#, python-format
+msgid ""
+"Add a user to the following editor group manager group"
+"%(selected_editorgroupmanagers|pluralize)s:"
+msgstr ""
+"Cuir úsáideoir leis an ngrúpa bainisteoirí grúpaí eagarthóirí a leanas"
+"%(selected_editorgroupmanagers|pluralize)s:"
+
+#: templates/accounts/add_user_profile_to_editor_group_managers.html:12
+#: templates/accounts/remove_user_profile_from_editor_group_managers.html:12
+#, python-format
+msgid "Editor Group Manager Group%(selected_editorgroupmanagers|pluralize)s"
+msgstr ""
+"Grúpa bainisteoirí grúpaí eagarthóirí"
+"%(selected_editorgroupmanagers|pluralize)s"
+
+#: templates/accounts/add_user_profile_to_organization.html:8
+#, python-format
+msgid ""
+"Add a user to the following organization%(selected_organizations|pluralize)s:"
+msgstr ""
+"Cuir úsáideoir leis an eagraíocht a leanas"
+"%(selected_organizations|pluralize)s:"
+
+#: templates/accounts/add_user_profile_to_organization.html:12
+#: templates/accounts/remove_user_profile_from_organization.html:12
+#, python-format
+msgid "Organization%(selected_organizations|pluralize)s"
+msgstr "Eagraíocht%(selected_organizations|pluralize)s"
+
+#: templates/accounts/add_user_profile_to_organization.html:14
+#: templates/accounts/remove_user_profile_from_organization.html:12
+msgid "Organization Managers"
+msgstr "Bainisteoirí eagraíochta"
+
+#: templates/accounts/add_user_profile_to_organization_managers.html:8
+#, python-format
+msgid ""
+"Add a user to the following organization manager group"
+"%(selected_organizationmanagers|pluralize)s:"
+msgstr ""
+"Cuir úsáideoir leis an ngrúpa bainisteoirí eagraíochta a leanas"
+"%(selected_organizationmanagers|pluralize)s:"
+
+#: templates/accounts/add_user_profile_to_organization_managers.html:12
+#, python-format
+msgid "Organization Manager%(selected_organizationmanagers|pluralize)s"
+msgstr "Bainisteoir eagraíochta%(selected_organizationmanagers|pluralize)s"
+
+#: templates/accounts/apply_for_edelivery.html:18
+msgid "Apply for ELRI eDelivery membership"
+msgstr "Déan iarratas ar bhallraíocht eDelivery ELRI"
+
+#: templates/accounts/apply_for_edelivery.html:20
+msgid "MSH Endpoint"
+msgstr "Críochphointe MSH"
+
+#: templates/accounts/apply_for_edelivery.html:29
+msgid "Access Point Gateway Party Name"
+msgstr "Ainm Gheata Pointe Rochtana"
+
+#: templates/accounts/apply_for_edelivery.html:48
+msgid "Public Certificate (.crt, .cert, .cer)"
+msgstr "Teastas poiblí (.crt, .cert, .cer)"
+
+#: templates/accounts/change_password.html:3
+msgid "Change Your Password &ndash; ELRI"
+msgstr "Athraigh do phasfhocal &ndash; ELRI"
+
+#: templates/accounts/change_password.html:6
+#, python-format
+msgid "Please correct the error%(form.errors|pluralize)s below."
+msgstr "Ceartaigh an earráid%(form.errors|pluralize)s thíos."
+
+#: templates/accounts/change_password.html:12
+msgid "Change your password"
+msgstr "Athraigh do phasfhocal"
+
+#: templates/accounts/change_password.html:20
+msgid "Change Password"
+msgstr "Athraigh pasfhocal"
+
+#: templates/accounts/change_password_done.html:3
+msgid "Password Change Successful &ndash; ELRI"
+msgstr "Athraíodh pasfhocal &ndash; ELRI"
+
+#: templates/accounts/change_password_done.html:7
+msgid "Password change successful"
+msgstr "Athraíodh pasfhocal"
+
+#: templates/accounts/change_password_done.html:11
+msgid "Your password was changed"
+msgstr "Athraíodh do phasfhocal"
+
+#: templates/accounts/change_password_done.html:15
+msgid "Go back to your profile"
+msgstr "Téigh siar go dtí do phróifíl"
+
+#: templates/accounts/confirmation_email.html:2
+#, python-format
+msgid ""
+"Dear %(firstname)s %(lastname)s,\n"
+"\n"
+"we have received a registration request for a new ELRI user account "
+"\"%(shortname)s\" at [1]. You can confirm that registration request and "
+"create your account by clicking the following link:\n"
+"\n"
+"  %(confirmation_url)s\n"
+"\n"
+"Please make sure to follow the link within three days. If you do not wish to "
+"create an account with this e-mail address, then please simply disregard "
+"this message.\n"
+"\n"
+"Welcome to ELRI!"
+msgstr ""
+"A chara,\n"
+"\n"
+"Fuaireamar iarratas clárúcháin do chuntas úsáideora nua ELRI \"%(shortname)s"
+"\" ag [1]. Is féidír leat an t-iarratas sin a dheimhniú agus do chuntas féin "
+"a chruthú trí cliceáil ar an nasc seo a leanas:\n"
+"\n"
+"  %(confirmation_url)s\n"
+"\n"
+"Déan cinnte go leanfaidh tú an nasc laistigh de thrí lá, le do thoil. Muna "
+"bhfuil tú ag iarraidh cuntas a chruthú leis an seoladh ríomhphoist seo, ná "
+"bac leis an dteachtaireacht seo.\n"
+"\n"
+"Fáilte chuig ELRI!\n"
+"\n"
+"____________________________________\n"
+"\n"
+"Dear %(firstname)s %(lastname)s,\n"
+"\n"
+"we have received a registration request for a new ELRI user account "
+"\"%(shortname)s\" at [1]. You can confirm that registration request and "
+"create your account by clicking the following link:\n"
+"\n"
+"  %(confirmation_url)s\n"
+"\n"
+"Please make sure to follow the link within three days. If you do not wish to "
+"create an account with this e-mail address, then please simply disregard "
+"this message.\n"
+"\n"
+"Welcome to ELRI!"
+
+#: templates/accounts/contact_maintainers.html:10
+msgid ""
+"With this form you can send messages to the ELRI team. You can use this "
+"form, for example, if you would like to suggest the creation of a new group "
+"for resource sharing purposes. "
+msgstr ""
+"Leis an bhfoirm seo, is féidir leat teachtaireachtaí a sheoladh chuig an "
+"bhfoireann ELRI. Is féidir leat an fhoirm seo a úsáid, mar shampla, má tá tú "
+"ag iarraidh moladh a dhéanamh faoi ghrúpa nua a chruthú chun acmhainní a "
+"roinnt leis. "
+
+#: templates/accounts/contact_maintainers.html:16
+msgid "Send Message"
+msgstr "Seol teachtaireacht"
+
+#: templates/accounts/contact_maintainers.html:19
+#, python-format
+msgid ""
+"Note: along with your message, the ELRI team will automatically receive your "
+"name and the e-mail address which is set in <a href=\"%(edit_profile_url)s"
+"\">your user profile</a>."
+msgstr ""
+"Nóta: chomh maith le do theachtaireacht, gheobhaidh Foireann ELRI go "
+"huathoibríoch d’ainm agus an seoladh ríomhphoist atá luaite i <a href="
+"\"%(edit_profile_url)s\">do phróifíl úsáideora</a>."
+
+#: templates/accounts/contact_maintainers_email.html:3
+#, python-format
+msgid ""
+"Dear superuser,\n"
+"\n"
+"%(user_first_name)s %(user_last_name)s (user account: %(user_account_name)s) "
+"has sent you a message through the contact form of ELRI.\n"
+"\n"
+"Subject: %(subject)s\n"
+"Message: see below \n"
+"\n"
+"Please try to answer this request soon by responding to %(user_email)s.\n"
+"\n"
+"Best regards,\n"
+"\n"
+"The ELRI Team"
+msgstr ""
+"A Superuser, a chara,\n"
+"\n"
+"Sheol %(user_first_name)s %(user_last_name)s (user account: "
+"%(user_account_name)s) teachtaireacht chugat tríd an bhfoirm teagmhála "
+"ELRI.\n"
+"\n"
+"Ábhar: %(subject)s\n"
+"Teachtaireacht: féach thíos \n"
+"\n"
+"Freagair an t-iarratas seo go luath, le do thoil, trí fhreagra a thabhairt "
+"do %(user_email)s.\n"
+"Beannacht,\n"
+"\n"
+"An Fhoireann ELRI\n"
+"\n"
+"_______________________________\n"
+"Dear superuser,\n"
+"\n"
+"%(user_first_name)s %(user_last_name)s (user account: %(user_account_name)s) "
+"has sent you a message through the contact form of ELRI.\n"
+"\n"
+"Subject: %(subject)s\n"
+"Message: see below \n"
+"\n"
+"Please try to answer this request soon by responding to %(user_email)s.\n"
+"\n"
+"Best regards,\n"
+"\n"
+"The ELRI Team"
+
+#: templates/accounts/create_account.html:8
+msgid "Please fill in all fields to create your account."
+msgstr "Líon gach réimse chun do chuntas a chruthú."
+
+#: templates/accounts/create_account.html:14
+#: templates/accounts/create_account.html:15
+#: templates/accounts/create_account.html:37
+msgid "Create Account"
+msgstr "Cruthaigh cuntas"
+
+#: templates/accounts/create_account.html:25
+#: templates/accounts/create_account.html:27
+#, python-format
+msgid ""
+"I accept the <a target=\"_blank\" href=\"%(elri_tos)s\">ELRI Terms of "
+"Service</a>."
+msgstr ""
+"Glacaim leis na <a target=\"_blank\" href=\"%(elri_tos)s\">Téarmaí Seirbhíse "
+"ELRI </a>."
+
+#: templates/accounts/delete_editor_group_application_selected_confirmation.html:6
+#: templates/accounts/delete_organization_application_selected_confirmation.html:6
+msgid "Home"
+msgstr "Baile"
+
+#: templates/accounts/delete_editor_group_application_selected_confirmation.html:9
+#: templates/accounts/delete_organization_application_selected_confirmation.html:9
+msgid "Turn down multiple objects"
+msgstr "Diúltaigh d'oibiachtaí iomadúla"
+
+#: templates/accounts/delete_editor_group_application_selected_confirmation.html:16
+#: templates/accounts/delete_organization_application_selected_confirmation.html:16
+#, python-format
+msgid ""
+"Turning down the selected %(objects_name)s would result in deleting related "
+"objects, but your account doesn't have permission to turn down the following "
+"types of objects:"
+msgstr ""
+"Bheadh mar thoradh ar dhiúltú don %(objects_name)s roghnaithe, oibiachtaí "
+"gaolmhara a scriosadh, ach níl cead ag do chuntas diúltú d’oibiachtaí de na "
+"cineálacha a leanas:"
+
+#: templates/accounts/delete_editor_group_application_selected_confirmation.html:24
+#: templates/accounts/delete_organization_application_selected_confirmation.html:24
+#, python-format
+msgid ""
+"Turning down the selected %(objects_name)s would require deleting the "
+"following protected related objects:"
+msgstr ""
+"Bheadh mar thoradh ar dhiúltú don %(objects_name)s roghnaithe, go gcaithfí "
+"na hoibiachtaí gaolmhara cosanta a leanas a scriosadh:"
+
+#: templates/accounts/delete_editor_group_application_selected_confirmation.html:32
+#: templates/accounts/delete_organization_application_selected_confirmation.html:32
+#, python-format
+msgid ""
+"Are you sure you want to turn down the selected %(objects_name)s? All of the "
+"following objects and their related items will be turned down:"
+msgstr ""
+"An bhfuil tú cinnte go bhfuil fonn ort diúltú do na %(objects_name)s "
+"roghnaithe? Diúltófar do na hoibiachtaí a leanas go léir agus na míreanna "
+"atá gaolta leo:"
+
+#: templates/accounts/delete_editor_group_application_selected_confirmation.html:43
+#: templates/accounts/delete_organization_application_selected_confirmation.html:43
+msgid "Yes, I"
+msgstr "Tá"
+
+#: templates/accounts/edit_profile.html:8
+msgid "First name"
+msgstr "Ainm"
+
+#: templates/accounts/edit_profile.html:11
+msgid "Last name"
+msgstr "Sloinne"
+
+#: templates/accounts/edit_profile.html:14
+msgid "Email"
+msgstr "Ríomhphost"
+
+#: templates/accounts/edit_profile.html:20
+#, python-format
+msgid ""
+"If you would like to change any of the above details, please <a href="
+"\"%(contact_url)s\">contact the maintainers of ELRI Repository</a>."
+msgstr ""
+"Má tá fonn ort aon chuid de na sonraí thuas a leasú, <a href="
+"\"%(contact_url)s\">bí i dteagmháil le Foireann ELRI</a>."
+
+#: templates/accounts/edit_profile.html:22
+msgid "API KEY"
+msgstr "Eochair API"
+
+#: templates/accounts/edit_profile.html:27
+#, python-format
+msgid "Editor Group Manager Group%(editor_group_managers_member_of|pluralize)s"
+msgstr ""
+"Grúpa bainisteoirí grúpaí eagarthóirí"
+"%(editor_group_managers_member_of|pluralize)s"
+
+#: templates/accounts/edit_profile.html:34
+msgid ""
+"Displays all the editor groups you belong in. Editor groups that are applied "
+"by default to your resources, are shown in italic."
+msgstr ""
+"Taispeánann na grúpaí eagarthóirí go léir ina bhfuil tú. Tá na grúpaí "
+"eagarthóirí a chuirtear le d’acmhainní mar réamhshocrú, léirithe i gcló "
+"iodálach."
+
+#: templates/accounts/edit_profile.html:34
+#, python-format
+msgid "Editor Group%(editor_groups_member_of|pluralize)s"
+msgstr "Grúpa egarthóirí%(editor_groups_member_of|pluralize)s"
+
+#: templates/accounts/edit_profile.html:42
+msgid "This editor group is set by default to your resources."
+msgstr "Tá an grúpa eagarthóirí seo réamhshocraithe do d’acmhainní."
+
+#: templates/accounts/edit_profile.html:55
+#, python-format
+msgid ""
+"You already applied for a membership of the following editor group"
+"%(groups_applied_for|pluralize)s: %(groups_applied_for|join:\", \")s"
+msgstr ""
+"Rinne tú iarratas cheana féin ar bhallraíocht sa ghrúpa eagarthóirí a leanas"
+"%(groups_applied_for|pluralize)s: %(groups_applied_for|join:\", \")s"
+
+#: templates/accounts/edit_profile.html:60
+#, python-format
+msgid "Organization Manager Group%(organization_managers_member_of|pluralize)s"
+msgstr ""
+"Grúpa Bainisteoirí Eagraíochta%(organization_managers_member_of|pluralize)s"
+
+#: templates/accounts/edit_profile.html:66
+#, python-format
+msgid "Organization%(organizations_member_of|pluralize)s"
+msgstr "Eagraíocht%(organizations_member_of|pluralize)s"
+
+#: templates/accounts/edit_profile.html:71
+#, python-format
+msgid ""
+"You already applied for a membership of the following organization"
+"%(organizations_applied_for|pluralize)s: "
+"%(organizations_applied_for|join:\", \")s"
+msgstr ""
+"Rinne tú iarratas cheana féin ar bhallraíocht san eagraíocht a leanas"
+"%(organizations_applied_for|pluralize)s: "
+"%(organizations_applied_for|join:\", \")s"
+
+#: templates/accounts/edit_profile.html:74
+msgid "Edit Profile"
+msgstr "Leasaigh do phróifíl"
+
+#: templates/accounts/editor_group_application.html:6
+#: templates/accounts/update_default_editor_group.html:8
+msgid "Please give at least one editor group."
+msgstr "Tabhair grúpa eagarthóirí amháin ar a laghad."
+
+#: templates/accounts/editor_group_application.html:11
+msgid "Apply for editor group membership"
+msgstr "Déan iarratas ar bhallraíocht i ngrúpa eagarthóirí"
+
+#: templates/accounts/editor_group_application.html:18
+#: templates/accounts/organization_application.html:18
+msgid "Apply"
+msgstr "Déan iarratas"
+
+#: templates/accounts/notification_editor_group_application_accepted_email.html:2
+#, python-format
+msgid ""
+"Dear %(shortname)s,\n"
+"\n"
+"The application to the editor group \"%(editor_group)s\"\n"
+"has been accepted by a manager of the group.\n"
+"\n"
+"Best regards,"
+msgstr ""
+"A chara,\n"
+"\n"
+"Glacadh leis an iarratas páirt a ghlacadh sa ghrúpa\n"
+"eagarthóirí \"%(editor_group)s\" ag bainisteoir an ghrúpa.\n"
+"\n"
+"Beannacht,\n"
+"\n"
+"______________________\n"
+"\n"
+"Dear %(shortname)s,\n"
+"\n"
+"The application to the editor group \"%(editor_group)s\"\n"
+"has been accepted by a manager of the group.\n"
+"\n"
+"Best regards,"
+
+#: templates/accounts/notification_editor_group_application_turned_down_email.html:2
+#, python-format
+msgid ""
+"Dear %(shortname)s,\n"
+"\n"
+"The application to the editor group \"%(editor_group)s\"\n"
+"has been turned down by a manager of the group.\n"
+"\n"
+"Best regards,"
+msgstr ""
+"%(shortname)s,\n"
+"\n"
+"Diúladh an t-iarratas páirt a ghlacadh sa ghrúpa\n"
+"eagarthóirí \"%(editor_group)s\" ag bainisteoir an ghrúpa.\n"
+"\n"
+"Beannacht,\n"
+"\n"
+"______________________\n"
+"\n"
+"A chara,\n"
+"\n"
+"The application to the editor group \"%(editor_group)s\"\n"
+"has been accepted by a manager of the group.\n"
+"\n"
+"Best regards,"
+
+#: templates/accounts/notification_editor_group_managers_application_email.html:2
+#, python-format
+msgid ""
+"Dear editor group manager,\n"
+"\n"
+"We have received an application to your editor group \"%(editor_group)s\"\n"
+"from the ELRI user account \"%(shortname)s\".\n"
+"\n"
+"You can confirm or reject that application by going to the following page in "
+"the administration section:\n"
+"- %(confirmation_url)s\n"
+"\n"
+"Best regards"
+msgstr ""
+"A Bhainisteoir an Ghrúpa Eagarthóirí, a chara,\n"
+"\n"
+"Fuaireamar iarratas do do ghrúpa eagarthóirí \"%(editor_group)s\"\n"
+"ón gcuntas úsáideora ELRI \"%(shortname)s\".\n"
+"\n"
+"Is féidir leat an iarratas sin a ghlacadh nó a dhiúltadh ar an leathnach seo "
+"a leanas don chuid\n"
+"riaracháin: - %(confirmation_url)s\n"
+"\n"
+"Beannacht,\n"
+"\n"
+"_____________________________\n"
+"\n"
+"Dear editor group manager,\n"
+"\n"
+"We have received an application to your editor group \"%(editor_group)s\"\n"
+"from the ELRI user account \"%(shortname)s\".\n"
+"\n"
+"You can confirm or reject that application by going to the following page in "
+"the administration section:\n"
+"- {{confirmation_url}\n"
+"\n"
+"Best regards"
+
+#: templates/accounts/notification_organization_application_accepted_email.html:2
+#, python-format
+msgid ""
+"Dear %(shortname)s,\n"
+"\n"
+"The application to the organization \"%(organization)s\"\n"
+"has been accepted by a manager of the organization. \n"
+"\n"
+"Best regards,"
+msgstr ""
+"A chara,\n"
+"\n"
+"Glacadh leis an iarratas páirt a ghlacadh san eagraíocht\n"
+"\"%(organization)s\" ag bainisteoir na heagraíochta.\n"
+"\n"
+"Beannacht,\n"
+"\n"
+"_____________________\n"
+"\n"
+"Dear %(shortname)s,\n"
+"\n"
+"The application to the organisation \"%(organization)s\"\n"
+"has been accepted by a manager of the organisation. \n"
+"\n"
+"Best regards,"
+
+#: templates/accounts/notification_organization_application_turned_down_email.html:2
+#, python-format
+msgid ""
+"Dear %(shortname)s,\n"
+"\n"
+"The application to the organization \"%(organization)s\"\n"
+"has been turned down by a manager of the organization.\n"
+"\n"
+"Best regards,"
+msgstr ""
+"%(shortname)s,\n"
+"\n"
+"Diúladh an t-iarratas páirt a ghlacadh san eagraíocht\n"
+"\"%(organization)s\" ag bainisteoir na heagraíochta.\n"
+"\n"
+"Beannacht,\n"
+"\n"
+"_____________________\n"
+"\n"
+"Dear %(shortname)s,\n"
+"\n"
+"The application to the organisation \"%(organization)s\"\n"
+"has been turned down by a manager of the organisation. \n"
+"\n"
+"Best regards,"
+
+#: templates/accounts/notification_organization_managers_application_email.html:2
+#, python-format
+msgid ""
+"Dear organization manager,\n"
+"\n"
+"We have received an application to your organization \"%(organization)s\"\n"
+"from the ELRI user account \"%(shortname)s\".\n"
+"\n"
+"You can confirm or reject that application by going to the following page in "
+"the administration section:\n"
+"- %(confirmation_url)s\n"
+"\n"
+"Best regards"
+msgstr ""
+"A Bhainisteoir Eagraíochta. a chara,\n"
+"\n"
+"Fuaireamar iarratas do d’eagraíocht \"%(organization)s\"\n"
+"ón gcuntas úsáideora ELRI \"%(shortname)s\".\n"
+"\n"
+"Is féidir leat an iarratas sin a ghlacadh nó a dhiúltadh ar an leathnach seo "
+"a leanas don chuid\n"
+"riaracháin: - %(confirmation_url)s\n"
+"\n"
+"Beannacht,\n"
+"\n"
+"_____________________________\n"
+"\n"
+"Dear organization manager,\n"
+"\n"
+"We have received an application to your organisation \"%(organization)s\"\n"
+"from the ELRI user account \"%(shortname)s\".\n"
+"\n"
+"You can confirm or reject that application by going to the following page in "
+"the administration section:\n"
+"- {{confirmation_url}\n"
+"\n"
+"Best regards"
+
+#: templates/accounts/organization_application.html:6
+msgid "Please give at least one organization."
+msgstr "Tabhair eagraíocht amháin ar a laghad."
+
+#: templates/accounts/organization_application.html:11
+msgid "Apply for organization membership"
+msgstr "Déan iarratas ar bhallraíocht in eagraíocht"
+
+#: templates/accounts/reactivation_email.html:2
+#, python-format
+msgid ""
+"Dear  %(firstname)s %(lastname)s,\n"
+"\n"
+"We have now reset your ELRI user account \"%(shortname)s\".\n"
+"Your password is \"%(random_password)s\".\n"
+"We advise that you change your password the next time you login to ELRI. \n"
+"\n"
+"Thank you for using ELRI!"
+msgstr ""
+"%(firstname)s %(lastname)s,\n"
+"Rinneamar athshocrú ar do chuntas úsáideora ELRI \"%(shortname)s\".\n"
+"Is é do phasfhocal \"%(random_password)s\".\n"
+"Molaimid go n-athríonn tú do phasfhocal an chéad uair eile a dhéanann tú "
+"logáil isteach ar ELRI. \n"
+"\n"
+"Go raibh maith agat as ELRI a úsáid!\n"
+"\n"
+"__________________________\n"
+"\n"
+"Dear  %(firstname)s %(lastname)s,\n"
+"\n"
+"We have now reset your ELRI user account \"%(shortname)s\".\n"
+"Your password is \"%(random_password)s\".\n"
+"We advise that you change your password the next time you login to ELRI. \n"
+"\n"
+"Thank you for using ELRI!"
+
+#: templates/accounts/registration_email.html:2
+#, python-format
+msgid ""
+"User %(username)s provided the following registration information:\n"
+"\n"
+"- First name:  %(firstname)s\n"
+"\n"
+"- Last name:  %(lastname)s\n"
+"\n"
+"- E-mail:  %(email)s\n"
+"\n"
+"- Telephone number:  %(telephone)s\n"
+"\n"
+"- Affiliation: %(affiliation)s\n"
+"\n"
+"- Position: %(position)s\n"
+"\n"
+"You can either confirm this user's account by clicking on the\n"
+"%(confirmation_url)s, or review and activate the user's account from the\n"
+"back-office."
+msgstr ""
+"Chuir an t-úsáideoir %(username)s na sonraí clárúcháin seo a leanas ar "
+"fáil:\n"
+"\n"
+"- Ainm: %(firstname)s\n"
+"\n"
+"- Sloinne: %(lastname)s \n"
+"\n"
+"- Ríomhphost: %(email)s \n"
+"\n"
+"- Uimhir theileafóin: %(telephone)s  \n"
+"\n"
+"- Comhlacht:  %(affiliation)s\n"
+"\n"
+"- Teideal:  %(position)s\n"
+"\n"
+"Is féidir leat an cuntas úsáideora seo a dheimniú trí chliceáil ar "
+"%(confirmation_url)s, nó déan athbhreithniú agus ghníomhachtú ar an gcuntas "
+"ón gcúl-oifig.\n"
+"\n"
+"__________________________________________\n"
+"\n"
+"User %(username)s provided the following registration information:\n"
+"\n"
+"- First name:  %(firstname)s\n"
+"\n"
+"- Last name:  %(lastname)s\n"
+"\n"
+"- E-mail:  %(email)s\n"
+"\n"
+"- Telephone number:  %(telephone)s\n"
+"\n"
+"- Affiliation: %(affiliation)s\n"
+"\n"
+"- Position: %(position)s\n"
+"\n"
+"You can either confirm this user's account by clicking on the\n"
+"%(confirmation_url)s, or review and activate the user's account from the\n"
+"back-office."
+
+#: templates/accounts/remove_user_profile_from_editor_group.html:8
+#, python-format
+msgid ""
+"Remove a user from the following editor group"
+"%(selected_editorgroups|pluralize)s:"
+msgstr ""
+"Bain úsáideoir ón ngrúpa eagarthóirí a leanas"
+"%(selected_editorgroups|pluralize)s:"
+
+#: templates/accounts/remove_user_profile_from_editor_group.html:26
+#: templates/accounts/remove_user_profile_from_editor_group_managers.html:26
+#: templates/accounts/remove_user_profile_from_organization.html:26
+#: templates/accounts/remove_user_profile_from_organization_managers.html:26
+msgid "Remove"
+msgstr "Bain"
+
+#: templates/accounts/remove_user_profile_from_editor_group.html:27
+#: templates/accounts/remove_user_profile_from_editor_group_managers.html:27
+#: templates/accounts/remove_user_profile_from_organization.html:27
+#: templates/accounts/remove_user_profile_from_organization_managers.html:27
+msgid "Cancel"
+msgstr "Cealaigh"
+
+#: templates/accounts/remove_user_profile_from_editor_group_managers.html:8
+#, python-format
+msgid ""
+"Remove a user from the following editor group manager group"
+"%(selected_editorgroupmanagers|pluralize)s:"
+msgstr ""
+"Bain úsáideoir ón ngrúpa bainisteoirí grúpaí eagarthóirí a leanas"
+"%(selected_editorgroupmanagers|pluralize)s:"
+
+#: templates/accounts/remove_user_profile_from_organization.html:8
+#, python-format
+msgid ""
+"Remove a user from the following organization"
+"%(selected_organizations|pluralize)s:"
+msgstr ""
+"Bain úsáideoir ón eagraíocht a leanas%(selected_organizations|pluralize)s:"
+
+#: templates/accounts/remove_user_profile_from_organization_managers.html:8
+#, python-format
+msgid ""
+"Remove a user from the following organization manager group"
+"%(selected_organizationmanagers|pluralize)s:"
+msgstr ""
+"Bain úsáideoir ón ngrúpa bainisteoirí eagraíochta a leanas"
+"%(selected_organizationmanagers|pluralize)s:"
+
+#: templates/accounts/remove_user_profile_from_organization_managers.html:12
+#, python-format
+msgid "Organization Manager Group%(selected_organizationmanagers|pluralize)s"
+msgstr ""
+"Grúpa Bainisteoirí Eagraíochta%(selected_organizationmanagers|pluralize)s"
+
+#: templates/accounts/reset_account.html:5
+#: templates/accounts/reset_account.html:12
+msgid "Reset Account"
+msgstr "Athshocraigh cuntas"
+
+#: templates/accounts/reset_email.html:2
+#, python-format
+msgid ""
+"Dear %(firstname)s %(lastname)s,\n"
+"\n"
+"We have received a password reset request for your ELRI user\n"
+"account \"%(shortname)s\". You can confirm this request and\n"
+"reset your password by clicking on the following link:\n"
+"- %(confirmation_url)s\n"
+"\n"
+"If you do not wish to reset your account password, please \n"
+"ignore this email.\n"
+"\n"
+"Thank you for using ELRI!  "
+msgstr ""
+"%(firstname)s %(lastname)s,\n"
+"\n"
+"Fuaireamar iarratas chun do phasfhocal do do chuntas úsáidteora \n"
+"ELRI \"%(shortname)s\" a athshocrú. Is féidir leat an t-iarratas seo a \n"
+"dheimniú agus do phasfhoca a athshocrú trí chliceáil ar an nasc seo a "
+"leanas:\n"
+" - %(confirmation_url)s\n"
+"\n"
+"Muna bhfuil fonn ort do phasfhocal a athshocrú, na bac leis an rphost seo, "
+"le do thoil.\n"
+"\n"
+"Go raibh maith agat as ELRI a úsáid! \n"
+"\n"
+"_________________________________\n"
+"\n"
+"Dear %(firstname)s %(lastname)s,\n"
+"\n"
+"We have received a password reset request for your ELRI user\n"
+"account \"%(shortname)s\". You can confirm this request and\n"
+"reset your password by clicking on the following link:\n"
+"- %(confirmation_url)s\n"
+"\n"
+"If you do not wish to reset your account password, please \n"
+"ignore this email.\n"
+"\n"
+"Thank you for using ELRI! "
+
+#: templates/accounts/update_default_editor_group.html:25
+msgid "Update"
+msgstr "Uasdátaigh"
+
+#~ msgid "Dear organization manager,"
+#~ msgstr "A Bhainisteoir Eagraíochta. a chara,"
+
+#~ msgid ""
+#~ "We have received an application to your organization \"%(organization)s"
+#~ "\"\n"
+#~ "from the ELRI user account \"%(shortname)s\"."
+#~ msgstr ""
+#~ "Fuaireamar iarratas do d’eagraíocht \"%(organization)s\"\n"
+#~ "ón gcuntas úsáideora ELRI \"%(shortname)s\"."
+
+#~ msgid ""
+#~ "You can confirm or reject that application by going to the following page "
+#~ "in the administration section:\n"
+#~ "- %(confirmation_url)s"
+#~ msgstr ""
+#~ "Is féidir leat an iarratas sin a ghlacadh nó a dhiúltadh ar an leathnach "
+#~ "seo a leanas don chuid\n"
+#~ "riaracháin: - %(confirmation_url)s"
+
+#~ msgid "Best regards"
+#~ msgstr "Beannacht"
+
+#~ msgid "Dear "
+#~ msgstr " "
+
+#~ msgid ""
+#~ "The application to the organization \"%(organization)s\"\n"
+#~ "has been turned down by a manager of the organization."
+#~ msgstr ""
+#~ "Diúladh an t-iarratas páirt a ghlacadh san eagraíocht\n"
+#~ "\"%(organization)s\" ag bainisteoir na heagraíochta."
+
+#~ msgid "Best regards,"
+#~ msgstr "Beannacht,"
+
+#~ msgid "Dear editor group manager,"
+#~ msgstr "A Bhainisteoir an Ghrúpa Eagarthóirí, a chara,"
+
+#~ msgid ""
+#~ "We have received an application to your editor group \"%(editor_group)s"
+#~ "\"\n"
+#~ "from the ELRI user account \"%(shortname)s\"."
+#~ msgstr ""
+#~ "Fuaireamar iarratas do do ghrúpa eagarthóirí \"%(editor_group)s\"\n"
+#~ "ón gcuntas úsáideora ELRI \"%(shortname)s\"."
+
+#~ msgid ""
+#~ "The application to the editor group \"%(editor_group)s\"\n"
+#~ "has been turned down by a manager of the group."
+#~ msgstr ""
+#~ "Diúladh an t-iarratas páirt a ghlacadh sa ghrúpa\n"
+#~ "eagarthóirí \"%(editor_group)s\" ag bainisteoir an ghrúpa."
+
+#~ msgid "Dear %(firstname)s %(lastname)s,"
+#~ msgstr "%(firstname)s %(lastname)s, a chara,"
+
+#~ msgid ""
+#~ "If you do not wish to reset your account password, please \n"
+#~ "ignore this email."
+#~ msgstr ""
+#~ "Muna bhfuil fonn ort do phasfhocal a athshocrú, na bac leis an rphost "
+#~ "seo, le do thoil."
+
+#~ msgid "Thank you for using ELRI!  "
+#~ msgstr "Go raibh maith agat as ELRI a úsáid! "
+
+#~ msgid "User %(username)s provided the following registration information:"
+#~ msgstr ""
+#~ "Chuir an t-úsáideoir %(username)s na sonraí clárúcháin seo a leanas ar "
+#~ "fáil:"
+
+#~ msgid "- First name: "
+#~ msgstr "- Ainm: "
+
+#~ msgid "- Last name: "
+#~ msgstr "- Sloinne: "
+
+#~ msgid "- E-mail: "
+#~ msgstr "- Ríomhphost: "
+
+#~ msgid "- Telephone number: "
+#~ msgstr "- Uimhir theileafóin: "
+
+#~ msgid "- Affiliation: "
+#~ msgstr "- Comhlacht: "
+
+#~ msgid "- Position: "
+#~ msgstr "- Teideal: "
+
+#~ msgid ""
+#~ "You can either confirm this user's account by clicking on the\n"
+#~ "%(confirmation_url)s, or review and activate the user's account from the\n"
+#~ "back-office."
+#~ msgstr ""
+#~ "Is féidir leat an cuntas úsáideora seo a dheimniú trí chliceáil ar "
+#~ "%(confirmation_url)s, nó déan athbhreithniú agus ghníomhachtú ar an "
+#~ "gcuntas ón gcúl-oifig."
+
+#~ msgid "We have now reset your ELRI user account \"%(shortname)s\"."
+#~ msgstr "Rinneamar athshocrú ar do chuntas úsáideora ELRI \"%(shortname)s\"."
+
+#~ msgid "Your password is \"%(random_password)s\"."
+#~ msgstr "Is é do phasfhocal \"%(random_password)s\"."
+
+#~ msgid ""
+#~ "We advise that you change your password the next time you login to ELRI. "
+#~ msgstr ""
+#~ "Molaimid go n-athríonn tú do phasfhocal an chéad uair eile a dhéanann tú "
+#~ "logáil isteach ar ELRI. "
+
+#~ msgid "Thank you for using ELRI!"
+#~ msgstr "Go raibh maith agat as ELRI a úsáid!"
+
+#~ msgid "Dear superuser,"
+#~ msgstr "A Superuser, a chara,"
+
+#~ msgid "Subject: %(subject)s"
+#~ msgstr "Ábhar: %(subject)s"
+
+#~ msgid "Message: see below "
+#~ msgstr "Teachtaireacht: féach thíos "
+
+#~ msgid ""
+#~ "Please try to answer this request soon by responding to %(user_email)s."
+#~ msgstr ""
+#~ "Freagair an t-iarratas seo go luath, le do thoil, trí fhreagra a "
+#~ "thabhairt do %(user_email)s."
+
+#~ msgid "The ELRI Team"
+#~ msgstr "An Fhoireann ELRI"
+
+#~ msgid ""
+#~ "Please make sure to follow the link within three days. If you do not wish "
+#~ "to create an account with this e-mail address, then please simply "
+#~ "disregard this message."
+#~ msgstr ""
+#~ "Déan cinnte go leanfaidh tú an nasc laistigh de thrí lá, le do thoil. "
+#~ "Muna bhfuil tú ag iarraidh cuntas a chruthú leis an seoladh ríomhphoist "
+#~ "seo, ná bac leis an dteachtaireacht seo."
+
+#~ msgid "Welcome to ELRI!"
+#~ msgstr "Fáilte chuig ELRI!"
+
+#~ msgid "The ELRI team"
+#~ msgstr "An fhoireann ELRI"
+
+#~ msgid ""
+#~ "I accept the <a target=\"_blank\" href=\"%(elri_tos_url)s\">ELRI Terms of "
+#~ "Service</a>."
+#~ msgstr ""
+#~ "Glacaim leis na <a target=“_blank” href=“%(elri_tos_url)s”>Téarmaí "
+#~ "Seirbhíse ELRI </a>."
+
+#~ msgid ""
+#~ "With this form you can send messages to the node maintainers, for "
+#~ "example, if you would like to suggest the creation of a new editor group "
+#~ "or a new organization. There are extra forms available for applying for "
+#~ "membership in existing \n"
+#~ "\t  <a href=\"%(editor_group_application)s\">editor groups</a> or \n"
+#~ "\t  <a href=\"%(organization_application_url)s\">organizations</a>."
+#~ msgstr ""
+#~ "Is féidir teachtaireachtaí a sheoladh chuig na coimeádaithe nód leis an "
+#~ "bhfoirm seo, mar shampla, más mian leat a mholadh go gcruthófaí grúpa "
+#~ "eagarthóirí nua nó eagraíocht nua. Tá foirmeacha sa bhreis ar fáil le "
+#~ "hiarratas a dhéanamh ar bhallraíocht in \n"
+#~ "\t  <a href=\"%(editor_group_application)s\">grúpaí eagarthóireachta</a> "
+#~ "nó \n"
+#~ "\t  <a href=\"%(organization_application_url)s\">eagraíochtaí</a>."

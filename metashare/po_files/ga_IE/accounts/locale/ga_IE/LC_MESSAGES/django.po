@@ -1,0 +1,804 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-04-04 13:42+0200\n"
+"PO-Revision-Date: 2019-04-05 13:03+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ga_IE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#: accounts/admin.py:82
+msgid "Editor groups"
+msgstr "Grúpaí eagarthóirí"
+
+#: accounts/admin.py:94
+msgid "Managed Editor Groups"
+msgstr "Grúpaí Eagarthóirí bainistithe"
+
+#: accounts/admin.py:105
+msgid "Organizations"
+msgstr "Eagraíochtaí"
+
+#: accounts/admin.py:117
+msgid "Managed organizations"
+msgstr "Eagraíochtaí bainistithe"
+
+#: accounts/admin.py:137 accounts/admin.py:475 accounts/admin.py:627
+#: accounts/admin.py:935
+msgid "Members"
+msgstr "Baill"
+
+#: accounts/admin.py:147 accounts/admin.py:637
+msgid "Managing groups"
+msgstr "Grúpaí a bhainistiú"
+
+#: accounts/admin.py:158 accounts/admin.py:648
+msgid "Managers"
+msgstr "Bainisteoirí"
+
+#: accounts/admin.py:199
+msgid "Cancelled adding users to the editor group."
+msgstr "Úsáideoirí a chur leis an ngrúpa eagarthóirí ar ceal."
+
+#: accounts/admin.py:212
+msgid "You need to be group manager to add a user to this editor group."
+msgstr ""
+"Ní mór a bheith i do bhainisteoir grúpa chun úsáideoir a chur leis an ngrúpa "
+"eagarthóirí seo."
+
+#: accounts/admin.py:214
+msgid "Successfully added users to editor group."
+msgstr "Úsáideoirí curtha leis an ngrúpa eagarthóirí."
+
+#: accounts/admin.py:223
+msgid "Add Users to Editor Group"
+msgstr "Cuir úsáideoirí le Grúpa Eagarthóirí"
+
+#: accounts/admin.py:228 accounts/admin.py:555 accounts/admin.py:699
+#: accounts/admin.py:1012
+msgid "Add user"
+msgstr "Cuir úsáideoir leis"
+
+#: accounts/admin.py:234
+msgid "Add users to selected editor groups"
+msgstr "Cuir úsáideoirí le grúpaí eagarthóirí roghnaithe"
+
+#: accounts/admin.py:240
+msgid "Cancelled removing users from the editor group."
+msgstr "Cuireadh úsáideoirí a bhaint ón ngrúpa eagarthóirí ar ceal."
+
+#: accounts/admin.py:250
+msgid "Successfully removed users from editor group."
+msgstr "Baineadh úsáideoirí ón ngrúpa eagarthóirí."
+
+#: accounts/admin.py:259
+msgid "Remove Users from Editor Group"
+msgstr "Bain úsáideoirí ón nGrúpa Eagarthóirí"
+
+#: accounts/admin.py:264 accounts/admin.py:597 accounts/admin.py:735
+#: accounts/admin.py:1053
+msgid "Remove user"
+msgstr "Bain úsáideoir"
+
+#: accounts/admin.py:270
+msgid "Remove users from selected editor groups"
+msgstr "Bain úsáideoirí ó ghrúpaí eagarthóirí roghnaithe"
+
+#: accounts/admin.py:287
+msgid "You must be superuser or group manager to accept applications."
+msgstr ""
+"Ní mór a bheith i d’fhorúsáideoir nó bainisteoir grúpa chun glacadh le "
+"hiarratais."
+
+#: accounts/admin.py:311 accounts/admin.py:779
+msgid "Application accepted"
+msgstr "Iarratas glactha | Application accepted"
+
+#: accounts/admin.py:318 accounts/admin.py:786
+msgid "There was an error sending out an application acceptance e-mail."
+msgstr "Tharla earráid agus rphost glactha iarratais á sheoladh amach."
+
+#: accounts/admin.py:321
+#, python-format
+msgid ""
+"You have successfully accepted \"%(user)s\" as member of the editor group "
+"\"%(group)s\"."
+msgstr ""
+"Ghlac tú le \"%(user)s\" mar bhall den ghrúpa eagarthóirí \"%(group)s\"."
+
+#: accounts/admin.py:326 accounts/admin.py:794
+#, python-format
+msgid ""
+"Successfully accepted %(accepted)d of %(total)d applications. You have no "
+"permissions to accept the remaining applications."
+msgstr ""
+"Ghlac tú le %(accepted)d as %(total)d iarratas. Níl ceadanna agat glacadh "
+"leis na hiarratais atá fágtha."
+
+#: accounts/admin.py:332 accounts/admin.py:800
+msgid "Successfully accepted all requests."
+msgstr "Glactha le gach iarratas."
+
+#: accounts/admin.py:336
+msgid "Accept selected editor group applications"
+msgstr "Glac le hiarratais roghnaithe don ghrúpa eagarthóirí"
+
+#: accounts/admin.py:370 accounts/admin.py:830
+msgid "Application turned down"
+msgstr "Iarratas diúltaithe | Application declined"
+
+#: accounts/admin.py:378 accounts/admin.py:838
+msgid ""
+"There was an error sending out an e-mail about turning down the application."
+msgstr ""
+"Tharla earráid agus rphost maidir leis an iarratas a dhiúltú á sheoladh "
+"amach."
+
+#: accounts/admin.py:381
+#, python-format
+msgid ""
+"You have successfully turned down \"%(user)s\" from the editor group "
+"\"%(group)s\"."
+msgstr ""
+"Tá tú tar éis diúltú do \"%(user)s\" ón ngrúpa eagarthóirí \"%(group)s\"."
+
+#: accounts/admin.py:423 accounts/admin.py:883
+#, python-format
+msgid "Successfully turned down %(count)d %(items)s."
+msgstr "%(count)d %(items)s diúltaithe."
+
+#: accounts/admin.py:435 accounts/admin.py:895
+#, python-format
+msgid "Cannot turn down %(name)s"
+msgstr "Ní féidir diúltú do %(name)s"
+
+#: accounts/admin.py:437 accounts/admin.py:897
+msgid "Are you sure?"
+msgstr "An bhfuil tú cinnte?"
+
+#: accounts/admin.py:456
+msgid "Turn down selected editor group applications"
+msgstr "Diúltaigh d’iarratais roghnaithe ar ghrúpaí eagarthóirí"
+
+#: accounts/admin.py:531
+msgid "Cancelled adding users to the editor group managers."
+msgstr ""
+"Cuireadh úsáideoirí a chur le bainisteoirí na ngrúpaí eagarthóirí ar ceal."
+
+#: accounts/admin.py:541
+msgid "Successfully added users to editor group managers."
+msgstr "Úsáideoirí curtha le bainisteoirí na ngrúpaí eagarthóirí."
+
+#: accounts/admin.py:550
+msgid "Add Users to Editor Group Managers"
+msgstr "Cuir úsáideoirí le Bainisteoirí na nGrúpaí Eagarthóirí"
+
+#: accounts/admin.py:561
+msgid ""
+"You need to be a superuser to add a user to these editor group managers."
+msgstr ""
+"Ní mór a bheith i d’fhorúsáideoir chun úsáideoir a chur le bainisteoirí na "
+"ngrúpaí eagarthóirí seo."
+
+#: accounts/admin.py:565
+msgid "Add users to selected editor group managers"
+msgstr "Cuir úsáideoirí le bainisteoirí grúpaí eagarthóirí roghnaithe"
+
+#: accounts/admin.py:571
+msgid "Cancelled removing users from editor group managers."
+msgstr ""
+"Cuireadh úsáideoirí a bhaint ó bhainisteoirí na ngrúpaí eagarthóirí ar ceal."
+
+#: accounts/admin.py:582
+msgid "Successfully removed users from editor group managers."
+msgstr "Baineadh úsáideoirí ó bhainisteoirí na ngrúpaí eagarthóirí."
+
+#: accounts/admin.py:592
+msgid "Remove Users from Editor Group Managers"
+msgstr "Bain úsáideoirí ó Bhainisteoirí na nGrúpaí Eagarthóirí"
+
+#: accounts/admin.py:603
+msgid ""
+"You need to be a superuser to remove a user from these editor group managers."
+msgstr ""
+"Ní mór a bheith i d’fhorúsáideoir chun úsáideoir a bhaint ó bhainisteoirí na "
+"ngrúpaí eagarthóirí seo."
+
+#: accounts/admin.py:607
+msgid "Remove users from selected editor group managers"
+msgstr "Bain úsáideoirí o bhainisteoirí grúpaí eagarthóirí roghnaithe"
+
+#: accounts/admin.py:669
+msgid "Cancelled adding users to the organization."
+msgstr "Cuireadh úsáideoirí a chur leis an eagraíocht ar ceal."
+
+#: accounts/admin.py:683
+msgid ""
+"You need to be organization managers to add a user to this organization."
+msgstr ""
+"Ní mór a bheith i do bhainisteoir eagraíochta chun úsáideoir a chur leis an "
+"eagraíocht seo."
+
+#: accounts/admin.py:685
+msgid "Successfully added users to organization."
+msgstr "Úsáideoirí curtha leis an eagraíocht."
+
+#: accounts/admin.py:694
+msgid "Add Users to Organization"
+msgstr "Cuir Úsáideoirí leis an Eagraíocht"
+
+#: accounts/admin.py:705
+msgid "Add users to selected organizations"
+msgstr "Cuir úsáideoirí le heagraíochtaí roghnaithe"
+
+#: accounts/admin.py:711
+msgid "Cancelled removing users from the organization."
+msgstr "Cuireadh úsáideoirí a bhaint ón eagraíocht ar ceal."
+
+#: accounts/admin.py:721
+msgid "Successfully removed users from organization."
+msgstr "Úsáideoirí bainte ón eagraíocht."
+
+#: accounts/admin.py:730
+msgid "Remove Users from Organization"
+msgstr "Bain úsáideoirí ón eagraíocht"
+
+#: accounts/admin.py:741
+msgid "Remove users from selected organizations"
+msgstr "Bain úsáideoirí ó eagraíochtaí roghnaithe"
+
+#: accounts/admin.py:758
+msgid "You must be superuser or organization manager to accept applications."
+msgstr ""
+"Ní mór a bheith i d’fhorúsáideoir nó bainisteoir eagraíochta chun glacadh le "
+"hiarratais."
+
+#: accounts/admin.py:789
+#, python-format
+msgid ""
+"You have successfully accepted \"%(user)s\" as member of the organization "
+"\"%(group)s\"."
+msgstr "Ghlac tú le \"%(user)s\" mar bhall den eagraíocht \"%(group)s\"."
+
+#: accounts/admin.py:804
+msgid "Accept selected organization applications"
+msgstr "Glac le hiarratais eagraíochta roghnaithe"
+
+#: accounts/admin.py:841
+#, python-format
+msgid ""
+"You have turned down the application of \"%(user)s\" for membership in the "
+"organization \"%(group)s\"."
+msgstr ""
+"Dhiúltaigh tú d’iarratas \"%(user)s\" ar bhallraíocht san eagraíocht "
+"\"%(group)s\"."
+
+#: accounts/admin.py:916
+msgid "Turn down selected organization applications"
+msgstr "Diúltaigh d’iarratais eagraíochta roghnaithe"
+
+#: accounts/admin.py:986
+msgid "Cancelled adding users to the organization managers."
+msgstr "Cuireadh úsáideoirí a chur le bainisteoirí eagraíochta ar ceal."
+
+#: accounts/admin.py:998
+msgid "Successfully added users to organization managers."
+msgstr "Úsáideoirí curtha le bainisteoirí eagraíochta."
+
+#: accounts/admin.py:1007
+msgid "Add Users to Organization Manager Group"
+msgstr "Cuir úsáideoirí le Grúpa Bainisteoirí Eagraíochta"
+
+#: accounts/admin.py:1018
+msgid ""
+"You need to be a superuser to add a user to these organization managers."
+msgstr ""
+"Ní mór a bheith i d’fhorúsáideoir chun úsáideoir a chur leis na bainisteoirí "
+"eagraíochta seo."
+
+#: accounts/admin.py:1022
+msgid "Add users to selected organization managers"
+msgstr "Cuir úsáideoirí le bainisteoirí eagraíochta roghnaithe"
+
+#: accounts/admin.py:1028
+msgid "Cancelled removing users from the organization managers."
+msgstr "Cuireadh úsáideoirí a bhaint ó bhainisteoirí eagraíochta ar ceal."
+
+#: accounts/admin.py:1038
+msgid "Successfully removed users from organization managers."
+msgstr "Baineadh úsáideoirí ó bhainisteoirí eagraíochta."
+
+#: accounts/admin.py:1048
+msgid "Remove Users from Organization Manager Group"
+msgstr "Bain úsáideoirí ó Ghrúpa Bainisteoirí Eagraíochta"
+
+#: accounts/admin.py:1059
+msgid ""
+"You need to be a superuser to remove a user from these organization managers."
+msgstr ""
+"Ní mór a bheith i d’fhorúsáideoir chun úsáideoir a bhaint ó na bainisteoirí "
+"eagraíochta seo."
+
+#: accounts/admin.py:1063
+msgid "Remove users from selected organization managers"
+msgstr "Bain úsáideoirí ó bhainisteoirí eagraíochta roghnaithe"
+
+#: accounts/admin.py:1116
+msgid "You must be superuser to accept eDelivery applications."
+msgstr ""
+"Ní mór a bheith i d’fhorúsáideoir chun glacadh le hiarratais eDelivery."
+
+#: accounts/admin.py:1130
+msgid "Accept selected eDelivery applications"
+msgstr "Glac le hiarratais roghnaithe eDelivery"
+
+#: accounts/admin.py:1135
+msgid "You must be superuser to reject eDelivery applications."
+msgstr "Ní mór a bheith i d’fhorúsáideoir chun diúltú d’iarratais eDelivery."
+
+#: accounts/admin.py:1145 accounts/admin.py:1193
+msgid "ELRI eDelivery application"
+msgstr "Iarratas eDelivery ELRI | ELRI eDelivery application"
+
+#: accounts/admin.py:1157
+msgid "{} cannot be rejected. Only \"PENDING\" applications can be rejected"
+msgstr ""
+"Ní féidir {} a dhiúltú. Iarratais \"PENDING\" amháin ar féidir diúltú dóibh"
+
+#: accounts/admin.py:1161
+msgid "Reject selected eDelivery applications"
+msgstr "Diúltaigh d’iarratais roghnaithe eDelivery"
+
+#: accounts/admin.py:1166
+msgid "You must be superuser to revoke active eDelivery applications."
+msgstr ""
+"Ní mór a bheith i d’fhorúsáideoir chun iarratais ghníomhacha eDelivery a "
+"chulghairm."
+
+#: accounts/admin.py:1206
+msgid "{} cannot be rejected. Only \"ACTIVE\" applications can be revoked."
+msgstr ""
+"Ní féidir diúltú do {}. Iarratais \"ACTIVE\" amháin is féidir a chúlghairm."
+
+#: accounts/admin.py:1210
+msgid "Revoke selected eDelivery applications"
+msgstr "Déan iarratais roghnaithe eDelivery a chúlghairm"
+
+#: accounts/admin.py:1215
+msgid "You must be superuser to reactivate revoked eDelivery applications."
+msgstr ""
+"Ní mór a bheith i d’fhorúsáideoir chun iarratais chúlghairthe eDelivery a "
+"athghníomhachtú."
+
+#: accounts/admin.py:1226
+msgid ""
+"{} cannot be reactivated. Only \"REVOKED\" applications can be reactivated."
+msgstr ""
+"Ní féidir {} a athghníomhachtú. Iarratais \"REVOKED\" amháin is féidir a "
+"athghníomhachtú."
+
+#: accounts/admin.py:1230
+msgid "Reactivate selected eDelivery applications"
+msgstr "Athghníomhachtaigh iarratais eDelivery roghnaithe"
+
+#: accounts/forms.py:75
+msgid "Desired account name"
+msgstr "Cén t-ainm cuntais ba mhaith leat?"
+
+#: accounts/forms.py:77
+msgid "First name"
+msgstr "Céadainm"
+
+#: accounts/forms.py:79
+msgid "Last name"
+msgstr "Sloinne"
+
+#: accounts/forms.py:80
+msgid "E-mail"
+msgstr "Ríomhphost"
+
+#: accounts/forms.py:88
+msgid "Organization name"
+msgstr "Ainm eagraíochta"
+
+#: accounts/forms.py:91
+msgid "Organization address"
+msgstr "Seoladh eagraíochta"
+
+#: accounts/forms.py:95
+msgid "Organization phone number"
+msgstr "Uimhir ghutháin eagraíochta"
+
+#: accounts/forms.py:98
+msgid "Position in the organization"
+msgstr "Post san eagraíocht"
+
+#: accounts/forms.py:107
+msgid "Password"
+msgstr "Pasfhocal"
+
+#: accounts/forms.py:111
+msgid "Password confirmation"
+msgstr "Deimhniú pasfhocail"
+
+#: accounts/forms.py:137
+msgid "User account name already exists, please choose another one."
+msgstr "Ainm cuntas úsáideora in úsáid cheana, roghnaigh ceann eile."
+
+#: accounts/forms.py:151 accounts/forms.py:154
+msgid "There is already an account registered with this e-mail address."
+msgstr "Tá cuntas cláraithe leis an seoladh rphoist seo cheana féin."
+
+#: accounts/forms.py:165
+msgid "The two password fields did not match."
+msgstr "Níorbh ionann an dá réimse pasfhocal."
+
+#: accounts/forms.py:172
+msgid "This password is entirely numeric. "
+msgstr "Úsáideann an pasfhocal seo uimhreacha amháin."
+
+#: accounts/forms.py:174
+msgid "This password is too common. "
+msgstr "Tá an pasfhocal seo ró-choitianta. "
+
+#: accounts/forms.py:176
+msgid "This password is too short. It must contain at least 9 characters. "
+msgstr ""
+"Tá an pasfhocal seo ró-ghearr. Is gá naoi gcarachtar ar a laghad a bheith "
+"ann."
+
+#: accounts/forms.py:178
+#, python-format
+msgid "The password is too similar to the%s"
+msgstr "Tá an pasfhocal ró-chosúil leis an%s"
+
+#: accounts/forms.py:204
+msgid "Subject"
+msgstr "Ábhar"
+
+#: accounts/forms.py:205
+msgid "Please provide a meaningful and sufficiently indicative subject."
+msgstr "Scríobh líne a achoimríonn do cheist go héifeachtúil."
+
+#: accounts/forms.py:207
+msgid "Message"
+msgstr "Teachtaireacht"
+
+#: accounts/forms.py:208
+msgid ""
+"Your message appears to be rather short. Please make sure to phrase your "
+"request as precise as possible. This will help us to process it as quick as "
+"possible."
+msgstr ""
+"Is cosúil go bhfuil do theachtaireacht beagán gearr. Bí cinnte go bhfuil do "
+"cheist mínithe chomh beacht agus is féidir. Cabhróidh sé sin linn é a "
+"phróiseáil chomh tapa agus is féidir."
+
+#: accounts/forms.py:218
+msgid "Username"
+msgstr "Ainm úsáideora"
+
+#: accounts/forms.py:219
+msgid "Email"
+msgstr "Ríomhphost"
+
+#: accounts/forms.py:230
+msgid "Not a valid username-email combination."
+msgstr "Níl an t-ainm úsáideora agus an rphost sin ag teacht le chéile."
+
+#: accounts/forms.py:276
+msgid "default editor groups"
+msgstr "grúpaí eagarthóirí réamhshocraithe"
+
+#: accounts/models.py:132
+msgid "MSH Endpoint"
+msgstr "Críochphointe MSH"
+
+#: accounts/models.py:133
+msgid "Gateway Party Name"
+msgstr "Ainm Geata"
+
+#: accounts/models.py:134
+msgid "Gateway Party ID"
+msgstr "Aitheantas Geata"
+
+#: accounts/models.py:135
+msgid "Public Cetificate"
+msgstr "Teastas Poiblí"
+
+#: accounts/models.py:136
+msgid "Application Status"
+msgstr "Stádas Iarratais"
+
+#: accounts/models.py:138
+msgid "Rejection Reason"
+msgstr "Cúis Diúltaithe"
+
+#: accounts/models.py:139
+msgid "Date Created"
+msgstr "Dáta Cruthaithe"
+
+#: accounts/models.py:145
+#, python-brace-format
+msgid "eDelivery Application for user: \"{0}\""
+msgstr "Iarratas eDelivery d’úsáideoir: \"{0}\""
+
+#: accounts/models.py:206
+msgid "editor group managers group"
+msgstr "grúpa bainisteoirí na ngrúpaí eagarthóirí"
+
+#: accounts/models.py:250
+msgid "organization managers group"
+msgstr "grúpa na mbainisteoirí eagraíochta"
+
+#: accounts/models.py:262
+msgid "Not a valid phone number"
+msgstr "Níl an uimhir ghutháin bailí"
+
+#: accounts/models.py:274
+msgid "Is a META-SHARE associate member."
+msgstr "Is ea ball comhlach de META-SHARE."
+
+#: accounts/models.py:275
+msgid "Is a META-SHARE full member."
+msgstr "Is ea lánbhall de META-SHARE."
+
+#: accounts/models.py:282
+msgid "Date of birth"
+msgstr "Dáta breithe"
+
+#: accounts/models.py:285
+msgid "Phone Number"
+msgstr "Uimhir ghutháin"
+
+#: accounts/models.py:287
+msgid "Country"
+msgstr "Tír"
+
+#: accounts/models.py:290
+msgid "Affiliation(s)"
+msgstr "Cleamhnaithe le"
+
+#: accounts/models.py:291
+msgid "Affiliation address"
+msgstr "Seoladh na cleamhnachta"
+
+#: accounts/models.py:292
+msgid "Affiliation phone number"
+msgstr "Uimhir ghutháin na cleamhnachta"
+
+#: accounts/models.py:294
+msgid "Position"
+msgstr "Ról"
+
+#: accounts/models.py:295
+msgid "Homepage"
+msgstr "Baile"
+
+#: accounts/views.py:57
+msgid "Your ELRI user account has been activated"
+msgstr ""
+"Tá do chuntas úsáideora ELRI gníomhachtaithe | Your ELRI user account has "
+"been activated"
+
+#: accounts/views.py:64
+msgid "We have activated user account for user {}."
+msgstr "Tá an cuntas úsáideora don úsáideoir {} gníomhachtaithe."
+
+#: accounts/views.py:91
+#, python-format
+msgid "[ELRI] Contact Form Request: %s"
+msgstr ""
+"Iarratas ar Fhoirm Teagmhála [ELRI]: | [ELRI] Contact Form Request: %s "
+
+#: accounts/views.py:98
+#, python-format
+msgid ""
+"Oops, there was an error sending out your contact request. You can copy your "
+"message and try again later: <pre>%s</pre>"
+msgstr ""
+"Úps, tharla earráid agus d’iarratas teagmhála á sheoladh amach. Is féidir do "
+"theachtaireacht a chóipeáil agus triail a bhaint as arís níos déanaí: <pre>"
+"%s</pre>"
+
+#: accounts/views.py:103
+msgid ""
+"We have received your message and successfully sent it to the node "
+"maintainers. Please give them some days to get back to you."
+msgstr ""
+"Tá do theachtaireacht faighte againn agus tá sé seolta chuig na coimeádaithe "
+"nód. Tabhair roinnt laethanta dóibh le dul i dteagmháil leat."
+
+#: accounts/views.py:110
+msgid "Contact Node Maintainers"
+msgstr "Déan teagmháil le Foireann ELRI"
+
+#: accounts/views.py:175
+msgid "New user registration"
+msgstr "Clárúchán úsáideora nua | New user registration"
+
+#: accounts/views.py:183
+msgid ""
+"There was an error sending out the notification email to the administrators. "
+"Please contact them directly."
+msgstr ""
+"Tharla earráid agus an rphost fógartha á sheoladh amach go dtí na "
+"riarthóirí. Déan teagmháil díreach leo, le do thoil."
+
+#: accounts/views.py:191
+msgid ""
+"We have received your registration data and sent the administrators a "
+"notification email.You will receive an email when your account has been "
+"activated."
+msgstr ""
+"Tá do shonraí cláraithe faighte againn agus tá rphost fógartha seolta againn "
+"chuig na riarthóirí. Gheobhaidh tú rphost nuair a bheas do chuntas "
+"gníomhachtaithe."
+
+#: accounts/views.py:247
+msgid "You have successfully updated your profile information."
+msgstr "Tá d’eolas próifíle uasdátaithe agat."
+
+#: accounts/views.py:259
+msgid "full member"
+msgstr "lánbhall"
+
+#: accounts/views.py:261
+msgid "associate member"
+msgstr "ball comhlach"
+
+#: accounts/views.py:264
+msgid "Edit Profile Information"
+msgstr "Cuir d’Eolas Próifíle in eagar"
+
+#: accounts/views.py:310
+#, python-format
+msgid "An older application of yours for editor group \"%s\" is still pending."
+msgstr ""
+"Tá sean-iarratas a rinne tú ar an ngrúpa eagarthóirí \"%s\" fós ar feitheamh."
+
+#: accounts/views.py:332
+msgid "New editor membership request"
+msgstr "Iarratas ar bhallríocht eagarthóra nua | New editor membership request"
+
+#: accounts/views.py:339
+msgid ""
+"There was an error sending out the request email for your editor group "
+"application."
+msgstr ""
+"Tharla earráid agus an rphoist iarrtha do d’iarratas ar ghrúpa eagarthóirí á "
+"sheoladh amach."
+
+#: accounts/views.py:342
+#, python-format
+msgid "You have successfully applied for editor group \"%s\"."
+msgstr "Tá tú tar éis cur isteach ar ghrúpa eagarthóirí \"%s\"."
+
+#: accounts/views.py:353
+msgid ""
+"There are no editor groups in the database, yet, for which you could apply. "
+"Please ask the system administrator to create one."
+msgstr ""
+"Níl aon ghrúpaí eagarthóirí sa bhunachar sonraí, go fóill, ar féidir leat "
+"cur isteach orthu. Iarr ar an riarthóir córais ceann a chruthú."
+
+#: accounts/views.py:361
+msgid "Apply for editor group membership"
+msgstr "Déan iarratas ar bhallraíocht i ngrúpa eagarthóirí"
+
+#: accounts/views.py:410
+#, python-format
+msgid "You have successfully added default editor group \"%s\"."
+msgstr "Chuir tú grúpa eagarthóirí réamhshocraithe \"%s\" leis."
+
+#: accounts/views.py:417
+#, python-format
+msgid "You have successfully removed default editor group \"%s\"."
+msgstr "Bhain tú grúpa eagarthóirí réamhshocraithe \"%s\"."
+
+#: accounts/views.py:429
+msgid "There are no editor groups you could add to your default list."
+msgstr ""
+"Níl aon ghrúpaí eagarthóirí ar féidir leat iad a chur le do liosta "
+"réamhshocraithe."
+
+#: accounts/views.py:436
+msgid "Update default editor groups"
+msgstr "Déan uasdátú ar ghrúpaí eagarthóirí réamhshocraithe"
+
+#: accounts/views.py:464
+#, python-format
+msgid "An older application of yours for organization \"%s\" is still pending."
+msgstr "Tá sean-iarratas a rinne tú ar an eagraíocht \"%s\" fós ar feitheamh."
+
+#: accounts/views.py:486
+msgid "New organization membership request"
+msgstr ""
+"Iarratas ar bhallraíocht eagraíochta nua | New organisation membership "
+"request"
+
+#: accounts/views.py:493
+msgid ""
+"There was an error sending out the request email for your organization "
+"application."
+msgstr ""
+"Tharla earráid agus an rphoist iarrtha do d’iarratas ar eagraíocht á "
+"sheoladh amach."
+
+#: accounts/views.py:496
+#, python-format
+msgid "You have successfully applied for organization \"%s\"."
+msgstr "Tá tú tar éis cur isteach ar eagraíocht \"%s\"."
+
+#: accounts/views.py:507
+msgid ""
+"There are no organizations in the database, yet, for which you could apply. "
+"Please ask the system administrator to create one."
+msgstr ""
+"Níl aon eagraíochtaí sa bhunachar sonraí, go fóill, ar féidir leat cur "
+"isteach orthu. Iarr ar an riarthóir córais ceann a chruthú."
+
+#: accounts/views.py:515
+msgid "Apply for organization membership"
+msgstr "Déan iarratas ar bhallraíocht in eagraíocht"
+
+#: accounts/views.py:550
+msgid "Please confirm your ELRI password reset request"
+msgstr ""
+"Deimhnigh d’iarratas ar athshocrú pasfhocail ELRI | Please confirm your ELRI "
+"password reset request"
+
+#: accounts/views.py:561
+msgid ""
+"We have received your password reset request and sent you an email with "
+"further instructions."
+msgstr ""
+"Tá d’iarratas ar athshocrú pasfhocail faighte againn agus tá rphost le níos "
+"mó treoracha seolta chugat."
+
+#: accounts/views.py:571
+msgid "Reset user account"
+msgstr "Athshocraigh cuntas úsáideora"
+
+#: accounts/views.py:597
+msgid "Your ELRI user account has been re-activated"
+msgstr "Tá do chuntas úsáideora ELRI athghníomhachtaithe"
+
+#: accounts/views.py:603
+#, python-format
+msgid ""
+"There was an error sending out the activation email for your user account. "
+"Please contact the administrator at %s."
+msgstr ""
+"Tharla earráid agus an rphoist ghníomhachtaithe do do chuntas úsáideora á "
+"sheoladh amach. Déan teagmháil leis an riarthóir ag %s."
+
+#: accounts/views.py:612
+msgid ""
+"We have re-activated your user account and sent you an email with your "
+"personal password which allows you to login to the website."
+msgstr ""
+"Tá do chuntas úsáideora athghníomhachtaithe againn agus rphost seolta "
+"chugatle do phasfhocal pearsanta a thugann deis duit logáil isteach ar an "
+"suíomh gréasáin."
+
+#: accounts/views.py:657
+msgid "Apply for eDelivery membership"
+msgstr "Cuir isteach ar bhallraíocht in eDelivery"
+
+#~ msgid "Phone number"
+#~ msgstr "Uimhir ghutháin"
+
+#~ msgid "Contributor group"
+#~ msgstr "Grúpa rannpháirtithe"

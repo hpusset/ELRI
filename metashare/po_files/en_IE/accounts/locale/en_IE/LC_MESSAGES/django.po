@@ -1,0 +1,764 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-04-04 13:42+0200\n"
+"PO-Revision-Date: 2019-04-08 16:16+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_IE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#: accounts/admin.py:82
+msgid "Editor groups"
+msgstr ""
+
+#: accounts/admin.py:94
+msgid "Managed Editor Groups"
+msgstr ""
+
+#: accounts/admin.py:105
+msgid "Organizations"
+msgstr "Organisations"
+
+#: accounts/admin.py:117
+msgid "Managed organizations"
+msgstr "Managed organisations"
+
+#: accounts/admin.py:137 accounts/admin.py:475 accounts/admin.py:627
+#: accounts/admin.py:935
+msgid "Members"
+msgstr ""
+
+#: accounts/admin.py:147 accounts/admin.py:637
+msgid "Managing groups"
+msgstr ""
+
+#: accounts/admin.py:158 accounts/admin.py:648
+msgid "Managers"
+msgstr ""
+
+#: accounts/admin.py:199
+msgid "Cancelled adding users to the editor group."
+msgstr ""
+
+#: accounts/admin.py:212
+msgid "You need to be group manager to add a user to this editor group."
+msgstr ""
+
+#: accounts/admin.py:214
+msgid "Successfully added users to editor group."
+msgstr ""
+
+#: accounts/admin.py:223
+msgid "Add Users to Editor Group"
+msgstr ""
+
+#: accounts/admin.py:228 accounts/admin.py:555 accounts/admin.py:699
+#: accounts/admin.py:1012
+msgid "Add user"
+msgstr ""
+
+#: accounts/admin.py:234
+msgid "Add users to selected editor groups"
+msgstr ""
+
+#: accounts/admin.py:240
+msgid "Cancelled removing users from the editor group."
+msgstr ""
+
+#: accounts/admin.py:250
+msgid "Successfully removed users from editor group."
+msgstr ""
+
+#: accounts/admin.py:259
+msgid "Remove Users from Editor Group"
+msgstr ""
+
+#: accounts/admin.py:264 accounts/admin.py:597 accounts/admin.py:735
+#: accounts/admin.py:1053
+msgid "Remove user"
+msgstr ""
+
+#: accounts/admin.py:270
+msgid "Remove users from selected editor groups"
+msgstr ""
+
+#: accounts/admin.py:287
+msgid "You must be superuser or group manager to accept applications."
+msgstr ""
+
+#: accounts/admin.py:311 accounts/admin.py:779
+msgid "Application accepted"
+msgstr "Iarratas glactha  | Application accepted"
+
+#: accounts/admin.py:318 accounts/admin.py:786
+msgid "There was an error sending out an application acceptance e-mail."
+msgstr ""
+
+#: accounts/admin.py:321
+#, python-format
+msgid ""
+"You have successfully accepted \"%(user)s\" as member of the editor group "
+"\"%(group)s\"."
+msgstr ""
+
+#: accounts/admin.py:326 accounts/admin.py:794
+#, python-format
+msgid ""
+"Successfully accepted %(accepted)d of %(total)d applications. You have no "
+"permissions to accept the remaining applications."
+msgstr ""
+
+#: accounts/admin.py:332 accounts/admin.py:800
+msgid "Successfully accepted all requests."
+msgstr ""
+
+#: accounts/admin.py:336
+msgid "Accept selected editor group applications"
+msgstr ""
+
+#: accounts/admin.py:370 accounts/admin.py:830
+msgid "Application turned down"
+msgstr "Iarratas diúltaithe  | Application declined "
+
+#: accounts/admin.py:378 accounts/admin.py:838
+msgid ""
+"There was an error sending out an e-mail about turning down the application."
+msgstr "There was an error sending an e-mail about declining the application."
+
+#: accounts/admin.py:381
+#, python-format
+msgid ""
+"You have successfully turned down \"%(user)s\" from the editor group "
+"\"%(group)s\"."
+msgstr ""
+"You have successfully declined \"%(user)s\" from the editor group \"%(group)s"
+"\"."
+
+#: accounts/admin.py:423 accounts/admin.py:883
+#, python-format
+msgid "Successfully turned down %(count)d %(items)s."
+msgstr "Successfully declined %(count)d %(items)s."
+
+#: accounts/admin.py:435 accounts/admin.py:895
+#, python-format
+msgid "Cannot turn down %(name)s"
+msgstr "Cannot decline %(name)s"
+
+#: accounts/admin.py:437 accounts/admin.py:897
+msgid "Are you sure?"
+msgstr ""
+
+#: accounts/admin.py:456
+msgid "Turn down selected editor group applications"
+msgstr "Decline selected editor group applications"
+
+#: accounts/admin.py:531
+msgid "Cancelled adding users to the editor group managers."
+msgstr ""
+
+#: accounts/admin.py:541
+msgid "Successfully added users to editor group managers."
+msgstr ""
+
+#: accounts/admin.py:550
+msgid "Add Users to Editor Group Managers"
+msgstr ""
+
+#: accounts/admin.py:561
+msgid ""
+"You need to be a superuser to add a user to these editor group managers."
+msgstr ""
+
+#: accounts/admin.py:565
+msgid "Add users to selected editor group managers"
+msgstr ""
+
+#: accounts/admin.py:571
+msgid "Cancelled removing users from editor group managers."
+msgstr ""
+
+#: accounts/admin.py:582
+msgid "Successfully removed users from editor group managers."
+msgstr ""
+
+#: accounts/admin.py:592
+msgid "Remove Users from Editor Group Managers"
+msgstr ""
+
+#: accounts/admin.py:603
+msgid ""
+"You need to be a superuser to remove a user from these editor group managers."
+msgstr ""
+
+#: accounts/admin.py:607
+msgid "Remove users from selected editor group managers"
+msgstr ""
+
+#: accounts/admin.py:669
+msgid "Cancelled adding users to the organization."
+msgstr "Cancelled adding users to the organisation."
+
+#: accounts/admin.py:683
+msgid ""
+"You need to be organization managers to add a user to this organization."
+msgstr ""
+"You need to be an organisation manager to add a user to this organisation."
+
+#: accounts/admin.py:685
+msgid "Successfully added users to organization."
+msgstr "Successfully added users to organisation."
+
+#: accounts/admin.py:694
+msgid "Add Users to Organization"
+msgstr "Add Users to Organisation"
+
+#: accounts/admin.py:705
+msgid "Add users to selected organizations"
+msgstr "Add users to selected organisations"
+
+#: accounts/admin.py:711
+msgid "Cancelled removing users from the organization."
+msgstr "Cancelled removing users from the organisation."
+
+#: accounts/admin.py:721
+msgid "Successfully removed users from organization."
+msgstr "Successfully removed users from organisation."
+
+#: accounts/admin.py:730
+msgid "Remove Users from Organization"
+msgstr "Remove Users from Organisation"
+
+#: accounts/admin.py:741
+msgid "Remove users from selected organizations"
+msgstr "Remove users from selected organisations"
+
+#: accounts/admin.py:758
+msgid "You must be superuser or organization manager to accept applications."
+msgstr "You must be superuser or organisation manager to accept applications."
+
+#: accounts/admin.py:789
+#, python-format
+msgid ""
+"You have successfully accepted \"%(user)s\" as member of the organization "
+"\"%(group)s\"."
+msgstr ""
+"You have successfully accepted \"%(user)s\" as member of the organisation "
+"\"%(group)s\"."
+
+#: accounts/admin.py:804
+msgid "Accept selected organization applications"
+msgstr "Accept selected organisation applications"
+
+#: accounts/admin.py:841
+#, python-format
+msgid ""
+"You have turned down the application of \"%(user)s\" for membership in the "
+"organization \"%(group)s\"."
+msgstr ""
+"You have rejected the application of \"%(user)s\" for membership in the "
+"organisation \"%(group)s\"."
+
+#: accounts/admin.py:916
+msgid "Turn down selected organization applications"
+msgstr "Decline selected organisation applications"
+
+#: accounts/admin.py:986
+msgid "Cancelled adding users to the organization managers."
+msgstr "Cancelled adding users to the organisation managers."
+
+#: accounts/admin.py:998
+msgid "Successfully added users to organization managers."
+msgstr "Successfully added users to organisation managers."
+
+#: accounts/admin.py:1007
+msgid "Add Users to Organization Manager Group"
+msgstr "Add Users to Organisation Manager Group"
+
+#: accounts/admin.py:1018
+msgid ""
+"You need to be a superuser to add a user to these organization managers."
+msgstr ""
+"You need to be a superuser to add a user to these organisation managers."
+
+#: accounts/admin.py:1022
+msgid "Add users to selected organization managers"
+msgstr "Add users to selected organisation managers"
+
+#: accounts/admin.py:1028
+msgid "Cancelled removing users from the organization managers."
+msgstr "Cancelled removing users from the organisation managers."
+
+#: accounts/admin.py:1038
+msgid "Successfully removed users from organization managers."
+msgstr "Successfully removed users from organisation managers."
+
+#: accounts/admin.py:1048
+msgid "Remove Users from Organization Manager Group"
+msgstr "Remove Users from Organisation Manager Group"
+
+#: accounts/admin.py:1059
+msgid ""
+"You need to be a superuser to remove a user from these organization managers."
+msgstr ""
+"You need to be a superuser to remove a user from these organisation managers."
+
+#: accounts/admin.py:1063
+msgid "Remove users from selected organization managers"
+msgstr "Remove users from selected organisation managers"
+
+#: accounts/admin.py:1116
+msgid "You must be superuser to accept eDelivery applications."
+msgstr ""
+
+#: accounts/admin.py:1130
+msgid "Accept selected eDelivery applications"
+msgstr ""
+
+#: accounts/admin.py:1135
+msgid "You must be superuser to reject eDelivery applications."
+msgstr ""
+
+#: accounts/admin.py:1145 accounts/admin.py:1193
+msgid "ELRI eDelivery application"
+msgstr "Iarratas eDelivery ELRI | ELRI eDelivery application "
+
+#: accounts/admin.py:1157
+msgid "{} cannot be rejected. Only \"PENDING\" applications can be rejected"
+msgstr ""
+
+#: accounts/admin.py:1161
+msgid "Reject selected eDelivery applications"
+msgstr ""
+
+#: accounts/admin.py:1166
+msgid "You must be superuser to revoke active eDelivery applications."
+msgstr ""
+
+#: accounts/admin.py:1206
+msgid "{} cannot be rejected. Only \"ACTIVE\" applications can be revoked."
+msgstr "{} cannot be rejected. Only “ACTIVE” applications can be rejected."
+
+#: accounts/admin.py:1210
+msgid "Revoke selected eDelivery applications"
+msgstr ""
+
+#: accounts/admin.py:1215
+msgid "You must be superuser to reactivate revoked eDelivery applications."
+msgstr "You must be superuser to reactivate rejected eDelivery applications."
+
+#: accounts/admin.py:1226
+msgid ""
+"{} cannot be reactivated. Only \"REVOKED\" applications can be reactivated."
+msgstr ""
+
+#: accounts/admin.py:1230
+msgid "Reactivate selected eDelivery applications"
+msgstr ""
+
+#: accounts/forms.py:75
+msgid "Desired account name"
+msgstr "What do you want to call your account?"
+
+#: accounts/forms.py:77
+msgid "First name"
+msgstr "Name"
+
+#: accounts/forms.py:79
+msgid "Last name"
+msgstr "Surname"
+
+#: accounts/forms.py:80
+msgid "E-mail"
+msgstr ""
+
+#: accounts/forms.py:88
+msgid "Organization name"
+msgstr "Organisation name"
+
+#: accounts/forms.py:91
+msgid "Organization address"
+msgstr "Organisation address"
+
+#: accounts/forms.py:95
+msgid "Organization phone number"
+msgstr "Organisation phone number"
+
+#: accounts/forms.py:98
+msgid "Position in the organization"
+msgstr "Position in the organisation"
+
+#: accounts/forms.py:107
+msgid "Password"
+msgstr ""
+
+#: accounts/forms.py:111
+msgid "Password confirmation"
+msgstr ""
+
+#: accounts/forms.py:137
+msgid "User account name already exists, please choose another one."
+msgstr ""
+
+#: accounts/forms.py:151 accounts/forms.py:154
+msgid "There is already an account registered with this e-mail address."
+msgstr ""
+
+#: accounts/forms.py:165
+msgid "The two password fields did not match."
+msgstr ""
+
+#: accounts/forms.py:172
+msgid "This password is entirely numeric. "
+msgstr ""
+
+#: accounts/forms.py:174
+msgid "This password is too common. "
+msgstr ""
+
+#: accounts/forms.py:176
+msgid "This password is too short. It must contain at least 9 characters. "
+msgstr ""
+
+#: accounts/forms.py:178
+#, python-format
+msgid "The password is too similar to the%s"
+msgstr "The password is too similar to the%s"
+
+#: accounts/forms.py:204
+msgid "Subject"
+msgstr ""
+
+#: accounts/forms.py:205
+msgid "Please provide a meaningful and sufficiently indicative subject."
+msgstr ""
+"Please provide a relevant subject that effectively summarises your query."
+
+#: accounts/forms.py:207
+msgid "Message"
+msgstr ""
+
+#: accounts/forms.py:208
+msgid ""
+"Your message appears to be rather short. Please make sure to phrase your "
+"request as precise as possible. This will help us to process it as quick as "
+"possible."
+msgstr ""
+"Your message appears to be rather short. Please make sure to phrase your "
+"request as precisely as possible. This will help us to process it as quickly "
+"as possible."
+
+#: accounts/forms.py:218
+msgid "Username"
+msgstr ""
+
+#: accounts/forms.py:219
+msgid "Email"
+msgstr ""
+
+#: accounts/forms.py:230
+msgid "Not a valid username-email combination."
+msgstr ""
+
+#: accounts/forms.py:276
+msgid "default editor groups"
+msgstr ""
+
+#: accounts/models.py:132
+msgid "MSH Endpoint"
+msgstr ""
+
+#: accounts/models.py:133
+msgid "Gateway Party Name"
+msgstr ""
+
+#: accounts/models.py:134
+msgid "Gateway Party ID"
+msgstr ""
+
+#: accounts/models.py:135
+msgid "Public Cetificate"
+msgstr ""
+
+#: accounts/models.py:136
+msgid "Application Status"
+msgstr ""
+
+#: accounts/models.py:138
+msgid "Rejection Reason"
+msgstr ""
+
+#: accounts/models.py:139
+msgid "Date Created"
+msgstr ""
+
+#: accounts/models.py:145
+#, python-brace-format
+msgid "eDelivery Application for user: \"{0}\""
+msgstr ""
+
+#: accounts/models.py:206
+msgid "editor group managers group"
+msgstr ""
+
+#: accounts/models.py:250
+msgid "organization managers group"
+msgstr "Organisation managers group"
+
+#: accounts/models.py:262
+msgid "Not a valid phone number"
+msgstr ""
+
+#: accounts/models.py:274
+msgid "Is a META-SHARE associate member."
+msgstr ""
+
+#: accounts/models.py:275
+msgid "Is a META-SHARE full member."
+msgstr ""
+
+#: accounts/models.py:282
+msgid "Date of birth"
+msgstr ""
+
+#: accounts/models.py:285
+msgid "Phone Number"
+msgstr ""
+
+#: accounts/models.py:287
+msgid "Country"
+msgstr ""
+
+#: accounts/models.py:290
+msgid "Affiliation(s)"
+msgstr ""
+
+#: accounts/models.py:291
+msgid "Affiliation address"
+msgstr ""
+
+#: accounts/models.py:292
+msgid "Affiliation phone number"
+msgstr ""
+
+#: accounts/models.py:294
+msgid "Position"
+msgstr ""
+
+#: accounts/models.py:295
+msgid "Homepage"
+msgstr ""
+
+#: accounts/views.py:57
+msgid "Your ELRI user account has been activated"
+msgstr ""
+"Tá do chuntas úsáideora ELRI gníomhachtaithe  | Your ELRI user account has "
+"been activated "
+
+#: accounts/views.py:64
+msgid "We have activated user account for user {}."
+msgstr ""
+
+#: accounts/views.py:91
+#, python-format
+msgid "[ELRI] Contact Form Request: %s"
+msgstr ""
+"Iarratas ar Fhoirm Teagmhála [ELRI]: | [ELRI] Contact Form Request:  %s"
+
+#: accounts/views.py:98
+#, python-format
+msgid ""
+"Oops, there was an error sending out your contact request. You can copy your "
+"message and try again later: <pre>%s</pre>"
+msgstr ""
+"Oops, there was an error sending your contact request. You can copy your "
+"message and try again later: <pre>%s</pre>"
+
+#: accounts/views.py:103
+msgid ""
+"We have received your message and successfully sent it to the node "
+"maintainers. Please give them some days to get back to you."
+msgstr ""
+
+#: accounts/views.py:110
+msgid "Contact Node Maintainers"
+msgstr ""
+
+#: accounts/views.py:175
+msgid "New user registration"
+msgstr "Clárúchán úsáideora nua | New user registration "
+
+#: accounts/views.py:183
+msgid ""
+"There was an error sending out the notification email to the administrators. "
+"Please contact them directly."
+msgstr ""
+"There was an error sending the notification email to the administrators. "
+"Please contact them directly."
+
+#: accounts/views.py:191
+msgid ""
+"We have received your registration data and sent the administrators a "
+"notification email.You will receive an email when your account has been "
+"activated."
+msgstr ""
+"We have received your registration data and sent the administrators a "
+"notification email. You will receive an email when your account has been "
+"activated."
+
+#: accounts/views.py:247
+msgid "You have successfully updated your profile information."
+msgstr ""
+
+#: accounts/views.py:259
+msgid "full member"
+msgstr ""
+
+#: accounts/views.py:261
+msgid "associate member"
+msgstr ""
+
+#: accounts/views.py:264
+msgid "Edit Profile Information"
+msgstr ""
+
+#: accounts/views.py:310
+#, python-format
+msgid "An older application of yours for editor group \"%s\" is still pending."
+msgstr ""
+"An existing application you made for editor group \"%s\" is still pending."
+
+#: accounts/views.py:332
+msgid "New editor membership request"
+msgstr ""
+"Iarratas ar bhallríocht eagarthóra nua | New editor membership request "
+
+#: accounts/views.py:339
+msgid ""
+"There was an error sending out the request email for your editor group "
+"application."
+msgstr ""
+"There was an error sending the request email for your editor group "
+"application."
+
+#: accounts/views.py:342
+#, python-format
+msgid "You have successfully applied for editor group \"%s\"."
+msgstr ""
+
+#: accounts/views.py:353
+msgid ""
+"There are no editor groups in the database, yet, for which you could apply. "
+"Please ask the system administrator to create one."
+msgstr ""
+"There are no editor groups in the database yet for which you could apply. "
+"Please ask the system administrator to create one."
+
+#: accounts/views.py:361
+msgid "Apply for editor group membership"
+msgstr ""
+
+#: accounts/views.py:410
+#, python-format
+msgid "You have successfully added default editor group \"%s\"."
+msgstr ""
+
+#: accounts/views.py:417
+#, python-format
+msgid "You have successfully removed default editor group \"%s\"."
+msgstr ""
+
+#: accounts/views.py:429
+msgid "There are no editor groups you could add to your default list."
+msgstr "There are no editor groups that you could add to your default list."
+
+#: accounts/views.py:436
+msgid "Update default editor groups"
+msgstr ""
+
+#: accounts/views.py:464
+#, python-format
+msgid "An older application of yours for organization \"%s\" is still pending."
+msgstr ""
+"An existing application you made for organisation \"%s\" is still pending."
+
+#: accounts/views.py:486
+msgid "New organization membership request"
+msgstr ""
+"Iarratas ar bhallraíocht eagraíochta nua | New organisation membership "
+"request "
+
+#: accounts/views.py:493
+msgid ""
+"There was an error sending out the request email for your organization "
+"application."
+msgstr ""
+"There was an error sending the request email for your organisation "
+"application."
+
+#: accounts/views.py:496
+#, python-format
+msgid "You have successfully applied for organization \"%s\"."
+msgstr "You have successfully applied for organisation \"%s\"."
+
+#: accounts/views.py:507
+msgid ""
+"There are no organizations in the database, yet, for which you could apply. "
+"Please ask the system administrator to create one."
+msgstr ""
+"There are no organisations in the database yet for which you could apply. "
+"Please ask the system administrator to create one."
+
+#: accounts/views.py:515
+msgid "Apply for organization membership"
+msgstr "Apply for organisation membership"
+
+#: accounts/views.py:550
+msgid "Please confirm your ELRI password reset request"
+msgstr ""
+"Deimhnigh d’iarratas ar athshocrú pasfhocail ELRI | Please confirm your ELRI "
+"password reset request  "
+
+#: accounts/views.py:561
+msgid ""
+"We have received your password reset request and sent you an email with "
+"further instructions."
+msgstr ""
+
+#: accounts/views.py:571
+msgid "Reset user account"
+msgstr ""
+
+#: accounts/views.py:597
+msgid "Your ELRI user account has been re-activated"
+msgstr ""
+
+#: accounts/views.py:603
+#, python-format
+msgid ""
+"There was an error sending out the activation email for your user account. "
+"Please contact the administrator at %s."
+msgstr ""
+"There was an error sending the activation email for your user account. "
+"Please contact the administrator at %s."
+
+#: accounts/views.py:612
+msgid ""
+"We have re-activated your user account and sent you an email with your "
+"personal password which allows you to login to the website."
+msgstr ""
+"We have re-activated your user account and sent you an email with your "
+"personal password, which allows you to login to the website."
+
+#: accounts/views.py:657
+msgid "Apply for eDelivery membership"
+msgstr ""
