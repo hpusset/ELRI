@@ -761,7 +761,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
                         licences_restriction.append(lic_restriction)
                        
                     resource_path=obj.storage_object._storage_folder()
-                    resource_path=obj.storage_object._storage_folder()
                     lr_archive_zip=zipfile.ZipFile(resource_path+'/archive.zip', mode='a')
                     '''licence file is added after ingesting the resource
                     user_membership = _get_user_membership(request.user) 
