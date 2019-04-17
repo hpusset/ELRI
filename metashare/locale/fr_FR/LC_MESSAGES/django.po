@@ -7,35 +7,39 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-08 09:52+0100\n"
-"PO-Revision-Date: 2018-11-13 17:36+0100\n"
+"POT-Creation-Date: 2019-04-05 10:45+0200\n"
+"PO-Revision-Date: 2019-04-05 13:49+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: edelivery/management/commands/get_new_edelivery_messages.py:23
 msgid "New contributions through eDelivery"
-msgstr ""
+msgstr "Nouvelles contributions par eDelivery"
 
 #: edelivery/management/commands/get_new_edelivery_messages.py:24
 msgid ""
 "You have new unmanaged contributed resources on elri.eu, through eDelivery."
 msgstr ""
+"Vous avez des nouvelles ressources contribuées et non managées sur elri.eu, "
+"via eDelivery."
 
 #: edelivery/management/commands/get_new_edelivery_messages.py:29
 msgid ""
 "An error has occurred while trying to send email to contributions alert "
 "recipients."
 msgstr ""
+"Une erreur s'est produite lors de la tentative d'envoi d'e-mails aux "
+"destinataires des alertes de contributions."
 
-#: local_settings.py:43
-msgid "Spanish"
-msgstr "Espagnol"
+#: local_settings.py:45
+msgid "French"
+msgstr "Français"
 
 #: storage/models.py:113
 msgid "Can synchronize"
@@ -46,34 +50,33 @@ msgid ""
 "(Read-only) base URL for the server where the master copy of the associated "
 "language resource is located."
 msgstr ""
-"(Lecture seule) l'URL de base du serveur où la copy originale de la langue "
-"associée est situé."
+"(Lecture seule) URL de base pour le serveur où la copie originale de la "
+"ressource linguistique associée est située."
 
 #: storage/models.py:122
 msgid "(Read-only) unique identifier for this storage object instance."
 msgstr ""
-"(Lecture seule) identifiant unique pour cette instance de l'objet de "
-"stockage."
+"(Lecture seule) identifiant unique pour cette instance d'objet de stockage."
 
 #: storage/models.py:126
 msgid "(Read-only) creation date for this storage object instance."
 msgstr ""
-"(Lecture seule) date de création de cette instance de l'objet de stockage."
+"(Lecture seule) date de création de cette instance d'objet de stockage."
 
 #: storage/models.py:129
 msgid ""
 "(Read-only) last modification date of the metadata XML for this storage "
 "object instance."
 msgstr ""
-"(Lecture seule) date de dernière modification des métadonnées XML de cette "
-"instance de l'objet de stockage."
+"(Lecture seule) date de dernière modification des métadonnées XML pour cette "
+"instance d'objet de stockage."
 
 #: storage/models.py:133
 msgid ""
 "(Read-only) MD5 checksum of the binary data for this storage object instance."
 msgstr ""
-"(Lecture seule) Somme de contrôle MD5 des données binaires de cette instance "
-"d'objet de stockage."
+"(Lecture seule) Somme de contrôle MD5 des données binaires pour cette "
+"instance d'objet de stockage."
 
 #: storage/models.py:137
 msgid ""
@@ -82,48 +85,51 @@ msgid ""
 "instance."
 msgstr ""
 "(Lecture seule) somme de contrôle du fichier zip résumé contenant l'objet de "
-"série globale et les métadonnées XML de cette instance d'objet de stockage."
+"stockage sérialisé global et les métadonnées XML pour cette instance d'objet "
+"de stockage."
 
 #: storage/models.py:142
 msgid ""
 "(Read-only) last modification date of digest zip for this storage object "
 "instance."
 msgstr ""
-"(Lecture seule) date dernière modification du fichier zip résumé de cette "
-"instance de l'objet de stockage."
+"(Lecture seule) date de dernière modification du fichier zip résumé pour "
+"cette instance d'objet de stockage."
 
 #: storage/models.py:146
 msgid ""
 "(Read-only) last update check date of digest zip for this storage object "
 "instance."
 msgstr ""
-"(Lecture seule) date dernière mise à jour du fichier zip résumé de cette "
-"instance de l'objet de stockage."
+"(Lecture seule) date de dernière mise à jour du fichier zip résumé pour "
+"cette instance d'objet de stockage."
 
 #: storage/models.py:149
 msgid "Revision or version information for this storage object instance."
 msgstr ""
-"Révision ou information de version de cette instance d'objet de stockage?"
+"Révision ou information de version pour cette instance d'objet de stockage."
 
 #: storage/models.py:154
 msgid "(Read-only) META-SHARE version used with the storage object instance."
 msgstr ""
-"(Lecture seule) version META-SHARE utilisée avec cette instance d'objet de "
-"stockage?"
+"(Lecture seule) version META-SHARE utilisée avec l'instance d'objet de "
+"stockage."
 
 #: storage/models.py:158
-#, fuzzy
-#| msgid "Specifies whether the resource is collected by ELRC 1"
 msgid "Specifies whether the resource is collected by ELRI 1"
-msgstr "Précise si la ressource est collectée par ELRC 1"
+msgstr "Précise si la ressource est collectée par ELRI"
 
 #: storage/models.py:173
 msgid "Generalized copy status flag for this storage object instance."
-msgstr "Statut de la copie généralisée  de cet instance d'objet de stockage."
+msgstr ""
+"Drapeau d'état généralisé de la copie pour cette instance d'objet de "
+"stockage."
 
 #: storage/models.py:191
 msgid "Generalized publication status flag for this storage object instance."
-msgstr "Statut de publication de cette instance d'objet de stockage."
+msgstr ""
+"Drapeau d'état généralisé de la publication de cette instance d'objet de "
+"stockage."
 
 #: storage/models.py:195
 msgid ""
@@ -137,13 +143,13 @@ msgstr ""
 
 #: storage/models.py:199
 msgid "Deletion status flag for this storage object instance."
-msgstr "Statut de cette instance d'objet de stockage"
+msgstr "Drapeau d'état de suppression pour cette instance d'objet de stockage."
 
 #: storage/models.py:203
 msgid ""
 "XML containing the metadata description for this storage object instance."
 msgstr ""
-"XML contenant les métadonnées de description de cette instance d'objet de "
+"XML contenant la description de métadonnées pour cette instance d'objet de "
 "stockage."
 
 #: storage/models.py:207
@@ -151,16 +157,16 @@ msgid ""
 "text containing the JSON serialization of global attributes for this storage "
 "object instance."
 msgstr ""
-"texte contenant la série JSON des attributs globaux de cette instance "
-"d'objet de stockage."
+"texte contenant la sérialisation JSON des attributs globaux pour cette "
+"instance d'objet de stockage."
 
 #: storage/models.py:211
 msgid ""
 "text containing the JSON serialization of local attributes for this storage "
 "object instance."
 msgstr ""
-"texte contenant la série JSON des attributs locaux de cette instance d'objet "
-"de stockage."
+"texte contenant la sérialisation JSON des attributs locaux pour cette "
+"instance d'objet de stockage."
 
 #: views.py:22
 #, python-format
@@ -168,21 +174,25 @@ msgid ""
 "Please enter a correct %(username)s and password, Note that both fields may "
 "be case-sensitive."
 msgstr ""
+"Veuillez entrer un %(username)s et un mot de passe corrects. Notez que les "
+"deux champs peuvent être sensibles à la casse."
 
 #: views.py:24
 msgid ""
 "This account has not been activated yet. Please contact us if there is any "
 "issue with an existing account."
 msgstr ""
+"Ce compte n'a pas encore été activé. Veuillez nous contacter en cas de "
+"problème avec un compte existant."
+
+#~ msgid "Spanish"
+#~ msgstr "Espagnol"
 
 #~ msgid "Gaelic"
 #~ msgstr "Gaélique"
 
 #~ msgid "English"
 #~ msgstr "Anglais"
-
-#~ msgid "French"
-#~ msgstr "Français"
 
 #~ msgid "Portuguese"
 #~ msgstr "Portugais"

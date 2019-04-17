@@ -51,7 +51,7 @@ from django.utils.translation import ugettext as _
 from haystack.views import FacetedSearchView
 
 from metashare.accounts.models import UserProfile, Organization, OrganizationManagers
-from metashare.local_settings import CONTRIBUTIONS_ALERT_EMAILS, TMP, SUPPORTED_LANGUAGES, EMAIL_ADDRESSES
+from metashare.local_settings import CONTRIBUTIONS_ALERT_EMAILS, TMP, SUPPORTED_LANGUAGES, EMAIL_ADDRESSES, COUNTRY
 from metashare.recommendations.recommendations import SessionResourcesTracker, \
     get_download_recommendations, get_view_recommendations, \
     get_more_from_same_creators_qs, get_more_from_same_projects_qs
@@ -298,7 +298,8 @@ def download_contact(request, object_id):
                                  storage_object__identifier=object_id,
                                  storage_object__publication_status=PUBLISHED)
 
-    default_message = "We are interested in using the above mentioned " \
+    default_message = ""
+    """_("We are interested in using the above mentioned " \
                       "resource. Please provide us with all the relevant information (e.g.," \
                       " licensing provisions and restrictions, any fees required etc.) " \
                       "which is necessary for concluding a deal for getting a license. We " \
@@ -307,8 +308,8 @@ def download_contact(request, object_id):
                       "[Please include here any other request you may have regarding this " \
                       "resource or change this message altogether]\n\n" \
                       "Please kindly use the above mentioned e-mail address for any " \
-                      "further communication."
-
+                      "further communication.")
+"""
     # Find out the relevant resource contact emails and names
     resource_emails = []
     resource_contacts = []
@@ -1116,9 +1117,11 @@ def contribute(request):
             licence_file_object = request.FILES.get('licenceFile')
             if licence_file_object:
                 # a licence file has been uploaded
-                licence_filename = filename + "_licence.pdf"
+                lfilename = u'_'.join(request.POST['resourceTitle'].split())
+                licence_filename = lfilename + "_licence.pdf"
                 licence_filepath = os.path.sep.join((unprocessed_dir,
                                                      licence_filename))
+                #TODO:que pasa si ya existe el archivo? que pasa si dos recursos se llaman igual y suben una licencia adhoc?
                 with open(licence_filepath, 'wb+') as licence_destination:
                     for chunk in licence_file_object.chunks():
                         licence_destination.write(chunk)
@@ -1216,7 +1219,8 @@ def contribute(request):
     languages=SUPPORTED_LANGUAGES
 
     return render_to_response('repository/editor/contributions/contribute.html', \
-                              {'groups':Organization.objects.values_list("name","id").filter(id__in = request.user.groups.values_list("id")), 'languages':languages},
+                              {'groups':Organization.objects.values_list("name","id").filter(id__in = request.user.groups.values_list("id")), 'languages':languages,
+                               'country':COUNTRY},
                               context_instance=RequestContext(request))
 
 

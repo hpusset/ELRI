@@ -61,8 +61,7 @@ def confirm(request, uuid):
         pass
 
     # Add a message to the user after successful creation.
-    messages.success(request, _("We have activated user account for user {}."\
-                                .format(user.username)))
+    messages.success(request, _("We have activated user account for user {}.").format(user.username))
     
     # Redirect the user to the front page.
     return redirect('metashare.views.frontpage')
@@ -206,7 +205,7 @@ def create(request):
     
     elri_tos='/static/metashare/ELRI_ToS_'+lang+'.pdf'
         
-    dictionary = {'title': 'Create Account', 'form': form, 'elri_tos': elri_tos }
+    dictionary = {'title': _('Create Account'), 'form': form, 'elri_tos': elri_tos }
     return render_to_response('accounts/create_account.html', dictionary,
       context_instance=RequestContext(request))
 
