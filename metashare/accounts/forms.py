@@ -71,7 +71,7 @@ class RegistrationRequestForm(Form):
     """
     Form used to create user account requests from new users.
     """
-    alphanumeric = RegexValidator(r'^[0-9a-zA-Z@.+\-_]*$', _(u'username can only contain letters, numbers and @ . + - _'))
+    alphanumeric = RegexValidator(r'^[0-9a-zA-Z@.+\-_]*$', _(u'This value may contain only letters, numbers and @/./+/-/_ characters.'))
     shortname = forms.CharField(max_length=User._meta.get_field('username').max_length,validators=[alphanumeric],
                                 label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Desired account name")))
     first_name = forms.CharField(User._meta.get_field('first_name').max_length,
