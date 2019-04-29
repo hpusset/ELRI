@@ -685,11 +685,12 @@ class ResourceModelAdmin(SchemaModelAdmin):
                         elif l == 'openUnder-PSI':
                             access_links=STATIC_URL + 'metashare/licences/openUnderPSI.txt'
                         elif l == 'non-standard/Other_Licence/Terms' :
-                            unprocessed_dir = "/unprocessed"
-                            access_links=unprocessed_dir+'/'+u'_'.join(resource_name[0].split())+'_licence.pdf'
+                            #unprocessed_dir = "/unprocessed"
+                            access_links= STATIC_URL + 'metashare/licences/'+u'_'.join(resource_name[0].split())+'_licence.pdf'#openUnderPSI.txt'
+                            #unprocessed_dir+'/'+u'_'.join(resource_name[0].split())+'_licence.pdf'
                         else:
                             access_links,attr=LICENCEINFOTYPE_URLS_LICENCE_CHOICES[l]  #(l)#, None)
-                            LOGGER.info(access_links)
+                            #LOGGER.info(access_links)
                     #add access file to the lr.archive.zip file 
                     licence_path=ROOT_PATH+access_links
                     path, filename = os.path.split(licence_path)

@@ -162,6 +162,7 @@ def download(request, object_id, **kwargs):
 
     if request.method == "POST":
         licence_choice = request.POST.get('licence', None)
+        LOGGER.info(licence_choice)
         if licence_choice and 'in_licence_agree_form' in request.POST:
             la_form = LicenseAgreementForm(licence_choice, data=request.POST)
             l_info, access_links, access = licences[licence_choice]
@@ -179,6 +180,9 @@ def download(request, object_id, **kwargs):
                          'l_name': l_info.otherLicenceName,
                          'l_url': l_info.otherLicence_TermsURL,
                          'l_text': l_info.otherLicence_TermsText.values()}
+                if licence_choice == 'non-standard/Other_Licence/Terms':
+                    res_name=resource.identificationInfo.get_default_resourceName()
+                    _dict['licence_path']=STATIC_URL + 'metashare/licences/'+u'_'.join(res_name.split())+'_licence.pdf'
                 return render_to_response('repository/licence_agreement.html',
                                           _dict, context_instance=RequestContext(request))
         elif licence_choice and not licence_choice in licences:
@@ -198,6 +202,10 @@ def download(request, object_id, **kwargs):
                  'l_url': l_info.otherLicence_TermsURL,
                  'l_text': l_info.otherLicence_TermsText.values(),
                  'l_conditions': l_info.restrictionsOfUse}
+        if licence_choice == 'non-standard/Other_Licence/Terms':
+            res_name=resource.identificationInfo.get_default_resourceName()
+            _dict['licence_path']=STATIC_URL + 'metashare/licences/'+u'_'.join(res_name.split())+'_licence.pdf'
+            
         return render_to_response('repository/licence_agreement.html',
                                   _dict, context_instance=RequestContext(request))
     elif len(licences) > 1:
@@ -1119,7 +1127,8 @@ def contribute(request):
                 # a licence file has been uploaded
                 lfilename = u'_'.join(request.POST['resourceTitle'].split())
                 licence_filename = lfilename + "_licence.pdf"
-                licence_filepath = os.path.sep.join((unprocessed_dir,
+                licences_folder=ROOT_PATH+STATIC_URL + 'metashare/licences'
+                licence_filepath = os.path.sep.join((licences_folder,
                                                      licence_filename))
                 #TODO:que pasa si ya existe el archivo? que pasa si dos recursos se llaman igual y suben una licencia adhoc?
                 with open(licence_filepath, 'wb+') as licence_destination:
