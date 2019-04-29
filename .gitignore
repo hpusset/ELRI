@@ -45,5 +45,6 @@ metashare/recommendations/django_migrations/
 po_files*.zip
 metashare/processed/*
 metashare/unprocessed/*
+metashare/static/metashare/licences/*
 elri_resources/language_resources/
 docker/
