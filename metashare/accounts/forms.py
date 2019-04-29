@@ -15,8 +15,8 @@ from metashare.accounts.validators import validate_wsdl_url
 from metashare.settings import LOG_HANDLER
 import logging
 ## Setup logging support.
-#LOGGER = logging.getLogger(__name__)
-#LOGGER.addHandler(LOG_HANDLER)
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(LOG_HANDLER)
 
 
 class ModelForm(forms.ModelForm):
@@ -163,9 +163,16 @@ class RegistrationRequestForm(Form):
         if pswrd != pswrd_conf:
             raise ValidationError(_('The two password fields did not match.'))
         try:  
-            validate_password(pswrd)
+            _username=self.cleaned_data['shortname']
+            _first_name=self.cleaned_data['first_name']
+            _last_name=self.cleaned_data['last_name'] 
+            _email=self.cleaned_data['email'] 
+            #user=User.objects.create_user(username=_username,email=_email,first_name=_first_name,last_name=_last_name,password=pswrd)
+            user={'username':_username,'first_name':_first_name,'last_name':_last_name,'email':_email}
+            #### create a data structure with user information to pass to the password validator
+            validate_password(pswrd,user=user,password_validators=None)
         except ValidationError as error:
-            #LOGGER.info(error)
+            LOGGER.info(error)
             messages=[]
             if 'This password is entirely numeric.' in error:
                 messages.append(_(u'This password is entirely numeric. '))
@@ -173,8 +180,18 @@ class RegistrationRequestForm(Form):
                 messages.append(_(u'This password is too common. '))
             if 'This password is too short. It must contain at least 9 characters.' in error:
                 messages.append(_(u'This password is too short. It must contain at least 9 characters. '))
-            if 'The password is too similar to the' in error:
-                messages.append(_(u'The password is too similar to the %s') % error.split('the')[1])
+            if 'The password is too similar to the username.' in error :
+                #LOGGER.info('aqui?')
+                messages.append(_(u'The password is too similar to the %s.') % 'username') #error.split('the')[1])
+            if 'The password is too similar to the email.' in error :
+                #LOGGER.info('aqui?')
+                messages.append(_(u'The password is too similar to the %s.') % 'email')
+            if 'The password is too similar to the first_name.' in error :
+                #LOGGER.info('aqui?')
+                messages.append(_(u'The password is too similar to the %s.') % 'first name')
+            if 'The password is too similar to the last_name.' in error :
+                #LOGGER.info('aqui?')
+                messages.append(_(u'The password is too similar to the %s.') % 'last name')                
             raise ValidationError(messages)
         return pswrd
 
