@@ -15,8 +15,8 @@ from metashare.accounts.validators import validate_wsdl_url
 from metashare.settings import LOG_HANDLER
 import logging
 ## Setup logging support.
-#LOGGER = logging.getLogger(__name__)
-#LOGGER.addHandler(LOG_HANDLER)
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(LOG_HANDLER)
 
 
 class ModelForm(forms.ModelForm):
@@ -96,7 +96,7 @@ class RegistrationRequestForm(Form):
             label=mark_safe( _("Organization phone number")),required=False)
     position = forms.CharField(UserProfile._meta.get_field('position').max_length,
                                label=mark_safe(_("Position in the organization")),required=False)
-                               
+
 
     #Removing user phone number for now: user email and organisation phone number should be sufficient
     #phone_number = forms.CharField(UserProfile._meta.get_field('phone_number').max_length,
@@ -162,20 +162,22 @@ class RegistrationRequestForm(Form):
         pswrd_conf = self.cleaned_data['confirm_password']
         if pswrd != pswrd_conf:
             raise ValidationError(_('The two password fields did not match.'))
-        try:  
-            validate_password(pswrd)
-        except ValidationError as error:
-            #LOGGER.info(error)
-            messages=[]
-            if 'This password is entirely numeric.' in error:
-                messages.append(_(u'This password is entirely numeric. '))
-            if 'This password is too common.' in error:
-                messages.append(_(u'This password is too common. '))
-            if 'This password is too short. It must contain at least 9 characters.' in error:
-                messages.append(_(u'This password is too short. It must contain at least 9 characters. '))
-            if 'The password is too similar to the' in error:
-                messages.append(_(u'The password is too similar to the %s') % error.split('the')[1])
-            raise ValidationError(messages)
+        validate_password(pswrd, user=User(
+            # this in-memory object is just for password validation
+            username=self.cleaned_data['shortname'],
+            email=self.cleaned_data['email'],
+            password=self.cleaned_data['password'],
+            first_name=self.cleaned_data['first_name'],
+            last_name=self.cleaned_data['last_name'],
+        ))
+        validate_password(pswrd, user=UserProfile(
+            # this in-memory object is just for password validation
+            user_id=1, # dummy foreign key
+
+            affiliation=self.cleaned_data['organization'],
+            affiliation_address=self.cleaned_data['organization_address'],
+            affiliation_phone_number=self.cleaned_data['organization_phone_number'],
+        ))
         return pswrd
 
         # cfedermann: possible extensions for future improvements.
