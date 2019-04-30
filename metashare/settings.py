@@ -141,6 +141,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+#    'django_password_validation.DjangoPasswordValidationMiddleware', # must come before AuthenticationMiddleware
     'django.contrib.auth.middleware.AuthenticationMiddleware',
 )
 
@@ -181,9 +182,9 @@ INSTALLED_APPS = (
     'haystack',
     'analytical',
     'tastypie',
+
     'django_password_validation', # needed for proper localization
                                   # of password validation error messages
-
     'metashare.accounts',
     'metashare.storage',
     # 'metashare.sync',
@@ -337,3 +338,4 @@ AUTH_PASSWORD_VALIDATORS = [
         }
     }
 ]
+

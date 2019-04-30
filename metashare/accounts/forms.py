@@ -15,8 +15,8 @@ from metashare.accounts.validators import validate_wsdl_url
 from metashare.settings import LOG_HANDLER
 import logging
 ## Setup logging support.
-#LOGGER = logging.getLogger(__name__)
-#LOGGER.addHandler(LOG_HANDLER)
+LOGGER = logging.getLogger(__name__)
+LOGGER.addHandler(LOG_HANDLER)
 
 
 class ModelForm(forms.ModelForm):
@@ -173,6 +173,7 @@ class RegistrationRequestForm(Form):
         validate_password(pswrd, user=UserProfile(
             # this in-memory object is just for password validation
             user_id=1, # dummy foreign key
+
             affiliation=self.cleaned_data['organization'],
             affiliation_address=self.cleaned_data['organization_address'],
             affiliation_phone_number=self.cleaned_data['organization_phone_number'],
