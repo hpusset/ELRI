@@ -3,7 +3,7 @@ services:
   # Django app
   elri-node1:
     container_name: elri_app
-    image: elrinrs/nationalrelaystation:R3.3.4
+    image: elrinrs/nationalrelaystation:R3.3.5
     secrets:
       - db.secret
       - app.secret
@@ -62,7 +62,7 @@ services:
   # NGINX webserver
   nginx:
     container_name: elri_webserver
-    image: elrinrs/nginx:R2.3
+    image: elrinrs/nginx:R2.3.1
     secrets:
       - web.secret
     volumes:
