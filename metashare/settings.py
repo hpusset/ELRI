@@ -182,7 +182,9 @@ INSTALLED_APPS = (
     'haystack',
     'analytical',
     'tastypie',
-    'django_password_validation',
+
+    'django_password_validation', # needed for proper localization
+                                  # of password validation error messages
     'metashare.accounts',
     'metashare.storage',
     # 'metashare.sync',
@@ -309,14 +311,31 @@ TASTYPIE_DEFAULT_FORMATS = ['json']
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django_password_validation.UserAttributeSimilarityValidator',
+        'OPTIONS': {
+            'max_similarity': .5,
+        }
     }, {
         'NAME': 'django_password_validation.MinimumLengthValidator',
         'OPTIONS': {
-            'min_length': 9,
+            'min_length': 10,
         }
     }, {
         'NAME': 'django_password_validation.CommonPasswordValidator',
     }, {
         'NAME': 'django_password_validation.NumericPasswordValidator',
-    },
+    }, {
+        'NAME': 'django_password_validation.AtLeastOneDigitValidator',
+    }, {
+        'NAME': 'django_password_validation.AtLeastOnePunctuationCharacterValidator',
+    }, {
+        'NAME': 'django_password_validation.AtLeastOneUppercaseCharacterValidator',
+    }, {
+        'NAME': 'django_password_validation.AtLeastOneLowercaseCharacterValidator',
+    }, {
+        'NAME': 'django_password_validation.NoRepeatsValidator',
+        'OPTIONS': {
+            'max_repeats': 2,
+        }
+    }
 ]
+

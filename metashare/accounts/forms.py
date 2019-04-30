@@ -96,7 +96,7 @@ class RegistrationRequestForm(Form):
             label=mark_safe( _("Organization phone number")),required=False)
     position = forms.CharField(UserProfile._meta.get_field('position').max_length,
                                label=mark_safe(_("Position in the organization")),required=False)
-                               
+
 
     #Removing user phone number for now: user email and organisation phone number should be sufficient
     #phone_number = forms.CharField(UserProfile._meta.get_field('phone_number').max_length,
@@ -173,9 +173,10 @@ class RegistrationRequestForm(Form):
         validate_password(pswrd, user=UserProfile(
             # this in-memory object is just for password validation
             user_id=1, # dummy foreign key
-            affiliation=self.cleaned_data['affiliation'],
-            affiliation_address=self.cleaned_data['affiliation_address'],
-            affiliation_phone_number=self.cleaned_data['affiliation_phone_number'],
+
+            affiliation=self.cleaned_data['organization'],
+            affiliation_address=self.cleaned_data['organization_address'],
+            affiliation_phone_number=self.cleaned_data['organization_phone_number'],
         ))
         return pswrd
 
