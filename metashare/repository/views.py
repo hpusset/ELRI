@@ -51,7 +51,7 @@ from django.utils.translation import ugettext as _
 from haystack.views import FacetedSearchView
 
 from metashare.accounts.models import UserProfile, Organization, OrganizationManagers
-from metashare.local_settings import CONTRIBUTIONS_ALERT_EMAILS, TMP, SUPPORTED_LANGUAGES, EMAIL_ADDRESSES, COUNTRY
+from metashare.local_settings import CONTRIBUTIONS_ALERT_EMAILS, TMP, SUPPORTED_LANGUAGES, EMAIL_ADDRESSES, COUNTRY, STATIC_ROOT
 from metashare.recommendations.recommendations import SessionResourcesTracker, \
     get_download_recommendations, get_view_recommendations, \
     get_more_from_same_creators_qs, get_more_from_same_projects_qs
@@ -1127,7 +1127,7 @@ def contribute(request):
                 # a licence file has been uploaded
                 lfilename = u'_'.join(request.POST['resourceTitle'].split())
                 licence_filename = lfilename + "_licence.pdf"
-                licences_folder=ROOT_PATH+STATIC_URL + 'metashare/licences'
+                licences_folder= STATIC_ROOT + 'metashare/licences'
                 licence_filepath = os.path.sep.join((licences_folder,
                                                      licence_filename))
                 #TODO:que pasa si ya existe el archivo? que pasa si dos recursos se llaman igual y suben una licencia adhoc?
