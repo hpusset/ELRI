@@ -27,6 +27,7 @@ from django.views.decorators.csrf import csrf_protect
 
 
 from metashare import settings
+from metashare.local_settings import STATIC_ROOT
 from metashare.settings import STATIC_URL,LOG_HANDLER,ROOT_PATH, DJANGO_URL, CONTRIBUTION_FORM_DATA
 
 from metashare.accounts.models import EditorGroup, EditorGroupManagers
@@ -68,44 +69,44 @@ MEMBER_TYPES = type('MemberEnum', (), dict(GOD=100, FULL=3, ASSOCIATE=2, NON=1))
 # is required at a minimum to be able to download the associated resource
 # straight away; otherwise the licence requires a hard-copy signature
 LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
-    'CC-BY-4.0': (STATIC_URL + 'metashare/licences/CC-BY-4.0.pdf', MEMBER_TYPES.NON),
-    'CC-BY-NC-4.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-4.0.pdf', MEMBER_TYPES.NON),
-    'CC-BY-NC-ND-4.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-ND-4.0.pdf', MEMBER_TYPES.NON),
-    'CC-BY-NC-SA-4.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-SA-4.0.pdf', MEMBER_TYPES.NON),
-    'CC-BY-ND-4.0': (STATIC_URL + 'metashare/licences/CC-BY-ND-4.0.pdf', MEMBER_TYPES.NON),
-    'CC-BY-SA-4.0': (STATIC_URL + 'metashare/licences/CC-BY-SA-4.0.pdf', MEMBER_TYPES.NON),
-    'CC0-1.0': (STATIC_URL + 'metashare/licences/CC0-1.0.pdf', MEMBER_TYPES.NON),
-    'CC-BY-3.0': (STATIC_URL + 'metashare/licences/CC-BY-3.0.pdf', MEMBER_TYPES.NON),
-    'CC-BY-NC-3.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-3.0.pdf', MEMBER_TYPES.NON),
-    'CC-BY-NC-ND-3.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-ND-3.0.pdf', MEMBER_TYPES.NON),
-    'CC-BY-NC-SA-3.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-SA-3.0.pdf', MEMBER_TYPES.NON),
-    'CC-BY-ND-3.0': (STATIC_URL + 'metashare/licences/CC-BY-ND-3.0.pdf', MEMBER_TYPES.NON),
-    'CC-BY-SA-3.0': (STATIC_URL + 'metashare/licences/CC-BY-SA-3.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-4.0': ( 'metashare/licences/CC-BY-4.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-NC-4.0': ( 'metashare/licences/CC-BY-NC-4.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-NC-ND-4.0': ( 'metashare/licences/CC-BY-NC-ND-4.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-NC-SA-4.0': ( 'metashare/licences/CC-BY-NC-SA-4.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-ND-4.0': ( 'metashare/licences/CC-BY-ND-4.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-SA-4.0': ( 'metashare/licences/CC-BY-SA-4.0.pdf', MEMBER_TYPES.NON),
+    'CC0-1.0': ( 'metashare/licences/CC0-1.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-3.0': ( 'metashare/licences/CC-BY-3.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-NC-3.0': ( 'metashare/licences/CC-BY-NC-3.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-NC-ND-3.0': ( 'metashare/licences/CC-BY-NC-ND-3.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-NC-SA-3.0': ( 'metashare/licences/CC-BY-NC-SA-3.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-ND-3.0': ( 'metashare/licences/CC-BY-ND-3.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-SA-3.0': ( 'metashare/licences/CC-BY-SA-3.0.pdf', MEMBER_TYPES.NON),
     # TODO: PDDL
-    'PDDL-1.0': (STATIC_URL + 'metashare/licences/PDDL-1.0.pdf', MEMBER_TYPES.NON),
+    'PDDL-1.0': ( 'metashare/licences/PDDL-1.0.pdf', MEMBER_TYPES.NON),
     # TODO: ODC-BY
-    'ODC-BY-1.0': (STATIC_URL + 'metashare/licences/ODC-BY-1.0.pdf', MEMBER_TYPES.NON),
-    'ODbL-1.0': (STATIC_URL + 'metashare/licences/ODbL-1.0.pdf', MEMBER_TYPES.NON),
-    'AGPL-3.0': (STATIC_URL + 'metashare/licences/AGPL-3.0.pdf', MEMBER_TYPES.NON),
-    'Apache-2.0': (STATIC_URL + 'metashare/licences/Apache-2.0.pdf', MEMBER_TYPES.NON),
-    'BSD-4-Clause': (STATIC_URL + 'metashare/licences/BSD-4-Clause.pdf', MEMBER_TYPES.NON),
-    'BSD-3-Clause': (STATIC_URL + 'metashare/licences/BSD-3-Clause.pdf', MEMBER_TYPES.NON),
-    'BSD-2-Clause': (STATIC_URL + 'metashare/licences/BSD-2-Clause', MEMBER_TYPES.NON),
-    'GFDL-1.3': (STATIC_URL + 'metashare/licences/GFDL-1.3.pdf', MEMBER_TYPES.NON),
-    'GPL-3.0': (STATIC_URL + 'metashare/licences/GPL-3.0.pdf', MEMBER_TYPES.NON),
-    'LGPL-3.0': (STATIC_URL + 'metashare/licences/LGPL-3.0.pdf', MEMBER_TYPES.NON),
-    'MIT': (STATIC_URL + 'metashare/licences/MIT.pdf', MEMBER_TYPES.NON),
-    'EPL-1.0': (STATIC_URL + 'metashare/licences/EPL-1.0.pdf', MEMBER_TYPES.NON),
-    'EUPL-1.0': (STATIC_URL + 'metashare/licences/EUPL-1.0.pdf', MEMBER_TYPES.NON),
-    'EUPL-1.1': (STATIC_URL + 'metashare/licences/EUPL-1.1.pdf', MEMBER_TYPES.NON),
-    'EUPL-1.2': (STATIC_URL + 'metashare/licences/EUPL-1.2.pdf', MEMBER_TYPES.NON),
-    'LO-OL-v2': (STATIC_URL + 'metashare/licences/LO-OL-v2.pdf', MEMBER_TYPES.NON),
-    'dl-de/by-2-0': (STATIC_URL + 'metashare/licences/dl-de_by-2-0.pdf', MEMBER_TYPES.NON),
-    'dl-de/zero-2-0': (STATIC_URL + 'metashare/licences/dl-de_zero-2-0.pdf', MEMBER_TYPES.NON),
-    'IODL-1.0': (STATIC_URL + 'metashare/licences/IODL-1.0.pdf', MEMBER_TYPES.NON),
-    'NLOD-1.0': (STATIC_URL + 'metashare/licences/NLOD-1.0.pdf', MEMBER_TYPES.NON),
-    'OGL-3.0': (STATIC_URL + 'metashare/licences/OGL-3.0.pdf', MEMBER_TYPES.NON),
-    'NCGL-1.0': (STATIC_URL + 'metashare/licences/NCGL-1.0.pdf', MEMBER_TYPES.GOD),
+    'ODC-BY-1.0': ( 'metashare/licences/ODC-BY-1.0.pdf', MEMBER_TYPES.NON),
+    'ODbL-1.0': ( 'metashare/licences/ODbL-1.0.pdf', MEMBER_TYPES.NON),
+    'AGPL-3.0': ( 'metashare/licences/AGPL-3.0.pdf', MEMBER_TYPES.NON),
+    'Apache-2.0': ( 'metashare/licences/Apache-2.0.pdf', MEMBER_TYPES.NON),
+    'BSD-4-Clause': ( 'metashare/licences/BSD-4-Clause.pdf', MEMBER_TYPES.NON),
+    'BSD-3-Clause': ( 'metashare/licences/BSD-3-Clause.pdf', MEMBER_TYPES.NON),
+    'BSD-2-Clause': ( 'metashare/licences/BSD-2-Clause', MEMBER_TYPES.NON),
+    'GFDL-1.3': ( 'metashare/licences/GFDL-1.3.pdf', MEMBER_TYPES.NON),
+    'GPL-3.0': ( 'metashare/licences/GPL-3.0.pdf', MEMBER_TYPES.NON),
+    'LGPL-3.0': ( 'metashare/licences/LGPL-3.0.pdf', MEMBER_TYPES.NON),
+    'MIT': ( 'metashare/licences/MIT.pdf', MEMBER_TYPES.NON),
+    'EPL-1.0': ( 'metashare/licences/EPL-1.0.pdf', MEMBER_TYPES.NON),
+    'EUPL-1.0': ( 'metashare/licences/EUPL-1.0.pdf', MEMBER_TYPES.NON),
+    'EUPL-1.1': ( 'metashare/licences/EUPL-1.1.pdf', MEMBER_TYPES.NON),
+    'EUPL-1.2': ( 'metashare/licences/EUPL-1.2.pdf', MEMBER_TYPES.NON),
+    'LO-OL-v2': ( 'metashare/licences/LO-OL-v2.pdf', MEMBER_TYPES.NON),
+    'dl-de/by-2-0': ( 'metashare/licences/dl-de_by-2-0.pdf', MEMBER_TYPES.NON),
+    'dl-de/zero-2-0': ( 'metashare/licences/dl-de_zero-2-0.pdf', MEMBER_TYPES.NON),
+    'IODL-1.0': ( 'metashare/licences/IODL-1.0.pdf', MEMBER_TYPES.NON),
+    'NLOD-1.0': ( 'metashare/licences/NLOD-1.0.pdf', MEMBER_TYPES.NON),
+    'OGL-3.0': ( 'metashare/licences/OGL-3.0.pdf', MEMBER_TYPES.NON),
+    'NCGL-1.0': ( 'metashare/licences/NCGL-1.0.pdf', MEMBER_TYPES.GOD),
     'openUnder-PSI':('', MEMBER_TYPES.NON),
     'publicDomain':('', MEMBER_TYPES.NON),
     #'openUnder-PSI': (STATIC_URL + 'metashare/licences/openUnderPSI.txt', MEMBER_TYPES.NON),
@@ -681,18 +682,18 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     access_links=''
                     for l in licences:
                         if l == 'publicDomain':
-                            access_links=STATIC_URL + 'metashare/licences/publicDomain.txt'
+                            access_links=STATIC_ROOT + '/metashare/licences/publicDomain.txt'
                         elif l == 'openUnder-PSI':
-                            access_links=STATIC_URL + 'metashare/licences/openUnderPSI.txt'
+                            access_links=STATIC_ROOT + '/metashare/licences/openUnderPSI.txt'
                         elif l == 'non-standard/Other_Licence/Terms' :
                             #unprocessed_dir = "/unprocessed"
-                            access_links= STATIC_URL + 'metashare/licences/'+u'_'.join(resource_name[0].split())+'_licence.pdf'#openUnderPSI.txt'
+                            access_links= STATIC_ROOT + '/metashare/licences/'+u'_'.join(resource_name[0].split())+'_licence.pdf'#openUnderPSI.txt'
                             #unprocessed_dir+'/'+u'_'.join(resource_name[0].split())+'_licence.pdf'
                         else:
-                            access_links,attr=LICENCEINFOTYPE_URLS_LICENCE_CHOICES[l]  #(l)#, None)
+                            access_links,attr=STATIC_ROOT +LICENCEINFOTYPE_URLS_LICENCE_CHOICES[l]  #(l)#, None)
                             #LOGGER.info(access_links)
                     #add access file to the lr.archive.zip file 
-                    licence_path=ROOT_PATH+access_links
+                    licence_path=access_links
                     path, filename = os.path.split(licence_path)
                     processed_zip.write(licence_path,'license_'+filename)
                     

@@ -175,7 +175,7 @@ def download(request, object_id, **kwargs):
                 _dict = {'form': la_form,
                          'resource': resource,
                          'licence_name': licence_choice,
-                         'licence_path': LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
+                         'licence_path': STATIC_URL+LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
                          'download_available': access,
                          'l_name': l_info.otherLicenceName,
                          'l_url': l_info.otherLicence_TermsURL,
@@ -196,7 +196,7 @@ def download(request, object_id, **kwargs):
         l_info, access_links, access = licences[licence_choice]
         _dict = {'form': LicenseAgreementForm(licence_choice),
                  'resource': resource, 'licence_name': licence_choice,
-                 'licence_path': LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
+                 'licence_path': STATIC_URL+LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
                  'download_available': access,
                  'l_name': l_info.otherLicenceName,
                  'l_url': l_info.otherLicence_TermsURL,
