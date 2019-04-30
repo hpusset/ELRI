@@ -1127,7 +1127,7 @@ def contribute(request):
                 # a licence file has been uploaded
                 lfilename = u'_'.join(request.POST['resourceTitle'].split())
                 licence_filename = lfilename + "_licence.pdf"
-                licences_folder= STATIC_ROOT + 'metashare/licences'
+                licences_folder= STATIC_ROOT + '/metashare/licences'
                 licence_filepath = os.path.sep.join((licences_folder,
                                                      licence_filename))
                 #TODO:que pasa si ya existe el archivo? que pasa si dos recursos se llaman igual y suben una licencia adhoc?
