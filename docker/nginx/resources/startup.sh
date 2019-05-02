@@ -34,6 +34,7 @@ esac
 
 popd
 
+cmd="$cmd -template /tmp/security-vhost.tmpl:/etc/nginx/conf.d/security.conf"
 cmd="$cmd -timeout 240s nginx"
 
 $cmd
