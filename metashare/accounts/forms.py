@@ -163,7 +163,7 @@ class RegistrationRequestForm(Form):
         pswrd_conf = self.cleaned_data['confirm_password']
         if pswrd != pswrd_conf:
             raise ValidationError(_('The two password fields did not match.'))
-        if 'shortname' in self.cleaned_data.keys(): #check password iif there is a valid username
+        if 'shortname' in self.cleaned_data.keys(): #check password iif there is a valid username, to avoid 
             validate_password(pswrd, user=User(
                 # this in-memory object is just for password validation
                 username=self.cleaned_data['shortname'],
