@@ -646,7 +646,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                 send_mail(_("Error when processing resource %(rname)s") % ({'rname':r_name}), _('An error occurred when processing the resource %(rname)s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %(email)s') % ({'rname':r_name,'email':settings.EMAIL_ADDRESSES['elri-nrs-support']}), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
                             except: 
                                 messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
-                            
+                        
                 #if something success-> create new archive.zip and replace the old one uploaded by the user     
                 # if any errors, then handle error reporting
                 if errors > 0 or error_msg!='':
@@ -690,7 +690,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
                             access_links= STATIC_ROOT + '/metashare/licences/'+u'_'.join(resource_name[0].split())+'_licence.pdf'#openUnderPSI.txt'
                             #unprocessed_dir+'/'+u'_'.join(resource_name[0].split())+'_licence.pdf'
                         else:
-                            access_links,attr=STATIC_ROOT +LICENCEINFOTYPE_URLS_LICENCE_CHOICES[l]  #(l)#, None)
+                            #LOGGER.info(LICENCEINFOTYPE_URLS_LICENCE_CHOICES[l])
+                            access_links,attr=LICENCEINFOTYPE_URLS_LICENCE_CHOICES[l]  
+                            access_links = STATIC_ROOT +'/'+access_links
                             #LOGGER.info(access_links)
                     #add access file to the lr.archive.zip file 
                     licence_path=access_links
@@ -708,7 +710,42 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     if error_msg !='':
                         prepare_error_zip(error_msg,resource_path,request)
                         processing_status = processing_status and False
-                    elif call_tm2tmx==0 or call_doc2tmx==0:
+                    elif call_tm2tmx==0 and call_doc2tmx==0:
+                        
+                        #ingest file that is not processed
+                        #create the archive.zip with the processed resources
+                        processed_zip=zipfile.ZipFile(resource_path+'/archive.zip',mode='w')
+                        #if there are other files: add them as well
+                        add_files2zip(resource_other_path,processed_zip)
+                        #add licence file
+                        resource_info=obj.export_to_elementtree()
+                        resource_name=[u.find('resourceName').text for u in resource_info.iter('identificationInfo')]
+                        
+                        user_membership = _get_user_membership(request.user) 
+                        licences = _get_licences(obj,user_membership)
+                        access_links=''
+                        for l in licences:
+                            if l == 'publicDomain':
+                                access_links=STATIC_ROOT + '/metashare/licences/publicDomain.txt'
+                            elif l == 'openUnder-PSI':
+                                access_links=STATIC_ROOT + '/metashare/licences/openUnderPSI.txt'
+                            elif l == 'non-standard/Other_Licence/Terms' :
+                                #unprocessed_dir = "/unprocessed"
+                                access_links= STATIC_ROOT + '/metashare/licences/'+u'_'.join(resource_name[0].split())+'_licence.pdf'#openUnderPSI.txt'
+                                #unprocessed_dir+'/'+u'_'.join(resource_name[0].split())+'_licence.pdf'
+                            else:
+                                #LOGGER.info(LICENCEINFOTYPE_URLS_LICENCE_CHOICES[l])
+                                access_links,attr=LICENCEINFOTYPE_URLS_LICENCE_CHOICES[l]  
+                                access_links = STATIC_ROOT +'/'+access_links
+                                #LOGGER.info(access_links)
+                        #add access file to the lr.archive.zip file 
+                        licence_path=access_links
+                        path, filename = os.path.split(licence_path)
+                        processed_zip.write(licence_path,'license_'+filename)
+                        
+                        #close zip file with processed resources
+                        processed_zip.close()
+                        
                         change_resource_status(obj,status=INGESTED, precondition_status=PROCESSING)
                         processing_status = processing_status and True
                     else:
