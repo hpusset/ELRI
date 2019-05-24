@@ -1,10 +1,19 @@
 {% load static from staticfiles %}
 {% load is_member i18n %}
 {% spaceless %}
+
     <div id="header">
-        <a href="http://www.elri-project.eu/" title="European Language Resource Infrastructure"
+        {% if country == "Portugal" %}
+        <a href="http://www.elri-project.eu/" title="{% trans 'Go to the ELRI project homepage' %}"
            target="_blank"><img style="float:right; margin: 10px 20px 0 0"
-                                src="{{ STATIC_URL }}metashare/images/elri-logo-title-small.png"/></a>
+                                src="{{ STATIC_URL }}metashare/images/elri-logo-title-small-pt.png" alt="ELRI ‐ European Language 
+Resource Infrastructure"/></a>
+        {% else %}
+        <a href="http://www.elri-project.eu/" title="{% trans 'Go to the ELRI project homepage' %}"
+                target="_blank"><img style="float:right; margin: 10px 20px 0 0"
+                                        src="{{ STATIC_URL }}metashare/images/elri-logo-title-small.png" alt="ELRI ‐ European Language 
+        Resource Infrastructure"/></a>
+        {% endif %}
         <div id="jsddmdiv" class="jsddm">
             {# drop-down menu created with http://javascript-array.com/scripts/jquery_simple_drop_down_menu/ #}
             <ul id="jsddm">

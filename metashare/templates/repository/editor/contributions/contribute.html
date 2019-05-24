@@ -11,6 +11,11 @@
     <meta name="description" content="{% spaceless %}{% block description %}ELRC-SHARE: a repository used for documenting, storing, browsing and accessing Language Resources.{% endblock %}{% endspaceless %}"/>
     <meta name="keywords" content="{% spaceless %}{% block keywords %}ELRC-SHARE, language resources, language tools, ELRC, European Language Resource Coordination{% endblock %}{% endspaceless %}"/>
     <link rel="shortcut icon" href="{{ STATIC_URL }}metashare/images/favicon.ico"/>
+    {% if country == "Portugal" %}
+        <link rel="shortcut icon" href="{{ STATIC_URL }}metashare/images/favicon_pt.ico">
+        {% else %}
+        <link rel="shortcut icon" href="{{ STATIC_URL }}metashare/images/favicon.ico">
+        {% endif %}
     <link rel="stylesheet" href="{{ STATIC_URL }}metashare/css/blueprint/screen.css" type="text/css"
           media="screen, projection">
     <link rel="stylesheet" href="{{ STATIC_URL }}metashare/css/blueprint/print.css" type="text/css" media="print">

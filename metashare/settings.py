@@ -163,6 +163,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
     "django.core.context_processors.request",
+    "metashare.context_processors.global_settings",
 )
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
