@@ -2,9 +2,9 @@
 {% load email_protection i18n %}
 
 {% block content %}
-
+    <h1 style=" border: 0; clip: rect(0 0 0 0); height: 1px; margin: 1px; overflow: hidden; padding: 0; position: absolute; width=1px;" >{% trans 'Usage' %}</h1>
     <div id="ELRI_services" class="anchor"></div>
-    <h2>{% blocktrans %}ELRI Services{% endblocktrans %}</h2>
+    <h2 id="main-content">{% blocktrans %}ELRI Services{% endblocktrans %}</h2>
     <div class="content_box">
         <p>{% blocktrans %}The ELRI project is intended to provide services related to the collection, preparation, storage and sharing of language resources. These services are provided via National Relay Stations, websites based in the Member States that are part of the initiative.{% endblocktrans %}</p>
 

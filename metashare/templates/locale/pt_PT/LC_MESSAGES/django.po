@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-08 09:51+0100\n"
-"PO-Revision-Date: 2019-05-22 15:29+0100\n"
+"PO-Revision-Date: 2019-05-28 13:10+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_PT\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: templates/403.html:5
 msgid "Permission Denied (403)"
@@ -425,7 +425,7 @@ msgstr "Para obter apoio na identificação de recursos partilháveis, ajuda na 
 #: templates/help.html:24
 #, python-format
 msgid "For technical help about this National Relay Station, you can contact us at <a href=\"mailto:%(email)s\" >%(email)s</a>."
-msgstr "Para questões relacionadas com o projeto ELRI, consulte a <a href=\"http://www.elri-project.eu/contact-us.html\" target=\"_blank\">lista de contactos na página do projeto."
+msgstr "Para questões relacionadas com o projeto ELRI, consulte a <a href=\"http://www.elri-project.eu/contact-us.html\" target=\"_blank\">lista de contactos na página do projeto.</a>"
 
 #: templates/legal.html:7
 msgid "<strong>ELRI Terms of Service</strong>"

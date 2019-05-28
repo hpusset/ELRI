@@ -2,7 +2,7 @@
 {% load i18n %}
 {% block title %}{{ title }} &ndash; ELRI{% endblock %}
 {% block content %}
-<h2>{% trans 'Reset Account' %}</h2>
+<h1 id="main-content" style="font-size: 20pt; line-height:150%; margin: '20px 0px 20px 0px'; font-weight: normal; color:#111; display:block; margin-block-start: 0.83em; margin-block-end: 0.83em; margin-inline-start:0px; margin-inline-end:0px;" id="main-content">{% trans 'Reset Account' %}</h2>
 <div class="content_box">
 <form class="form_helper" method="post" action="{% url 'reset' %}">
 {% csrf_token %}
