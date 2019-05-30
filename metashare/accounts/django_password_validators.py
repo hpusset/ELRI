@@ -20,32 +20,32 @@ from django.utils.translation import ugettext_lazy as _, ungettext_lazy
 
 DEFAULT_AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django_password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'metashare.accounts.django_password_validators.UserAttributeSimilarityValidator',
         'OPTIONS': {
             'max_similarity': .5,
         }
     }, {
-        'NAME': 'django_password_validation.MinimumLengthValidator',
+        'NAME': 'metashare.accounts.django_password_validators.MinimumLengthValidator',
         'OPTIONS': {
             'min_length': 10,
         }
     }, {
-        'NAME': 'django_password_validation.CommonPasswordValidator',
+        'NAME': 'metashare.accounts.django_password_validators.CommonPasswordValidator',
     }, {
-        'NAME': 'django_password_validation.NumericPasswordValidator',
+        'NAME': 'metashare.accounts.django_password_validators.NumericPasswordValidator',
     }, {
-        'NAME': 'django_password_validation.AtLeastOneDigitValidator',
+        'NAME': 'metashare.accounts.django_password_validators.AtLeastOneDigitValidator',
     }, {
-        'NAME': 'django_password_validation.AtLeastOnePunctuationCharacterValidator',
+        'NAME': 'metashare.accounts.django_password_validators.AtLeastOnePunctuationCharacterValidator',
     }, {
-        'NAME': 'django_password_validation.AtLeastOneUppercaseCharacterValidator',
+        'NAME': 'metashare.accounts.django_password_validators.AtLeastOneUppercaseCharacterValidator',
     }, {
-        'NAME': 'django_password_validation.AtLeastOneLowercaseCharacterValidator',
-    # }, {
-    #     'NAME': 'django_password_validation.NoRepeatsValidator',
-    #     'OPTIONS': {
-    #         'max_repeats': 2,
-    #     }
+        'NAME': 'metashare.accounts.django_password_validators.AtLeastOneLowercaseCharacterValidator',
+     },{
+        'NAME': 'metashare.accounts.django_password_validators.NoRepeatsValidator',
+        'OPTIONS': {
+            'max_repeats': 2,
+        }
     }
 ]
 
