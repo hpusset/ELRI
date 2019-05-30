@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from django.core.validators import RegexValidator
-from django_password_validation import validate_password
+from metashare.accounts.django_password_validators import validate_password
 
 from metashare.accounts.models import UserProfile, EditorGroupApplication, \
     OrganizationApplication, Organization, OrganizationManagers, EditorGroup, \
@@ -73,12 +73,12 @@ class RegistrationRequestForm(Form):
     """
     alphanumeric = RegexValidator(r'^[0-9a-zA-Z@.+\-_]*$', _(u'This value may contain only letters, numbers and @/./+/-/_ characters.'))
     shortname = forms.CharField(max_length=User._meta.get_field('username').max_length,validators=[alphanumeric],
-                                label=mark_safe(u"%s<span style='color:red' aria-label='%s'>*</span>" % ( _("Desired account name"), _("Mandatory Field"))))
+                                label=mark_safe(u"%s<span style='color:red' aria-label='%s'>*</span>" % ( _("Desired account name"), _("Required Field"))))
     first_name = forms.CharField(User._meta.get_field('first_name').max_length,
-                                 label=mark_safe(u"%s<span style='color:red' aria-label='%s'>*</span>" % (_("First name"), _("Mandatory Field"))))
+                                 label=mark_safe(u"%s<span style='color:red' aria-label='%s'>*</span>" % (_("First name"), _("Required Field"))))
     last_name = forms.CharField(User._meta.get_field('last_name').max_length,
-                                label=mark_safe(u"%s<span style='color:red' aria-label='%s'>*</span>" % (_("Last name"), _("Mandatory Field"))))
-    email = forms.EmailField(label=mark_safe(u"%s<span style='color:red' aria-label='%s'>*</span>" % (_("E-mail"), _("Mandatory Field"))))
+                                label=mark_safe(u"%s<span style='color:red' aria-label='%s'>*</span>" % (_("Last name"), _("Required Field"))))
+    email = forms.EmailField(label=mark_safe(u"%s<span style='color:red' aria-label='%s'>*</span>" % (_("E-mail"), _("Required Field"))))
 
 	# For National Relay Stations, the country is limited to the Member State in which the NRS is deployed
     #country = forms.ChoiceField(UserProfile._meta.get_field('country').choices,
@@ -86,11 +86,11 @@ class RegistrationRequestForm(Form):
                                 #label=mark_safe(u"%s<span style='color:red'>*</span>" % _("Country")))
 
     organization = forms.CharField(UserProfile._meta.get_field('affiliation').max_length,
-                                   label=mark_safe(u"%s<span style='color:red' aria-label='%s'>*</span>" % (_("Organization name"), _("Mandatory Field"))))
+                                   label=mark_safe(u"%s<span style='color:red' aria-label='%s'>*</span>" % (_("Organization name"), _("Required Field"))))
     organization_address = forms.CharField(
             UserProfile._meta.get_field('affiliation_address').max_length,
             label=mark_safe(u"%s<span style='color:red' aria-label='%s'>*</span>"
-                            % (_("Organization address"), _("Mandatory Field")) ))
+                            % (_("Organization address"), _("Required Field")) ))
     organization_phone_number = forms.CharField(
             UserProfile._meta.get_field('affiliation_phone_number').max_length,
             label=mark_safe( _("Organization phone number")),required=False)
@@ -103,11 +103,11 @@ class RegistrationRequestForm(Form):
                                    #label=mark_safe(u"%s<span style='color:grey'>*</span>" % _("Phone number")))
 
     password = forms.CharField(User._meta.get_field('password').max_length,
-                               label=mark_safe(u"%s<span style='color:red' aria-label='%s'>*</span>" % (_("Password"), _("Mandatory Field"))),
+                               label=mark_safe(u"%s<span style='color:red' aria-label='%s'>*</span>" % (_("Password"), _("Required Field"))),
                                widget=forms.PasswordInput())
     confirm_password = forms.CharField(
         User._meta.get_field('password').max_length,
-        label=mark_safe(u"%s<span style='color:red' aria-label='%s'>*</span>" % (_("Password confirmation"), _("Mandatory Field"))), widget=forms.PasswordInput())
+        label=mark_safe(u"%s<span style='color:red' aria-label='%s'>*</span>" % (_("Password confirmation"), _("Required Field"))), widget=forms.PasswordInput())
 
 
 	#Commenting from now, as it might be more functional to handle group assignment for logged in users

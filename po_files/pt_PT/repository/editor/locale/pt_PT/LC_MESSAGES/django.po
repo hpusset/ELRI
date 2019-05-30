@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-04 16:42+0200\n"
-"PO-Revision-Date: 2019-04-03 14:04+0200\n"
+"PO-Revision-Date: 2019-05-17 15:33+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_PT\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.2.1\n"
 
 #: repository/editor/__init__.py:113
 msgid "Upload new resource description(s)"
@@ -54,16 +54,16 @@ msgid ""
 msgstr ""
 "O caractere na posição %(char_pos)s (&#x%(char_code)04x;) não pode ser "
 "utilizado. Insira caracteres que correspondam a Char production do XML 1.0 "
-"(Segunda edição), vidé http://www.w3.org/TR/2000/WD-xml-2e-20000814#NT-Char."
+"(Segunda edição), http://www.w3.org/TR/2000/WD-xml-2e-20000814#NT-Char."
 
 #: repository/editor/forms.py:25
 msgid "The maximum upload file size is {:.0f} MB!"
-msgstr "O tamanho máximo do ficheiro é  {:.0f}  MB!"
+msgstr "O tamanho máximo para upload de ficheiros é  {:.0f}  MB!"
 
 #: repository/editor/forms.py:35 repository/editor/forms.py:53
 #: repository/editor/forms.py:70
 msgid "Invalid upload file type. Valid file types are: {}"
-msgstr "Tipo de ficheiro inválido. Tipos de ficheiro válidos são: {}"
+msgstr "Tipo de ficheiro inválido. Os tipos de ficheiro válidos são: {}"
 
 #: repository/editor/forms.py:99
 msgid "File is not a zip file."
@@ -83,7 +83,7 @@ msgid ""
 "will overwrite the current data!"
 msgstr ""
 "Pode fazer upload de recursos até (<{:.0f} MB) utilizando esta ferramenta. "
-"Note que irá substituir os dados actuais!"
+"Note que irá substituir os dados atuais!"
 
 #: repository/editor/forms.py:119 repository/editor/forms.py:133
 msgid "Upload Terms"
@@ -109,8 +109,8 @@ msgid ""
 msgstr ""
 "Pode fazer upload de uma nova descrição de recurso num formato XML, ou "
 "várias descrições de recurso num ficheiro .ZIP que contenha ficheiros XML. "
-"Por favor, certifique-se que os ficheiros XML têm Schemas-válidos antes de "
-"proceder."
+"Por favor, certifique-se que os ficheiros XML são válidos para o esquema "
+"antes de prosseguir."
 
 #: repository/editor/forms.py:134
 msgid ""
@@ -130,8 +130,8 @@ msgid ""
 "Note that this will overwrite the current report if it exists!"
 msgstr ""
 "Pode fazer upload do relatório de validação em formato .PDF usando esta "
-"aplicação. Por favor, repare que isto vai substituir o relatório actual - "
-"caso exista!"
+"ferramenta. Por favor, note que isto vai substituir o relatório atual - caso "
+"exista!"
 
 #: repository/editor/forms.py:153
 msgid "Legal Documentation"
@@ -171,13 +171,13 @@ msgstr "Documento"
 #: repository/editor/superadmin.py:268
 #, python-format
 msgid "%(name)s object with primary key %(key)r does not exist."
-msgstr "%(name)s objecto com a chave %(key)r não existe."
+msgstr "O objeto %(name)s com a chave %(key)r não existe."
 
 #: repository/editor/manual_admin_registration.py:201
 #: repository/editor/superadmin.py:364
 #, python-format
 msgid "Add %s"
-msgstr "Acrescentar  %s"
+msgstr "Adicionar %s"
 
 #: repository/editor/manual_admin_registration.py:201
 #: repository/editor/superadmin.py:364
@@ -190,7 +190,8 @@ msgstr "Mudar %s"
 msgid ""
 "The %(name)s \"%(obj)s\" was saved successfully. You may edit it again below."
 msgstr ""
-"O %(name)s \"%(obj)s\" foi gravado com sucesso. Pode editar novamente abaixo."
+"O %(name)s \"%(obj)s\" foi gravado com sucesso. Pode-o editar novamente "
+"abaixo."
 
 #: repository/editor/related_widget.py:70
 msgid "Edit related model"
@@ -198,7 +199,7 @@ msgstr "Editar modelo relacionado"
 
 #: repository/editor/related_widget.py:76
 msgid "Add information"
-msgstr "Acrescentar informações"
+msgstr "Adicionar informações"
 
 #: repository/editor/related_widget.py:85
 msgid "Delete related model"
@@ -232,7 +233,7 @@ msgid ""
 "more information at %(email)s"
 msgstr ""
 "Ocorreu um erro ao processar o recurso %(rname)s. Por favor verifique o "
-"error.log anexado ao recurso. Contacte o suporte da equipa do NRS ELRI para "
+"error.log anexado ao recurso. Contacte o suporte da equipa do eTradução para "
 "mais informações no %(email)s"
 
 #: repository/editor/resource_editor.py:579
@@ -275,7 +276,7 @@ msgstr "O pedido POST à toolchain doc2tmx falhou."
 
 #: repository/editor/resource_editor.py:692
 msgid "Only ingested or error resources can be re-processed."
-msgstr "Só recursos ingeridos podem ser reprocessados."
+msgstr "Só os recursos ingeridos podem ser reprocessados."
 
 #: repository/editor/resource_editor.py:696
 msgid "Resource(s) re-processed correctly."
@@ -291,7 +292,7 @@ msgid ""
 "resources and check the error.log file(s). You will receive a notification "
 "email."
 msgstr ""
-"Ocorreu um erro no processamento do(s) recurso(s). Re-processe o recurso que "
+"Ocorreu um erro no processamento do(s) recurso(s). Reprocesse o recurso que "
 "deu erro e veja os ficheiros error.log. Irá receber uma notificação por e-"
 "mail."
 
@@ -303,7 +304,7 @@ msgid ""
 "You do not have the permission to perform this action for all selected "
 "resources."
 msgstr ""
-"Não tem permissões para executar esta acção para todos os recursos "
+"Não tem permissões para executar esta ação para todos os recursos "
 "selecionados."
 
 #: repository/editor/resource_editor.py:712
@@ -321,7 +322,7 @@ msgstr "Licença:"
 
 #: repository/editor/resource_editor.py:811
 msgid "\t Restrictions of Use: None\n"
-msgstr "\t Restrições de Uso: None\n"
+msgstr "\t Restrições de Uso: Nenhuma\n"
 
 #: repository/editor/resource_editor.py:813
 msgid "\t Restrictions of Use: "
@@ -387,7 +388,7 @@ msgstr "Só recursos publicados podem ser suspendidos."
 
 #: repository/editor/resource_editor.py:881
 msgid "Suspend selected published resources"
-msgstr "Suspende os recursos publicados selectionados"
+msgstr "Suspende os recursos publicados selecionados"
 
 #: repository/editor/resource_editor.py:924
 #: repository/editor/resource_editor.py:928
@@ -399,7 +400,7 @@ msgid ""
 msgstr ""
 "\n"
 "                        O processo ingerir foi interrompido.\n"
-"                        Re-processamento do(s) recurso(s) com erro no "
+"                        Reprocessamento do(s) recurso(s) com erro no "
 "estado.\n"
 "                        "
 
@@ -412,7 +413,7 @@ msgid ""
 "                        "
 msgstr ""
 "\n"
-"                        Ingerido com sucesso {} recurso(s) interno(s). \n"
+"                         {} recurso(s) interno(s) ingerido(s) com sucesso \n"
 "                        Será notificado quando o recurso for totalmente "
 "processado."
 
@@ -425,8 +426,9 @@ msgid ""
 "                        "
 msgstr ""
 "\n"
-"                        Ingerido com sucesso {}(s) recurso(s) interno(s). \n"
-"                        Será notificado quando o recurso(s) for(em) "
+"                        recurso(s) interno(s) ingerido(s) com sucesso {}"
+"(s) \n"
+"                        Será notificado quando o(s) recurso(s) for(em) "
 "totalmente processado(s)."
 
 #: repository/editor/resource_editor.py:947
@@ -438,7 +440,7 @@ msgid ""
 "There was an error sending out the notification email to the group "
 "reviewers. Please contact them directly."
 msgstr ""
-"Ocorreu um erro no envio de e-mail ao grupo de revisores. por favor contacte-"
+"Ocorreu um erro no envio de e-mail ao grupo de revisores. Por favor contacte-"
 "os diretamente."
 
 #: repository/editor/resource_editor.py:957
@@ -473,7 +475,7 @@ msgstr[1] "Remoção %d dos recursos com sucesso."
 
 #: repository/editor/resource_editor.py:1089
 msgid "Are you sure?"
-msgstr "Tem certeza?"
+msgstr "Tem a certeza?"
 
 #: repository/editor/resource_editor.py:1096
 msgid "Delete resource"
@@ -494,14 +496,14 @@ msgid ""
 "%(failure)i resource editor groups were left unchanged due to missing "
 "permissions."
 msgstr ""
-"Acrescentou com sucesso aos grupos de edição %(success)i dos grupos "
+"Grupos de edição adicionados com sucesso %(success)i dos recursos "
 "selecionados. %(failure)i grupos de edição de recursos permanecem "
 "inalterados devido à falta de permissões."
 
 #: repository/editor/resource_editor.py:1137
 msgid "Successfully added editor groups to all selected resources."
 msgstr ""
-"Acrescentou com sucesso aos grupos de edição todos os recursos selecionados."
+"Grupos de edição adicionados com sucesso a todos os recursos selecionados."
 
 #: repository/editor/resource_editor.py:1151
 msgid "Add editor group"
@@ -513,11 +515,11 @@ msgstr "Acrescentar grupos de edição aos recursos selecionados"
 
 #: repository/editor/resource_editor.py:1190
 msgid "Cancelled removing editor groups."
-msgstr "Cancelado. Remoção de grupos de editor cancelada."
+msgstr "Remoção de grupos de editor cancelada."
 
 #: repository/editor/resource_editor.py:1200
 msgid "Successfully removed editor groups from the selected resources."
-msgstr "Removeu com sucesso os grupos de edição aos recursos selecionados."
+msgstr "Removeu com sucesso os grupos de edição dos recursos selecionados."
 
 #: repository/editor/resource_editor.py:1213
 msgid "Remove editor group"
@@ -529,7 +531,7 @@ msgstr "Remover grupos de edição dos recursos selecionados"
 
 #: repository/editor/resource_editor.py:1230
 msgid "Cancelled adding owners."
-msgstr "Cancelado. Adição proprietários cancelada."
+msgstr "Adição de proprietários cancelada."
 
 #: repository/editor/resource_editor.py:1246
 #, python-format
@@ -538,7 +540,7 @@ msgid ""
 "%(failure)i resource owners were left unchanged due to missing permissions."
 msgstr ""
 "Acrescentou com sucesso os proprietários %(success)i dos recursos "
-"selcionados. %(failure)i proprietários dos recursos inalterados devido à "
+"selecionados. %(failure)i proprietários dos recursos inalterados devido à "
 "falta de permissões."
 
 #: repository/editor/resource_editor.py:1251
@@ -551,11 +553,11 @@ msgstr "Acrescentar propretários"
 
 #: repository/editor/resource_editor.py:1271
 msgid "Add owners to selected resources"
-msgstr "Acrescentar proprietários a recursos selectionados"
+msgstr "Acrescentar proprietários a recursos selecionados"
 
 #: repository/editor/resource_editor.py:1283
 msgid "Cancelled removing owners."
-msgstr "Cancelado. Remoção proprietários cancelada."
+msgstr "Remoção de proprietários cancelada."
 
 #: repository/editor/resource_editor.py:1293
 msgid "Successfully removed owners from the selected resources."
@@ -575,7 +577,7 @@ msgstr "Remover proprietários dos recursos selecionados"
 #: repository/editor/resource_editor.py:1816
 #, python-format
 msgid "%(name)s object with primary key %(key)s does not exist."
-msgstr "%(name)s objectos com a chave %(key)s não existem."
+msgstr "O objeto %(name)s com a chave %(key)s não existe."
 
 #: repository/editor/resource_editor.py:1406
 #: repository/editor/resource_editor.py:1500
@@ -585,14 +587,14 @@ msgstr "%(name)s objectos com a chave %(key)s não existem."
 msgid ""
 "%(name)s object with primary key %(key)s does not have a StorageObject "
 "attached."
-msgstr "%(name)s objectos com a chave %(key)s não têm StorageObjects ligados."
+msgstr "O objeto %(name)s com a chave %(key)s não temm StorageObjects anexado."
 
 #: repository/editor/resource_editor.py:1410
 #: repository/editor/resource_editor.py:1504
 #: repository/editor/resource_editor.py:1652
 #, python-format
 msgid "%(name)s object with primary key %(key)s is not a master-copy."
-msgstr "%(name)s objectos com a chave %(key)s não té uma cópia original."
+msgstr "O objeto %(name)s com a chave %(key)s não é uma cópia original."
 
 #: repository/editor/resource_editor.py:1465
 #, python-format
@@ -612,7 +614,7 @@ msgstr "Enviar documentação legal: \"%s\""
 #: repository/editor/resource_editor.py:1823
 #, python-format
 msgid "%(name)s object with primary key %(key)s does not exist anymore."
-msgstr "%(name)s objectos com a chave %(key)s não existe mais."
+msgstr "O objeto %(name)s com a chave %(key)s já não existe."
 
 #: repository/editor/resource_editor.py:1916
 #, python-format

@@ -11,9 +11,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>{% spaceless %}{% block title %}ELRI{% endblock %}{% endspaceless %}</title>
         <meta name="description" content="
-                {% spaceless %}{% block description %}ELRI National Relay Station: a repository to store, search and retrieve Language Resources.{% endblock %}{% endspaceless %}"/>
+                {% spaceless %}{% block description %}{% blocktrans %}ELRI National Relay Station: a repository to store, search and retrieve Language Resources.{% endblocktrans %}{% endblock %}{% endspaceless %}"/>
         <meta name="keywords" content="
-                {% spaceless %}{% block keywords %}ELRI, National Relay Station, language resources, translation memories, Connecting Europe Facility{% endblock %}{% endspaceless %}"/>
+                {% spaceless %}{% block keywords %}{% blocktrans %}ELRI, National Relay Station, language resources, translation memories, Connecting Europe Facility {% endblocktrans %}{% endblock %}{% endspaceless %}"/>
         {% if country == "Portugal" %}
         <link rel="shortcut icon" href="{% static 'metashare/images/favicon_pt.ico' %}">
         {% else %}
@@ -71,7 +71,7 @@
 	
     {% analytical_body_top %}
     {% block header %}
-         <a href="#main-content" lang="en">{% trans 'Go to the web page main content.' %}</a> 
+         
         {% include "header.html" with page="frontpage" %}
     {% endblock %}
     {% block back %}{% endblock %}

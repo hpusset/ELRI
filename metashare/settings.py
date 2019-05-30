@@ -184,7 +184,7 @@ INSTALLED_APPS = (
     'analytical',
     'tastypie',
 
-    'django_password_validation', # needed for proper localization
+    ##'django_password_validation', # needed for proper localization
                                   # of password validation error messages
     'metashare.accounts',
     'metashare.storage',
@@ -309,7 +309,7 @@ CACHES = {
 TASTYPIE_ALLOW_MISSING_SLASH = True
 TASTYPIE_DEFAULT_FORMATS = ['json']
 
-AUTH_PASSWORD_VALIDATORS = [
+'''AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django_password_validation.UserAttributeSimilarityValidator',
         'OPTIONS': {
@@ -338,5 +338,5 @@ AUTH_PASSWORD_VALIDATORS = [
             'max_repeats': 2,
         }
     }
-]
+]'''
 

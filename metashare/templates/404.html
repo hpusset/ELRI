@@ -4,7 +4,8 @@
 {% load i18n %}
 
 {% block content %}
-<h2>{% blocktrans %}Page not Found (404){% endblocktrans %}</h2>
+
+<h1 id="main-content" style="font-size: 20pt; line-height:150%; margin: '20px 0px 20px 0px'; font-weight: normal; color:#111; display:block; margin-block-start: 0.83em; margin-block-end: 0.83em; margin-inline-start:0px; margin-inline-end:0px;">{% blocktrans %}Page not Found (404){% endblocktrans %}</h1>
 <div class="content_box">
 <p>{% trans "We&rsquo;re sorry, but the URL you requested was not found." %}</p>
 {% url 'metashare.accounts.views.contact' as the_node_maintainers %}

@@ -8,27 +8,27 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-04 16:42+0200\n"
-"PO-Revision-Date: 2019-04-03 16:13+0200\n"
+"PO-Revision-Date: 2019-05-22 15:30+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_PT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.2.1\n"
 
 #: templates/repository/editor/contributions/contribute.html:9
 msgid "ELRI"
-msgstr "ELRI"
+msgstr "eTradução"
 
 #: templates/repository/editor/contributions/contribute.html:61
 msgid ""
 "\"This site uses cookies to enhance your user experience. By clicking any "
 "link on this page you are giving your consent for us to set cookies.\" "
 msgstr ""
-"\"Este site utiliza cookies para melhorar a experiencia do utilizador. Ao "
+"\"Este site utiliza cookies para melhorar a experiência do utilizador. Ao "
 "clicar em qualquer link nesta página, está a dar consentimento para que "
-"possamos definir cookies.\""
+"possamos definir cookies.\" "
 
 #: templates/repository/editor/contributions/contribute.html:62
 #: templates/repository/editor/contributions/contribute.html:65
@@ -48,12 +48,12 @@ msgid ""
 "Please make sure that you have javascript enabled and refresh the page "
 "before proceeding with your contribution."
 msgstr ""
-"Por favor, certifique-se que tem o JavaScript activo e recarregue a página "
+"Por favor, certifique-se que tem o JavaScript ativo e recarregue a página "
 "antes de continuar com o seu contributo."
 
 #: templates/repository/editor/contributions/contribute.html:97
 msgid "Uploading your data"
-msgstr "A enviar os dados"
+msgstr "A enviar os seus dados"
 
 #: templates/repository/editor/contributions/contribute.html:98
 msgid ""
@@ -66,11 +66,11 @@ msgid ""
 "notified via email and will be able to download it from this repository."
 msgstr ""
 "Por favor, forneça as informações necessárias abaixo para os dados que "
-"deseja carregar. Uma vez carregados, os motores ELRI processarão seus dados "
-"com o objetivo de fornecer-lhe, e aos utilizadores do grupo de sua escolha, "
-"um recurso de linguagem totalmente preparado.\n"
-"                <br> uma vez que seu recurso foi totalmente processado, será "
-"notificado via e-mail e será capaz de descarregá-lo a partir deste "
+"deseja carregar. Uma vez carregados, os seus dados serão processados com o "
+"objetivo de lhe fornecer a si, e aos utilizadores do grupo da sua escolha, "
+"um recurso linguístico totalmente preparado.\n"
+"                <br> Quando o seu recurso for totalmente processado, será "
+"notificado por e-mail e será possível descarregá-lo a partir deste "
 "repositório."
 
 #: templates/repository/editor/contributions/contribute.html:105
@@ -87,7 +87,7 @@ msgstr ""
 
 #: templates/repository/editor/contributions/contribute.html:116
 msgid "Resource short description"
-msgstr "Descrição curta do projecto"
+msgstr "Descrição curta do recurso"
 
 #: templates/repository/editor/contributions/contribute.html:118
 msgid ""
@@ -99,7 +99,7 @@ msgid ""
 msgstr ""
 "[Opcional] Uma descrição curta, incluindo qualquer informação considerada "
 "útil sobre o recurso, p.ex.: se é um conjunto de dados (coleção de "
-"documentos) ou um léxico, glossário, recurso terminológico, etc., seu "
+"documentos) ou um léxico, glossário, recurso terminológico, etc., o seu "
 "tamanho, idioma(s), informações de classificação (por exemplo, relatórios de "
 "saúde, boletins de notícias, léxico de terminologia desportiva etc.)"
 
@@ -126,8 +126,8 @@ msgid ""
 "[Optional] The type of the resource: can be Corpus, Lexicon, or Language "
 "Description. Do not choose anything if you are not sure."
 msgstr ""
-"[Opcional] O tipo do recurso: pode ser Corpo, Lexico ou descrição do idioma. "
-"Não escolha uma opção caso não tenha certeza."
+"[Opcional] O tipo do recurso: pode ser Corpo, Léxico ou descrição do idioma. "
+"Não escolha nenhuma opção caso não tenha certeza."
 
 #: templates/repository/editor/contributions/contribute.html:135
 #: templates/repository/editor/contributions/contribute.html:174
@@ -168,7 +168,7 @@ msgstr "Finlandês"
 
 #: templates/repository/editor/contributions/contribute.html:148
 msgid "French"
-msgstr "Francesa"
+msgstr "Francês"
 
 #: templates/repository/editor/contributions/contribute.html:149
 msgid "German"
@@ -224,7 +224,7 @@ msgstr "Português"
 
 #: templates/repository/editor/contributions/contribute.html:162
 msgid "Romanian; Moldavian; Moldovan"
-msgstr "Romena; Moldavo"
+msgstr "Romeno; Moldavo"
 
 #: templates/repository/editor/contributions/contribute.html:163
 msgid "Slovak"
@@ -417,7 +417,7 @@ msgstr "Não padrão/Outra_Licença/Termos"
 
 #: templates/repository/editor/contributions/contribute.html:240
 msgid "The licensing conditions for the resource."
-msgstr "As condições de licenciamento do recurso."
+msgstr "Condições de licenciamento do recurso."
 
 #: templates/repository/editor/contributions/contribute.html:241
 msgid " More information about the available licences."
@@ -429,7 +429,7 @@ msgstr "Ficheiro de licença"
 
 #: templates/repository/editor/contributions/contribute.html:248
 msgid "Please upload license file in the <b>.pdf format</b>."
-msgstr "Por favor, envie a o ficheiro da licença em <b>formato .pdf </b>."
+msgstr "Por favor, envie o ficheiro da licença em <b>formato .pdf </b>."
 
 #: templates/repository/editor/contributions/contribute.html:273
 msgid "Upload Resource"
@@ -452,8 +452,8 @@ msgid ""
 "to provide an SFTP link for direct download or consider uploading smaller "
 "files"
 msgstr ""
-"Caso deseje enviar dados amiores que 100MB, por favor contacte-nos para "
-"fornecer um link SFTP para download directo ou considere fazer o envio de "
+"Caso deseje enviar dados maiores que 100MB, por favor contacte-nos para "
+"fornecer um link SFTP para download direto ou considere fazer o envio de "
 "ficheiros mais pequenos"
 
 #: templates/repository/editor/contributions/contribute.html:283
@@ -479,11 +479,11 @@ msgstr ""
 
 #: templates/repository/editor/contributions/contribute.html:310
 msgid "Submit"
-msgstr "Submeter"
+msgstr "Enviar"
 
 #: templates/repository/editor/contributions/contribute.html:311
 msgid "Reset"
-msgstr "Reset"
+msgstr "Limpar"
 
 #: templates/repository/editor/dict_widget.html:4
 #: templates/repository/editor/dict_widget.html:8
@@ -495,15 +495,15 @@ msgstr "Apagar Campo"
 #: templates/repository/editor/dict_widget.html:6
 #: templates/repository/editor/lang_dict_widget.html:6
 msgid "Add Another Field"
-msgstr "Acrescentar Outro Campo"
+msgstr "Adicionar Outro Campo"
 
 #: templates/repository/editor/index.html:28
 msgid "Recent Actions"
-msgstr "Acções Recentes"
+msgstr "Ações Recentes"
 
 #: templates/repository/editor/index.html:29
 msgid "My Actions"
-msgstr "As minhas Acções"
+msgstr "As minhas Ações"
 
 #: templates/repository/editor/index.html:33
 msgid "None available"
@@ -542,7 +542,7 @@ msgstr "Início"
 
 #: templates/repository/editor/logged_out.html:10
 msgid "Thanks for using the ELRI editor."
-msgstr "Obrigado por usar o editor ELRI."
+msgstr "Obrigado por usar o editor eTradução."
 
 #: templates/repository/editor/logged_out.html:14
 msgid "Log in again"
@@ -552,7 +552,7 @@ msgstr "Voltar a entrar"
 #: templates/repository/editor/multi_corpus_info.html:31
 #: templates/repository/editor/one_media_info.html:13
 msgid "Add"
-msgstr "Acrescentar"
+msgstr "Adicionar"
 
 #: templates/repository/editor/select_resource_type.html:17
 msgid "Language description"
@@ -580,15 +580,15 @@ msgid ""
 "                            languages, including, for instance,"
 msgstr ""
 "para conjuntos de documentos em um ou mais\n"
-"                            idiomas, incluíndo por exemplo,"
+"                            idiomas, incluindo por exemplo,"
 
 #: templates/repository/editor/select_resource_type.html:47
 msgid ""
 "sets of public administration official documents (e.g. ministerial "
 "decisions, legal acts, Board decisions etc.),"
 msgstr ""
-"conjuntos de documentos oficiais de administrações públicas (ex.: decições "
-"ministeriais, actos legais, decisões de conselhos de administração)"
+"conjuntos de documentos oficiais de administrações públicas (ex.: decisões "
+"ministeriais, atos legais, decisões de conselhos de administração)"
 
 #: templates/repository/editor/select_resource_type.html:48
 msgid "sets of journal, newspaper, bulletin, blog articles, etc."
@@ -599,7 +599,7 @@ msgid ""
 "parallel corpora, i.e. sets of original document with its translations "
 "(without any processing)"
 msgstr ""
-"corpora paralela, ou seja, conjuntos de documentos originais com suas "
+"corpora paralela, ou seja, conjuntos de documentos originais com as suas "
 "traduções (sem qualquer processamento)"
 
 #: templates/repository/editor/select_resource_type.html:50
@@ -629,7 +629,7 @@ msgid ""
 "data)."
 msgstr ""
 "modelos de linguagem e tradução, que contêm informações estatísticas "
-"atribueindo uma probabilidade a uma peça de texto invisível (com base em "
+"atribuindo uma probabilidade a uma peça de texto invisível (com base em "
 "alguns dados de treino)."
 
 #: templates/repository/editor/select_resource_type.html:61
@@ -663,7 +663,7 @@ msgid ""
 "part of\n"
 "                                    speech, inflectional information, etc.)."
 msgstr ""
-"léxica e dicionários contendo palavras com informações linguísticas (por "
+"léxica e dicionários que contêm palavras com informações linguísticas (por "
 "exemplo,\n"
 "                                     fala, informação inflexional, etc.)."
 

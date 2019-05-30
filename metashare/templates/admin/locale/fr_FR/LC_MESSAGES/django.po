@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-05 10:45+0200\n"
+"POT-Creation-Date: 2019-05-29 17:51+0200\n"
 "PO-Revision-Date: 2019-04-05 13:52+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: templates/admin/base.html:39
+#: templates/admin/base.html:43
 msgid ""
 "\"This site uses cookies to enhance your user experience. By clicking any "
 "link on this page you are giving your consent for us to set cookies.\" "
@@ -26,15 +26,15 @@ msgstr ""
 "pour améliorer l’expérience de l'utilisateur. En poursuivant votre "
 "navigation sur ce site Web, vous consentez à l'utilisation de ces cookies.\""
 
-#: templates/admin/base.html:40 templates/admin/base.html.py:43
+#: templates/admin/base.html:44 templates/admin/base.html.py:47
 msgid "\"OK\""
 msgstr "\"Entendu\""
 
-#: templates/admin/base.html:42
+#: templates/admin/base.html:46
 msgid "\"Learn more\""
 msgstr "\"En savoir plus\""
 
-#: templates/admin/base.html:57 templates/admin/delete_confirmation.html:6
+#: templates/admin/base.html:61 templates/admin/delete_confirmation.html:6
 #: templates/admin/delete_selected_confirmation.html:6
 msgid "Home"
 msgstr "Accueil"

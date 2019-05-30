@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-04 16:42+0200\n"
+"POT-Creation-Date: 2019-05-29 17:50+0200\n"
 "PO-Revision-Date: 2019-05-17 16:29+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1616,6 +1616,10 @@ msgid "Text Type"
 msgstr "Tipo de texto"
 
 #: repository/validators.py:38
+#, fuzzy
+#| msgid ""
+#| "Enter a valid year value which conforms to the XML Schema \"gYear\" type "
+#| "(see http://www.w3.org/TR/xmlschema-2/#gYear). \"{}\" is not valid."
 msgid ""
 "Enter a valid year value which conforms to the XML Schema \"gYear\" type "
 "(see http://www.w3.org/TR/xmlschema-2/#gYear). \"{}\" is not valid."
@@ -1625,7 +1629,12 @@ msgstr ""
 "válido."
 
 #: repository/validators.py:56
-#, python-brace-format
+#, fuzzy, python-brace-format
+#| msgid ""
+#| "The character at position {char_pos} (&#x{char_code:0>4x};) must not be "
+#| "used. Enter a string consisting of only characters that match the Char "
+#| "production from XML 1.0 (Second Edition), cf. http://www.w3.org/TR/2000/"
+#| "WD-xml-2e-20000814#NT-Char."
 msgid ""
 "The character at position {char_pos} (&#x{char_code:0>4x};) must not be "
 "used. Enter a string consisting of only characters that match the Char "
@@ -1638,6 +1647,9 @@ msgstr ""
 "Char."
 
 #: repository/validators.py:72
+#, fuzzy
+#| msgid ""
+#| "Enter a valid language code as the key for each pair. \"{}\" is not valid."
 msgid ""
 "Enter a valid language code as the key for each pair. \"{}\" is not valid."
 msgstr ""
@@ -1645,34 +1657,46 @@ msgstr ""
 "válido."
 
 #: repository/validators.py:86
+#, fuzzy
+#| msgid "This field is required."
 msgid "This field is required."
 msgstr "Este campo é obrigatório."
 
 #: repository/validators.py:92
+#, fuzzy
+#| msgid "This field accepts only number values (without commas)"
 msgid "This field accepts only number values (without commas)"
 msgstr "Este campo aceita apenas valores numéricos (sem vírgulas)"
 
 #: repository/validators.py:97
+#, fuzzy
+#| msgid "Please edit the attribution text template"
 msgid "Please edit the attribution text template"
 msgstr "Edite o modelo de texto de atribuição"
 
-#: repository/views.py:341
+#: repository/validators.py:101
+#, fuzzy
+#| msgid "Not a valid emailAddress value."
+msgid "Enter a valid email address."
+msgstr "Não é um e-mail válido."
+
+#: repository/views.py:352
 msgid "Request for information regarding a resource"
 msgstr "Agrupa informação necessária para identificar o recurso"
 
-#: repository/views.py:349
+#: repository/views.py:360
 msgid "There was an error sending out the request email."
 msgstr "Ocorreu um erro no envio do e-mail com o pedido."
 
-#: repository/views.py:351
+#: repository/views.py:362
 msgid "You have successfully sent a message to the resource contact person."
 msgstr "Enviou com sucesso uma mensagem para a pessoa de contato do recurso."
 
-#: repository/views.py:1040
+#: repository/views.py:1051
 msgid "N/A"
 msgstr "N/A"
 
-#: repository/views.py:1101
+#: repository/views.py:1112
 msgid ""
 "\n"
 "                Only files of type DOC(X), ODT, RTF, PDF, TMX, SDLTM, XML,\n"
@@ -1689,7 +1713,7 @@ msgstr ""
 "                tipos específicos. Por favor remova os ficheiros\n"
 "                que não pertencem a nenhum destes tipos."
 
-#: repository/views.py:1140
+#: repository/views.py:1154
 msgid ""
 "\n"
 "                            Your request could not be completed.\"\n"
@@ -1702,7 +1726,7 @@ msgstr ""
 "                            O ficheiro que tentou enviar está corrompido ou\n"
 "                            não é um ficheiro '.zip' válido."
 
-#: repository/views.py:1149
+#: repository/views.py:1163
 msgid ""
 "\n"
 "                            Only files of type DOC(X), ODT, RTF, PDF, TMX, "
@@ -1722,11 +1746,11 @@ msgstr ""
 "ficheiros\n"
 "                            que não pertencem a nenhum destes tipos."
 
-#: repository/views.py:1192
+#: repository/views.py:1206
 msgid "New submitted contributions"
 msgstr "Novas contribuições enviadas"
 
-#: repository/views.py:1200
+#: repository/views.py:1214
 msgid ""
 "\n"
 "                Thank you for sharing, your data have been successfully "
@@ -1739,7 +1763,7 @@ msgstr ""
 "sucesso e serão agora processados e revistos.  Será notificado por e-mail "
 "quando o recurso estiver disponível para download."
 
-#: repository/views.py:1209
+#: repository/views.py:1223
 msgid ""
 "\n"
 "                The file you are trying to upload exceeds the size limit. If "
