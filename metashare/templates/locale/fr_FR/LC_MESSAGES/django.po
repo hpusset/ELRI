@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-29 17:51+0200\n"
+"POT-Creation-Date: 2019-05-30 17:02+0200\n"
 "PO-Revision-Date: 2019-04-05 13:51+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -88,6 +88,10 @@ msgstr "\"Entendu\""
 #: templates/base.html:62
 msgid "\"Learn more\""
 msgstr "\"En savoir plus\""
+
+#: templates/base.html:74
+msgid "Go to the web page main content."
+msgstr ""
 
 #: templates/breadcrumbs.html:3 templates/header.html:19
 #: templates/header.html.py:20
@@ -434,10 +438,6 @@ msgstr ""
 "                            <br><a href=\"/repository/contribute\">Partagez</"
 "a> vos propres données et bénéficiez de ressources linguistiques préparées "
 "en retour."
-
-#: templates/header.html:4
-msgid "Go to the web page main content."
-msgstr ""
 
 #: templates/header.html:22
 msgid "Browse the resources of the ELRI catalogue"
@@ -2280,6 +2280,7 @@ msgstr "Télécharger le contrat de licence"
 msgid "Licence Agreement"
 msgstr "Contrat de licence"
 
+#: templates/repository/licence_agreement.html:21
 #: templates/repository/licence_agreement.html:22
 #: templates/repository/licence_agreement.html:26
 msgid "View licence"
@@ -2953,6 +2954,12 @@ msgstr "N-Gramme"
 #: templates/repository/resource_view/person.html:20
 msgid "Click to view contact card"
 msgstr "Cliquer pour voir la carte de visite"
+
+#: templates/repository/resource_view/person.html:25
+#, fuzzy
+#| msgid "Contact details"
+msgid "Contact Card"
+msgstr "Coordonnées"
 
 #: templates/repository/resource_view/person.html:146
 #: templates/repository/resource_view/person.html:228

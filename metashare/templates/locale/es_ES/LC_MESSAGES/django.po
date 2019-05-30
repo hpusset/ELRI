@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-29 17:51+0200\n"
-"PO-Revision-Date: 2019-05-29 14:20+0200\n"
+"POT-Creation-Date: 2019-05-30 17:01+0200\n"
+"PO-Revision-Date: 2019-05-30 17:12+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -89,6 +89,10 @@ msgstr "\"Entendido\""
 #: templates/base.html:62
 msgid "\"Learn more\""
 msgstr "\"Leer más\""
+
+#: templates/base.html:74
+msgid "Go to the web page main content."
+msgstr "Ir al contenido principal de la página web."
 
 #: templates/breadcrumbs.html:3 templates/header.html:19
 #: templates/header.html.py:20
@@ -411,10 +415,6 @@ msgstr ""
 "disponibles.\n"
 "                            <br> <a href=\"/repository/contribute\"> "
 "Contribuir </a> datos y recuperar memorias de traducción."
-
-#: templates/header.html:4
-msgid "Go to the web page main content."
-msgstr "Ir al contenido principal de la página web."
 
 #: templates/header.html:22
 msgid "Browse the resources of the ELRI catalogue"
@@ -2235,6 +2235,7 @@ msgstr "Descargar acuerdo de licencia"
 msgid "Licence Agreement"
 msgstr "Acuerdo de licencia"
 
+#: templates/repository/licence_agreement.html:21
 #: templates/repository/licence_agreement.html:22
 #: templates/repository/licence_agreement.html:26
 msgid "View licence"
@@ -2903,6 +2904,10 @@ msgstr "N-Gram"
 msgid "Click to view contact card"
 msgstr "Haga clic para ver la tarjeta de contacto"
 
+#: templates/repository/resource_view/person.html:25
+msgid "Contact Card"
+msgstr "Tarjeta de contacto"
+
 #: templates/repository/resource_view/person.html:146
 #: templates/repository/resource_view/person.html:228
 msgid "Tel."
@@ -3258,8 +3263,6 @@ msgid "Search and Browse"
 msgstr "Buscar y examinar"
 
 #: templates/repository/search.html:69
-#, fuzzy
-#| msgid "Browse Resources"
 msgid "Browse Language Resources"
 msgstr "Explorar recursos"
 

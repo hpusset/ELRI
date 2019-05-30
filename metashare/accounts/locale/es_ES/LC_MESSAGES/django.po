@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-29 17:50+0200\n"
-"PO-Revision-Date: 2019-05-29 18:29+0200\n"
+"POT-Creation-Date: 2019-05-30 17:01+0200\n"
+"PO-Revision-Date: 2019-05-30 17:07+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -108,8 +108,8 @@ msgstr "Solicitud aceptada"
 #: accounts/admin.py:318 accounts/admin.py:786
 msgid "There was an error sending out an application acceptance e-mail."
 msgstr ""
-"Ha habido un error al enviar el correo electrónico de aceptación de la "
-"solicitud."
+"Error: Ha habido un error al enviar el correo electrónico de aceptación de "
+"la solicitud."
 
 #: accounts/admin.py:321
 #, python-format
@@ -145,8 +145,8 @@ msgstr "Solicitud rechazada"
 msgid ""
 "There was an error sending out an e-mail about turning down the application."
 msgstr ""
-"Ha habido un error al enviar un mensaje de correo electrónico acerca de la "
-"desactivación de la solicitud."
+"Error: Ha habido un error al enviar un mensaje de correo electrónico acerca "
+"de la desactivación de la solicitud."
 
 #: accounts/admin.py:381
 #, python-format
@@ -733,8 +733,8 @@ msgid ""
 "There was an error sending out the notification email to the administrators. "
 "Please contact them directly."
 msgstr ""
-"Ha habido un error al enviar el correo electrónico de notificación a los "
-"administradores. Póngase en contacto con ellos directamente."
+"Error: Ha habido un error al enviar el correo electrónico de notificación a "
+"los administradores. Póngase en contacto con ellos directamente."
 
 #: accounts/views.py:191
 msgid ""
@@ -781,8 +781,8 @@ msgid ""
 "There was an error sending out the request email for your editor group "
 "application."
 msgstr ""
-"Ha habido un error al enviar el correo electrónico para la solicitud de "
-"grupo de editor."
+"Error: Ha habido un error al enviar el correo electrónico para la solicitud "
+"de grupo de editor."
 
 #: accounts/views.py:342
 #, python-format
@@ -834,7 +834,7 @@ msgid ""
 "There was an error sending out the request email for your organization "
 "application."
 msgstr ""
-"Ha habido un error al enviar el correo electrónico de solicitud de "
+"Error: Ha habido un error al enviar el correo electrónico de solicitud de "
 "organización."
 
 #: accounts/views.py:496
@@ -881,8 +881,8 @@ msgid ""
 "There was an error sending out the activation email for your user account. "
 "Please contact the administrator at %s."
 msgstr ""
-"Ha habido un error al enviar el correo electrónico de activación de su "
-"cuenta de usuario. Póngase en contacto con el administrador en %s."
+"Error: Ha habido un error al enviar el correo electrónico de activación de "
+"su cuenta de usuario. Póngase en contacto con el administrador en %s."
 
 #: accounts/views.py:612
 msgid ""
