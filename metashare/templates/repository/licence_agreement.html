@@ -18,12 +18,12 @@
             </h3>
             <div class="licence_text">
                 {% if licence_path %}
-                    <iframe src="{{ licence_path }}" width="100%" height="400"><a href="{{ licence_path }}">
+                    <iframe src="{{ licence_path }}" width="100%" height="400" title="{% trans 'View licence' %}" ><a href="{{ licence_path }}">
                         {% trans 'View licence' %}</a>
                     </iframe>
                 {% else %}
                     {% if l_url %}
-                        <iframe src="{{ l_url }}" width="850" height="400"><a href="{{ l_url }}">{% trans 'View licence' %}</a>
+                        <iframe src="{{ l_url }}" width="850" height="400" title="{% trans 'View licence' %}"><a href="{{ l_url }}">{% trans 'View licence' %}</a>
                         </iframe>
                     {% else %}
                         {% if l_text %}
