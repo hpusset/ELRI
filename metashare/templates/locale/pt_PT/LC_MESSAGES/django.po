@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-30 17:02+0200\n"
-"PO-Revision-Date: 2019-05-28 13:10+0200\n"
+"PO-Revision-Date: 2019-06-03 12:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_PT\n"
@@ -330,19 +330,14 @@ msgid "ELRI National Relay Station "
 msgstr ""
 
 #: templates/footer.html:12 templates/footer.html.py:23
-#, fuzzy
-#| msgid ""
-#| "powered by <a href=\"http://www.meta-share.org/\" target=\"_blank\">META-"
-#| "SHARE</a> and <a href=\"https://elrc-share.eu/\" target=\"_blank\">ELRC-"
-#| "SHARE</a>"
 msgid ""
 "powered by <a href=\"http://www.meta-share.org/\" target=\"_blank\" lang=\"en"
 "\">META-SHARE</a> and <a href=\"https://elrc-share.eu/\" target=\"_blank\" "
 "lang=\"en\">ELRC-SHARE</a>"
 msgstr ""
-"powered by <a href=\"http://meta-share.org/\" target=\"_blank\"> META-SHARE "
-"</a> e <a href = \"https://elrc-share.eu/\" target = \"_blank\"> ELRC-SHARE "
-"</a>"
+"powered by <a href=\"http://meta-share.org/\" target=\"_blank\" lang=\"en\"> "
+"META-SHARE </a> e <a href = \"https://elrc-share.eu/\" target = \"_blank\" "
+"lang=\"en\"> ELRC-SHARE </a>"
 
 #: templates/footer.html:13 templates/footer.html.py:24
 msgid ""
@@ -369,12 +364,6 @@ msgstr ""
 "Instituições Públicas e centros de investigação."
 
 #: templates/frontpage.html:17
-#, fuzzy
-#| msgid ""
-#| "National Relay Stations are developed within the  <a href=\"http://www."
-#| "elri-project.eu\">ELRI</a> European project, supported by the <a href="
-#| "\"http://ec.europa.eu/inea/en/connecting-europe-facility\">Connecting "
-#| "Europe Facility</a> programme."
 msgid ""
 "National Relay Stations are developed within the  <a href=\"http://www.elri-"
 "project.eu\">ELRI</a> European project, supported by the <a href=\"http://ec."
@@ -440,8 +429,8 @@ msgstr ""
 "\n"
 "O serviço eTradução foi desenvolvido no âmbito do projeto europeu <a href="
 "\"http://www.elri-project.eu\"> ELRI</a>, apoiado pelo programa <a href="
-"\"http://ec.europa.eu/inea/en/connecting-europe-facility\">Connecting Europe "
-"Facility</a>."
+"\"http://ec.europa.eu/inea/en/connecting-europe-facility\" lang=\"en"
+"\">Connecting Europe Facility</a>."
 
 #: templates/header.html:22
 msgid "Browse the resources of the ELRI catalogue"
@@ -566,7 +555,7 @@ msgstr "Política de Aviso e Retirada"
 #: templates/header.html:121 templates/header.html.py:122 templates/help.html:7
 #: templates/help.html.py:8
 msgid "Help"
-msgstr "Contactos"
+msgstr "Ajuda"
 
 #: templates/header.html:125
 msgid "Profile settings and actions"
@@ -638,10 +627,9 @@ msgid ""
 "For enquiries related to the project, please refer to the <a href=\"http://"
 "www.elri-project.eu/contact-us.html\" target=\"_blank\">list of ELRI Contacts"
 msgstr ""
-"Para obter apoio na identificação de recursos partilháveis, ajuda na "
-"utilização do serviço eTradução e esclarecer dúvidas gerais sobre o "
-"Repositório Nacional de Recursos de Tradução, contacte-nos através do e-mail "
-"<a href=\"mailto:etraducao@ama.pt\" >eTraducao@ama.pt</a>"
+"Para questões relacionadas com o projeto ELRI, consulte a <a href=\"http://"
+"www.elri-project.eu/contact-us.html\" target=\"_blank\">lista de contactos "
+"na página do projeto.</a>"
 
 #: templates/help.html:24
 #, python-format
@@ -649,9 +637,10 @@ msgid ""
 "For technical help about this National Relay Station, you can contact us at "
 "<a href=\"mailto:%(email)s\" >%(email)s</a>."
 msgstr ""
-"Para questões relacionadas com o projeto ELRI, consulte a <a href=\"http://"
-"www.elri-project.eu/contact-us.html\" target=\"_blank\">lista de contactos "
-"na página do projeto.</a>"
+"Para obter apoio na identificação de recursos partilháveis, ajuda na "
+"utilização do serviço eTradução e esclarecer dúvidas gerais sobre o "
+"Repositório Nacional de Recursos de Tradução, contacte-nos através do e-mail "
+"<a href=\"mailto:%(email)s\" >%(email)s</a>"
 
 #: templates/legal.html:7
 msgid "<strong>ELRI Terms of Service</strong>"
@@ -819,10 +808,6 @@ msgstr ""
 "recursos por qualquer outra pessoa."
 
 #: templates/legal.html:44
-#, fuzzy
-#| msgid ""
-#| "If you are an ELRI Registered User, then You have unlimited access to all "
-#| "ELRI Services offered by the Service Provider; more specifically:"
 msgid ""
 "If you are an ELRI Registered User, then You have unlimited access to all "
 "ELRI Services offered by the Service Provider; more specifically:"
@@ -831,10 +816,6 @@ msgstr ""
 "serviços ELRI oferecidos pelo prestador de serviços, especificamente:"
 
 #: templates/legal.html:45
-#, fuzzy
-#| msgid ""
-#| "access to all language resources in accordance to the relevant licensing "
-#| "terms granted for each resource;"
 msgid ""
 "access to all language resources in accordance to the relevant licensing "
 "terms granted for each resource;"
@@ -937,7 +918,7 @@ msgid ""
 "<li>ELRI will only collect and use Your information to administer, support, "
 "improve and obtain feedback on its services.</li>"
 msgstr ""
-"</li>A ELRI somente recolherá e utilizará as suas informações para "
+"<li>A ELRI somente recolherá e utilizará as suas informações para "
 "administrar, apoiar, melhorar e obter feedback sobre seus serviços.</li>"
 
 #: templates/legal.html:64
@@ -945,14 +926,14 @@ msgid ""
 "<li>ELRI may also contact You to obtain feedback on services and any "
 "improvements it can make.</li>"
 msgstr ""
-"</li>A ELRI também pode entrar em contacto consigo para obter feedback sobre "
+"<li>A ELRI também pode entrar em contacto consigo para obter feedback sobre "
 "os serviços e quaisquer melhorias que ele possa fazer.</li>"
 
 #: templates/legal.html:65
 msgid ""
 "<li>ELRI will not disclose Your personal data to any other organization.</li>"
 msgstr ""
-"</li>A ELRI não divulgará os seus dados pessoais a nenhuma outra organização."
+"<li>A ELRI não divulgará os seus dados pessoais a nenhuma outra organização."
 "</li>"
 
 #: templates/legal.html:66
@@ -960,7 +941,7 @@ msgid ""
 "<li>You can access and modify your personal data through the Registration "
 "Service.</li>"
 msgstr ""
-"</li>Pode aceder e modificar os seus dados pessoais através do Serviço de "
+"<li>Pode aceder e modificar os seus dados pessoais através do Serviço de "
 "Registo.</li>"
 
 #: templates/legal.html:70 templates/privacy.html:119
@@ -1043,7 +1024,7 @@ msgstr ""
 "guide/safari/manage-cookies-and-website-data-sfri11471/mac\">Safari web</a> "
 "e no <a href=\"https://support.apple.com/pt-pt/HT201265\">Safari para iOS</"
 "a></li>\n"
-"</ul>."
+"</ul>"
 
 #: templates/legal.html:74
 msgid "<b>ELRI Services misuse and notification regarding IPR infringement</b>"
@@ -1103,27 +1084,6 @@ msgid "<b>Disclaimers and Limitation of Liability</b>"
 msgstr "<b>Isenções e Limitações de Responsabilidade</b>"
 
 #: templates/legal.html:84
-#, fuzzy
-#| msgid ""
-#| "ELRI Services, content and metadata are provided “AS IS” and on an “ΑS "
-#| "AVAILABLE” basis without any representations or any kind of warranty made "
-#| "(whether express or implied by law) to the extent permitted by law, "
-#| "including the implied warranties of satisfactory quality, fitness for a "
-#| "particular purpose, noninfringement, compatibility, security and accuracy."
-#| "</p>\n"
-#| " \n"
-#| "        <p>Under no circumstances will ELRI be liable for any of the "
-#| "following losses or damage (whether such losses where foreseen, "
-#| "foreseeable, known or otherwise): (a) loss of data; (b) loss of "
-#| "opportunity; (c) loss of goodwill or injury to reputation; (d) losses "
-#| "suffered by third parties; or (e) any direct, indirect, consequential, "
-#| "special or exemplary damages arising from the use of the ELRI regardless "
-#| "of the form of action.</p>\n"
-#| " \n"
-#| "        <p>ELRI does not warrant that functions contained in the ELRI "
-#| "Services will be uninterrupted or error free, that defects will be "
-#| "corrected, or that the ELRI databases or the delivery mechanism that make "
-#| "it available are free of viruses and bugs."
 msgid ""
 "ELRI Services, content and metadata are provided “AS IS” and on an “ΑS "
 "AVAILABLE” basis without any representations or any kind of warranty made "
@@ -1248,8 +1208,6 @@ msgstr ""
 "ama@ama.pt por escrito, declarando o seguinte:"
 
 #: templates/legal.html:109
-#, fuzzy
-#| msgid "His/Her contact details;"
 msgid "His/Her contact details;"
 msgstr "Os seus detalhes de contacto;"
 
@@ -1341,7 +1299,7 @@ msgstr ""
 
 #: templates/legal.html:129
 msgid "Appendix B"
-msgstr "Anexo B"
+msgstr " "
 
 #: templates/login.html:9
 msgid "User Authentication"
@@ -1364,7 +1322,7 @@ msgstr "<strong>Termos de Serviço ELRI</strong>"
 
 #: templates/privacy.html:11
 msgid "<b>ELRI National Relay Station Data Protection Notice</b>"
-msgstr "Aviso de proteção de dados do eTradução"
+msgstr "<b>Aviso de proteção de dados do eTradução</b>"
 
 #: templates/privacy.html:12
 msgid ""
