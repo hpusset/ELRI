@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-30 17:02+0200\n"
-"PO-Revision-Date: 2019-06-04 13:08+0200\n"
+"PO-Revision-Date: 2019-06-04 16:14+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_PT\n"
@@ -2897,7 +2897,7 @@ msgstr "N-Gram"
 
 #: templates/repository/resource_view/person.html:20
 msgid "Click to view contact card"
-msgstr "Carregar para ver o cartão de contacto"
+msgstr "Clique para ver o cartão de contacto"
 
 #: templates/repository/resource_view/person.html:25
 msgid "Contact Card"
