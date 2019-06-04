@@ -5,8 +5,9 @@
 
     <div id="header">
         {% if country == "Portugal" %}
+           <a href="{% url 'frontpage' %}" title="Ir para a homepage do eTradução">
            <img style="float:right; margin: 10px 20px 0 0"
-                                src="{{ STATIC_URL }}metashare/images/elri-logo-title-small-pt.png" alt="eTradução logo" title="logo eTradução"/>
+                                src="{{ STATIC_URL }}metashare/images/elri-logo-title-small-pt.png" alt="Ir para a homepage do eTradução" /></a>
         {% else %}
         <a href="http://www.elri-project.eu/" title="{% trans 'Go to the ELRI project homepage' %}"
                 target="_blank"><img style="float:right; margin: 10px 20px 0 0"

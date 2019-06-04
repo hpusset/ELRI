@@ -1462,8 +1462,9 @@ def create_description(xml_file, type, base, user):
     psi = False
     licence = u"underReview"
     if info['licence']:
-        availability = u'available'
-        licence = info['licence'][0]
+        #by default: our availability is always underReview
+        #availability = u'available'
+        licence = info['licence']
         if info['licence'] == u'openUnder-PSI':
             psi = True
     distribution = distributionInfoType_model.objects.create(

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-30 17:02+0200\n"
-"PO-Revision-Date: 2019-06-03 12:54+0200\n"
+"PO-Revision-Date: 2019-06-04 13:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_PT\n"
@@ -56,19 +56,23 @@ msgstr ""
 
 #: templates/back.html:7 templates/back.html.py:10
 msgid "ELRI National Relay Station"
-msgstr "Estação de Transmissão Nacional ELRI"
+msgstr "eTradução/ELRI: Repositório Nacional de Recursos de Tradução"
 
 #: templates/base.html:14
 msgid ""
 "ELRI National Relay Station: a repository to store, search and retrieve "
 "Language Resources."
 msgstr ""
+"eTradução/ELRI: Repositório Nacional de Recursos de Tradução, onde os "
+"recursos linguísticos podem ser recolhidos, preparados e partilhados."
 
 #: templates/base.html:16
 msgid ""
 "ELRI, National Relay Station, language resources, translation memories, "
 "Connecting Europe Facility "
 msgstr ""
+"eTradução, ELRI,  Repositório Nacional de Recursos de Tradução, recursos "
+"linguísticos, memórias de tradução, Connecting Europe Facility"
 
 #: templates/base.html:59
 msgid ""
@@ -89,7 +93,7 @@ msgstr "\"Saber mais\""
 
 #: templates/base.html:74
 msgid "Go to the web page main content."
-msgstr ""
+msgstr "Navegar para o conteúdo principal da página."
 
 #: templates/breadcrumbs.html:3 templates/header.html:19
 #: templates/header.html.py:20
@@ -168,40 +172,28 @@ msgstr ""
 "seguinte procedimento:"
 
 #: templates/elri-info.html:23
-#, fuzzy
-#| msgid ""
-#| "New users should first register <a href=\"../accounts/create/\">here</a>. "
-#| "Once your account credentials have been validated, you can log in and "
-#| "either search (via the Browse Resources menu) or contribute ((via the "
-#| "Contribute Resources menu) language resources."
 msgid ""
 "New users should first  <a href=\"../accounts/create/\">register</a>. Once "
 "your account credentials have been validated, you can log in and either "
 "search (via the Browse Resources menu) or contribute ((via the Contribute "
 "Resources menu) language resources."
 msgstr ""
-"Os novos utilizadores devem primeiro registar-se <a href=\"../accounts/"
-"create/\"> aqui </a>. Após a validação das credenciais da sua conta, poderá "
-"fazer login e pesquisar (por meio do menu Procurar Recursos) ou contribuir "
-"com os recursos linguísticos (através do menu Recursos do Contribuinte)."
+"Os novos utilizadores devem começar por se  <a href=\"../accounts/create/"
+"\">registar</a>. Após a validação da sua conta, pode iniciar sessão e "
+"procurar (através do menu Procurar) ou contribuir (através do menu Contribua "
+"com recursos) com recursos de tradução."
 
 #: templates/elri-info.html:25
-#, fuzzy
-#| msgid ""
-#| "For each language resource, you will be asked to provide the languages of "
-#| "its content, a short title, the group with which you wish to share the "
-#| "resource, and the associated licensing conditions (see <a href="
-#| "\"#Licensing_LRs\">below</a>)."
 msgid ""
 "For each language resource, you will be asked to provide the languages of "
 "its content, a short title, the group with which you wish to share the "
 "resource, and the associated licensing conditions (see <a href="
 "\"#Licensing_LRs\" title=\"licensing contitions\">below</a>)."
 msgstr ""
-"Para cada recurso linguístico, será solicitado a fornecer idiomas do seu "
-"conteúdo, um título curto, o grupo com o qual deseja partilhar o recurso e "
-"as condições de licenciamento associadas (consulte <a href=\"#Licensing_LRs"
-"\">abaixo</a>)."
+"Para cada recurso linguístico, será pedido que forneça as línguas do seu "
+"conteúdo, um título curto, o grupo com o qual pretende partilhar, o recurso "
+"e as <a href=\"#Licensing_LRs\" title=\"ver condições de licenciamento "
+"associadas\">condições de licenciamento associadas</a>."
 
 #: templates/elri-info.html:27
 msgid ""
@@ -323,11 +315,11 @@ msgstr "Licenças de dados específicas"
 
 #: templates/footer.html:9 templates/header.html:11
 msgid "Go to the ELRI project homepage"
-msgstr ""
+msgstr "Visitar a página do projeto ELR"
 
 #: templates/footer.html:11 templates/footer.html.py:22
 msgid "ELRI National Relay Station "
-msgstr ""
+msgstr "eTradução/ELRI: Repositório Nacional de Recursos de Tradução"
 
 #: templates/footer.html:12 templates/footer.html.py:23
 msgid ""
@@ -344,6 +336,8 @@ msgid ""
 "Go to the Creative Commons Attribution Non-Commercial Share Alike 4.0 "
 "International license information page."
 msgstr ""
+"Visitar a página de informação relativa à licença internacional Creative "
+"Commons Attribution Non-Commercial Share Alike 4.0"
 
 #: templates/footer.html:16 templates/footer.html.py:29
 msgid "Privacy Policy"
@@ -2906,10 +2900,8 @@ msgid "Click to view contact card"
 msgstr "Carregar para ver o cartão de contacto"
 
 #: templates/repository/resource_view/person.html:25
-#, fuzzy
-#| msgid "Contact details"
 msgid "Contact Card"
-msgstr "Suporte"
+msgstr "Cartão de Contacto"
 
 #: templates/repository/resource_view/person.html:146
 #: templates/repository/resource_view/person.html:228
@@ -3265,10 +3257,8 @@ msgid "Search and Browse"
 msgstr "Pesquisar e Navegar"
 
 #: templates/repository/search.html:69
-#, fuzzy
-#| msgid "Browse Resources"
 msgid "Browse Language Resources"
-msgstr "Procurar Recursos"
+msgstr "Procurar Recursos Linguísticos"
 
 #: templates/repository/search.html:78 templates/repository/search.html:79
 msgid "Search"
