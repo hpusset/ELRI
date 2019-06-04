@@ -32,8 +32,10 @@ case "${ELRI_PROTOCOL}" in
 		;;
 esac
 
+
 popd
 
+cmd="$cmd -template /tmp/timeout-vhost.tmpl:/etc/nginx/conf.d/timeout.conf"
 cmd="$cmd -template /tmp/security-vhost.tmpl:/etc/nginx/conf.d/security.conf"
 cmd="$cmd -timeout 240s nginx"
 
