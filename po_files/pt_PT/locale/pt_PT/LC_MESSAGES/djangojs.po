@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-30 18:37+0100\n"
-"PO-Revision-Date: 2019-04-03 16:09+0200\n"
+"PO-Revision-Date: 2019-05-17 12:35+0100\n"
 "Language: pt_PT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.2.1\n"
 
 #: static/admin/js/SelectFilter2.js:47
 #, c-format
@@ -33,7 +33,7 @@ msgstr "Escolher todos"
 
 #: static/admin/js/SelectFilter2.js:67
 msgid "Add"
-msgstr "Acrescentar"
+msgstr "Adicionar"
 
 #: static/admin/js/SelectFilter2.js:69
 msgid "Remove"
@@ -63,8 +63,8 @@ msgid ""
 "You have unsaved changes on individual editable fields. If you run an "
 "action, your unsaved changes will be lost."
 msgstr ""
-"Tem alterações não gravadas em campos editáveis individuais. Se correr uma "
-"acção, as suas alterações serão perdidas."
+"Tem alterações não gravadas em campos editáveis individuais. Se executar uma "
+"ação, as suas alterações serão perdidas."
 
 #: static/admin/js/actions.js:126 static/admin/js/actions.min.js:6
 msgid ""
@@ -72,9 +72,9 @@ msgid ""
 "individual fields yet. Please click OK to save. You'll need to re-run the "
 "action."
 msgstr ""
-"Escolheu uma acção, mas ainda não guardou as suas alterações em campos "
-"individuais. Por favor, carregue em OK para gravar. Vai necessitar de voltar "
-"a correr a acção."
+"Escolheu uma ação, mas ainda não guardou as suas alterações em campos "
+"individuais. Por favor, carregue em OK para gravar. Vai precisar de voltar a "
+"correr a ação."
 
 #: static/admin/js/actions.js:128 static/admin/js/actions.min.js:6
 msgid ""
@@ -82,8 +82,8 @@ msgid ""
 "fields. You're probably looking for the Go button rather than the Save "
 "button."
 msgstr ""
-"Escolheu uma acção, mas ainda não fez alterações em campos individuais. Por "
-"ventura quererá carregar no botão Correr invés do botão Guardar."
+"Escolheu uma ação, mas ainda não fez alterações em campos individuais. Por "
+"ventura quererá carregar no botão \"Correr\" em vez do botão \"Guardar\"."
 
 #: static/admin/js/admin/DateTimeShortcuts.js:49
 #: static/admin/js/admin/DateTimeShortcuts.js:85
@@ -147,11 +147,11 @@ msgstr "Do Se Te Qa Qi Se Sa"
 #: static/admin/js/collapse.js:8 static/admin/js/collapse.js.c:19
 #: static/admin/js/collapse.min.js:8 static/admin/js/collapse.min.js.c:19
 msgid "Show"
-msgstr "Mostra"
+msgstr "Mostrar"
 
 #: static/admin/js/collapse.js:16 static/admin/js/collapse.min.js:16
 msgid "Hide"
-msgstr "Esconde"
+msgstr "Esconder"
 
 #: static/admin/js/dateparse.js:33
 msgid "Sunday Monday Tuesday Wednesday Thursday Friday Saturday"
@@ -164,8 +164,8 @@ msgid ""
 "Could not open popup window!\n"
 "Maybe there's a popup "
 msgstr ""
-"Não foi possivel abrir uma janela de popup!\n"
-"Talvez já exista um popup "
+"Não foi possível abrir uma janela de pop-up!\n"
+"Talvez já exista um pop-up "
 
 #: static/metashare/js/upload.js:75
 msgid "The file(s) you are trying to upload exceed(s) the size limit. "
@@ -174,7 +174,7 @@ msgstr ""
 
 #: static/metashare/js/upload.js:99 static/metashare/js/upload.js.c:167
 msgid "Only files of type "
-msgstr "Exclusivo para ficheiros do tipo "
+msgstr "Ficheiros do tipo "
 
 #: static/metashare/js/upload.js:100 static/metashare/js/upload.js.c:168
 msgid ""

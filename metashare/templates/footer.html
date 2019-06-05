@@ -2,15 +2,33 @@
 {% spaceless %}
 {% load static from staticfiles %}
 
+    {% if country == "Portugal" %}
     <div id="footer">
-        <div class="split"></div>
+    <div class="split"> </div>
+    
+	<span style="text-align:left"><a href="http://www.elri-project.eu" target="_blank" title="{% trans 'Go to the ELRI project homepage' %}"><img src="/static/metashare/images/elri-logo-small.png" sizes="" alt="ELRI ‐ European Language Resource Infrastructure"/></a></span>
+    <br>
         {% blocktrans %}ELRI National Relay Station {% endblocktrans  %}
-        <br>{% blocktrans %}powered by <a href="http://www.meta-share.org/" target="_blank">META-SHARE</a> and <a href="https://elrc-share.eu/" target="_blank">ELRC-SHARE</a>{% endblocktrans  %}
-        <br><span style="text-align: center"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><img src="/static/metashare/images/by-nc-sa.eu_small.png" sizes=""></a></span>
+        <br>{% blocktrans %}powered by <a href="http://www.meta-share.org/" target="_blank" lang="en">META-SHARE</a> and <a href="https://elrc-share.eu/" target="_blank" lang="en">ELRC-SHARE</a>{% endblocktrans  %}
+        <br><span style="text-align: center"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"  title="{% trans 'Go to the Creative Commons Attribution Non-Commercial Share Alike 4.0 International license information page.' %}"  target="_blank"><img src="/static/metashare/images/by-nc-sa.eu_small.png" sizes="" alt="creative commons by-nc-sa 4.0 license"></a></span>
         <br>
-    CC-BY-NC-SA 4.0
-    <br><a href="{% url 'privacy' %}">{% trans 'Privacy Policy' %}</a>
+    <figcaption>CC-BY-NC-SA 4.0 </figcaption>
+   <a href="{% url 'privacy' %}">{% trans 'Privacy Policy' %}</a>
     </div>
+    {% else %}
+     <div id="footer">
+    <div class="split"></div>
+    <br>
+        {% blocktrans %}ELRI National Relay Station {% endblocktrans  %}
+        <br>{% blocktrans %}powered by <a href="http://www.meta-share.org/" target="_blank" lang="en">META-SHARE</a> and <a href="https://elrc-share.eu/" target="_blank" lang="en">ELRC-SHARE</a>{% endblocktrans  %}
+        <br><span style="text-align: center"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" title="{% trans 'Go to the Creative Commons Attribution Non-Commercial Share Alike 4.0 International license information page.' %}" target="_blank">
+        <img src="/static/metashare/images/by-nc-sa.eu_small.png" sizes="" alt="creative commons by-nc-sa 4.0 license"/>
+        </a></span>
+        <br>
+    <figcaption>CC-BY-NC-SA 4.0 </figcaption>
+    <a href="{% url 'privacy' %}">{% trans 'Privacy Policy' %}</a>
+    </div>
+    {% endif %}
 {% endspaceless %}
 
 

@@ -1,8 +1,14 @@
 {% load i18n %}
-<div class="back" style="margin-top: 20px">
-        <div style="width: 100% !important; height:300px; text-align: center; background-image: url('{{ STATIC_URL }}metashare/images/Artboard1Bannerazul.png'); background-position: center; background-repeat: no-repeat; border-bottom: 1px solid;">
+{% load static from staticfiles %}
 
-            <h2 style=" text-align: center; color: #222;  font-size: 45px;position:relative;top:150px; text-shadow: 1px 1px #fff;">{% trans "ELRI National Relay Station" %}</h2>
-   
+<div class="back" style="margin-top: 20px">
+		{% if country == "Portugal" %}
+		<div style="width: 100% !important; height:300px; text-align: center; background-image: url('{{ STATIC_URL }}metashare/images/banner_pt.png'); background-position: center; background-repeat: no-repeat; border-bottom: 1px solid;alt=''">
+		 <h1 style=" border: 0; clip: rect(0 0 0 0); height: 1px; margin: 1px; overflow: hidden; padding: 0; position: absolute; width=1px;">{% trans "ELRI National Relay Station" %}</h1>
+		{% else %}
+        <div style="width: 100% !important; height:300px; text-align: center; background-image: url('{{ STATIC_URL }}metashare/images/Artboard1Bannerazul.png'); background-position: center; background-repeat: no-repeat; border-bottom: 1px solid;alt=''">
+         <h1 style=" text-align: center; color: #222;  font-size: 45px;position:relative;top:150px; text-shadow: 1px 1px #fff;">{% trans "ELRI National Relay Station" %}</h1>
+		{% endif %}
+
         </div>
 </div>

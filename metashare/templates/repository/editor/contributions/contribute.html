@@ -3,14 +3,20 @@
 
 
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html">
+{% get_current_language as LANGUAGE_CODE %}
+<html xmlns="http://www.w3.org/1999/html" lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>{% spaceless %}{% block title %}{% trans 'ELRI' %}{% endblock %}{% endspaceless %}</title>
-    <meta name="description" content="{% spaceless %}{% block description %}ELRC-SHARE: a repository used for documenting, storing, browsing and accessing Language Resources.{% endblock %}{% endspaceless %}"/>
-    <meta name="keywords" content="{% spaceless %}{% block keywords %}ELRC-SHARE, language resources, language tools, ELRC, European Language Resource Coordination{% endblock %}{% endspaceless %}"/>
+    <meta name="description" content="{% spaceless %}{% block description %}{% blocktrans %}ELRI: a repository used for documenting, storing, browsing and accessing Language Resources.{% endblocktrans %}{% endblock %}{% endspaceless %}"/>
+    <meta name="keywords" content="{% spaceless %}{% block keywords %}{% blocktrans %}ELRI, language resources, language tools, ELRC, European Language Resource Coordination{% endblocktrans %}{% endblock %}{% endspaceless %}"/>
     <link rel="shortcut icon" href="{{ STATIC_URL }}metashare/images/favicon.ico"/>
+    {% if country == "Portugal" %}
+        <link rel="shortcut icon" href="{{ STATIC_URL }}metashare/images/favicon_pt.ico">
+        {% else %}
+        <link rel="shortcut icon" href="{{ STATIC_URL }}metashare/images/favicon.ico">
+        {% endif %}
     <link rel="stylesheet" href="{{ STATIC_URL }}metashare/css/blueprint/screen.css" type="text/css"
           media="screen, projection">
     <link rel="stylesheet" href="{{ STATIC_URL }}metashare/css/blueprint/print.css" type="text/css" media="print">
@@ -70,6 +76,7 @@
         </script>
 </head>
 <body style="position: relative;">
+<a href="#main-content" lang="en">Go to web page main content.</a> 
 {% include 'header.html' %}
 
 <div class="overlay"></div>
@@ -86,7 +93,7 @@
         {% trans 'Please make sure that you have javascript enabled and refresh the page before proceeding with your contribution.' %}
     </div>
 </noscript>
-
+<h1 style=" border: 0; clip: rect(0 0 0 0); height: 1px; margin: 1px; overflow: hidden; padding: 0; position: absolute; width=1px;" >{% trans 'Contribute' %}</h1>
 <div class="row">
     <div class="col-md-11">
         <form id="simple_form" name="simple_form" style="margin-left: 25%; margin-top: 80px" class="col-md-7"
@@ -95,7 +102,7 @@
             <!-- Form Name -->
 
             <span class="help-block contrib-help">
-                <h3>{% trans "Uploading your data" %}</h3>
+                <h2 id="main-content">{% trans "Uploading your data" %}</h2>
                 {% blocktrans %}Please provide the required information below for the data you wish to upload. Once uploaded, the ELRI engines will process your data with the goal of providing you, and users of the group of your choice, with a fully prepared language resource.
                 <br>
                 Once your resource has been fully processed, you will be notified via email and will be able to download it from this repository.{% endblocktrans %}
@@ -187,9 +194,9 @@
             
             <div class="form-group">
                 <label class="control-label" for="domains">{% trans 'Domain(s)' %}</label>
-                <div class="domain">
+                <div class="domain" >
                     <div id="tooltip_container"></div>
-                    <select class="form-control" multiple style="padding: 6px; height:200px" name="domains[]">
+                    <select class="form-control" multiple style="padding: 6px; height:200px" name="domains[]" id="domains">
                     
                         {% trans "Digital resources in any field of activity." as other_title %}
                         <option data-toggle="tooltip" data-html="true" data-container="#tooltip_container" data-trigger="manual" title="{{ other_title }}" value="other">{% trans 'Other / Unknown' %}</option>
@@ -227,9 +234,9 @@
                 </div>
             </div>
            
-            <div class="form-group required" id="licence">
+            <div class="form-group required">
                 <label class="control-label" for="licence">{% trans 'Licensing conditions' %}</label>
-                <select required name="licence">
+                <select required name="licence" id="licence">
                     <option value="publicDomain">{% trans 'Public Domain' %}</option>
                     <option value="openUnder-PSI">{% trans 'Open Under PSI' %}</option>
                     <option value="CC0-1.0">{% trans 'Creative Commons Zero 1.0 (CC0-1.0)' %}</option>
@@ -299,9 +306,10 @@
                 </div>
             </div>
             <!-- Terms of Service confirmation -->
-            <div class="form-group required" id="accept_tos">
+            <div class="form-group required">
                 {% url 'legal' as legal_url %}
-                <input type="checkbox" name="accepttos" value="true" required="">{% blocktrans %}I agree with the <a target="_blank" href="{{ legal_url }}#Sharing">Language Resource upload Terms of Service for Data Holders</a> {% endblocktrans %}<br>
+                <label style="font-weight: normal;">
+                <input type="checkbox" name="accepttos" value="true" required="" id="accept_tos">{% blocktrans %}I agree with the <a target="_blank" href="{{ legal_url }}#Sharing">Language Resource upload Terms of Service for Data Holders</a> {% endblocktrans %}</label> <br>
             </div>
                 
             <!-- Button (Double) -->

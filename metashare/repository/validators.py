@@ -1,7 +1,7 @@
 import re
 
 from django.core.exceptions import ValidationError
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, ugettext_lazy
 
 
 # a compiled regular expression which matches a lexically valid RFC 3066
@@ -95,3 +95,12 @@ def validate_size_is_integer(value):
 def validate_attribution_text(value):
     if u'[' in value['en'] and u']' in value['en']:
         raise ValidationError(_(u'Please edit the attribution text template'))
+
+def validate_email(value):
+    if '@' not in value:
+        raise ValidationError(_(u'Enter a valid email address.'))
+    
+
+    
+    
+    

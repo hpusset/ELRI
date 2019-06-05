@@ -66,14 +66,16 @@ function addStatus(filter){
 }
 </script>
 
+<h1 style=" border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width=1px;" >{% trans 'Browse Language Resources' %}</h1>
 
 <div class="searchbox">
-  <form class="form_helper" id="searchbox" action="." method="get">
+  <form class="form_helper" id="searchbox" action="." method="get" label="searchbox">
     {{ form.non_field_errors }}
+    
     <table>
       <tr>
-        <td><img style="width:100px; height:98px;" src="{% static "metashare/images/elri-logo-small.png" %}" /></td>
-        <td>{{ form.q }}</td>
+        <td><img style="width:100px; height:98px;" src="{% static "metashare/images/elri-logo-small.png" %}" alt="ELRI ‐ European Language Resource Infrastructure"/></td>
+        <td><label for="id_q" style=" border: 0; height: 1px; margin: 1px; overflow: hidden; padding: 0; position: absolute; width=1px;">{% trans 'Search' %}</label>{{ form.q }}</td>
         <td><input id="search_button" class="button middle_button" type="submit" value="{% trans 'Search' %}" /></td>
       </tr>
     </table>
@@ -97,19 +99,19 @@ function addStatus(filter){
         <table id="resource_type">
             <tr>
                 <td width="120">{% trans 'Corpus:' %}</td>
-                <td><img src="{% static "metashare/css/sexybuttons/images/icons/silk/database_yellow.png" %}" /></td>
+                <td><img src="{% static "metashare/css/sexybuttons/images/icons/silk/database_yellow.png" %}" alt="Corpus" /></td>
             </tr>
             <tr>
                 <td width="120">{% trans 'Lexical/Conceptual:' %}</td>
-                <td><img src="{% static "metashare/css/sexybuttons/images/icons/silk/text_ab.png" %}" /></td>
+                <td><img src="{% static "metashare/css/sexybuttons/images/icons/silk/text_ab.png" %}" alt="Lexical/Conceptual" /></td>
             </tr>
             <tr>
                 <td width="120">{% trans 'Language Description:' %}</td>
-                <td><img src="{% static "metashare/css/sexybuttons/images/icons/silk/script.png" %}" /></td>
+                <td><img src="{% static "metashare/css/sexybuttons/images/icons/silk/script.png" %}" alt="Language Description" /></td>
             </tr>
             <tr>
                 <td width="120">{% trans 'Tool/Service:' %}</td>
-                <td><img src="{% static "metashare/css/sexybuttons/images/icons/silk/page_white_gear.png" %}" /></td>
+                <td><img src="{% static "metashare/css/sexybuttons/images/icons/silk/page_white_gear.png" %}" alt="Tool/Service" /></td>
             </tr>
             </table>
     </div>
@@ -128,8 +130,9 @@ function addStatus(filter){
       {% if page.has_previous %}<a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key == 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% if key == 'sort' %}&amp;sort={{values.0}}{% endif %}{% endfor %}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo;&nbsp;{% trans 'Previous' %}{% if page.has_previous %}</a>{% endif %} |
       {% if page.has_next %}<a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key == 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% if key == 'sort' %}&amp;sort={{values.0}}{% endif %}{% endfor %}&amp;page={{ page.next_page_number }}">{% endif %}{% trans 'Next' %}&nbsp;&raquo;{% if page.has_next %}</a>{% endif %}
     {% endif %}
-    <span style="float:right;">{% trans 'Order by:' %}
-      <select name="ordering" onChange="window.location.href=this.value;">
+    <span style="float:right;">
+      <label for="ordering" style="line-height: 1.6; font-size:17px; vertical-align: middle; color:#232323; font-weight:normal;">{% trans 'Order by:' %} </label>
+      <select name="ordering" id="ordering" onChange="window.location.href=this.value;">
         <option value="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key == 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% endfor %}&amp;sort=resourcename_asc" {% if 'sort' in request.GET %}{% for key, values in request.GET.iterlists %}{% if key == 'sort' %}{% if values.0 == "resourcename_asc" %} selected=true{% endif %}{% endif %}{% endfor %}{% endif %}>{% trans 'Resource Name A-Z' %}</option>
         <option value="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key == 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% endfor %}&amp;sort=resourcename_desc" {% if 'sort' in request.GET %}{% for key, values in request.GET.iterlists %}{% if key == 'sort' %}{% if values.0 == "resourcename_desc" %} selected=true{% endif %}{% endif %}{% endfor %}{% endif %}>{% trans 'Resource Name Z-A' %}</option>
         <option value="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key == 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% endfor %}&amp;sort=resourcetype_asc" {% if 'sort' in request.GET %}{% for key, values in request.GET.iterlists %}{% if key == 'sort' %}{% if values.0 == "resourcetype_asc" %} selected=true{% endif %}{% endif %}{% endfor %}{% endif %}>{% trans 'Resource Type A-Z' %}</option>

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-05 13:59+0200\n"
-"PO-Revision-Date: 2019-04-05 14:06+0200\n"
+"POT-Creation-Date: 2019-05-30 17:01+0200\n"
+"PO-Revision-Date: 2019-05-30 17:09+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -1662,9 +1662,9 @@ msgid ""
 "Enter a valid year value which conforms to the XML Schema \"gYear\" type "
 "(see http://www.w3.org/TR/xmlschema-2/#gYear). \"{}\" is not valid."
 msgstr ""
-"Especifique un valor de año válido que se ajuste al tipo \"gYear\" del "
-"esquema XML (consulte http://www.w3.org/TR/xmlschema-2/#gYear). \"{}\" no es "
-"válido."
+"Error: Especifique un valor de año válido que se ajuste al tipo \"gYear\" "
+"del esquema XML (consulte http://www.w3.org/TR/xmlschema-2/#gYear). \"{}\" "
+"no es válido."
 
 #: repository/validators.py:56
 #, python-brace-format
@@ -1674,47 +1674,51 @@ msgid ""
 "production from XML 1.0 (Second Edition), cf. http://www.w3.org/TR/2000/WD-"
 "xml-2e-20000814#NT-Char."
 msgstr ""
-"The character at position {char_pos} (&#x{char_code:0>4x};) must not be "
-"used. Enter a string consisting of only characters that match the Char "
-"production from XML 1.0 (Second Edition), cf. http://www.w3.org/TR/2000/WD-"
-"xml-2e-20000814#NT-Char."
+"Error: El caracter en la posición {char_pos} (&#x{char_code:0>4x};) no se "
+"debe usar. Introduzca una cadena que contenga únicamente caracteres que sea "
+"justen al conjunto de caracteres de XML 1.0 (Second Edition), cf. http://www."
+"w3.org/TR/2000/WD-xml-2e-20000814#NT-Char."
 
 #: repository/validators.py:72
 msgid ""
 "Enter a valid language code as the key for each pair. \"{}\" is not valid."
 msgstr ""
-"Introduzca un código de idioma válido como clave para cada par. \"{}\" no es "
-"válido."
+"Error: Introduzca un código de idioma válido como clave para cada par. "
+"\"{}\" no es válido."
 
 #: repository/validators.py:86
 msgid "This field is required."
-msgstr "Este campo es obligatorio."
+msgstr "Error: Este campo es obligatorio."
 
 #: repository/validators.py:92
 msgid "This field accepts only number values (without commas)"
-msgstr "Este campo sólo acepta valores numéricos (sin comas)"
+msgstr "Error: Este campo sólo acepta valores numéricos (sin comas)"
 
 #: repository/validators.py:97
 msgid "Please edit the attribution text template"
-msgstr "Por favor edite la plantilla de texto de atribución"
+msgstr "Error: Por favor edite la plantilla de texto de atribución"
 
-#: repository/views.py:341
+#: repository/validators.py:101
+msgid "Enter a valid email address."
+msgstr "Error: Introduzca una dirección de correo electrónico válida."
+
+#: repository/views.py:352
 msgid "Request for information regarding a resource"
 msgstr "Solicitud de información sobre un recurso"
 
-#: repository/views.py:349
+#: repository/views.py:360
 msgid "There was an error sending out the request email."
 msgstr "Hubo un error al enviar la sol·licitud."
 
-#: repository/views.py:351
+#: repository/views.py:362
 msgid "You have successfully sent a message to the resource contact person."
 msgstr "Ha enviado un mensaje a la persona de contacto."
 
-#: repository/views.py:1040
+#: repository/views.py:1051
 msgid "N/A"
 msgstr "N/A"
 
-#: repository/views.py:1101
+#: repository/views.py:1112
 msgid ""
 "\n"
 "                Only files of type DOC(X), ODT, RTF, PDF, TMX, SDLTM, XML,\n"
@@ -1731,7 +1735,7 @@ msgstr ""
 "                los formatos permitidos.  Remueva por favor los archivos\n"
 "                que no estén entre los permitidos."
 
-#: repository/views.py:1140
+#: repository/views.py:1154
 msgid ""
 "\n"
 "                            Your request could not be completed.\"\n"
@@ -1745,7 +1749,7 @@ msgstr ""
 "                            Los archivos que se ha intentado subir a la "
 "aplicación no son válidos."
 
-#: repository/views.py:1149
+#: repository/views.py:1163
 msgid ""
 "\n"
 "                            Only files of type DOC(X), ODT, RTF, PDF, TMX, "
@@ -1764,11 +1768,11 @@ msgstr ""
 "                los formatos permitidos. Remueva por favor los archivos\n"
 "                que no estén entre los permitidos."
 
-#: repository/views.py:1192
+#: repository/views.py:1206
 msgid "New submitted contributions"
 msgstr "Nuevas contribuciones enviadas"
 
-#: repository/views.py:1200
+#: repository/views.py:1214
 msgid ""
 "\n"
 "                Thank you for sharing, your data have been successfully "
@@ -1782,7 +1786,7 @@ msgstr ""
 "herramientas integradas y  revisados por el equipo ELRI. Recibirá un correo "
 "de notificación cuando  el recurso final se pueda descargar."
 
-#: repository/views.py:1209
+#: repository/views.py:1223
 msgid ""
 "\n"
 "                The file you are trying to upload exceeds the size limit. If "
@@ -1798,6 +1802,16 @@ msgstr ""
 "proporcionar un enlace SFTP link que permita\n"
 "                descargar directamente el archivo, o considere subir "
 "archivos de menor tamaño."
+
+#~ msgid ""
+#~ "This password is too short. It must contain at least %(min_length)d "
+#~ "character."
+#~ msgstr ""
+#~ "Error: La contraseña es demasiado corta. Debe tener al menos "
+#~ "%(min_length)d caracteres."
+
+#~ msgid "This password is too common."
+#~ msgstr "Error: Esta contraseña es demasiado común."
 
 #~ msgid ""
 #~ "We are interested in using the above mentioned resource. Please provide "

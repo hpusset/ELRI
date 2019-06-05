@@ -4,7 +4,7 @@
     {% blocktrans %}{{ resource }} &ndash; Contact Resource Maintainer &ndash; ELRI{% endblocktrans %}
 {% endblock %}
 {% block content %}
-    <h2>{% trans 'Contact Resource Maintainer' %}</h2>
+    <h1 id="main-content" id="main-content" style="font-size: 20pt; line-height:150%; margin: '20px 0px 20px 0px'; font-weight: normal; color:#111; display:block; margin-block-start: 0.83em; margin-block-end: 0.83em; margin-inline-start:0px; margin-inline-end:0px;">{% trans 'Contact Resource Maintainer' %}</h1>
     <div class="content_box">
         <form class="form_helper" action="{% url 'download_contact' resource.storage_object.identifier %}"
               method="post">

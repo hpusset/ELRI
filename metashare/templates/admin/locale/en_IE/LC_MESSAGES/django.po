@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-08 09:52+0100\n"
+"POT-Creation-Date: 2019-05-29 17:51+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,33 +17,21 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: templates/admin/base.html:39
+#: templates/admin/base.html:43
 msgid ""
 "\"This site uses cookies to enhance your user experience. By clicking any "
 "link on this page you are giving your consent for us to set cookies.\" "
 msgstr ""
 
-#: templates/admin/base.html:40
-msgid "\"OK, I aggree \""
+#: templates/admin/base.html:44 templates/admin/base.html.py:47
+msgid "\"OK\""
 msgstr ""
 
-#: templates/admin/base.html:41
-msgid "\"Decline \""
-msgstr ""
-
-#: templates/admin/base.html:42
-msgid "\"Allow cookies\""
-msgstr ""
-
-#: templates/admin/base.html:43
+#: templates/admin/base.html:46
 msgid "\"Learn more\""
 msgstr ""
 
-#: templates/admin/base.html:44
-msgid "'Cookie Policy'"
-msgstr ""
-
-#: templates/admin/base.html:58 templates/admin/delete_confirmation.html:6
+#: templates/admin/base.html:61 templates/admin/delete_confirmation.html:6
 #: templates/admin/delete_selected_confirmation.html:6
 msgid "Home"
 msgstr ""

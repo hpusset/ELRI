@@ -2,9 +2,9 @@
 {% load email_protection i18n %}
 
 {% block content %}
-
+    <h1 style=" border: 0; clip: rect(0 0 0 0); height: 1px; margin: 1px; overflow: hidden; padding: 0; position: absolute; width=1px;" >{% trans 'Usage' %}</h1>
     <div id="ELRI_services" class="anchor"></div>
-    <h2>{% blocktrans %}ELRI Services{% endblocktrans %}</h2>
+    <h2 id="main-content">{% blocktrans %}ELRI Services{% endblocktrans %}</h2>
     <div class="content_box">
         <p>{% blocktrans %}The ELRI project is intended to provide services related to the collection, preparation, storage and sharing of language resources. These services are provided via National Relay Stations, websites based in the Member States that are part of the initiative.{% endblocktrans %}</p>
 
@@ -20,9 +20,9 @@
     <div class="content_box">
         <p>{% blocktrans %}To benefit from the services of this ELRI National Relay Station, users should follow the following procedure:{% endblocktrans %}</p>
         <ul>
-            <li>{% blocktrans %}New users should first register <a href="../accounts/create/">here</a>. Once your account credentials have been validated, you can log in and either search (via the Browse Resources menu) or contribute ((via the Contribute Resources menu) language resources.{% endblocktrans %}</li>
+            <li>{% blocktrans %}New users should first  <a href="../accounts/create/">register</a>. Once your account credentials have been validated, you can log in and either search (via the Browse Resources menu) or contribute ((via the Contribute Resources menu) language resources.{% endblocktrans %}</li>
 
-            <li>{% blocktrans %}For each language resource, you will be asked to provide the languages of its content, a short title, the group with which you wish to share the resource, and the associated licensing conditions (see <a href="#Licensing_LRs">below</a>).{% endblocktrans %}</li>
+            <li>{% blocktrans %}For each language resource, you will be asked to provide the languages of its content, a short title, the group with which you wish to share the resource, and the associated licensing conditions (see <a href="#Licensing_LRs" title="licensing contitions">below</a>).{% endblocktrans %}</li>
 
             <li>{% blocktrans %}Users who require the creation of a specific group of users for sharing purposes, beyong the available user groups, can contact us via the Contact menu.{% endblocktrans %}</li>
 
@@ -77,31 +77,31 @@
                 <tr>
                     <td>CC0-1.0</td>
                     <td><a href="https://creativecommons.org/publicdomain/zero/1.0/"
-                           target="_blank">Creative Commons Zero</a></td>
+                           target="_blank" lang="en">Creative Commons Zero</a></td>
                     </td>
                 </tr>
                 <tr>
                     <td>CC-BY-4.0</td>
                     <td><a href="https://creativecommons.org/licenses/by/4.0/"
-                           target="_blank">Creative Commons Attribution v4.0</a></td>
+                           target="_blank" lang="en">Creative Commons Attribution v4.0</a></td>
                     </td>
                 </tr>
                 <tr>
                     <td>CC-BY-NC-4.0</td>
                     <td><a href="https://creativecommons.org/licenses/by-nc/4.0/"
-                           target="_blank">Creative Commons Attribution-NonCommercial v4.0</a></td>
+                           target="_blank" lang="en">Creative Commons Attribution-NonCommercial v4.0</a></td>
                     </td>
                 </tr>
                 <tr>
                     <td>CC-BY-NC-SA-4.0</td>
                     <td><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
-                           target="_blank">Creative Commons Attribution-NonCommercial-ShareAlike v4.0</a></td>
+                           target="_blank" lang="en">Creative Commons Attribution-NonCommercial-ShareAlike v4.0</a></td>
                     </td>
                 </tr>
                 <tr>
                     <td>CC-BY-SA-4.0</td>
                     <td><a href="https://creativecommons.org/licenses/by-sa/4.0/"
-                           target="_blank">Creative Commons Attribution-ShareAlike v4.0</a></td>
+                           target="_blank" lang="en">Creative Commons Attribution-ShareAlike v4.0</a></td>
                     </td>
                 </tr>
                
@@ -116,13 +116,13 @@
                 <tr>
                     <td>LO-OL-v2</td>
                     <td><a href="https://www.etalab.gouv.fr/wp-content/uploads/2017/04/ETALAB-Licence-Ouverte-v2.0.pdf"
-                           target="_blank">Licence
+                           target="_blank" lang="fr">Licence
                         Ouverte / Open Licence v2.0</a> (France)
                     </td>
                 </tr>
                 <tr>
                 <td>ODbL-1.0</td>
-                <td><a href="https://www.opendatacommons.org/licenses/odbl/1.0/" target="_blank"> Open Database License (ODbL) v1.0 </a> (France) </td>
+                <td><a href="https://www.opendatacommons.org/licenses/odbl/1.0/" target="_blank" lang="en"> Open Database License (ODbL) v1.0 </a> (France) </td>
                 </tr>
                 <!-- Other -->
                 <tbody>

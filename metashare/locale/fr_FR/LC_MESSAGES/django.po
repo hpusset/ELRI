@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-05 10:45+0200\n"
+"POT-Creation-Date: 2019-05-30 17:02+0200\n"
 "PO-Revision-Date: 2019-04-05 13:49+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -37,9 +37,9 @@ msgstr ""
 "Une erreur s'est produite lors de la tentative d'envoi d'e-mails aux "
 "destinataires des alertes de contributions."
 
-#: local_settings.py:45
-msgid "French"
-msgstr "Français"
+#: local_settings.py:43
+msgid "Spanish"
+msgstr "Espagnol"
 
 #: storage/models.py:113
 msgid "Can synchronize"
@@ -168,31 +168,36 @@ msgstr ""
 "texte contenant la sérialisation JSON des attributs locaux pour cette "
 "instance d'objet de stockage."
 
-#: views.py:22
-#, python-format
+#: views.py:22 views.py:24
+#, fuzzy
+#| msgid ""
+#| "Please enter a correct %(username)s and password, Note that both fields "
+#| "may be case-sensitive."
 msgid ""
-"Please enter a correct %(username)s and password, Note that both fields may "
-"be case-sensitive."
+"Please enter a correct username and password. Note that both fields may be "
+"case-sensitive. "
 msgstr ""
 "Veuillez entrer un %(username)s et un mot de passe corrects. Notez que les "
 "deux champs peuvent être sensibles à la casse."
 
-#: views.py:24
-msgid ""
-"This account has not been activated yet. Please contact us if there is any "
-"issue with an existing account."
+#: views.py:23 views.py:25
+#, fuzzy
+#| msgid ""
+#| "This account has not been activated yet. Please contact us if there is "
+#| "any issue with an existing account."
+msgid "Please contact us if there is any issue with an existing account."
 msgstr ""
 "Ce compte n'a pas encore été activé. Veuillez nous contacter en cas de "
 "problème avec un compte existant."
-
-#~ msgid "Spanish"
-#~ msgstr "Espagnol"
-
-#~ msgid "Gaelic"
-#~ msgstr "Gaélique"
 
 #~ msgid "English"
 #~ msgstr "Anglais"
 
 #~ msgid "Portuguese"
 #~ msgstr "Portugais"
+
+#~ msgid "French"
+#~ msgstr "Français"
+
+#~ msgid "Gaelic"
+#~ msgstr "Gaélique"

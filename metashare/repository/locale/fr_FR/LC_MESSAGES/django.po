@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-05 10:45+0200\n"
+"POT-Creation-Date: 2019-05-30 17:02+0200\n"
 "PO-Revision-Date: 2019-04-05 14:26+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1673,6 +1673,10 @@ msgid "Text Type"
 msgstr "Type de texte"
 
 #: repository/validators.py:38
+#, fuzzy
+#| msgid ""
+#| "Enter a valid year value which conforms to the XML Schema \"gYear\" type "
+#| "(see http://www.w3.org/TR/xmlschema-2/#gYear). \"{}\" is not valid."
 msgid ""
 "Enter a valid year value which conforms to the XML Schema \"gYear\" type "
 "(see http://www.w3.org/TR/xmlschema-2/#gYear). \"{}\" is not valid."
@@ -1681,7 +1685,12 @@ msgstr ""
 "\" (voir http://www.w3.org/TR/xmlschema-2/#gYear). \"{}\" n'est pas valide."
 
 #: repository/validators.py:56
-#, python-brace-format
+#, fuzzy, python-brace-format
+#| msgid ""
+#| "The character at position {char_pos} (&#x{char_code:0>4x};) must not be "
+#| "used. Enter a string consisting of only characters that match the Char "
+#| "production from XML 1.0 (Second Edition), cf. http://www.w3.org/TR/2000/"
+#| "WD-xml-2e-20000814#NT-Char."
 msgid ""
 "The character at position {char_pos} (&#x{char_code:0>4x};) must not be "
 "used. Enter a string consisting of only characters that match the Char "
@@ -1694,6 +1703,9 @@ msgstr ""
 "http://www.w3.org/TR/2000/WD-xml-2e-20000814#NT-Char."
 
 #: repository/validators.py:72
+#, fuzzy
+#| msgid ""
+#| "Enter a valid language code as the key for each pair. \"{}\" is not valid."
 msgid ""
 "Enter a valid language code as the key for each pair. \"{}\" is not valid."
 msgstr ""
@@ -1701,36 +1713,48 @@ msgstr ""
 "pas valide."
 
 #: repository/validators.py:86
+#, fuzzy
+#| msgid "This field is required."
 msgid "This field is required."
 msgstr "Ce champ est obligatoire."
 
 #: repository/validators.py:92
+#, fuzzy
+#| msgid "This field accepts only number values (without commas)"
 msgid "This field accepts only number values (without commas)"
 msgstr "Ce champ n'accepte que les valeurs numériques (sans les virgules)"
 
 #: repository/validators.py:97
+#, fuzzy
+#| msgid "Please edit the attribution text template"
 msgid "Please edit the attribution text template"
 msgstr "Veuillez modifier le modèle de texte d'attribution"
 
-#: repository/views.py:341
+#: repository/validators.py:101
+#, fuzzy
+#| msgid "Not a valid emailAddress value."
+msgid "Enter a valid email address."
+msgstr "Valeur emailAddress non valide."
+
+#: repository/views.py:352
 msgid "Request for information regarding a resource"
 msgstr "Demande de renseignements concernant une ressource"
 
-#: repository/views.py:349
+#: repository/views.py:360
 msgid "There was an error sending out the request email."
 msgstr "Il y a eu une erreur lors de l'envoi de l'email de demande."
 
-#: repository/views.py:351
+#: repository/views.py:362
 msgid "You have successfully sent a message to the resource contact person."
 msgstr ""
 "Vous avez envoyé avec succès un message à la personne de contact pour la "
 "ressource."
 
-#: repository/views.py:1040
+#: repository/views.py:1051
 msgid "N/A"
 msgstr "S.O."
 
-#: repository/views.py:1101
+#: repository/views.py:1112
 msgid ""
 "\n"
 "                Only files of type DOC(X), ODT, RTF, PDF, TMX, SDLTM, XML,\n"
@@ -1748,7 +1772,7 @@ msgstr ""
 "fichiers\n"
 "                qui n'appartiennent pas à l'un de ces types."
 
-#: repository/views.py:1140
+#: repository/views.py:1154
 msgid ""
 "\n"
 "                            Your request could not be completed.\"\n"
@@ -1762,7 +1786,7 @@ msgstr ""
 "est corrompu ou n'est.\n"
 "                            n'est pas un fichier '.zip' valide."
 
-#: repository/views.py:1149
+#: repository/views.py:1163
 msgid ""
 "\n"
 "                            Only files of type DOC(X), ODT, RTF, PDF, TMX, "
@@ -1783,11 +1807,11 @@ msgstr ""
 "les fichiers\n"
 "                            qui n'appartiennent pas à l'un de ces types."
 
-#: repository/views.py:1192
+#: repository/views.py:1206
 msgid "New submitted contributions"
 msgstr "Nouvelles contributions soumises"
 
-#: repository/views.py:1200
+#: repository/views.py:1214
 msgid ""
 "\n"
 "                Thank you for sharing, your data have been successfully "
@@ -1801,7 +1825,7 @@ msgstr ""
 "examinées par l'équipe ELRI. Vous serez avisé par courriel lorsque la "
 "ressource résultante sera disponible pour téléchargement."
 
-#: repository/views.py:1209
+#: repository/views.py:1223
 msgid ""
 "\n"
 "                The file you are trying to upload exceeds the size limit. If "
