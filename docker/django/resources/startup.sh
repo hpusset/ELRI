@@ -7,8 +7,7 @@ NC='\033[0m' # No Color
 # Workaround to allow elri_resources persistence without overriding shared volume with toolchains image
 # Updating web_service config file but saving already existing config file first
 cp /elri/elri_resources/config/web_service.cfg /elri/elri_resources/config/_web_service.cfg
-cp /elri/config/web_service.cfg /elri/elri_resources/config/web_service.cfg
-cp -r /elri/elri_resources/toolchain_resources /elri/elri_resources/_toolchain_resources
+cp /elri/web_service.cfg /elri/elri_resources/config/web_service.cfg
 cp -r /elri/toolchain_resources/* /elri/elri_resources/toolchain_resources/
 source /elri/env_secrets_expand.sh
 
