@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-30 17:02+0200\n"
-"PO-Revision-Date: 2019-04-05 12:20+0200\n"
+"POT-Creation-Date: 2019-06-06 15:13+0200\n"
+"PO-Revision-Date: 2019-06-06 17:40+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -24,7 +24,7 @@ msgstr "Mettre en ligne une nouvelle description de ressource"
 
 #: repository/editor/editorutils.py:257
 msgid "Database error"
-msgstr "Erreur de la base de données"
+msgstr "Erreur: Erreur de la base de données"
 
 #: repository/editor/editorutils.py:272
 #, python-format
@@ -221,7 +221,7 @@ msgstr ""
 #: repository/editor/resource_editor.py:790
 #, python-format
 msgid "Error when processing resource %(rname)s"
-msgstr "Erreur lors du traitement de la ressource %(rname)s"
+msgstr "Erreur: Erreur lors du traitement de la ressource %(rname)s"
 
 #: repository/editor/resource_editor.py:578
 #: repository/editor/resource_editor.py:589
@@ -236,9 +236,10 @@ msgid ""
 "error.log attached to the resource. Contact the ELRI NRS support team for "
 "more information at %(email)s"
 msgstr ""
-"Une erreur s'est produite lors du traitement de la ressource %(rname)s. "
-"Veuillez vérifier le fichier error.log joint à la ressource. Contactez "
-"l'équipe de support du SRN d'ELRI pour plus d'informations à %(email)s"
+"Erreur: Une erreur s'est produite lors du traitement de la ressource "
+"%(rname)s. Veuillez vérifier le fichier error.log joint à la ressource. "
+"Contactez l'équipe de support du SRN d'ELRI pour plus d'informations à "
+"%(email)s"
 
 #: repository/editor/resource_editor.py:580
 #: repository/editor/resource_editor.py:591
@@ -251,8 +252,9 @@ msgid ""
 "There was an error sending out the ERROR notification email to the group "
 "reviewers. Please contact them directly."
 msgstr ""
-"Une erreur s'est produite lors de l'envoi du courriel de notification "
-"d'ERREUR aux réviseurs du groupe. Veuillez les contacter directement."
+"Erreur: Une erreur s'est produite lors de l'envoi du courriel de "
+"notification d'ERREUR aux réviseurs du groupe. Veuillez les contacter "
+"directement."
 
 #: repository/editor/resource_editor.py:584
 msgid "Invalid json response from tm2tmx toolchain: "
@@ -284,7 +286,8 @@ msgstr "La requête POST à la chaîne d'outils doc2tmx a échoué."
 #: repository/editor/resource_editor.py:754
 msgid "Only ingested or error resources can be re-processed."
 msgstr ""
-"Seulement les ressources intégrées ou erronées peuvent être retraitées."
+"Erreur: Seulement les ressources intégrées ou erronées peuvent être "
+"retraitées."
 
 #: repository/editor/resource_editor.py:758
 msgid "Resource(s) re-processed correctly."
@@ -301,9 +304,9 @@ msgid ""
 "resources and check the error.log file(s). You will receive a notification "
 "email."
 msgstr ""
-"Quelque chose a mal fonctionné lors du traitement de la ressource. Traitez à "
-"nouveau les ressources d'erreur et vérifiez le(s) fichier(s) error.log. Vous "
-"recevrez un courriel de notification."
+"Erreur: Quelque chose a mal fonctionné lors du traitement de la ressource. "
+"Traitez à nouveau les ressources d'erreur et vérifiez le(s) fichier(s) error."
+"log. Vous recevrez un courriel de notification."
 
 #: repository/editor/resource_editor.py:770
 #: repository/editor/resource_editor.py:946
@@ -317,20 +320,15 @@ msgstr ""
 "ressources sélectionnées."
 
 #: repository/editor/resource_editor.py:776
-#, fuzzy
-#| msgid ""
-#| "Something went wrong when processing the resource(s). Re-process the "
-#| "error resources and check the error.log file(s). You will receive a "
-#| "notification email."
 msgid ""
 "Something went wrong when processing the resource(s). Re-process the error "
 "resources and check the error.log file(s). You will receive a notification "
 "email.\n"
 " "
 msgstr ""
-"Quelque chose a mal fonctionné lors du traitement de la ressource. Traitez à "
-"nouveau les ressources d'erreur et vérifiez le(s) fichier(s) error.log. Vous "
-"recevrez un courriel de notification."
+"Erreur: Quelque chose a mal fonctionné lors du traitement de la ressource. "
+"Traitez à nouveau les ressources d'erreur et vérifiez le(s) fichier(s) error."
+"log. Vous recevrez un courriel de notification."
 
 #: repository/editor/resource_editor.py:794
 msgid "Re-process selected resources"
@@ -382,8 +380,8 @@ msgid ""
 "There was an error sending out the notification email to the resource "
 "owners. Please contact them directly."
 msgstr ""
-"Une erreur s'est produite lors de l'envoi de l'email de notification aux "
-"propriétaires des ressources. Veuillez les contacter directement."
+"Erreur: Une erreur s'est produite lors de l'envoi de l'email de notification "
+"aux propriétaires des ressources. Veuillez les contacter directement."
 
 #: repository/editor/resource_editor.py:938
 #, python-format
@@ -424,7 +422,8 @@ msgid ""
 "                        "
 msgstr ""
 "\n"
-"                        Le processus d'intégration a été interrompu.\n"
+"                        Erreur: Le processus d'intégration a été "
+"interrompu.\n"
 "                        Traiter à nouveau la ou les ressources avec le "
 "statut d'erreur.\n"
 "                        "

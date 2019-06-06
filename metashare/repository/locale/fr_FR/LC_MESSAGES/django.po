@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-30 17:02+0200\n"
-"PO-Revision-Date: 2019-04-05 14:26+0200\n"
+"POT-Creation-Date: 2019-06-06 15:13+0200\n"
+"PO-Revision-Date: 2019-06-06 17:41+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -1673,68 +1673,50 @@ msgid "Text Type"
 msgstr "Type de texte"
 
 #: repository/validators.py:38
-#, fuzzy
-#| msgid ""
-#| "Enter a valid year value which conforms to the XML Schema \"gYear\" type "
-#| "(see http://www.w3.org/TR/xmlschema-2/#gYear). \"{}\" is not valid."
 msgid ""
 "Enter a valid year value which conforms to the XML Schema \"gYear\" type "
 "(see http://www.w3.org/TR/xmlschema-2/#gYear). \"{}\" is not valid."
 msgstr ""
-"Saisissez une valeur d'année valide conforme au schéma XML de type \"gYear"
-"\" (voir http://www.w3.org/TR/xmlschema-2/#gYear). \"{}\" n'est pas valide."
+"Erreur:  Saisissez une valeur d'année valide conforme au schéma XML de type "
+"\"gYear\" (voir http://www.w3.org/TR/xmlschema-2/#gYear). \"{}\" n'est pas "
+"valide."
 
 #: repository/validators.py:56
-#, fuzzy, python-brace-format
-#| msgid ""
-#| "The character at position {char_pos} (&#x{char_code:0>4x};) must not be "
-#| "used. Enter a string consisting of only characters that match the Char "
-#| "production from XML 1.0 (Second Edition), cf. http://www.w3.org/TR/2000/"
-#| "WD-xml-2e-20000814#NT-Char."
+#, python-brace-format
 msgid ""
 "The character at position {char_pos} (&#x{char_code:0>4x};) must not be "
 "used. Enter a string consisting of only characters that match the Char "
 "production from XML 1.0 (Second Edition), cf. http://www.w3.org/TR/2000/WD-"
 "xml-2e-20000814#NT-Char."
 msgstr ""
-"Le caractère à la position {char_pos}. (&#x{char_code:0>4x} ;) ne doit pas "
-"être utilisé. Entrez une chaîne composée uniquement de caractères qui "
-"correspondent à la production de caractères XML 1.0 (deuxième édition), cf. "
-"http://www.w3.org/TR/2000/WD-xml-2e-20000814#NT-Char."
+"Erreur: Le caractère à la position {char_pos}. (&#x{char_code:0>4x} ;) ne "
+"doit pas être utilisé. Entrez une chaîne composée uniquement de caractères "
+"qui correspondent à la production de caractères XML 1.0 (deuxième édition), "
+"cf. http://www.w3.org/TR/2000/WD-xml-2e-20000814#NT-Char."
 
 #: repository/validators.py:72
-#, fuzzy
-#| msgid ""
-#| "Enter a valid language code as the key for each pair. \"{}\" is not valid."
 msgid ""
 "Enter a valid language code as the key for each pair. \"{}\" is not valid."
 msgstr ""
-"Entrez un code de langue valide comme clé pour chaque paire. \"{}\" n'est "
-"pas valide."
+"Erreur: Entrez un code de langue valide comme clé pour chaque paire. \"{}\" "
+"n'est pas valide."
 
 #: repository/validators.py:86
-#, fuzzy
-#| msgid "This field is required."
 msgid "This field is required."
-msgstr "Ce champ est obligatoire."
+msgstr "Erreur: Ce champ est obligatoire."
 
 #: repository/validators.py:92
-#, fuzzy
-#| msgid "This field accepts only number values (without commas)"
 msgid "This field accepts only number values (without commas)"
-msgstr "Ce champ n'accepte que les valeurs numériques (sans les virgules)"
+msgstr ""
+"Erreur: Ce champ n'accepte que les valeurs numériques (sans les virgules)"
 
 #: repository/validators.py:97
-#, fuzzy
-#| msgid "Please edit the attribution text template"
 msgid "Please edit the attribution text template"
-msgstr "Veuillez modifier le modèle de texte d'attribution"
+msgstr "Erreur: Veuillez modifier le modèle de texte d'attribution"
 
 #: repository/validators.py:101
-#, fuzzy
-#| msgid "Not a valid emailAddress value."
 msgid "Enter a valid email address."
-msgstr "Valeur emailAddress non valide."
+msgstr "Erreur: Entrez un email address valide."
 
 #: repository/views.py:352
 msgid "Request for information regarding a resource"
@@ -1742,7 +1724,7 @@ msgstr "Demande de renseignements concernant une ressource"
 
 #: repository/views.py:360
 msgid "There was an error sending out the request email."
-msgstr "Il y a eu une erreur lors de l'envoi de l'email de demande."
+msgstr "Erreur: Il y a eu une erreur lors de l'envoi de l'email de demande."
 
 #: repository/views.py:362
 msgid "You have successfully sent a message to the resource contact person."
