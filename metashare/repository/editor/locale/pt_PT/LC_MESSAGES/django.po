@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-30 17:02+0200\n"
-"PO-Revision-Date: 2019-06-04 16:05+0200\n"
+"POT-Creation-Date: 2019-06-06 18:15+0200\n"
+"PO-Revision-Date: 2019-06-06 18:59+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_PT\n"
@@ -24,7 +24,7 @@ msgstr "Enviar nova descrição(ões) do(s) recurso(s)"
 
 #: repository/editor/editorutils.py:257
 msgid "Database error"
-msgstr "Erro da base de dados"
+msgstr "Erro: Erro da base de dados"
 
 #: repository/editor/editorutils.py:272
 #, python-format
@@ -208,7 +208,7 @@ msgstr "Remover modelo relacionado"
 #: repository/editor/resource_editor.py:573
 msgid ""
 "Something went wrong when processing the resource with the tm2tmx toolchain."
-msgstr "Ocorreu um erro ao processar o recurso com a toolchain tm2tmx."
+msgstr "Erro: Ocorreu um erro ao processar o recurso com a toolchain tm2tmx."
 
 #: repository/editor/resource_editor.py:578
 #: repository/editor/resource_editor.py:589
@@ -219,7 +219,7 @@ msgstr "Ocorreu um erro ao processar o recurso com a toolchain tm2tmx."
 #: repository/editor/resource_editor.py:790
 #, python-format
 msgid "Error when processing resource %(rname)s"
-msgstr "Erro ao processar o recurso %(rname)s"
+msgstr "Erro: Erro ao processar o recurso %(rname)s"
 
 #: repository/editor/resource_editor.py:578
 #: repository/editor/resource_editor.py:589
@@ -234,9 +234,9 @@ msgid ""
 "error.log attached to the resource. Contact the ELRI NRS support team for "
 "more information at %(email)s"
 msgstr ""
-"Ocorreu um erro ao processar o recurso %(rname)s. Por favor verifique o "
-"error.log anexado ao recurso. Contacte o suporte da equipa do eTradução para "
-"mais informações no %(email)s"
+"Erro: Ocorreu um erro ao processar o recurso %(rname)s. Por favor verifique "
+"o error.log anexado ao recurso. Contacte o suporte da equipa do eTradução "
+"para mais informações no %(email)s"
 
 #: repository/editor/resource_editor.py:580
 #: repository/editor/resource_editor.py:591
@@ -265,7 +265,7 @@ msgid ""
 "Something went wrong when processing the resource with the doc2tmx "
 "toolchain.\n"
 " "
-msgstr "Ocorreu um erro ao processar o recurso com a toolchain doc2tmx"
+msgstr "Erro: Ocorreu um erro ao processar o recurso com a toolchain doc2tmx"
 
 #: repository/editor/resource_editor.py:631
 msgid "Invalid json response from doc2tmx toolchain: "
@@ -279,7 +279,7 @@ msgstr "O pedido POST à toolchain doc2tmx falhou."
 
 #: repository/editor/resource_editor.py:754
 msgid "Only ingested or error resources can be re-processed."
-msgstr "Só os recursos ingeridos podem ser reprocessados."
+msgstr "Erro: Só os recursos ingeridos podem ser reprocessados."
 
 #: repository/editor/resource_editor.py:758
 msgid "Resource(s) re-processed correctly."
@@ -296,9 +296,9 @@ msgid ""
 "resources and check the error.log file(s). You will receive a notification "
 "email."
 msgstr ""
-"Ocorreu um erro no processamento do(s) recurso(s). Reprocesse o recurso que "
-"deu erro e veja os ficheiros error.log. Irá receber uma notificação por e-"
-"mail."
+"Erro: Ocorreu um erro no processamento do(s) recurso(s). Reprocesse o "
+"recurso que deu erro e veja os ficheiros error.log. Irá receber uma "
+"notificação por e-mail."
 
 #: repository/editor/resource_editor.py:770
 #: repository/editor/resource_editor.py:946
@@ -414,7 +414,7 @@ msgid ""
 "                        "
 msgstr ""
 "\n"
-"                        O processo ingerir foi interrompido.\n"
+"                        Erro: O processo ingerir foi interrompido.\n"
 "                        Reprocessamento do(s) recurso(s) com erro no "
 "estado.\n"
 "                        "

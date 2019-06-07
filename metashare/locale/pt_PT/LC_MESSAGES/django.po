@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-30 17:02+0200\n"
-"PO-Revision-Date: 2019-06-04 15:49+0200\n"
+"POT-Creation-Date: 2019-06-06 18:15+0200\n"
+"PO-Revision-Date: 2019-06-06 18:22+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_PT\n"
@@ -31,11 +31,12 @@ msgid ""
 "An error has occurred while trying to send email to contributions alert "
 "recipients."
 msgstr ""
-"Ocorreu um erro ao tentar enviar o e-mail de alerta para os contribuidores."
+"Erro: Ocorreu um erro ao tentar enviar o e-mail de alerta para os "
+"contribuidores."
 
-#: local_settings.py:43
-msgid "Spanish"
-msgstr "Espanhol"
+#: local_settings.py:45
+msgid "French"
+msgstr "Francês"
 
 #: storage/models.py:113
 msgid "Can synchronize"
@@ -174,6 +175,9 @@ msgstr ""
 "Por favor entre em contacto connosco se houver algum problema com uma conta "
 "existente."
 
+#~ msgid "Spanish"
+#~ msgstr "Espanhol"
+
 #~ msgid "English"
 #~ msgstr "Inglês"
 
@@ -182,6 +186,3 @@ msgstr ""
 
 #~ msgid "Gaelic"
 #~ msgstr "Gaélico"
-
-#~ msgid "French"
-#~ msgstr "Francês"

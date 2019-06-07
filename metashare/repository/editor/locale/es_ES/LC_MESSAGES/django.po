@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-30 17:01+0200\n"
-"PO-Revision-Date: 2019-05-30 17:09+0200\n"
+"POT-Creation-Date: 2019-06-06 18:12+0200\n"
+"PO-Revision-Date: 2019-06-06 18:17+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -24,7 +24,7 @@ msgstr "Subir nueva(s) descripción(es) de recursos"
 
 #: repository/editor/editorutils.py:257
 msgid "Database error"
-msgstr "Error de la base de datos"
+msgstr "Error: Error de la base de datos"
 
 #: repository/editor/editorutils.py:272
 #, python-format
@@ -206,7 +206,8 @@ msgstr "Eliminar modelo relacionado"
 msgid ""
 "Something went wrong when processing the resource with the tm2tmx toolchain."
 msgstr ""
-"Ha ocurrido un error al procesarse el recurso con la herramienta tm2tmx."
+"Error: Ha ocurrido un error al procesarse el recurso con la herramienta "
+"tm2tmx."
 
 #: repository/editor/resource_editor.py:578
 #: repository/editor/resource_editor.py:589
@@ -217,7 +218,7 @@ msgstr ""
 #: repository/editor/resource_editor.py:790
 #, python-format
 msgid "Error when processing resource %(rname)s"
-msgstr "Ha ocurrido un error al procesarse el recurso %(rname)s"
+msgstr "Error: Ha ocurrido un error al procesarse el recurso %(rname)s"
 
 #: repository/editor/resource_editor.py:578
 #: repository/editor/resource_editor.py:589
@@ -232,9 +233,9 @@ msgid ""
 "error.log attached to the resource. Contact the ELRI NRS support team for "
 "more information at %(email)s"
 msgstr ""
-"Ha ocurrido un error procesando el recurso %(rname)s. Consulte el archivo "
-"error.log adjunto al recurso. Contacte el equipo de soporte de ELRU para más "
-"información a la siguiente dirección %(email)s"
+"Error: Ha ocurrido un error procesando el recurso %(rname)s. Consulte el "
+"archivo error.log adjunto al recurso. Contacte el equipo de soporte de ELRU "
+"para más información a la siguiente dirección %(email)s"
 
 #: repository/editor/resource_editor.py:580
 #: repository/editor/resource_editor.py:591
@@ -247,8 +248,8 @@ msgid ""
 "There was an error sending out the ERROR notification email to the group "
 "reviewers. Please contact them directly."
 msgstr ""
-"Ha ocurrido un error al mandarse el correo de notificación de ERROR al grupo "
-"de revisores. Por favor contáctenles directamente."
+"Error: Ha ocurrido un error al mandarse el correo de notificación de ERROR "
+"al grupo de revisores. Por favor contáctenles directamente."
 
 #: repository/editor/resource_editor.py:584
 msgid "Invalid json response from tm2tmx toolchain: "
@@ -264,7 +265,8 @@ msgid ""
 "toolchain.\n"
 " "
 msgstr ""
-"Ha ocurrido un error al procesarse el recurso con la herramienta doc2tmx."
+"Error: Ha ocurrido un error al procesarse el recurso con la herramienta "
+"doc2tmx."
 
 #: repository/editor/resource_editor.py:631
 msgid "Invalid json response from doc2tmx toolchain: "
@@ -278,7 +280,7 @@ msgstr "No se ha logrado ejecutar la petición POST a la herramienta doc2tmx. "
 
 #: repository/editor/resource_editor.py:754
 msgid "Only ingested or error resources can be re-processed."
-msgstr "Sólo se pueden  los recursos introducidos."
+msgstr "Error: Sólo se pueden  los recursos introducidos."
 
 #: repository/editor/resource_editor.py:758
 msgid "Resource(s) re-processed correctly."
@@ -295,9 +297,9 @@ msgid ""
 "resources and check the error.log file(s). You will receive a notification "
 "email."
 msgstr ""
-"Ha ocurrido un error al procesarse el recurso. Verifiquen el archivo error."
-"log y reprocesen el recurso. Recibirá un correo de notificación cuando se "
-"haya completado el proceso."
+"Error: Ha ocurrido un error al procesarse el recurso. Verifiquen el archivo "
+"error.log y reprocesen el recurso. Recibirá un correo de notificación cuando "
+"se haya completado el proceso."
 
 #: repository/editor/resource_editor.py:770
 #: repository/editor/resource_editor.py:946
@@ -371,8 +373,8 @@ msgid ""
 "There was an error sending out the notification email to the resource "
 "owners. Please contact them directly."
 msgstr ""
-"Ha ocurrido un error al enviar el email de notificación a los propietarios "
-"de los recursos. Por favor, contacte con ellos directamente."
+"Error: Ha ocurrido un error al enviar el email de notificación a los "
+"propietarios de los recursos. Por favor, contacte con ellos directamente."
 
 #: repository/editor/resource_editor.py:938
 #, python-format
@@ -414,7 +416,8 @@ msgid ""
 "                        "
 msgstr ""
 "\n"
-"                        El proceso de ingestión ha sido interrumpido.\n"
+"                        Error: El proceso de ingestión ha sido "
+"interrumpido.\n"
 "                        Verifique el error y reprocese los recursos con "
 "estado de publicación \"error\".\n"
 "                        "
@@ -456,7 +459,7 @@ msgid ""
 "There was an error sending out the notification email to the group "
 "reviewers. Please contact them directly."
 msgstr ""
-"Ha ocurrido un error al mandar el correo de notificación al grupo de "
+"Error: Ha ocurrido un error al mandar el correo de notificación al grupo de "
 "revisores. Por favor, contáctenles directamente."
 
 #: repository/editor/resource_editor.py:1050

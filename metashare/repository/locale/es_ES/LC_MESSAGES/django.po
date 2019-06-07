@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-30 17:01+0200\n"
-"PO-Revision-Date: 2019-05-30 17:09+0200\n"
+"POT-Creation-Date: 2019-06-06 18:12+0200\n"
+"PO-Revision-Date: 2019-06-06 18:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -1708,7 +1708,7 @@ msgstr "Solicitud de información sobre un recurso"
 
 #: repository/views.py:360
 msgid "There was an error sending out the request email."
-msgstr "Hubo un error al enviar la sol·licitud."
+msgstr "Error: Hubo un error al enviar la sol·licitud."
 
 #: repository/views.py:362
 msgid "You have successfully sent a message to the resource contact person."
