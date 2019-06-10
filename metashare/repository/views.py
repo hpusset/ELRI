@@ -51,7 +51,7 @@ from django.utils.translation import ugettext as _
 from haystack.views import FacetedSearchView
 
 from metashare.accounts.models import UserProfile, Organization, OrganizationManagers
-from metashare.local_settings import CONTRIBUTIONS_ALERT_EMAILS, TMP, SUPPORTED_LANGUAGES, EMAIL_ADDRESSES, COUNTRY, STATIC_ROOT
+from metashare.local_settings import CONTRIBUTIONS_ALERT_EMAILS, TMP, SUPPORTED_LANGUAGES, EMAIL_ADDRESSES, COUNTRY, STATIC_ROOT, MAXIMUM_UPLOAD_SIZE_CONTRIBUTE
 from metashare.recommendations.recommendations import SessionResourcesTracker, \
     get_download_recommendations, get_view_recommendations, \
     get_more_from_same_creators_qs, get_more_from_same_projects_qs
@@ -1118,7 +1118,7 @@ def contribute(request):
             return HttpResponse(json.dumps(response),
                                 content_type="application/json")
 
-        if sum(fobj.size for fobj in file_objects) <= MAXIMUM_UPLOAD_SIZE:
+        if sum(fobj.size for fobj in file_objects) <= MAXIMUM_UPLOAD_SIZE_CONTRIBUTE :
             try:
                 if not os.path.isdir(unprocessed_dir):
                     os.makedirs(unprocessed_dir)
@@ -1224,7 +1224,7 @@ def contribute(request):
                 The file you are trying to upload exceeds the size limit. If the file(s) you
                 would like to contribute exceed(s) {:.10} MB please contact us to provide an SFTP link for direct
                 download or consider uploading smaller files.""".format(
-                float(MAXIMUM_UPLOAD_SIZE) / (1024 * 1024)))
+                float(MAXIMUM_UPLOAD_SIZE_CONTRIBUTE) / (1024 * 1024)))
             return HttpResponse(json.dumps(response), content_type="application/json")
 
     # In ELRI, LR contributions can only be shared within the groups to which a user belongs.
