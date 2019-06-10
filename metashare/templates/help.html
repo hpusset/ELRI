@@ -13,7 +13,7 @@
 
             {% get_current_language as LANGUAGE_CODE %}
                 {% get_guidelines LANGUAGE_CODE as elri_userguidelines %}
-                <li> <a href="{% static elri_userguidelines %}">{% trans 'User guidelines' %}</a>
+                <li> <a href="{% static elri_userguidelines %}" target="_blank">{% trans 'User guidelines' %}</a>
                 </li>
             
         </ul>
