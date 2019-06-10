@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-06 18:15+0200\n"
-"PO-Revision-Date: 2019-06-07 09:34+0200\n"
+"POT-Creation-Date: 2019-06-10 12:13+0200\n"
+"PO-Revision-Date: 2019-06-10 12:14+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_PT\n"
@@ -92,7 +92,11 @@ msgstr "\"OK\""
 msgid "\"Learn more\""
 msgstr "\"Saber mais\""
 
-#: templates/base.html:74
+#: templates/base.html:64
+msgid "\"Cookies policy\""
+msgstr "'Política de Cookies'"
+
+#: templates/base.html:75
 msgid "Go to the web page main content."
 msgstr "Navegar para o conteúdo principal da página."
 
@@ -3644,9 +3648,6 @@ msgstr "nunca usado"
 
 #~ msgid "\"Allow cookies\""
 #~ msgstr "\"Permitir cookies\""
-
-#~ msgid "'Cookie Policy'"
-#~ msgstr "'Política de Cookies'"
 
 #~ msgid "Manage Resources"
 #~ msgstr "Gerir Recursos"

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-06 18:12+0200\n"
-"PO-Revision-Date: 2019-06-06 17:49+0200\n"
+"POT-Creation-Date: 2019-06-10 12:12+0200\n"
+"PO-Revision-Date: 2019-06-10 12:14+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -34,7 +34,11 @@ msgstr "\"Entendu\""
 msgid "\"Learn more\""
 msgstr "\"En savoir plus\""
 
-#: templates/admin/base.html:61 templates/admin/delete_confirmation.html:6
+#: templates/admin/base.html:48
+msgid "\"Cookies policy\""
+msgstr "'Politique de Cookies'"
+
+#: templates/admin/base.html:62 templates/admin/delete_confirmation.html:6
 #: templates/admin/delete_selected_confirmation.html:6
 msgid "Home"
 msgstr "Accueil"
@@ -147,6 +151,3 @@ msgstr "Abandooner l'édition et ignorer toutes les modifications"
 
 #~ msgid "\"Allow cookies\""
 #~ msgstr "\"Permettre les cookies\""
-
-#~ msgid "'Cookie Policy'"
-#~ msgstr "\"Politique de cookies\""
