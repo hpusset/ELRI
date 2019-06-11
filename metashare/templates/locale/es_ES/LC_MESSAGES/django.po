@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-06-10 17:03+0200\n"
-"PO-Revision-Date: 2019-06-10 17:05+0200\n"
+"PO-Revision-Date: 2019-06-11 13:45+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -2438,7 +2438,7 @@ msgstr "Repositorio de ELRI en [2]"
 
 #: templates/repository/resource_new_contributions_email.html:2
 msgid "There are new submitted contributed resources on ELRI "
-msgstr "Hay nuevas aportaciones de recursos en ELRI"
+msgstr "Hay nuevas aportaciones de recursos en ELRI "
 
 #: templates/repository/resource_view/annotation.html:10
 #: templates/repository/resource_view/input_output.html:74
