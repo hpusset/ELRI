@@ -2,9 +2,12 @@ import datetime, requests, os, zipfile
 from functools import update_wrapper
 from mimetypes import guess_type
 from shutil import copyfile
+import shutil
 import json
 import logging
 import codecs
+import tempfile
+
 from django import forms
 from django.contrib import admin, messages
 from django.contrib.admin.utils import unquote
@@ -429,6 +432,21 @@ def prepare_error_zip(error_msg,resource_path,request):
     #close zip file with processed resources
     errorzip.close()
 
+
+def remove_from_zip(zipfname, *filenames):
+    tempdir = tempfile.mkdtemp()
+    try:
+        tempname = os.path.join(tempdir, 'new.zip')
+        with zipfile.ZipFile(zipfname, 'r') as zipread:
+            with zipfile.ZipFile(tempname, 'w') as zipwrite:
+                for item in zipread.infolist():
+                    if item.filename not in filenames:
+                        data = zipread.read(item.filename)
+                        zipwrite.writestr(item, data)
+        shutil.move(tempname, zipfname)
+    finally:
+        shutil.rmtree(tempdir)
+        
 class ResourceModelAdmin(SchemaModelAdmin): 
     haystack_connection = 'default'
     inline_type = 'stacked'
@@ -821,30 +839,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                         licences_restriction.append(lic_restriction)
                        
                     resource_path=obj.storage_object._storage_folder()
-                    lr_archive_zip=zipfile.ZipFile(resource_path+'/archive.zip', mode='a')
-                    '''licence file is added after ingesting the resource
-                    user_membership = _get_user_membership(request.user) 
-                    licences = _get_licences(obj,user_membership)    
-                    for l in licences_name:
-                        l_info, access_links, access = licences[l]
-                        if l == 'publicDomain':
-                            access_links=STATIC_URL + 'metashare/licences/publicDomain.txt'
-                        if l == 'openUnder-PSI':
-                            access_links=STATIC_URL + 'metashare/licences/openUnderPSI.txt'
-                        if l == 'non-standard/Other_Licence/Terms' :
-                            #access_links=STATIC_URL + 'metashare/licences/openUnderPSI.txt'
-                            unprocessed_dir = "/unprocessed"
-                            access_links=unprocessed_dir+'/'+u'_'.join(resource_name[0].split())+'_licence.pdf'
-                            #LOGGER.info(licences[l])
-                            #LOGGER.info(l_info)
-                            #LOGGER.info(access_links)
-                            #LOGGER.info(access)
-                        #add access file to the lr.archive.zip file 
-                        licence_path=ROOT_PATH+access_links
-                        
-                        path, filename = os.path.split(licence_path)
-                        lr_archive_zip.write(licence_path,'license_'+filename)
-                    '''    
+                  
                     #attribution text
                     attr_text=''
                     for at in resource_info.iter('attributionText'):
@@ -893,6 +888,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     # (Attribution text:)
                     # IPR Holder: Name Surname (email), Organization 
                     # Contact Person: Name Surname (email), Organization 
+                    #if metadata_file exist --> update it : remove + add 
+                    
                     metadata_file_path=resource_path+'/'+resource_name[0]+'_metadata.txt'
                     with codecs.open(metadata_file_path, encoding='utf-8',mode='w') as metadata_file:
                         metadata_file.write(_('Resource_name: %s  \n') % resource_name[0])
@@ -914,7 +911,11 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                 metadata_file.write(_('Contact Person: ')+p+' '+contact_surname[i]+' ('+contact_email[i]+'), '+contact_organization[i]+'\n')
                         else:
                             metadata_file.write(_('Contact Person: N/A \n'))
-                    lr_archive_zip.write(metadata_file_path,resource_name[0]+'_metadata.txt',)
+                    #lr_archive_zip=zipfile.ZipFile(resource_path+'/archive.zip', mode='a')        
+                    #if resource_name[0]+'_metadata.txt' in lr_archive_zip.namelist():
+                    remove_from_zip(resource_path+'/archive.zip', resource_name[0]+'_metadata.txt')
+                    lr_archive_zip=zipfile.ZipFile(resource_path+'/archive.zip', mode='a')        
+                    lr_archive_zip.write(metadata_file_path,resource_name[0]+'_metadata.txt')
                     lr_archive_zip.close()
                     
                     #send corresponding emails
