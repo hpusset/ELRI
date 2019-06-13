@@ -425,10 +425,21 @@ def prepare_error_zip(error_msg,resource_path,request):
     add_files2zip(resource_path+'/doc/input',errorzip)
     add_files2zip(resource_path+'/tm/input',errorzip)
     add_files2zip(resource_path+'/other',errorzip)
+    #remove files from the toolchain folders
+    if os.path.isdir(resource_path+'/doc'):
+        shutil.rmtree(resource_path+'/doc')
+    if os.path.isdir(resource_path + '/doc'):
+        shutil.rmtree(resource_path+'/tm')
+    if os.path.isdir(resource_path + '/other'):
+        shutil.rmtree(resource_path+'/other')
+
     error_log = open(os.path.join(resource_path,'error.log'), 'w')
     error_log.write(error_msg.encode("utf-8"))
     error_log.close()
     errorzip.write(os.path.join(resource_path,'error.log'), 'error.log')
+    #remove the error.log file
+    if os.path.isfile(os.path.join(resource_path,'error.log')):
+        os.remove(os.path.join(resource_path,'error.log'))
     #close zip file with processed resources
     errorzip.close()
 
@@ -475,7 +486,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
             if has_publish_permission(request, queryset):
                 successful = 0
                 processing_status=True
+                #queryset = [resourceInfoType_model]
                 for obj in queryset:
+                    #obj --> resourceInfoType_model
                     #variables to control tc errors
                     errors=0
                     error_msg=''
@@ -720,6 +733,13 @@ class ResourceModelAdmin(SchemaModelAdmin):
                         
                         #close zip file with processed resources
                         processed_zip.close()
+                        # remove files from the toolchain folders
+                        if os.path.isdir(resource_path + '/doc'):
+                            shutil.rmtree(resource_path + '/doc')
+                        if os.path.isdir(resource_path + '/doc'):
+                            shutil.rmtree(resource_path + '/tm')
+                        if os.path.isdir(resource_path + '/other'):
+                            shutil.rmtree(resource_path + '/other')
                         #if pre_status == INGESTED or pre_status==ERROR :
                         change_resource_status(obj,status=INGESTED, precondition_status=PROCESSING)
                             
@@ -791,7 +811,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
         except:
             messages.error(request,_("Something went wrong when processing the resource(s). Re-process the error resources and check the error.log file(s). You will receive a notification email."))
             
-            error_msg=error_msg+_("Something went wrong when processing the resource(s). Re-process the error resources and check the error.log file(s). You will receive a notification email.\n ")
+            error_msg=_("Something went wrong when processing the resource(s). Re-process the error resources and check the error.log file(s). You will receive a notification email.\n ")
+            errors=0
             for obj in queryset:
                 change_resource_status(obj,status=ERROR, precondition_status=PROCESSING)
                 resource_path=obj.storage_object._storage_folder()
