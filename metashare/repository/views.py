@@ -66,7 +66,7 @@ from metashare.repository.models import resourceInfoType_model, identificationIn
     metadataInfoType_model, languageDescriptionTextInfoType_model, languageDescriptionMediaTypeType_model, \
     languageDescriptionInfoType_model, lexicalConceptualResourceTextInfoType_model, \
     lexicalConceptualResourceMediaTypeType_model, lexicalConceptualResourceInfoType_model, distributionInfoType_model, \
-    licenceInfoType_model, resourceCreationInfoType_model
+    licenceInfoType_model, resourceCreationInfoType_model, projectInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex, \
     update_lr_index_entry
 from metashare.settings import LOG_HANDLER, STATIC_URL, DJANGO_URL, MAXIMUM_UPLOAD_SIZE, CONTRIBUTION_FORM_DATA, \
@@ -1291,9 +1291,20 @@ def create_description(xml_file, type, base, user):
         resourceName={'en': unicode(info['title'])}, #.encode('utf-8')},
         description={'en': unicode(info['description'])},#.encode('utf-8')},
         appropriatenessForDSI=info['domains'])
+
+
     resource_creation = resourceCreationInfoType_model.objects.create(
-        createdUsingELRCServices=False
-    )
+        createdUsingELRCServices=False,
+        anonymized=False)
+    elri_project=projectInfoType_model.objects.create()
+    elri_project.projectName["en"]= u"European Language Resource Infrastructure"
+    elri_project.projectShortName["en"]=u"ELRI"
+    elri_project.url=[u'http://www.elri-project.eu',]
+    elri_project.fundingType=[u'euFunds',]
+    elri_project.funder = [u'European Comission',]
+    elri_project.fundingCountry = [u'European Union',]
+    elri_project.save()
+    resource_creation.fundingProject.add(elri_project)
 
     # CONTACT PERSON:
 
