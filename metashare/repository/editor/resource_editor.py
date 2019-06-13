@@ -47,7 +47,8 @@ from metashare.repository.models import resourceComponentTypeType_model, \
     lexicalConceptualResourceInfoType_model, toolServiceInfoType_model, \
     corpusMediaTypeType_model, languageDescriptionMediaTypeType_model, \
     lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model, \
-    licenceInfoType_model, User
+    licenceInfoType_model, User, sizeInfoType_model, textFormatInfoType_model
+
 from metashare.repository.supermodel import SchemaModel
 from metashare.stats.model_utils import saveLRStats, UPDATE_STAT, INGEST_STAT, DELETE_STAT
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, PROCESSING, ERROR, \
@@ -598,41 +599,20 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                 response_tm=requests.post(settings.TM2TMX_URL,json=tm_json)
                                 if json_validator(response_tm):
                                     if response_tm.json()["status"]=="Success":
-                                        #LOGGER.info(obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].sizeinfotype_model_set.all())
                                         successful +=1
-                                        # update the obj with the info from the toolchain
-                                        #  -> for p in json()["lr_properties"]
-                                        # size_info=p['size']; p['size_unit']
-                                        # data_format=p['data_format']
-                                        from metashare.repository.models import sizeInfoType_model
-                                        size_info = sizeInfoType_model.objects.create(size=3,
-                                                                                      sizeUnit='translationUnits')
-                                        # size_info.size=3#int(response_doc.json()["size"])
-                                        # size_info.sizeUnit="translationUnits" #response_doc.json()["size_unit"]
+                                        #clear previous information
                                         if len(obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].sizeinfotype_model_set.all()) > 0:
                                             obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].sizeinfotype_model_set.clear()
-                                        obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].sizeinfotype_model_set.add(size_info)
-                                        LOGGER.info(size_info)
-                                        LOGGER.info(
-                                            obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[
-                                                0].textformatinfotype_model_set.all())
-                                        from metashare.repository.models import textFormatInfoType_model
+                                        if len(obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].textformatinfotype_model_set.all()) > 0:
+                                            obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].textformatinfotype_model_set.clear()
+                                        props = response_tm.json()["lr_properties"]
+                                        for prop in props:
+                                            size_info = sizeInfoType_model.objects.create(size=int(prop["size"]),
+                                                                                      sizeUnit=prop["size_unit"])
+                                            obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].sizeinfotype_model_set.add(size_info)
 
-                                        lr_data_format = textFormatInfoType_model.objects.create(
-                                            dataFormat=u"application/x-tmx+xml")
-                                        if len(
-                                                obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[
-                                                    0].textformatinfotype_model_set.all()) > 0:
-                                            obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[
-                                                0].textformatinfotype_model_set.clear()
-                                        obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[
-                                            0].textformatinfotype_model_set.add(lr_data_format)
-
-                                        lr_data_format = textFormatInfoType_model.objects.create(
-                                            dataFormat=u'text/plain')
-                                        obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[
-                                            0].textformatinfotype_model_set.add(lr_data_format)
-
+                                            lr_data_format = textFormatInfoType_model.objects.create(dataFormat=prop["data_format"])
+                                            obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].textformatinfotype_model_set.add(lr_data_format)
                                         obj.storage_object.update_storage()
 
                                     else:
@@ -681,34 +661,24 @@ class ResourceModelAdmin(SchemaModelAdmin):
                             try:
                                 response_doc=requests.post(settings.DOC2TMX_URL,json=doc_json)
                                 if json_validator(response_doc):
+
                                     if response_doc.json()["status"] == "Success":
                                         successful += 1
-                                        LOGGER.info('aaaaa:')
-                                        LOGGER.info(obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].sizeinfotype_model_set.all())
-                                        # update the obj with the info from the toolchain
-                                        #  -> for p in json()["lr_properties"]
-                                        # size_info=p['size']; p['size_unit']
-                                        # data_format=p['data_format']
-                                        from metashare.repository.models import sizeInfoType_model
-                                        size_info= sizeInfoType_model.objects.create(size=3,sizeUnit='translationUnits')
-                                        #size_info.size=3#int(response_doc.json()["size"])
-                                        #size_info.sizeUnit="translationUnits" #response_doc.json()["size_unit"]
-                                        if len(obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].sizeinfotype_model_set.all())>0:
+                                        # clear previous information
+                                        if len(obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].sizeinfotype_model_set.all()) > 0:
                                             obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].sizeinfotype_model_set.clear()
-                                        obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].sizeinfotype_model_set.add(size_info)
-                                        LOGGER.info(size_info)
-                                        LOGGER.info(obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].textformatinfotype_model_set.all())
-                                        from metashare.repository.models import textFormatInfoType_model
-
-                                        lr_data_format= textFormatInfoType_model.objects.create(dataFormat= u"application/x-tmx+xml")
-                                        if len(obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].textformatinfotype_model_set.all())>0:
+                                        if len(obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].textformatinfotype_model_set.all()) > 0:
                                             obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].textformatinfotype_model_set.clear()
-                                        obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].textformatinfotype_model_set.add(lr_data_format)
 
-                                        lr_data_format= textFormatInfoType_model.objects.create(dataFormat= u'text/plain')
-                                        obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].textformatinfotype_model_set.add(lr_data_format)
+                                        props=response_doc.json()["lr_properties"]
+                                        for prop in props:
+                                            size_info = sizeInfoType_model.objects.create(size=prop["size"],
+                                                                                          sizeUnit=prop["size_unit"])
+                                            obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].sizeinfotype_model_set.add(size_info)
 
-
+                                            lr_data_format = textFormatInfoType_model.objects.create(
+                                                dataFormat=prop["data_format"])
+                                            obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].textformatinfotype_model_set.add(lr_data_format)
                                         obj.storage_object.update_storage()
 
                                     else:
