@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-05 13:59+0200\n"
-"PO-Revision-Date: 2019-04-05 14:02+0200\n"
+"POT-Creation-Date: 2019-06-17 17:17+0200\n"
+"PO-Revision-Date: 2019-06-06 18:17+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -31,12 +31,28 @@ msgid ""
 "An error has occurred while trying to send email to contributions alert "
 "recipients."
 msgstr ""
-"Ha ocurrido un error al intentar enviar el email a los gestores de las "
-"alertas de nuevas contribuciones."
+"Error: Ha ocurrido un error al intentar enviar el email a los gestores de "
+"las alertas de nuevas contribuciones."
 
 #: local_settings.py:45
+msgid "Gaelic"
+msgstr "Gaélico"
+
+#: local_settings.py:46
+msgid "Spanish"
+msgstr "Español"
+
+#: local_settings.py:47
+msgid "English"
+msgstr "Inglés"
+
+#: local_settings.py:48
 msgid "French"
 msgstr "Francés"
+
+#: local_settings.py:49
+msgid "Portuguese"
+msgstr "Portugués"
 
 #: storage/models.py:113
 msgid "Can synchronize"
@@ -170,31 +186,14 @@ msgstr ""
 "texto que contiene la serialización JSON de atributos locales para esta "
 "instancia del objeto de almacenamiento."
 
-#: views.py:22
-#, python-format
+#: views.py:22 views.py:24
 msgid ""
-"Please enter a correct %(username)s and password, Note that both fields may "
-"be case-sensitive."
+"Please enter a correct username and password. Note that both fields may be "
+"case-sensitive. "
 msgstr ""
-"Por favor indique  %(username)s y contraseña correctos. Nótese que ambos "
+"Error: Por favor indique  un nombre de usuario y contraseña correctos. Ambos "
 "campos pueden ser sensibles a la capitalización."
 
-#: views.py:24
-msgid ""
-"This account has not been activated yet. Please contact us if there is any "
-"issue with an existing account."
-msgstr ""
-"Esta cuenta no ha sido activada aún. Contáctenos si hubiese cualquier "
-"problema con una cuenta existente."
-
-#~ msgid "Spanish"
-#~ msgstr "Español"
-
-#~ msgid "Gaelic"
-#~ msgstr "Gaélico"
-
-#~ msgid "English"
-#~ msgstr "Inglés"
-
-#~ msgid "Portuguese"
-#~ msgstr "Portugués"
+#: views.py:23 views.py:25
+msgid "Please contact us if there is any issue with an existing account."
+msgstr "Contáctenos si hubiese cualquier problema con una cuenta existente."

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-05 10:45+0200\n"
-"PO-Revision-Date: 2019-04-05 13:49+0200\n"
+"POT-Creation-Date: 2019-06-17 17:07+0200\n"
+"PO-Revision-Date: 2019-06-06 18:16+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -34,12 +34,16 @@ msgid ""
 "An error has occurred while trying to send email to contributions alert "
 "recipients."
 msgstr ""
-"Une erreur s'est produite lors de la tentative d'envoi d'e-mails aux "
+"Erreur: Une erreur s'est produite lors de la tentative d'envoi d'e-mails aux "
 "destinataires des alertes de contributions."
 
 #: local_settings.py:45
-msgid "French"
-msgstr "Français"
+msgid "Gaelic"
+msgstr "Gaélique"
+
+#: local_settings.py:47
+msgid "English"
+msgstr "Anglais"
 
 #: storage/models.py:113
 msgid "Can synchronize"
@@ -168,31 +172,23 @@ msgstr ""
 "texte contenant la sérialisation JSON des attributs locaux pour cette "
 "instance d'objet de stockage."
 
-#: views.py:22
-#, python-format
+#: views.py:22 views.py:24
 msgid ""
-"Please enter a correct %(username)s and password, Note that both fields may "
-"be case-sensitive."
+"Please enter a correct username and password. Note that both fields may be "
+"case-sensitive. "
 msgstr ""
-"Veuillez entrer un %(username)s et un mot de passe corrects. Notez que les "
-"deux champs peuvent être sensibles à la casse."
+"Erreur: Veuillez entrer un nom d'utilisateur et un mot de passe valides. Les "
+"deux champs sont sensibles aux caractères en majuscule et en minuscule."
 
-#: views.py:24
-msgid ""
-"This account has not been activated yet. Please contact us if there is any "
-"issue with an existing account."
-msgstr ""
-"Ce compte n'a pas encore été activé. Veuillez nous contacter en cas de "
-"problème avec un compte existant."
+#: views.py:23 views.py:25
+msgid "Please contact us if there is any issue with an existing account."
+msgstr "Veuillez nous contacter en cas de problème avec un compte existant."
 
 #~ msgid "Spanish"
 #~ msgstr "Espagnol"
 
-#~ msgid "Gaelic"
-#~ msgstr "Gaélique"
-
-#~ msgid "English"
-#~ msgstr "Anglais"
+#~ msgid "French"
+#~ msgstr "Français"
 
 #~ msgid "Portuguese"
 #~ msgstr "Portugais"

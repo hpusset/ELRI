@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-04 16:42+0200\n"
-"PO-Revision-Date: 2019-05-17 12:31+0100\n"
+"POT-Creation-Date: 2019-06-17 17:09+0200\n"
+"PO-Revision-Date: 2019-06-06 18:22+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_PT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: edelivery/management/commands/get_new_edelivery_messages.py:23
 msgid "New contributions through eDelivery"
@@ -31,11 +31,16 @@ msgid ""
 "An error has occurred while trying to send email to contributions alert "
 "recipients."
 msgstr ""
-"Ocorreu um erro ao tentar enviar o e-mail de alerta para os contribuidores."
+"Erro: Ocorreu um erro ao tentar enviar o e-mail de alerta para os "
+"contribuidores."
+
+#: local_settings.py:45
+msgid "Gaelic"
+msgstr "Gaélico"
 
 #: local_settings.py:47
-msgid "Portuguese"
-msgstr "Português"
+msgid "English"
+msgstr "Inglês"
 
 #: storage/models.py:113
 msgid "Can synchronize"
@@ -160,32 +165,25 @@ msgstr ""
 "texto que contém a serialização JSON dos atributos locais deste objeto de "
 "armazenamento."
 
-#: views.py:22
-#, python-format
+#: views.py:22 views.py:24
 msgid ""
-"Please enter a correct %(username)s and password, Note that both fields may "
-"be case-sensitive."
+"Please enter a correct username and password. Note that both fields may be "
+"case-sensitive. "
 msgstr ""
-"Por favor introduza um nome de utilizador %(username)s e palavra-passe "
-"corretos. Note que ambos os campos podem fazer distinção entre maiúsculas e "
-"minúsculas. "
+"Erro: Por favor introduza um nome de utilizador e uma palavra-passe válidos. "
+"Note que os campos podem ser sensíveis a maiúsculas e minúsculas."
 
-#: views.py:24
-msgid ""
-"This account has not been activated yet. Please contact us if there is any "
-"issue with an existing account."
+#: views.py:23 views.py:25
+msgid "Please contact us if there is any issue with an existing account."
 msgstr ""
-"Esta conta ainda não foi ativada. Por favor entre em contacto connosco se "
-"houver algum problema com uma conta existente."
-
-#~ msgid "Gaelic"
-#~ msgstr "Gaélico"
-
-#~ msgid "English"
-#~ msgstr "Inglês"
+"Por favor entre em contacto connosco se houver algum problema com uma conta "
+"existente."
 
 #~ msgid "Spanish"
 #~ msgstr "Espanhol"
 
 #~ msgid "French"
 #~ msgstr "Francês"
+
+#~ msgid "Portuguese"
+#~ msgstr "Português"

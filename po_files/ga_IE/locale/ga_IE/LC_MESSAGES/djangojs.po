@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-30 18:37+0100\n"
-"PO-Revision-Date: 2019-03-12 14:29+0000\n"
+"POT-Creation-Date: 2019-06-17 16:39+0200\n"
+"PO-Revision-Date: 2019-06-17 16:51+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: ga_IE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=5; plural=(n==1 ? 0 : n==2 ? 1 : n>=3 && n<=6 ? 2 : n>=7 && "
-"n<=10 ? 3 : 4);\n"
-"X-Generator: Poedit 2.2.1\n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"Plural-Forms: nplurals=5; plural=(n==1 ? 0 : n==2 ? 1 : n>=3 && n<=6 ? 2 : "
+"n>=7 && n<=10 ? 3 : 4);\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: static/admin/js/SelectFilter2.js:47
 #, c-format
@@ -64,27 +64,29 @@ msgstr[4] "%(sel)s de %(cnt)s roghnaithe"
 
 #: static/admin/js/actions.js:114 static/admin/js/actions.min.js:5
 msgid ""
-"You have unsaved changes on individual editable fields. If you run an action, your "
-"unsaved changes will be lost."
+"You have unsaved changes on individual editable fields. If you run an "
+"action, your unsaved changes will be lost."
 msgstr ""
-"Tá athruithe gan sábháil agat ar réimsí aonair so-eagartha. Má ritheann tú gníomh, "
-"caillfear d’athruithe nach bhfuil sábháilte."
+"Tá athruithe gan sábháil agat ar réimsí aonair so-eagartha. Má ritheann tú "
+"gníomh, caillfear d’athruithe nach bhfuil sábháilte."
 
 #: static/admin/js/actions.js:126 static/admin/js/actions.min.js:6
 msgid ""
-"You have selected an action, but you haven't saved your changes to individual fields yet. "
-"Please click OK to save. You'll need to re-run the action."
+"You have selected an action, but you haven't saved your changes to "
+"individual fields yet. Please click OK to save. You'll need to re-run the "
+"action."
 msgstr ""
-"Tá gníomh roghnaithe agat, ach níl d’athruithe ar réimsí aonair sábháilte agat go fóill. "
-"Roghnaigh OK le sábháil. Beidh ort an gníomh a athrith."
+"Tá gníomh roghnaithe agat, ach níl d’athruithe ar réimsí aonair sábháilte "
+"agat go fóill. Roghnaigh OK le sábháil. Beidh ort an gníomh a athrith."
 
 #: static/admin/js/actions.js:128 static/admin/js/actions.min.js:6
 msgid ""
-"You have selected an action, and you haven't made any changes on individual fields. "
-"You're probably looking for the Go button rather than the Save button."
+"You have selected an action, and you haven't made any changes on individual "
+"fields. You're probably looking for the Go button rather than the Save "
+"button."
 msgstr ""
-"Tá gníomh roghnaithe agat, ach níl aon athrú déanta agat ar réimsí aonair. Is dócha go "
-"bhfuil an cnaipe Téigh á lorg agat seachas an cnaipe Sábháil."
+"Tá gníomh roghnaithe agat, ach níl aon athrú déanta agat ar réimsí aonair. "
+"Is dócha go bhfuil an cnaipe Téigh á lorg agat seachas an cnaipe Sábháil."
 
 #: static/admin/js/admin/DateTimeShortcuts.js:49
 #: static/admin/js/admin/DateTimeShortcuts.js:85
@@ -135,10 +137,11 @@ msgstr "Amárach"
 
 #: static/admin/js/calendar.js:8 static/admin/js/dateparse.js:32
 msgid ""
-"January February March April May June July August September October November December"
+"January February March April May June July August September October November "
+"December"
 msgstr ""
-"Eanáir Feabhra Márta Aibreán Bealtaine Meitheamh Iúil Lúnasa Meán Fómhair Deireadh "
-"FómhairSamhain Nollaig"
+"Eanáir Feabhra Márta Aibreán Bealtaine Meitheamh Iúil Lúnasa Meán Fómhair "
+"Deireadh FómhairSamhain Nollaig"
 
 #: static/admin/js/calendar.js:9
 msgid "S M T W T F S"
@@ -155,7 +158,8 @@ msgstr "Folaigh"
 
 #: static/admin/js/dateparse.js:33
 msgid "Sunday Monday Tuesday Wednesday Thursday Friday Saturday"
-msgstr "Dé Domhnaigh Dé Luain Dé Máirt Dé Céadaoin Déardaoin Dé hAoine Dé Sathairn"
+msgstr ""
+"Dé Domhnaigh Dé Luain Dé Máirt Dé Céadaoin Déardaoin Dé hAoine Dé Sathairn"
 
 #: static/metashare/js/choice-type-widget.js:18
 msgid ""
@@ -165,30 +169,41 @@ msgstr ""
 "Ní fhéadfaí fuinneog aníos a oscailt!\n"
 "B’fhéidir go bhfuil mír aníos "
 
-#: static/metashare/js/upload.js:75
-msgid "The file(s) you are trying to upload exceed(s) the size limit. "
-msgstr "Sáraíonn comha(i)d atá á uaslódáil agat an uasmhéid spáis. "
+#: static/metashare/js/upload.js:69
+msgid ""
+"The file(s) you are trying to upload exceed(s) the size limit. If the "
+"file(s) you would like to contribute exceed(s) 100.0 MB, please contact us "
+"to provide an SFTP link for direct download or consider uploading smaller "
+"files."
+msgstr ""
+"Tá an comhad a bhfuil tú ag iarraidh uaslódáil ró-mhór. Má tá an comhad nó "
+"na comhaid níos mó ná 100 MB, téigh i dteagmháil linn le do thoil chun nasc "
+"SFTP a fháil, nó triall arís é le comhaid níos lú."
 
-#: static/metashare/js/upload.js:99 static/metashare/js/upload.js.c:167
+#: static/metashare/js/upload.js:91 static/metashare/js/upload.js.c:159
 msgid "Only files of type "
 msgstr "Comhaid de chineál "
 
-#: static/metashare/js/upload.js:100 static/metashare/js/upload.js.c:168
+#: static/metashare/js/upload.js:92 static/metashare/js/upload.js.c:160
 msgid ""
-" are allowed. The .zip files can only contain files of the specified types. Please "
-"consider removing the files that do not belong to one of these types."
+" are allowed. The .zip files can only contain files of the specified types. "
+"Please consider removing the files that do not belong to one of these types."
 msgstr ""
-" amháin atá ceadaithe. Ní féidir ach comhaid de na cineálacha atá sonraithe a bheith sna "
-"zipchomhaid. Bheifí buíoch ach na comhaid nach mbaineann leis na cineálacha sin a bhaint."
+" amháin atá ceadaithe. Ní féidir ach comhaid de na cineálacha atá sonraithe "
+"a bheith sna zipchomhaid. Bheifí buíoch ach na comhaid nach mbaineann leis "
+"na cineálacha sin a bhaint."
 
-#: static/metashare/js/upload.js:103
+#: static/metashare/js/upload.js:95
 msgid " Uploading file: \""
 msgstr " Comhad á uaslódáil: \""
 
-#: static/metashare/js/upload.js:123
+#: static/metashare/js/upload.js:115
 msgid "There was an error uploading this file.\n"
 msgstr "Earráid agus an comhad seo á uaslódáil.\n"
 
-#: static/metashare/js/upload.js:172
+#: static/metashare/js/upload.js:164
 msgid "Uploading file: \""
 msgstr "Comhad á uaslódáil: \""
+
+#~ msgid "The file(s) you are trying to upload exceed(s) the size limit. "
+#~ msgstr "Sáraíonn comha(i)d atá á uaslódáil agat an uasmhéid spáis. "

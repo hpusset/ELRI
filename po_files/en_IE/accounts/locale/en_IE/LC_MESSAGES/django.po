@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-04 13:42+0200\n"
-"PO-Revision-Date: 2019-04-08 16:16+0200\n"
+"POT-Creation-Date: 2019-06-10 17:14+0200\n"
+"PO-Revision-Date: 2019-06-07 09:38+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_IE\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: accounts/admin.py:82
 msgid "Editor groups"
@@ -103,6 +104,7 @@ msgstr "Iarratas glactha  | Application accepted"
 #: accounts/admin.py:318 accounts/admin.py:786
 msgid "There was an error sending out an application acceptance e-mail."
 msgstr ""
+"Error: There was an error sending out an application acceptance e-mail."
 
 #: accounts/admin.py:321
 #, python-format
@@ -133,7 +135,8 @@ msgstr "Iarratas diúltaithe  | Application declined "
 #: accounts/admin.py:378 accounts/admin.py:838
 msgid ""
 "There was an error sending out an e-mail about turning down the application."
-msgstr "There was an error sending an e-mail about declining the application."
+msgstr ""
+"Error: There was an error sending an e-mail about declining the application."
 
 #: accounts/admin.py:381
 #, python-format
@@ -365,89 +368,171 @@ msgstr ""
 msgid "Reactivate selected eDelivery applications"
 msgstr ""
 
-#: accounts/forms.py:75
+#: accounts/django_password_validators.py:140
+#, python-format
+msgid ""
+"This password is too short. It must contain at least %(min_length)d "
+"character."
+msgid_plural ""
+"This password is too short. It must contain at least %(min_length)d "
+"characters."
+msgstr[0] ""
+"Error: This password is too short. It must contain at least %(min_length)d "
+"character."
+msgstr[1] ""
+"Error: This password is too short. It must contain at least %(min_length)d "
+"characters."
+
+#: accounts/django_password_validators.py:150
+#, python-format
+msgid "Your password must contain at least %(min_length)d character."
+msgid_plural "Your password must contain at least %(min_length)d characters."
+msgstr[0] ""
+msgstr[1] ""
+
+#: accounts/django_password_validators.py:186
+#, python-format
+msgid "The password is too similar to the %(verbose_name)s."
+msgstr "Error: The password is too similar to the %(verbose_name)s."
+
+#: accounts/django_password_validators.py:192
+msgid "Your password can't be too similar to your other personal information."
+msgstr ""
+
+#: accounts/django_password_validators.py:218
+msgid "This password is too common."
+msgstr "Error: This password is too common."
+
+#: accounts/django_password_validators.py:223
+msgid "Your password can't be a commonly used password."
+msgstr ""
+
+#: accounts/django_password_validators.py:233
+msgid "This password is entirely numeric."
+msgstr "Error: This password is entirely numeric."
+
+#: accounts/django_password_validators.py:238
+msgid "Your password can't be entirely numeric."
+msgstr ""
+
+#: accounts/django_password_validators.py:248
+msgid "This password does not contain a digit."
+msgstr "Error: This password does not contain a digit."
+
+#: accounts/django_password_validators.py:253
+msgid "Your password must contain at least one digit."
+msgstr ""
+
+#: accounts/django_password_validators.py:263
+msgid "This password does not contain a punctuation character."
+msgstr "Error: This password does not contain a punctuation character."
+
+#: accounts/django_password_validators.py:268
+msgid "Your password must contain at least one punctuation character."
+msgstr ""
+
+#: accounts/django_password_validators.py:278
+msgid "This password does not contain an uppercase character."
+msgstr "Error: This password does not contain an uppercase character."
+
+#: accounts/django_password_validators.py:283
+msgid "Your password must contain at least one uppercase character."
+msgstr ""
+
+#: accounts/django_password_validators.py:293
+msgid "This password does not contain a lowercase character."
+msgstr "Error: This password does not contain a lowercase character."
+
+#: accounts/django_password_validators.py:298
+msgid "Your password must contain at least one lowercase character."
+msgstr ""
+
+#: accounts/django_password_validators.py:313
+#, python-format
+msgid ""
+"This password contains a character repeated more than %d times in a row."
+msgstr ""
+"Error: This password contains a character repeated more than %d times in a "
+"row."
+
+#: accounts/django_password_validators.py:318
+#, python-format
+msgid ""
+"Your password can't contain a character repeated more than %d times in a row."
+msgstr ""
+
+#: accounts/forms.py:74
+msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
+msgstr ""
+"Error: This value may contain only letters, numbers and @/./+/-/_ characters."
+
+#: accounts/forms.py:76
 msgid "Desired account name"
 msgstr "What do you want to call your account?"
 
-#: accounts/forms.py:77
+#: accounts/forms.py:78
 msgid "First name"
 msgstr "Name"
 
-#: accounts/forms.py:79
+#: accounts/forms.py:80
 msgid "Last name"
 msgstr "Surname"
 
-#: accounts/forms.py:80
+#: accounts/forms.py:81
 msgid "E-mail"
 msgstr ""
 
-#: accounts/forms.py:88
+#: accounts/forms.py:89
 msgid "Organization name"
 msgstr "Organisation name"
 
-#: accounts/forms.py:91
+#: accounts/forms.py:92
 msgid "Organization address"
 msgstr "Organisation address"
 
-#: accounts/forms.py:95
+#: accounts/forms.py:96
 msgid "Organization phone number"
 msgstr "Organisation phone number"
 
-#: accounts/forms.py:98
+#: accounts/forms.py:99
 msgid "Position in the organization"
 msgstr "Position in the organisation"
 
-#: accounts/forms.py:107
+#: accounts/forms.py:108
 msgid "Password"
 msgstr ""
 
-#: accounts/forms.py:111
+#: accounts/forms.py:112
 msgid "Password confirmation"
 msgstr ""
 
-#: accounts/forms.py:137
+#: accounts/forms.py:138
 msgid "User account name already exists, please choose another one."
-msgstr ""
+msgstr "Error: User account name already exists, please choose another one."
 
-#: accounts/forms.py:151 accounts/forms.py:154
+#: accounts/forms.py:152 accounts/forms.py:155
 msgid "There is already an account registered with this e-mail address."
 msgstr ""
+"Error: There is already an account registered with this e-mail address."
 
-#: accounts/forms.py:165
+#: accounts/forms.py:166
 msgid "The two password fields did not match."
-msgstr ""
+msgstr "Error: The two password fields did not match."
 
-#: accounts/forms.py:172
-msgid "This password is entirely numeric. "
-msgstr ""
-
-#: accounts/forms.py:174
-msgid "This password is too common. "
-msgstr ""
-
-#: accounts/forms.py:176
-msgid "This password is too short. It must contain at least 9 characters. "
-msgstr ""
-
-#: accounts/forms.py:178
-#, python-format
-msgid "The password is too similar to the%s"
-msgstr "The password is too similar to the%s"
-
-#: accounts/forms.py:204
+#: accounts/forms.py:209
 msgid "Subject"
 msgstr ""
 
-#: accounts/forms.py:205
+#: accounts/forms.py:210
 msgid "Please provide a meaningful and sufficiently indicative subject."
 msgstr ""
 "Please provide a relevant subject that effectively summarises your query."
 
-#: accounts/forms.py:207
+#: accounts/forms.py:212
 msgid "Message"
 msgstr ""
 
-#: accounts/forms.py:208
+#: accounts/forms.py:213
 msgid ""
 "Your message appears to be rather short. Please make sure to phrase your "
 "request as precise as possible. This will help us to process it as quick as "
@@ -457,19 +542,19 @@ msgstr ""
 "request as precisely as possible. This will help us to process it as quickly "
 "as possible."
 
-#: accounts/forms.py:218
+#: accounts/forms.py:223
 msgid "Username"
 msgstr ""
 
-#: accounts/forms.py:219
+#: accounts/forms.py:224
 msgid "Email"
 msgstr ""
 
-#: accounts/forms.py:230
+#: accounts/forms.py:235
 msgid "Not a valid username-email combination."
-msgstr ""
+msgstr "Error: Not a valid username-email combination."
 
-#: accounts/forms.py:276
+#: accounts/forms.py:281
 msgid "default editor groups"
 msgstr ""
 
@@ -602,8 +687,8 @@ msgid ""
 "There was an error sending out the notification email to the administrators. "
 "Please contact them directly."
 msgstr ""
-"There was an error sending the notification email to the administrators. "
-"Please contact them directly."
+"Error: There was an error sending the notification email to the "
+"administrators. Please contact them directly."
 
 #: accounts/views.py:191
 msgid ""
@@ -614,6 +699,10 @@ msgstr ""
 "We have received your registration data and sent the administrators a "
 "notification email. You will receive an email when your account has been "
 "activated."
+
+#: accounts/views.py:208
+msgid "Create Account"
+msgstr ""
 
 #: accounts/views.py:247
 msgid "You have successfully updated your profile information."
@@ -647,7 +736,7 @@ msgid ""
 "There was an error sending out the request email for your editor group "
 "application."
 msgstr ""
-"There was an error sending the request email for your editor group "
+"Error: There was an error sending the request email for your editor group "
 "application."
 
 #: accounts/views.py:342
@@ -702,7 +791,7 @@ msgid ""
 "There was an error sending out the request email for your organization "
 "application."
 msgstr ""
-"There was an error sending the request email for your organisation "
+"Error: There was an error sending the request email for your organisation "
 "application."
 
 #: accounts/views.py:496
@@ -748,8 +837,8 @@ msgid ""
 "There was an error sending out the activation email for your user account. "
 "Please contact the administrator at %s."
 msgstr ""
-"There was an error sending the activation email for your user account. "
-"Please contact the administrator at %s."
+"Error: There was an error sending the activation email for your user "
+"account. Please contact the administrator at %s."
 
 #: accounts/views.py:612
 msgid ""
