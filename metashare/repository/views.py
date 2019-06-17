@@ -51,7 +51,7 @@ from django.utils.translation import ugettext as _
 from haystack.views import FacetedSearchView
 
 from metashare.accounts.models import UserProfile, Organization, OrganizationManagers
-from metashare.local_settings import CONTRIBUTIONS_ALERT_EMAILS, TMP, SUPPORTED_LANGUAGES, EMAIL_ADDRESSES, COUNTRY, STATIC_ROOT
+from metashare.local_settings import CONTRIBUTIONS_ALERT_EMAILS, TMP, SUPPORTED_LANGUAGES, EMAIL_ADDRESSES, COUNTRY, STATIC_ROOT, MAXIMUM_UPLOAD_SIZE_CONTRIBUTE
 from metashare.recommendations.recommendations import SessionResourcesTracker, \
     get_download_recommendations, get_view_recommendations, \
     get_more_from_same_creators_qs, get_more_from_same_projects_qs
@@ -66,7 +66,7 @@ from metashare.repository.models import resourceInfoType_model, identificationIn
     metadataInfoType_model, languageDescriptionTextInfoType_model, languageDescriptionMediaTypeType_model, \
     languageDescriptionInfoType_model, lexicalConceptualResourceTextInfoType_model, \
     lexicalConceptualResourceMediaTypeType_model, lexicalConceptualResourceInfoType_model, distributionInfoType_model, \
-    licenceInfoType_model, resourceCreationInfoType_model
+    licenceInfoType_model, resourceCreationInfoType_model, projectInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex, \
     update_lr_index_entry
 from metashare.settings import LOG_HANDLER, STATIC_URL, DJANGO_URL, MAXIMUM_UPLOAD_SIZE, CONTRIBUTION_FORM_DATA, \
@@ -162,7 +162,6 @@ def download(request, object_id, **kwargs):
 
     if request.method == "POST":
         licence_choice = request.POST.get('licence', None)
-        LOGGER.info(licence_choice)
         if licence_choice and 'in_licence_agree_form' in request.POST:
             la_form = LicenseAgreementForm(licence_choice, data=request.POST)
             l_info, access_links, access = licences[licence_choice]
@@ -1118,7 +1117,7 @@ def contribute(request):
             return HttpResponse(json.dumps(response),
                                 content_type="application/json")
 
-        if sum(fobj.size for fobj in file_objects) <= MAXIMUM_UPLOAD_SIZE:
+        if sum(fobj.size for fobj in file_objects) <= MAXIMUM_UPLOAD_SIZE_CONTRIBUTE :
             try:
                 if not os.path.isdir(unprocessed_dir):
                     os.makedirs(unprocessed_dir)
@@ -1220,11 +1219,9 @@ def contribute(request):
             
         else:
             response['status'] = "failed"
-            response['message'] = _("""
-                The file you are trying to upload exceeds the size limit. If the file(s) you
-                would like to contribute exceed(s) {:.10} MB please contact us to provide an SFTP link for direct
-                download or consider uploading smaller files.""".format(
-                float(MAXIMUM_UPLOAD_SIZE) / (1024 * 1024)))
+            response['message'] = _("The file(s) you are trying to upload exceeds the size limit. If the file(s) you "
+                                    "would like to contribute exceed(s) {:.10} MB please contact us to provide an "
+                                    "SFTP link for direct download or consider uploading smaller files.").format(float(MAXIMUM_UPLOAD_SIZE_CONTRIBUTE))
             return HttpResponse(json.dumps(response), content_type="application/json")
 
     # In ELRI, LR contributions can only be shared within the groups to which a user belongs.
@@ -1291,9 +1288,20 @@ def create_description(xml_file, type, base, user):
         resourceName={'en': unicode(info['title'])}, #.encode('utf-8')},
         description={'en': unicode(info['description'])},#.encode('utf-8')},
         appropriatenessForDSI=info['domains'])
+
+
     resource_creation = resourceCreationInfoType_model.objects.create(
-        createdUsingELRCServices=False
-    )
+        createdUsingELRCServices=False,
+        anonymized=False)
+    elri_project=projectInfoType_model.objects.create()
+    elri_project.projectName["en"]= u"European Language Resource Infrastructure"
+    elri_project.projectShortName["en"]=u"ELRI"
+    elri_project.url=[u'http://www.elri-project.eu',]
+    elri_project.fundingType=[u'euFunds',]
+    elri_project.funder = [u'European Comission',]
+    elri_project.fundingCountry = [u'European Union',]
+    elri_project.save()
+    resource_creation.fundingProject.add(elri_project)
 
     # CONTACT PERSON:
 

@@ -160,25 +160,25 @@ class RegistrationRequestForm(Form):
         Make sure that the password confirmation is the same as password.
         """
         pswrd = self.cleaned_data.get('password', None)
-        pswrd_conf = self.cleaned_data['confirm_password']
+        pswrd_conf = self.cleaned_data.get('confirm_password',None)
         if pswrd != pswrd_conf:
             raise ValidationError(_('The two password fields did not match.'))
-        if 'shortname' in self.cleaned_data.keys(): #check password iif there is a valid username, to avoid 
-            validate_password(pswrd, user=User(
+        #if 'shortname' in self.cleaned_data.keys() and 'email' in self.cleaned_data.keys() and 'password' in :  #check password iif there is a valid username, to avoid 
+        validate_password(pswrd, user=User(
                 # this in-memory object is just for password validation
-                username=self.cleaned_data['shortname'],
-                email=self.cleaned_data['email'],
-                password=self.cleaned_data['password'],
-                first_name=self.cleaned_data['first_name'],
-                last_name=self.cleaned_data['last_name'],
+                username=self.cleaned_data.get('shortname',None),
+                email=self.cleaned_data.get('email',None),
+                password=self.cleaned_data.get('password',None),
+                first_name=self.cleaned_data.get('first_name',None),
+                last_name=self.cleaned_data.get('last_name',None),
             ))
-            validate_password(pswrd, user=UserProfile(
+        validate_password(pswrd, user=UserProfile(
                 # this in-memory object is just for password validation
                 user_id=1, # dummy foreign key
 
-                affiliation=self.cleaned_data['organization'],
-                affiliation_address=self.cleaned_data['organization_address'],
-                affiliation_phone_number=self.cleaned_data['organization_phone_number'],
+                affiliation=self.cleaned_data.get('organization',None),
+                affiliation_address=self.cleaned_data.get('organization_address',None),
+                affiliation_phone_number=self.cleaned_data.get('organization_phone_number',None),
             ))
         return pswrd
 

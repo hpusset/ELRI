@@ -2,9 +2,12 @@ import datetime, requests, os, zipfile
 from functools import update_wrapper
 from mimetypes import guess_type
 from shutil import copyfile
+import shutil
 import json
 import logging
 import codecs
+import tempfile
+
 from django import forms
 from django.contrib import admin, messages
 from django.contrib.admin.utils import unquote
@@ -44,7 +47,8 @@ from metashare.repository.models import resourceComponentTypeType_model, \
     lexicalConceptualResourceInfoType_model, toolServiceInfoType_model, \
     corpusMediaTypeType_model, languageDescriptionMediaTypeType_model, \
     lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model, \
-    licenceInfoType_model, User
+    licenceInfoType_model, User, sizeInfoType_model, textFormatInfoType_model
+
 from metashare.repository.supermodel import SchemaModel
 from metashare.stats.model_utils import saveLRStats, UPDATE_STAT, INGEST_STAT, DELETE_STAT
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, PROCESSING, ERROR, \
@@ -422,13 +426,39 @@ def prepare_error_zip(error_msg,resource_path,request):
     add_files2zip(resource_path+'/doc/input',errorzip)
     add_files2zip(resource_path+'/tm/input',errorzip)
     add_files2zip(resource_path+'/other',errorzip)
+    #remove files from the toolchain folders
+    if os.path.isdir(resource_path+'/doc'):
+        shutil.rmtree(resource_path+'/doc')
+    if os.path.isdir(resource_path + '/doc'):
+        shutil.rmtree(resource_path+'/tm')
+    if os.path.isdir(resource_path + '/other'):
+        shutil.rmtree(resource_path+'/other')
+
     error_log = open(os.path.join(resource_path,'error.log'), 'w')
     error_log.write(error_msg.encode("utf-8"))
     error_log.close()
     errorzip.write(os.path.join(resource_path,'error.log'), 'error.log')
+    #remove the error.log file
+    if os.path.isfile(os.path.join(resource_path,'error.log')):
+        os.remove(os.path.join(resource_path,'error.log'))
     #close zip file with processed resources
     errorzip.close()
 
+
+def remove_from_zip(zipfname, *filenames):
+    tempdir = tempfile.mkdtemp()
+    try:
+        tempname = os.path.join(tempdir, 'new.zip')
+        with zipfile.ZipFile(zipfname, 'r') as zipread:
+            with zipfile.ZipFile(tempname, 'w') as zipwrite:
+                for item in zipread.infolist():
+                    if item.filename not in filenames:
+                        data = zipread.read(item.filename)
+                        zipwrite.writestr(item, data)
+        shutil.move(tempname, zipfname)
+    finally:
+        shutil.rmtree(tempdir)
+        
 class ResourceModelAdmin(SchemaModelAdmin): 
     haystack_connection = 'default'
     inline_type = 'stacked'
@@ -457,7 +487,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
             if has_publish_permission(request, queryset):
                 successful = 0
                 processing_status=True
+                #queryset = [resourceInfoType_model]
                 for obj in queryset:
+                    #obj --> resourceInfoType_model
                     #variables to control tc errors
                     errors=0
                     error_msg=''
@@ -476,7 +508,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                         group_reviewers = [u.email for u in User.objects.filter(groups__name__in=groups_name, email__in=reviewers)]
                         ####
                         resource_info=obj.export_to_elementtree()
-                        
+                        #LOGGER.info(to_xml_string(obj.export_to_elementtree(), encoding="utf-8").encode("utf-8"))
                         r_languages=[]
                         for lang in resource_info.iter('languageInfo'):
                             lang_id=lang.find('languageId').text
@@ -568,6 +600,21 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                 if json_validator(response_tm):
                                     if response_tm.json()["status"]=="Success":
                                         successful +=1
+                                        #clear previous information
+                                        if len(obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].sizeinfotype_model_set.all()) > 0:
+                                            obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].sizeinfotype_model_set.clear()
+                                        if len(obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].textformatinfotype_model_set.all()) > 0:
+                                            obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].textformatinfotype_model_set.clear()
+                                        props = response_tm.json()["lr_properties"]
+                                        for prop in props:
+                                            size_info = sizeInfoType_model.objects.create(size=int(prop["size"]),
+                                                                                      sizeUnit=prop["size_unit"])
+                                            obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].sizeinfotype_model_set.add(size_info)
+
+                                            lr_data_format = textFormatInfoType_model.objects.create(dataFormat=prop["data_format"])
+                                            obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].textformatinfotype_model_set.add(lr_data_format)
+                                        obj.storage_object.update_storage()
+
                                     else:
                                         change_resource_status(obj,status=ERROR, precondition_status=PROCESSING)
                                         error_msg=error_msg+_("Something went wrong when processing the resource with the tm2tmx toolchain.")+response_tm.json()["info"]+'\n'
@@ -614,8 +661,26 @@ class ResourceModelAdmin(SchemaModelAdmin):
                             try:
                                 response_doc=requests.post(settings.DOC2TMX_URL,json=doc_json)
                                 if json_validator(response_doc):
+
                                     if response_doc.json()["status"] == "Success":
                                         successful += 1
+                                        # clear previous information
+                                        if len(obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].sizeinfotype_model_set.all()) > 0:
+                                            obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].sizeinfotype_model_set.clear()
+                                        if len(obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].textformatinfotype_model_set.all()) > 0:
+                                            obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].textformatinfotype_model_set.clear()
+
+                                        props=response_doc.json()["lr_properties"]
+                                        for prop in props:
+                                            size_info = sizeInfoType_model.objects.create(size=prop["size"],
+                                                                                          sizeUnit=prop["size_unit"])
+                                            obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].sizeinfotype_model_set.add(size_info)
+
+                                            lr_data_format = textFormatInfoType_model.objects.create(
+                                                dataFormat=prop["data_format"])
+                                            obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].textformatinfotype_model_set.add(lr_data_format)
+                                        obj.storage_object.update_storage()
+
                                     else:
                                         change_resource_status(obj,status=ERROR, precondition_status=PROCESSING)
                                         error_msg=error_msg+_("Something went wrong when processing the resource with the doc2tmx toolchain.\n ")+response_doc.json()["info"]+"\n"
@@ -702,6 +767,13 @@ class ResourceModelAdmin(SchemaModelAdmin):
                         
                         #close zip file with processed resources
                         processed_zip.close()
+                        # remove files from the toolchain folders
+                        if os.path.isdir(resource_path + '/doc'):
+                            shutil.rmtree(resource_path + '/doc')
+                        if os.path.isdir(resource_path + '/doc'):
+                            shutil.rmtree(resource_path + '/tm')
+                        if os.path.isdir(resource_path + '/other'):
+                            shutil.rmtree(resource_path + '/other')
                         #if pre_status == INGESTED or pre_status==ERROR :
                         change_resource_status(obj,status=INGESTED, precondition_status=PROCESSING)
                             
@@ -773,7 +845,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
         except:
             messages.error(request,_("Something went wrong when processing the resource(s). Re-process the error resources and check the error.log file(s). You will receive a notification email."))
             
-            error_msg=error_msg+_("Something went wrong when processing the resource(s). Re-process the error resources and check the error.log file(s). You will receive a notification email.\n ")
+            error_msg=_("Something went wrong when processing the resource(s). Re-process the error resources and check the error.log file(s). You will receive a notification email.\n ")
+            errors=0
             for obj in queryset:
                 change_resource_status(obj,status=ERROR, precondition_status=PROCESSING)
                 resource_path=obj.storage_object._storage_folder()
@@ -821,30 +894,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                         licences_restriction.append(lic_restriction)
                        
                     resource_path=obj.storage_object._storage_folder()
-                    lr_archive_zip=zipfile.ZipFile(resource_path+'/archive.zip', mode='a')
-                    '''licence file is added after ingesting the resource
-                    user_membership = _get_user_membership(request.user) 
-                    licences = _get_licences(obj,user_membership)    
-                    for l in licences_name:
-                        l_info, access_links, access = licences[l]
-                        if l == 'publicDomain':
-                            access_links=STATIC_URL + 'metashare/licences/publicDomain.txt'
-                        if l == 'openUnder-PSI':
-                            access_links=STATIC_URL + 'metashare/licences/openUnderPSI.txt'
-                        if l == 'non-standard/Other_Licence/Terms' :
-                            #access_links=STATIC_URL + 'metashare/licences/openUnderPSI.txt'
-                            unprocessed_dir = "/unprocessed"
-                            access_links=unprocessed_dir+'/'+u'_'.join(resource_name[0].split())+'_licence.pdf'
-                            #LOGGER.info(licences[l])
-                            #LOGGER.info(l_info)
-                            #LOGGER.info(access_links)
-                            #LOGGER.info(access)
-                        #add access file to the lr.archive.zip file 
-                        licence_path=ROOT_PATH+access_links
-                        
-                        path, filename = os.path.split(licence_path)
-                        lr_archive_zip.write(licence_path,'license_'+filename)
-                    '''    
+                  
                     #attribution text
                     attr_text=''
                     for at in resource_info.iter('attributionText'):
@@ -893,6 +943,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     # (Attribution text:)
                     # IPR Holder: Name Surname (email), Organization 
                     # Contact Person: Name Surname (email), Organization 
+                    #if metadata_file exist --> update it : remove + add 
+                    
                     metadata_file_path=resource_path+'/'+resource_name[0]+'_metadata.txt'
                     with codecs.open(metadata_file_path, encoding='utf-8',mode='w') as metadata_file:
                         metadata_file.write(_('Resource_name: %s  \n') % resource_name[0])
@@ -914,7 +966,11 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                 metadata_file.write(_('Contact Person: ')+p+' '+contact_surname[i]+' ('+contact_email[i]+'), '+contact_organization[i]+'\n')
                         else:
                             metadata_file.write(_('Contact Person: N/A \n'))
-                    lr_archive_zip.write(metadata_file_path,resource_name[0]+'_metadata.txt',)
+                    #lr_archive_zip=zipfile.ZipFile(resource_path+'/archive.zip', mode='a')        
+                    #if resource_name[0]+'_metadata.txt' in lr_archive_zip.namelist():
+                    remove_from_zip(resource_path+'/archive.zip', resource_name[0]+'_metadata.txt')
+                    lr_archive_zip=zipfile.ZipFile(resource_path+'/archive.zip', mode='a')        
+                    lr_archive_zip.write(metadata_file_path,resource_name[0]+'_metadata.txt')
                     lr_archive_zip.close()
                     
                     #send corresponding emails

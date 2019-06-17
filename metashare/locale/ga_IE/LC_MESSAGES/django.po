@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-29 17:50+0200\n"
+"POT-Creation-Date: 2019-06-06 09:52+0200\n"
 "PO-Revision-Date: 2019-03-12 14:26+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -35,9 +35,13 @@ msgid ""
 "recipients."
 msgstr "Tharla earráid le seoladh rphost chuig na léirmheastóirí."
 
-#: local_settings.py:43
-msgid "Spanish"
-msgstr "Spáinnis"
+#: local_settings.py:42
+msgid "Gaelic"
+msgstr "Gaeilge"
+
+#: local_settings.py:44
+msgid "English"
+msgstr "Béarla"
 
 #: storage/models.py:113
 msgid "Can synchronize"
@@ -179,14 +183,11 @@ msgstr ""
 "Níl an cuntas seo gníomhachtaithe go fóill. Déan teagmháil linn má tá aon "
 "fhadhb ann le cuntas reatha."
 
-#~ msgid "English"
-#~ msgstr "Béarla"
+#~ msgid "Spanish"
+#~ msgstr "Spáinnis"
 
 #~ msgid "Portuguese"
 #~ msgstr "Portaingéilis"
-
-#~ msgid "Gaelic"
-#~ msgstr "Gaeilge"
 
 #~ msgid "French"
 #~ msgstr "Fraincis"
