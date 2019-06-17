@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-10 17:03+0200\n"
-"PO-Revision-Date: 2019-06-06 18:18+0200\n"
+"POT-Creation-Date: 2019-06-17 17:07+0200\n"
+"PO-Revision-Date: 2019-06-17 17:30+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -1718,25 +1718,25 @@ msgstr "Erreur: Veuillez modifier le modèle de texte d'attribution"
 msgid "Enter a valid email address."
 msgstr "Erreur: Entrez un email address valide."
 
-#: repository/views.py:352
+#: repository/views.py:351
 msgid "Request for information regarding a resource"
 msgstr "Demande de renseignements concernant une ressource"
 
-#: repository/views.py:360
+#: repository/views.py:359
 msgid "There was an error sending out the request email."
 msgstr "Erreur: Il y a eu une erreur lors de l'envoi de l'email de demande."
 
-#: repository/views.py:362
+#: repository/views.py:361
 msgid "You have successfully sent a message to the resource contact person."
 msgstr ""
 "Vous avez envoyé avec succès un message à la personne de contact pour la "
 "ressource."
 
-#: repository/views.py:1051
+#: repository/views.py:1050
 msgid "N/A"
 msgstr "S.O."
 
-#: repository/views.py:1112
+#: repository/views.py:1111
 msgid ""
 "\n"
 "                Only files of type DOC(X), ODT, RTF, PDF, TMX, SDLTM, XML,\n"
@@ -1754,7 +1754,7 @@ msgstr ""
 "fichiers\n"
 "                qui n'appartiennent pas à l'un de ces types."
 
-#: repository/views.py:1154
+#: repository/views.py:1153
 msgid ""
 "\n"
 "                            Your request could not be completed.\"\n"
@@ -1768,7 +1768,7 @@ msgstr ""
 "est corrompu ou n'est.\n"
 "                            n'est pas un fichier '.zip' valide."
 
-#: repository/views.py:1163
+#: repository/views.py:1162
 msgid ""
 "\n"
 "                            Only files of type DOC(X), ODT, RTF, PDF, TMX, "
@@ -1789,11 +1789,11 @@ msgstr ""
 "les fichiers\n"
 "                            qui n'appartiennent pas à l'un de ces types."
 
-#: repository/views.py:1206
+#: repository/views.py:1205
 msgid "New submitted contributions"
 msgstr "Nouvelles contributions soumises"
 
-#: repository/views.py:1214
+#: repository/views.py:1213
 msgid ""
 "\n"
 "                Thank you for sharing, your data have been successfully "
@@ -1807,18 +1807,13 @@ msgstr ""
 "examinées par l'équipe ELRI. Vous serez avisé par courriel lorsque la "
 "ressource résultante sera disponible pour téléchargement."
 
-#: repository/views.py:1223
+#: repository/views.py:1222
 msgid ""
-"\n"
-"                The file you are trying to upload exceeds the size limit. If "
-"the file(s) you\n"
-"                would like to contribute exceed(s) {:.10} MB please contact "
-"us to provide an SFTP link for direct\n"
-"                download or consider uploading smaller files."
+"The file(s) you are trying to upload exceeds the size limit. If the file(s) "
+"you would like to contribute exceed(s) {:.10} MB please contact us to "
+"provide an SFTP link for direct download or consider uploading smaller files."
 msgstr ""
-"\n"
-"                Le fichier que vous essayez de télécharger dépasse la limite "
-"de taille. Si le(s) fichier(s) que vous\n"
-"                souhaitez contribuer dépasse(nt) { :.10} Mo, veuillez nous "
-"contacter pour fournir un lien SFTP pour télécharger\n"
-"                directement ou envisagez de charger des fichiers plus petits."
+" Le fichier que vous essayez de télécharger dépasse la limite de taille. Si "
+"le(s) fichier(s) que vous souhaitez contribuer dépasse(nt) {:.10} Mo, "
+"veuillez nous contacter pour fournir un lien SFTP pour télécharger "
+"directement ou envisagez de charger des fichiers plus petits."

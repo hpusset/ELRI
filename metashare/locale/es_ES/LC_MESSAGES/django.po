@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-10 17:03+0200\n"
+"POT-Creation-Date: 2019-06-17 17:17+0200\n"
 "PO-Revision-Date: 2019-06-06 18:17+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -34,9 +34,25 @@ msgstr ""
 "Error: Ha ocurrido un error al intentar enviar el email a los gestores de "
 "las alertas de nuevas contribuciones."
 
+#: local_settings.py:45
+msgid "Gaelic"
+msgstr "Gaélico"
+
 #: local_settings.py:46
 msgid "Spanish"
 msgstr "Español"
+
+#: local_settings.py:47
+msgid "English"
+msgstr "Inglés"
+
+#: local_settings.py:48
+msgid "French"
+msgstr "Francés"
+
+#: local_settings.py:49
+msgid "Portuguese"
+msgstr "Portugués"
 
 #: storage/models.py:113
 msgid "Can synchronize"
@@ -181,15 +197,3 @@ msgstr ""
 #: views.py:23 views.py:25
 msgid "Please contact us if there is any issue with an existing account."
 msgstr "Contáctenos si hubiese cualquier problema con una cuenta existente."
-
-#~ msgid "French"
-#~ msgstr "Francés"
-
-#~ msgid "English"
-#~ msgstr "Inglés"
-
-#~ msgid "Portuguese"
-#~ msgstr "Portugués"
-
-#~ msgid "Gaelic"
-#~ msgstr "Gaélico"

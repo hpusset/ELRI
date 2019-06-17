@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-10 17:03+0200\n"
+"POT-Creation-Date: 2019-06-17 17:09+0200\n"
 "PO-Revision-Date: 2019-06-10 17:07+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2976,6 +2976,7 @@ msgid "Relation Type"
 msgstr "Tipo de Relação"
 
 #: templates/repository/resource_view/resource_creation.html:5
+#: templates/repository/resource_view/resource_creation.html:9
 msgid "Resource Creation"
 msgstr "Criação do recurso"
 

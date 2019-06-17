@@ -162,7 +162,6 @@ def download(request, object_id, **kwargs):
 
     if request.method == "POST":
         licence_choice = request.POST.get('licence', None)
-        LOGGER.info(licence_choice)
         if licence_choice and 'in_licence_agree_form' in request.POST:
             la_form = LicenseAgreementForm(licence_choice, data=request.POST)
             l_info, access_links, access = licences[licence_choice]
@@ -1220,11 +1219,9 @@ def contribute(request):
             
         else:
             response['status'] = "failed"
-            response['message'] = _("""
-                The file you are trying to upload exceeds the size limit. If the file(s) you
-                would like to contribute exceed(s) {:.10} MB please contact us to provide an SFTP link for direct
-                download or consider uploading smaller files.""".format(
-                float(MAXIMUM_UPLOAD_SIZE_CONTRIBUTE) / (1024 * 1024)))
+            response['message'] = _("The file(s) you are trying to upload exceeds the size limit. If the file(s) you "
+                                    "would like to contribute exceed(s) {:.10} MB please contact us to provide an "
+                                    "SFTP link for direct download or consider uploading smaller files.").format(float(MAXIMUM_UPLOAD_SIZE_CONTRIBUTE))
             return HttpResponse(json.dumps(response), content_type="application/json")
 
     # In ELRI, LR contributions can only be shared within the groups to which a user belongs.
