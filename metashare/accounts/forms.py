@@ -176,9 +176,9 @@ class RegistrationRequestForm(Form):
                 # this in-memory object is just for password validation
                 user_id=1, # dummy foreign key
 
-                affiliation=self.cleaned_data['organization'],
-                affiliation_address=self.cleaned_data['organization_address'],
-                affiliation_phone_number=self.cleaned_data['organization_phone_number'],
+                affiliation=self.cleaned_data.get('organization',None),
+                affiliation_address=self.cleaned_data.get('organization_address',None),
+                affiliation_phone_number=self.cleaned_data.get('organization_phone_number',None),
             ))
         return pswrd
 
