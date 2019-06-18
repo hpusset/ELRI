@@ -1090,6 +1090,17 @@ def contribute(request):
                 "%s argument is not a basetring format, type `file` or subclass of \
                 `django.core.files.base.File`." % filename)
 
+        def filename_zips(files):
+            nzips=0
+            for f in files :
+                if filename_ext(f.name) == '.zip':
+                    nzips = nzips+1
+            return nzips
+        def filename_zipandothers(files):
+            if filename_zips(files)==1 and len(files)>1:
+                return True
+            return False
+
         if 'languages[]' in request.POST:
             data['resourceInfo']['languages'] = decode_csv_to_list(request.POST.getlist('languages[]'))
             #LOGGER.info(data['resourceInfo']['languages'])
@@ -1116,7 +1127,11 @@ def contribute(request):
                 that do not belong to one of these types.""")
             return HttpResponse(json.dumps(response),
                                 content_type="application/json")
-
+        if filename_zips(file_objects)>1 or filename_zipandothers(file_objects):
+            response['status'] = "failed"
+            response['message'] = _("""Please upload a single .zip file or any number of files of the following type: .doc(x), .odt, .rtf, .pdf, .tmx, .sdltm, .xml, .tbx, .xls(x), or .txt file up to 100MB.""")
+            return HttpResponse(json.dumps(response),
+                                content_type="application/json")
         if sum(fobj.size for fobj in file_objects) <= MAXIMUM_UPLOAD_SIZE_CONTRIBUTE :
             try:
                 if not os.path.isdir(unprocessed_dir):
@@ -1132,7 +1147,7 @@ def contribute(request):
                 licences_folder= STATIC_ROOT + '/metashare/licences'
                 licence_filepath = os.path.sep.join((licences_folder,
                                                      licence_filename))
-                #TODO:que pasa si ya existe el archivo? que pasa si dos recursos se llaman igual y suben una licencia adhoc?
+                #TODO: what if the file exists already? what if there are two resources with the same name that add an adhoc license?
                 with open(licence_filepath, 'wb+') as licence_destination:
                     for chunk in licence_file_object.chunks():
                         licence_destination.write(chunk)
