@@ -1129,7 +1129,8 @@ def contribute(request):
                                 content_type="application/json")
         if filename_zips(file_objects)>1 or filename_zipandothers(file_objects):
             response['status'] = "failed"
-            response['message'] = _("""Please upload a single .zip file or any number of files of the following type: .doc(x), .odt, .rtf, .pdf, .tmx, .sdltm, .xml, .tbx, .xls(x), or .txt file up to 100MB.""")
+            response['message'] = _("""Please upload a single <strong>.zip</strong> file or any number of files of the following type: <strong>.doc(x), .odt, .rtf, .pdf, .tmx, .sdltm, .xml, .tbx, .xls(x), or .txt file</strong> up to 100MB.""")
+#                _("""Please upload a single .zip file or any number of files of the following type: .doc(x), .odt, .rtf, .pdf, .tmx, .sdltm, .xml, .tbx, .xls(x), or .txt file up to 100MB.""")
             return HttpResponse(json.dumps(response),
                                 content_type="application/json")
         if sum(fobj.size for fobj in file_objects) <= MAXIMUM_UPLOAD_SIZE_CONTRIBUTE :
