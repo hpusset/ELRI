@@ -1132,7 +1132,7 @@ def contribute(request):
                 licences_folder= STATIC_ROOT + '/metashare/licences'
                 licence_filepath = os.path.sep.join((licences_folder,
                                                      licence_filename))
-                #TODO:que pasa si ya existe el archivo? que pasa si dos recursos se llaman igual y suben una licencia adhoc?
+                #TODO: what if the file exists already? what if there are two resources with the same name that add an adhoc license?
                 with open(licence_filepath, 'wb+') as licence_destination:
                     for chunk in licence_file_object.chunks():
                         licence_destination.write(chunk)
