@@ -521,6 +521,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                         for r_info in resource_info.iter('resourceName'):
                             r_name=r_info.text
                         ###    DEBUG
+                        LOGGER.info(r_name)
                         #messages.info(request,'####'+r_name)
                         
                         licence_info=''
@@ -547,9 +548,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
                         #and unzip the resource files into the corresponding /input folder
                         resources=resource_zip.namelist()
                         #create, if needed, the /tm /docs /other folder
-                        resource_tm_path=resource_path+'/tm'
-                        resource_doc_path=resource_path+'/doc'
-                        resource_other_path=resource_path+'/other'
+                        resource_tm_path=resource_path+u'/tm'
+                        resource_doc_path=resource_path+u'/doc'
+                        resource_other_path=resource_path+u'/other'
                         tmx_files=[]
                         call_tm2tmx=0
                         call_doc2tmx=0
@@ -581,7 +582,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                 if not os.path.isdir(resource_other_path):
                                     os.makedirs(resource_other_path)
                                 resource_zip.extract(r,resource_other_path)
-                                os.rename(resource_other_path+'/'+r,resource_other_path+'/'+r_name+'_'+str(others)+filext)
+                                dest_file=resource_other_path+'/'+r_name+u'_'+str(others)+filext
+                                os.rename(resource_other_path+'/'+r,dest_file)
                                 others = others+1
                                 
                         response_tm=''
