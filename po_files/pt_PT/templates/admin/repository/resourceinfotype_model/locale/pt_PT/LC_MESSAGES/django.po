@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-04 16:42+0200\n"
-"PO-Revision-Date: 2019-04-03 16:12+0200\n"
+"POT-Creation-Date: 2019-06-17 17:09+0200\n"
+"PO-Revision-Date: 2019-05-20 10:56+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_PT\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.2.1\n"
 
 #: templates/admin/repository/resourceinfotype_model/change_form.html:26
 #: templates/admin/repository/resourceinfotype_model/upload_description.html:15
@@ -28,7 +28,7 @@ msgstr "Início"
 
 #: templates/admin/repository/resourceinfotype_model/change_form.html:30
 msgid "Add"
-msgstr "Acrescentar"
+msgstr "Adicionar"
 
 #: templates/admin/repository/resourceinfotype_model/change_form.html:150
 #: templates/admin/repository/resourceinfotype_model/change_list.html:30
@@ -36,7 +36,7 @@ msgid "Please correct the error below."
 msgid_plural ""
 "Please\n"
 "                            correct the errors below."
-msgstr[0] "Por favor, corrija o erro abaixo"
+msgstr[0] "Por favor, corrija o erro abaixo."
 msgstr[1] ""
 "Por favor,\n"
 " corrija os erros abaixo."
@@ -44,7 +44,7 @@ msgstr[1] ""
 #: templates/admin/repository/resourceinfotype_model/change_list.html:21
 #, python-format
 msgid "Add %(name)s"
-msgstr "Acrescentar %(name)s"
+msgstr "Adicionar %(name)s"
 
 # Filtro ou filtrar? (nome ou verbo?)
 #: templates/admin/repository/resourceinfotype_model/change_list.html:41

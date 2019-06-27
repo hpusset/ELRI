@@ -3,19 +3,19 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-08 09:52+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2019-06-06 09:51+0200\n"
+"PO-Revision-Date: 2019-06-06 10:06+0200\n"
+"Language: en_IE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: templates/accounts/activation_email.html:3
 #: templates/accounts/confirmation_email.html:2
@@ -128,7 +128,7 @@ msgid "Public Certificate (.crt, .cert, .cer)"
 msgstr ""
 
 #: templates/accounts/change_password.html:3
-msgid "Change Your Password &ndash; ELRC-SHARE"
+msgid "Change Your Password &ndash; ELRI"
 msgstr ""
 
 #: templates/accounts/change_password.html:6
@@ -227,6 +227,10 @@ msgstr ""
 msgid "The ELRI Team"
 msgstr ""
 
+#: templates/accounts/create_account.html:8
+msgid "Please fill in all fields to create your account."
+msgstr ""
+
 #: templates/accounts/create_account.html:14
 #: templates/accounts/create_account.html:15
 #: templates/accounts/create_account.html:35
@@ -281,76 +285,77 @@ msgstr ""
 msgid "Yes, I"
 msgstr ""
 
-#: templates/accounts/edit_profile.html:8
+#: templates/accounts/edit_profile.html:5
+#: templates/accounts/edit_profile.html:75
+msgid "Edit Profile"
+msgstr ""
+
+#: templates/accounts/edit_profile.html:9
 msgid "First name"
 msgstr ""
 
-#: templates/accounts/edit_profile.html:11
+#: templates/accounts/edit_profile.html:12
 msgid "Last name"
 msgstr ""
 
-#: templates/accounts/edit_profile.html:14
+#: templates/accounts/edit_profile.html:15
 msgid "Email"
 msgstr ""
 
-#: templates/accounts/edit_profile.html:20
+#: templates/accounts/edit_profile.html:21
 #, python-format
 msgid ""
 "If you would like to change any of the above details, please <a href="
 "\"%(contact_url)s\">contact the maintainers of ELRI Repository</a>."
 msgstr ""
 
-#: templates/accounts/edit_profile.html:22
+#: templates/accounts/edit_profile.html:23
 msgid "API KEY"
 msgstr ""
 
-#: templates/accounts/edit_profile.html:27
+#: templates/accounts/edit_profile.html:28
 #, python-format
 msgid "Editor Group Manager Group%(editor_group_managers_member_of|pluralize)s"
 msgstr ""
 
-#: templates/accounts/edit_profile.html:34
+#: templates/accounts/edit_profile.html:35
 msgid ""
 "Displays all the editor groups you belong in. Editor groups that are applied "
 "by default to your resources, are shown in italic."
 msgstr ""
 
-#: templates/accounts/edit_profile.html:34
+#: templates/accounts/edit_profile.html:35
 #, python-format
 msgid "Editor Group%(editor_groups_member_of|pluralize)s"
 msgstr ""
 
-#: templates/accounts/edit_profile.html:42
+#: templates/accounts/edit_profile.html:43
 msgid "This editor group is set by default to your resources."
 msgstr ""
 
-#: templates/accounts/edit_profile.html:55
+#: templates/accounts/edit_profile.html:56
 #, python-format
 msgid ""
 "You already applied for a membership of the following editor group"
 "%(groups_applied_for|pluralize)s: %(groups_applied_for|join:\", \")s"
 msgstr ""
 
-#: templates/accounts/edit_profile.html:60
+#: templates/accounts/edit_profile.html:61
 #, python-format
 msgid "Organization Manager Group%(organization_managers_member_of|pluralize)s"
 msgstr ""
 
-#: templates/accounts/edit_profile.html:66
+#: templates/accounts/edit_profile.html:67
 #, python-format
 msgid "Organization%(organizations_member_of|pluralize)s"
 msgstr ""
 
-#: templates/accounts/edit_profile.html:71
+#: templates/accounts/edit_profile.html:72
 #, python-format
 msgid ""
 "You already applied for a membership of the following organization"
 "%(organizations_applied_for|pluralize)s: "
 "%(organizations_applied_for|join:\", \")s"
-msgstr ""
-
-#: templates/accounts/edit_profile.html:74
-msgid "Edit Profile"
 msgstr ""
 
 #: templates/accounts/editor_group_application.html:6

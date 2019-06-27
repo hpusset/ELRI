@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-04 13:42+0200\n"
-"PO-Revision-Date: 2019-04-08 16:18+0200\n"
+"POT-Creation-Date: 2019-06-10 17:14+0200\n"
+"PO-Revision-Date: 2019-06-07 09:49+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_IE\n"
@@ -282,20 +282,23 @@ msgstr ""
 
 #: templates/accounts/create_account.html:8
 msgid "Please fill in all fields to create your account."
-msgstr ""
+msgstr "Error: Please fill in all fields to create your account."
 
 #: templates/accounts/create_account.html:14
-#: templates/accounts/create_account.html:15
-#: templates/accounts/create_account.html:37
+#: templates/accounts/create_account.html:36
 msgid "Create Account"
 msgstr ""
 
-#: templates/accounts/create_account.html:25
-#: templates/accounts/create_account.html:27
+#: templates/accounts/create_account.html:24
+#: templates/accounts/create_account.html:26
 #, python-format
 msgid ""
 "I accept the <a target=\"_blank\" href=\"%(elri_tos)s\">ELRI Terms of "
 "Service</a>."
+msgstr ""
+
+#: templates/accounts/create_account.html:31
+msgid "Required Field"
 msgstr ""
 
 #: templates/accounts/delete_editor_group_application_selected_confirmation.html:6
@@ -345,35 +348,40 @@ msgstr ""
 msgid "Yes, I"
 msgstr "Yes, I am sure"
 
-#: templates/accounts/edit_profile.html:8
+#: templates/accounts/edit_profile.html:5
+#: templates/accounts/edit_profile.html:75
+msgid "Edit Profile"
+msgstr ""
+
+#: templates/accounts/edit_profile.html:9
 msgid "First name"
 msgstr "Name"
 
-#: templates/accounts/edit_profile.html:11
+#: templates/accounts/edit_profile.html:12
 msgid "Last name"
 msgstr "Surname"
 
-#: templates/accounts/edit_profile.html:14
+#: templates/accounts/edit_profile.html:15
 msgid "Email"
 msgstr ""
 
-#: templates/accounts/edit_profile.html:20
+#: templates/accounts/edit_profile.html:21
 #, python-format
 msgid ""
 "If you would like to change any of the above details, please <a href="
 "\"%(contact_url)s\">contact the maintainers of ELRI Repository</a>."
 msgstr ""
 
-#: templates/accounts/edit_profile.html:22
+#: templates/accounts/edit_profile.html:23
 msgid "API KEY"
 msgstr ""
 
-#: templates/accounts/edit_profile.html:27
+#: templates/accounts/edit_profile.html:28
 #, python-format
 msgid "Editor Group Manager Group%(editor_group_managers_member_of|pluralize)s"
 msgstr ""
 
-#: templates/accounts/edit_profile.html:34
+#: templates/accounts/edit_profile.html:35
 msgid ""
 "Displays all the editor groups you belong in. Editor groups that are applied "
 "by default to your resources, are shown in italic."
@@ -381,34 +389,34 @@ msgstr ""
 "Displays all the editor groups you belong in. Editor groups that are applied "
 "by default to your resources, are shown in italics."
 
-#: templates/accounts/edit_profile.html:34
+#: templates/accounts/edit_profile.html:35
 #, python-format
 msgid "Editor Group%(editor_groups_member_of|pluralize)s"
 msgstr ""
 
-#: templates/accounts/edit_profile.html:42
+#: templates/accounts/edit_profile.html:43
 msgid "This editor group is set by default to your resources."
 msgstr ""
 
-#: templates/accounts/edit_profile.html:55
+#: templates/accounts/edit_profile.html:56
 #, python-format
 msgid ""
 "You already applied for a membership of the following editor group"
 "%(groups_applied_for|pluralize)s: %(groups_applied_for|join:\", \")s"
 msgstr ""
 
-#: templates/accounts/edit_profile.html:60
+#: templates/accounts/edit_profile.html:61
 #, python-format
 msgid "Organization Manager Group%(organization_managers_member_of|pluralize)s"
 msgstr ""
 "Organisation Manager Group%(organization_managers_member_of|pluralize)s"
 
-#: templates/accounts/edit_profile.html:66
+#: templates/accounts/edit_profile.html:67
 #, python-format
 msgid "Organization%(organizations_member_of|pluralize)s"
 msgstr "Organisation%(organizations_member_of|pluralize)s"
 
-#: templates/accounts/edit_profile.html:71
+#: templates/accounts/edit_profile.html:72
 #, python-format
 msgid ""
 "You already applied for a membership of the following organization"
@@ -418,10 +426,6 @@ msgstr ""
 "You already applied for a membership of the following organisation"
 "%(organizations_applied_for|pluralize)s: "
 "%(organizations_applied_for|join:\", \")s"
-
-#: templates/accounts/edit_profile.html:74
-msgid "Edit Profile"
-msgstr ""
 
 #: templates/accounts/editor_group_application.html:6
 #: templates/accounts/update_default_editor_group.html:8
@@ -765,8 +769,8 @@ msgstr ""
 msgid "Organization Manager Group%(selected_organizationmanagers|pluralize)s"
 msgstr "Organisation Manager Group%(selected_organizationmanagers|pluralize)s"
 
-#: templates/accounts/reset_account.html:5
-#: templates/accounts/reset_account.html:12
+#: templates/accounts/reset_account.html:6
+#: templates/accounts/reset_account.html:13
 msgid "Reset Account"
 msgstr ""
 

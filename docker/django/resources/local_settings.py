@@ -21,6 +21,9 @@ DJANGO_BASE = ''
 # Required if deployed with lighttpd.
 # FORCE_SCRIPT_NAME = ""
 
+# MAX SIZE FOR CONTRIBUTE
+MAXIMUM_UPLOAD_SIZE_CONTRIBUTE= 100 * 1024 * 1024
+
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 USE_L10N = True

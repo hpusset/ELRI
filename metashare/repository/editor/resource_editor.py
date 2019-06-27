@@ -2,9 +2,12 @@ import datetime, requests, os, zipfile
 from functools import update_wrapper
 from mimetypes import guess_type
 from shutil import copyfile
+import shutil
 import json
 import logging
 import codecs
+import tempfile
+
 from django import forms
 from django.contrib import admin, messages
 from django.contrib.admin.utils import unquote
@@ -44,7 +47,8 @@ from metashare.repository.models import resourceComponentTypeType_model, \
     lexicalConceptualResourceInfoType_model, toolServiceInfoType_model, \
     corpusMediaTypeType_model, languageDescriptionMediaTypeType_model, \
     lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model, \
-    licenceInfoType_model, User
+    licenceInfoType_model, User, sizeInfoType_model, textFormatInfoType_model
+
 from metashare.repository.supermodel import SchemaModel
 from metashare.stats.model_utils import saveLRStats, UPDATE_STAT, INGEST_STAT, DELETE_STAT
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, PROCESSING, ERROR, \
@@ -422,13 +426,39 @@ def prepare_error_zip(error_msg,resource_path,request):
     add_files2zip(resource_path+'/doc/input',errorzip)
     add_files2zip(resource_path+'/tm/input',errorzip)
     add_files2zip(resource_path+'/other',errorzip)
+    #remove files from the toolchain folders
+    if os.path.isdir(resource_path+'/doc'):
+        shutil.rmtree(resource_path+'/doc')
+    if os.path.isdir(resource_path + '/doc'):
+        shutil.rmtree(resource_path+'/tm')
+    if os.path.isdir(resource_path + '/other'):
+        shutil.rmtree(resource_path+'/other')
+
     error_log = open(os.path.join(resource_path,'error.log'), 'w')
     error_log.write(error_msg.encode("utf-8"))
     error_log.close()
     errorzip.write(os.path.join(resource_path,'error.log'), 'error.log')
+    #remove the error.log file
+    if os.path.isfile(os.path.join(resource_path,'error.log')):
+        os.remove(os.path.join(resource_path,'error.log'))
     #close zip file with processed resources
     errorzip.close()
 
+
+def remove_from_zip(zipfname, *filenames):
+    tempdir = tempfile.mkdtemp()
+    try:
+        tempname = os.path.join(tempdir, 'new.zip')
+        with zipfile.ZipFile(zipfname, 'r') as zipread:
+            with zipfile.ZipFile(tempname, 'w') as zipwrite:
+                for item in zipread.infolist():
+                    if item.filename not in filenames:
+                        data = zipread.read(item.filename)
+                        zipwrite.writestr(item, data)
+        shutil.move(tempname, zipfname)
+    finally:
+        shutil.rmtree(tempdir)
+        
 class ResourceModelAdmin(SchemaModelAdmin): 
     haystack_connection = 'default'
     inline_type = 'stacked'
@@ -447,129 +477,160 @@ class ResourceModelAdmin(SchemaModelAdmin):
     search_fields = ("identificationInfo__resourceName", "identificationInfo__resourceShortName", "identificationInfo__description", "identificationInfo__identifier")
 
     def process_action(self, request, queryset, from_ingest=None ):
-        getext = lambda file_object: os.path.splitext(file_object)[-1]
-        getname = lambda file_object: os.path.splitext(file_object)[0].split('/')[-1]
-        tmextensions=[".tmx", ".sdltm"]
-        docextensions=[ ".pdf", ".doc", ".docx", ".rtf", ".txt", ".odt"]
-        #not processed: xml, tbx, xls, xlsx
-        from metashare.xml_utils import to_xml_string
-        if has_publish_permission(request, queryset):
-            successful = 0
-            processing_status=True
-            for obj in queryset:
-                #variables to control tc errors
-                errors=0
-                error_msg=''
-                call_tm2tmx=-1
-                call_doc2tmx=-1
-                pre_status=check_resource_status(obj)
-                
-                if change_resource_status(obj, status=PROCESSING, precondition_status=INGESTED) or change_resource_status(obj, status=PROCESSING, precondition_status=ERROR) or (from_ingest and change_resource_status(obj, status=PROCESSING, precondition_status=INTERNAL)): #or check_resource_status(obj)== PROCESSING:
-                    #only (re)process INGESTED or ERROR or INTERNAL resources, published are suposed to be ok 
-                    ################
-                    ##GET INFO TO SEND NOTIFICATION EMAILS
-                    groups_name=[]
-                    for g in obj.groups.all():
-                        groups_name.append(g.name)
-                    reviewers = [u.email for u in User.objects.filter(groups__name__in=['reviewers'])] #,groups__name__in=groups_name)]
-                    group_reviewers = [u.email for u in User.objects.filter(groups__name__in=groups_name, email__in=reviewers)]
-                    ####
-                    resource_info=obj.export_to_elementtree()
+        try:
+            getext = lambda file_object: os.path.splitext(file_object)[-1]
+            getname = lambda file_object: os.path.splitext(file_object)[0].split('/')[-1]
+            tmextensions=[".tmx", ".sdltm"]
+            docextensions=[ ".pdf", ".doc", ".docx", ".rtf", ".txt", ".odt"]
+            #not processed: xml, tbx, xls, xlsx
+            from metashare.xml_utils import to_xml_string
+            if has_publish_permission(request, queryset):
+                successful = 0
+                processing_status=True
+                #queryset = [resourceInfoType_model]
+                for obj in queryset:
+                    #obj --> resourceInfoType_model
+                    #variables to control tc errors
+                    errors=0
+                    error_msg=''
+                    call_tm2tmx=-1
+                    call_doc2tmx=-1
+                    pre_status=check_resource_status(obj)
                     
-                    r_languages=[]
-                    for lang in resource_info.iter('languageInfo'):
-                        lang_id=lang.find('languageId').text
-                        r_languages.append(lang_id)
-                    '''DEBUGGING_INFO    
-                    #messages.info(request,"info de idiomas...")    
-                    #messages.info(request,r_languages)
-                    '''
-                    r_name=''
-                    for r_info in resource_info.iter('resourceName'):
-                        r_name=r_info.text
-                    ###    DEBUG
-                    #messages.info(request,'####'+r_name)
-                    
-                    licence_info=''
-                    for l_info in resource_info.iter('licenceInfo'):
-                        if l_info.find('licence') is not None:
-                            licence_info+=l_info.find('licence').text+': '
-                        if l_info.find('otherLicenceName') is not None:
-                            licence_info+=l_info.find('otherLicenceName').text
-                    ###    DEBUG    
-                    #messages.info(request,'####'+licence_info)
-                    #LOGGER.info(licence_info)
-                    
-                    #get the resource storage folder path
-                    resource_path=obj.storage_object._storage_folder()
-                    #first process for this resource:
-                    #cp archive.zip to _archive.zip iif _archive.zip does not exist...
-                    if not os.path.isfile(resource_path+'/_archive.zip'): #save the resource source for possible later reprocessing steps
-                        copyfile(resource_path+'/archive.zip',resource_path+'/_archive.zip')
-                        #save also a copy of the original uploaded resource
-                        copyfile(resource_path+'/archive.zip',resource_path+'/_archive_origin.zip')
-                    #unzip always _archive.zip wich has always the source resource files; archive.zip can contain processed documents 
+                    if change_resource_status(obj, status=PROCESSING, precondition_status=INGESTED) or change_resource_status(obj, status=PROCESSING, precondition_status=ERROR) or (from_ingest and change_resource_status(obj, status=PROCESSING, precondition_status=INTERNAL)) : #or check_resource_status(obj)== PROCESSING:
+                        #only (re)process INGESTED or ERROR or INTERNAL resources, published are suposed to be ok 
+                        ################
+                        ##GET INFO TO SEND NOTIFICATION EMAILS
+                        groups_name=[]
+                        for g in obj.groups.all():
+                            groups_name.append(g.name)
+                        reviewers = [u.email for u in User.objects.filter(groups__name__in=['reviewers'])] #,groups__name__in=groups_name)]
+                        group_reviewers = [u.email for u in User.objects.filter(groups__name__in=groups_name, email__in=reviewers)]
+                        ####
+                        resource_info=obj.export_to_elementtree()
+                        #LOGGER.info(to_xml_string(obj.export_to_elementtree(), encoding="utf-8").encode("utf-8"))
+                        r_languages=[]
+                        for lang in resource_info.iter('languageInfo'):
+                            lang_id=lang.find('languageId').text
+                            r_languages.append(lang_id)
+                        '''DEBUGGING_INFO    
+                        #messages.info(request,"info de idiomas...")    
+                        #messages.info(request,r_languages)
+                        '''
+                        r_name=''
+                        for r_info in resource_info.iter('resourceName'):
+                            r_name=r_info.text
+                        ###    DEBUG
+                        LOGGER.info(r_name)
+                        #messages.info(request,'####'+r_name)
+                        
+                        licence_info=''
+                        for l_info in resource_info.iter('licenceInfo'):
+                            if l_info.find('licence') is not None:
+                                licence_info+=l_info.find('licence').text+': '
+                            if l_info.find('otherLicenceName') is not None:
+                                licence_info+=l_info.find('otherLicenceName').text
+                        ###    DEBUG    
+                        #messages.info(request,'####'+licence_info)
+                        #LOGGER.info(licence_info)
+                        
+                        #get the resource storage folder path
+                        resource_path=obj.storage_object._storage_folder()
+                        #first process for this resource:
+                        #cp archive.zip to _archive.zip iif _archive.zip does not exist...
+                        if not os.path.isfile(resource_path+'/_archive.zip'): #save the resource source for possible later reprocessing steps
+                            copyfile(resource_path+'/archive.zip',resource_path+'/_archive.zip')
+                            #save also a copy of the original uploaded resource
+                            copyfile(resource_path+'/archive.zip',resource_path+'/_archive_origin.zip')
+                        #unzip always _archive.zip wich has always the source resource files; archive.zip can contain processed documents 
 
-                    resource_zip=zipfile.ZipFile(resource_path+'/_archive.zip','r')
-                    #and unzip the resource files into the corresponding /input folder
-                    resources=resource_zip.namelist()
-                    #create, if needed, the /tm /docs /other folder
-                    resource_tm_path=resource_path+'/tm'
-                    resource_doc_path=resource_path+'/doc'
-                    resource_other_path=resource_path+'/other'
-                    tmx_files=[]
-                    call_tm2tmx=0
-                    call_doc2tmx=0
-                    others=0
-                    #prepare tc calls:
-                    for r in resources:
-                        #check the extension of the files
-                        #if it is a tm file:
-                        filext=getext(r)
-                        filename=getname(r)
-                        if filext in tmextensions:
-                            if  not os.path.isdir(resource_tm_path):
-                                os.makedirs(resource_tm_path)
-                                os.makedirs(resource_tm_path+'/input')
-                            resource_zip.extract(r,resource_tm_path+'/input')
-                            if '/' in r: #handle files from a folder inside a .zip
-                                os.rename(resource_tm_path+'/input/'+r, resource_tm_path+'/input/'+filename+filext)
-                            tmx_files.append(r)
-                            call_tm2tmx = call_tm2tmx + 1
-                        elif filext in docextensions: #if it is a doc file
-                            if not os.path.isdir(resource_doc_path):
-                                os.makedirs(resource_doc_path)
-                                os.makedirs(resource_doc_path+'/input')
-                            resource_zip.extract(r,resource_doc_path+'/input')
-                            if '/' in r: #handle files from a folder inside a .zip
-                                os.rename(resource_doc_path+'/input/'+r, resource_doc_path+'/input/'+filename+filext)
-                            call_doc2tmx = call_doc2tmx + 1
-                        else : #either case...
-                            if not os.path.isdir(resource_other_path):
-                                os.makedirs(resource_other_path)
-                            resource_zip.extract(r,resource_other_path)
-                            os.rename(resource_other_path+'/'+r,resource_other_path+'/'+r_name+'_'+str(others)+filext)
-                            others = others+1
+                        resource_zip=zipfile.ZipFile(resource_path+'/_archive.zip','r')
+                        #and unzip the resource files into the corresponding /input folder
+                        resources=resource_zip.namelist()
+                        #create, if needed, the /tm /docs /other folder
+                        resource_tm_path=resource_path+u'/tm'
+                        resource_doc_path=resource_path+u'/doc'
+                        resource_other_path=resource_path+u'/other'
+                        tmx_files=[]
+                        call_tm2tmx=0
+                        call_doc2tmx=0
+                        others=0
+                        #prepare tc calls:
+                        for r in resources:
+                            #check the extension of the files
+                            #if it is a tm file:
+                            filext=getext(r)
+                            filename=getname(r)
+                            if filext in tmextensions:
+                                if  not os.path.isdir(resource_tm_path):
+                                    os.makedirs(resource_tm_path)
+                                    os.makedirs(resource_tm_path+'/input')
+                                resource_zip.extract(r,resource_tm_path+'/input')
+                                if '/' in r: #handle files from a folder inside a .zip
+                                    os.rename(resource_tm_path+'/input/'+r, resource_tm_path+'/input/'+filename+filext)
+                                tmx_files.append(r)
+                                call_tm2tmx = call_tm2tmx + 1
+                            elif filext in docextensions: #if it is a doc file
+                                if not os.path.isdir(resource_doc_path):
+                                    os.makedirs(resource_doc_path)
+                                    os.makedirs(resource_doc_path+'/input')
+                                resource_zip.extract(r,resource_doc_path+'/input')
+                                if '/' in r: #handle files from a folder inside a .zip
+                                    os.rename(resource_doc_path+'/input/'+r, resource_doc_path+'/input/'+filename+filext)
+                                call_doc2tmx = call_doc2tmx + 1
+                            else : #either case...
+                                if not os.path.isdir(resource_other_path):
+                                    os.makedirs(resource_other_path)
+                                resource_zip.extract(r,resource_other_path)
+                                dest_file=resource_other_path+'/'+r_name+u'_'+str(others)+filext
+                                os.rename(resource_other_path+'/'+r,dest_file)
+                                others = others+1
+                                
+                        response_tm=''
                             
-                    response_tm=''
-                        
-                    if call_tm2tmx > 0:
-                        #prepare the json for calling the tm2tmx tc for each tmx in tmx_files
-                        r_id=obj.storage_object.id
-                        r_overwrite='true'
+                        if call_tm2tmx > 0:
+                            #prepare the json for calling the tm2tmx tc for each tmx in tmx_files
+                            r_id=obj.storage_object.id
+                            r_overwrite='true'
 
-                        #for tm in tmx_files:
-                        r_input=resource_tm_path+'/input'#+tm
-                        tm_json= {'id':r_id, 'title': r_name ,'input':r_input,'overwrite':r_overwrite,'languages':r_languages, 'license':licence_info}
-                        
-                        try: 
-                            response_tm=requests.post(settings.TM2TMX_URL,json=tm_json)
-                            if json_validator(response_tm):
-                                if response_tm.json()["status"]=="Success":
-                                    successful +=1
-                                else:
+                            #for tm in tmx_files:
+                            r_input=resource_tm_path+'/input'#+tm
+                            tm_json= {'id':r_id, 'title': r_name ,'input':r_input,'overwrite':r_overwrite,'languages':r_languages, 'license':licence_info}
+                            
+                            try: 
+                                response_tm=requests.post(settings.TM2TMX_URL,json=tm_json)
+                                if json_validator(response_tm):
+                                    if response_tm.json()["status"]=="Success":
+                                        successful +=1
+                                        #clear previous information
+                                        if len(obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].sizeinfotype_model_set.all()) > 0:
+                                            obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].sizeinfotype_model_set.clear()
+                                        if len(obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].textformatinfotype_model_set.all()) > 0:
+                                            obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].textformatinfotype_model_set.clear()
+                                        props = response_tm.json()["lr_properties"]
+                                        for prop in props:
+                                            size_info = sizeInfoType_model.objects.create(size=int(prop["size"]),
+                                                                                      sizeUnit=prop["size_unit"])
+                                            obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].sizeinfotype_model_set.add(size_info)
+
+                                            lr_data_format = textFormatInfoType_model.objects.create(dataFormat=prop["data_format"])
+                                            obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].textformatinfotype_model_set.add(lr_data_format)
+                                        obj.storage_object.update_storage()
+
+                                    else:
+                                        change_resource_status(obj,status=ERROR, precondition_status=PROCESSING)
+                                        error_msg=error_msg+_("Something went wrong when processing the resource with the tm2tmx toolchain.")+response_tm.json()["info"]+'\n'
+                                        #ToDo: add timestamp info to error.log 
+                                        errors+=1
+                                        #send notification email
+                                        try:
+                                            send_mail(_("Error when processing resource %(rname)s") % ({'rname':r_name}), _('An error occurred when processing the resource %(rname)s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %(email)s') % ({'rname':r_name,'email':settings.EMAIL_ADDRESSES['elri-nrs-support']}), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
+                                        except: 
+                                            messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
+                                                                                                                                                                                                                                                                
+                                else:    
                                     change_resource_status(obj,status=ERROR, precondition_status=PROCESSING)
-                                    error_msg=error_msg+_("Something went wrong when processing the resource with the tm2tmx toolchain.")+response_tm.json()["info"]+'\n'
+                                    error_msg=error_msg+_("Invalid json response from tm2tmx toolchain: ")+response_tm.text+'\n'
                                     #ToDo: add timestamp info to error.log 
                                     errors+=1
                                     #send notification email
@@ -577,10 +638,10 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                         send_mail(_("Error when processing resource %(rname)s") % ({'rname':r_name}), _('An error occurred when processing the resource %(rname)s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %(email)s') % ({'rname':r_name,'email':settings.EMAIL_ADDRESSES['elri-nrs-support']}), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
                                     except: 
                                         messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
-                                                                                                                                                                                                                                                            
-                            else:    
+                                    
+                            except: 
                                 change_resource_status(obj,status=ERROR, precondition_status=PROCESSING)
-                                error_msg=error_msg+_("Invalid json response from tm2tmx toolchain: ")+response_tm.text+'\n'
+                                error_msg=error_msg+_("The POST request to the tm2tmx toolchain has failed.")+response_tm+"\n"
                                 #ToDo: add timestamp info to error.log 
                                 errors+=1
                                 #send notification email
@@ -588,36 +649,53 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                     send_mail(_("Error when processing resource %(rname)s") % ({'rname':r_name}), _('An error occurred when processing the resource %(rname)s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %(email)s') % ({'rname':r_name,'email':settings.EMAIL_ADDRESSES['elri-nrs-support']}), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
                                 except: 
                                     messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
-                                
-                        except: 
-                            change_resource_status(obj,status=ERROR, precondition_status=PROCESSING)
-                            error_msg=error_msg+_("The POST request to the tm2tmx toolchain has failed.")+response_tm+"\n"
-                            #ToDo: add timestamp info to error.log 
-                            errors+=1
-                            #send notification email
+                        response_doc=''    
+
+                        if call_doc2tmx > 0:
+                            #prepare the json for calling the doc2tmx tc
+                            r_id=obj.storage_object.id
+                            r_input=resource_doc_path+'/input'
+                            r_overwrite='true'
+                            doc_json={'id':r_id, 'title':r_name,'input':r_input,'overwrite':r_overwrite,'languages':r_languages, 'license':licence_info}
+
+                            ####messages.info(request,"Processing resource with doc2tmx...")
+                            
                             try:
-                                send_mail(_("Error when processing resource %(rname)s") % ({'rname':r_name}), _('An error occurred when processing the resource %(rname)s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %(email)s') % ({'rname':r_name,'email':settings.EMAIL_ADDRESSES['elri-nrs-support']}), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
-                            except: 
-                                messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
-                    response_doc=''    
+                                response_doc=requests.post(settings.DOC2TMX_URL,json=doc_json)
+                                if json_validator(response_doc):
 
-                    if call_doc2tmx > 0:
-                        #prepare the json for calling the doc2tmx tc
-                        r_id=obj.storage_object.id
-                        r_input=resource_doc_path+'/input'
-                        r_overwrite='true'
-                        doc_json={'id':r_id, 'title':r_name,'input':r_input,'overwrite':r_overwrite,'languages':r_languages, 'license':licence_info}
+                                    if response_doc.json()["status"] == "Success":
+                                        successful += 1
+                                        # clear previous information
+                                        if len(obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].sizeinfotype_model_set.all()) > 0:
+                                            obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].sizeinfotype_model_set.clear()
+                                        if len(obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].textformatinfotype_model_set.all()) > 0:
+                                            obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].textformatinfotype_model_set.clear()
 
-                        ####messages.info(request,"Processing resource with doc2tmx...")
-                        
-                        try:
-                            response_doc=requests.post(settings.DOC2TMX_URL,json=doc_json)
-                            if json_validator(response_doc):
-                                if response_doc.json()["status"] == "Success":
-                                    successful += 1
+                                        props=response_doc.json()["lr_properties"]
+                                        for prop in props:
+                                            size_info = sizeInfoType_model.objects.create(size=prop["size"],
+                                                                                          sizeUnit=prop["size_unit"])
+                                            obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].sizeinfotype_model_set.add(size_info)
+
+                                            lr_data_format = textFormatInfoType_model.objects.create(
+                                                dataFormat=prop["data_format"])
+                                            obj.resourceComponentType.as_subclass().corpusMediaType.corpustextinfotype_model_set.all()[0].textformatinfotype_model_set.add(lr_data_format)
+                                        obj.storage_object.update_storage()
+
+                                    else:
+                                        change_resource_status(obj,status=ERROR, precondition_status=PROCESSING)
+                                        error_msg=error_msg+_("Something went wrong when processing the resource with the doc2tmx toolchain.\n ")+response_doc.json()["info"]+"\n"
+                                        #ToDo: add timestamp info to error.log 
+                                        errors+=1
+                                        #send notification email
+                                        try:
+                                            send_mail(_("Error when processing resource %(rname)s") % ({'rname':r_name}), _('An error occurred when processing the resource %(rname)s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %(email)s') % ({'rname':r_name,'email':settings.EMAIL_ADDRESSES['elri-nrs-support']}), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
+                                        except: 
+                                            messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
                                 else:
                                     change_resource_status(obj,status=ERROR, precondition_status=PROCESSING)
-                                    error_msg=error_msg+_("Something went wrong when processing the resource with the doc2tmx toolchain.\n ")+response_doc.json()["info"]+"\n"
+                                    error_msg=error_msg+_("Invalid json response from doc2tmx toolchain: ")+response_doc.text+'\n'
                                     #ToDo: add timestamp info to error.log 
                                     errors+=1
                                     #send notification email
@@ -625,9 +703,10 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                         send_mail(_("Error when processing resource %(rname)s") % ({'rname':r_name}), _('An error occurred when processing the resource %(rname)s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %(email)s') % ({'rname':r_name,'email':settings.EMAIL_ADDRESSES['elri-nrs-support']}), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
                                     except: 
                                         messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
-                            else:
+                                    
+                            except:
                                 change_resource_status(obj,status=ERROR, precondition_status=PROCESSING)
-                                error_msg=error_msg+_("Invalid json response from doc2tmx toolchain: ")+response_doc.text+'\n'
+                                error_msg=error_msg+_("The POST request to the doc2tmx toolchain has failed.\n ")+response_doc+'\n'
                                 #ToDo: add timestamp info to error.log 
                                 errors+=1
                                 #send notification email
@@ -635,88 +714,33 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                     send_mail(_("Error when processing resource %(rname)s") % ({'rname':r_name}), _('An error occurred when processing the resource %(rname)s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %(email)s') % ({'rname':r_name,'email':settings.EMAIL_ADDRESSES['elri-nrs-support']}), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
                                 except: 
                                     messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
-                                
-                        except:
-                            change_resource_status(obj,status=ERROR, precondition_status=PROCESSING)
-                            error_msg=error_msg+_("The POST request to the doc2tmx toolchain has failed.\n ")+response_doc+'\n'
-                            #ToDo: add timestamp info to error.log 
-                            errors+=1
-                            #send notification email
-                            try:
-                                send_mail(_("Error when processing resource %(rname)s") % ({'rname':r_name}), _('An error occurred when processing the resource %(rname)s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %(email)s') % ({'rname':r_name,'email':settings.EMAIL_ADDRESSES['elri-nrs-support']}), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
-                            except: 
-                                messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
-                        
-                #if something success-> create new archive.zip and replace the old one uploaded by the user     
-                # if any errors, then handle error reporting
-                if errors > 0 or error_msg!='':
-                    #create the archive.zip with the original files and the error.log file
-                    prepare_error_zip(error_msg,resource_path,request)
-                    processing_status = processing_status and False
-                elif successful > 0:
-                    #create the archive.zip with the processed resources
-                    processed_zip=zipfile.ZipFile(resource_path+'/archive.zip',mode='w')
-
-                    if response_doc != '' and json_validator(response_doc):
-                        #if any rejected file and !E file(s) in output --> add input/into rejected/inside archive.zip
-                        if not os.listdir(response_doc.json()["output"]): 
-                            add_rejected_files2zip(r_input,processed_zip)                            
-                        else: #if there are any produced output-> copy output and rejected file(s)
-                            add_files2zip(response_doc.json()["output"],processed_zip)
-                            add_rejected_files2zip(response_doc.json()["rejected"],processed_zip)
-
-                    if response_tm != '' and json_validator(response_tm):
-                        add_files2zip(response_tm.json()["output"],processed_zip)
-                        add_rejected_files2zip(response_tm.json()["rejected"],processed_zip)
-                    
-
-                    #if there are other files: add them as well
-                    add_files2zip(resource_other_path,processed_zip)
-                    
-                    #add licence file
-                    resource_info=obj.export_to_elementtree()
-                    resource_name=[u.find('resourceName').text for u in resource_info.iter('identificationInfo')]
-                    
-                    user_membership = _get_user_membership(request.user) 
-                    licences = _get_licences(obj,user_membership)
-                    access_links=''
-                    for l in licences:
-                        if l == 'publicDomain':
-                            access_links=STATIC_ROOT + '/metashare/licences/publicDomain.txt'
-                        elif l == 'openUnder-PSI':
-                            access_links=STATIC_ROOT + '/metashare/licences/openUnderPSI.txt'
-                        elif l == 'non-standard/Other_Licence/Terms' :
-                            #unprocessed_dir = "/unprocessed"
-                            access_links= STATIC_ROOT + '/metashare/licences/'+u'_'.join(resource_name[0].split())+'_licence.pdf'#openUnderPSI.txt'
-                            #unprocessed_dir+'/'+u'_'.join(resource_name[0].split())+'_licence.pdf'
-                        else:
-                            #LOGGER.info(LICENCEINFOTYPE_URLS_LICENCE_CHOICES[l])
-                            access_links,attr=LICENCEINFOTYPE_URLS_LICENCE_CHOICES[l]  
-                            access_links = STATIC_ROOT +'/'+access_links
-                            #LOGGER.info(access_links)
-                    #add access file to the lr.archive.zip file 
-                    licence_path=access_links
-                    path, filename = os.path.split(licence_path)
-                    processed_zip.write(licence_path,'license_'+filename)
-                    
-                    #close zip file with processed resources
-                    processed_zip.close()
-                    #if pre_status == INGESTED or pre_status==ERROR :
-                    change_resource_status(obj,status=INGESTED, precondition_status=PROCESSING)
-                        
-                    processing_status = processing_status and True
-                    
-                else:
-                    if error_msg !='':
+                            
+                    #if something success-> create new archive.zip and replace the old one uploaded by the user     
+                    # if any errors, then handle error reporting
+                    if errors > 0 or error_msg!='':
+                        #create the archive.zip with the original files and the error.log file
                         prepare_error_zip(error_msg,resource_path,request)
                         processing_status = processing_status and False
-                    elif call_tm2tmx==0 and call_doc2tmx==0:
-                        
-                        #ingest file that is not processed
+                    elif successful > 0:
                         #create the archive.zip with the processed resources
                         processed_zip=zipfile.ZipFile(resource_path+'/archive.zip',mode='w')
+
+                        if response_doc != '' and json_validator(response_doc):
+                            #if any rejected file and !E file(s) in output --> add input/into rejected/inside archive.zip
+                            if not os.listdir(response_doc.json()["output"]): 
+                                add_rejected_files2zip(r_input,processed_zip)                            
+                            else: #if there are any produced output-> copy output and rejected file(s)
+                                add_files2zip(response_doc.json()["output"],processed_zip)
+                                add_rejected_files2zip(response_doc.json()["rejected"],processed_zip)
+
+                        if response_tm != '' and json_validator(response_tm):
+                            add_files2zip(response_tm.json()["output"],processed_zip)
+                            add_rejected_files2zip(response_tm.json()["rejected"],processed_zip)
+                        
+
                         #if there are other files: add them as well
                         add_files2zip(resource_other_path,processed_zip)
+                        
                         #add licence file
                         resource_info=obj.export_to_elementtree()
                         resource_name=[u.find('resourceName').text for u in resource_info.iter('identificationInfo')]
@@ -741,34 +765,124 @@ class ResourceModelAdmin(SchemaModelAdmin):
                         #add access file to the lr.archive.zip file 
                         licence_path=access_links
                         path, filename = os.path.split(licence_path)
-                        processed_zip.write(licence_path,'license_'+filename)
-                        
-                        #close zip file with processed resources
-                        processed_zip.close()
-                        
+                        #if license file does not exist: error:
+                        try :
+                            processed_zip.write(licence_path,'license_'+filename)
+                            # close zip file with processed resources
+                            processed_zip.close()
+                        except:
+                            messages.error(request,_("There was an error adding the license file. Please check that a Non-standard license file has been uploaded through the contribute page. "))
+                            error_msg=_("There was an error adding the license file. Please check that a Non-standard license file has been uploaded through the contribute page. ")
+                            prepare_error_zip(error_msg, resource_path, request)
+                            processing_status = processing_status and False
+                            change_resource_status(obj, status=ERROR, precondition_status=PROCESSING)
+                            return processing_status
+                        # remove files from the toolchain folders
+                        if os.path.isdir(resource_path + '/doc'):
+                            shutil.rmtree(resource_path + '/doc')
+                        if os.path.isdir(resource_path + '/doc'):
+                            shutil.rmtree(resource_path + '/tm')
+                        if os.path.isdir(resource_path + '/other'):
+                            shutil.rmtree(resource_path + '/other')
+                        #if pre_status == INGESTED or pre_status==ERROR :
                         change_resource_status(obj,status=INGESTED, precondition_status=PROCESSING)
+                            
                         processing_status = processing_status and True
-                    else:
-                        messages.error(request,
-                           _('Only ingested or error resources can be re-processed.'))
-                        processing_status = processing_status and False
                         
-            if processing_status and (pre_status==INGESTED or pre_status==ERROR) :# or pre_status==PROCESSING):
-                messages.info(request, _('Resource(s) re-processed correctly.'))
-                return processing_status
-            elif processing_status and pre_status==INTERNAL:
-                messages.info(request, _('Resource(s) processed correctly.'))
-                return processing_status
-            else:
-                messages.error(request,_("Something went wrong when processing the resource(s). Re-process the error resources and check the error.log file(s). You will receive a notification email."))
+                    else:
+                        if error_msg !='':
+                            prepare_error_zip(error_msg,resource_path,request)
+                            processing_status = processing_status and False
+                        elif call_tm2tmx==0 and call_doc2tmx==0:
+                            
+                            #ingest file that is not processed
+                            #create the archive.zip with the processed resources
+                            processed_zip=zipfile.ZipFile(resource_path+'/archive.zip',mode='w')
+                            #if there are other files: add them as well
+                            add_files2zip(resource_other_path,processed_zip)
+                            #add licence file
+                            resource_info=obj.export_to_elementtree()
+                            resource_name=[u.find('resourceName').text for u in resource_info.iter('identificationInfo')]
+                            
+                            user_membership = _get_user_membership(request.user) 
+                            licences = _get_licences(obj,user_membership)
+                            access_links=''
+                            for l in licences:
+                                if l == 'publicDomain':
+                                    access_links=STATIC_ROOT + '/metashare/licences/publicDomain.txt'
+                                elif l == 'openUnder-PSI':
+                                    access_links=STATIC_ROOT + '/metashare/licences/openUnderPSI.txt'
+                                elif l == 'non-standard/Other_Licence/Terms' :
+                                    #unprocessed_dir = "/unprocessed"
+                                    access_links= STATIC_ROOT + '/metashare/licences/'+u'_'.join(resource_name[0].split())+'_licence.pdf'#openUnderPSI.txt'
+                                    #unprocessed_dir+'/'+u'_'.join(resource_name[0].split())+'_licence.pdf'
+                                else:
+                                    #LOGGER.info(LICENCEINFOTYPE_URLS_LICENCE_CHOICES[l])
+                                    access_links,attr=LICENCEINFOTYPE_URLS_LICENCE_CHOICES[l]  
+                                    access_links = STATIC_ROOT +'/'+access_links
+                                    #LOGGER.info(access_links)
+                            #add access file to the lr.archive.zip file 
+                            licence_path=access_links
+                            path, filename = os.path.split(licence_path)
+                            # if license file does not exist: error:
+                            try:
+                                processed_zip.write(licence_path, 'license_' + filename)
+                                # close zip file with processed resources
+                                processed_zip.close()
+                            except:
+                                messages.error(request, _(
+                                    "There was an error adding the license file. Please check that a Non-standard license file has been uploaded through the contribute page. "))
+                                error_msg = _(
+                                    "There was an error adding the license file. Please check that a Non-standard license file has been uploaded through the contribute page. ")
+                                prepare_error_zip(error_msg, resource_path, request)
+                                processing_status = processing_status and False
+                                change_resource_status(obj, status=ERROR, precondition_status=PROCESSING)
+                                return processing_status
+
+                            change_resource_status(obj,status=INGESTED, precondition_status=PROCESSING)
+                            processing_status = processing_status and True
+                        else:
+                            messages.error(request,
+                            _('Only ingested or error resources can be re-processed.'))
+                            processing_status = processing_status and False
+                            
+                if processing_status and (pre_status==INGESTED or pre_status==ERROR) :# or pre_status==PROCESSING):
+                    messages.info(request, _('Resource(s) re-processed correctly.'))
+                    return processing_status
+                elif processing_status and pre_status==INTERNAL:
+                    messages.info(request, _('Resource(s) processed correctly.'))
+                    return processing_status
+                else:
+                    messages.error(request,_("Something went wrong when processing the resource(s). Re-process the error resources and check the error.log file(s). You will receive a notification email."))
+                    return processing_status
+                
                 return processing_status
             
-            return processing_status
-        
-        else:
-            messages.error(request, _('You do not have the permission to ' \
-                            'perform this action for all selected resources.'))
-            return processing_status
+            else:
+                messages.error(request, _('You do not have the permission to ' \
+                                'perform this action for all selected resources.'))
+                return processing_status
+        except:
+            messages.error(request,_("Something went wrong when processing the resource(s). Re-process the error resources and check the error.log file(s). You will receive a notification email."))
+            
+            error_msg=_("Something went wrong when processing the resource(s). Re-process the error resources and check the error.log file(s). You will receive a notification email.\n ")
+            errors=0
+            for obj in queryset:
+                change_resource_status(obj,status=ERROR, precondition_status=PROCESSING)
+                resource_path=obj.storage_object._storage_folder()
+                prepare_error_zip(error_msg,resource_path,request)
+                errors+=1
+                #send notification email
+                ##GET INFO TO SEND NOTIFICATION EMAILS
+                groups_name=[]
+                for g in obj.groups.all():
+                    groups_name.append(g.name)
+                reviewers = [u.email for u in User.objects.filter(groups__name__in=['reviewers'])] #,groups__name__in=groups_name)]
+                group_reviewers = [u.email for u in User.objects.filter(groups__name__in=groups_name, email__in=reviewers)]
+                try:
+                    send_mail(_("Error when processing resource %(rname)s") % ({'rname':r_name}), _('An error occurred when processing the resource %(rname)s. Please check the error.log attached to the resource. Contact the ELRI NRS support team for more information at %(email)s') % ({'rname':r_name,'email':settings.EMAIL_ADDRESSES['elri-nrs-support']}), settings.EMAIL_ADDRESSES['elri-no-reply'],group_reviewers)
+                except: 
+                    messages.error(request,_("There was an error sending out the ERROR notification email to the group reviewers. Please contact them directly."))
 
     process_action.short_description = _("Re-process selected resources")
 
@@ -800,30 +914,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                         licences_restriction.append(lic_restriction)
                        
                     resource_path=obj.storage_object._storage_folder()
-                    lr_archive_zip=zipfile.ZipFile(resource_path+'/archive.zip', mode='a')
-                    '''licence file is added after ingesting the resource
-                    user_membership = _get_user_membership(request.user) 
-                    licences = _get_licences(obj,user_membership)    
-                    for l in licences_name:
-                        l_info, access_links, access = licences[l]
-                        if l == 'publicDomain':
-                            access_links=STATIC_URL + 'metashare/licences/publicDomain.txt'
-                        if l == 'openUnder-PSI':
-                            access_links=STATIC_URL + 'metashare/licences/openUnderPSI.txt'
-                        if l == 'non-standard/Other_Licence/Terms' :
-                            #access_links=STATIC_URL + 'metashare/licences/openUnderPSI.txt'
-                            unprocessed_dir = "/unprocessed"
-                            access_links=unprocessed_dir+'/'+u'_'.join(resource_name[0].split())+'_licence.pdf'
-                            #LOGGER.info(licences[l])
-                            #LOGGER.info(l_info)
-                            #LOGGER.info(access_links)
-                            #LOGGER.info(access)
-                        #add access file to the lr.archive.zip file 
-                        licence_path=ROOT_PATH+access_links
-                        
-                        path, filename = os.path.split(licence_path)
-                        lr_archive_zip.write(licence_path,'license_'+filename)
-                    '''    
+                  
                     #attribution text
                     attr_text=''
                     for at in resource_info.iter('attributionText'):
@@ -872,6 +963,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                     # (Attribution text:)
                     # IPR Holder: Name Surname (email), Organization 
                     # Contact Person: Name Surname (email), Organization 
+                    #if metadata_file exist --> update it : remove + add 
+                    
                     metadata_file_path=resource_path+'/'+resource_name[0]+'_metadata.txt'
                     with codecs.open(metadata_file_path, encoding='utf-8',mode='w') as metadata_file:
                         metadata_file.write(_('Resource_name: %s  \n') % resource_name[0])
@@ -893,7 +986,11 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                 metadata_file.write(_('Contact Person: ')+p+' '+contact_surname[i]+' ('+contact_email[i]+'), '+contact_organization[i]+'\n')
                         else:
                             metadata_file.write(_('Contact Person: N/A \n'))
-                    lr_archive_zip.write(metadata_file_path,resource_name[0]+'_metadata.txt',)
+                    #lr_archive_zip=zipfile.ZipFile(resource_path+'/archive.zip', mode='a')        
+                    #if resource_name[0]+'_metadata.txt' in lr_archive_zip.namelist():
+                    remove_from_zip(resource_path+'/archive.zip', resource_name[0]+'_metadata.txt')
+                    lr_archive_zip=zipfile.ZipFile(resource_path+'/archive.zip', mode='a')        
+                    lr_archive_zip.write(metadata_file_path,resource_name[0]+'_metadata.txt')
                     lr_archive_zip.close()
                     
                     #send corresponding emails

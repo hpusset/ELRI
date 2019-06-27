@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-04 13:42+0200\n"
-"PO-Revision-Date: 2019-04-02 15:17+0200\n"
+"POT-Creation-Date: 2019-06-17 16:38+0200\n"
+"PO-Revision-Date: 2019-06-17 16:51+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ga_IE\n"
@@ -108,15 +108,15 @@ msgstr ""
 msgid "EU"
 msgstr "AE"
 
-#: repository/models.py:65 repository/models.py:2076 repository/models.py:2250
+#: repository/models.py:65 repository/models.py:2075 repository/models.py:2249
 msgid "More"
 msgstr "Tuilleadh"
 
-#: repository/models.py:117
+#: repository/models.py:116
 msgid "Groups together information needed to identify the resource"
 msgstr "Cruinníonn eolas le chéile chun an acmhainn a aithint"
 
-#: repository/models.py:126
+#: repository/models.py:125
 msgid ""
 "Groups information on the person(s) that is/are responsible for providing "
 "further information regarding the resource"
@@ -124,32 +124,32 @@ msgstr ""
 "Cruinníonn eolas ar an duine/na daoine atá freagrach as eolas sa bhreis a "
 "chur ar fáil maidir leis an acmhainn"
 
-#: repository/models.py:132
+#: repository/models.py:131
 msgid "Groups information on the metadata record itself"
 msgstr "Cruinníonn eolas ar an taifead meiteashonraí féin"
 
-#: repository/models.py:137
+#: repository/models.py:136
 msgid "Groups information on a specific version or release of the resource"
 msgstr "Cruinníonn eolas ar leagan nó eisiúint ar leith den acmhainn"
 
-#: repository/models.py:143
+#: repository/models.py:142
 msgid "Groups information on the creation procedure of a resource"
 msgstr "Cruinníonn eolas ar ghnás cruthaithe acmhainne"
 
-#: repository/models.py:149
+#: repository/models.py:148
 msgid "Groups together information on any document describing the resource"
 msgstr ""
 "Cruinníonn le chéile eolas ar aon doiciméad a chuireann síos ar an acmhainn"
 
-#: repository/models.py:159
+#: repository/models.py:158
 msgid "Used for distinguishing between resource types"
 msgstr "Úsáidte chun idirdhealú a dhéanamh idir chineálacha acmhainní"
 
-#: repository/models.py:174
+#: repository/models.py:173
 msgid "Groups within the resourse is shared"
 msgstr "Grúpaí lena roinntear an acmhainn"
 
-#: repository/models.py:296
+#: repository/models.py:295
 msgid ""
 "Specifies the size of the resource with regard to the SizeUnit measurement "
 "in form of a number"
@@ -157,7 +157,7 @@ msgstr ""
 "Sonraíonn méid na hacmhainne i dtaca leis an tomhais Aonad Toise i bhfoirm "
 "uimhreach"
 
-#: repository/models.py:302
+#: repository/models.py:301
 msgid ""
 "Specifies the unit that is used when providing information on the size of "
 "the resource or of resource parts"
@@ -165,7 +165,7 @@ msgstr ""
 "Sonraíonn an t-aonad a bhíonn in úsáid nuair a thugtar eolas ar mhéid na "
 "hacmhainne nó ar pháirteanna na hacmhainne"
 
-#: repository/models.py:355
+#: repository/models.py:354
 msgid ""
 "The full name by which the resource is known; the element can be repeated "
 "for the different language versions using the \"lang\" attribute to specify "
@@ -175,7 +175,7 @@ msgstr ""
 "leaganacha teanga éagsúla trí an tréith \"lang\" a úsáid chun an teanga a "
 "shonrú."
 
-#: repository/models.py:364
+#: repository/models.py:363
 msgid ""
 "Provides the description of the resource in prose; the element can be "
 "repeated for the different language versions using the \"lang\" attribute to "
@@ -185,7 +185,7 @@ msgstr ""
 "na leaganacha teanga éagsúla trí an tréith \"lang\" a úsáid chun an teanga a "
 "shonrú."
 
-#: repository/models.py:373
+#: repository/models.py:372
 msgid ""
 "The short form (abbreviation, acronym etc.) used to identify the resource; "
 "the element can be repeated for the different language versions using the "
@@ -195,7 +195,7 @@ msgstr ""
 "aithint; is féidir an ghné a athdhéanamh do na leaganacha teanga éagsúla trí "
 "an tréith \"lang\" a úsáid chun an teanga a shonrú."
 
-#: repository/models.py:381
+#: repository/models.py:380
 msgid ""
 "A Web page that can be navigated to in a Web browser to gain access to the "
 "resource, its distributions and/or additional information"
@@ -203,7 +203,7 @@ msgstr ""
 "Leathanach gréasáin ar féidir nascleanúint chuige i mbrabhsálaí gréasáin "
 "chun rochtain a fháil ar an acmhainn, a dáileadh agus/nó eolas eile sa bhreis"
 
-#: repository/models.py:388
+#: repository/models.py:387
 msgid ""
 "An unambiguous referent to the resource within META-SHARE; it reflects to "
 "the unique system id provided automatically by the MetaShare software"
@@ -212,7 +212,7 @@ msgstr ""
 "go dtí an t-aitheantas córais uathúil a chuireann bogearra MetaShare ar fáil "
 "go huathoibríoch"
 
-#: repository/models.py:395
+#: repository/models.py:394
 msgid ""
 "Reference to the unique ISLRN number of the resource; if the resource has "
 "not been assigned an ISLRN yet, you may request for one at: http://www.islrn."
@@ -221,7 +221,7 @@ msgstr ""
 "Tagairt d’uimhir ISLRN uathúil na hacmhainne; mura bhfuil ISLRN sainithe don "
 "acmhainn go fóill, is féidir ceann a iarraidh ag: http://www.islrn.org/"
 
-#: repository/models.py:402
+#: repository/models.py:401
 msgid ""
 "Reference to a PID, DOI or an internal identifier used by the resource "
 "provider for the resource"
@@ -229,7 +229,7 @@ msgstr ""
 "Tagairt do PID, DOI nó aitheantóir inmheánach a úsáideann an soláthróir "
 "acmhainne don acmhainn"
 
-#: repository/models.py:408
+#: repository/models.py:407
 msgid ""
 "Specifies whether the resource is appropriate for use in one or more of the "
 "DSIs (Digital Service Infrastructures)"
@@ -237,19 +237,19 @@ msgstr ""
 "Sonraíonn cé an bhfuil nó nach bhfuil an acmhainn oiriúnach le húsáid i "
 "gceann amháin nó níos mó de na DSIanna (bonneagar seirbhísí digiteacha)"
 
-#: repository/models.py:434
+#: repository/models.py:433
 msgid "Any string, usually a number, that identifies the version of a resource"
 msgstr "Aon teaghrán, uimhir de ghnáth, a thugann le fios an leagan d’acmhainn"
 
-#: repository/models.py:440
+#: repository/models.py:439
 msgid "Date of the last update of the version of the resource"
 msgstr "Dáta ar tharla an uaslódáil dheireanach den leagan den acmhainn"
 
-#: repository/models.py:473
+#: repository/models.py:472
 msgid "Specifies the validation status of the resource"
 msgstr "Sonraíonn sé stádas bailíochtaithe na hacmhainne"
 
-#: repository/models.py:479
+#: repository/models.py:478
 msgid ""
 "A short account of the validation details or a bibliographic reference to a "
 "document with detailed information on the validation process and results"
@@ -257,7 +257,7 @@ msgstr ""
 "Cuntas gearr de na sonraí bailíochtaithe nó tagairt bhibleagrafach do "
 "dhoiciméad le mioneolas ar an bpróiseas bailíochtaithe agus na torthaí"
 
-#: repository/models.py:486
+#: repository/models.py:485
 msgid ""
 "Groups information on the person(s) or the organization(s) that validated "
 "the resource"
@@ -265,7 +265,7 @@ msgstr ""
 "Cruinníonn sé eolas ar dhuine/dhaoine nó eagraíocht(aí) a bhailíochtaigh an "
 "acmhainn"
 
-#: repository/models.py:524
+#: repository/models.py:523
 msgid ""
 "Specifies whether ELRC services have been exploited in the creation process "
 "of the resource; if so, please specify the services used in the description "
@@ -275,29 +275,29 @@ msgstr ""
 "bpróiseas cruthúcháin na hacmhainne; má baineadh, sonraigh na seirbhísí ar "
 "baineadh feidhm astu i réimse tuairisce an taifid mheiteashonraí"
 
-#: repository/models.py:532
+#: repository/models.py:531
 msgid "Declares whether the resource has been anonymized"
 msgstr "Dearbhaíonn má rinneadh anaithnidiú ar an acmhainn"
 
-#: repository/models.py:538
+#: repository/models.py:537
 msgid ""
 "Groups information on the person or the organization that has created the "
 "resource"
 msgstr "Cruinníonn eolas ar an duine nó an eagraíocht a chruthaigh an acmhainn"
 
-#: repository/models.py:544
+#: repository/models.py:543
 msgid "Groups information on the project that has funded the resource"
 msgstr "Cruinníonn eolas ar an tionscadal a mhaoinigh an acmhainn"
 
-#: repository/models.py:550
+#: repository/models.py:549
 msgid "The date in which the creation process was started"
 msgstr "An dáta ar tosaíodh próiseas an chruthaithe"
 
-#: repository/models.py:555
+#: repository/models.py:554
 msgid "The date in which the creation process was completed"
 msgstr "An dáta ar críochnaíodh próiseas an chruthaithe"
 
-#: repository/models.py:595 repository/models.py:3679
+#: repository/models.py:594 repository/models.py:3678
 msgid ""
 "The name, the identifier or the url of thethe original resources that were "
 "at the base of the creation process of the resource"
@@ -305,7 +305,7 @@ msgstr ""
 "Ainm, aitheantóir, nó url na mbunfhoinsí a bhí mar bhonnle próiseas "
 "cruthaithe na hacmhainne"
 
-#: repository/models.py:602
+#: repository/models.py:601
 msgid ""
 "Specifies whether the resource is created automatically or in a manual or "
 "interactive mode"
@@ -313,17 +313,17 @@ msgstr ""
 "Sonraíonn cé acu an gcruthaítear an acmhainn go huathoibríoch nó i modh "
 "láimhe nó idirghníomhach"
 
-#: repository/models.py:612
+#: repository/models.py:611
 msgid "Provides further information on the creation methods and processes"
 msgstr "Tugann eolas sa bhreis ar na modhanna agus na próisis chruthaithe"
 
-#: repository/models.py:618
+#: repository/models.py:617
 msgid ""
 "The name, the identifier or the url of the tool used in the creation process"
 msgstr ""
 "Ainm, aitheantóir, nó url na huirlise a úsáideadh sa phróiseas cruthaithe"
 
-#: repository/models.py:650
+#: repository/models.py:649
 msgid ""
 "The date of creation of this metadata description (automatically inserted by "
 "the MetaShare software)"
@@ -331,12 +331,12 @@ msgstr ""
 "An dáta a cruthaíodh an tuairisc seo ar na meiteashonraí (ionsáite go "
 "huathoibríoch ag an mbogearra MetaShare)"
 
-#: repository/models.py:656
+#: repository/models.py:655
 msgid "Groups information on the person that has created the metadata record"
 msgstr ""
 "Cruinníonn eolas ar an duine a chruthaigh an tuairisc ar na meiteashonraí"
 
-#: repository/models.py:662
+#: repository/models.py:661
 msgid ""
 "The name of the language in which the metadata description is written, "
 "according to IETF BCP47"
@@ -344,7 +344,7 @@ msgstr ""
 "Ainm na teanga ina bhfuil an tuairisc ar na meiteashonraí scríofa, dar le "
 "IETF BCP47"
 
-#: repository/models.py:668
+#: repository/models.py:667
 msgid ""
 "The identifier of the language in which the metadata description is written "
 "according to IETF BCP47"
@@ -352,7 +352,7 @@ msgstr ""
 "Aitheantóir na teanga ina bhfuil an tuairisc ar na meiteashonraí scríofa, "
 "dar le IETF BCP47"
 
-#: repository/models.py:674
+#: repository/models.py:673
 msgid ""
 "The date of the last updating of the metadata record (automatically inserted "
 "by the repo software)"
@@ -360,47 +360,47 @@ msgstr ""
 "An dáta a rinneadh an t-uasdátú deireanach ar an tuairisc ar na "
 "meiteashonraí (ionsáite go huathoibríoch ag an bogearra stóir)\""
 
-#: repository/models.py:758
+#: repository/models.py:757
 msgid ""
 "Specifies the type of the document provided with or related to the resource"
 msgstr "Sonraíonn an cineál doiciméid a tugadh nó a bhaineann leis an acmhainn"
 
-#: repository/models.py:770
+#: repository/models.py:769
 msgid "The title of the document reporting on the resource"
 msgstr "Teideal an doiciméid a dhéanann tuairisc ar an acmhainn"
 
-#: repository/models.py:775
+#: repository/models.py:774
 msgid "The name(s) of the author(s), in the format described in the document"
 msgstr "Ainm úda(i)r, san fhormáid atá tuairiscithe sa doiciméad"
 
-#: repository/models.py:781
+#: repository/models.py:780
 msgid "The name of the editor as mentioned in the document"
 msgstr "Ainm an eagarthóra mar atá luaite sa doiciméad"
 
-#: repository/models.py:786
+#: repository/models.py:785
 msgid ""
 "The year of publication or, for an unpublished work, the year it was written"
 msgstr ""
 "An bhliain ar foilsíodh nó, i gcás saothair neamhfhoilsithe, an bhliain ar "
 "scríobhadh"
 
-#: repository/models.py:792
+#: repository/models.py:791
 msgid "The name of the publisher"
 msgstr "Ainm an foilsitheora"
 
-#: repository/models.py:797
+#: repository/models.py:796
 msgid "The title of a book, part of which is being cited"
 msgstr "Teideal leabhair, a bhfuil tagairt á déanamh do chuid de"
 
-#: repository/models.py:802
+#: repository/models.py:801
 msgid "A journal name. Abbreviations could also be provided"
 msgstr "Ainm irise. Is féidir giorrúcháin a chur ar fáil freisin"
 
-#: repository/models.py:807
+#: repository/models.py:806
 msgid "Specifies the volume of a journal or multivolume book"
 msgstr "Sonraíonn an t-imleabhar de iris nó de leabhar il-imleabhair"
 
-#: repository/models.py:812
+#: repository/models.py:811
 msgid ""
 "The name of a series or set of books. When citing an entire book, the title "
 "field gives its title and an optional series field gives the name of a "
@@ -411,23 +411,23 @@ msgstr ""
 "roghnach sraithe ainm na sraithe nó na foirne il-imleabhar ina bhfuil an "
 "leabhar foilsithe"
 
-#: repository/models.py:820
+#: repository/models.py:819
 msgid "One or more page numbers or range of page numbers"
 msgstr "Uimhir leathanaigh amháin nó níos mó nó raon uimhreacha leathanach"
 
-#: repository/models.py:825
+#: repository/models.py:824
 msgid "The edition of a book"
 msgstr "Eagrán leabhair"
 
-#: repository/models.py:830
+#: repository/models.py:829
 msgid "The name of the conference in which the document has been presented"
 msgstr "Ainm na comhdhála inar tugadh an doiciméad"
 
-#: repository/models.py:836
+#: repository/models.py:835
 msgid "A digital object identifier assigned to the document"
 msgstr "Aitheantóir oibiachta digití a sainíodh don doiciméad"
 
-#: repository/models.py:841 repository/models.py:1369
+#: repository/models.py:840 repository/models.py:1368
 msgid ""
 "A URL used as homepage of an entity (e.g. of a person, organization, "
 "resource etc.); it provides general information (for instance in the case of "
@@ -439,26 +439,26 @@ msgstr ""
 "d’fhéadfadh sé tuairisc a dhéanamh ar an acmhainn, a cruthaitheoirí and "
 "b’fhéidir naisc go dtí an URL inar féidir rochtain a fháil uirthi"
 
-#: repository/models.py:850
+#: repository/models.py:849
 msgid "The International Standard Serial Number used to identify a journal"
 msgstr "An tSraithuimhir Chaighdeánach Idirnáisiúnta ar iris"
 
-#: repository/models.py:856
+#: repository/models.py:855
 msgid "The International Standard Book Number"
 msgstr "An Leabharuimhir Chaighdeánach Idirnáisiúnta"
 
-#: repository/models.py:861
+#: repository/models.py:860
 msgid "The keyword(s) for indexing and classification of the document"
 msgstr "Eochairfhoca(i)l maidir le hinnéacsú agus rangú an doiciméid"
 
-#: repository/models.py:867
+#: repository/models.py:866
 msgid ""
 "The language the document is written in (according to the IETF BCP47 "
 "guidelines)"
 msgstr ""
 "An teanga ina bhfuil an doiciméad scríofa (dar le treoirlínte IETF BCP47)"
 
-#: repository/models.py:873
+#: repository/models.py:872
 msgid ""
 "The id of the language the document is written in (according to the IETF "
 "BCP47 guidelines)"
@@ -466,8 +466,8 @@ msgstr ""
 "Aitheantas na teanga a bhfuil an doiciméad scríofa inti (dar le treoirlínte "
 "IETF BCP47)"
 
-#: repository/models.py:879 repository/models.py:1497 repository/models.py:1586
-#: repository/models.py:2521
+#: repository/models.py:878 repository/models.py:1496 repository/models.py:1585
+#: repository/models.py:2520
 msgid ""
 "(Read-only) base URL for the server where the master copy of the associated "
 "entity instance is located."
@@ -475,28 +475,28 @@ msgstr ""
 "(Inléite amháin) URL bunaidh don fhreastalaí ina bhfuil máistirchóip don ásc "
 "aonáin gaolmhar lonnaithe."
 
-#: repository/models.py:883 repository/models.py:1501 repository/models.py:1590
-#: repository/models.py:2525
+#: repository/models.py:882 repository/models.py:1500 repository/models.py:1589
+#: repository/models.py:2524
 msgid "Generalized copy status flag for this entity instance."
 msgstr "Brat stádais do thráchtaireacht ghinearálaithe don ásc aonáin seo."
 
-#: repository/models.py:924
+#: repository/models.py:923
 msgid "Refers to papers, manuals, reports etc. describing the resource"
 msgstr ""
 "Tagraíonn do pháipéir, lámhleabhair, tuairiscí etc. ag tuairisciú ar an "
 "acmhainn"
 
-#: repository/models.py:931
+#: repository/models.py:930
 msgid "URL link to an online manual or help pages"
 msgstr "Nasc URL do lámhleabhar nó leathanaigh chabhrach ar líne"
 
-#: repository/models.py:937
+#: repository/models.py:936
 msgid ""
 "A url with samples of the resource or, in the case of tools, of samples of "
 "the output"
 msgstr "Url le samplaí den acmhainn nó, i gcás uirlisí, le samplaí den aschur"
 
-#: repository/models.py:974
+#: repository/models.py:973
 msgid ""
 "Specifies the application domain of the resource or the tool/service "
 "according to the EUROVOC thesaurus"
@@ -504,7 +504,7 @@ msgstr ""
 "Sonraíonn fearann feidhmchláir na hacmhainne nó na huirlise/seirbhíse dar le "
 "teasáras EUROVOC"
 
-#: repository/models.py:983
+#: repository/models.py:982
 msgid ""
 "The identifier of the application domain of the resource or the tool/"
 "service, taken from the EUROVOC domains: http://eurovoc.europa.eu/drupal"
@@ -512,7 +512,7 @@ msgstr ""
 "Aitheantóir fearainn feidhmchláir na hacmhainne nó na huirlise/seirbhíse, "
 "tógtha ó fhearainn EUROVOC: http://eurovoc.europa.eu/drupal"
 
-#: repository/models.py:996 repository/models.py:4096
+#: repository/models.py:995 repository/models.py:4095
 msgid ""
 "The name of the application subdomain of the resource or the tool/service, "
 "taken from the EUROVOC domains: http://eurovoc.europa.eu/drupal"
@@ -520,7 +520,7 @@ msgstr ""
 "Ainm fofhearainn feidhmchláir na hacmhainne nó na huirlise/seirbhíse, tógtha "
 "ó fhearainn EUROVOC: http://eurovoc.europa.eu/drupal"
 
-#: repository/models.py:1006 repository/models.py:4103
+#: repository/models.py:1005 repository/models.py:4102
 msgid ""
 "The identifier of the application subdomain of the resource or the tool/"
 "service, taken from the EUROVOC domains: http://eurovoc.europa.eu/drupal"
@@ -528,17 +528,17 @@ msgstr ""
 "Aitheantóir fofhearainn feidhmchláir na hacmhainne nó na huirlise/seirbhíse, "
 "tógtha ó fhearainn EUROVOC: http://eurovoc.europa.eu/drupal"
 
-#: repository/models.py:1017 repository/models.py:2744
-#: repository/models.py:4110
+#: repository/models.py:1016 repository/models.py:2743
+#: repository/models.py:4109
 msgid "Specifies the external classification schemes"
 msgstr "Sonraíonn na scéimeanna rangúcháin seachtracha"
 
-#: repository/models.py:1024
+#: repository/models.py:1023
 msgid "Specifies the size of resource parts per domain"
 msgstr "Sonraíonn méid pháirteanna na hacmhainne san fhearann"
 
-#: repository/models.py:1126 repository/models.py:3267
-#: repository/models.py:3461
+#: repository/models.py:1125 repository/models.py:3266
+#: repository/models.py:3460
 msgid ""
 "Specifies the annotation level of the resource or the annotation type a "
 "tool/ service requires or produces as an output"
@@ -546,12 +546,12 @@ msgstr ""
 "Sonraíonn leibhéal anótála na hacmhainne nó cineál anótála atá de dhíth ar "
 "uirlis/sheirbhís nó a tháirgeann sé mar aschur"
 
-#: repository/models.py:1136
+#: repository/models.py:1135
 msgid ""
 "Indicates whether the annotation is created inline or in a stand-off fashion"
 msgstr "Tugann le fios cé ar cruthaíodh an anótáil inlíne nó ó chian"
 
-#: repository/models.py:1142
+#: repository/models.py:1141
 msgid ""
 "Specifies the segmentation unit in terms of which the resource has been "
 "segmented or the level of segmentation a tool/service requires/outputs"
@@ -559,8 +559,8 @@ msgstr ""
 "Sonraíonn an t-aonad deighilte de réir a bhfuil an acmhainn deighilte nó an "
 "leibhéal deighilte de dhíth ar/mar aschur ag uirlis/seirbhís"
 
-#: repository/models.py:1152 repository/models.py:3276
-#: repository/models.py:3470
+#: repository/models.py:1151 repository/models.py:3275
+#: repository/models.py:3469
 msgid ""
 "A name or a url reference to the typesystem used in the annotation of the "
 "resource or used by the tool/service"
@@ -568,8 +568,8 @@ msgstr ""
 "Ainm nó tagairt url don chineálchóras úsáidte in anótáil na hacmhainne nó "
 "úsáidte ag an uirlis/seirbhís"
 
-#: repository/models.py:1158 repository/models.py:3282
-#: repository/models.py:3476
+#: repository/models.py:1157 repository/models.py:3281
+#: repository/models.py:3475
 msgid ""
 "A name or a url reference to the annotation schema used in the annotation of "
 "the resource or used by the tool/service"
@@ -577,7 +577,7 @@ msgstr ""
 "Ainm nó tagairt url don scéimre anótála úsáidte in anótáil na hacmhainne nó "
 "úsáidte ag an uirlis/seirbhís"
 
-#: repository/models.py:1164
+#: repository/models.py:1163
 msgid ""
 "A name or a url reference to the resource (e.g. tagset, ontology, term "
 "lexicon etc.) used in the annotation of the resource or used by the tool/"
@@ -587,8 +587,8 @@ msgstr ""
 "téarmaí etc.) úsáidte in anótáil na hacmhainne nó úsáidte ag an uirlis/"
 "seirbhís"
 
-#: repository/models.py:1171 repository/models.py:2816
-#: repository/models.py:3000
+#: repository/models.py:1170 repository/models.py:2815
+#: repository/models.py:2999
 msgid ""
 "Specifies the standards or the best practices to which the tagset used for "
 "the annotation conforms"
@@ -596,7 +596,7 @@ msgstr ""
 "Sonraíonn na caighdeáin nó na dea-chleachtais a bhfuil an chlibshraith atá "
 "úsáidte don anótáil i gcomhréir leo"
 
-#: repository/models.py:1180 repository/models.py:3009
+#: repository/models.py:1179 repository/models.py:3008
 msgid ""
 "Name of the theoretic model applied for the creation or enrichment of the "
 "resource, and/or a reference (URL or bibliographic reference) to informative "
@@ -606,11 +606,11 @@ msgstr ""
 "nó a fheabhsú, agus/nó tagairt (URL nó tagairt bhibleagrafach) d'ábhar "
 "eolais faoin samhail theoiriciúil a úsáideadh"
 
-#: repository/models.py:1188
+#: repository/models.py:1187
 msgid "A bibliographic reference or ms:httpURI link to the annotation manual"
 msgstr "Tagairt bhibleagrafach nó nasc ms:httpURI don lámhleabhar anótála"
 
-#: repository/models.py:1194
+#: repository/models.py:1193
 msgid ""
 "Indicates whether the resource is annotated manually or by automatic "
 "processes"
@@ -618,22 +618,22 @@ msgstr ""
 "Tugann le fios cé an bhfuil an acmhainn anótáilte de láimh nó trí phróisis "
 "uathoibríocha"
 
-#: repository/models.py:1204
+#: repository/models.py:1203
 msgid "Provides further information on annotation process"
 msgstr "Tugann eolas sa bhreis faoi phróiseas anótála"
 
-#: repository/models.py:1209
+#: repository/models.py:1208
 msgid ""
 "The name, the identifier or the url of the tool used for the annotation of "
 "the resource"
 msgstr ""
 "Ainm, aitheantóir nó url na huirlise a úsáidtear chun an acmhainn a anótáil"
 
-#: repository/models.py:1215
+#: repository/models.py:1214
 msgid "Provides information on size for the annotated parts of the resource"
 msgstr "Tugann eolas faoi mhéid na bpáirteanna anótáilte den acmhainn"
 
-#: repository/models.py:1243
+#: repository/models.py:1242
 msgid ""
 "The full name or a url to a resource related to the one being described; to "
 "be used for identifiers also for this version"
@@ -641,25 +641,25 @@ msgstr ""
 "Ainm iomlán nó url d'acmhainn a bhaineann leis an gceann atá sa tuairisc; le "
 "húsáid mar aitheantóir don leagan seo"
 
-#: repository/models.py:1278
+#: repository/models.py:1277
 msgid ""
 "Specifies the type of relation not covered by the ones proposed by META-SHARE"
 msgstr ""
 "Sonraíonn cineál an ghaoil nach bhfuil clúdaithe ag na cinn molta ag META-"
 "SHARE"
 
-#: repository/models.py:1287
+#: repository/models.py:1286
 msgid "The full name, the identifier or the url of the related resource"
 msgstr "Ainm iomlán, aitheantóir nó url na hacmhainne gaolta"
 
-#: repository/models.py:1317
+#: repository/models.py:1316
 msgid ""
 "Additional software required for running a tool and/or computational grammar"
 msgstr ""
 "Bogearra sa bhreis atá riachtanach chun uirlis agus/nó gramadach "
 "ríomhaireachtúil a rith"
 
-#: repository/models.py:1323
+#: repository/models.py:1322
 msgid ""
 "If for running a tool and/or computational grammar, specific LRs (e.g. a "
 "grammar, a list of words etc.) are required"
@@ -667,24 +667,24 @@ msgstr ""
 "Má tá Acmhainní Teanga ar leith (e.g. gramadach, gluais etc.) riachtanach "
 "chun uirlis agus/nó gramadach ríomhaireachtúil a rith"
 
-#: repository/models.py:1329
+#: repository/models.py:1328
 msgid "Provides further information on the dependencies"
 msgstr "Tugann eolas sa bhreis ar na spleáchais"
 
-#: repository/models.py:1363
+#: repository/models.py:1362
 msgid "The email address of a person or an organization"
 msgstr "Seoladh ríomhphoist duine nó eagraíochta"
 
-#: repository/models.py:1378
+#: repository/models.py:1377
 msgid ""
 "The street and the number of the postal address of a person or organization"
 msgstr "Sráid agus uimhir ó sheoladh poist duine nó eagraíochta"
 
-#: repository/models.py:1384
+#: repository/models.py:1383
 msgid "The zip code of the postal address of a person or organization"
 msgstr "Cód poist ó sheoladh poist duine nó eagraíochta"
 
-#: repository/models.py:1390
+#: repository/models.py:1389
 msgid ""
 "The name of the city, town or village as mentioned in the postal address of "
 "a person or organization"
@@ -692,7 +692,7 @@ msgstr ""
 "Ainm na cathrach, an bhaile nó an tsráidbhaile mar atá le fáil i seoladh "
 "poist duine nó eagraíochta"
 
-#: repository/models.py:1396
+#: repository/models.py:1395
 msgid ""
 "The name of the region, county or department as mentioned in the postal "
 "address of a person or organization"
@@ -700,7 +700,7 @@ msgstr ""
 "Ainm an réigiúin, an chontae nó na roinne mar atá le fáil i seoladh poist "
 "duine nó eagraíochta"
 
-#: repository/models.py:1402
+#: repository/models.py:1401
 msgid ""
 "The name of the country mentioned in the postal address of a person or "
 "organization as defined in the list of values of ISO 3166"
@@ -708,7 +708,7 @@ msgstr ""
 "Ainm tíre mar atá le fáil i seoladh poist duine nó eagraíochtamar atá "
 "sainithe i liosta luachanna ISO 3166"
 
-#: repository/models.py:1409
+#: repository/models.py:1408
 msgid ""
 "The identifier of the country mentioned in the postal address of a person or "
 "organization as defined in the list of values of ISO 3166"
@@ -716,7 +716,7 @@ msgstr ""
 "Aitheantóir na tíre mar atá le fáil i seoladh poist duine nó eagraíochta mar "
 "atá sainithe i liosta luachanna ISO 3166"
 
-#: repository/models.py:1416
+#: repository/models.py:1415
 msgid ""
 "The telephone number of a person or an organization; recommended format: "
 "+_international code_city code_number"
@@ -724,15 +724,15 @@ msgstr ""
 "Uimhir ghutháin duine nó eagraíochta; formáid mholta:+_cód idirnáisiúnta_cód "
 "cathrach_uimhir"
 
-#: repository/models.py:1471
+#: repository/models.py:1470
 msgid "The full name of an organization"
 msgstr "Ainm iomlán eagraíochta"
 
-#: repository/models.py:1477
+#: repository/models.py:1476
 msgid "The short name (abbreviation, acronym etc.) used for an organization"
 msgstr "Ainm gearr (giorrúchán, acrainm etc.) a úsáidtear do eagraíocht"
 
-#: repository/models.py:1484
+#: repository/models.py:1483
 msgid ""
 "The name of the department or unit (e.g. specific university faculty/"
 "department, department/unit of a research organization or private company "
@@ -741,16 +741,16 @@ msgstr ""
 "Ainm na roinne nó an aonaid (e.g. dámh/roinn ar leith ollscoile, roinn/aonad "
 "d'eagraíocht taighde nó comhlacht príobháideach etc.)"
 
-#: repository/models.py:1491 repository/models.py:1568
+#: repository/models.py:1490 repository/models.py:1567
 msgid ""
 "Groups information on communication details of a person or an organization"
 msgstr "Cruinníonn eolas ar shonraí teagmhála duine nó eagraíochta"
 
-#: repository/models.py:1544
+#: repository/models.py:1543
 msgid "The surname (family name) of a person related to the resource"
 msgstr "Sloinne duine a bhaineann leis an acmhainn"
 
-#: repository/models.py:1552
+#: repository/models.py:1551
 msgid ""
 "The given name (first name) of a person related to the resource; initials "
 "can also be used"
@@ -758,20 +758,20 @@ msgstr ""
 "Ainm baiste (céadainm) duine a bhaineann leis an acmhainn; is féidir "
 "inisealacha a úsáid freisin"
 
-#: repository/models.py:1558
+#: repository/models.py:1557
 msgid "The gender of a person related to or participating in the resource"
 msgstr ""
 "Inscne duine a duine a bhaineann leis an acmhainn nó a bhfuil páirt aige inti"
 
-#: repository/models.py:1574
+#: repository/models.py:1573
 msgid "The position or the title of a person if affiliated to an organization"
 msgstr "Post nó teideal duine má tá siad ceangailte le heagraíocht"
 
-#: repository/models.py:1580
+#: repository/models.py:1579
 msgid "Groups information on organization to whom the person is affiliated"
 msgstr "Cruinníonn eolas ar eagraíocht a bhfuil an duine cleamhnaithe léi"
 
-#: repository/models.py:1642
+#: repository/models.py:1641
 msgid ""
 "Specifies the availability status of the resource; restrictionsOfUse can be "
 "further used to indicate the specific terms of availability"
@@ -779,7 +779,7 @@ msgstr ""
 "Sonraíonn inúsáidteacht na hacmhainne; is féidir srianta úsáide a úsáid chun "
 "téarmaí sonraithe na húsáidteachta a léiriú"
 
-#: repository/models.py:1653
+#: repository/models.py:1652
 msgid ""
 "Indicates that the resource falls under the Public Sector Information "
 "regulations"
@@ -787,14 +787,14 @@ msgstr ""
 "Tugann le fios go dtagann an acmhainn faoi rialúcháin maidir le Faisnéis ón "
 "Earnáil Phoiblí"
 
-#: repository/models.py:1659
+#: repository/models.py:1658
 msgid ""
 "Whether the resource can be used for purposes other than those of the DGT"
 msgstr ""
 "Cé an féidir nó nach féidir an acmhainn a úsáid d'fheidhmeanna seachas obair "
 "an DGT"
 
-#: repository/models.py:1666
+#: repository/models.py:1665
 msgid ""
 "Groups information on licences for the resource; can be repeated to allow "
 "for different modes of access and restrictions of use (e.g. free for "
@@ -806,7 +806,7 @@ msgstr ""
 "d'úsáid acadúil, ar bhonn táille d'úsáid tráchtála, sampla a íoslódáil saor "
 "in aisce etc.)a chuimsiú"
 
-#: repository/models.py:1674
+#: repository/models.py:1673
 msgid ""
 "Specifies the medium (channel) used for delivery or providing access to the "
 "resource"
@@ -814,7 +814,7 @@ msgstr ""
 "Sonraíonn an meán (cainéal) a úsáidtear chun an acmhainn a sheachadadh nó "
 "chun teacht ar an acmhainn"
 
-#: repository/models.py:1684
+#: repository/models.py:1683
 msgid ""
 "Any url where the resource can be downloaded from; please, use if the "
 "resource is \"downloadable\" and you have not uploaded the resource in the "
@@ -824,7 +824,7 @@ msgstr ""
 "a íoslódáil \"downloadable\" agus mura bhfuil an acmhainn uaslódáilte sa "
 "stór agat"
 
-#: repository/models.py:1692
+#: repository/models.py:1691
 msgid ""
 " Any url where the service providing access to a resource is being executed; "
 "please use for resources that are \"accessibleThroughInterface\" or "
@@ -833,7 +833,7 @@ msgstr ""
 " Aon url ina bhfuil an tseirbhís a chuireann an acmhainn ar fáil ag rith; "
 "úsáid d'acmhainní atá \"accessibleThroughInterface\" nó \"webExecutable\" "
 
-#: repository/models.py:1701
+#: repository/models.py:1700
 msgid ""
 " The text that must be quoted for attribution purposes when using a resource "
 "- for cases where a resource is provided with a request for attribution; you "
@@ -845,7 +845,7 @@ msgstr ""
 "admháil; is féidir téacs caighdeánach a úsáid, leithéidí \"Acmhainn X le "
 "Cruthaitheoir Y úsáidte faoi cheadúnas Z\" "
 
-#: repository/models.py:1709
+#: repository/models.py:1708
 msgid ""
 "Specifies whether the resource contains or not personal data; this might "
 "mean that special handling of the resource is required (e.g. anonymisation)"
@@ -854,7 +854,7 @@ msgstr ""
 "b'fhéidir go mbeadh gá le cúram ar leith leis an acmhainn dá bharr (e.g. "
 "anaithnidiú)"
 
-#: repository/models.py:1716
+#: repository/models.py:1715
 msgid ""
 "If the resource includes personal data, this field can be used for entering "
 "more information, e.g. whether special handling of the resource is required "
@@ -864,7 +864,7 @@ msgstr ""
 "chun eolas sa bhreis a thabhairt, e.g. má tá cúram ar leith de dhíth leis an "
 "acmhainn (e.g. anaithnidiú, iarratas breise le haghaidh úsáide etc.)"
 
-#: repository/models.py:1724
+#: repository/models.py:1723
 msgid ""
 "Specifies whether the resource contains or not sensitive data; this might "
 "mean that special handling of the resource is required (e.g. anonymisation)"
@@ -873,7 +873,7 @@ msgstr ""
 "b'fhéidir go mbeadh gá le cúram ar leith leis an acmhainn dá bharr (e.g. "
 "anaithnidiú)"
 
-#: repository/models.py:1731
+#: repository/models.py:1730
 msgid ""
 "If the resource includes sensitive data, this field can be used for entering "
 "more information, e.g. whether special handling of the resource is required "
@@ -883,7 +883,7 @@ msgstr ""
 "chun eolas sa bhreis a thabhairt, e.g. má tá cúram ar leith de dhíth leis an "
 "acmhainn (e.g. anaithnidiú)"
 
-#: repository/models.py:1738
+#: repository/models.py:1737
 msgid ""
 "Specifies the costs that are required to access the resource, a fragment of "
 "the resource or to use a tool or service"
@@ -891,7 +891,7 @@ msgstr ""
 "Sonraíonn na costais atá i gceist le teacht ar an acmhainn, cuid den "
 "acmhainn nó chun uirlis nó seirbhís a úsáid"
 
-#: repository/models.py:1744
+#: repository/models.py:1743
 msgid ""
 "Groups information on a person or an organization who holds the full "
 "Intellectual Property Rights (Copyright, trademark etc.) that subsist in the "
@@ -908,27 +908,27 @@ msgstr ""
 "arb é an sealbhóir IPR é) agus an dáilitheoir a bhfuil ceadúnas ar leith "
 "aige (i.e. cead) le saothar a dháileadh"
 
-#: repository/models.py:1850
+#: repository/models.py:1849
 msgid "International/National Data Licences"
 msgstr "Ceadúnais Sonraí Náisiúnta/Idirnáisiúnta"
 
-#: repository/models.py:1851
+#: repository/models.py:1850
 msgid "National Data Licences"
 msgstr "Ceadúnais Sonraí Náisiúnta"
 
-#: repository/models.py:1852
+#: repository/models.py:1851
 msgid "International Software Licences"
 msgstr "Ceadúnais Bogearraí Idirnáisiúnta"
 
-#: repository/models.py:1853
+#: repository/models.py:1852
 msgid "International Software & Data Licences"
 msgstr "Ceadúnais Bogearraí agus Sonaraí Idirnáisiúnta"
 
-#: repository/models.py:1854
+#: repository/models.py:1853
 msgid "Other"
 msgstr "Eile"
 
-#: repository/models.py:1967
+#: repository/models.py:1966
 msgid ""
 "The licence of use for the resource; for an overview of licences, please "
 "visit: https://www.elrc-share.eu/info/#Licensing_LRs"
@@ -936,7 +936,7 @@ msgstr ""
 "An ceadúnas a úsáideann an acmhainn; d'achoimre ar cheadúnais tabhair cuairt "
 "ar: https://www.elrc-share.eu/info/#Licensing_LRs"
 
-#: repository/models.py:1977
+#: repository/models.py:1976
 msgid ""
 "The name with which a licence is known; to be used for licences not included "
 "in the pre-defined list of recommended licences"
@@ -944,7 +944,7 @@ msgstr ""
 "An t-ainm faoina bhfuil aithne ar cheadúnas; le húsáid do cheadúnais nach "
 "bhfuil áirithe sa liosta réamhshainithe de cheadúnais mholta"
 
-#: repository/models.py:1986
+#: repository/models.py:1985
 msgid ""
 "Used for inputting the text of licences that are not included in the pre-"
 "defined list or terms of use statements associated with a resource"
@@ -952,7 +952,7 @@ msgstr ""
 "Chun téacs do cheadúnais nach bhfuil áirithe sa liosta réamhshainithe nó "
 "ráitis i dtaobh coinníollacha úsáide atá luaite le hacmhainn a iontráil"
 
-#: repository/models.py:1993
+#: repository/models.py:1992
 msgid ""
 "Used to provide a hyperlink to a url containing the text of a licence not "
 "included in the predefined list or describing the terms of use for a "
@@ -962,7 +962,7 @@ msgstr ""
 "bhfuil áirithe sa liosta réamhshainithe nó ag cur síos ar théarmaí úsáide "
 "acmhainne teanga"
 
-#: repository/models.py:2000
+#: repository/models.py:1999
 msgid ""
 "Specifies terms and conditions of use (e.g. attribution, payment etc.) "
 "imposed by the licence"
@@ -970,19 +970,19 @@ msgstr ""
 "Sonraíonn na téarmaí agus coinníollacha úsáide (e.g. admháil, íocaíocht "
 "etc.) a chuireann an ceadúnas i bhfeidhm"
 
-#: repository/models.py:2024
+#: repository/models.py:2023
 msgid "Terms for Public Domain resources"
 msgstr "Téarmaí d'acmhainní san Fhearann Poiblí"
 
-#: repository/models.py:2025
+#: repository/models.py:2024
 msgid "The resource is free of all known legal restrictions."
 msgstr "Tá an acmhainn glan ar gach srian dlí atá aitheanta."
 
-#: repository/models.py:2027
+#: repository/models.py:2026
 msgid "Terms for PSI-compliant resources"
 msgstr "Téarmaí d'acmhainní atá ag teacht le PSI"
 
-#: repository/models.py:2028
+#: repository/models.py:2027
 msgid ""
 "Used for resources that fall under the scope of PSI (Public Sector "
 "Information) regulations, and for which no further information is required "
@@ -996,8 +996,8 @@ msgstr ""
 "earnáil phoiblí a athúsáid le fáil anseo: https://ec.europa.eu/digital-"
 "single-market/en/european-legislation-reuse-public-sector-information."
 
-#: repository/models.py:2102 repository/models.py:3254
-#: repository/models.py:3452
+#: repository/models.py:2101 repository/models.py:3253
+#: repository/models.py:3451
 msgid ""
 "The name of the character encoding used in the resource or accepted by the "
 "tool/service"
@@ -1005,7 +1005,7 @@ msgstr ""
 "Ainm an ionchódaithe carachtair atá in úsáid san acmhainn nó a ghlacann an "
 "uirlis/tseirbhís"
 
-#: repository/models.py:2110
+#: repository/models.py:2109
 msgid ""
 "Provides information on the size of the resource parts with different "
 "character encoding"
@@ -1013,22 +1013,22 @@ msgstr ""
 "Cuireann eolas ar fáil faoi mhéid choda na hacmhainne le hionchódú carachtar "
 "éagsúil iontu"
 
-#: repository/models.py:2152
+#: repository/models.py:2151
 msgid "Indicates whether the resource includes one, two or more languages"
 msgstr ""
 "Tugann le fios an bhfuil teanga amháin, dhá theanga nó níos mó san acmhainn"
 
-#: repository/models.py:2162
+#: repository/models.py:2161
 msgid "Indicates whether the corpus is parallel, comparable or mixed"
 msgstr ""
 "Tugann le fios an bhfuil an corpas comhthreomhar, comparáideach nó measctha"
 
-#: repository/models.py:2172
+#: repository/models.py:2171
 msgid ""
 "Provides further information on multilinguality of a resource in free text"
 msgstr "Tugann eolas sa bhreis faoi bhreisteangachas acmhainne i saorthéacs"
 
-#: repository/models.py:2217
+#: repository/models.py:2216
 msgid ""
 "Specifies the type of the language variety that occurs in the resource or is "
 "supported by a tool/service"
@@ -1036,8 +1036,8 @@ msgstr ""
 "Sonraíonn cineál an chineáil teanga atá le fáil san acmhainn nó a dtacaíonn "
 "uirlis/seirbhís leis"
 
-#: repository/models.py:2227 repository/models.py:3248
-#: repository/models.py:3446
+#: repository/models.py:2226 repository/models.py:3247
+#: repository/models.py:3445
 msgid ""
 "The name of the language variety that occurs in the resource or is supported "
 "by a tool/service"
@@ -1045,11 +1045,11 @@ msgstr ""
 "Ainm an chineáil teanga atá le fáil san acmhainn nó a dtacaíonn uirlis/"
 "seirbhís leis"
 
-#: repository/models.py:2233
+#: repository/models.py:2232
 msgid "Provides information on the size per language variety component"
 msgstr "Cuireann eolas ar fáil faoin méid sa chomhpháirt chineáil teanga"
 
-#: repository/models.py:2282 repository/models.py:2372
+#: repository/models.py:2281 repository/models.py:2371
 msgid ""
 "The identifier of the language that is included in the resource or supported "
 "by the tool/service, according to the IETF BCP47 guidelines"
@@ -1057,7 +1057,7 @@ msgstr ""
 "Aitheantóir na teanga atá le fáil san acmhainn nó a dtacaíonn uirlis/"
 "seirbhís léi, dar le treoirlínte IETF BCP47"
 
-#: repository/models.py:2289 repository/models.py:2379
+#: repository/models.py:2288 repository/models.py:2378
 msgid ""
 "A human understandable name of the language that is used in the resource; "
 "the name is selected according to the IETF BCP47 specifications"
@@ -1065,7 +1065,7 @@ msgstr ""
 "Ainm intuigthe do dhaoine na teanga atá in úsáid san acmhainn; roghnaítear "
 "an t-ainm de réir shonraíochtaí IETF BCP47"
 
-#: repository/models.py:2296 repository/models.py:2385
+#: repository/models.py:2295 repository/models.py:2384
 msgid ""
 "A human understandable name of the script used for the resource, according "
 "to the IETF BCP47 specifications; the element is optional and should only be "
@@ -1075,7 +1075,7 @@ msgstr ""
 "shonraíochtaí IETF BCP47; tá an mhír roghnach agus níor chóir í a úsáid ach "
 "i gcásanna eisceachtúla (e.g. téacs trascríofa san AFI etc.)"
 
-#: repository/models.py:2304 repository/models.py:2393
+#: repository/models.py:2303 repository/models.py:2392
 msgid ""
 "Name of the region where the language of the resource is spoken (e.g. for "
 "English as spoken in the US or the UK etc.)"
@@ -1083,18 +1083,18 @@ msgstr ""
 "Ainm an réigiúin ina labhraítear teanga na hacmhainne (e.g. don Bhéarla mar "
 "a labhraítear í sa RA nó SAM etc.)"
 
-#: repository/models.py:2311 repository/models.py:2400
+#: repository/models.py:2310 repository/models.py:2399
 msgid ""
 "Name of the variant of the language of the resource is spoken (according to "
 "IETF BCP47)"
 msgstr ""
 "Ainm an leagan den teanga atá in úsáid san acmhainn (de réir IETF BCP47)"
 
-#: repository/models.py:2319
+#: repository/models.py:2318
 msgid "Provides information on the size per language component"
 msgstr "Cuireann eolas ar fáil faoi mhéid na comhpháirte teanga"
 
-#: repository/models.py:2324
+#: repository/models.py:2323
 msgid ""
 "Groups information on language varieties occurred in the resource (e.g. "
 "dialects)"
@@ -1102,19 +1102,19 @@ msgstr ""
 "Cruinníonn eolas faoi chineálacha teanga atá le fáil san acmhainn (e.g. "
 "canúintí)"
 
-#: repository/models.py:2459
+#: repository/models.py:2458
 msgid "The full name of a project related to the resource"
 msgstr "Ainm iomlán tionscadail atá bainteach leis an acmhainn"
 
-#: repository/models.py:2466
+#: repository/models.py:2465
 msgid "A short name or abbreviation of a project related to the resource"
 msgstr "Ainm gearr nó giorrúchán do thionscadal atá bainteach leis an acmhainn"
 
-#: repository/models.py:2472
+#: repository/models.py:2471
 msgid "An unambiguous referent to a project related to the resource"
 msgstr "Tagrán soiléir do thionscadal atá bainteach leis an acmhainn"
 
-#: repository/models.py:2479
+#: repository/models.py:2478
 msgid ""
 "A URL used as homepage of an entity (e.g. of a person, organization, "
 "resource etc.) and/or where an entity (e.g.LR, document etc.) is located"
@@ -1123,15 +1123,15 @@ msgstr ""
 "acmhainn etc.) agus/nó an áit a bhfuil aonán (e.g. AT, doiciméad etc.) "
 "lonnaithe"
 
-#: repository/models.py:2486
+#: repository/models.py:2485
 msgid "Specifies the type of funding of the project"
 msgstr "Sonraíonn an cineál maoinithe atá ag an tionscadal"
 
-#: repository/models.py:2494
+#: repository/models.py:2493
 msgid "The full name of the funder of the project"
 msgstr "Ainm iomlán mhaoinitheora an tionscadail"
 
-#: repository/models.py:2499
+#: repository/models.py:2498
 msgid ""
 "The name of the funding country, in case of national funding as mentioned in "
 "ISO3166"
@@ -1139,7 +1139,7 @@ msgstr ""
 "Ainm na tíre a chuireann maoiniú ar fáil, nuair atá maoiniú náisiúnta i "
 "gceist mar atá luaite in ISO3166"
 
-#: repository/models.py:2505
+#: repository/models.py:2504
 msgid ""
 "The identifier of the funding country, in case of national funding as "
 "mentioned in ISO3166"
@@ -1147,17 +1147,17 @@ msgstr ""
 "Aitheantóir na tíre a chuireann maoiniú ar fáil, nuair atá maoiniú náisiúnta "
 "i gceist mar atá luaite in ISO3166"
 
-#: repository/models.py:2511
+#: repository/models.py:2510
 msgid "The starting date of a project related to the resource"
 msgstr "An dáta a thosaigh tionscadal a bhaineann leis an acmhainn"
 
-#: repository/models.py:2516
+#: repository/models.py:2515
 msgid "The end date of a project related to the resource"
 msgstr "An dáta a chríochnóidh tionscadal a bhaineann leis an acmhainn"
 
-#: repository/models.py:2582 repository/models.py:2885
-#: repository/models.py:3077 repository/models.py:3208
-#: repository/models.py:3407
+#: repository/models.py:2581 repository/models.py:2884
+#: repository/models.py:3076 repository/models.py:3207
+#: repository/models.py:3406
 msgid ""
 "Specifies the media type of the resource and basically corresponds to the "
 "physical medium of the content representation. Each media type is described "
@@ -1171,8 +1171,8 @@ msgstr ""
 "cineálacha éagsúla meán in acmhainn. Is féidir le huirlis/seirbhís níos mó "
 "ná cineál amháin meáin a thógáil mar inchur/aschur."
 
-#: repository/models.py:2592 repository/models.py:2895
-#: repository/models.py:3087
+#: repository/models.py:2591 repository/models.py:2894
+#: repository/models.py:3086
 msgid ""
 "Groups information on the number of languages of the resource part and of "
 "the way they are combined to each other"
@@ -1180,7 +1180,7 @@ msgstr ""
 "Cruinníonn eolas ar an líon teangacha sa chuid den acmhainn agus ar conas a "
 "nascann siad le chéile"
 
-#: repository/models.py:2612
+#: repository/models.py:2611
 msgid ""
 "Groups together information on the resource creation (e.g. for corpora, "
 "selection of texts/audio files/ video files etc. and structural encoding "
@@ -1190,8 +1190,8 @@ msgstr ""
 "roghnú na gcomhad téacs/fuaime/físe etc. agus an t-ionchódú struchtúrach a "
 "rinneadh orthu; do fhoclóirí, cur le chéile liostaí na leamaí etc.)"
 
-#: repository/models.py:2648 repository/models.py:3231
-#: repository/models.py:3429
+#: repository/models.py:2647 repository/models.py:3230
+#: repository/models.py:3428
 msgid ""
 "The data format (usually corresponding to the mime-type) of the resource "
 "which is a formalized specifier for the format included or a data format "
@@ -1209,14 +1209,14 @@ msgstr ""
 "IS FEARR Ó NA LUACHANNA A MHOLANN IANA DO MHEÁIN DE CHINEÁL MIME (http://www."
 "iana.org/assignments/media-types/media-types.xhtml)"
 
-#: repository/models.py:2664
+#: repository/models.py:2663
 msgid ""
 "Provides information on the size of the resource parts with different format"
 msgstr ""
 "Cuireann eolas ar fáil maidir le méid chodanna na hacmhainne le formáid "
 "éagsúil"
 
-#: repository/models.py:2723
+#: repository/models.py:2722
 msgid ""
 "Genre: The conventionalized discourse or text types of the content of the "
 "resource, based on extra-linguistic and internal linguistic criteria"
@@ -1225,18 +1225,18 @@ msgstr ""
 "hacmhainne, bunaithe ar chritéir sheachtheangeolaíocha agus inmheánacha "
 "theangeolaíocha"
 
-#: repository/models.py:2734
+#: repository/models.py:2733
 msgid "Specifies the type of the text according to a text type classification"
 msgstr "Sonraíonn an cineál téacs de réir rangú ar chineálacha téacs"
 
-#: repository/models.py:2753
+#: repository/models.py:2752
 msgid ""
 "Provides information on size of resource parts with different text "
 "classification"
 msgstr ""
 "Cuireann eolas ar fáil ar mhéid chodanna na hacmhainne le rangú téacs éagsúil"
 
-#: repository/models.py:2807
+#: repository/models.py:2806
 msgid ""
 "Information on the linguistic levels covered by the resource (grammar or "
 "lexical/conceptual resource)"
@@ -1244,7 +1244,7 @@ msgstr ""
 "Eolas ar na leibhéil teangeolaíocha a chlúdaíonn an acmhainn (acmhainn "
 "ghramadaí nó foclóireachta/choincheapúil)"
 
-#: repository/models.py:2825
+#: repository/models.py:2824
 msgid ""
 "Name of the theoretic model applied for the creation/enrichment of the "
 "resource, and/or reference (URL or bibliographic reference) to informative "
@@ -1254,7 +1254,7 @@ msgstr ""
 "agus/nó tagairt (URL nó tagairt bhibleagrafach) d'ábhar eolais faoin "
 "tsamhail theoiriciúil a úsáideadh"
 
-#: repository/models.py:2833 repository/models.py:3672
+#: repository/models.py:2832 repository/models.py:3671
 msgid ""
 "Reference (name, bibliographic reference or link to url) for the formalism "
 "used for the creation/enrichment of the resource (grammar or tool/service)"
@@ -1262,11 +1262,11 @@ msgstr ""
 "Tagairt (ainm, tagairt bhibleagrafach nó nasc go url) don fhoirmiúlachas a "
 "úsáideadh chun an acmhainn a chruthú/fhorbairt (gramadach nó uirlis/seirbhís)"
 
-#: repository/models.py:2840
+#: repository/models.py:2839
 msgid "An indication of the task performed by the grammar"
 msgstr "Tugann le fios an tasc a dhéanann an gramadach"
 
-#: repository/models.py:2982
+#: repository/models.py:2981
 msgid ""
 "Information on the contents of the lexicalConceptualResource as regards the "
 "linguistic level of analysis"
@@ -1274,7 +1274,7 @@ msgstr ""
 "Eolas ar inneachar na hAcmhainne foclóireachta coincheapúla mar a bhaineann "
 "sé le leibhéal teangeolaíoch na hanailíse"
 
-#: repository/models.py:2991
+#: repository/models.py:2990
 msgid ""
 "A more detailed account of the linguistic information contained in the "
 "lexicalConceptualResource"
@@ -1282,7 +1282,7 @@ msgstr ""
 "Cuntas níos mine ar an eolas teangeolaíoch atá le fáil san Acmhainn "
 "foclóireachta choincheapúil"
 
-#: repository/models.py:3017
+#: repository/models.py:3016
 msgid ""
 "Another resource to which the lexicalConceptualResource is linked (e.g. link "
 "to a wordnet or ontology)"
@@ -1290,7 +1290,7 @@ msgstr ""
 "Acmhainn eile a bhfuil an Acmhainn foclóireachta choincheapúil nasctha léi "
 "(e.g. nasc le gréasán focal nó ointeolaíocht)"
 
-#: repository/models.py:3023
+#: repository/models.py:3022
 msgid ""
 "An indication of the extratextual information contained in the "
 "lexicalConceptualResouce; can be used as an alternative to audio, image, "
@@ -1302,7 +1302,7 @@ msgstr ""
 "íomhá, físeanna etc. i gcásanna nuair nach meastar gur cuid thábhachtach den "
 "acmhainn iad"
 
-#: repository/models.py:3034
+#: repository/models.py:3033
 msgid ""
 "The unit of the extratextual information contained in the lexical conceptual "
 "resource"
@@ -1310,8 +1310,8 @@ msgstr ""
 "Aonad an eolais sheachthéacsúil atá le fáil san Acmhainn foclóireachta "
 "choincheapúil"
 
-#: repository/models.py:3222 repository/models.py:3420
-#: repository/models.py:3872
+#: repository/models.py:3221 repository/models.py:3419
+#: repository/models.py:3871
 msgid ""
 "The type of the resource that a tool or service takes as input or produces "
 "as output"
@@ -1319,7 +1319,7 @@ msgstr ""
 "Cineál na hacmhainne a dtógann uirlis nó seirbhís í mar ionchur nó a "
 "dtáirgeann siad í mar aschur"
 
-#: repository/models.py:3288 repository/models.py:3482
+#: repository/models.py:3287 repository/models.py:3481
 msgid ""
 "A name or a url reference to the resource (ontology, tagset, term lexicon "
 "etc.) used in the annotation of the resource or used by the tool/service"
@@ -1328,7 +1328,7 @@ msgstr ""
 "téarmaí etc.) a úsáidtear in anótáil na hacmhainne nó úsáidte ag an uirlis/"
 "tseirbhís"
 
-#: repository/models.py:3295 repository/models.py:3489
+#: repository/models.py:3294 repository/models.py:3488
 msgid ""
 "Specifies the standards or the best practices to which the resource used for "
 "the annotation conforms"
@@ -1336,24 +1336,24 @@ msgstr ""
 "Sonraíonn na caighdeáin nó na dea-chleachtais a dtagann an acmhainn a "
 "úsáidtear don anótáil leo"
 
-#: repository/models.py:3548
+#: repository/models.py:3547
 msgid "Indicates whether the tool or service has been evaluated"
 msgstr "Tugann le fios cé an bhfuil measúnú déanta ar an uirlis nó seirbhís"
 
-#: repository/models.py:3554
+#: repository/models.py:3553
 msgid "Indicates the evaluation level"
 msgstr "Tugann le fios an leibhéal measúnaithe"
 
-#: repository/models.py:3562
+#: repository/models.py:3561
 msgid "Defines the criteria of the evaluation of a tool"
 msgstr "Sainmhíníonn critéir mheasúnaithe ar uirlis"
 
-#: repository/models.py:3570
+#: repository/models.py:3569
 msgid "Defines whether the evaluation measure is human or automatic"
 msgstr ""
 "Sonraíonn cé an bhfuil an gníomh measúnaithe ó dhuine nó go huathoibríoch"
 
-#: repository/models.py:3579
+#: repository/models.py:3578
 msgid ""
 "A bibliographical record of or link to a report describing the evaluation "
 "process, tool, method etc. of the tool or service"
@@ -1361,7 +1361,7 @@ msgstr ""
 "Taifead bibleagrafach de nó nasc chuig tuairisc ag cur síos ar phróiseas "
 "measúnaithe, uirlis, modh etc. na huirlise nó na seirbhíse"
 
-#: repository/models.py:3586
+#: repository/models.py:3585
 msgid ""
 "The name or id or url of the tool used for the evaluation of the tool or "
 "service"
@@ -1369,14 +1369,14 @@ msgstr ""
 "Ainm nó aitheantas nó url na huirlise a úsáideadh i measúnú na huirlise nó "
 "na seirbhíse"
 
-#: repository/models.py:3592
+#: repository/models.py:3591
 msgid ""
 "Provides further information on the evaluation process of a tool or service"
 msgstr ""
 "Cuireann eolas sa bhreis ar fáil faoi phróiseas measúnaithe uirlise nó "
 "seirbhíse"
 
-#: repository/models.py:3598
+#: repository/models.py:3597
 msgid ""
 "Groups information on person or organization that evaluated the tool or "
 "service"
@@ -1384,11 +1384,11 @@ msgstr ""
 "Cruinníonn eolas ar dhuine nó eagraíocht a rinne measúnú ar an uirlis nó "
 "seirbhís"
 
-#: repository/models.py:3629
+#: repository/models.py:3628
 msgid "The operating system on which the tool will be running"
 msgstr "An córas oibriúcháin ar a mbeidh an uirlis ag rith"
 
-#: repository/models.py:3637
+#: repository/models.py:3636
 msgid ""
 "Groups together information on the dependencies (requirements) of a tool or "
 "a language description"
@@ -1396,7 +1396,7 @@ msgstr ""
 "Cruinníonn le chéile eolas ar spleáchais (riachtanais) uirlise nó tuairisc "
 "teanga"
 
-#: repository/models.py:3665
+#: repository/models.py:3664
 msgid ""
 "The programming languages needed for allowing user contributions, or for "
 "running the tools, in case no executables are available"
@@ -1404,39 +1404,39 @@ msgstr ""
 "Na teangacha ríomhchlárúcháin is gá chun a gcuireann úsáideoirí ar fáil a "
 "cheadú, nó chun na huirlisí a rith, mura bhfuil aon chomhad inrite ar fáil"
 
-#: repository/models.py:3686
+#: repository/models.py:3685
 msgid "Provides additional information on the creation of a tool or service"
 msgstr "Cuireann eolas sa bhreis ar fáil faoi chruthú uirlise nó seirbhíse"
 
-#: repository/models.py:3733 repository/models.py:3790
-#: repository/models.py:3957
+#: repository/models.py:3732 repository/models.py:3789
+#: repository/models.py:3956
 msgid "Specifies the type of the resource being described"
 msgstr "Sonraíonn cineál na hacmhainne atáthar ag cur síos uirthi"
 
-#: repository/models.py:3738
+#: repository/models.py:3737
 msgid "Specifies the subtype of lexicalConceptualResource"
 msgstr "Sonraíonn fochineál na hAcmhainne foclóireachta coincheapúla"
 
-#: repository/models.py:3746
+#: repository/models.py:3745
 msgid ""
 "Groups all information regarding the contents of lexical/conceptual resources"
 msgstr ""
 "Cruinníonn gach eolas maidir le hinneachar acmhainní foclóireachta / "
 "coincheapúla"
 
-#: repository/models.py:3752
+#: repository/models.py:3751
 msgid "Restriction of mediaType for lexicalConceptualResources"
 msgstr "Srianadh ar chineál meáin d'acmhainní foclóireachta coincheapúla"
 
-#: repository/models.py:3795
+#: repository/models.py:3794
 msgid "The type of the language description"
 msgstr "Cineál na tuairisce teanga"
 
-#: repository/models.py:3803
+#: repository/models.py:3802
 msgid "Groups together information on the contents of the LanguageDescriptions"
 msgstr "Cruinníonn le chéile eolas ar inneachar na dTuairiscí Teanga"
 
-#: repository/models.py:3809
+#: repository/models.py:3808
 msgid ""
 "Groups information on the media type-specific components for language "
 "descriptions"
@@ -1444,17 +1444,17 @@ msgstr ""
 "Cruinníonn eolas ar na sain-chomhpháirteanna cineáil meáin do thuairiscí "
 "teanga"
 
-#: repository/models.py:3878
+#: repository/models.py:3877
 msgid "Specifies the type of the tool or service"
 msgstr "Sonraíonn cineál na huirlise nó na seirbhíse"
 
-#: repository/models.py:3887
+#: repository/models.py:3886
 msgid ""
 "Specifies the function/operation/task that a tool or web service performs"
 msgstr ""
 "Sonraíonn an feidhm/oibriúchán/tasc a dhéanann uirlis nó seirbhís ghréasáin"
 
-#: repository/models.py:3896
+#: repository/models.py:3895
 msgid ""
 "Indicates whether the operation of the tool or service is language dependent "
 "or not"
@@ -1462,7 +1462,7 @@ msgstr ""
 "Tugann le fios cé an bhfuil oibriúchán na huirlise nó na seirbhíse spleách "
 "ar theanga nó nach bhfuil"
 
-#: repository/models.py:3902
+#: repository/models.py:3901
 msgid ""
 "Groups together information on the requirements set on the input resource of "
 "a tool or service"
@@ -1470,7 +1470,7 @@ msgstr ""
 "Cruinníonn le chéile eolas ar na riachtanais a bhaineann le hacmhainn "
 "ionchurtha uirlise nó seirbhíse"
 
-#: repository/models.py:3908
+#: repository/models.py:3907
 msgid ""
 "Groups together information on the requirements set on the output of a tool "
 "or service"
@@ -1478,20 +1478,20 @@ msgstr ""
 "Cruinníonn le chéile eolas ar na riachtanais a bhaineann le haschur uirlise "
 "nó seirbhíse"
 
-#: repository/models.py:3914
+#: repository/models.py:3913
 msgid "Groups together information on the operation of a tool or service"
 msgstr "Cruinníonn le chéile eolas ar oibriúchán uirlise nó seirbhíse"
 
-#: repository/models.py:3920
+#: repository/models.py:3919
 msgid ""
 "Groups together information on the evaluation status of a tool or service"
 msgstr "Cruinníonn le chéile eolas ar stádas measúnaithe uirlise nó seirbhíse"
 
-#: repository/models.py:3926
+#: repository/models.py:3925
 msgid "Groups together information on the creation of a tool or service"
 msgstr "Cruinníonn le chéile eolas ar chruthú uirlise nó seirbhíse"
 
-#: repository/models.py:3962
+#: repository/models.py:3961
 msgid ""
 "Used to specify the media type specific to corpora and group together the "
 "relevant information"
@@ -1499,7 +1499,7 @@ msgstr ""
 "Úsáidte chun sainchineál meán a bhaineann le corpais a shonrú agus an t-"
 "eolas ábhartha a chruinniú le chéile"
 
-#: repository/models.py:4010
+#: repository/models.py:4009
 msgid ""
 "Groups together all information relevant to the text module of a language "
 "description (e.g. format, languages, size etc.); it is obligatory for all "
@@ -1509,14 +1509,14 @@ msgstr ""
 "teanga (e.g. formáid, teangacha, méid etc.); tá sé éigeantach do gach "
 "tuairisc teanga"
 
-#: repository/models.py:4036
+#: repository/models.py:4035
 msgid ""
 "Groups information on the textual part of the lexical/conceptual resource"
 msgstr ""
 "Cruinníonn eolas ar an gcomhpháirt téacs den acmhainn foclóireachta/"
 "choincheapúil"
 
-#: repository/models.py:4078 repository/models.py:4087
+#: repository/models.py:4077 repository/models.py:4086
 msgid "Specifies the application domain of the resource or the tool/service"
 msgstr "Sonraíonn fearann feidhmchláir na hacmainne nó na huirlise/seirbhíse"
 
@@ -1636,8 +1636,8 @@ msgid ""
 "Enter a valid year value which conforms to the XML Schema \"gYear\" type "
 "(see http://www.w3.org/TR/xmlschema-2/#gYear). \"{}\" is not valid."
 msgstr ""
-"Iontráil luach bailí bliana a thagann leis an Scéimre XML \"gYear\" type "
-"(féach http://www.w3.org/TR/xmlschema-2/#gYear). Níl \"{}\" bailí."
+"Earráid: Iontráil luach bailí bliana a thagann leis an Scéimre XML \"gYear\" "
+"type (féach http://www.w3.org/TR/xmlschema-2/#gYear). Níl \"{}\" bailí."
 
 #: repository/validators.py:56
 #, python-brace-format
@@ -1647,7 +1647,7 @@ msgid ""
 "production from XML 1.0 (Second Edition), cf. http://www.w3.org/TR/2000/WD-"
 "xml-2e-20000814#NT-Char."
 msgstr ""
-"Ní mór gan úsáid a bhaint as an gcarachtar ag ionad {char_pos} "
+"Earráid:Ní mór gan úsáid a bhaint as an gcarachtar ag ionad {char_pos} "
 "(&#x{char_code:0>4x};). Iontráil teaghrán gan ach carachtair ann atá ag "
 "teacht le táirgeadh Char ó XML 1.0 (Dara hEagrán), cf. http://www.w3.org/"
 "TR/2000/WD-xml-2e-20000814#NT-Char."
@@ -1656,40 +1656,46 @@ msgstr ""
 msgid ""
 "Enter a valid language code as the key for each pair. \"{}\" is not valid."
 msgstr ""
-"Iontráil cód teanga bailí mar an eochair do gach péire. Níl \"{}\" bailí."
+"Earráid: Iontráil cód teanga bailí mar an eochair do gach péire. Níl \"{}\" "
+"bailí."
 
 #: repository/validators.py:86
 msgid "This field is required."
-msgstr "Tá an réimse seo de dhíth."
+msgstr "Earráid: Tá an réimse seo de dhíth."
 
 #: repository/validators.py:92
 msgid "This field accepts only number values (without commas)"
-msgstr "Ní ghlacann an réimse seo ach le luachanna uimhriúla (gan chamóga)"
+msgstr ""
+"Earráid: Ní ghlacann an réimse seo ach le luachanna uimhriúla (gan chamóga)"
 
 #: repository/validators.py:97
 msgid "Please edit the attribution text template"
-msgstr "Leasaigh an teimpléad don téacs admhála"
+msgstr "Earráid: Leasaigh an teimpléad don téacs admhála"
 
-#: repository/views.py:341
+#: repository/validators.py:102
+msgid "Enter a valid email address."
+msgstr "Earráid: Luach seoladh ríomhphoist nach bhfuil bailí."
+
+#: repository/views.py:351
 msgid "Request for information regarding a resource"
 msgstr ""
 "Iarratas eolais maidir le hacmhainn | Request for information regarding a "
 "resource"
 
-#: repository/views.py:349
+#: repository/views.py:359
 msgid "There was an error sending out the request email."
-msgstr "Tharla earráid agus an ríomhphost iarratais á sheoladh amach."
+msgstr "Earráid: Tharla earráid agus an ríomhphost iarratais á sheoladh amach."
 
-#: repository/views.py:351
+#: repository/views.py:361
 msgid "You have successfully sent a message to the resource contact person."
 msgstr ""
 "Tá tú tar éis teachtaireacht a sheoladh go dtí an teagmhálaí acmhainne."
 
-#: repository/views.py:1040
+#: repository/views.py:1050
 msgid "N/A"
 msgstr "N/B"
 
-#: repository/views.py:1101
+#: repository/views.py:1111
 msgid ""
 "\n"
 "                Only files of type DOC(X), ODT, RTF, PDF, TMX, SDLTM, XML,\n"
@@ -1708,7 +1714,7 @@ msgstr ""
 "gcomhaid ZIP agus\n"
 "                triall arís é le do thoil."
 
-#: repository/views.py:1140
+#: repository/views.py:1153
 msgid ""
 "\n"
 "                            Your request could not be completed.\"\n"
@@ -1722,7 +1728,7 @@ msgstr ""
 "truallaithe, nó\n"
 "                            ní comhad ZIP bailí é."
 
-#: repository/views.py:1149
+#: repository/views.py:1162
 msgid ""
 "\n"
 "                            Only files of type DOC(X), ODT, RTF, PDF, TMX, "
@@ -1743,11 +1749,11 @@ msgstr ""
 "cineáil seo ón gcomhaid ZIP, agus\n"
 "                            triall arís é le do thoil."
 
-#: repository/views.py:1192
+#: repository/views.py:1205
 msgid "New submitted contributions"
 msgstr "Ábhar nua curtha ar fáil | New submitted contributions"
 
-#: repository/views.py:1200
+#: repository/views.py:1213
 msgid ""
 "\n"
 "                Thank you for sharing, your data have been successfully "
@@ -1761,20 +1767,15 @@ msgstr ""
 "bhfoireann ELRI. Gheobhaidh tú rphost nuair a bheas an acmhainn réidh don "
 "íoslódáil."
 
-#: repository/views.py:1209
+#: repository/views.py:1222
 msgid ""
-"\n"
-"                The file you are trying to upload exceeds the size limit. If "
-"the file(s) you\n"
-"                would like to contribute exceed(s) {:.10} MB please contact "
-"us to provide an SFTP link for direct\n"
-"                download or consider uploading smaller files."
+"The file(s) you are trying to upload exceeds the size limit. If the file(s) "
+"you would like to contribute exceed(s) {:.10} MB please contact us to "
+"provide an SFTP link for direct download or consider uploading smaller files."
 msgstr ""
-"\n"
-"                Tá an comhad a bhfuil tú ag iarraidh uaslódáil ró-mhór. Má "
-"tá an comhad nó na comhaid\n"
-"                níos mó ná {:.10} MB, téigh i dteagmháil linn le do thoil "
-"chun nasc SFTP a fháil, nó triall arís é le comhaid níos lú."
+"Tá an comhad a bhfuil tú ag iarraidh uaslódáil ró-mhór. Má tá an comhad nó "
+"na comhaid níos mó ná {:.10} MB, téigh i dteagmháil linn le do thoil chun "
+"nasc SFTP a fháil, nó triall arís é le comhaid níos lú."
 
 #~ msgid "Resource"
 #~ msgstr "Acmhainn"

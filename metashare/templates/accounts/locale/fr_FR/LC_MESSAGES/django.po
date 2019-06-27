@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-05 10:45+0200\n"
-"PO-Revision-Date: 2019-04-05 13:51+0200\n"
+"POT-Creation-Date: 2019-06-17 17:07+0200\n"
+"PO-Revision-Date: 2019-06-06 18:19+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -324,19 +324,24 @@ msgstr ""
 msgid "Yes, I"
 msgstr "Oui, je"
 
-#: templates/accounts/edit_profile.html:8
+#: templates/accounts/edit_profile.html:5
+#: templates/accounts/edit_profile.html:75
+msgid "Edit Profile"
+msgstr "Modifier le profil"
+
+#: templates/accounts/edit_profile.html:9
 msgid "First name"
 msgstr "Prénom"
 
-#: templates/accounts/edit_profile.html:11
+#: templates/accounts/edit_profile.html:12
 msgid "Last name"
 msgstr "Nom"
 
-#: templates/accounts/edit_profile.html:14
+#: templates/accounts/edit_profile.html:15
 msgid "Email"
 msgstr "Adresse e-mail"
 
-#: templates/accounts/edit_profile.html:20
+#: templates/accounts/edit_profile.html:21
 #, python-format
 msgid ""
 "If you would like to change any of the above details, please <a href="
@@ -345,18 +350,18 @@ msgstr ""
 "Si vous souhaitez modifier un des détails ci-dessus, merci de <a href="
 "\"%(contact_url)s\">contacter les gestionnaires du répositoire ELRI</a>."
 
-#: templates/accounts/edit_profile.html:22
+#: templates/accounts/edit_profile.html:23
 msgid "API KEY"
 msgstr "Clé API"
 
-#: templates/accounts/edit_profile.html:27
+#: templates/accounts/edit_profile.html:28
 #, python-format
 msgid "Editor Group Manager Group%(editor_group_managers_member_of|pluralize)s"
 msgstr ""
 "Modifier le(s) groupe%(editor_group_managers_member_of|pluralize)s de "
 "gestionnaires du groupe d'édition"
 
-#: templates/accounts/edit_profile.html:34
+#: templates/accounts/edit_profile.html:35
 msgid ""
 "Displays all the editor groups you belong in. Editor groups that are applied "
 "by default to your resources, are shown in italic."
@@ -365,16 +370,16 @@ msgstr ""
 "d'édition qui sont appliqués à vos ressources par défaut sont indiqués en "
 "italique."
 
-#: templates/accounts/edit_profile.html:34
+#: templates/accounts/edit_profile.html:35
 #, python-format
 msgid "Editor Group%(editor_groups_member_of|pluralize)s"
 msgstr "Groupe%(editor_groups_member_of|pluralize)s d'édition"
 
-#: templates/accounts/edit_profile.html:42
+#: templates/accounts/edit_profile.html:43
 msgid "This editor group is set by default to your resources."
 msgstr "Ce groupe d'édition est défini par défaut sur vos ressources."
 
-#: templates/accounts/edit_profile.html:55
+#: templates/accounts/edit_profile.html:56
 #, python-format
 msgid ""
 "You already applied for a membership of the following editor group"
@@ -384,19 +389,19 @@ msgstr ""
 "%(groups_applied_for|pluralize)s: %(groups_applied_for|join:\", \")s "
 "d'édition suivant(s)"
 
-#: templates/accounts/edit_profile.html:60
+#: templates/accounts/edit_profile.html:61
 #, python-format
 msgid "Organization Manager Group%(organization_managers_member_of|pluralize)s"
 msgstr ""
 "Groupe%(organization_managers_member_of|pluralize)s de gestionnaires de "
 "l'organisation"
 
-#: templates/accounts/edit_profile.html:66
+#: templates/accounts/edit_profile.html:67
 #, python-format
 msgid "Organization%(organizations_member_of|pluralize)s"
 msgstr "Organisation%(organizations_member_of|pluralize)s"
 
-#: templates/accounts/edit_profile.html:71
+#: templates/accounts/edit_profile.html:72
 #, python-format
 msgid ""
 "You already applied for a membership of the following organization"
@@ -406,10 +411,6 @@ msgstr ""
 "Vous avez déjà demandé à adhérer à/aux (l')organisation"
 "%(organizations_applied_for|pluralize)s: "
 "%(organizations_applied_for|join:\", \")s suivante(s)"
-
-#: templates/accounts/edit_profile.html:74
-msgid "Edit Profile"
-msgstr "Modifier le profil"
 
 #: templates/accounts/editor_group_application.html:6
 #: templates/accounts/update_default_editor_group.html:8

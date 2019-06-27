@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-08 09:52+0100\n"
+"POT-Creation-Date: 2019-06-06 09:52+0200\n"
 "PO-Revision-Date: 2019-03-12 14:26+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: ga_IE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
 "X-Generator: Poedit 2.2.1\n"
-"Last-Translator: \n"
-"Language-Team: \n"
 
 #: edelivery/management/commands/get_new_edelivery_messages.py:23
 msgid "New contributions through eDelivery"
@@ -35,9 +35,13 @@ msgid ""
 "recipients."
 msgstr "Tharla earráid le seoladh rphost chuig na léirmheastóirí."
 
-#: local_settings.py:43
-msgid "Spanish"
-msgstr "Spáinnis"
+#: local_settings.py:42
+msgid "Gaelic"
+msgstr "Gaeilge"
+
+#: local_settings.py:44
+msgid "English"
+msgstr "Béarla"
 
 #: storage/models.py:113
 msgid "Can synchronize"
@@ -157,31 +161,33 @@ msgstr ""
 "téacs ina bhfuil an srathú JSON de thréithe logánta don ásc oibiacht stórála "
 "seo."
 
-#: views.py:22
-#, python-format
+#: views.py:22 views.py:24
+#, fuzzy
+#| msgid ""
+#| "Please enter a correct %(username)s and password, Note that both fields "
+#| "may be case-sensitive."
 msgid ""
-"Please enter a correct %(username)s and password, Note that both fields may "
-"be case-sensitive."
+"Please enter a correct username and password. Note that both fields may be "
+"case-sensitive. "
 msgstr ""
 "Cuir isteach %(username)s ceart agus pasfhocal, le do thoil. Tabhair faoi "
 "deara go bhfuil seans ann go bhfuil na réimsí cásíogair."
 
-#: views.py:24
-msgid ""
-"This account has not been activated yet. Please contact us if there is any "
-"issue with an existing account."
+#: views.py:23 views.py:25
+#, fuzzy
+#| msgid ""
+#| "This account has not been activated yet. Please contact us if there is "
+#| "any issue with an existing account."
+msgid "Please contact us if there is any issue with an existing account."
 msgstr ""
 "Níl an cuntas seo gníomhachtaithe go fóill. Déan teagmháil linn má tá aon "
 "fhadhb ann le cuntas reatha."
 
-#~ msgid "Gaelic"
-#~ msgstr "Gaeilge"
-
-#~ msgid "English"
-#~ msgstr "Béarla"
-
-#~ msgid "French"
-#~ msgstr "Fraincis"
+#~ msgid "Spanish"
+#~ msgstr "Spáinnis"
 
 #~ msgid "Portuguese"
 #~ msgstr "Portaingéilis"
+
+#~ msgid "French"
+#~ msgstr "Fraincis"

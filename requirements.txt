@@ -35,4 +35,3 @@ xlsxwriter
 xmltodict
 gunicorn
 futures
-django_password_validation_backport>=0.4.2

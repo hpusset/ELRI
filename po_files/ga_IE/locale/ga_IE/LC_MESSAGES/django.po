@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-04 13:42+0200\n"
-"PO-Revision-Date: 2019-04-04 13:07+0200\n"
+"POT-Creation-Date: 2019-06-17 16:38+0200\n"
+"PO-Revision-Date: 2019-06-17 16:15+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ga_IE\n"
@@ -34,13 +34,13 @@ msgstr ""
 msgid ""
 "An error has occurred while trying to send email to contributions alert "
 "recipients."
-msgstr "Tharla earráid le seoladh rphost chuig na léirmheastóirí."
+msgstr "Earráid: Tharla earráid le seoladh rphost chuig na léirmheastóirí."
 
-#: local_settings.py:42
+#: local_settings.py:45
 msgid "Gaelic"
 msgstr "Gaeilge"
 
-#: local_settings.py:44
+#: local_settings.py:47
 msgid "English"
 msgstr "Béarla"
 
@@ -162,24 +162,20 @@ msgstr ""
 "téacs ina bhfuil an srathú JSON de thréithe logánta don ásc oibiacht stórála "
 "seo."
 
-#: views.py:22
+#: views.py:22 views.py:24
 msgid ""
 "Please enter a correct username and password. Note that both fields may be "
-"case-sensitive."
+"case-sensitive. "
 msgstr ""
-"Cuir isteach ainm úsáideora ceart agus pasfhocal, le do thoil. Tabhair faoi "
-"deara go bhfuil seans ann go bhfuil na réimsí cásíogair. | Please enter a "
-"correct username and password. Note that both fields may be case-sensitive."
+"Earráid: Cuir isteach ainm úsáideora agus pasfhocal bailí le do thoil. "
+"D'fhéadfadh an dá réimse a bheith cásíogair. | Error: Please enter a correct "
+"username and password. Note that both fields may be case-sensitive."
 
-#: views.py:23
-msgid ""
-"This account has not been activated yet. Please contact us if there is any "
-"issue with an existing account."
+#: views.py:23 views.py:25
+msgid "Please contact us if there is any issue with an existing account."
 msgstr ""
-"Níl an cuntas seo gníomhachtaithe go fóill. Déan teagmháil linn má tá aon "
-"fhadhb ann le cuntas reatha.\n"
-"- This account has not been activated yet. Please contact us if there is any "
-"issue with an existing account."
+" Earráid: Déan teagmháil linn má tá aon fhadhb ann le cuntas reatha.\n"
+"- Error: Please contact us if there is any issue with an existing account."
 
 #~ msgid "Spanish"
 #~ msgstr "Spáinnis"

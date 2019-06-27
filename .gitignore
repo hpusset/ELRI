@@ -48,3 +48,4 @@ metashare/unprocessed/*
 metashare/static/metashare/licences/*
 elri_resources/language_resources/
 docker/
+.idea/

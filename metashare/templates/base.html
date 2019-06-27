@@ -4,28 +4,33 @@
 {% load i18n %}
 
 {% spaceless %}
-    <html lang="en">
+	{% get_current_language as LANGUAGE_CODE %}
+    <html lang="{{ LANGUAGE_CODE }}">
     <head>
         {% analytical_head_top %}
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>{% spaceless %}{% block title %}ELRI{% endblock %}{% endspaceless %}</title>
         <meta name="description" content="
-                {% spaceless %}{% block description %}ELRI National Relay Station: a repository to store, search and retrieve Language Resources.{% endblock %}{% endspaceless %}"/>
+                {% spaceless %}{% block description %}{% blocktrans %}ELRI National Relay Station: a repository to store, search and retrieve Language Resources.{% endblocktrans %}{% endblock %}{% endspaceless %}"/>
         <meta name="keywords" content="
-                {% spaceless %}{% block keywords %}ELRI, National Relay Station, language resources, translation memories, Connecting Europe Facility{% endblock %}{% endspaceless %}"/>
-        <link rel="shortcut icon" href="{% static "metashare/images/favicon.ico" %}"/>
-        <link rel="stylesheet" href="{% static "metashare/css/blueprint/screen.css" %}" type="text/css"
+                {% spaceless %}{% block keywords %}{% blocktrans %}ELRI, National Relay Station, language resources, translation memories, Connecting Europe Facility {% endblocktrans %}{% endblock %}{% endspaceless %}"/>
+        {% if country == "Portugal" %}
+        <link rel="shortcut icon" href="{% static 'metashare/images/favicon_pt.ico' %}">
+        {% else %}
+        <link rel="shortcut icon" href="{% static 'metashare/images/favicon.ico' %}">
+        {% endif %}
+        <link rel="stylesheet" href="{% static 'metashare/css/blueprint/screen.css' %}" type="text/css"
               media="screen, projection">
-        <link rel="stylesheet" href="{% static "metashare/css/blueprint/print.css" %}" type="text/css" media="print">
+        <link rel="stylesheet" href="{% static 'metashare/css/blueprint/print.css' %}" type="text/css" media="print">
         <!--[if lt IE 8]><link rel="stylesheet" href="{% static "metashare/css/blueprint/ie.css" %}" type="text/css" media="screen, projection">
         <![endif]-->
-        <link rel="stylesheet" href="{% static "metashare/css/sexybuttons/sexybuttons.css" %}" type="text/css"
+        <link rel="stylesheet" href="{% static 'metashare/css/sexybuttons/sexybuttons.css' %}" type="text/css"
               media="screen">
-        <link rel="stylesheet" href="{% static "metashare/css/screen.css" %}" type="text/css" media="screen">
-        <link rel="stylesheet" href="{% static "metashare/css/typo.css" %}" type="text/css" media="screen">
-        <script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
-        <script type="text/javascript" src="{% static "metashare/js/jquery-1.7.1.min.js" %}"></script>
-        <script type="text/javascript" src="{% static "metashare/js/metashare.js" %}"></script>
+        <link rel="stylesheet" href="{% static 'metashare/css/screen.css' %}" type="text/css" media="screen">
+        <link rel="stylesheet" href="{% static 'metashare/css/typo.css' %}" type="text/css" media="screen">
+        <script src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
+        <script src="{% static 'metashare/js/jquery-1.7.1.min.js' %}"></script>
+        <script src="{% static 'metashare/js/metashare.js' %}"></script>
         <script src="https://use.fontawesome.com/92573ad434.js"></script>
 
         {% block links %}{% endblock %}{% analytical_head_bottom %}
@@ -56,6 +61,7 @@
                         //"dismiss": "",
                         "link":  {% blocktrans %}"Learn more"{% endblocktrans %},
                         //"close": {% blocktrans %}"OK"{% endblocktrans %},
+                        "policy": {% blocktrans %}"Cookies policy"{% endblocktrans %},
                     }
                 });
             });
@@ -63,8 +69,10 @@
 
     </head>
     <body>
+	
     {% analytical_body_top %}
     {% block header %}
+         <a href="#main-content" lang="en">{% trans 'Go to the web page main content.' %}</a> 
         {% include "header.html" with page="frontpage" %}
     {% endblock %}
     {% block back %}{% endblock %}
@@ -82,7 +90,7 @@
         </div>
     </div>
     {% include "footer.html" %}
-    <script type="text/javascript">addFormHelper()</script>
+    <script>addFormHelper()</script>
     {% analytical_body_bottom %}
     </body>
     </html>

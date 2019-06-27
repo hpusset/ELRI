@@ -1,14 +1,23 @@
 {% load static from staticfiles %}
 {% load is_member i18n %}
 {% spaceless %}
+
+
     <div id="header">
-        <a href="http://www.elri-project.eu/" title="European Language Resource Infrastructure"
-           target="_blank"><img style="float:right; margin: 10px 20px 0 0"
-                                src="{{ STATIC_URL }}metashare/images/elri-logo-title-small.png"/></a>
+        {% if country == "Portugal" %}
+           <a href="{% url 'frontpage' %}" title="Ir para a homepage do eTradução">
+           <img style="float:right; margin: 10px 20px 0 0"
+                                src="{{ STATIC_URL }}metashare/images/elri-logo-title-small-pt.png" alt="Ir para a homepage do eTradução" /></a>
+        {% else %}
+        <a href="http://www.elri-project.eu/" title="{% trans 'Go to the ELRI project homepage' %}"
+                target="_blank"><img style="float:right; margin: 10px 20px 0 0"
+                                        src="{{ STATIC_URL }}metashare/images/elri-logo-title-small.png" alt="ELRI ‐ European Language 
+        Resource Infrastructure"/></a>
+        {% endif %}
         <div id="jsddmdiv" class="jsddm">
             {# drop-down menu created with http://javascript-array.com/scripts/jquery_simple_drop_down_menu/ #}
             <ul id="jsddm">
-                <li title="{% trans 'Home' %}"><a href="{% url 'frontpage' %}" %}>
+                <li title="{% trans 'Home' %}"><a href="{% url 'frontpage' %}" >
                     <i class="fa fa-home menu_fontawesome" aria-hidden="true"></i> {% trans 'Home' %}</a></li>
                 {% if user.is_authenticated %}
                     <li title="{% trans 'Browse the resources of the ELRI catalogue' %}"><a

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-04 13:42+0200\n"
-"PO-Revision-Date: 2019-04-08 16:18+0200\n"
+"POT-Creation-Date: 2019-06-10 17:14+0200\n"
+"PO-Revision-Date: 2019-06-17 11:28+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_IE\n"
@@ -40,6 +40,8 @@ msgid ""
 "Please try again and, if the error persists, contact the ELRI NRS support "
 "group (<a href=\"mailto:%(email)s\" >%(email)s</a>)."
 msgstr ""
+"Error: Please try again and, if the error persists, contact the ELRI NRS "
+"support group (<a href=\"mailto:%(email)s\" >%(email)s</a>)."
 
 #: templates/500.html:7
 msgid "Internal Server Error (500)"
@@ -50,29 +52,55 @@ msgid ""
 "We&rsquo;re sorry, but an internal error occurred when processing your "
 "request."
 msgstr ""
-"We’re sorry, but an internal error occurred when processing your request."
+"Error: We’re sorry, but an internal error occurred when processing your "
+"request."
 
 #: templates/back.html:5
 msgid "ELRI National Relay Station"
 msgstr "ELRI National Relay Station Ireland"
 
-#: templates/base.html:54
+#: templates/base.html:14
+msgid ""
+"ELRI National Relay Station: a repository to store, search and retrieve "
+"Language Resources."
+msgstr ""
+
+#: templates/base.html:16
+msgid ""
+"ELRI, National Relay Station, language resources, translation memories, "
+"Connecting Europe Facility "
+msgstr ""
+
+#: templates/base.html:55
 msgid ""
 "\"This site uses cookies to enhance your user experience. By clicking any "
 "link on this page you are giving your consent for us to set cookies.\" "
 msgstr ""
 
-#: templates/base.html:55 templates/base.html.py:58
+#: templates/base.html:56 templates/base.html.py:59
 msgid "\"OK\""
 msgstr ""
 
-#: templates/base.html:57
+#: templates/base.html:58
 msgid "\"Learn more\""
+msgstr ""
+
+#: templates/base.html:60
+msgid "\"Cookies policy\""
+msgstr ""
+
+#: templates/base.html:70
+msgid "Go to the web page main content."
 msgstr ""
 
 #: templates/breadcrumbs.html:3 templates/header.html:79
 #: templates/header.html.py:80
 msgid "Home"
+msgstr ""
+
+#: templates/elri-info.html:5 templates/header.html:161
+#: templates/repository/resource_view/usage.html:3
+msgid "Usage"
 msgstr ""
 
 #: templates/elri-info.html:7 templates/header.html:163
@@ -123,8 +151,8 @@ msgstr ""
 
 #: templates/elri-info.html:23
 msgid ""
-"New users should first register <a href=\"../accounts/create/\">here</a>. "
-"Once your account credentials have been validated, you can log in and either "
+"New users should first <a href=\"../accounts/create/\">register</a>. Once "
+"your account credentials have been validated, you can log in and either "
 "search (via the Browse Resources menu) or contribute ((via the Contribute "
 "Resources menu) language resources."
 msgstr ""
@@ -134,7 +162,7 @@ msgid ""
 "For each language resource, you will be asked to provide the languages of "
 "its content, a short title, the group with which you wish to share the "
 "resource, and the associated licensing conditions (see <a href="
-"\"#Licensing_LRs\">below</a>)."
+"\"#Licensing_LRs\" title=\"licensing contitions\">below</a>)."
 msgstr ""
 
 #: templates/elri-info.html:27
@@ -229,17 +257,24 @@ msgstr "ELRI National Relay Station Ireland"
 
 #: templates/footer.html:8
 msgid ""
-"powered by <a href=\"http://www.meta-share.org/\" target=\"_blank\">META-"
-"SHARE</a> and <a href=\"https://elrc-share.eu/\" target=\"_blank\">ELRC-"
-"SHARE</a>"
+"powered by <a href=\"http://www.meta-share.org/\" target=\"_blank\" lang=\"en"
+"\">META-SHARE</a> and <a href=\"https://elrc-share.eu/\" target=\"_blank\" "
+"lang=\"en\">ELRC-SHARE</a>"
 msgstr ""
-"Managed by <a href=\"https://www.adaptcentre.ie\">ADAPT</a> and hosted at <a "
-"href=\"https://www.computing.dcu.ie/\">DCU</a>\n"
-"<br>powered by <a href=\"http://www.meta-share.org/\" target=\"_blank\">META-"
-"SHARE</a> and <a href=\"https://elrc-share.eu/\" target=\"_blank\">ELRC-"
-"SHARE</a>"
+"Managed by <a href=\"https://www.adaptcentre.ie\" target=\"_blank\" lang=\"en"
+"\">ADAPT</a> and hosted at <a href=\"https://www.computing.dcu.ie/\" target="
+"\"_blank\" lang=\"en\">DCU</a>\n"
+"<br>powered by <a href=\"http://www.meta-share.org/\" target=\"_blank\" lang="
+"\"en\">META-SHARE</a> and <a href=\"https://elrc-share.eu/\" target=\"_blank"
+"\"  lang=\"en\">ELRC-SHARE</a>"
 
-#: templates/footer.html:12
+#: templates/footer.html:9
+msgid ""
+"Go to the Creative Commons Attribution Non-Commercial Share Alike 4.0 "
+"International license information page."
+msgstr ""
+
+#: templates/footer.html:14
 msgid "Privacy Policy"
 msgstr ""
 
@@ -260,9 +295,9 @@ msgstr ""
 #: templates/frontpage.html:17
 msgid ""
 "National Relay Stations are developed within the  <a href=\"http://www.elri-"
-"project.eu\">ELRI</a> European project, supported by the <a href=\"http://ec."
-"europa.eu/inea/en/connecting-europe-facility\">Connecting Europe Facility</"
-"a> programme."
+"project.eu\" target=\"_blank\" >ELRI</a> European project, supported by the "
+"<a href=\"http://ec.europa.eu/inea/en/connecting-europe-facility\" lang=\"en"
+"\" target=\"_blank\">Connecting Europe Facility</a> programme."
 msgstr ""
 
 #: templates/frontpage.html:19
@@ -299,12 +334,16 @@ msgid ""
 "\">Contribute</a> your own data and retrieve prepared language resources."
 msgstr ""
 
-#: templates/header.html:34 templates/header.html.py:46
+#: templates/header.html:33 templates/header.html.py:45
 msgid "Gaeilge"
 msgstr ""
 
-#: templates/header.html:39 templates/header.html.py:49
+#: templates/header.html:38 templates/header.html.py:48
 msgid "English"
+msgstr ""
+
+#: templates/header.html:70
+msgid "Go to the ELRI project homepage"
 msgstr ""
 
 #: templates/header.html:82
@@ -399,10 +438,6 @@ msgstr ""
 msgid "Statistics"
 msgstr ""
 
-#: templates/header.html:161 templates/repository/resource_view/usage.html:3
-msgid "Usage"
-msgstr ""
-
 #: templates/header.html:170
 msgid "Terms of Service"
 msgstr ""
@@ -484,27 +519,27 @@ msgstr ""
 msgid "Documentation"
 msgstr ""
 
-#: templates/help.html:11
+#: templates/help.html:12
 msgid ""
 "The following guidelines provide detailed information on how to use the ELRI "
 "platform."
 msgstr ""
 
-#: templates/help.html:16
+#: templates/help.html:17
 msgid "User guidelines"
 msgstr ""
 
-#: templates/help.html:20
+#: templates/help.html:21
 msgid "Contact details"
 msgstr ""
 
-#: templates/help.html:22
+#: templates/help.html:23
 msgid ""
 "For enquiries related to the project, please refer to the <a href=\"http://"
 "www.elri-project.eu/contact-us.html\" target=\"_blank\">list of ELRI Contacts"
 msgstr ""
 
-#: templates/help.html:24
+#: templates/help.html:25
 #, python-format
 msgid ""
 "For technical help about this National Relay Station, you can contact us at "
@@ -1155,7 +1190,7 @@ msgstr "The LR is replaced on the ELRI Services inventory with changes."
 msgid "The LR is permanently removed from the ELRI Services inventory."
 msgstr "The LR is permanently removed from the ELRI Services inventory."
 
-#: templates/legal.html:126
+#: templates/legal.html:127
 msgid ""
 "If the Depositor and the complainant are unable to agree on a solution, the "
 "LR will remain unavailable through the ELRI Services inventory until a time "
@@ -1165,7 +1200,7 @@ msgstr ""
 "LR will remain unavailable through the ELRI Services inventory until a time "
 "when a resolution has been reached."
 
-#: templates/legal.html:128
+#: templates/legal.html:129
 msgid "Appendix B"
 msgstr ""
 "<h3><b>Appendix B</b><br><b>Data protection Notice</b></h3><p>In using and "
@@ -1193,7 +1228,7 @@ msgstr ""
 msgid "Don&rsquo;t have an account, yet? Click here to create one."
 msgstr "Don’t have an account, yet? Click here to create one."
 
-#: templates/privacy.html:7
+#: templates/privacy.html:8
 msgid "<strong>ELRI NRS Privacy Policy</strong>"
 msgstr ""
 "<strong>Privacy Statement for European Language Resource Infrastructure "
@@ -1219,21 +1254,21 @@ msgstr ""
 msgid ""
 "The ELRI Consortium consisting of Fundación Centro de Tecnologías de "
 "Interacción Visual \n"
-"        y  Comunicaciones  (<a href=\"http://www.vicomtech.org\">VICOMTECH</"
-"a>),  the  Administrative  Modernization \n"
-"        Agency  (<a href=\"https://www.ama.gov.pt/\">AMA</a>),  Dublin  "
-"City  University  School  of  Computing \n"
-"        (<a href=\"https://www.computing.dcu.ie\">DCU</a>),  the  "
-"Evaluations  and  Language  Resource  Distribution \n"
-"        Agency (<a href=\"http://www.elda.org\">ELDA</a>),  Faculdade de "
-"Ciências da Universidade de Lisboa (<a href=\"https://ciencias.ulisboa.pt"
-"\">FCUL</a>),    \n"
+"        y  Comunicaciones  (<a href=\"http://www.vicomtech.org\" target="
+"\"_blank\">VICOMTECH</a>),  the  Administrative  Modernization \n"
+"        Agency  (<a href=\"https://www.ama.gov.pt/\" target=\"_blank\">AMA</"
+"a>),  Dublin  City  University  School  of  Computing \n"
+"        (<a href=\"https://www.computing.dcu.ie\" target=\"_blank\">DCU</"
+"a>),  the  Evaluations  and  Language  Resource  Distribution \n"
+"        Agency (<a href=\"http://www.elda.org\" target=\"_blank\">ELDA</"
+"a>),  Faculdade de Ciências da Universidade de Lisboa (<a href=\"https://"
+"ciencias.ulisboa.pt\" target=\"_blank\">FCUL</a>),    \n"
 "        Linkare TI – Tecnologias de Informação, Lda. (<a href=\"http://www."
-"linkare.com\">Linkare</a>) \n"
+"linkare.com\" target=\"_blank\">Linkare</a>) \n"
 "        and  the Kingdom  of Spain, represented by the Secretary  of State "
 "for \n"
 "        Digital Progress (<a href=\"https://www.mincotur.gob.es/"
-"telecomunicaciones\">SEAD</a>) \n"
+"telecomunicaciones\" target=\"_blank\">SEAD</a>) \n"
 "        are  jointly  responsible  for  the  collection  and \n"
 "        processing of personal data. ELRI and all its members are committed "
 "to goal- and risk-oriented  \n"
@@ -1983,6 +2018,11 @@ msgid ""
 "or internal errors. Trying again later might\n"
 "                solve the problem."
 msgstr ""
+"Error: We&rsquo;re afraid, the selected legal documentation is currently not "
+"available for download. This\n"
+"                problem may be temporary due to network connection problems "
+"or internal errors. Trying again later might\n"
+"                solve the problem."
 
 #: templates/repository/legal_not_downloadable.html:18
 #: templates/repository/lr_not_downloadable.html:18
@@ -2005,6 +2045,7 @@ msgstr ""
 msgid "Licence Agreement"
 msgstr ""
 
+#: templates/repository/licence_agreement.html:21
 #: templates/repository/licence_agreement.html:22
 #: templates/repository/licence_agreement.html:26
 msgid "View licence"
@@ -2063,6 +2104,11 @@ msgid ""
 "errors. Trying again later might solve the\n"
 "                problem."
 msgstr ""
+"Error: We&rsquo;re afraid the selected resource is currently not available "
+"for download. This problem may be\n"
+"                temporary due to network connection problems or internal "
+"errors. Trying again later might solve the\n"
+"                problem."
 
 #: templates/repository/multi_field_widget.html:6
 msgid "Add Another Field"
@@ -2166,6 +2212,10 @@ msgid ""
 "                may be temporary due to network connection problems or "
 "internal errors. Trying again later might solve"
 msgstr ""
+"Error: We&rsquo;re afraid, the selected validation report is currently not "
+"available for download. This problem\n"
+"                may be temporary due to network connection problems or "
+"internal errors. Trying again later might solve"
 
 #: templates/repository/resource_download_information_email.html:2
 #, python-format
@@ -2678,6 +2728,10 @@ msgstr ""
 msgid "Click to view contact card"
 msgstr ""
 
+#: templates/repository/resource_view/person.html:25
+msgid "Contact Card"
+msgstr ""
+
 #: templates/repository/resource_view/person.html:146
 #: templates/repository/resource_view/person.html:228
 msgid "Tel."
@@ -3031,109 +3085,113 @@ msgstr ""
 msgid "Search and Browse"
 msgstr ""
 
-#: templates/repository/search.html:77
+#: templates/repository/search.html:69
+msgid "Browse Language Resources"
+msgstr ""
+
+#: templates/repository/search.html:77 templates/repository/search.html:79
 msgid "Search"
 msgstr ""
 
-#: templates/repository/search.html:86 templates/stats/topstats.html:174
+#: templates/repository/search.html:88 templates/stats/topstats.html:174
 #: templates/stats/usagestats.html:142
 msgid "Filter by:"
 msgstr ""
 
-#: templates/repository/search.html:96
+#: templates/repository/search.html:98
 msgid "Resource Type:"
 msgstr ""
 
-#: templates/repository/search.html:99
+#: templates/repository/search.html:101 templates/repository/search.html:102
 msgid "Corpus:"
 msgstr ""
 
-#: templates/repository/search.html:103
+#: templates/repository/search.html:105 templates/repository/search.html:106
 msgid "Lexical/Conceptual:"
 msgstr ""
 
-#: templates/repository/search.html:107
+#: templates/repository/search.html:109 templates/repository/search.html:110
 msgid "Language Description:"
 msgstr ""
 
-#: templates/repository/search.html:111
+#: templates/repository/search.html:113 templates/repository/search.html:114
 msgid "Tool/Service:"
 msgstr ""
 
-#: templates/repository/search.html:121
+#: templates/repository/search.html:123
 #, python-format
 msgid " %(cnt)s Language Resource "
 msgid_plural " %(cnt)s Language Resources "
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/repository/search.html:122
+#: templates/repository/search.html:124
 #, python-format
 msgid "(Page %(pgnum)s of %(numpgs)s)"
 msgstr ""
 
-#: templates/repository/search.html:128 templates/repository/search.html:155
+#: templates/repository/search.html:130 templates/repository/search.html:158
 #: templates/stats/topstats.html:241 templates/stats/topstats.html.py:243
 msgid "Previous"
 msgstr ""
 
-#: templates/repository/search.html:129 templates/repository/search.html:156
+#: templates/repository/search.html:131 templates/repository/search.html:159
 #: templates/stats/topstats.html:247 templates/stats/topstats.html.py:249
 msgid "Next"
 msgstr ""
 
-#: templates/repository/search.html:131
+#: templates/repository/search.html:133 templates/repository/search.html:134
 msgid "Order by:"
 msgstr ""
 
-#: templates/repository/search.html:133
+#: templates/repository/search.html:136
 msgid "Resource Name A-Z"
 msgstr ""
 
-#: templates/repository/search.html:134
+#: templates/repository/search.html:137
 msgid "Resource Name Z-A"
 msgstr ""
 
-#: templates/repository/search.html:135
+#: templates/repository/search.html:138
 msgid "Resource Type A-Z"
 msgstr ""
 
-#: templates/repository/search.html:136
+#: templates/repository/search.html:139
 msgid "Resource Type Z-A"
 msgstr ""
 
-#: templates/repository/search.html:137
+#: templates/repository/search.html:140
 msgid "Media Type A-Z"
 msgstr ""
 
-#: templates/repository/search.html:138
+#: templates/repository/search.html:141
 msgid "Media Type Z-A"
 msgstr ""
 
-#: templates/repository/search.html:139
+#: templates/repository/search.html:142
 msgid "Language Name A-Z"
 msgstr ""
 
-#: templates/repository/search.html:140
+#: templates/repository/search.html:143
 msgid "Language Name Z-A"
 msgstr ""
 
-#: templates/repository/search.html:141
+#: templates/repository/search.html:144
 msgid "Number of Downloads"
 msgstr ""
 
-#: templates/repository/search.html:142
+#: templates/repository/search.html:145
 msgid "Number of Views"
 msgstr ""
 
-#: templates/repository/search.html:163
+#: templates/repository/search.html:166
 #, python-format
 msgid ""
 "No results were found for search query &ldquo;%(query)s&rdquo; and filters "
 "%(filters)s."
 msgstr ""
 
-#: templates/repository/search.html:165
+#: templates/repository/search.html:168
 #, python-format
 msgid "No results were found for search query &ldquo;%(query)s&rdquo;."
 msgstr ""

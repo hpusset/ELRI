@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-04 16:42+0200\n"
-"PO-Revision-Date: 2019-04-03 16:12+0200\n"
+"POT-Creation-Date: 2019-06-17 17:09+0200\n"
+"PO-Revision-Date: 2019-05-20 10:55+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_PT\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.2.1\n"
 
 #: templates/admin/repository/cannot_edit.html:9
 #, python-format
@@ -31,8 +31,9 @@ msgstr ""
 "\n"
 "    \t\t\tNão é possível editar os metadados para o\n"
 "\t\t\t recurso &ldquo;%(resource)s&rdquo;.\n"
-"\t\t\t Originalmente criado\n"
-"        \t\tpor %(source)s."
+"\t\t\t Foi originalmente criado\n"
+"        \t\tpor %(source)s.\n"
+"                "
 
 #: templates/admin/repository/cannot_edit.html:16
 #, python-format
@@ -45,9 +46,9 @@ msgid ""
 "\t\t"
 msgstr ""
 "\n"
-"\t\t\tNão é possível editar os metadados para\n"
-"\t\t\to recurso &ldquo;%(resource)s&rdquo;.\n"
-"\t\t\toriginalmente criado\n"
+"\t\t\tNão é possível editar os metadados para o\n"
+"\t\t\trecurso &ldquo;%(resource)s&rdquo;.\n"
+"\t\t\tFoi originalmente criado\n"
 "\t\t\tem %(source_url)s.\n"
 "\t\t"
 
@@ -80,9 +81,9 @@ msgid ""
 "      other node. "
 msgstr ""
 "\n"
-"      <a href=\"%(redirection_url)s\"> carruegue aqui </a> para ir "
+"      <a href=\"%(redirection_url)s\"> Carregue aqui </a> para ir "
 "imediatamente\n"
-"      para o outro nó."
+"      para outro nó. "
 
 #: templates/admin/repository/cannot_edit.html:42
 #, python-format
@@ -90,16 +91,16 @@ msgid ""
 "The metadata for this entity was originally created\n"
 "      <a href=\"%(url)s\">here</a>."
 msgstr ""
-"Os metadados para esta entidade foi originalmente criado\n"
-"      <a href=\"%(url)s\">aqui</a>"
+"Os metadados para esta entidade foi originalmente criados\n"
+"      <a href=\"%(url)s\">aqui</a>."
 
 #: templates/admin/repository/change_form.html:21
 msgid "Home"
-msgstr "início"
+msgstr "Início"
 
 #: templates/admin/repository/change_form.html:24
 msgid "Add"
-msgstr "Acrescentar"
+msgstr "Adicionar"
 
 #: templates/admin/repository/change_form.html:33
 msgid "History"
@@ -107,11 +108,11 @@ msgstr "Histórico"
 
 #: templates/admin/repository/change_form.html:34
 msgid "View on site"
-msgstr "Ver no sítio web"
+msgstr "Ver no site"
 
 #: templates/admin/repository/change_form.html:49
 #: templates/admin/repository/tabbed_change_form.html:47
 msgid "Please correct the error below."
 msgid_plural "Please correct the errors below."
-msgstr[0] "Por favor, corrija o erro abaixo"
-msgstr[1] "Por favor, corrija os erros abaixo"
+msgstr[0] "Por favor, corrija o erro abaixo."
+msgstr[1] "Por favor, corrija os erros abaixo."

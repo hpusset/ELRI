@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-05 10:45+0200\n"
-"PO-Revision-Date: 2019-04-05 14:26+0200\n"
+"POT-Creation-Date: 2019-06-17 17:07+0200\n"
+"PO-Revision-Date: 2019-06-17 17:30+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -106,15 +106,15 @@ msgstr ""
 msgid "EU"
 msgstr "UE"
 
-#: repository/models.py:65 repository/models.py:2076 repository/models.py:2250
+#: repository/models.py:65 repository/models.py:2075 repository/models.py:2249
 msgid "More"
 msgstr "Plus"
 
-#: repository/models.py:117
+#: repository/models.py:116
 msgid "Groups together information needed to identify the resource"
 msgstr "Regroupe les informations nécessaires pour identifier la ressource"
 
-#: repository/models.py:126
+#: repository/models.py:125
 msgid ""
 "Groups information on the person(s) that is/are responsible for providing "
 "further information regarding the resource"
@@ -122,34 +122,34 @@ msgstr ""
 "Regroupe les informations sur la ou les personnes chargées de fournir des "
 "informations supplémentaires sur la ressource"
 
-#: repository/models.py:132
+#: repository/models.py:131
 msgid "Groups information on the metadata record itself"
 msgstr "Regroupe des informations sur la fiche des métadonnées elle-même"
 
-#: repository/models.py:137
+#: repository/models.py:136
 msgid "Groups information on a specific version or release of the resource"
 msgstr ""
 "Regroupe des informations sur une version ou une publication spécifique de "
 "la ressource"
 
-#: repository/models.py:143
+#: repository/models.py:142
 msgid "Groups information on the creation procedure of a resource"
 msgstr "Regroupe des informations sur la procédure de création d'une ressource"
 
-#: repository/models.py:149
+#: repository/models.py:148
 msgid "Groups together information on any document describing the resource"
 msgstr ""
 "Regroupe des informations sur n'importe quel document qui décrit la ressource"
 
-#: repository/models.py:159
+#: repository/models.py:158
 msgid "Used for distinguishing between resource types"
 msgstr "Utilisé pour distinguer les types de ressources"
 
-#: repository/models.py:174
+#: repository/models.py:173
 msgid "Groups within the resourse is shared"
 msgstr "Groupes dans lesquels la ressource est partagée"
 
-#: repository/models.py:296
+#: repository/models.py:295
 msgid ""
 "Specifies the size of the resource with regard to the SizeUnit measurement "
 "in form of a number"
@@ -157,7 +157,7 @@ msgstr ""
 "Spécifie la taille de la ressource par rapport à la mesure SizeUnit sous la "
 "forme d'un nombre"
 
-#: repository/models.py:302
+#: repository/models.py:301
 msgid ""
 "Specifies the unit that is used when providing information on the size of "
 "the resource or of resource parts"
@@ -165,7 +165,7 @@ msgstr ""
 "Spécifies l'unité utilisé quand fournit des informations sur la taille de la "
 "ressource ou des parties de la ressource"
 
-#: repository/models.py:355
+#: repository/models.py:354
 msgid ""
 "The full name by which the resource is known; the element can be repeated "
 "for the different language versions using the \"lang\" attribute to specify "
@@ -175,7 +175,7 @@ msgstr ""
 "répété pour les différentes versions de langues en utilisant l'attribut "
 "\"lang\" pour spécifier le language."
 
-#: repository/models.py:364
+#: repository/models.py:363
 msgid ""
 "Provides the description of the resource in prose; the element can be "
 "repeated for the different language versions using the \"lang\" attribute to "
@@ -185,7 +185,7 @@ msgstr ""
 "pour les différentes versions de langues en utilisant l'attribut \"lang\" "
 "pour spécifier le language."
 
-#: repository/models.py:373
+#: repository/models.py:372
 msgid ""
 "The short form (abbreviation, acronym etc.) used to identify the resource; "
 "the element can be repeated for the different language versions using the "
@@ -195,7 +195,7 @@ msgstr ""
 "ressource; l'élément peut être répété pour les différentes versions de "
 "langues en utilisant l'attribut \"lang\" pour spécifier le language."
 
-#: repository/models.py:381
+#: repository/models.py:380
 msgid ""
 "A Web page that can be navigated to in a Web browser to gain access to the "
 "resource, its distributions and/or additional information"
@@ -204,7 +204,7 @@ msgstr ""
 "accéder à la ressource, ses distributions et/ou des informations "
 "complémentaires"
 
-#: repository/models.py:388
+#: repository/models.py:387
 msgid ""
 "An unambiguous referent to the resource within META-SHARE; it reflects to "
 "the unique system id provided automatically by the MetaShare software"
@@ -212,7 +212,7 @@ msgstr ""
 "Un référent non ambigüe à la ressource dans META-SHARE; il renvoi à "
 "l'identifiant système unique fourni automatiquement par le logiciel MetaShare"
 
-#: repository/models.py:395
+#: repository/models.py:394
 msgid ""
 "Reference to the unique ISLRN number of the resource; if the resource has "
 "not been assigned an ISLRN yet, you may request for one at: http://www.islrn."
@@ -221,7 +221,7 @@ msgstr ""
 "Référence au numéro ISLRN unique de la ressource; si la ressource n'a pas "
 "encore d'ISLRN, vous pouvez en demander un à : http://www.islrn.org/"
 
-#: repository/models.py:402
+#: repository/models.py:401
 msgid ""
 "Reference to a PID, DOI or an internal identifier used by the resource "
 "provider for the resource"
@@ -229,7 +229,7 @@ msgstr ""
 "Référence à un PID, DOI ou un identifiant interne utilisé par le fournisseur "
 "de la ressource pour la ressource"
 
-#: repository/models.py:408
+#: repository/models.py:407
 msgid ""
 "Specifies whether the resource is appropriate for use in one or more of the "
 "DSIs (Digital Service Infrastructures)"
@@ -237,21 +237,21 @@ msgstr ""
 "Spécifie si la ressource est adaptée pour une utilisation dans un ou "
 "plusieurs DSI (Digital Service Infrastructures)"
 
-#: repository/models.py:434
+#: repository/models.py:433
 msgid "Any string, usually a number, that identifies the version of a resource"
 msgstr ""
 "N'importe quelle chaîne de caractère, généralement un nombre, qui identifie "
 "la version de la ressource"
 
-#: repository/models.py:440
+#: repository/models.py:439
 msgid "Date of the last update of the version of the resource"
 msgstr "Date de la dernière mise à jour de la version de la ressource"
 
-#: repository/models.py:473
+#: repository/models.py:472
 msgid "Specifies the validation status of the resource"
 msgstr "Spécifie le statut de validation de la ressource"
 
-#: repository/models.py:479
+#: repository/models.py:478
 msgid ""
 "A short account of the validation details or a bibliographic reference to a "
 "document with detailed information on the validation process and results"
@@ -260,7 +260,7 @@ msgstr ""
 "bibliographique à un document contenant des informations détaillées sur le "
 "processus de validation et les résultats."
 
-#: repository/models.py:486
+#: repository/models.py:485
 msgid ""
 "Groups information on the person(s) or the organization(s) that validated "
 "the resource"
@@ -268,7 +268,7 @@ msgstr ""
 "Regroupe les informations sur la ou les personnes ou les organisations qui "
 "ont validé la ressource"
 
-#: repository/models.py:524
+#: repository/models.py:523
 msgid ""
 "Specifies whether ELRC services have been exploited in the creation process "
 "of the resource; if so, please specify the services used in the description "
@@ -278,11 +278,11 @@ msgstr ""
 "création de la ressource; si tel est le cas, veuillez préciser les services "
 "utilisés dans le champ description des métadonnées"
 
-#: repository/models.py:532
+#: repository/models.py:531
 msgid "Declares whether the resource has been anonymized"
 msgstr "Indique si la ressource a été anonymisée"
 
-#: repository/models.py:538
+#: repository/models.py:537
 msgid ""
 "Groups information on the person or the organization that has created the "
 "resource"
@@ -290,19 +290,19 @@ msgstr ""
 "Regroupe des informations sur la personne ou l'organisation qui a crée la "
 "ressource"
 
-#: repository/models.py:544
+#: repository/models.py:543
 msgid "Groups information on the project that has funded the resource"
 msgstr "Regroupe des informations sur le projet qui a financé la ressource"
 
-#: repository/models.py:550
+#: repository/models.py:549
 msgid "The date in which the creation process was started"
 msgstr "La date à laquelle le processus de création a commencé"
 
-#: repository/models.py:555
+#: repository/models.py:554
 msgid "The date in which the creation process was completed"
 msgstr "La date à laquelle le processus de création s'est terminé"
 
-#: repository/models.py:595 repository/models.py:3679
+#: repository/models.py:594 repository/models.py:3678
 msgid ""
 "The name, the identifier or the url of thethe original resources that were "
 "at the base of the creation process of the resource"
@@ -310,7 +310,7 @@ msgstr ""
 "Le nom, l'identifiant ou l'url des ressources originales qui étaient à "
 "l'origine du processus de création de la ressource"
 
-#: repository/models.py:602
+#: repository/models.py:601
 msgid ""
 "Specifies whether the resource is created automatically or in a manual or "
 "interactive mode"
@@ -318,20 +318,20 @@ msgstr ""
 "Spécifie si la ressource est créee automatiquement, manuellement ou de façon "
 "interactive"
 
-#: repository/models.py:612
+#: repository/models.py:611
 msgid "Provides further information on the creation methods and processes"
 msgstr ""
 "Fournit des informations supplémentaires sur les méthodes et les processus "
 "de création"
 
-#: repository/models.py:618
+#: repository/models.py:617
 msgid ""
 "The name, the identifier or the url of the tool used in the creation process"
 msgstr ""
 "Le nom, l'identifiant ou l'url de l'outil utilisé dans le processus de "
 "création"
 
-#: repository/models.py:650
+#: repository/models.py:649
 msgid ""
 "The date of creation of this metadata description (automatically inserted by "
 "the MetaShare software)"
@@ -339,13 +339,13 @@ msgstr ""
 "La date de création de cette description des métadonnées (automatiquement "
 "insérée par le logiciel MetaShare)"
 
-#: repository/models.py:656
+#: repository/models.py:655
 msgid "Groups information on the person that has created the metadata record"
 msgstr ""
 "Regroupe les informations sur la personne qui a crée l'enregistrement des "
 "métadonnées"
 
-#: repository/models.py:662
+#: repository/models.py:661
 msgid ""
 "The name of the language in which the metadata description is written, "
 "according to IETF BCP47"
@@ -353,7 +353,7 @@ msgstr ""
 "Le nom de la langue dans laquelle la description des métadonnées est écrite, "
 "selon IETF BCP47"
 
-#: repository/models.py:668
+#: repository/models.py:667
 msgid ""
 "The identifier of the language in which the metadata description is written "
 "according to IETF BCP47"
@@ -361,7 +361,7 @@ msgstr ""
 "L'identifiant de la langue dans laquelle la description des métadonnées est "
 "écrite selon IETF BCP47"
 
-#: repository/models.py:674
+#: repository/models.py:673
 msgid ""
 "The date of the last updating of the metadata record (automatically inserted "
 "by the repo software)"
@@ -369,47 +369,47 @@ msgstr ""
 "La date de la dernière mise à jour de l'enregistrement des métadonnées "
 "(insérée automatiquement par le logiciel repo)"
 
-#: repository/models.py:758
+#: repository/models.py:757
 msgid ""
 "Specifies the type of the document provided with or related to the resource"
 msgstr "Spécifie le type de document fourni avec ou lié à la ressource"
 
-#: repository/models.py:770
+#: repository/models.py:769
 msgid "The title of the document reporting on the resource"
 msgstr "Le titre du document faisant un rapport sur la ressource"
 
-#: repository/models.py:775
+#: repository/models.py:774
 msgid "The name(s) of the author(s), in the format described in the document"
 msgstr "Le(s) nom(s) de l'auteur(s), dans le format décrit dans le document"
 
-#: repository/models.py:781
+#: repository/models.py:780
 msgid "The name of the editor as mentioned in the document"
 msgstr "Le nom du réviseur tel que mentionné dans le document"
 
-#: repository/models.py:786
+#: repository/models.py:785
 msgid ""
 "The year of publication or, for an unpublished work, the year it was written"
 msgstr ""
 "L'année de publication ou, dans le cas d'une œuvre non publiée, l'année où "
 "elle a été écrite"
 
-#: repository/models.py:792
+#: repository/models.py:791
 msgid "The name of the publisher"
 msgstr "Le nom de l'éditeur"
 
-#: repository/models.py:797
+#: repository/models.py:796
 msgid "The title of a book, part of which is being cited"
 msgstr "Le titre d'un livre dont une partie est citée"
 
-#: repository/models.py:802
+#: repository/models.py:801
 msgid "A journal name. Abbreviations could also be provided"
 msgstr "Un nom de journal. Des abréviations pourraient également être fournies"
 
-#: repository/models.py:807
+#: repository/models.py:806
 msgid "Specifies the volume of a journal or multivolume book"
 msgstr "Spécifie le volume d'un journal ou d'un livre en plusieurs volumes"
 
-#: repository/models.py:812
+#: repository/models.py:811
 msgid ""
 "The name of a series or set of books. When citing an entire book, the title "
 "field gives its title and an optional series field gives the name of a "
@@ -420,23 +420,23 @@ msgstr ""
 "nom d'une série ou d'un ensemble de plusieurs volumes dans lequel le livre "
 "est publié."
 
-#: repository/models.py:820
+#: repository/models.py:819
 msgid "One or more page numbers or range of page numbers"
 msgstr "Un ou plusieurs numéros de page ou une série de numéros de page"
 
-#: repository/models.py:825
+#: repository/models.py:824
 msgid "The edition of a book"
 msgstr "L'édition d'un livre"
 
-#: repository/models.py:830
+#: repository/models.py:829
 msgid "The name of the conference in which the document has been presented"
 msgstr "Le nom de la conférence dans laquelle le document a été présenté"
 
-#: repository/models.py:836
+#: repository/models.py:835
 msgid "A digital object identifier assigned to the document"
 msgstr "un identificateur d'objet numérique attribué au document"
 
-#: repository/models.py:841 repository/models.py:1369
+#: repository/models.py:840 repository/models.py:1368
 msgid ""
 "A URL used as homepage of an entity (e.g. of a person, organization, "
 "resource etc.); it provides general information (for instance in the case of "
@@ -449,21 +449,21 @@ msgstr ""
 "description de la ressource, de ses créateurs et éventuellement inclure des "
 "liens vers l'URL d'où elle peut être accessible)"
 
-#: repository/models.py:850
+#: repository/models.py:849
 msgid "The International Standard Serial Number used to identify a journal"
 msgstr ""
 "Numéro international normalisé des publications en série utilisé pour "
 "identifier une revue"
 
-#: repository/models.py:856
+#: repository/models.py:855
 msgid "The International Standard Book Number"
 msgstr "Numéro international normalisé du livre"
 
-#: repository/models.py:861
+#: repository/models.py:860
 msgid "The keyword(s) for indexing and classification of the document"
 msgstr "Le(s) mot-clé(s) pour l'indexation et la classification d'un document"
 
-#: repository/models.py:867
+#: repository/models.py:866
 msgid ""
 "The language the document is written in (according to the IETF BCP47 "
 "guidelines)"
@@ -471,7 +471,7 @@ msgstr ""
 "Langue dans laquelle le document est écrit (selon les recommandations IETF "
 "BCP47)"
 
-#: repository/models.py:873
+#: repository/models.py:872
 msgid ""
 "The id of the language the document is written in (according to the IETF "
 "BCP47 guidelines)"
@@ -479,8 +479,8 @@ msgstr ""
 "L'identifiant de la langue dans laquelle le document est écrit (selon les "
 "recommandations IETF BCP47)"
 
-#: repository/models.py:879 repository/models.py:1497 repository/models.py:1586
-#: repository/models.py:2521
+#: repository/models.py:878 repository/models.py:1496 repository/models.py:1585
+#: repository/models.py:2520
 msgid ""
 "(Read-only) base URL for the server where the master copy of the associated "
 "entity instance is located."
@@ -488,22 +488,22 @@ msgstr ""
 "URL de base (en lecture seule) du serveur sur lequel se trouve la copie "
 "principale de l'instance d'entité associée."
 
-#: repository/models.py:883 repository/models.py:1501 repository/models.py:1590
-#: repository/models.py:2525
+#: repository/models.py:882 repository/models.py:1500 repository/models.py:1589
+#: repository/models.py:2524
 msgid "Generalized copy status flag for this entity instance."
 msgstr "Indicateur d'état de copie généralisé pour cette instance d'entité."
 
-#: repository/models.py:924
+#: repository/models.py:923
 msgid "Refers to papers, manuals, reports etc. describing the resource"
 msgstr ""
 "Fait référence à des documents, manuels, rapports, etc. décrivant la "
 "ressource"
 
-#: repository/models.py:931
+#: repository/models.py:930
 msgid "URL link to an online manual or help pages"
 msgstr "Lien URL vers un manuel en ligne ou des pages d'aide"
 
-#: repository/models.py:937
+#: repository/models.py:936
 msgid ""
 "A url with samples of the resource or, in the case of tools, of samples of "
 "the output"
@@ -511,7 +511,7 @@ msgstr ""
 "Une url avec des échantillons de la ressource ou, dans le cas d'outils, des "
 "échantillons de la sortie"
 
-#: repository/models.py:974
+#: repository/models.py:973
 msgid ""
 "Specifies the application domain of the resource or the tool/service "
 "according to the EUROVOC thesaurus"
@@ -519,7 +519,7 @@ msgstr ""
 "Spécifie le domaine d'application de la ressource ou de l'outil/service "
 "selon le thésaurus EUROVOC"
 
-#: repository/models.py:983
+#: repository/models.py:982
 msgid ""
 "The identifier of the application domain of the resource or the tool/"
 "service, taken from the EUROVOC domains: http://eurovoc.europa.eu/drupal"
@@ -527,7 +527,7 @@ msgstr ""
 "L'identifiant du domaine d'application de la ressource ou de l'outil/"
 "service, tiré des domaines EUROVOC : http://eurovoc.europa.eu/drupal"
 
-#: repository/models.py:996 repository/models.py:4096
+#: repository/models.py:995 repository/models.py:4095
 msgid ""
 "The name of the application subdomain of the resource or the tool/service, "
 "taken from the EUROVOC domains: http://eurovoc.europa.eu/drupal"
@@ -535,7 +535,7 @@ msgstr ""
 "Le nom du sous-domaine d'application de la ressource ou de l'outil/service, "
 "tiré des domaines EUROVOC : http://eurovoc.europa.eu/drupal"
 
-#: repository/models.py:1006 repository/models.py:4103
+#: repository/models.py:1005 repository/models.py:4102
 msgid ""
 "The identifier of the application subdomain of the resource or the tool/"
 "service, taken from the EUROVOC domains: http://eurovoc.europa.eu/drupal"
@@ -543,17 +543,17 @@ msgstr ""
 "L'identifiant du sous-domaine d'application de la ressource ou de l'outil/"
 "service, tiré des domaines EUROVOC : http://eurovoc.europa.eu/drupal"
 
-#: repository/models.py:1017 repository/models.py:2744
-#: repository/models.py:4110
+#: repository/models.py:1016 repository/models.py:2743
+#: repository/models.py:4109
 msgid "Specifies the external classification schemes"
 msgstr "Spécifie les schémas de classification externes"
 
-#: repository/models.py:1024
+#: repository/models.py:1023
 msgid "Specifies the size of resource parts per domain"
 msgstr "Spécifie la taille des parties de ressources par domaine"
 
-#: repository/models.py:1126 repository/models.py:3267
-#: repository/models.py:3461
+#: repository/models.py:1125 repository/models.py:3266
+#: repository/models.py:3460
 msgid ""
 "Specifies the annotation level of the resource or the annotation type a "
 "tool/ service requires or produces as an output"
@@ -561,12 +561,12 @@ msgstr ""
 "Spécifie le niveau d'annotation de la ressource ou le type d'annotation dont "
 "un outil/service a besoin ou qu'il produit en sortie."
 
-#: repository/models.py:1136
+#: repository/models.py:1135
 msgid ""
 "Indicates whether the annotation is created inline or in a stand-off fashion"
 msgstr "Indique si l'annotation est créée en ligne ou de façon isolée."
 
-#: repository/models.py:1142
+#: repository/models.py:1141
 msgid ""
 "Specifies the segmentation unit in terms of which the resource has been "
 "segmented or the level of segmentation a tool/service requires/outputs"
@@ -574,8 +574,8 @@ msgstr ""
 "Spécifie l'unité de segmentation en fonction de laquelle la ressource a été "
 "segmentée ou le niveau de segmentation qu'un outil/service nécessite/produit."
 
-#: repository/models.py:1152 repository/models.py:3276
-#: repository/models.py:3470
+#: repository/models.py:1151 repository/models.py:3275
+#: repository/models.py:3469
 msgid ""
 "A name or a url reference to the typesystem used in the annotation of the "
 "resource or used by the tool/service"
@@ -583,8 +583,8 @@ msgstr ""
 "Un nom ou une référence URL au système de type utilisé dans l'annotation de "
 "la ressource ou utilisé par l'outil/service"
 
-#: repository/models.py:1158 repository/models.py:3282
-#: repository/models.py:3476
+#: repository/models.py:1157 repository/models.py:3281
+#: repository/models.py:3475
 msgid ""
 "A name or a url reference to the annotation schema used in the annotation of "
 "the resource or used by the tool/service"
@@ -592,7 +592,7 @@ msgstr ""
 "Un nom ou une référence url au schéma d'annotation utilisé dans l'annotation "
 "de la ressource ou utilisé par l'outil/service."
 
-#: repository/models.py:1164
+#: repository/models.py:1163
 msgid ""
 "A name or a url reference to the resource (e.g. tagset, ontology, term "
 "lexicon etc.) used in the annotation of the resource or used by the tool/"
@@ -602,8 +602,8 @@ msgstr ""
 "ontologie, lexique terminologique, etc.) utilisé dans l'annotation de la "
 "ressource ou utilisé par l'outil/service"
 
-#: repository/models.py:1171 repository/models.py:2816
-#: repository/models.py:3000
+#: repository/models.py:1170 repository/models.py:2815
+#: repository/models.py:2999
 msgid ""
 "Specifies the standards or the best practices to which the tagset used for "
 "the annotation conforms"
@@ -611,7 +611,7 @@ msgstr ""
 "Spécifie les normes ou les meilleures pratiques auxquelles l'ensemble des "
 "étiquettes utilisées pour l'annotation est conforme."
 
-#: repository/models.py:1180 repository/models.py:3009
+#: repository/models.py:1179 repository/models.py:3008
 msgid ""
 "Name of the theoretic model applied for the creation or enrichment of the "
 "resource, and/or a reference (URL or bibliographic reference) to informative "
@@ -621,13 +621,13 @@ msgstr ""
 "ressource, et/ou une référence (URL ou référence bibliographique) au "
 "matériel informatif sur le modèle théorique utilisé."
 
-#: repository/models.py:1188
+#: repository/models.py:1187
 msgid "A bibliographic reference or ms:httpURI link to the annotation manual"
 msgstr ""
 "Une référence bibliographique ou un lien ms:httpURI vers le manuel "
 "d'annotation"
 
-#: repository/models.py:1194
+#: repository/models.py:1193
 msgid ""
 "Indicates whether the resource is annotated manually or by automatic "
 "processes"
@@ -635,11 +635,11 @@ msgstr ""
 "Indique si la ressource est annotée manuellement ou par des processus "
 "automatiques."
 
-#: repository/models.py:1204
+#: repository/models.py:1203
 msgid "Provides further information on annotation process"
 msgstr "Fournit de plus amples renseignements sur le processus d'annotation"
 
-#: repository/models.py:1209
+#: repository/models.py:1208
 msgid ""
 "The name, the identifier or the url of the tool used for the annotation of "
 "the resource"
@@ -647,12 +647,12 @@ msgstr ""
 "Le nom, l'identifiant ou l'url de l'outil utilisé pour l'annotation de la "
 "ressource"
 
-#: repository/models.py:1215
+#: repository/models.py:1214
 msgid "Provides information on size for the annotated parts of the resource"
 msgstr ""
 "Fournit des informations sur la taille des parties annotées de la ressource."
 
-#: repository/models.py:1243
+#: repository/models.py:1242
 msgid ""
 "The full name or a url to a resource related to the one being described; to "
 "be used for identifiers also for this version"
@@ -660,24 +660,24 @@ msgstr ""
 "Le nom complet ou l'url d'une ressource liée à celle qui est décrite ; à "
 "utiliser également pour les identifiants de cette version."
 
-#: repository/models.py:1278
+#: repository/models.py:1277
 msgid ""
 "Specifies the type of relation not covered by the ones proposed by META-SHARE"
 msgstr ""
 "Spécifie le type de relation non couvert par celles proposées par META-SHARE"
 
-#: repository/models.py:1287
+#: repository/models.py:1286
 msgid "The full name, the identifier or the url of the related resource"
 msgstr "Le nom complet, l'identifiant ou l'url de la ressource associée"
 
-#: repository/models.py:1317
+#: repository/models.py:1316
 msgid ""
 "Additional software required for running a tool and/or computational grammar"
 msgstr ""
 "Logiciels supplémentaires requis pour exécuter un outil et/ou une grammaire "
 "computationnelle"
 
-#: repository/models.py:1323
+#: repository/models.py:1322
 msgid ""
 "If for running a tool and/or computational grammar, specific LRs (e.g. a "
 "grammar, a list of words etc.) are required"
@@ -686,26 +686,26 @@ msgstr ""
 "spécifiques (par exemple, une grammaire, une liste de mots, etc.) sont "
 "nécessaires."
 
-#: repository/models.py:1329
+#: repository/models.py:1328
 msgid "Provides further information on the dependencies"
 msgstr "Fournit des informations supplémentaires sur les dépendances."
 
-#: repository/models.py:1363
+#: repository/models.py:1362
 msgid "The email address of a person or an organization"
 msgstr "L'adresse email d'une personne ou d'une organisation"
 
-#: repository/models.py:1378
+#: repository/models.py:1377
 msgid ""
 "The street and the number of the postal address of a person or organization"
 msgstr ""
 "La rue et le numéro de l'adresse postale d'une personne ou d'une organisation"
 
-#: repository/models.py:1384
+#: repository/models.py:1383
 msgid "The zip code of the postal address of a person or organization"
 msgstr ""
 "Le code postal de l'adresse postale d'une personne ou d'une organisation"
 
-#: repository/models.py:1390
+#: repository/models.py:1389
 msgid ""
 "The name of the city, town or village as mentioned in the postal address of "
 "a person or organization"
@@ -713,7 +713,7 @@ msgstr ""
 "Le nom de la ville ou du village mentionné dans l'adresse postale d'une "
 "personne ou d'une organisation."
 
-#: repository/models.py:1396
+#: repository/models.py:1395
 msgid ""
 "The name of the region, county or department as mentioned in the postal "
 "address of a person or organization"
@@ -721,7 +721,7 @@ msgstr ""
 "Le nom de la région, du comté ou du département mentionné dans l'adresse "
 "postale d'une personne ou d'une organisation"
 
-#: repository/models.py:1402
+#: repository/models.py:1401
 msgid ""
 "The name of the country mentioned in the postal address of a person or "
 "organization as defined in the list of values of ISO 3166"
@@ -729,7 +729,7 @@ msgstr ""
 "Le nom du pays mentionné dans l'adresse postale d'une personne ou d'une "
 "organisation telle que définie dans la liste des valeurs de l'ISO 3166."
 
-#: repository/models.py:1409
+#: repository/models.py:1408
 msgid ""
 "The identifier of the country mentioned in the postal address of a person or "
 "organization as defined in the list of values of ISO 3166"
@@ -737,7 +737,7 @@ msgstr ""
 "L'identifiant du pays mentionné dans l'adresse postale d'une personne ou "
 "d'une organisation telle que définie dans la liste des valeurs de l'ISO 3166."
 
-#: repository/models.py:1416
+#: repository/models.py:1415
 msgid ""
 "The telephone number of a person or an organization; recommended format: "
 "+_international code_city code_number"
@@ -745,16 +745,16 @@ msgstr ""
 "Le numéro de téléphone d'une personne ou d'un organisme ; format "
 "recommandé : +_code_international_code_ville_numéro"
 
-#: repository/models.py:1471
+#: repository/models.py:1470
 msgid "The full name of an organization"
 msgstr "Le nom complet d'une organisation"
 
-#: repository/models.py:1477
+#: repository/models.py:1476
 msgid "The short name (abbreviation, acronym etc.) used for an organization"
 msgstr ""
 "Le nom abrégé (abréviation, acronyme, etc.) utilisé pour une organisation."
 
-#: repository/models.py:1484
+#: repository/models.py:1483
 msgid ""
 "The name of the department or unit (e.g. specific university faculty/"
 "department, department/unit of a research organization or private company "
@@ -764,18 +764,18 @@ msgstr ""
 "universitaire spécifique, département ou unité d'un organisme de recherche "
 "ou d'une entreprise privée, etc.)"
 
-#: repository/models.py:1491 repository/models.py:1568
+#: repository/models.py:1490 repository/models.py:1567
 msgid ""
 "Groups information on communication details of a person or an organization"
 msgstr ""
 "Regroupe des informations sur les détails de communication d'une personne ou "
 "d'une organisation"
 
-#: repository/models.py:1544
+#: repository/models.py:1543
 msgid "The surname (family name) of a person related to the resource"
 msgstr "Le nom (nom de famille) d'une personne liée à la ressource"
 
-#: repository/models.py:1552
+#: repository/models.py:1551
 msgid ""
 "The given name (first name) of a person related to the resource; initials "
 "can also be used"
@@ -783,22 +783,22 @@ msgstr ""
 "Le prénom d'une personne liée à la ressource ; les initiales peuvent aussi "
 "être utilisées."
 
-#: repository/models.py:1558
+#: repository/models.py:1557
 msgid "The gender of a person related to or participating in the resource"
 msgstr "Le genre d'une personne liée ou participant à la ressource"
 
-#: repository/models.py:1574
+#: repository/models.py:1573
 msgid "The position or the title of a person if affiliated to an organization"
 msgstr ""
 "Le poste ou le titre d'une personne si elle est affiliée à une organisation"
 
-#: repository/models.py:1580
+#: repository/models.py:1579
 msgid "Groups information on organization to whom the person is affiliated"
 msgstr ""
 "Regroupe des informations sur l'organisation à laquelle la personne est "
 "affiliée"
 
-#: repository/models.py:1642
+#: repository/models.py:1641
 msgid ""
 "Specifies the availability status of the resource; restrictionsOfUse can be "
 "further used to indicate the specific terms of availability"
@@ -806,7 +806,7 @@ msgstr ""
 "Spécifie le statut de disponibilité de la ressource ; restrictionsOfUse peut "
 "être utilisé pour indiquer les conditions spécifiques de disponibilité"
 
-#: repository/models.py:1653
+#: repository/models.py:1652
 msgid ""
 "Indicates that the resource falls under the Public Sector Information "
 "regulations"
@@ -814,13 +814,13 @@ msgstr ""
 "Indique que la ressource relève de la Réglementation des informations du "
 "secteur public"
 
-#: repository/models.py:1659
+#: repository/models.py:1658
 msgid ""
 "Whether the resource can be used for purposes other than those of the DGT"
 msgstr ""
 "Si la ressource peut être utilisée à des fins autres que celles de la DGT"
 
-#: repository/models.py:1666
+#: repository/models.py:1665
 msgid ""
 "Groups information on licences for the resource; can be repeated to allow "
 "for different modes of access and restrictions of use (e.g. free for "
@@ -833,7 +833,7 @@ msgstr ""
 "usage commercial, téléchargement d'un échantillon pour un usage gratuit, "
 "etc.)"
 
-#: repository/models.py:1674
+#: repository/models.py:1673
 msgid ""
 "Specifies the medium (channel) used for delivery or providing access to the "
 "resource"
@@ -841,7 +841,7 @@ msgstr ""
 "Spécifie le support (canal) utilisé pour la diffusion ou l'accès à la "
 "ressource"
 
-#: repository/models.py:1684
+#: repository/models.py:1683
 msgid ""
 "Any url where the resource can be downloaded from; please, use if the "
 "resource is \"downloadable\" and you have not uploaded the resource in the "
@@ -851,7 +851,7 @@ msgstr ""
 "ressource est \"téléchargeable\" et que vous n'avez pas chargé la ressource "
 "dans le répositoire"
 
-#: repository/models.py:1692
+#: repository/models.py:1691
 msgid ""
 " Any url where the service providing access to a resource is being executed; "
 "please use for resources that are \"accessibleThroughInterface\" or "
@@ -861,7 +861,7 @@ msgstr ""
 "d'exécution ; veuillez l'utiliser pour les ressources qui sont "
 "\"accessibleThroughInterface\" ou \"webExecutable\""
 
-#: repository/models.py:1701
+#: repository/models.py:1700
 msgid ""
 " The text that must be quoted for attribution purposes when using a resource "
 "- for cases where a resource is provided with a request for attribution; you "
@@ -873,7 +873,7 @@ msgstr ""
 "d'attribution ; vous pouvez utiliser un texte standard tel que \"Ressource X "
 "par le Créateur de Ressource Y utilisé sous licence Z\". "
 
-#: repository/models.py:1709
+#: repository/models.py:1708
 msgid ""
 "Specifies whether the resource contains or not personal data; this might "
 "mean that special handling of the resource is required (e.g. anonymisation)"
@@ -882,7 +882,7 @@ msgstr ""
 "ce qui peut nécessiter un traitement spécial de la ressource (par exemple, "
 "anonymisation)"
 
-#: repository/models.py:1716
+#: repository/models.py:1715
 msgid ""
 "If the resource includes personal data, this field can be used for entering "
 "more information, e.g. whether special handling of the resource is required "
@@ -893,7 +893,7 @@ msgstr ""
 "spécial de la ressource est nécessaire (par exemple, anonymisation, autre "
 "demande d'utilisation, etc.)"
 
-#: repository/models.py:1724
+#: repository/models.py:1723
 msgid ""
 "Specifies whether the resource contains or not sensitive data; this might "
 "mean that special handling of the resource is required (e.g. anonymisation)"
@@ -902,7 +902,7 @@ msgstr ""
 "signifier qu'un traitement spécial de la ressource est nécessaire (par "
 "exemple, anonymisation)."
 
-#: repository/models.py:1731
+#: repository/models.py:1730
 msgid ""
 "If the resource includes sensitive data, this field can be used for entering "
 "more information, e.g. whether special handling of the resource is required "
@@ -912,7 +912,7 @@ msgstr ""
 "pour saisir d'autres informations, par exemple si un traitement spécial de "
 "la ressource est nécessaire (par exemple, anonymisation)."
 
-#: repository/models.py:1738
+#: repository/models.py:1737
 msgid ""
 "Specifies the costs that are required to access the resource, a fragment of "
 "the resource or to use a tool or service"
@@ -920,7 +920,7 @@ msgstr ""
 "Spécifie les coûts nécessaires pour accéder à la ressource, à un fragment de "
 "ressource ou pour utiliser un outil ou un service."
 
-#: repository/models.py:1744
+#: repository/models.py:1743
 msgid ""
 "Groups information on a person or an organization who holds the full "
 "Intellectual Property Rights (Copyright, trademark etc.) that subsist in the "
@@ -937,27 +937,27 @@ msgstr ""
 "qui est titulaire du IPR) et au distributeur qui détient une licence "
 "spécifique (c'est-à-dire une autorisation) pour distribuer l'œuvre."
 
-#: repository/models.py:1850
+#: repository/models.py:1849
 msgid "International/National Data Licences"
 msgstr "Licences internationales/nationales de données"
 
-#: repository/models.py:1851
+#: repository/models.py:1850
 msgid "National Data Licences"
 msgstr "Licences nationales de données"
 
-#: repository/models.py:1852
+#: repository/models.py:1851
 msgid "International Software Licences"
 msgstr "Licences internationales de logiciels"
 
-#: repository/models.py:1853
+#: repository/models.py:1852
 msgid "International Software & Data Licences"
 msgstr "Licences internationales de logiciels et de données"
 
-#: repository/models.py:1854
+#: repository/models.py:1853
 msgid "Other"
 msgstr "Autre"
 
-#: repository/models.py:1967
+#: repository/models.py:1966
 msgid ""
 "The licence of use for the resource; for an overview of licences, please "
 "visit: https://www.elrc-share.eu/info/#Licensing_LRs"
@@ -965,7 +965,7 @@ msgstr ""
 "La licence d'utilisation de la ressource ; pour un aperçu des licences, "
 "veuillez consulter : https://www.elrc-share.eu/info/#Licensing_LRs"
 
-#: repository/models.py:1977
+#: repository/models.py:1976
 msgid ""
 "The name with which a licence is known; to be used for licences not included "
 "in the pre-defined list of recommended licences"
@@ -973,7 +973,7 @@ msgstr ""
 "Nom sous lequel un permis est connu ; à utiliser pour les permis qui ne "
 "figurent pas dans la liste prédéfinie des permis recommandés."
 
-#: repository/models.py:1986
+#: repository/models.py:1985
 msgid ""
 "Used for inputting the text of licences that are not included in the pre-"
 "defined list or terms of use statements associated with a resource"
@@ -982,7 +982,7 @@ msgstr ""
 "liste prédéfinie ou les énoncés de conditions d'utilisation associés à une "
 "ressource."
 
-#: repository/models.py:1993
+#: repository/models.py:1992
 msgid ""
 "Used to provide a hyperlink to a url containing the text of a licence not "
 "included in the predefined list or describing the terms of use for a "
@@ -992,7 +992,7 @@ msgstr ""
 "licence non incluse dans la liste prédéfinie ou décrivant les conditions "
 "d'utilisation d'une ressource linguistique."
 
-#: repository/models.py:2000
+#: repository/models.py:1999
 msgid ""
 "Specifies terms and conditions of use (e.g. attribution, payment etc.) "
 "imposed by the licence"
@@ -1000,19 +1000,19 @@ msgstr ""
 "Précise les conditions d'utilisation (p. ex. attribution, paiement, etc.) "
 "imposées par la licence."
 
-#: repository/models.py:2024
+#: repository/models.py:2023
 msgid "Terms for Public Domain resources"
 msgstr "Conditions d'utilisation pour les ressources du domaine public"
 
-#: repository/models.py:2025
+#: repository/models.py:2024
 msgid "The resource is free of all known legal restrictions."
 msgstr "La ressource est libre de toute restriction légale connue."
 
-#: repository/models.py:2027
+#: repository/models.py:2026
 msgid "Terms for PSI-compliant resources"
 msgstr "Conditions relatives aux ressources conformes à la PSI"
 
-#: repository/models.py:2028
+#: repository/models.py:2027
 msgid ""
 "Used for resources that fall under the scope of PSI (Public Sector "
 "Information) regulations, and for which no further information is required "
@@ -1027,8 +1027,8 @@ msgstr ""
 "informations du secteur public, voir ici : https://ec.europa.eu/digital-"
 "single-market/en/european-legislation-reuse-public-sector-information"
 
-#: repository/models.py:2102 repository/models.py:3254
-#: repository/models.py:3452
+#: repository/models.py:2101 repository/models.py:3253
+#: repository/models.py:3451
 msgid ""
 "The name of the character encoding used in the resource or accepted by the "
 "tool/service"
@@ -1036,7 +1036,7 @@ msgstr ""
 "Le nom de l'encodage des caractères utilisé dans la ressource ou accepté par "
 "l'outil/service."
 
-#: repository/models.py:2110
+#: repository/models.py:2109
 msgid ""
 "Provides information on the size of the resource parts with different "
 "character encoding"
@@ -1044,22 +1044,22 @@ msgstr ""
 "Fournit des informations sur la taille des parties de la ressource avec "
 "différents encodages de caractères"
 
-#: repository/models.py:2152
+#: repository/models.py:2151
 msgid "Indicates whether the resource includes one, two or more languages"
 msgstr "Indique si la ressource comprend une, deux ou plusieurs langues."
 
-#: repository/models.py:2162
+#: repository/models.py:2161
 msgid "Indicates whether the corpus is parallel, comparable or mixed"
 msgstr "Indique si le corpus est parallèle, comparable ou mixte"
 
-#: repository/models.py:2172
+#: repository/models.py:2171
 msgid ""
 "Provides further information on multilinguality of a resource in free text"
 msgstr ""
 "Fournit de plus amples informations sur le multilinguisme d'une ressource en "
 "texte libre."
 
-#: repository/models.py:2217
+#: repository/models.py:2216
 msgid ""
 "Specifies the type of the language variety that occurs in the resource or is "
 "supported by a tool/service"
@@ -1067,8 +1067,8 @@ msgstr ""
 "Spécifie le type de la variété de langue qui apparaît dans la ressource ou "
 "qui est prise en charge par un outil/service."
 
-#: repository/models.py:2227 repository/models.py:3248
-#: repository/models.py:3446
+#: repository/models.py:2226 repository/models.py:3247
+#: repository/models.py:3445
 msgid ""
 "The name of the language variety that occurs in the resource or is supported "
 "by a tool/service"
@@ -1076,12 +1076,12 @@ msgstr ""
 "Le nom de la variété linguistique qui apparaît dans la ressource ou qui est "
 "soutenue par un outil/service."
 
-#: repository/models.py:2233
+#: repository/models.py:2232
 msgid "Provides information on the size per language variety component"
 msgstr ""
 "Fournit des informations sur la taille par composante de type de langue"
 
-#: repository/models.py:2282 repository/models.py:2372
+#: repository/models.py:2281 repository/models.py:2371
 msgid ""
 "The identifier of the language that is included in the resource or supported "
 "by the tool/service, according to the IETF BCP47 guidelines"
@@ -1089,7 +1089,7 @@ msgstr ""
 "L'identifiant de la langue qui est incluse dans la ressource ou supportée "
 "par l'outil/service, selon les directives IETF BCP47."
 
-#: repository/models.py:2289 repository/models.py:2379
+#: repository/models.py:2288 repository/models.py:2378
 msgid ""
 "A human understandable name of the language that is used in the resource; "
 "the name is selected according to the IETF BCP47 specifications"
@@ -1097,7 +1097,7 @@ msgstr ""
 "Un nom compréhensible par l'homme de la langue utilisée dans la ressource ; "
 "le nom est choisi conformément aux spécifications IETF BCP47."
 
-#: repository/models.py:2296 repository/models.py:2385
+#: repository/models.py:2295 repository/models.py:2384
 msgid ""
 "A human understandable name of the script used for the resource, according "
 "to the IETF BCP47 specifications; the element is optional and should only be "
@@ -1108,7 +1108,7 @@ msgstr ""
 "utilisé que dans des cas exceptionnels (par exemple, le texte transcrit dans "
 "IPA etc.)."
 
-#: repository/models.py:2304 repository/models.py:2393
+#: repository/models.py:2303 repository/models.py:2392
 msgid ""
 "Name of the region where the language of the resource is spoken (e.g. for "
 "English as spoken in the US or the UK etc.)"
@@ -1116,18 +1116,18 @@ msgstr ""
 "Nom de la région où la langue de la ressource est parlée (p. ex. pour "
 "l'anglais parlé aux États-Unis ou au Royaume-Uni, etc.)"
 
-#: repository/models.py:2311 repository/models.py:2400
+#: repository/models.py:2310 repository/models.py:2399
 msgid ""
 "Name of the variant of the language of the resource is spoken (according to "
 "IETF BCP47)"
 msgstr ""
 "Nom de la variante de la langue de la ressource parlée (selon IETF BCP47)"
 
-#: repository/models.py:2319
+#: repository/models.py:2318
 msgid "Provides information on the size per language component"
 msgstr "Fournit des informations sur la taille par composante linguistique"
 
-#: repository/models.py:2324
+#: repository/models.py:2323
 msgid ""
 "Groups information on language varieties occurred in the resource (e.g. "
 "dialects)"
@@ -1135,19 +1135,19 @@ msgstr ""
 "Regroupe des informations sur les variétés linguistiques présentes dans la "
 "ressource (par ex., dialectes)"
 
-#: repository/models.py:2459
+#: repository/models.py:2458
 msgid "The full name of a project related to the resource"
 msgstr "Le nom complet d'un projet lié à la ressource"
 
-#: repository/models.py:2466
+#: repository/models.py:2465
 msgid "A short name or abbreviation of a project related to the resource"
 msgstr "Nom abrégé ou abréviation d'un projet lié à la ressource."
 
-#: repository/models.py:2472
+#: repository/models.py:2471
 msgid "An unambiguous referent to a project related to the resource"
 msgstr "Un référent non ambiguë à un projet lié à la ressource"
 
-#: repository/models.py:2479
+#: repository/models.py:2478
 msgid ""
 "A URL used as homepage of an entity (e.g. of a person, organization, "
 "resource etc.) and/or where an entity (e.g.LR, document etc.) is located"
@@ -1156,15 +1156,15 @@ msgstr ""
 "d'une organisation, d'une ressource, etc.) et/ou où se trouve une entité "
 "(par ex, RL, document, etc.)"
 
-#: repository/models.py:2486
+#: repository/models.py:2485
 msgid "Specifies the type of funding of the project"
 msgstr "Précise le type de financement du projet"
 
-#: repository/models.py:2494
+#: repository/models.py:2493
 msgid "The full name of the funder of the project"
 msgstr "Le nom complet du financeur du projet"
 
-#: repository/models.py:2499
+#: repository/models.py:2498
 msgid ""
 "The name of the funding country, in case of national funding as mentioned in "
 "ISO3166"
@@ -1172,7 +1172,7 @@ msgstr ""
 "Le nom du pays de financement, dans le cas d'un financement national tel que "
 "mentionné dans la norme ISO3166"
 
-#: repository/models.py:2505
+#: repository/models.py:2504
 msgid ""
 "The identifier of the funding country, in case of national funding as "
 "mentioned in ISO3166"
@@ -1180,17 +1180,17 @@ msgstr ""
 "L'identificateur du pays de financement, dans le cas d'un financement "
 "national tel que mentionné dans la norme ISO3166"
 
-#: repository/models.py:2511
+#: repository/models.py:2510
 msgid "The starting date of a project related to the resource"
 msgstr "La date de début d'un projet lié à la ressource"
 
-#: repository/models.py:2516
+#: repository/models.py:2515
 msgid "The end date of a project related to the resource"
 msgstr "La date de fin d'un projet lié à la ressource"
 
-#: repository/models.py:2582 repository/models.py:2885
-#: repository/models.py:3077 repository/models.py:3208
-#: repository/models.py:3407
+#: repository/models.py:2581 repository/models.py:2884
+#: repository/models.py:3076 repository/models.py:3207
+#: repository/models.py:3406
 msgid ""
 "Specifies the media type of the resource and basically corresponds to the "
 "physical medium of the content representation. Each media type is described "
@@ -1205,8 +1205,8 @@ msgstr ""
 "outil/service peut prendre en entrée/sortie plus d'un type de support "
 "différent."
 
-#: repository/models.py:2592 repository/models.py:2895
-#: repository/models.py:3087
+#: repository/models.py:2591 repository/models.py:2894
+#: repository/models.py:3086
 msgid ""
 "Groups information on the number of languages of the resource part and of "
 "the way they are combined to each other"
@@ -1214,7 +1214,7 @@ msgstr ""
 "Regroupe des informations sur le nombre de langues de la partie ressource et "
 "la façon dont elle sont combinées les unes aux autres"
 
-#: repository/models.py:2612
+#: repository/models.py:2611
 msgid ""
 "Groups together information on the resource creation (e.g. for corpora, "
 "selection of texts/audio files/ video files etc. and structural encoding "
@@ -1225,8 +1225,8 @@ msgstr ""
 "encodage structurel de ceux-ci; pour un lexique, construction d'une liste de "
 "lemmes, etc.)"
 
-#: repository/models.py:2648 repository/models.py:3231
-#: repository/models.py:3429
+#: repository/models.py:2647 repository/models.py:3230
+#: repository/models.py:3428
 msgid ""
 "The data format (usually corresponding to the mime-type) of the resource "
 "which is a formalized specifier for the format included or a data format "
@@ -1244,14 +1244,14 @@ msgstr ""
 "une valeur, DE PRÉFÉRENCE PARMI LES VALEURS MEDIA MIMETYPE RECOMMENDÉES DE "
 "L'IANA (http://www.iana.org/assignments/media-types/media-types.xhtml)"
 
-#: repository/models.py:2664
+#: repository/models.py:2663
 msgid ""
 "Provides information on the size of the resource parts with different format"
 msgstr ""
 "Fournit des informations sur la taille des parties de la ressource avec un "
 "format différent"
 
-#: repository/models.py:2723
+#: repository/models.py:2722
 msgid ""
 "Genre: The conventionalized discourse or text types of the content of the "
 "resource, based on extra-linguistic and internal linguistic criteria"
@@ -1260,12 +1260,12 @@ msgstr ""
 "ressource, basés sur des critères extra-linguistiques et linguistiques "
 "internes."
 
-#: repository/models.py:2734
+#: repository/models.py:2733
 msgid "Specifies the type of the text according to a text type classification"
 msgstr ""
 "Spécifie le type de texte en fonction d'une classification de type de texte"
 
-#: repository/models.py:2753
+#: repository/models.py:2752
 msgid ""
 "Provides information on size of resource parts with different text "
 "classification"
@@ -1273,7 +1273,7 @@ msgstr ""
 "Fournit des informations sur la taille des parties de la ressource avec "
 "différentes classifications de texte."
 
-#: repository/models.py:2807
+#: repository/models.py:2806
 msgid ""
 "Information on the linguistic levels covered by the resource (grammar or "
 "lexical/conceptual resource)"
@@ -1281,7 +1281,7 @@ msgstr ""
 "Information sur les niveaux linguistiques couverts par la ressource "
 "(grammaire ou ressource lexicale/conceptuelle)"
 
-#: repository/models.py:2825
+#: repository/models.py:2824
 msgid ""
 "Name of the theoretic model applied for the creation/enrichment of the "
 "resource, and/or reference (URL or bibliographic reference) to informative "
@@ -1291,7 +1291,7 @@ msgstr ""
 "ressource, et/ou référence (URL ou référence bibliographique) au matériel "
 "informatif sur le modèle théorique utilisé"
 
-#: repository/models.py:2833 repository/models.py:3672
+#: repository/models.py:2832 repository/models.py:3671
 msgid ""
 "Reference (name, bibliographic reference or link to url) for the formalism "
 "used for the creation/enrichment of the resource (grammar or tool/service)"
@@ -1300,11 +1300,11 @@ msgstr ""
 "utilisé pour la création/enrichissement de la ressource (grammaire ou outil/"
 "service)"
 
-#: repository/models.py:2840
+#: repository/models.py:2839
 msgid "An indication of the task performed by the grammar"
 msgstr "Une indication de la tâche effectuée par la grammaire"
 
-#: repository/models.py:2982
+#: repository/models.py:2981
 msgid ""
 "Information on the contents of the lexicalConceptualResource as regards the "
 "linguistic level of analysis"
@@ -1312,7 +1312,7 @@ msgstr ""
 "Information sur le contenu de lexicalConceptualResource en ce qui concerne "
 "le niveau d'analyse linguistique "
 
-#: repository/models.py:2991
+#: repository/models.py:2990
 msgid ""
 "A more detailed account of the linguistic information contained in the "
 "lexicalConceptualResource"
@@ -1320,7 +1320,7 @@ msgstr ""
 "Un compte rendu plus détaillé de l'information linguistique contenue dans le "
 "lexicalConceptualResource"
 
-#: repository/models.py:3017
+#: repository/models.py:3016
 msgid ""
 "Another resource to which the lexicalConceptualResource is linked (e.g. link "
 "to a wordnet or ontology)"
@@ -1328,7 +1328,7 @@ msgstr ""
 "Une autre ressource à laquelle le lexicalConceptualResource est liée (par "
 "exemple un lien vers un réseau de mots ou une ontologie)"
 
-#: repository/models.py:3023
+#: repository/models.py:3022
 msgid ""
 "An indication of the extratextual information contained in the "
 "lexicalConceptualResouce; can be used as an alternative to audio, image, "
@@ -1340,7 +1340,7 @@ msgstr ""
 "l'image, les vidéos etc. pour les cas où ceux-ci ne sont pas considérés "
 "comme une partie importante de la lcr"
 
-#: repository/models.py:3034
+#: repository/models.py:3033
 msgid ""
 "The unit of the extratextual information contained in the lexical conceptual "
 "resource"
@@ -1348,8 +1348,8 @@ msgstr ""
 "L'unité de l'information extratextuelle contenue dans la ressource "
 "conceptuelle lexicale"
 
-#: repository/models.py:3222 repository/models.py:3420
-#: repository/models.py:3872
+#: repository/models.py:3221 repository/models.py:3419
+#: repository/models.py:3871
 msgid ""
 "The type of the resource that a tool or service takes as input or produces "
 "as output"
@@ -1357,7 +1357,7 @@ msgstr ""
 "Le type de ressource qu'un outil ou un service prend en entrée ou produit en "
 "sortie"
 
-#: repository/models.py:3288 repository/models.py:3482
+#: repository/models.py:3287 repository/models.py:3481
 msgid ""
 "A name or a url reference to the resource (ontology, tagset, term lexicon "
 "etc.) used in the annotation of the resource or used by the tool/service"
@@ -1366,7 +1366,7 @@ msgstr ""
 "lexique terminologique, etc.) utilisée dans l'annotation de la ressource ou "
 "utilisée par l'outil/service"
 
-#: repository/models.py:3295 repository/models.py:3489
+#: repository/models.py:3294 repository/models.py:3488
 msgid ""
 "Specifies the standards or the best practices to which the resource used for "
 "the annotation conforms"
@@ -1374,23 +1374,23 @@ msgstr ""
 "Spécifie les normes ou les meilleures pratiques auxquelles se conforme la "
 "ressource utilisée pour l'annotation"
 
-#: repository/models.py:3548
+#: repository/models.py:3547
 msgid "Indicates whether the tool or service has been evaluated"
 msgstr "Indique si l'outil ou le service a été évalué"
 
-#: repository/models.py:3554
+#: repository/models.py:3553
 msgid "Indicates the evaluation level"
 msgstr "Indique le niveau d'évaluation"
 
-#: repository/models.py:3562
+#: repository/models.py:3561
 msgid "Defines the criteria of the evaluation of a tool"
 msgstr "Définit les critères d'évaluation d'un outil"
 
-#: repository/models.py:3570
+#: repository/models.py:3569
 msgid "Defines whether the evaluation measure is human or automatic"
 msgstr "Précise si la mesure d'évaluation est humaine ou automatique"
 
-#: repository/models.py:3579
+#: repository/models.py:3578
 msgid ""
 "A bibliographical record of or link to a report describing the evaluation "
 "process, tool, method etc. of the tool or service"
@@ -1398,7 +1398,7 @@ msgstr ""
 "Une notice bibliographique ou un lien vers un rapport décrivant le processus "
 "d'évaluation, l'outil, la méthode, etc. de l'outil ou du service"
 
-#: repository/models.py:3586
+#: repository/models.py:3585
 msgid ""
 "The name or id or url of the tool used for the evaluation of the tool or "
 "service"
@@ -1406,14 +1406,14 @@ msgstr ""
 "Le nom, l'id ou l'url de l'outil utilisé pour l'évaluation de l'outil ou du "
 "service"
 
-#: repository/models.py:3592
+#: repository/models.py:3591
 msgid ""
 "Provides further information on the evaluation process of a tool or service"
 msgstr ""
 "Fournit des informations supplémentaires sur le processus d'évaluation d'un "
 "outil ou d'un service"
 
-#: repository/models.py:3598
+#: repository/models.py:3597
 msgid ""
 "Groups information on person or organization that evaluated the tool or "
 "service"
@@ -1421,11 +1421,11 @@ msgstr ""
 "Regroupe des informations sur la personne ou l'organisation qui a évalué "
 "l'outil ou le service"
 
-#: repository/models.py:3629
+#: repository/models.py:3628
 msgid "The operating system on which the tool will be running"
 msgstr "Le système d'exploitation sur lequel l'outil sera exécuté"
 
-#: repository/models.py:3637
+#: repository/models.py:3636
 msgid ""
 "Groups together information on the dependencies (requirements) of a tool or "
 "a language description"
@@ -1433,7 +1433,7 @@ msgstr ""
 "Regroupe les informations sur les dépendances (exigences) d'un outil ou "
 "d'une description linguistique"
 
-#: repository/models.py:3665
+#: repository/models.py:3664
 msgid ""
 "The programming languages needed for allowing user contributions, or for "
 "running the tools, in case no executables are available"
@@ -1442,41 +1442,41 @@ msgstr ""
 "des utilisateurs, ou pour exécuter les outils, dans le cas où aucun "
 "exécutable n'est disponible"
 
-#: repository/models.py:3686
+#: repository/models.py:3685
 msgid "Provides additional information on the creation of a tool or service"
 msgstr ""
 "Fournit des informations supplémentaires sur la création d'un outil ou d'un "
 "service"
 
-#: repository/models.py:3733 repository/models.py:3790
-#: repository/models.py:3957
+#: repository/models.py:3732 repository/models.py:3789
+#: repository/models.py:3956
 msgid "Specifies the type of the resource being described"
 msgstr "Spécifie le type de la ressource décrite"
 
-#: repository/models.py:3738
+#: repository/models.py:3737
 msgid "Specifies the subtype of lexicalConceptualResource"
 msgstr "Spécifie le sous-type de lexicalConceptualResource"
 
-#: repository/models.py:3746
+#: repository/models.py:3745
 msgid ""
 "Groups all information regarding the contents of lexical/conceptual resources"
 msgstr ""
 "Regroupe toutes les informations concernant le contenu des ressources "
 "lexicales/conceptuelles."
 
-#: repository/models.py:3752
+#: repository/models.py:3751
 msgid "Restriction of mediaType for lexicalConceptualResources"
 msgstr "Restriction de mediaType pour lexicalConceptualResources"
 
-#: repository/models.py:3795
+#: repository/models.py:3794
 msgid "The type of the language description"
 msgstr "Le type de description de la langue"
 
-#: repository/models.py:3803
+#: repository/models.py:3802
 msgid "Groups together information on the contents of the LanguageDescriptions"
 msgstr "Regroupe les informations sur le contenu des LanguageDescriptions"
 
-#: repository/models.py:3809
+#: repository/models.py:3808
 msgid ""
 "Groups information on the media type-specific components for language "
 "descriptions"
@@ -1484,17 +1484,17 @@ msgstr ""
 "Regroupe les informations sur les composants spécifiques au type de support "
 "pour les descriptions linguistiques."
 
-#: repository/models.py:3878
+#: repository/models.py:3877
 msgid "Specifies the type of the tool or service"
 msgstr "Spécifie le type de l'outil ou du service"
 
-#: repository/models.py:3887
+#: repository/models.py:3886
 msgid ""
 "Specifies the function/operation/task that a tool or web service performs"
 msgstr ""
 "Spécifie la fonction/opération/tâche qu'un outil ou un service web réalise"
 
-#: repository/models.py:3896
+#: repository/models.py:3895
 msgid ""
 "Indicates whether the operation of the tool or service is language dependent "
 "or not"
@@ -1502,7 +1502,7 @@ msgstr ""
 "Indique si le fonctionnement de l'outil ou du service est dépendant de la "
 "langue ou non"
 
-#: repository/models.py:3902
+#: repository/models.py:3901
 msgid ""
 "Groups together information on the requirements set on the input resource of "
 "a tool or service"
@@ -1510,7 +1510,7 @@ msgstr ""
 "Regroupe les informations sur les exigences définies sur la ressource "
 "d'entrée d'un outil ou d'un service."
 
-#: repository/models.py:3908
+#: repository/models.py:3907
 msgid ""
 "Groups together information on the requirements set on the output of a tool "
 "or service"
@@ -1518,23 +1518,23 @@ msgstr ""
 "Regroupe les informations sur les exigences définies sur la sortie d'un "
 "outil ou d'un service."
 
-#: repository/models.py:3914
+#: repository/models.py:3913
 msgid "Groups together information on the operation of a tool or service"
 msgstr ""
 "Regroupe les informations sur le fonctionnement d'un outil ou d'un service"
 
-#: repository/models.py:3920
+#: repository/models.py:3919
 msgid ""
 "Groups together information on the evaluation status of a tool or service"
 msgstr ""
 "Regroupe les informations sur le statut d'évaluation d'un outil ou d'un "
 "service"
 
-#: repository/models.py:3926
+#: repository/models.py:3925
 msgid "Groups together information on the creation of a tool or service"
 msgstr "Regroupe les informations sur la création d'un outil ou d'un service"
 
-#: repository/models.py:3962
+#: repository/models.py:3961
 msgid ""
 "Used to specify the media type specific to corpora and group together the "
 "relevant information"
@@ -1542,7 +1542,7 @@ msgstr ""
 "Utilisé pour spécifier le type de média spécifique au corpus et regrouper "
 "les informations pertinentes"
 
-#: repository/models.py:4010
+#: repository/models.py:4009
 msgid ""
 "Groups together all information relevant to the text module of a language "
 "description (e.g. format, languages, size etc.); it is obligatory for all "
@@ -1552,14 +1552,14 @@ msgstr ""
 "description linguistique (par exemple, format, langues, taille, etc.) ; "
 "obligatoire pour toutes les descriptions linguistiques."
 
-#: repository/models.py:4036
+#: repository/models.py:4035
 msgid ""
 "Groups information on the textual part of the lexical/conceptual resource"
 msgstr ""
 "Regroupe des informations sur la partie textuelle de la ressource lexicale/"
 "conceptuelle"
 
-#: repository/models.py:4078 repository/models.py:4087
+#: repository/models.py:4077 repository/models.py:4086
 msgid "Specifies the application domain of the resource or the tool/service"
 msgstr ""
 "Spécifie le domaine d'application de la ressource ou de l'outil/service"
@@ -1677,8 +1677,9 @@ msgid ""
 "Enter a valid year value which conforms to the XML Schema \"gYear\" type "
 "(see http://www.w3.org/TR/xmlschema-2/#gYear). \"{}\" is not valid."
 msgstr ""
-"Saisissez une valeur d'année valide conforme au schéma XML de type \"gYear"
-"\" (voir http://www.w3.org/TR/xmlschema-2/#gYear). \"{}\" n'est pas valide."
+"Erreur:  Saisissez une valeur d'année valide conforme au schéma XML de type "
+"\"gYear\" (voir http://www.w3.org/TR/xmlschema-2/#gYear). \"{}\" n'est pas "
+"valide."
 
 #: repository/validators.py:56
 #, python-brace-format
@@ -1688,49 +1689,54 @@ msgid ""
 "production from XML 1.0 (Second Edition), cf. http://www.w3.org/TR/2000/WD-"
 "xml-2e-20000814#NT-Char."
 msgstr ""
-"Le caractère à la position {char_pos}. (&#x{char_code:0>4x} ;) ne doit pas "
-"être utilisé. Entrez une chaîne composée uniquement de caractères qui "
-"correspondent à la production de caractères XML 1.0 (deuxième édition), cf. "
-"http://www.w3.org/TR/2000/WD-xml-2e-20000814#NT-Char."
+"Erreur: Le caractère à la position {char_pos}. (&#x{char_code:0>4x} ;) ne "
+"doit pas être utilisé. Entrez une chaîne composée uniquement de caractères "
+"qui correspondent à la production de caractères XML 1.0 (deuxième édition), "
+"cf. http://www.w3.org/TR/2000/WD-xml-2e-20000814#NT-Char."
 
 #: repository/validators.py:72
 msgid ""
 "Enter a valid language code as the key for each pair. \"{}\" is not valid."
 msgstr ""
-"Entrez un code de langue valide comme clé pour chaque paire. \"{}\" n'est "
-"pas valide."
+"Erreur: Entrez un code de langue valide comme clé pour chaque paire. \"{}\" "
+"n'est pas valide."
 
 #: repository/validators.py:86
 msgid "This field is required."
-msgstr "Ce champ est obligatoire."
+msgstr "Erreur: Ce champ est obligatoire."
 
 #: repository/validators.py:92
 msgid "This field accepts only number values (without commas)"
-msgstr "Ce champ n'accepte que les valeurs numériques (sans les virgules)"
+msgstr ""
+"Erreur: Ce champ n'accepte que les valeurs numériques (sans les virgules)"
 
 #: repository/validators.py:97
 msgid "Please edit the attribution text template"
-msgstr "Veuillez modifier le modèle de texte d'attribution"
+msgstr "Erreur: Veuillez modifier le modèle de texte d'attribution"
 
-#: repository/views.py:341
+#: repository/validators.py:101
+msgid "Enter a valid email address."
+msgstr "Erreur: Entrez un email address valide."
+
+#: repository/views.py:351
 msgid "Request for information regarding a resource"
 msgstr "Demande de renseignements concernant une ressource"
 
-#: repository/views.py:349
+#: repository/views.py:359
 msgid "There was an error sending out the request email."
-msgstr "Il y a eu une erreur lors de l'envoi de l'email de demande."
+msgstr "Erreur: Il y a eu une erreur lors de l'envoi de l'email de demande."
 
-#: repository/views.py:351
+#: repository/views.py:361
 msgid "You have successfully sent a message to the resource contact person."
 msgstr ""
 "Vous avez envoyé avec succès un message à la personne de contact pour la "
 "ressource."
 
-#: repository/views.py:1040
+#: repository/views.py:1050
 msgid "N/A"
 msgstr "S.O."
 
-#: repository/views.py:1101
+#: repository/views.py:1111
 msgid ""
 "\n"
 "                Only files of type DOC(X), ODT, RTF, PDF, TMX, SDLTM, XML,\n"
@@ -1748,7 +1754,7 @@ msgstr ""
 "fichiers\n"
 "                qui n'appartiennent pas à l'un de ces types."
 
-#: repository/views.py:1140
+#: repository/views.py:1153
 msgid ""
 "\n"
 "                            Your request could not be completed.\"\n"
@@ -1762,7 +1768,7 @@ msgstr ""
 "est corrompu ou n'est.\n"
 "                            n'est pas un fichier '.zip' valide."
 
-#: repository/views.py:1149
+#: repository/views.py:1162
 msgid ""
 "\n"
 "                            Only files of type DOC(X), ODT, RTF, PDF, TMX, "
@@ -1783,11 +1789,11 @@ msgstr ""
 "les fichiers\n"
 "                            qui n'appartiennent pas à l'un de ces types."
 
-#: repository/views.py:1192
+#: repository/views.py:1205
 msgid "New submitted contributions"
 msgstr "Nouvelles contributions soumises"
 
-#: repository/views.py:1200
+#: repository/views.py:1213
 msgid ""
 "\n"
 "                Thank you for sharing, your data have been successfully "
@@ -1801,18 +1807,13 @@ msgstr ""
 "examinées par l'équipe ELRI. Vous serez avisé par courriel lorsque la "
 "ressource résultante sera disponible pour téléchargement."
 
-#: repository/views.py:1209
+#: repository/views.py:1222
 msgid ""
-"\n"
-"                The file you are trying to upload exceeds the size limit. If "
-"the file(s) you\n"
-"                would like to contribute exceed(s) {:.10} MB please contact "
-"us to provide an SFTP link for direct\n"
-"                download or consider uploading smaller files."
+"The file(s) you are trying to upload exceeds the size limit. If the file(s) "
+"you would like to contribute exceed(s) {:.10} MB please contact us to "
+"provide an SFTP link for direct download or consider uploading smaller files."
 msgstr ""
-"\n"
-"                Le fichier que vous essayez de télécharger dépasse la limite "
-"de taille. Si le(s) fichier(s) que vous\n"
-"                souhaitez contribuer dépasse(nt) { :.10} Mo, veuillez nous "
-"contacter pour fournir un lien SFTP pour télécharger\n"
-"                directement ou envisagez de charger des fichiers plus petits."
+" Le fichier que vous essayez de télécharger dépasse la limite de taille. Si "
+"le(s) fichier(s) que vous souhaitez contribuer dépasse(nt) {:.10} Mo, "
+"veuillez nous contacter pour fournir un lien SFTP pour télécharger "
+"directement ou envisagez de charger des fichiers plus petits."

@@ -292,7 +292,7 @@
                 href: '/privacy',
                 close: '&#x274c;',
                 target: '_blank',
-                policy: 'Cookie Policy'
+                policy: 'Cookies Policy'
             },
 
             // This is the HTML for the elements above. The string {{header}} will be replaced with the equivalent text below.

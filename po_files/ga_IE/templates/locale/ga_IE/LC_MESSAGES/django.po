@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-04 13:42+0200\n"
-"PO-Revision-Date: 2019-04-08 14:19+0200\n"
+"POT-Creation-Date: 2019-06-17 16:32+0200\n"
+"PO-Revision-Date: 2019-06-17 12:33+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ga_IE\n"
@@ -41,9 +41,9 @@ msgid ""
 "Please try again and, if the error persists, contact the ELRI NRS support "
 "group (<a href=\"mailto:%(email)s\" >%(email)s</a>)."
 msgstr ""
-"Triail arís é le do thoil, agus má leanann an earráid ar aghaidh, bí i "
-"dteagmháil le grúpa tacaíochta an SAN ELRI (<a href=\"mailto:%(email)s\" >"
-"%(email)s</a>)."
+"Earráid: Triail arís é le do thoil, agus má leanann an earráid ar aghaidh, "
+"bí i dteagmháil le grúpa tacaíochta an SAN ELRI (<a href=\"mailto:%(email)s"
+"\" >%(email)s</a>)."
 
 #: templates/500.html:7
 msgid "Internal Server Error (500)"
@@ -54,13 +54,30 @@ msgid ""
 "We&rsquo;re sorry, but an internal error occurred when processing your "
 "request."
 msgstr ""
-"Tá brón orainn, tharla earráid inmheánach agus d'iarratas á phróiseáil."
+"Earráid: Tá brón orainn, tharla earráid inmheánach agus d'iarratas á "
+"phróiseáil."
 
 #: templates/back.html:5
 msgid "ELRI National Relay Station"
 msgstr "Stáisiún Athsheachadta Náisiúnta na hÉireann ELRI"
 
-#: templates/base.html:54
+#: templates/base.html:14
+msgid ""
+"ELRI National Relay Station: a repository to store, search and retrieve "
+"Language Resources."
+msgstr ""
+"Stáisiún Athsheachadta Náisiúnta ELRI: stór chun Acmhainní Teanga a stóráil, "
+"a chuardach agus a aisghabháil."
+
+#: templates/base.html:16
+msgid ""
+"ELRI, National Relay Station, language resources, translation memories, "
+"Connecting Europe Facility "
+msgstr ""
+"Stáisiún Athsheachadta Náisiúnta, acmhainní teanga, cuimhní aistriúcháin, an "
+"tSaoráid um Chónascadh na hEorpa"
+
+#: templates/base.html:55
 msgid ""
 "\"This site uses cookies to enhance your user experience. By clicking any "
 "link on this page you are giving your consent for us to set cookies.\" "
@@ -69,18 +86,31 @@ msgstr ""
 "úsáideora a fheabhsú. Má chliceálann tú ar aon nasc ar an leathnach seo, "
 "beidh tú ag tabhairt do thola dúinn fianáin a chur i bhfeidhm.\""
 
-#: templates/base.html:55 templates/base.html.py:58
+#: templates/base.html:56 templates/base.html.py:59
 msgid "\"OK\""
 msgstr "\"Tuigim\""
 
-#: templates/base.html:57
+#: templates/base.html:58
 msgid "\"Learn more\""
 msgstr "\"Léigh níos mó faoi\""
+
+#: templates/base.html:60
+msgid "\"Cookies policy\""
+msgstr "'Beartas Fianán'"
+
+#: templates/base.html:70
+msgid "Go to the web page main content."
+msgstr "Téigh go dtí príomh-inneachar an leathanaigh ghréasáin."
 
 #: templates/breadcrumbs.html:3 templates/header.html:79
 #: templates/header.html.py:80
 msgid "Home"
 msgstr "Baile"
+
+#: templates/elri-info.html:5 templates/header.html:161
+#: templates/repository/resource_view/usage.html:3
+msgid "Usage"
+msgstr "Úsáid"
 
 #: templates/elri-info.html:7 templates/header.html:163
 msgid "ELRI Services"
@@ -150,27 +180,27 @@ msgstr ""
 
 #: templates/elri-info.html:23
 msgid ""
-"New users should first register <a href=\"../accounts/create/\">here</a>. "
-"Once your account credentials have been validated, you can log in and either "
+"New users should first <a href=\"../accounts/create/\">register</a>. Once "
+"your account credentials have been validated, you can log in and either "
 "search (via the Browse Resources menu) or contribute ((via the Contribute "
 "Resources menu) language resources."
 msgstr ""
-"Ba chóir d'úsáideoirí nua clárú <a href=\"../accounts/create/\">anseo</a> ar "
-"dtús. Nuair atá dintiúir do chuntais deimhnithe, is féidir leat logáil "
-"isteach agus cuardach (tríd an roghchlár Brabhsáil Acmhainní) nó acmhainní "
-"teanga a chur ar fáil (tríd an roghchlár Cuir Acmhainní ar Fáil)."
+"Ba chóir d'úsáideoirí nua <a href=\"../accounts/create/\">register</a> ar "
+"dtús. Nuair atá faisnéis aitheantais do chuntais bailíochtaithe is féidir "
+"leat logáil isteach agus acmhainní teanga a chuardach (trí roghchlár "
+"Brabhsáil Acmhainní) nó a roinnt (trí roghchlár Roinn Acmhainní)."
 
 #: templates/elri-info.html:25
 msgid ""
 "For each language resource, you will be asked to provide the languages of "
 "its content, a short title, the group with which you wish to share the "
 "resource, and the associated licensing conditions (see <a href="
-"\"#Licensing_LRs\">below</a>)."
+"\"#Licensing_LRs\" title=\"licensing contitions\">below</a>)."
 msgstr ""
-"Do gach acmhainn teanga, iarrfar ort teangacha a inneachair a chlárú, mar "
-"aon le teideal gearr, an grúpa is mian leat an acmhainn a roinnt leis, agus "
-"na coinníollacha ceadúnaithe a bhaineann leis (féach <a href=\"#Licensing_LRs"
-"\">thíos</a>)."
+"I gcás gach acmhainn teanga, iarrfar ort teangacha an inneachair a chur ar "
+"fáil mar aon le teideal gearr, an grúpa lenar mian leat an acmhainn a "
+"roinnt, agus na coinníollacha ceadúnaithe a bhaineann léi (féach <a href="
+"\"#Licensing_LRs\" title=\"licensing contitions\">thíos</a>)."
 
 #: templates/elri-info.html:27
 msgid ""
@@ -296,17 +326,26 @@ msgstr "Stáisiún Athsheachadta Náisiúnta na hÉireann ELRI"
 
 #: templates/footer.html:8
 msgid ""
-"powered by <a href=\"http://www.meta-share.org/\" target=\"_blank\">META-"
-"SHARE</a> and <a href=\"https://elrc-share.eu/\" target=\"_blank\">ELRC-"
-"SHARE</a>"
+"powered by <a href=\"http://www.meta-share.org/\" target=\"_blank\" lang=\"en"
+"\">META-SHARE</a> and <a href=\"https://elrc-share.eu/\" target=\"_blank\" "
+"lang=\"en\">ELRC-SHARE</a>"
 msgstr ""
-"Bainistithe ag <a href=\"https://www.adaptcentre.ie\">ADAPT</a> agus "
-"óstaithe in <a href=\"https://www.computing.dcu.ie/\">OCBÁC</a>\n"
-"<br>cumhachtaithe ag <a href=\"http://meta-share.org/\" target=\"_blank"
-"\">META-SHARE</a> agus <a href=\"https://elrc-share.eu/\" target=\"_blank"
-"\">ELRC-SHARE</a>"
+"Bainistithe ag <a href=\"https://www.adaptcentre.ie\" target=\"_blank\" lang="
+"\"en\">ADAPT</a> agus óstaithe in <a href=\"https://www.computing.dcu.ie/\" "
+"target=\"_blank\">OCBÁC</a>\n"
+"<br>cumhachtaithe ag <a href=\"http://www.meta-share.org/\" target=\"_blank"
+"\" lang=\"en\">META-SHARE</a> agus <a href=\"https://elrc-share.eu/\" target="
+"\"_blank\" lang=\"en\">ELRC-SHARE</a>"
 
-#: templates/footer.html:12
+#: templates/footer.html:9
+msgid ""
+"Go to the Creative Commons Attribution Non-Commercial Share Alike 4.0 "
+"International license information page."
+msgstr ""
+"Téigh go dtí leathanach eolais ceadúnas Idirnáisiúnta Creative Commons "
+"Ceadúnas Sannta Neamhthráchtála Comhroinnte 4.0."
+
+#: templates/footer.html:14
 msgid "Privacy Policy"
 msgstr "Polasaí Príobháideachais"
 
@@ -327,14 +366,15 @@ msgstr ""
 #: templates/frontpage.html:17
 msgid ""
 "National Relay Stations are developed within the  <a href=\"http://www.elri-"
-"project.eu\">ELRI</a> European project, supported by the <a href=\"http://ec."
-"europa.eu/inea/en/connecting-europe-facility\">Connecting Europe Facility</"
-"a> programme."
+"project.eu\" target=\"_blank\" >ELRI</a> European project, supported by the "
+"<a href=\"http://ec.europa.eu/inea/en/connecting-europe-facility\" lang=\"en"
+"\" target=\"_blank\">Connecting Europe Facility</a> programme."
 msgstr ""
 "Déantar Stáisiúin Athsheachadta Náisiúnta a fhorbairt taobh istigh den "
-"tionscadal Eorpach <a href=\"http://www.elri-project.eu\">ELRI</a>, le "
-"tacaíocht ón gclár <a href=\"http://ec.europa.eu/inea/en/connecting-europe-"
-"facility\">Saoráid um Chónascadh na hEorpa</a>."
+"tionscadal Eorpach <a href=\"http://www.elri-project.eu\" target=\"_blank"
+"\">ELRI</a>, le tacaíocht ón gclár <a href=\"http://ec.europa.eu/inea/en/"
+"connecting-europe-facility\" lang=\"ga\"target=\"_blank\" >Saoráid um "
+"Chónascadh na hEorpa</a>."
 
 #: templates/frontpage.html:19
 msgid "Help promote language equality in Europe by joining the ELRI network!"
@@ -384,13 +424,17 @@ msgstr ""
 "                            <br><a href=\"/repository/contribute\">Cuir ar "
 "fáil</a> do chuid sonraí féin agus athghabháil acmhainní teanga réitithe."
 
-#: templates/header.html:34 templates/header.html.py:46
+#: templates/header.html:33 templates/header.html.py:45
 msgid "Gaeilge"
 msgstr ""
 
-#: templates/header.html:39 templates/header.html.py:49
+#: templates/header.html:38 templates/header.html.py:48
 msgid "English"
 msgstr ""
+
+#: templates/header.html:70
+msgid "Go to the ELRI project homepage"
+msgstr "Téigh go dtí leathanach baile togra an ELRI"
 
 #: templates/header.html:82
 msgid "Browse the resources of the ELRI catalogue"
@@ -487,10 +531,6 @@ msgstr "Amharc ar staitisticí éagsúla don nód META-SHARE seo"
 msgid "Statistics"
 msgstr "Staitisticí"
 
-#: templates/header.html:161 templates/repository/resource_view/usage.html:3
-msgid "Usage"
-msgstr "Úsáid"
-
 #: templates/header.html:170
 msgid "Terms of Service"
 msgstr "Téarmaí Seirbhíse"
@@ -572,7 +612,7 @@ msgstr "Logáil isteach"
 msgid "Documentation"
 msgstr "Doiciméadacht"
 
-#: templates/help.html:11
+#: templates/help.html:12
 msgid ""
 "The following guidelines provide detailed information on how to use the ELRI "
 "platform."
@@ -580,15 +620,15 @@ msgstr ""
 "Tugann na treoirlínte a leanas mionsonraí ar conas an suíomh seo ELRI a "
 "úsáid."
 
-#: templates/help.html:16
+#: templates/help.html:17
 msgid "User guidelines"
 msgstr "Treoirlínte d’úsáideoirí"
 
-#: templates/help.html:20
+#: templates/help.html:21
 msgid "Contact details"
 msgstr "Sonraí teagmhála"
 
-#: templates/help.html:22
+#: templates/help.html:23
 msgid ""
 "For enquiries related to the project, please refer to the <a href=\"http://"
 "www.elri-project.eu/contact-us.html\" target=\"_blank\">list of ELRI Contacts"
@@ -597,7 +637,7 @@ msgstr ""
 "href=\"http://www.elri-project.eu/contact-us.html\" target=\"_blank\">liosta "
 "de Theagmhálaithe an ELRI"
 
-#: templates/help.html:24
+#: templates/help.html:25
 #, python-format
 msgid ""
 "For technical help about this National Relay Station, you can contact us at "
@@ -1299,7 +1339,7 @@ msgstr ""
 msgid "The LR is permanently removed from the ELRI Services inventory."
 msgstr "Bainfear an Acmhainn Teanga go buan ó fhardal Sheirbhísí an ELRI."
 
-#: templates/legal.html:126
+#: templates/legal.html:127
 msgid ""
 "If the Depositor and the complainant are unable to agree on a solution, the "
 "LR will remain unavailable through the ELRI Services inventory until a time "
@@ -1309,7 +1349,7 @@ msgstr ""
 "bheidh fáil ar an AT trí fhardal Sheirbhísí an ELRI go dtí go dtiocfar ar "
 "réiteach."
 
-#: templates/legal.html:128
+#: templates/legal.html:129
 msgid "Appendix B"
 msgstr ""
 "<h3><b>Foscríbhinn B.</b><br><b>Fógra Cosanta Sonraí</b></h3>\n"
@@ -1344,7 +1384,7 @@ msgstr ""
 msgid "Don&rsquo;t have an account, yet? Click here to create one."
 msgstr "An bhfuil cuntas agat fós? Cliceáil anseo chun ceann a chruthú."
 
-#: templates/privacy.html:7
+#: templates/privacy.html:8
 msgid "<strong>ELRI NRS Privacy Policy</strong>"
 msgstr ""
 "<strong>Ráiteas Príobháideachta le haghaidh Stáisiún Athsheachadáin "
@@ -1383,21 +1423,21 @@ msgstr ""
 msgid ""
 "The ELRI Consortium consisting of Fundación Centro de Tecnologías de "
 "Interacción Visual \n"
-"        y  Comunicaciones  (<a href=\"http://www.vicomtech.org\">VICOMTECH</"
-"a>),  the  Administrative  Modernization \n"
-"        Agency  (<a href=\"https://www.ama.gov.pt/\">AMA</a>),  Dublin  "
-"City  University  School  of  Computing \n"
-"        (<a href=\"https://www.computing.dcu.ie\">DCU</a>),  the  "
-"Evaluations  and  Language  Resource  Distribution \n"
-"        Agency (<a href=\"http://www.elda.org\">ELDA</a>),  Faculdade de "
-"Ciências da Universidade de Lisboa (<a href=\"https://ciencias.ulisboa.pt"
-"\">FCUL</a>),    \n"
+"        y  Comunicaciones  (<a href=\"http://www.vicomtech.org\" target="
+"\"_blank\">VICOMTECH</a>),  the  Administrative  Modernization \n"
+"        Agency  (<a href=\"https://www.ama.gov.pt/\" target=\"_blank\">AMA</"
+"a>),  Dublin  City  University  School  of  Computing \n"
+"        (<a href=\"https://www.computing.dcu.ie\" target=\"_blank\">DCU</"
+"a>),  the  Evaluations  and  Language  Resource  Distribution \n"
+"        Agency (<a href=\"http://www.elda.org\" target=\"_blank\">ELDA</"
+"a>),  Faculdade de Ciências da Universidade de Lisboa (<a href=\"https://"
+"ciencias.ulisboa.pt\" target=\"_blank\">FCUL</a>),    \n"
 "        Linkare TI – Tecnologias de Informação, Lda. (<a href=\"http://www."
-"linkare.com\">Linkare</a>) \n"
+"linkare.com\" target=\"_blank\">Linkare</a>) \n"
 "        and  the Kingdom  of Spain, represented by the Secretary  of State "
 "for \n"
 "        Digital Progress (<a href=\"https://www.mincotur.gob.es/"
-"telecomunicaciones\">SEAD</a>) \n"
+"telecomunicaciones\" target=\"_blank\">SEAD</a>) \n"
 "        are  jointly  responsible  for  the  collection  and \n"
 "        processing of personal data. ELRI and all its members are committed "
 "to goal- and risk-oriented  \n"
@@ -1414,27 +1454,29 @@ msgid ""
 "        Relay Station."
 msgstr ""
 "Tá na comhlachtaí seo a leanas Fundación Centro de Tecnologías de "
-"Interacción Visual y Comunicaciones (<a href=\"http://www.vicomtech.org"
-"\">VICOMTECH</a>), the  Administrative  Modernization Agency (<a href="
-"\"https://www.ama.gov.pt/\">AMA</a>), Scoil Ríomhaireachta Ollscoil Chathair "
-"Bhaile Átha Cliath (<a href=\"https://www.computing.dcu.ie\">OCBÁC</a>), the "
-"Evaluations and Language Resource Distribution Agency (<a href=\"http://www."
-"elda.org\">GDMAT</a>),  Faculdade de Ciências da Universidade de Lisboa (<a "
-"href=\"https://ciencias.ulisboa.pt\">FCUL</a>), Linkare TI – Tecnologias de "
-"Informação, Lda. (<a href=\"http://www.linkare.com\">Linkare</a>) agus "
-"Ríocht na Spáinne, arna hionadú ag an Rúnaí Stáit um an tSochaí Faisnéise "
-"agus an Clár Digiteach (<a href=\"https://www.mincotur.gob.es/"
-"telecomunicaciones\">SEAD</a>) freagrach go comhpháirteach as an mbailiú "
-"agus as an bpróiseáil a dhéanamh ar shonraí pearsanta. Tá ELRI agus a "
-"chomhaltaí go léir tiomanta ar phríobháideacht faisnéise atá oiriúnaithe ar "
-"spriocanna agus priacail agus ar an gceart bunúsach maidir le sonraí "
-"pearsanta a chosaint. Imlonnaíonn Gníomh ELRI suíomhanna gréasáin "
-"(“Stáisiúin Athsheachadáin Náisiúnta”) atá dírithe ar bhailiú, ar "
-"phróiseáil, agus ar roinnt a dhéanamh ar acmhainní teanga i mBallstáit "
-"éagsúla de chuid an Aontais Eorpaigh. San bheartas um chosaint sonraí seo, "
-"coinnímid ar an eolas tú maidir leis an bpróiseáil a dhéantar ar do shonraí "
-"pearsanta le linn duit cuairt a dhéanamh ar an suíomh gréasáin agus/nó úsáid "
-"a bhaint as seirbhísí an Stáisiúin Athsheachadáin Náisiúnta seo."
+"Interacción Visual y Comunicaciones (<a href=\"http://www.vicomtech.org\"  "
+"target=\"_blank\">VICOMTECH</a>), the  Administrative  Modernization Agency "
+"(<a href=\"https://www.ama.gov.pt/\"  target=\"_blank\">AMA</a>), Scoil "
+"Ríomhaireachta Ollscoil Chathair Bhaile Átha Cliath (<a href=\"https://www."
+"computing.dcu.ie\"  target=\"_blank\">OCBÁC</a>), the Evaluations and "
+"Language Resource Distribution Agency (<a href=\"http://www.elda.org\"  "
+"target=\"_blank\">GDMAT</a>),  Faculdade de Ciências da Universidade de "
+"Lisboa (<a href=\"https://ciencias.ulisboa.pt\"  target=\"_blank\">FCUL</"
+"a>), Linkare TI – Tecnologias de Informação, Lda. (<a href=\"http://www."
+"linkare.com\"  target=\"_blank\">Linkare</a>) agus Ríocht na Spáinne, arna "
+"hionadú ag an Rúnaí Stáit um an tSochaí Faisnéise agus an Clár Digiteach (<a "
+"href=\"https://www.mincotur.gob.es/telecomunicaciones\"  target=\"_blank"
+"\">SEAD</a>) freagrach go comhpháirteach as an mbailiú agus as an bpróiseáil "
+"a dhéanamh ar shonraí pearsanta. Tá ELRI agus a chomhaltaí go léir tiomanta "
+"ar phríobháideacht faisnéise atá oiriúnaithe ar spriocanna agus priacail "
+"agus ar an gceart bunúsach maidir le sonraí pearsanta a chosaint. "
+"Imlonnaíonn Gníomh ELRI suíomhanna gréasáin (“Stáisiúin Athsheachadáin "
+"Náisiúnta”) atá dírithe ar bhailiú, ar phróiseáil, agus ar roinnt a dhéanamh "
+"ar acmhainní teanga i mBallstáit éagsúla de chuid an Aontais Eorpaigh. San "
+"bheartas um chosaint sonraí seo, coinnímid ar an eolas tú maidir leis an "
+"bpróiseáil a dhéantar ar do shonraí pearsanta le linn duit cuairt a dhéanamh "
+"ar an suíomh gréasáin agus/nó úsáid a bhaint as seirbhísí an Stáisiúin "
+"Athsheachadáin Náisiúnta seo."
 
 #: templates/privacy.html:35
 msgid "<b>Controller</b>"
@@ -2239,8 +2281,8 @@ msgid ""
 "or internal errors. Trying again later might\n"
 "                solve the problem."
 msgstr ""
-"Is oth linn a rá nach bhfuil fáil le híoslódáil i láthair na huaire ar an "
-"doiciméadacht dhlíthiúil roghnaithe. B'fhéidir\n"
+"Earráid: Is oth linn a rá nach bhfuil fáil le híoslódáil i láthair na huaire "
+"ar an doiciméadacht dhlíthiúil roghnaithe. B'fhéidir\n"
 "                gur fadhb shealadach í seo de bharr fadhbanna leis an nasc "
 "líonra nó earráidí inmheánacha. B'fhéidir go mbeadh réiteach\n"
 "                ar an bhfadhb má thriaileann tú arís níos déanaí."
@@ -2267,6 +2309,7 @@ msgstr "Íoslódáil Comhaontú Ceadúnais"
 msgid "Licence Agreement"
 msgstr "Comhaontú Ceadúnais"
 
+#: templates/repository/licence_agreement.html:21
 #: templates/repository/licence_agreement.html:22
 #: templates/repository/licence_agreement.html:26
 msgid "View licence"
@@ -2333,8 +2376,8 @@ msgid ""
 "errors. Trying again later might solve the\n"
 "                problem."
 msgstr ""
-"Is oth linn a rá nach bhfuil fáil do íoslódáil i láthair na huaire ar an "
-"acmhainn roghnaithe. B'fhéidir\n"
+"Earráid: Is oth linn a rá nach bhfuil fáil do íoslódáil i láthair na huaire "
+"ar an acmhainn roghnaithe. B'fhéidir\n"
 "                gur fadhb shealadach í seo de bharr fadhbanna leis an nasc "
 "líonra nó earráidí inmheánacha. B'fhéidir go mbeadh réiteach ar an bhfadhb\n"
 "                má thriaileann tú arís níos déanaí."
@@ -2455,8 +2498,8 @@ msgid ""
 "                may be temporary due to network connection problems or "
 "internal errors. Trying again later might solve"
 msgstr ""
-"Is oth linn a rá nach bhfuil fáil do íoslódáil i láthair na huaire ar an "
-"tuairisc bhailíochtaithe roghnaithe. B'fhéidir\n"
+"Earráid: Is oth linn a rá nach bhfuil fáil do íoslódáil i láthair na huaire "
+"ar an tuairisc bhailíochtaithe roghnaithe. B'fhéidir\n"
 "                gur fadhb shealadach í seo de bharr fadhbanna leis an nasc "
 "líonra nó earráidí inmheánacha. B'fhéidir go mbeadh réiteach ar an bhfadhb\n"
 "                má thriaileann tú arís níos déanaí"
@@ -2970,7 +3013,11 @@ msgstr "N-Gram"
 
 #: templates/repository/resource_view/person.html:20
 msgid "Click to view contact card"
-msgstr "Cliceáil le hamharc ar chárta inneachair"
+msgstr "Brúigh le cárta teagmhála a fheiceáil"
+
+#: templates/repository/resource_view/person.html:25
+msgid "Contact Card"
+msgstr "Sonraí teagmhála"
 
 #: templates/repository/resource_view/person.html:146
 #: templates/repository/resource_view/person.html:228
@@ -3039,6 +3086,7 @@ msgid "Relation Type"
 msgstr "Cineál Gaoil"
 
 #: templates/repository/resource_view/resource_creation.html:5
+#: templates/repository/resource_view/resource_creation.html:9
 msgid "Resource Creation"
 msgstr "Cruthú Acmhainne"
 
@@ -3325,36 +3373,40 @@ msgstr "Comhbhrú"
 msgid "Search and Browse"
 msgstr "Cuardaigh agus Brabhsáil"
 
-#: templates/repository/search.html:77
+#: templates/repository/search.html:69
+msgid "Browse Language Resources"
+msgstr "Brabhsáil Acmhainní Teanga"
+
+#: templates/repository/search.html:77 templates/repository/search.html:79
 msgid "Search"
 msgstr "Cuardaigh"
 
-#: templates/repository/search.html:86 templates/stats/topstats.html:174
+#: templates/repository/search.html:88 templates/stats/topstats.html:174
 #: templates/stats/usagestats.html:142
 msgid "Filter by:"
 msgstr "Scag de réir:"
 
-#: templates/repository/search.html:96
+#: templates/repository/search.html:98
 msgid "Resource Type:"
 msgstr "Cineál Acmhainne:"
 
-#: templates/repository/search.html:99
+#: templates/repository/search.html:101 templates/repository/search.html:102
 msgid "Corpus:"
 msgstr "Corpas:"
 
-#: templates/repository/search.html:103
+#: templates/repository/search.html:105 templates/repository/search.html:106
 msgid "Lexical/Conceptual:"
 msgstr "Foclóireachta/Coincheapúil:"
 
-#: templates/repository/search.html:107
+#: templates/repository/search.html:109 templates/repository/search.html:110
 msgid "Language Description:"
 msgstr "Tuairisc Teanga:"
 
-#: templates/repository/search.html:111
+#: templates/repository/search.html:113 templates/repository/search.html:114
 msgid "Tool/Service:"
 msgstr "Uirlis/Seirbhís:"
 
-#: templates/repository/search.html:121
+#: templates/repository/search.html:123
 #, python-format
 msgid " %(cnt)s Language Resource "
 msgid_plural " %(cnt)s Language Resources "
@@ -3364,66 +3416,66 @@ msgstr[2] " %(cnt)s acmhainn teanga "
 msgstr[3] " %(cnt)s acmhainn teanga "
 msgstr[4] " %(cnt)s acmhainn teanga "
 
-#: templates/repository/search.html:122
+#: templates/repository/search.html:124
 #, python-format
 msgid "(Page %(pgnum)s of %(numpgs)s)"
 msgstr "(Leathanach %(pgnum)s de %(numpgs)s)"
 
-#: templates/repository/search.html:128 templates/repository/search.html:155
+#: templates/repository/search.html:130 templates/repository/search.html:158
 #: templates/stats/topstats.html:241 templates/stats/topstats.html.py:243
 msgid "Previous"
 msgstr "Roimhe"
 
-#: templates/repository/search.html:129 templates/repository/search.html:156
+#: templates/repository/search.html:131 templates/repository/search.html:159
 #: templates/stats/topstats.html:247 templates/stats/topstats.html.py:249
 msgid "Next"
 msgstr "Ar aghaidh"
 
-#: templates/repository/search.html:131
+#: templates/repository/search.html:133 templates/repository/search.html:134
 msgid "Order by:"
 msgstr "Cuir in ord:"
 
-#: templates/repository/search.html:133
+#: templates/repository/search.html:136
 msgid "Resource Name A-Z"
 msgstr "Ainm Acmhainne A-Z"
 
-#: templates/repository/search.html:134
+#: templates/repository/search.html:137
 msgid "Resource Name Z-A"
 msgstr "Ainm Acmhainne Z-A"
 
-#: templates/repository/search.html:135
+#: templates/repository/search.html:138
 msgid "Resource Type A-Z"
 msgstr "Cineál Acmhainne A-Z"
 
-#: templates/repository/search.html:136
+#: templates/repository/search.html:139
 msgid "Resource Type Z-A"
 msgstr "Cineál Acmhainne Z-A"
 
-#: templates/repository/search.html:137
+#: templates/repository/search.html:140
 msgid "Media Type A-Z"
 msgstr "Cineál Meáin A-Z"
 
-#: templates/repository/search.html:138
+#: templates/repository/search.html:141
 msgid "Media Type Z-A"
 msgstr "Cineál Meáin Z-A"
 
-#: templates/repository/search.html:139
+#: templates/repository/search.html:142
 msgid "Language Name A-Z"
 msgstr "Ainm Teanga A-Z"
 
-#: templates/repository/search.html:140
+#: templates/repository/search.html:143
 msgid "Language Name Z-A"
 msgstr "Ainm Teanga Z-A"
 
-#: templates/repository/search.html:141
+#: templates/repository/search.html:144
 msgid "Number of Downloads"
 msgstr "Líon na nUaslódálacha"
 
-#: templates/repository/search.html:142
+#: templates/repository/search.html:145
 msgid "Number of Views"
 msgstr "Líon na nAmharc"
 
-#: templates/repository/search.html:163
+#: templates/repository/search.html:166
 #, python-format
 msgid ""
 "No results were found for search query &ldquo;%(query)s&rdquo; and filters "
@@ -3432,7 +3484,7 @@ msgstr ""
 "Ní bhfuarthas toradh ar bith don iarratas cuardaigh &ldquo;%(query)s&rdquo; "
 "agus scagairí %(filters)s."
 
-#: templates/repository/search.html:165
+#: templates/repository/search.html:168
 #, python-format
 msgid "No results were found for search query &ldquo;%(query)s&rdquo;."
 msgstr ""
@@ -3738,10 +3790,6 @@ msgstr "níor úsáideadh"
 #~ msgid "\"Allow cookies\""
 #~ msgstr "\"Ceadaigh fianáin\""
 
-#~ msgid "'Cookie Policy'"
-#~ msgstr "<b>Beartas Fianán</b>"
-
-#, fuzzy
 #~ msgid " E-Mail: "
 #~ msgstr "R-phost:"
 
@@ -3751,9 +3799,6 @@ msgstr "níor úsáideadh"
 #~ msgstr ""
 #~ "Ní úsáideann an suíomh idirlín seo fianáin ná aon eolas rianaithe eile ar "
 #~ "an suíomh idirlín seo."
-
-#~ msgid "Browse Resources"
-#~ msgstr "Brabhsáil Acmhainní"
 
 #~ msgid "Manage Resources"
 #~ msgstr "Bainistigh Acmhainní"

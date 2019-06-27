@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-05 13:59+0200\n"
-"PO-Revision-Date: 2019-04-05 14:10+0200\n"
+"POT-Creation-Date: 2019-06-17 17:17+0200\n"
+"PO-Revision-Date: 2019-06-10 12:11+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: templates/admin/base.html:39
+#: templates/admin/base.html:43
 msgid ""
 "\"This site uses cookies to enhance your user experience. By clicking any "
 "link on this page you are giving your consent for us to set cookies.\" "
@@ -25,15 +25,19 @@ msgstr ""
 "\"Este sitio web utiliza cookies para mejorar su experiencia de usuario. Si "
 "continúa navegando, consideramos que acepta su uso.\" "
 
-#: templates/admin/base.html:40 templates/admin/base.html.py:43
+#: templates/admin/base.html:44 templates/admin/base.html.py:47
 msgid "\"OK\""
 msgstr "\"OK\""
 
-#: templates/admin/base.html:42
+#: templates/admin/base.html:46
 msgid "\"Learn more\""
 msgstr "\"Leer más\""
 
-#: templates/admin/base.html:57 templates/admin/delete_confirmation.html:6
+#: templates/admin/base.html:48
+msgid "\"Cookies policy\""
+msgstr "'Política de Cookies'"
+
+#: templates/admin/base.html:62 templates/admin/delete_confirmation.html:6
 #: templates/admin/delete_selected_confirmation.html:6
 msgid "Home"
 msgstr "Inicio"

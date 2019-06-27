@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-08 09:52+0100\n"
+"POT-Creation-Date: 2019-06-06 09:52+0200\n"
 "PO-Revision-Date: 2019-03-12 15:29+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -139,7 +139,9 @@ msgid "Public Certificate (.crt, .cert, .cer)"
 msgstr "Teastas poiblí (.crt, .cert, .cer)"
 
 #: templates/accounts/change_password.html:3
-msgid "Change Your Password &ndash; ELRC-SHARE"
+#, fuzzy
+#| msgid "Change Your Password &ndash; ELRC-SHARE"
+msgid "Change Your Password &ndash; ELRI"
 msgstr "Athraigh do phasfhocal &ndash; ELRC-SHARE"
 
 #: templates/accounts/change_password.html:6
@@ -255,6 +257,10 @@ msgstr ""
 msgid "The ELRI Team"
 msgstr "An Fhoireann ELRI"
 
+#: templates/accounts/create_account.html:8
+msgid "Please fill in all fields to create your account."
+msgstr "Líon gach réimse chun do chuntas a chruthú."
+
 #: templates/accounts/create_account.html:14
 #: templates/accounts/create_account.html:15
 #: templates/accounts/create_account.html:35
@@ -319,19 +325,24 @@ msgstr ""
 msgid "Yes, I"
 msgstr "Tá"
 
-#: templates/accounts/edit_profile.html:8
+#: templates/accounts/edit_profile.html:5
+#: templates/accounts/edit_profile.html:75
+msgid "Edit Profile"
+msgstr "Leasaigh do phróifíl"
+
+#: templates/accounts/edit_profile.html:9
 msgid "First name"
 msgstr "Ainm"
 
-#: templates/accounts/edit_profile.html:11
+#: templates/accounts/edit_profile.html:12
 msgid "Last name"
 msgstr "Sloinne"
 
-#: templates/accounts/edit_profile.html:14
+#: templates/accounts/edit_profile.html:15
 msgid "Email"
 msgstr "Ríomhphost"
 
-#: templates/accounts/edit_profile.html:20
+#: templates/accounts/edit_profile.html:21
 #, python-format
 msgid ""
 "If you would like to change any of the above details, please <a href="
@@ -340,18 +351,18 @@ msgstr ""
 "Má tá fonn ort aon chuid de na sonraí thuas a leasú, <a href="
 "\"%(contact_url)s\">bí i dteagmháil le Foireann ELRI</a>."
 
-#: templates/accounts/edit_profile.html:22
+#: templates/accounts/edit_profile.html:23
 msgid "API KEY"
 msgstr "Eochair API"
 
-#: templates/accounts/edit_profile.html:27
+#: templates/accounts/edit_profile.html:28
 #, python-format
 msgid "Editor Group Manager Group%(editor_group_managers_member_of|pluralize)s"
 msgstr ""
 "Grúpa bainisteoirí grúpaí eagarthóirí"
 "%(editor_group_managers_member_of|pluralize)s"
 
-#: templates/accounts/edit_profile.html:34
+#: templates/accounts/edit_profile.html:35
 msgid ""
 "Displays all the editor groups you belong in. Editor groups that are applied "
 "by default to your resources, are shown in italic."
@@ -360,16 +371,16 @@ msgstr ""
 "eagarthóirí a chuirtear le d’acmhainní mar réamhshocrú, léirithe i gcló "
 "iodálach."
 
-#: templates/accounts/edit_profile.html:34
+#: templates/accounts/edit_profile.html:35
 #, python-format
 msgid "Editor Group%(editor_groups_member_of|pluralize)s"
 msgstr "Grúpa egarthóirí%(editor_groups_member_of|pluralize)s"
 
-#: templates/accounts/edit_profile.html:42
+#: templates/accounts/edit_profile.html:43
 msgid "This editor group is set by default to your resources."
 msgstr "Tá an grúpa eagarthóirí seo réamhshocraithe do d’acmhainní."
 
-#: templates/accounts/edit_profile.html:55
+#: templates/accounts/edit_profile.html:56
 #, python-format
 msgid ""
 "You already applied for a membership of the following editor group"
@@ -378,18 +389,18 @@ msgstr ""
 "Rinne tú iarratas cheana féin ar bhallraíocht sa ghrúpa eagarthóirí a leanas"
 "%(groups_applied_for|pluralize)s: %(groups_applied_for|join:\", \")s"
 
-#: templates/accounts/edit_profile.html:60
+#: templates/accounts/edit_profile.html:61
 #, python-format
 msgid "Organization Manager Group%(organization_managers_member_of|pluralize)s"
 msgstr ""
 "Grúpa Bainisteoirí Eagraíochta%(organization_managers_member_of|pluralize)s"
 
-#: templates/accounts/edit_profile.html:66
+#: templates/accounts/edit_profile.html:67
 #, python-format
 msgid "Organization%(organizations_member_of|pluralize)s"
 msgstr "Eagraíocht%(organizations_member_of|pluralize)s"
 
-#: templates/accounts/edit_profile.html:71
+#: templates/accounts/edit_profile.html:72
 #, python-format
 msgid ""
 "You already applied for a membership of the following organization"
@@ -399,10 +410,6 @@ msgstr ""
 "Rinne tú iarratas cheana féin ar bhallraíocht san eagraíocht a leanas"
 "%(organizations_applied_for|pluralize)s: "
 "%(organizations_applied_for|join:\", \")s"
-
-#: templates/accounts/edit_profile.html:74
-msgid "Edit Profile"
-msgstr "Leasaigh do phróifíl"
 
 #: templates/accounts/editor_group_application.html:6
 #: templates/accounts/update_default_editor_group.html:8
@@ -677,6 +684,3 @@ msgstr "Uasdátaigh"
 #~ "\t  <a href=\"%(editor_group_application)s\">grúpaí eagarthóireachta</a> "
 #~ "nó \n"
 #~ "\t  <a href=\"%(organization_application_url)s\">eagraíochtaí</a>."
-
-#~ msgid "Please fill in all fields to create your account."
-#~ msgstr "Líon gach réimse chun do chuntas a chruthú."

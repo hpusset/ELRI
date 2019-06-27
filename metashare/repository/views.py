@@ -51,7 +51,7 @@ from django.utils.translation import ugettext as _
 from haystack.views import FacetedSearchView
 
 from metashare.accounts.models import UserProfile, Organization, OrganizationManagers
-from metashare.local_settings import CONTRIBUTIONS_ALERT_EMAILS, TMP, SUPPORTED_LANGUAGES, EMAIL_ADDRESSES, COUNTRY, STATIC_ROOT
+from metashare.local_settings import CONTRIBUTIONS_ALERT_EMAILS, TMP, SUPPORTED_LANGUAGES, EMAIL_ADDRESSES, COUNTRY, STATIC_ROOT, MAXIMUM_UPLOAD_SIZE_CONTRIBUTE
 from metashare.recommendations.recommendations import SessionResourcesTracker, \
     get_download_recommendations, get_view_recommendations, \
     get_more_from_same_creators_qs, get_more_from_same_projects_qs
@@ -66,7 +66,7 @@ from metashare.repository.models import resourceInfoType_model, identificationIn
     metadataInfoType_model, languageDescriptionTextInfoType_model, languageDescriptionMediaTypeType_model, \
     languageDescriptionInfoType_model, lexicalConceptualResourceTextInfoType_model, \
     lexicalConceptualResourceMediaTypeType_model, lexicalConceptualResourceInfoType_model, distributionInfoType_model, \
-    licenceInfoType_model, resourceCreationInfoType_model
+    licenceInfoType_model, resourceCreationInfoType_model, projectInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex, \
     update_lr_index_entry
 from metashare.settings import LOG_HANDLER, STATIC_URL, DJANGO_URL, MAXIMUM_UPLOAD_SIZE, CONTRIBUTION_FORM_DATA, \
@@ -162,7 +162,6 @@ def download(request, object_id, **kwargs):
 
     if request.method == "POST":
         licence_choice = request.POST.get('licence', None)
-        LOGGER.info(licence_choice)
         if licence_choice and 'in_licence_agree_form' in request.POST:
             la_form = LicenseAgreementForm(licence_choice, data=request.POST)
             l_info, access_links, access = licences[licence_choice]
@@ -1091,6 +1090,17 @@ def contribute(request):
                 "%s argument is not a basetring format, type `file` or subclass of \
                 `django.core.files.base.File`." % filename)
 
+        def filename_zips(files):
+            nzips=0
+            for f in files :
+                if filename_ext(f.name) == '.zip':
+                    nzips = nzips+1
+            return nzips
+        def filename_zipandothers(files):
+            if filename_zips(files)==1 and len(files)>1:
+                return True
+            return False
+
         if 'languages[]' in request.POST:
             data['resourceInfo']['languages'] = decode_csv_to_list(request.POST.getlist('languages[]'))
             #LOGGER.info(data['resourceInfo']['languages'])
@@ -1117,8 +1127,13 @@ def contribute(request):
                 that do not belong to one of these types.""")
             return HttpResponse(json.dumps(response),
                                 content_type="application/json")
-
-        if sum(fobj.size for fobj in file_objects) <= MAXIMUM_UPLOAD_SIZE:
+        if filename_zips(file_objects)>1 or filename_zipandothers(file_objects):
+            response['status'] = "failed"
+            response['message'] = _("""Please upload a single <strong>.zip</strong> file or any number of files of the following type: <strong>.doc(x), .odt, .rtf, .pdf, .tmx, .sdltm, .xml, .tbx, .xls(x), or .txt file</strong> up to 100MB.""")
+#                _("""Please upload a single .zip file or any number of files of the following type: .doc(x), .odt, .rtf, .pdf, .tmx, .sdltm, .xml, .tbx, .xls(x), or .txt file up to 100MB.""")
+            return HttpResponse(json.dumps(response),
+                                content_type="application/json")
+        if sum(fobj.size for fobj in file_objects) <= MAXIMUM_UPLOAD_SIZE_CONTRIBUTE :
             try:
                 if not os.path.isdir(unprocessed_dir):
                     os.makedirs(unprocessed_dir)
@@ -1133,7 +1148,7 @@ def contribute(request):
                 licences_folder= STATIC_ROOT + '/metashare/licences'
                 licence_filepath = os.path.sep.join((licences_folder,
                                                      licence_filename))
-                #TODO:que pasa si ya existe el archivo? que pasa si dos recursos se llaman igual y suben una licencia adhoc?
+                #TODO: what if the file exists already? what if there are two resources with the same name that add an adhoc license?
                 with open(licence_filepath, 'wb+') as licence_destination:
                     for chunk in licence_file_object.chunks():
                         licence_destination.write(chunk)
@@ -1220,11 +1235,9 @@ def contribute(request):
             
         else:
             response['status'] = "failed"
-            response['message'] = _("""
-                The file you are trying to upload exceeds the size limit. If the file(s) you
-                would like to contribute exceed(s) {:.10} MB please contact us to provide an SFTP link for direct
-                download or consider uploading smaller files.""".format(
-                float(MAXIMUM_UPLOAD_SIZE) / (1024 * 1024)))
+            response['message'] = _("The file(s) you are trying to upload exceeds the size limit. If the file(s) you "
+                                    "would like to contribute exceed(s) {:.10} MB please contact us to provide an "
+                                    "SFTP link for direct download or consider uploading smaller files.").format(float(MAXIMUM_UPLOAD_SIZE_CONTRIBUTE)/(1024 * 1024))
             return HttpResponse(json.dumps(response), content_type="application/json")
 
     # In ELRI, LR contributions can only be shared within the groups to which a user belongs.
@@ -1291,9 +1304,20 @@ def create_description(xml_file, type, base, user):
         resourceName={'en': unicode(info['title'])}, #.encode('utf-8')},
         description={'en': unicode(info['description'])},#.encode('utf-8')},
         appropriatenessForDSI=info['domains'])
+
+
     resource_creation = resourceCreationInfoType_model.objects.create(
-        createdUsingELRCServices=False
-    )
+        createdUsingELRCServices=False,
+        anonymized=False)
+    elri_project=projectInfoType_model.objects.create()
+    elri_project.projectName["en"]= u"European Language Resource Infrastructure"
+    elri_project.projectShortName["en"]=u"ELRI"
+    elri_project.url=[u'http://www.elri-project.eu',]
+    elri_project.fundingType=[u'euFunds',]
+    elri_project.funder = [u'European Comission',]
+    elri_project.fundingCountry = [u'European Union',]
+    elri_project.save()
+    resource_creation.fundingProject.add(elri_project)
 
     # CONTACT PERSON:
 
@@ -1438,15 +1462,44 @@ def create_description(xml_file, type, base, user):
                                                              (metadataCreationDate=datetime.date.today(),
                                                               metadataLastDateUpdated=datetime.date.today()))
     # create distributionInfo object
-    distribution = distributionInfoType_model.objects.create(
+    '''distribution = distributionInfoType_model.objects.create(
         availability=u"underReview",
         PSI=False)
-    licence_obj, _ = licenceInfoType_model.objects.get_or_create(
-        licence=info['licence'])
-    distribution.licenceInfo.add(licence_obj)
+    #licence_obj, _ = licenceInfoType_model.objects.get_or_create( licence=info['licence'])
+    #LOGGER.info(licence_obj)
+    licence_obj=licenceInfoType_model.objects.filter(licence=info['licence'])
+    LOGGER.info(licence_obj)
+    if len(licence_obj)>0:
+        LOGGER.info(licence_obj[0])
+        distribution.licenceInfo.add(licence_obj[0])
+    else:
+        licence_obj=licenceInfoType_model.objects.create(licence=info['licence'])
+        LOGGER.info(licence_obj)
+        distribution.licenceInfo.add(licence_obj)
+        
     resource.distributioninfotype_model_set.add(distribution)
     #LOGGER.info(len(resource.distributioninfotype_model_set.all()))
+    resource.save()'''
+    
+    # create distributionInfo object
+    availability = u"underReview"
+    psi = False
+    licence = u"underReview"
+    if info['licence']:
+        #by default: our availability is always underReview
+        #availability = u'available'
+        licence = info['licence']
+        if info['licence'] == u'openUnder-PSI':
+            psi = True
+    distribution = distributionInfoType_model.objects.create(
+        availability=availability,
+        PSI=psi)
+    licence_obj = licenceInfoType_model.objects.create(licence=licence)
+    distribution.licenceInfo.add(licence_obj)
+    resource.distributioninfotype_model_set.add(distribution)
     resource.save()
+    
+    
 
     # also add the designated maintainer, based on the country of the country of the donor
     resource.owners.add(user.id)

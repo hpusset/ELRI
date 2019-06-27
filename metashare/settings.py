@@ -163,6 +163,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
     "django.core.context_processors.request",
+    "metashare.context_processors.global_settings",
 )
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
@@ -183,8 +184,6 @@ INSTALLED_APPS = (
     'analytical',
     'tastypie',
 
-    'django_password_validation', # needed for proper localization
-                                  # of password validation error messages
     'metashare.accounts',
     'metashare.storage',
     # 'metashare.sync',
@@ -308,34 +307,5 @@ CACHES = {
 TASTYPIE_ALLOW_MISSING_SLASH = True
 TASTYPIE_DEFAULT_FORMATS = ['json']
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django_password_validation.UserAttributeSimilarityValidator',
-        'OPTIONS': {
-            'max_similarity': .5,
-        }
-    }, {
-        'NAME': 'django_password_validation.MinimumLengthValidator',
-        'OPTIONS': {
-            'min_length': 10,
-        }
-    }, {
-        'NAME': 'django_password_validation.CommonPasswordValidator',
-    }, {
-        'NAME': 'django_password_validation.NumericPasswordValidator',
-    }, {
-        'NAME': 'django_password_validation.AtLeastOneDigitValidator',
-    }, {
-        'NAME': 'django_password_validation.AtLeastOnePunctuationCharacterValidator',
-    }, {
-        'NAME': 'django_password_validation.AtLeastOneUppercaseCharacterValidator',
-    }, {
-        'NAME': 'django_password_validation.AtLeastOneLowercaseCharacterValidator',
-    }, {
-        'NAME': 'django_password_validation.NoRepeatsValidator',
-        'OPTIONS': {
-            'max_repeats': 2,
-        }
-    }
-]
+
 

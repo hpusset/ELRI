@@ -66,9 +66,7 @@ $(function () {
     $('form').submit(function (event) {
         var file = $('#filebutton')[0].files[0];
         if (file !== undefined && file.size > 104857600) {
-            alert(gettext("The file(s) you are trying to upload exceed(s) the size limit. " + "If the file(s) you would like to contribute exceed(s) 100 MB, " +
-                "please contact us to provide an SFTP link for direct download or " +
-                "consider uploading smaller files."));
+            alert(gettext("The file(s) you are trying to upload exceed(s) the size limit. If the file(s) you would like to contribute exceed(s) 100.0 MB, please contact us to provide an SFTP link for direct download or consider uploading smaller files."));
             return false;
         }
         return true;

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-04 13:42+0200\n"
-"PO-Revision-Date: 2019-04-02 15:34+0200\n"
+"POT-Creation-Date: 2019-06-10 17:14+0200\n"
+"PO-Revision-Date: 2019-06-07 09:39+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_IE\n"
@@ -32,14 +32,11 @@ msgid ""
 "An error has occurred while trying to send email to contributions alert "
 "recipients."
 msgstr ""
-"An error occurred while trying to send a notification email to the reviewers."
+"Error: An error occurred while trying to send a notification email to the "
+"reviewers."
 
-#: local_settings.py:42
-msgid "Gaelic"
-msgstr ""
-
-#: local_settings.py:44
-msgid "English"
+#: local_settings.py:46
+msgid "Spanish"
 msgstr ""
 
 #: storage/models.py:113
@@ -142,22 +139,18 @@ msgstr ""
 "text containing the JSON serialisation of local attributes for this storage "
 "object instance."
 
-#: views.py:22
+#: views.py:22 views.py:24
 msgid ""
 "Please enter a correct username and password. Note that both fields may be "
-"case-sensitive."
+"case-sensitive. "
 msgstr ""
-"Please enter a correct username and password. Note that both fields may be "
-"case-sensitive.\n"
-"| Cuir isteach ainm úsáideora ceart agus pasfhocal, le do thoil. Tabhair "
-"faoi deara go bhfuil seans ann go bhfuil na réimsí cásíogair."
+"Error: Please enter a correct username and password. Note that both fields "
+"may be case-sensitive.\n"
+"| Earráid: Cuir isteach ainm úsáideora agus pasfhocal bailí le do thoil. "
+"D'fhéadfadh an dá réimse a bheith cásíogair."
 
-#: views.py:23
-msgid ""
-"This account has not been activated yet. Please contact us if there is any "
-"issue with an existing account."
+#: views.py:23 views.py:25
+msgid "Please contact us if there is any issue with an existing account."
 msgstr ""
-"This account has not been activated yet. Please contact us if there is any "
-"issue with an existing account.\n"
-"- Níl an cuntas seo gníomhachtaithe go fóill. Déan teagmháil linn má tá aon "
-"fhadhb ann le cuntas reatha."
+"Please contact us if there is any issue with an existing account.\n"
+"-  Déan teagmháil linn má tá aon fhadhb ann le cuntas reatha."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-08 09:52+0100\n"
+"POT-Creation-Date: 2019-06-06 09:52+0200\n"
 "PO-Revision-Date: 2019-03-12 14:12+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -392,63 +392,168 @@ msgstr ""
 msgid "Reactivate selected eDelivery applications"
 msgstr "Athghníomhachtaigh iarratais eDelivery roghnaithe"
 
-#: accounts/forms.py:68
+#: accounts/django_password_validators.py:140
+#, python-format
+msgid ""
+"This password is too short. It must contain at least %(min_length)d "
+"character."
+msgid_plural ""
+"This password is too short. It must contain at least %(min_length)d "
+"characters."
+msgstr[0] ""
+msgstr[1] ""
+
+#: accounts/django_password_validators.py:150
+#, python-format
+msgid "Your password must contain at least %(min_length)d character."
+msgid_plural "Your password must contain at least %(min_length)d characters."
+msgstr[0] ""
+msgstr[1] ""
+
+#: accounts/django_password_validators.py:186
+#, python-format
+msgid "The password is too similar to the %(verbose_name)s."
+msgstr ""
+
+#: accounts/django_password_validators.py:192
+msgid "Your password can't be too similar to your other personal information."
+msgstr ""
+
+#: accounts/django_password_validators.py:218
+msgid "This password is too common."
+msgstr ""
+
+#: accounts/django_password_validators.py:223
+msgid "Your password can't be a commonly used password."
+msgstr ""
+
+#: accounts/django_password_validators.py:233
+msgid "This password is entirely numeric."
+msgstr ""
+
+#: accounts/django_password_validators.py:238
+msgid "Your password can't be entirely numeric."
+msgstr ""
+
+#: accounts/django_password_validators.py:248
+msgid "This password does not contain a digit."
+msgstr ""
+
+#: accounts/django_password_validators.py:253
+msgid "Your password must contain at least one digit."
+msgstr ""
+
+#: accounts/django_password_validators.py:263
+msgid "This password does not contain a punctuation character."
+msgstr ""
+
+#: accounts/django_password_validators.py:268
+msgid "Your password must contain at least one punctuation character."
+msgstr ""
+
+#: accounts/django_password_validators.py:278
+msgid "This password does not contain an uppercase character."
+msgstr ""
+
+#: accounts/django_password_validators.py:283
+msgid "Your password must contain at least one uppercase character."
+msgstr ""
+
+#: accounts/django_password_validators.py:293
+msgid "This password does not contain a lowercase character."
+msgstr ""
+
+#: accounts/django_password_validators.py:298
+msgid "Your password must contain at least one lowercase character."
+msgstr ""
+
+#: accounts/django_password_validators.py:313
+#, python-format
+msgid ""
+"This password contains a character repeated more than %d times in a row."
+msgstr ""
+
+#: accounts/django_password_validators.py:318
+#, python-format
+msgid ""
+"Your password can't contain a character repeated more than %d times in a row."
+msgstr ""
+
+#: accounts/forms.py:74
+msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
+msgstr ""
+
+#: accounts/forms.py:76
 msgid "Desired account name"
 msgstr "Ainm cuntais is mian leat"
 
-#: accounts/forms.py:70
+#: accounts/forms.py:76 accounts/forms.py:78 accounts/forms.py:80
+#: accounts/forms.py:81 accounts/forms.py:89 accounts/forms.py:93
+#: accounts/forms.py:106 accounts/forms.py:110
+msgid "Required Field"
+msgstr ""
+
+#: accounts/forms.py:78
 msgid "First name"
 msgstr "Céadainm"
 
-#: accounts/forms.py:72
+#: accounts/forms.py:80
 msgid "Last name"
 msgstr "Sloinne"
 
-#: accounts/forms.py:73
+#: accounts/forms.py:81
 msgid "E-mail"
 msgstr "Ríomhphost"
 
-#: accounts/forms.py:81
+#: accounts/forms.py:89
 msgid "Organization name"
 msgstr "Ainm eagraíochta"
 
-#: accounts/forms.py:85
+#: accounts/forms.py:93
 msgid "Organization address"
 msgstr "Seoladh eagraíochta"
 
-#: accounts/forms.py:88
+#: accounts/forms.py:96
 msgid "Organization phone number"
 msgstr "Uimhir ghutháin eagraíochta"
 
-#: accounts/forms.py:90
+#: accounts/forms.py:98
 msgid "Position in the organization"
 msgstr "Post san eagraíocht"
 
-#: accounts/forms.py:97
+#: accounts/forms.py:106
 msgid "Password"
 msgstr "Pasfhocal"
 
-#: accounts/forms.py:101
+#: accounts/forms.py:110
 msgid "Password confirmation"
 msgstr "Deimhniú pasfhocail"
 
-#: accounts/forms.py:127
+#: accounts/forms.py:137
 msgid "User account name already exists, please choose another one."
 msgstr "Ainm cuntas úsáideora in úsáid cheana, roghnaigh ceann eile."
 
-#: accounts/forms.py:141 accounts/forms.py:144
+#: accounts/forms.py:151 accounts/forms.py:154
 msgid "There is already an account registered with this e-mail address."
 msgstr "Tá cuntas cláraithe leis an seoladh rphoist seo cheana féin."
 
-#: accounts/forms.py:155
+#: accounts/forms.py:165
 msgid "The two password fields did not match."
 msgstr "Níorbh ionann an dá réimse pasfhocal."
 
-#: accounts/forms.py:181
+#: accounts/forms.py:207
+msgid "Subject"
+msgstr ""
+
+#: accounts/forms.py:208
 msgid "Please provide a meaningful and sufficiently indicative subject."
 msgstr "Tabhair ábhar a bhfuil ciall leis agus atá sách léiritheach."
 
-#: accounts/forms.py:184
+#: accounts/forms.py:210
+msgid "Message"
+msgstr ""
+
+#: accounts/forms.py:211
 msgid ""
 "Your message appears to be rather short. Please make sure to phrase your "
 "request as precise as possible. This will help us to process it as quick as "
@@ -458,11 +563,21 @@ msgstr ""
 "cheist mínithe chomh beacht agus is féidir. Cabhróidh sé sin linn é a "
 "phróiseáil chomh tapa agus is féidir."
 
-#: accounts/forms.py:206
+#: accounts/forms.py:221
+msgid "Username"
+msgstr ""
+
+#: accounts/forms.py:222
+#, fuzzy
+#| msgid "E-mail"
+msgid "Email"
+msgstr "Ríomhphost"
+
+#: accounts/forms.py:233
 msgid "Not a valid username-email combination."
 msgstr "Níl an t-ainm úsáideora agus an rphost sin ag teacht le chéile."
 
-#: accounts/forms.py:252
+#: accounts/forms.py:279
 msgid "default editor groups"
 msgstr "grúpaí eagarthóirí réamhshocraithe"
 
@@ -543,6 +658,14 @@ msgstr "Seoladh na cleamhnachta"
 msgid "Affiliation phone number"
 msgstr "Uimhir ghutháin na cleamhnachta"
 
+#: accounts/models.py:294
+msgid "Position"
+msgstr ""
+
+#: accounts/models.py:295
+msgid "Homepage"
+msgstr ""
+
 #: accounts/views.py:57
 msgid "Your ELRI user account has been activated"
 msgstr "Tá do chuntas úsáideora ELRI gníomhachtaithe"
@@ -551,12 +674,12 @@ msgstr "Tá do chuntas úsáideora ELRI gníomhachtaithe"
 msgid "We have activated user account for user {}."
 msgstr "Tá cuntas úsáideora gníomhachtaithe d’úsáideoir {}."
 
-#: accounts/views.py:92
+#: accounts/views.py:91
 #, python-format
 msgid "[ELRI] Contact Form Request: %s"
 msgstr "Iarratas ar Fhoirm Teagmhála [ELRI]: %s"
 
-#: accounts/views.py:99
+#: accounts/views.py:98
 #, python-format
 msgid ""
 "Oops, there was an error sending out your contact request. You can copy your "
@@ -566,7 +689,7 @@ msgstr ""
 "theachtaireacht a chóipeáil agus triail a bhaint as arís níos déanaí: <pre>"
 "%s</pre>"
 
-#: accounts/views.py:104
+#: accounts/views.py:103
 msgid ""
 "We have received your message and successfully sent it to the node "
 "maintainers. Please give them some days to get back to you."
@@ -574,11 +697,15 @@ msgstr ""
 "Tá do theachtaireacht faighte againn agus tá sé seolta chuig na coimeádaithe "
 "nód. Tabhair roinnt laethanta dóibh le dul i dteagmháil leat."
 
-#: accounts/views.py:176
+#: accounts/views.py:110
+msgid "Contact Node Maintainers"
+msgstr ""
+
+#: accounts/views.py:175
 msgid "New user registration"
 msgstr "Clárúchán úsáideora nua"
 
-#: accounts/views.py:184
+#: accounts/views.py:183
 msgid ""
 "There was an error sending out the notification email to the administrators. "
 "Please contact them directly."
@@ -586,7 +713,7 @@ msgstr ""
 "Tharla earráid agus an rphost fógartha á sheoladh amach go dtí na "
 "riarthóirí. Déan teagmháil díreach leo, le do thoil."
 
-#: accounts/views.py:192
+#: accounts/views.py:191
 msgid ""
 "We have received your registration data and sent the administrators a "
 "notification email.You will receive an email when your account has been "
@@ -596,33 +723,39 @@ msgstr ""
 "chuig na riarthóirí. Gheobhaidh tú rphost nuair a bheas do chuntas "
 "gníomhachtaithe."
 
-#: accounts/views.py:248
+#: accounts/views.py:208
+#, fuzzy
+#| msgid "Reset user account"
+msgid "Create Account"
+msgstr "Athshocraigh cuntas úsáideora"
+
+#: accounts/views.py:247
 msgid "You have successfully updated your profile information."
 msgstr "Tá d’eolas próifíle uasdátaithe agat."
 
-#: accounts/views.py:260
+#: accounts/views.py:259
 msgid "full member"
 msgstr "lánbhall"
 
-#: accounts/views.py:262
+#: accounts/views.py:261
 msgid "associate member"
 msgstr "ball comhlach"
 
-#: accounts/views.py:265
+#: accounts/views.py:264
 msgid "Edit Profile Information"
 msgstr "Cuir d’Eolas Próifíle in eagar"
 
-#: accounts/views.py:311
+#: accounts/views.py:310
 #, python-format
 msgid "An older application of yours for editor group \"%s\" is still pending."
 msgstr ""
 "Tá sean-iarratas a rinne tú ar an ngrúpa eagarthóirí \"%s\" fós ar feitheamh."
 
-#: accounts/views.py:333
+#: accounts/views.py:332
 msgid "New editor membership request"
 msgstr "Iarratas ar bhallríocht eagarthóra nua"
 
-#: accounts/views.py:340
+#: accounts/views.py:339
 msgid ""
 "There was an error sending out the request email for your editor group "
 "application."
@@ -630,12 +763,12 @@ msgstr ""
 "Tharla earráid agus an rphoist iarrtha do d’iarratas ar ghrúpa eagarthóirí á "
 "sheoladh amach."
 
-#: accounts/views.py:343
+#: accounts/views.py:342
 #, python-format
 msgid "You have successfully applied for editor group \"%s\"."
 msgstr "Tá tú tar éis cur isteach ar ghrúpa eagarthóirí \"%s\"."
 
-#: accounts/views.py:354
+#: accounts/views.py:353
 msgid ""
 "There are no editor groups in the database, yet, for which you could apply. "
 "Please ask the system administrator to create one."
@@ -643,40 +776,40 @@ msgstr ""
 "Níl aon ghrúpaí eagarthóirí sa bhunachar sonraí, go fóill, ar féidir leat "
 "cur isteach orthu. Iarr ar an riarthóir córais ceann a chruthú."
 
-#: accounts/views.py:362
+#: accounts/views.py:361
 msgid "Apply for editor group membership"
 msgstr "Déan iarratas ar bhallraíocht i ngrúpa eagarthóirí"
 
-#: accounts/views.py:411
+#: accounts/views.py:410
 #, python-format
 msgid "You have successfully added default editor group \"%s\"."
 msgstr "Chuir tú grúpa eagarthóirí réamhshocraithe \"%s\" leis."
 
-#: accounts/views.py:418
+#: accounts/views.py:417
 #, python-format
 msgid "You have successfully removed default editor group \"%s\"."
 msgstr "Bhain tú grúpa eagarthóirí réamhshocraithe \"%s\"."
 
-#: accounts/views.py:430
+#: accounts/views.py:429
 msgid "There are no editor groups you could add to your default list."
 msgstr ""
 "Níl aon ghrúpaí eagarthóirí ar féidir leat iad a chur le do liosta "
 "réamhshocraithe."
 
-#: accounts/views.py:437
+#: accounts/views.py:436
 msgid "Update default editor groups"
 msgstr "Déan uasdátú ar ghrúpaí eagarthóirí réamhshocraithe"
 
-#: accounts/views.py:465
+#: accounts/views.py:464
 #, python-format
 msgid "An older application of yours for organization \"%s\" is still pending."
 msgstr "Tá sean-iarratas a rinne tú ar an eagraíocht \"%s\" fós ar feitheamh."
 
-#: accounts/views.py:487
+#: accounts/views.py:486
 msgid "New organization membership request"
 msgstr "Iarratas ar bhallraíocht eagraíochta nua"
 
-#: accounts/views.py:494
+#: accounts/views.py:493
 msgid ""
 "There was an error sending out the request email for your organization "
 "application."
@@ -684,12 +817,12 @@ msgstr ""
 "Tharla earráid agus an rphoist iarrtha do d’iarratas ar eagraíocht á "
 "sheoladh amach."
 
-#: accounts/views.py:497
+#: accounts/views.py:496
 #, python-format
 msgid "You have successfully applied for organization \"%s\"."
 msgstr "Tá tú tar éis cur isteach ar eagraíocht \"%s\"."
 
-#: accounts/views.py:508
+#: accounts/views.py:507
 msgid ""
 "There are no organizations in the database, yet, for which you could apply. "
 "Please ask the system administrator to create one."
@@ -697,15 +830,15 @@ msgstr ""
 "Níl aon eagraíochtaí sa bhunachar sonraí, go fóill, ar féidir leat cur "
 "isteach orthu. Iarr ar an riarthóir córais ceann a chruthú."
 
-#: accounts/views.py:516
+#: accounts/views.py:515
 msgid "Apply for organization membership"
 msgstr "Déan iarratas ar bhallraíocht in eagraíocht"
 
-#: accounts/views.py:551
+#: accounts/views.py:550
 msgid "Please confirm your ELRI password reset request"
 msgstr "Deimhnigh d’iarratas ar athshocrú pasfhocail ELRI"
 
-#: accounts/views.py:562
+#: accounts/views.py:561
 msgid ""
 "We have received your password reset request and sent you an email with "
 "further instructions."
@@ -713,15 +846,15 @@ msgstr ""
 "Tá d’iarratas ar athshocrú pasfhocail faighte againn agus tá rphost le níos "
 "mó treoracha seolta chugat."
 
-#: accounts/views.py:572
+#: accounts/views.py:571
 msgid "Reset user account"
 msgstr "Athshocraigh cuntas úsáideora"
 
-#: accounts/views.py:598
+#: accounts/views.py:597
 msgid "Your ELRI user account has been re-activated"
 msgstr "Tá do chuntas úsáideora ELRI athghníomhachtaithe"
 
-#: accounts/views.py:604
+#: accounts/views.py:603
 #, python-format
 msgid ""
 "There was an error sending out the activation email for your user account. "
@@ -730,7 +863,7 @@ msgstr ""
 "Tharla earráid agus an rphoist ghníomhachtaithe do do chuntas úsáideora á "
 "sheoladh amach. Déan teagmháil leis an riarthóir ag %s."
 
-#: accounts/views.py:613
+#: accounts/views.py:612
 msgid ""
 "We have re-activated your user account and sent you an email with your "
 "personal password which allows you to login to the website."
@@ -739,7 +872,7 @@ msgstr ""
 "chugatle do phasfhocal pearsanta a thugann deis duit logáil isteach ar an "
 "suíomh gréasáin."
 
-#: accounts/views.py:658
+#: accounts/views.py:657
 msgid "Apply for eDelivery membership"
 msgstr "Cuir isteach ar bhallraíocht in eDelivery"
 

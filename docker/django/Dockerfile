@@ -6,8 +6,8 @@ RUN tar xvfz /tmp/dockerize-alpine-linux-amd64-v0.5.0.tar.gz -C /tmp/
 FROM python:2.7.15-stretch
 
 #ARG RELEASE="trunk"
-ARG RELEASE="tags/R3.3.8"
-#ARG RELEASE="branches/master"
+ARG RELEASE="tags/R3.3.9"
+#ARG RELEASE="branches/VIC"
 ENV DB_HOST="postgres-server" \
     DB_PORT="5432" \
     SOLR_HOST="solr" \
@@ -37,7 +37,9 @@ COPY resources/env_secrets_expand.sh \
 
 RUN svn export ${GIT_URL}/metashare /elri/metashare \
     && svn export ${GIT_URL}/project_management /elri/project_management \
-    && svn export ${GIT_URL}/elri_resources /elri/elri_resources \
+    && svn export ${GIT_URL}/elri_resources/config /elri/elri_resources/config \
+    && svn export ${GIT_URL}/elri_resources/toolchain_resources /elri/toolchain_resources \
+    && mkdir -p /elri/elri_resources/toolchain_resources \
     && svn export ${GIT_URL}/requirements.txt /elri/requirements.txt \
     && mkdir -p /elri/metashare/unprocessed \
              /elri/metashare/processed \

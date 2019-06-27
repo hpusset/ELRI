@@ -4,7 +4,8 @@
 {% load i18n %}
 
 {% block content %}
-<h2>{% blocktrans %}Internal Server Error (500){% endblocktrans %}</h2>
+
+<h1 id="main-content"  style="font-size: 20pt; line-height:150%; margin: '20px 0px 20px 0px'; font-weight: normal; color:#111; display:block; margin-block-start: 0.83em; margin-block-end: 0.83em; margin-inline-start:0px; margin-inline-end:0px;">{% blocktrans %}Internal Server Error (500){% endblocktrans %}</h1>
 <div class="content_box">
 <p>{% blocktrans %}We&rsquo;re sorry, but an internal error occurred when processing your request.{% endblocktrans %}</p>
 {% url 'metashare.accounts.views.contact' as the_node_maintainers %}

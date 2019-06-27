@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-04 16:42+0200\n"
-"PO-Revision-Date: 2019-03-28 13:59+0000\n"
+"POT-Creation-Date: 2019-06-17 17:09+0200\n"
+"PO-Revision-Date: 2019-05-20 10:43+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_PT\n"
@@ -21,7 +21,7 @@ msgstr ""
 #: templates/admin/edit_inline_one2one/tabular.html:116
 #, python-format
 msgid "Add another %(verbose_name)s"
-msgstr "Acrescentar outro %(verbose_name)s"
+msgstr "Adicionar outro %(verbose_name)s"
 
 #: templates/admin/edit_inline_one2one/stacked.html:74
 #: templates/admin/edit_inline_one2one/tabular.html:119

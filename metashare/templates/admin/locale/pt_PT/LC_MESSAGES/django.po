@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-04 16:42+0200\n"
-"PO-Revision-Date: 2019-04-03 14:15+0200\n"
+"POT-Creation-Date: 2019-06-17 17:09+0200\n"
+"PO-Revision-Date: 2019-06-10 12:16+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_PT\n"
@@ -17,24 +17,28 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: templates/admin/base.html:39
+#: templates/admin/base.html:43
 msgid ""
 "\"This site uses cookies to enhance your user experience. By clicking any "
 "link on this page you are giving your consent for us to set cookies.\" "
 msgstr ""
-"\"Este site usa cookies para melhorar a experiencia do utilizador. Ao clicar "
+"\"Este site usa cookies para melhorar a experiência do utilizador. Ao clicar "
 "em qualquer link desta página está a dar o seu consentimento para que "
 "possamos definir cookies.\" "
 
-#: templates/admin/base.html:40 templates/admin/base.html.py:43
+#: templates/admin/base.html:44 templates/admin/base.html.py:47
 msgid "\"OK\""
 msgstr "\"OK\""
 
-#: templates/admin/base.html:42
+#: templates/admin/base.html:46
 msgid "\"Learn more\""
 msgstr "\"Saber mais\""
 
-#: templates/admin/base.html:57 templates/admin/delete_confirmation.html:6
+#: templates/admin/base.html:48
+msgid "\"Cookies policy\""
+msgstr "'Política de Cookies'"
+
+#: templates/admin/base.html:62 templates/admin/delete_confirmation.html:6
 #: templates/admin/delete_selected_confirmation.html:6
 msgid "Home"
 msgstr "Início"
@@ -56,8 +60,8 @@ msgid ""
 "following types of objects:"
 msgstr ""
 "Apagar o %(object_name)s ‘%(escaped_object)s resultaria na remoção dos "
-"objectos relacionados, mas a sua conta não tem permissão para apagar os "
-"seguintes tipos de objectos:"
+"objetos relacionados, mas a sua conta não tem permissão para apagar os "
+"seguintes tipos de objetos:"
 
 #: templates/admin/delete_confirmation.html:25
 #, python-format
@@ -66,7 +70,7 @@ msgid ""
 "following protected related objects:"
 msgstr ""
 "Apagar o %(object_name)s ‘%(escaped_object)s’ requer apagar os seguintes "
-"objectos relacionados protegidos:"
+"objetos relacionados protegidos:"
 
 #: templates/admin/delete_confirmation.html:33
 #, python-format
@@ -75,7 +79,7 @@ msgid ""
 "All of the following related items will be deleted:"
 msgstr ""
 "Tem a certeza que quer apagar os %(object_name)s \"%(escaped_object)s\"? "
-"Todos os objectos relacionados serão apagados:"
+"Todos os objetos relacionados serão apagados:"
 
 #: templates/admin/delete_confirmation.html:38
 #: templates/admin/delete_selected_confirmation.html:43
@@ -84,7 +88,7 @@ msgstr "Sim, tenho a certeza"
 
 #: templates/admin/delete_selected_confirmation.html:9
 msgid "Delete multiple objects"
-msgstr "Recusar múltiplos objectos"
+msgstr "Apagar múltiplos objetos"
 
 #: templates/admin/delete_selected_confirmation.html:16
 #, python-format
@@ -93,9 +97,9 @@ msgid ""
 "objects, but your account doesn't have permission to delete the following "
 "types of objects:"
 msgstr ""
-"Rejeitar os %(objects_name)s selecionados resultará no apagamento dos "
-"objetos relacionados, mas sua conta não tem permissão para desativar os "
-"seguintes tipos de objetos:"
+"Apagar os %(objects_name)s selecionados resultará na eliminação dos objetos "
+"relacionados, mas a sua conta não tem permissão para desativar os seguintes "
+"tipos de objetos:"
 
 #: templates/admin/delete_selected_confirmation.html:24
 #, python-format
@@ -103,8 +107,8 @@ msgid ""
 "Deleting the selected %(objects_name)s would require deleting the following "
 "protected related objects:"
 msgstr ""
-"Rejeitar os %(objects_name)s selecionados resultará no apagamento dos "
-"objetos protegidos relacionados:"
+"Apagar os %(objects_name)s selecionados resultará na eliminação dos objetos "
+"protegidos relacionados:"
 
 #: templates/admin/delete_selected_confirmation.html:32
 #, python-format
@@ -112,24 +116,24 @@ msgid ""
 "Are you sure you want to delete the selected %(objects_name)s? All of the "
 "following objects and their related items will be deleted:"
 msgstr ""
-"Tem certeza de que deseja desativar os %(objects_name)s selecionados? Todos "
-"os seguintes objetos e itens relacionados serão apagados:"
+"Tem a certeza que quer desativar os %(objects_name)s selecionados? Todos os "
+"seguintes objetos e itens relacionados serão apagados:"
 
 #: templates/admin/submit_line.html:3
 msgid "Save"
-msgstr "Gravar"
+msgstr "Guardar"
 
 #: templates/admin/submit_line.html:5
 msgid "Save as new"
-msgstr "Gravar como novo"
+msgstr "Guardar como novo"
 
 #: templates/admin/submit_line.html:6
 msgid "Save and add another"
-msgstr "Gravar e acrescentar outro"
+msgstr "Guardar e adicionar outro"
 
 #: templates/admin/submit_line.html:7
 msgid "Save and continue editing"
-msgstr "Gravar e continuar a editar"
+msgstr "Guardar e continuar a editar"
 
 #: templates/admin/submit_line.html:8
 msgid "Cancel"
@@ -137,7 +141,7 @@ msgstr "Cancelar"
 
 #: templates/admin/submit_line.html:8
 msgid "Abort editing and discard any changes"
-msgstr "Aborta a edição e descartar as alterações"
+msgstr "Anular a edição e descartar quaisquer alterações"
 
 #~ msgid "\"OK, I aggree \""
 #~ msgstr "\"Ok, concordo\""
@@ -147,6 +151,3 @@ msgstr "Aborta a edição e descartar as alterações"
 
 #~ msgid "\"Allow cookies\""
 #~ msgstr "\"Permitir cookies\""
-
-#~ msgid "'Cookie Policy'"
-#~ msgstr "'Politica de Cookies'"

@@ -15,7 +15,7 @@ server {
     ssl_certificate_key  /etc/ssl/private/server.key;
     server_name          {{ .Env.ELRI_HOSTNAME }}.{{ .Env.ELRI_DOMAINNAME }};
     root                 /www/data;
-    client_max_body_size 100M;
+    client_max_body_size 400M;
     
     location /static/ {
         try_files $uri $uri/ =404;

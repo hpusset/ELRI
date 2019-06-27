@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-08 09:52+0100\n"
-"PO-Revision-Date: 2019-03-07 13:29+0100\n"
+"POT-Creation-Date: 2019-06-06 09:51+0200\n"
+"PO-Revision-Date: 2019-06-06 10:10+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_IE\n"
@@ -26,67 +26,76 @@ msgstr ""
 msgid "You don't have the sufficient rights to access this resource."
 msgstr ""
 
-#: templates/404.html:7
+#: templates/404.html:8
 msgid "Page not Found (404)"
 msgstr ""
 
-#: templates/404.html:9
+#: templates/404.html:10
 msgid "We&rsquo;re sorry, but the URL you requested was not found."
 msgstr ""
 
-#: templates/404.html:12 templates/500.html:12
+#: templates/404.html:13 templates/500.html:13
 #, python-format
 msgid ""
 "Please try again and, if the error persists, contact the ELRI NRS support "
 "group (<a href=\"mailto:%(email)s\" >%(email)s</a>)."
 msgstr ""
 
-#: templates/500.html:7
+#: templates/500.html:8
 msgid "Internal Server Error (500)"
 msgstr ""
 
-#: templates/500.html:9
+#: templates/500.html:10
 msgid ""
 "We&rsquo;re sorry, but an internal error occurred when processing your "
 "request."
 msgstr ""
 
-#: templates/back.html:5
+#: templates/back.html:7 templates/back.html.py:10
 msgid "ELRI National Relay Station"
 msgstr ""
 
-#: templates/base.html:54
+#: templates/base.html:14
+msgid ""
+"ELRI National Relay Station: a repository to store, search and retrieve "
+"Language Resources."
+msgstr ""
+
+#: templates/base.html:16
+msgid ""
+"ELRI, National Relay Station, language resources, translation memories, "
+"Connecting Europe Facility "
+msgstr ""
+
+#: templates/base.html:59
 msgid ""
 "\"This site uses cookies to enhance your user experience. By clicking any "
 "link on this page you are giving your consent for us to set cookies.\" "
 msgstr ""
 
-#: templates/base.html:55
-msgid "\"OK, I aggree \""
+#: templates/base.html:60 templates/base.html.py:63
+msgid "\"OK\""
 msgstr ""
 
-#: templates/base.html:56
-msgid "\"Decline \""
-msgstr ""
-
-#: templates/base.html:57
-msgid "\"Allow cookies\""
-msgstr ""
-
-#: templates/base.html:58
+#: templates/base.html:62
 msgid "\"Learn more\""
 msgstr ""
 
-#: templates/base.html:59
-msgid "'Cookie Policy'"
+#: templates/base.html:74
+msgid "Go to the web page main content."
 msgstr ""
 
-#: templates/breadcrumbs.html:3 templates/header.html:11
-#: templates/header.html.py:12
+#: templates/breadcrumbs.html:3 templates/header.html:20
+#: templates/header.html.py:21
 msgid "Home"
 msgstr ""
 
-#: templates/elri-info.html:7 templates/header.html:95
+#: templates/elri-info.html:5 templates/header.html:102
+#: templates/repository/resource_view/usage.html:3
+msgid "Usage"
+msgstr ""
+
+#: templates/elri-info.html:7 templates/header.html:104
 msgid "ELRI Services"
 msgstr ""
 
@@ -122,7 +131,7 @@ msgid ""
 "licensing terms under which the resources are provided."
 msgstr ""
 
-#: templates/elri-info.html:19 templates/header.html:96
+#: templates/elri-info.html:19 templates/header.html:105
 msgid "Managing Language Resources"
 msgstr ""
 
@@ -134,8 +143,8 @@ msgstr ""
 
 #: templates/elri-info.html:23
 msgid ""
-"New users should first register <a href=\"../accounts/create/\">here</a>. "
-"Once your account credentials have been validated, you can log in and either "
+"New users should first  <a href=\"../accounts/create/\">register</a>. Once "
+"your account credentials have been validated, you can log in and either "
 "search (via the Browse Resources menu) or contribute ((via the Contribute "
 "Resources menu) language resources."
 msgstr ""
@@ -145,7 +154,7 @@ msgid ""
 "For each language resource, you will be asked to provide the languages of "
 "its content, a short title, the group with which you wish to share the "
 "resource, and the associated licensing conditions (see <a href="
-"\"#Licensing_LRs\">below</a>)."
+"\"#Licensing_LRs\" title=\"licensing contitions\">below</a>)."
 msgstr ""
 
 #: templates/elri-info.html:27
@@ -171,7 +180,7 @@ msgid ""
 "authorised group of users, in accordance to its licensing conditions."
 msgstr ""
 
-#: templates/elri-info.html:37 templates/header.html:97
+#: templates/elri-info.html:37 templates/header.html:106
 msgid "Licensing Language Resources"
 msgstr ""
 
@@ -204,6 +213,7 @@ msgid ""
 msgstr ""
 
 #: templates/elri-info.html:49
+#: templates/repository/resource_view/distribution.html:31
 msgid "Licences"
 msgstr ""
 
@@ -233,18 +243,28 @@ msgstr ""
 msgid "National Data Licences"
 msgstr ""
 
-#: templates/footer.html:7
+#: templates/footer.html:9 templates/header.html:12
+msgid "Go to the ELRI project homepage"
+msgstr ""
+
+#: templates/footer.html:11 templates/footer.html.py:22
 msgid "ELRI National Relay Station "
 msgstr ""
 
-#: templates/footer.html:8
+#: templates/footer.html:12 templates/footer.html.py:23
 msgid ""
-"powered by <a href=\"http://www.meta-share.org/\" target=\"_blank\">META-"
-"SHARE</a> and <a href=\"https://elrc-share.eu/\" target=\"_blank\">ELRC-"
-"SHARE</a>"
+"powered by <a href=\"http://www.meta-share.org/\" target=\"_blank\" lang=\"en"
+"\">META-SHARE</a> and <a href=\"https://elrc-share.eu/\" target=\"_blank\" "
+"lang=\"en\">ELRC-SHARE</a>"
 msgstr ""
 
-#: templates/footer.html:12
+#: templates/footer.html:13 templates/footer.html.py:24
+msgid ""
+"Go to the Creative Commons Attribution Non-Commercial Share Alike 4.0 "
+"International license information page."
+msgstr ""
+
+#: templates/footer.html:16 templates/footer.html.py:29
 msgid "Privacy Policy"
 msgstr ""
 
@@ -266,8 +286,8 @@ msgstr ""
 msgid ""
 "National Relay Stations are developed within the  <a href=\"http://www.elri-"
 "project.eu\">ELRI</a> European project, supported by the <a href=\"http://ec."
-"europa.eu/inea/en/connecting-europe-facility\">Connecting Europe Facility</"
-"a> programme."
+"europa.eu/inea/en/connecting-europe-facility\" lang=\"en\">Connecting Europe "
+"Facility</a> programme."
 msgstr ""
 
 #: templates/frontpage.html:19
@@ -304,176 +324,173 @@ msgid ""
 "\">Contribute</a> your own data and retrieve prepared language resources."
 msgstr ""
 
-#: templates/header.html:14
+#: templates/header.html:23
 msgid "Browse the resources of the ELRI catalogue"
 msgstr ""
 
-#: templates/header.html:16
+#: templates/header.html:25
 msgid "Browse"
 msgstr ""
 
-#: templates/header.html:18
+#: templates/header.html:27
 msgid "Contribute"
 msgstr ""
 
-#: templates/header.html:21 templates/header.html.py:29
+#: templates/header.html:30 templates/header.html.py:38
 msgid "Create/edit resource metadata or upload resource data"
 msgstr ""
 
-#: templates/header.html:22
+#: templates/header.html:31
 msgid "Manage"
 msgstr ""
 
-#: templates/header.html:24
+#: templates/header.html:33
 msgid "Create/edit your own resource metadata or upload resource data"
 msgstr ""
 
-#: templates/header.html:26
+#: templates/header.html:35
 msgid "Manage your own resources"
 msgstr ""
 
-#: templates/header.html:31
+#: templates/header.html:40
 msgid "Manage all resources"
 msgstr ""
 
-#: templates/header.html:37 templates/header.html.py:38
+#: templates/header.html:46 templates/header.html.py:47
 msgid "Manage LRs by ELRC deliverables"
 msgstr ""
 
-#: templates/header.html:43
+#: templates/header.html:52
 msgid "Create/edit person object metadata"
 msgstr ""
 
-#: templates/header.html:45
+#: templates/header.html:54
 msgid "Manage person objects"
 msgstr ""
 
-#: templates/header.html:46
+#: templates/header.html:55
 msgid "Create/edit organization object metadata"
 msgstr ""
 
-#: templates/header.html:48
+#: templates/header.html:57
 msgid "Manage organization objects"
 msgstr ""
 
-#: templates/header.html:49
+#: templates/header.html:58
 msgid "Create/edit project object metadata"
 msgstr ""
 
-#: templates/header.html:51
+#: templates/header.html:60
 msgid "Manage project objects"
 msgstr ""
 
-#: templates/header.html:52
+#: templates/header.html:61
 msgid "Create/edit document/paper object metadata"
 msgstr ""
 
-#: templates/header.html:54
+#: templates/header.html:63
 msgid "Manage document objects"
 msgstr ""
 
-#: templates/header.html:56
+#: templates/header.html:65
 msgid "Upload XML resource descriptions"
 msgstr ""
 
-#: templates/header.html:57
+#: templates/header.html:66
 msgid "Upload resource descriptions"
 msgstr ""
 
-#: templates/header.html:63
+#: templates/header.html:72
 msgid "Manage users and groups"
 msgstr ""
 
-#: templates/header.html:64
+#: templates/header.html:73
 msgid "Administration"
 msgstr ""
 
-#: templates/header.html:88
+#: templates/header.html:97
 msgid "View various statistics for this META-SHARE Node"
 msgstr ""
 
-#: templates/header.html:90
+#: templates/header.html:99
 msgid "Statistics"
 msgstr ""
 
-#: templates/header.html:93 templates/repository/resource_view/usage.html:3
-msgid "Usage"
-msgstr ""
-
-#: templates/header.html:102
+#: templates/header.html:111
 msgid "Terms of Service"
 msgstr ""
 
-#: templates/header.html:104
+#: templates/header.html:113
 msgid "Use of ELRI Services"
 msgstr ""
 
-#: templates/header.html:105
+#: templates/header.html:114
 msgid "Sharing of Language Resources"
 msgstr ""
 
-#: templates/header.html:106
+#: templates/header.html:115
 msgid "Privacy"
 msgstr ""
 
-#: templates/header.html:107
+#: templates/header.html:116
 msgid "Data Protection"
 msgstr ""
 
-#: templates/header.html:108
+#: templates/header.html:117
 msgid "Data Protection Statement"
 msgstr ""
 
-#: templates/header.html:109
+#: templates/header.html:118
 msgid "Notice and Takedown Policy"
 msgstr ""
 
-#: templates/header.html:113 templates/header.html.py:114 templates/help.html:8
+#: templates/header.html:122 templates/header.html.py:123 templates/help.html:7
+#: templates/help.html.py:8
 msgid "Help"
 msgstr ""
 
-#: templates/header.html:117
+#: templates/header.html:126
 msgid "Profile settings and actions"
 msgstr ""
 
-#: templates/header.html:125
+#: templates/header.html:134
 msgid "View your recent actions"
 msgstr ""
 
-#: templates/header.html:126
+#: templates/header.html:135
 msgid "View or edit your personal details"
 msgstr ""
 
-#: templates/header.html:127
+#: templates/header.html:136
 msgid "Edit your profile"
 msgstr ""
 
-#: templates/header.html:128
+#: templates/header.html:137
 msgid "Change your password"
 msgstr ""
 
-#: templates/header.html:140
+#: templates/header.html:149
 msgid "Apply for eDelivery membership"
 msgstr ""
 
-#: templates/header.html:140
+#: templates/header.html:149
 msgid "Apply for ELRC-SHARE eDelivery membership"
 msgstr ""
 
-#: templates/header.html:145 templates/header.html.py:146
+#: templates/header.html:154 templates/header.html.py:155
 #: templates/repository/api/help.html:31
 msgid "ELRC-SHARE RESTful API"
 msgstr ""
 
-#: templates/header.html:155
+#: templates/header.html:164
 msgid "Logout"
 msgstr ""
 
-#: templates/header.html:158
+#: templates/header.html:167
 msgid "Register"
 msgstr ""
 
-#: templates/header.html:160 templates/login.html:19
+#: templates/header.html:169 templates/login.html:19
 msgid "Login"
 msgstr ""
 
@@ -1066,7 +1083,7 @@ msgstr "The LR is replaced on the ELRI Services inventory with changes."
 msgid "The LR is permanently removed from the ELRI Services inventory."
 msgstr "The LR is permanently removed from the ELRI Services inventory."
 
-#: templates/legal.html:126
+#: templates/legal.html:127
 msgid ""
 "If the Depositor and the complainant are unable to agree on a solution, the "
 "LR will remain unavailable through the ELRI Services inventory until a time "
@@ -1076,7 +1093,7 @@ msgstr ""
 "LR will remain unavailable through the ELRI Services inventory until a time "
 "when a resolution has been reached."
 
-#: templates/legal.html:128
+#: templates/legal.html:129
 msgid "Appendix B"
 msgstr ""
 "<h3><b>Appendix B</b><br><b>Data protection Notice</b></h3><p>In using and "
@@ -1912,6 +1929,7 @@ msgstr ""
 msgid "Licence Agreement"
 msgstr ""
 
+#: templates/repository/licence_agreement.html:21
 #: templates/repository/licence_agreement.html:22
 #: templates/repository/licence_agreement.html:26
 msgid "View licence"
@@ -2268,47 +2286,63 @@ msgstr ""
 msgid "Geographic coverage"
 msgstr ""
 
-#: templates/repository/resource_view/distribution.html:43
+#: templates/repository/resource_view/distribution.html:5
+msgid "Distribution"
+msgstr ""
+
+#: templates/repository/resource_view/distribution.html:9
+msgid "Availability:"
+msgstr ""
+
+#: templates/repository/resource_view/distribution.html:17
+msgid "Availability Start date:"
+msgstr ""
+
+#: templates/repository/resource_view/distribution.html:25
+msgid "Availability End Date:"
+msgstr ""
+
+#: templates/repository/resource_view/distribution.html:41
 msgid "Distribution Details"
 msgstr ""
 
-#: templates/repository/resource_view/distribution.html:49
+#: templates/repository/resource_view/distribution.html:47
 msgid "Distribution Medium"
 msgstr ""
 
-#: templates/repository/resource_view/distribution.html:57
+#: templates/repository/resource_view/distribution.html:55
 msgid "Download location"
 msgstr ""
 
-#: templates/repository/resource_view/distribution.html:66
+#: templates/repository/resource_view/distribution.html:64
 msgid "Execution locations"
 msgstr ""
 
-#: templates/repository/resource_view/distribution.html:66
+#: templates/repository/resource_view/distribution.html:64
 msgid "Execution location"
 msgstr ""
 
-#: templates/repository/resource_view/distribution.html:75
+#: templates/repository/resource_view/distribution.html:73
 msgid "Fee"
 msgstr ""
 
-#: templates/repository/resource_view/distribution.html:83
+#: templates/repository/resource_view/distribution.html:81
 msgid "Attribution Details"
 msgstr ""
 
-#: templates/repository/resource_view/distribution.html:91
+#: templates/repository/resource_view/distribution.html:89
 msgid "Distribution Rights Holders"
 msgstr ""
 
-#: templates/repository/resource_view/distribution.html:101
+#: templates/repository/resource_view/distribution.html:99
 msgid "IPR Holders"
 msgstr ""
 
-#: templates/repository/resource_view/distribution.html:116
+#: templates/repository/resource_view/distribution.html:114
 msgid "Personal Data"
 msgstr ""
 
-#: templates/repository/resource_view/distribution.html:117
+#: templates/repository/resource_view/distribution.html:115
 #: templates/stats/mystats.html:45
 msgid "YES"
 msgstr ""
@@ -2436,6 +2470,10 @@ msgstr ""
 msgid "DSI Relevance"
 msgstr ""
 
+#: templates/repository/resource_view/lr_view.html:238
+msgid "Back"
+msgstr ""
+
 #: templates/repository/resource_view/lr_view.html:251
 msgid "Edit Resource"
 msgstr ""
@@ -2519,6 +2557,10 @@ msgstr ""
 
 #: templates/repository/resource_view/person.html:20
 msgid "Click to view contact card"
+msgstr ""
+
+#: templates/repository/resource_view/person.html:25
+msgid "Contact Card"
 msgstr ""
 
 #: templates/repository/resource_view/person.html:146
@@ -2874,109 +2916,113 @@ msgstr ""
 msgid "Search and Browse"
 msgstr ""
 
-#: templates/repository/search.html:77
+#: templates/repository/search.html:69
+msgid "Browse Language Resources"
+msgstr ""
+
+#: templates/repository/search.html:78 templates/repository/search.html:79
 msgid "Search"
 msgstr ""
 
-#: templates/repository/search.html:86 templates/stats/topstats.html:174
+#: templates/repository/search.html:88 templates/stats/topstats.html:174
 #: templates/stats/usagestats.html:142
 msgid "Filter by:"
 msgstr ""
 
-#: templates/repository/search.html:96
+#: templates/repository/search.html:98
 msgid "Resource Type:"
 msgstr ""
 
-#: templates/repository/search.html:99
+#: templates/repository/search.html:101
 msgid "Corpus:"
 msgstr ""
 
-#: templates/repository/search.html:103
+#: templates/repository/search.html:105
 msgid "Lexical/Conceptual:"
 msgstr ""
 
-#: templates/repository/search.html:107
+#: templates/repository/search.html:109
 msgid "Language Description:"
 msgstr ""
 
-#: templates/repository/search.html:111
+#: templates/repository/search.html:113
 msgid "Tool/Service:"
 msgstr ""
 
-#: templates/repository/search.html:121
+#: templates/repository/search.html:123
 #, python-format
 msgid " %(cnt)s Language Resource "
 msgid_plural " %(cnt)s Language Resources "
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/repository/search.html:122
+#: templates/repository/search.html:124
 #, python-format
 msgid "(Page %(pgnum)s of %(numpgs)s)"
 msgstr ""
 
-#: templates/repository/search.html:128 templates/repository/search.html:155
+#: templates/repository/search.html:130 templates/repository/search.html:158
 #: templates/stats/topstats.html:241 templates/stats/topstats.html.py:243
 msgid "Previous"
 msgstr ""
 
-#: templates/repository/search.html:129 templates/repository/search.html:156
+#: templates/repository/search.html:131 templates/repository/search.html:159
 #: templates/stats/topstats.html:247 templates/stats/topstats.html.py:249
 msgid "Next"
 msgstr ""
 
-#: templates/repository/search.html:131
+#: templates/repository/search.html:134
 msgid "Order by:"
 msgstr ""
 
-#: templates/repository/search.html:133
+#: templates/repository/search.html:136
 msgid "Resource Name A-Z"
 msgstr ""
 
-#: templates/repository/search.html:134
+#: templates/repository/search.html:137
 msgid "Resource Name Z-A"
 msgstr ""
 
-#: templates/repository/search.html:135
+#: templates/repository/search.html:138
 msgid "Resource Type A-Z"
 msgstr ""
 
-#: templates/repository/search.html:136
+#: templates/repository/search.html:139
 msgid "Resource Type Z-A"
 msgstr ""
 
-#: templates/repository/search.html:137
+#: templates/repository/search.html:140
 msgid "Media Type A-Z"
 msgstr ""
 
-#: templates/repository/search.html:138
+#: templates/repository/search.html:141
 msgid "Media Type Z-A"
 msgstr ""
 
-#: templates/repository/search.html:139
+#: templates/repository/search.html:142
 msgid "Language Name A-Z"
 msgstr ""
 
-#: templates/repository/search.html:140
+#: templates/repository/search.html:143
 msgid "Language Name Z-A"
 msgstr ""
 
-#: templates/repository/search.html:141
+#: templates/repository/search.html:144
 msgid "Number of Downloads"
 msgstr ""
 
-#: templates/repository/search.html:142
+#: templates/repository/search.html:145
 msgid "Number of Views"
 msgstr ""
 
-#: templates/repository/search.html:163
+#: templates/repository/search.html:166
 #, python-format
 msgid ""
 "No results were found for search query &ldquo;%(query)s&rdquo; and filters "
 "%(filters)s."
 msgstr ""
 
-#: templates/repository/search.html:165
+#: templates/repository/search.html:168
 #, python-format
 msgid "No results were found for search query &ldquo;%(query)s&rdquo;."
 msgstr ""

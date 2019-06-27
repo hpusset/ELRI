@@ -141,7 +141,7 @@
                     &nbsp;<div align=right style="float: right"><i>({% trans 'Last modified' %}: {{ stat.last }})</i>&nbsp;</div>
                 {% else %}
                 	<a href="#" class="tip">
-                    <img src="{% static "stats/img/"|add:stat.action|add:"_icon.gif" %}"/>
+                    <img src="{% static "stats/img/"|add:stat.action|add:"_icon.gif" %}" alt="{{ stat.action }}" lang="en"/>
                     <strong>{{ stat.count }}</strong>&nbsp;
                     <span>Last {{ stat.action }}: {{ stat.last }}</span>
                     </a>
