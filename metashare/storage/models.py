@@ -232,14 +232,32 @@ class StorageObject(models.Model):
         """
         Returns the path to the local folder for this storage object instance.
         """
-        return '{0}/{1}'.format(settings.STORAGE_PATH, self.identifier)
+        return os.path.join(settings.STORAGE_PATH, self.identifier)
+
+    def get_storage_archive_path(self):
+        path = self._storage_folder()
+        if os.path.isfile(path):
+            return path
+        return None
+
+    def get_storage_xml_path(self):
+        """ Return the last metadata XML file.
+        """
+        base_path = self._storage_folder()
+
+        metadata_file_name = 'metadata-{:0>4d}.xml'.format(self.revision)
+        metadata_file_path = os.path.join(base_path, metadata_file_name)
+
+        if os.path.isfile(metadata_file_path):
+            return metadata_file_path
+        return None
 
     def compute_checksum(self):
         """
         Computes the MD5 hash checksum for the binary archive which may be
         attached to this storage object instance and sets it in `self.checksum`.
-        
-        Returns whether `self.checksum` was changed in this method. 
+
+        Returns whether `self.checksum` was changed in this method.
         """
         if not self.master_copy or not self.get_download():
             return False
@@ -315,7 +333,7 @@ class StorageObject(models.Model):
         """
         Updates the metadata XML if required and serializes it and this storage
         object to the storage folder.
-        
+
         force_digest (optional): if True, always recreate the digest zip-archive
         """
         # check if the storage folder for this storage object instance exists
@@ -353,7 +371,7 @@ class StorageObject(models.Model):
         local_updated = self.check_local_storage_object()
 
         # save storage object if required; this should always happen since
-        # at least self.digest_last_checked in the local storage object 
+        # at least self.digest_last_checked in the local storage object
         # has changed
         if source_url_updated or metadata_updated \
                 or local_updated:
@@ -365,8 +383,8 @@ class StorageObject(models.Model):
         current metadata serialization. If yes, recreates the serialization,
         updates it in the storage folder and increases the revision (for master
         copies)
-        
-        Returns a flag indicating if the serialization was updated. 
+
+        Returns a flag indicating if the serialization was updated.
         """
 
         # flag to indicate if rebuilding of metadata.xml is required
@@ -391,7 +409,7 @@ class StorageObject(models.Model):
             LOGGER.debug(u"\nMETADATA: {0}\n".format(self.metadata))
             self.modified = datetime.now()
             update_xml = True
-            # increase revision for ingested and published resources whenever 
+            # increase revision for ingested and published resources whenever
             # the metadata XML changes for master copies
             if self.publication_status in (INGESTED, PUBLISHED) \
                     and self.copy_status == MASTER:
@@ -417,8 +435,8 @@ class StorageObject(models.Model):
         """
         Checks if the global storage object serialization has changed. If yes,
         updates it in the storage folder.
-        
-        Returns a flag indicating if the serialization was updated. 
+
+        Returns a flag indicating if the serialization was updated.
         """
 
         _dict_global = {}
@@ -463,8 +481,8 @@ class StorageObject(models.Model):
         """
         Checks if the local storage object serialization has changed. If yes,
         updates it in the storage folder.
-        
-        Returns a flag indicating if the serialization was updated. 
+
+        Returns a flag indicating if the serialization was updated.
         """
 
         _dict_local = {}
@@ -487,23 +505,23 @@ def restore_from_folder(storage_id, copy_status=MASTER, \
                         storage_digest=None, source_node=None, force_digest=False):
     """
     Restores the storage object and the associated resource for the given
-    storage object identifier and makes it persistent in the database. 
-    
+    storage object identifier and makes it persistent in the database.
+
     storage_id: the storage object identifier; it is assumed that this is the
         folder name in the storage folder folder where serialized storage object
         and metadata XML are located
-    
+
     copy_status (optional): one of MASTER, REMOTE, PROXY; if present, used as
         copy status for the restored resource
-    
+
     storage_digest (optional): the digest_checksum to set in the restored
         storage object
 
     source_node (optional): the source node if to set in the restored
         storage object
-    
+
     force_digest (optional): if True, always recreate the digest zip-archive
-    
+
     Returns the restored resource with its storage object set.
     """
     from metashare.repository.models import resourceInfoType_model
@@ -536,7 +554,7 @@ def restore_from_folder(storage_id, copy_status=MASTER, \
             msg = u'{}'.format(result[2])
         raise Exception(msg)
     resource = result[0]
-    # at this point, a storage object is already created at the resource, so update it 
+    # at this point, a storage object is already created at the resource, so update it
     _storage_object = resource.storage_object
     _storage_object.metadata = _xml_string
 
@@ -549,7 +567,7 @@ def restore_from_folder(storage_id, copy_status=MASTER, \
         LOGGER.warn('missing storage-global.json, importing resource as new')
         _storage_object.identifier = storage_id
 
-    # add local storage object attributes if available 
+    # add local storage object attributes if available
     if os.path.isfile('{0}/storage-local.json'.format(storage_folder)):
         _local_json = \
             _fill_storage_object(_storage_object, '{0}/storage-local.json'.format(storage_folder))
@@ -593,7 +611,7 @@ def add_or_update_resource(storage_json, resource_xml_string, storage_digest,
         digest_checksum;
     - if it exists, delete it from the database, then import it with the given
         copy status and digest_checksum.
-    
+
     Raises 'IllegalAccessException' if an attempt is made to overwrite
     an existing master-copy resource with a non-master-copy one.
     '''
@@ -658,7 +676,7 @@ def add_or_update_resource(storage_json, resource_xml_string, storage_digest,
 def _fill_storage_object(storage_obj, json_file_name):
     """
     Fills the given storage object with the entries of the given JSON file.
-    The JSON file contains the serialization of dictionary where it is assumed 
+    The JSON file contains the serialization of dictionary where it is assumed
     the dictionary keys are valid attributes of the storage object.
     Returns the content of the JSON file.
     """
