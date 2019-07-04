@@ -1275,6 +1275,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
 
     set_elrc_uploaded.short_description = _('Set resources has ELRC uploaded')
 
+
     def export_xml_action(self, request, queryset):
         from StringIO import StringIO
         from zipfile import ZipFile
