@@ -64,7 +64,7 @@ LOCALE_PATHS = tuple([
 # Path to the local storage layer path used for persistent object storage.
 STORAGE_PATH = '/elri/elri_resources/language_resources'
 
-# Path to the local directory where all the static files (images, js, css) will 
+# Path to the local directory where all the static files (images, js, css) will
 # be collected and served by the web server in STATIC_URL
 STATIC_ROOT = '/elri/static'
 
@@ -151,8 +151,8 @@ SELENIUM_DRIVER = 'Firefox'
 SELENIUM_TESTSERVER_PORT = 8000
 
 # Settings for synchronization:
-# Time interval settings. It sets the intervals when the synchronization 
-# task will be triggered. Uses "crontab" conventions. 
+# Time interval settings. It sets the intervals when the synchronization
+# task will be triggered. Uses "crontab" conventions.
 # Defaults will run the synchronization task once an hour.
 SYNC_INTERVALS = {
     'MINUTE' : '25',      # 0-59 - Default is 25
@@ -163,8 +163,8 @@ SYNC_INTERVALS = {
 }
 
 # Settings for digest updating:
-# Time interval settings. It sets the intervals when the digest updating  
-# task will be triggered. Uses "crontab" conventions. 
+# Time interval settings. It sets the intervals when the digest updating
+# task will be triggered. Uses "crontab" conventions.
 # Defaults will run the updating task twice a day.
 # The update intervals should roughly be half of the MAX_DIGEST_AGE as
 # defined below
@@ -191,13 +191,13 @@ CORE_NODES = {
 #        'URL': 'http://metashare.example.com:8000', # The URL of the other
 #                                              # META-SHARE Managing Node (also
 #                                              # include the port if needed).
-#        'USERNAME': 'sync-user-1',            # The name of a sync user on 
+#        'USERNAME': 'sync-user-1',            # The name of a sync user on
 #                                              # the META-SHARE Managing Nodes.
 #        'PASSWORD': 'sync-user-pass',         # Sync user's password.
 #    },
 #    'node_id_2': {
-#        'NAME': 'BUNI',                     
-#        'DESCRIPTION': 'xxx',               
+#        'NAME': 'BUNI',
+#        'DESCRIPTION': 'xxx',
 #        'URL': 'http://example.com/pub/metashare',
 #        'USERNAME': 'sync-user-2',
 #        'PASSWORD': 'sync-user-pass-2',
@@ -278,3 +278,6 @@ ALLOWED_HOSTS = ['elri-node1', 'localhost']
 
 DOC2TMX_URL = "http://toolchain:8080/ELRI_WebService/tc_doc2tmx/process"
 TM2TMX_URL = "http://toolchain:8080/ELRI_WebService/tc_tm2tmx/process"
+
+ELRC_API_USERNAME = os.environ.get('ELRC_API_USERNAME', None)
+ELRC_API_PASSWORD = os.environ.get('ELRC_API_PASSWORD', None)
