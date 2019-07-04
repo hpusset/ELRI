@@ -94,6 +94,7 @@ class resourceInfoType_model(SchemaModel):
       ( 'resourceComponentType/toolServiceInfo', 'resourceComponentType', REQUIRED ),
       ( 'resourceComponentType/languageDescriptionInfo', 'resourceComponentType', REQUIRED ),
       ( 'resourceComponentType/lexicalConceptualResourceInfo', 'resourceComponentType', REQUIRED ),
+      ('ELRCUploaded', 'ELRCUploaded', OPTIONAL)
     )
     __schema_classes__ = {
       u'contactPerson': "personInfoType_model",
@@ -117,7 +118,7 @@ class resourceInfoType_model(SchemaModel):
       'urce'),
       )
 
-    
+
     # OneToMany field: distributionInfo
 
     contactPerson = models.ManyToManyField("personInfoType_model",
@@ -156,7 +157,8 @@ class resourceInfoType_model(SchemaModel):
     resourceComponentType = models.OneToOneField("resourceComponentTypeType_model",
       verbose_name='Resource component type', #_('Resource component type'),
       help_text=_('Used for distinguishing between resource types'),
-      )
+    )
+
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
@@ -167,7 +169,7 @@ class resourceInfoType_model(SchemaModel):
     editor_groups = models.ManyToManyField(EditorGroup, blank=True)
 
     owners = models.ManyToManyField(User, blank=True)
-    
+
     groups = models.ManyToManyField(Organization, blank=True,
 									verbose_name='Sharing Groups', #_('Sharing Groups'),
 									help_text=_('Groups within the resourse is shared'))
@@ -178,6 +180,8 @@ class resourceInfoType_model(SchemaModel):
 
     storage_object = models.ForeignKey(StorageObject, blank=True, null=True,
       unique=True)
+
+    ELRCUploaded = models.NullBooleanField(_("Uploaded to ELRC"), blank=True, null=True)
 
     def save(self, *args, **kwargs):
         """
@@ -925,13 +929,13 @@ class resourceDocumentationInfoType_model(SchemaModel):
       blank=True, null=True, related_name="documentation_%(class)s_related", )
 
     onLineHelpURL = XmlCharField(
-      verbose_name='On line help URL', #_('On line help URL'), 
+      verbose_name='On line help URL', #_('On line help URL'),
       validators=[HTTPURI_VALIDATOR],
       help_text=_('URL link to an online manual or help pages'),
       blank=True, max_length=1000, )
 
     samplesLocation = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=8, attrs={'size': '250'}),
-      verbose_name='Samples location', #_('Samples location'), 
+      verbose_name='Samples location', #_('Samples location'),
       validators=[HTTPURI_VALIDATOR],
       help_text=_('A url with samples of the resource or, in the case of t' \
       'ools, of samples of the output'),
@@ -1357,13 +1361,13 @@ class communicationInfoType_model(SchemaModel):
     )
 
     email = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=11, max_length=100),
-      verbose_name='Email', #_('Email'), 
+      verbose_name='Email', #_('Email'),
       validators=[EMAILADDRESS_VALIDATOR],
       help_text=_('The email address of a person or an organization'),
       )
 
     url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=12, max_length=150),
-      verbose_name='URL (Landing page)', #_('URL (Landing page)'), 
+      verbose_name='URL (Landing page)', #_('URL (Landing page)'),
       validators=[HTTPURI_VALIDATOR],
       help_text=_('A URL used as homepage of an entity (e.g. of a person, ' \
       'organization, resource etc.); it provides general information (fo' \
@@ -1678,7 +1682,7 @@ class distributionInfoType_model(SchemaModel):
       )
 
     downloadLocation = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=14, attrs={'size': '250'}),
-                                      verbose_name='Download location', #_('Download location'), 
+                                      verbose_name='Download location', #_('Download location'),
                                       validators=[HTTPURI_VALIDATOR],
                                       help_text=_('Any url where the resource can be downloaded from; plea' \
                                                 'se, use if the resource is "downloadable" and you have not upload' \
@@ -1686,7 +1690,7 @@ class distributionInfoType_model(SchemaModel):
                                       blank=True, )
 
     executionLocation = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=15, attrs={'size': '250'}),
-                                       verbose_name='Execution location', #_('Execution location'), 
+                                       verbose_name='Execution location', #_('Execution location'),
                                        validators=[HTTPURI_VALIDATOR],
                                        help_text=_(' Any url where the service providing access to a resour' \
                                                  'ce is being executed; please use for resources that are "accessib' \
@@ -2473,7 +2477,7 @@ class projectInfoType_model(SchemaModel):
       blank=True, max_length=100, )
 
     url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=18, attrs={'size': '250'}),
-      verbose_name='URL (Landing page)', #_('URL (Landing page)'), 
+      verbose_name='URL (Landing page)', #_('URL (Landing page)'),
       validators=[HTTPURI_VALIDATOR],
       help_text=_('A URL used as homepage of an entity (e.g. of a person, ' \
       'organization, resource etc.) and/or where an entity (e.g.LR, docu' \
@@ -3258,7 +3262,7 @@ class inputInfoType_model(SchemaModel):
       )
 
     domainSetInfo = models.ManyToManyField("domainSetInfoType_model",
-      verbose_name='Domain set', #_('Domain set'), 
+      verbose_name='Domain set', #_('Domain set'),
       blank=True, null=True, related_name="domainSetInfo_%(class)s_related", )
 
     annotationType = MultiSelectField(
