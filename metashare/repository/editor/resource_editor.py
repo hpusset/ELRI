@@ -1256,12 +1256,12 @@ class ResourceModelAdmin(SchemaModelAdmin):
     publish_elrc_action.short_description = _("Publish selected resources on ELRC-Share")
 
     def set_elrc_uploaded(self, request, queryset):
-        """ Define all resources of queryset to ELRC uploaded.
+        """ Define all resources of queryset has ELRC uploaded.
         """
         queryset.update(ELRCUploaded=True)
         return
 
-    set_elrc_uploaded.short_description = _("Set resources ELRC uploaded")
+    set_elrc_uploaded.short_description = _("Set resources has ELRC uploaded")
 
     def export_xml_action(self, request, queryset):
         from StringIO import StringIO
