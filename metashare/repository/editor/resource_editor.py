@@ -524,6 +524,7 @@ def remove_from_zip(zipfname, *filenames):
     finally:
         shutil.rmtree(tempdir)
 
+
 class ResourceModelAdmin(SchemaModelAdmin):
     haystack_connection = 'default'
     inline_type = 'stacked'
@@ -535,11 +536,19 @@ class ResourceModelAdmin(SchemaModelAdmin):
     # list_display = ('__unicode__', 'id', 'resource_type', 'publication_status', 'resource_Owners', 'editor_Groups',)
     list_display = ('__unicode__', 'id', 'resource_type', 'publication_status', 'resource_Owners', 'validated', 'ELRCUploaded')
     list_filter = ('storage_object__publication_status', ResourceTypeFilter, ValidatedFilter, 'ELRCUploaded')
-    actions = ('process_action', 'publish_action', 'suspend_action', 'ingest_action',
-        'publish_elrc_action', 'export_xml_action', 'delete', 'add_group',
-        'remove_group', 'add_owner', 'remove_owner', 'process_resource')
+    actions = (
+        'process_action', 'publish_action',
+        'suspend_action', 'ingest_action',
+        'publish_elrc_action', 'set_elrc_uploaded',
+        'export_xml_action', 'delete',
+        'add_group', 'remove_group',
+        'add_owner', 'remove_owner',
+        'process_resource')
     hidden_fields = ('storage_object', 'owners', 'editor_groups',)
-    search_fields = ("identificationInfo__resourceName", "identificationInfo__resourceShortName", "identificationInfo__description", "identificationInfo__identifier")
+    search_fields = (
+        "identificationInfo__resourceName", "identificationInfo__resourceShortName",
+        "identificationInfo__description", "identificationInfo__identifier"
+    )
 
     def changelist_view(self, request, extra_context=None):
         from collections import defaultdict
@@ -1245,6 +1254,14 @@ class ResourceModelAdmin(SchemaModelAdmin):
         return
 
     publish_elrc_action.short_description = _("Publish selected resources on ELRC-Share")
+
+    def set_elrc_uploaded(self, request, queryset):
+        """ Define all resources of queryset has ELRC uploaded.
+        """
+        queryset.update(ELRCUploaded=True)
+        return
+
+    set_elrc_uploaded.short_description = _("Set resources has ELRC uploaded")
 
     def export_xml_action(self, request, queryset):
         from StringIO import StringIO
