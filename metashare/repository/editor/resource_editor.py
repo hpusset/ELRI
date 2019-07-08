@@ -411,6 +411,7 @@ def change_resource_status(resource, status, precondition_status=None):
         return True
     return False
 
+
 def has_edit_permission(request, res_obj):
     """
     Returns `True` if the given request has permission to edit the metadata
@@ -1224,44 +1225,55 @@ class ResourceModelAdmin(SchemaModelAdmin):
     def publish_elrc_action(self, request, queryset):
         """ Each resource objects of queryset, update related XML file and archive file on ELRC website.
         """
-        global ELRC_THREAD
-        if not hasattr(settings, 'ELRC_USERNAME') or not hasattr(settings, 'ELRC_PASSWORD'):
-            raise ImproperlyConfigured(
-                'Define ELRC_API_USERNAME and ELRC_API_PASSWORD into settings before uploading.'
-            )
+        if has_edit_permission(request, queryset):
+            global ELRC_THREAD
+            if not hasattr(settings, 'ELRC_USERNAME') or not hasattr(settings, 'ELRC_PASSWORD'):
+                raise ImproperlyConfigured(
+                    'Define ELRC_API_USERNAME and ELRC_API_PASSWORD into settings before uploading.'
+                )
 
-        resources_success = list()
-        resources_failed = list()
+            resources_success = list()
+            resources_failed = list()
 
-        if not ELRC_THREAD or not ELRC_THREAD.is_alive():
-            ELRC_THREAD = UploadELRCThread(output=ELRC_THREAD_OUTPUT)
+            if not ELRC_THREAD or not ELRC_THREAD.is_alive():
+                ELRC_THREAD = UploadELRCThread(output=ELRC_THREAD_OUTPUT)
 
-        for resource in queryset:
-            resource_status = check_resource_status(resource)
-            if resource_status == PUBLISHED and not resource.ELRCUploaded:
-                ELRC_THREAD.add_resource(resource)
-                resources_success.append(str(resource.id))
-            else:
-                resources_failed.append(str(resource.id))
+            for resource in queryset:
+                resource_status = check_resource_status(resource)
+                if resource_status == PUBLISHED and not resource.ELRCUploaded:
+                    ELRC_THREAD.add_resource(resource)
+                    resources_success.append(str(resource.id))
+                else:
+                    resources_failed.append(str(resource.id))
 
-        if resources_success:
-            messages.info(request, _("Resources added to the upload list: {0}.".format(len(resources_success))))
-        if resources_failed:
-            messages.error(request, _("Resource upload failed: {0}. ID: {1}".format(len(resources_failed), ','.join(resources_failed))))
+            if resources_success:
+                messages.info(request, _('Resources added to the upload list: {0}.'.format(len(resources_success))))
+            if resources_failed:
+                messages.error(request, _('Resource upload failed: {0}. ID: {1}'.format(len(resources_failed), ','.join(resources_failed))))
 
-        if not ELRC_THREAD.started:
-            ELRC_THREAD.start()
+            if not ELRC_THREAD.started:
+                ELRC_THREAD.start()
+        else:
+            messages.error(request, _('You dont have the permission to run this action.'))
         return
 
     publish_elrc_action.short_description = _("Publish selected resources on ELRC-Share")
 
     def set_elrc_uploaded(self, request, queryset):
         """ Define all resources of queryset has ELRC uploaded.
-        """
-        queryset.update(ELRCUploaded=True)
+    """
+        if has_edit_permission(request, queryset):
+            for obj in queryset:
+                if not obj.ELRCUploaded:
+                    obj.ELRCUploaded = True
+                    obj.save()
+                else:
+                    messages.warning(request, 'Resource is already defined has ELRC uploaded: %s' % obj.pk)
+        else:
+            messages.error(request, _('You dont have the permission to run this action.'))
         return
 
-    set_elrc_uploaded.short_description = _("Set resources has ELRC uploaded")
+    set_elrc_uploaded.short_description = _('Set resources has ELRC uploaded')
 
     def export_xml_action(self, request, queryset):
         from StringIO import StringIO
@@ -1654,6 +1666,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 wrap(self.exportxml),
                 name='%s_%s_exportxml' % info),
         ) + urlpatterns
+
         return urlpatterns
 
     @csrf_protect_m
@@ -1672,7 +1685,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         _post['myresources'] = 'true'
         request.POST = _post
         _extra_context = extra_context or {}
-        _extra_context.update({'myresources':True})
+        _extra_context.update({'myresources': True})
         return self.changelist_view(request, _extra_context)
 
     def get_changelist(self, request, **kwargs):
