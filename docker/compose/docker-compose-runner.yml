@@ -33,13 +33,14 @@ services:
       - ELRI_EMAIL_ADDRESSES={{DOCKER-SECRET:app.secret}}
       - ELRI_WORKERS={{DOCKER-SECRET:app.secret}}
       - ELRI_THREADS={{DOCKER-SECRET:app.secret}}
-
+      - ELRC_API_USERNAME={{DOCKER-SECRET:app.secret}}
+      - ELRC_API_PASSWORD={{DOCKER-SECRET:app.secret}}
     depends_on:
       - solr
       - postgres-server
     networks:
       elri-nw: {}
-  # POSTGRES Database Server 
+  # POSTGRES Database Server
   postgres-server:
     container_name: elri_db
     image: elrinrs/postgres-server:R1
@@ -80,7 +81,8 @@ services:
   toolchain:
     container_name: elri_toolchain
     image: elrinrs/toolchain:R3.7
-    volumes:   
+    volumes:
+
       - elri-shared-resources:/elri/elri_resources:rw
     environment:
       - SHARED_FOLDER=/elri/elri_resources

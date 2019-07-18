@@ -1,74 +1,57 @@
-{% extends "base.html" %}
+{% extends "stats/base.html" %}
 {% load i18n %}
-{% load static from staticfiles %}
-
-{% block content %}
+{% load static %}
 
 {% if not myres %}
     <script>window.location.replace("{% url 'frontpage' %}stats/top/");</script>
 {% endif %}
 <link rel="stylesheet" href="{% static "metashare/css/view_stats.css" %}" type="text/css" media="screen" />
 
-<div class='tab-container'>
- <ul class='etabs'>
-    <li class='tab'><a href="{% url 'frontpage' %}stats/top/">{% trans 'ELRI visits statistics' %}</a></li>
-    <!--<li class='tab'><a href="{% url 'frontpage' %}stats/top/">{% trans 'ELRC-SHARE visits statistics' %}</a></li>-->
-    <li class='tab'><a href="{% url 'frontpage' %}stats/usage/">{% trans 'Statistics on resource metadata' %}</a></li>
-    <li class='tab tab-nobr'>{% trans 'My resources' %}</li>
- </ul>
-</div>
+{% block content_tab %}
+    {% if data|length <= 0 %}
+        <div class="content_box">{% trans 'No data found' %}</div>
+    {% else %}
+    <div class="results w-100">
+        <table class="result_table w-100"  cellspacing=0 cellpadding=0 >
+            <tr class="result_table_head">
+                <th width="60%" nowrap>{% trans 'Resource name' %}</th>
+                <th width="5%">{% trans 'Published' %}</th>
+                <th width="15%">{% trans 'Actions' %}</th>
+                <th width="5%" nowrap>{% trans 'Seen by users' %}</th>
+                <th width="20%" nowrap>{% trans 'Last access' %}</th>
+            </tr>
+            {% spaceless %}
+            {% load get_icon %}
+           {% for lr in data %}
+            <tr class="{% cycle odd,even %}">
+                <td class=resourceName>
+                <a href="{% url 'frontpage' %}editor/repository/resourceinfotype_model/{{ lr.0 }}/"><img src="{% static "admin/img/icon_changelink.gif" %}"></a>&nbsp;
+                {% get_icon lr.2.resourceComponentType.as_subclass.resourceType %}&nbsp;
 
-
-<div class="content_tab"> 
-{% if data|length <= 0 %}
- 	<div class="content_box">{% trans 'No data found' %}</div>
-{% else %}
-<div class="results">
-<table align=middle class="result_table"  cellspacing=0 cellpadding=0 style="width: 100%">
-    <tr class="result_table_head">
-        <th width="60%" nowrap>{% trans 'Resource name' %}</th>
-        <th width="5%">{% trans 'Published' %}</th>
-        <th width="15%">{% trans 'Actions' %}</th>
-        <th width="5%" nowrap>{% trans 'Seen by users' %}</th>
-        <th width="20%" nowrap>{% trans 'Last access' %}</th>
-    </tr>
-{% spaceless %}
-{% load get_icon %}
-
-   {% for lr in data %} 
-    <tr class="{% cycle odd,even %}">
-        <td class=resourceName>
-        <a href="{% url 'frontpage' %}editor/repository/resourceinfotype_model/{{ lr.0 }}/"><img src="{% static "admin/img/icon_changelink.gif" %}"></a>&nbsp;
-        {% get_icon lr.2.resourceComponentType.as_subclass.resourceType %}&nbsp;
-        
-        {% if lr.3 == 'p' %}
-            <a href="{{ lr.1 }}">{{ lr.2 }}</a></td><td>{% trans 'YES' %}
-        {% else %}
-            {{ lr.2 }}</td><td>{% trans 'NO' %}
-        {% endif %}           
-        </td>
-        <td align=right nowrap>
-            {% for stat in lr.4 %}
-                <img src="{% static "stats/img/"|add:stat.action|add:"_icon.gif" %}"
-                    alt="Last {{ stat.action }}: {{ stat.last }}" title="Last {{ stat.action }}: {{ stat.last }}" />
-                    <b>{{  stat.count }}</b>&nbsp;
+                {% if lr.3 == 'p' %}
+                    <a href="{{ lr.1 }}">{{ lr.2 }}</a></td><td>{% trans 'YES' %}
+                {% else %}
+                    {{ lr.2 }}</td><td>{% trans 'NO' %}
+                {% endif %}
+                </td>
+                <td align=right nowrap>
+                    {% for stat in lr.4 %}
+                        <img src="{% static "stats/img/"|add:stat.action|add:"_icon.gif" %}"
+                            alt="Last {{ stat.action }}: {{ stat.last }}" title="Last {{ stat.action }}: {{ stat.last }}" />
+                            <b>{{  stat.count }}</b>&nbsp;
+                    {% endfor %}
+                </td>
+                <td valign=bottom align=right nowrap>
+                    {{ lr.5 }}
+                </td>
+                <td valign=bottom align=right nowrap>
+                    {{ lr.6 }}
+                </td>
+            <tr>
             {% endfor %}
-        </td>
-        <td valign=bottom align=right nowrap>
-            {{ lr.5 }}
-        </td>
-        <td valign=bottom align=right nowrap>
-            {{ lr.6 }}
-        </td>
-        
-    <tr>
-{%endfor%}
-{% endspaceless %}
-
-</table>
-</div>
+            {% endspaceless %}
+        </table>
+    </div>
 </div>
 {% endif %}
-
 {% endblock %}
-

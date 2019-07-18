@@ -71,6 +71,7 @@ from metashare.repository.search_indexes import resourceInfoType_modelIndex, \
     update_lr_index_entry
 from metashare.settings import LOG_HANDLER, STATIC_URL, DJANGO_URL, MAXIMUM_UPLOAD_SIZE, CONTRIBUTION_FORM_DATA, \
     ROOT_PATH, LANGUAGE_CODE
+
 from metashare.stats.model_utils import getLRStats, saveLRStats, \
     saveQueryStats, VIEW_STAT, DOWNLOAD_STAT
 from metashare.storage.models import PUBLISHED, INGESTED
@@ -121,6 +122,108 @@ def _convert_to_template_tuples(element_tree):
         return ((element_tree.attrib["pretty"], element_tree.text),)
 
 
+# a type providing an enumeration of META-SHARE member types
+MEMBER_TYPES = type('MemberEnum', (), dict(GOD=100, FULL=3, ASSOCIATE=2, NON=1))
+
+# a dictionary holding a URL for each download licence and a member type which
+# is required at a minimum to be able to download the associated resource
+# straight away; otherwise the licence requires a hard-copy signature
+LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
+    'CC-BY-4.0': (STATIC_URL + 'metashare/licences/CC-BY-4.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-NC-4.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-4.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-NC-ND-4.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-ND-4.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-NC-SA-4.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-SA-4.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-ND-4.0': (STATIC_URL + 'metashare/licences/CC-BY-ND-4.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-SA-4.0': (STATIC_URL + 'metashare/licences/CC-BY-SA-4.0.pdf', MEMBER_TYPES.NON),
+    'CC0-1.0': (STATIC_URL + 'metashare/licences/CC0-1.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-3.0': (STATIC_URL + 'metashare/licences/CC-BY-3.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-NC-3.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-3.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-NC-ND-3.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-ND-3.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-NC-SA-3.0': (STATIC_URL + 'metashare/licences/CC-BY-NC-SA-3.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-ND-3.0': (STATIC_URL + 'metashare/licences/CC-BY-ND-3.0.pdf', MEMBER_TYPES.NON),
+    'CC-BY-SA-3.0': (STATIC_URL + 'metashare/licences/CC-BY-SA-3.0.pdf', MEMBER_TYPES.NON),
+    # TODO: PDDL
+    'PDDL-1.0': (STATIC_URL + 'metashare/licences/PDDL-1.0.pdf', MEMBER_TYPES.NON),
+    # TODO: ODC-BY
+    'ODC-BY-1.0': (STATIC_URL + 'metashare/licences/ODC-BY-1.0.pdf', MEMBER_TYPES.NON),
+    'ODbL-1.0': (STATIC_URL + 'metashare/licences/ODbL-1.0.pdf', MEMBER_TYPES.NON),
+    'AGPL-3.0': (STATIC_URL + 'metashare/licences/AGPL-3.0.pdf', MEMBER_TYPES.NON),
+    'Apache-2.0': (STATIC_URL + 'metashare/licences/Apache-2.0.pdf', MEMBER_TYPES.NON),
+    'BSD-4-Clause': (STATIC_URL + 'metashare/licences/BSD-4-Clause.pdf', MEMBER_TYPES.NON),
+    'BSD-3-Clause': (STATIC_URL + 'metashare/licences/BSD-3-Clause.pdf', MEMBER_TYPES.NON),
+    'BSD-2-Clause': (STATIC_URL + 'metashare/licences/BSD-2-Clause', MEMBER_TYPES.NON),
+    'GFDL-1.3': (STATIC_URL + 'metashare/licences/GFDL-1.3.pdf', MEMBER_TYPES.NON),
+    'GPL-3.0': (STATIC_URL + 'metashare/licences/GPL-3.0.pdf', MEMBER_TYPES.NON),
+    'LGPL-3.0': (STATIC_URL + 'metashare/licences/LGPL-3.0.pdf', MEMBER_TYPES.NON),
+    'MIT': (STATIC_URL + 'metashare/licences/MIT.pdf', MEMBER_TYPES.NON),
+    'EPL-1.0': (STATIC_URL + 'metashare/licences/EPL-1.0.pdf', MEMBER_TYPES.NON),
+    'EUPL-1.0': (STATIC_URL + 'metashare/licences/EUPL-1.0.pdf', MEMBER_TYPES.NON),
+    'EUPL-1.1': (STATIC_URL + 'metashare/licences/EUPL-1.1.pdf', MEMBER_TYPES.NON),
+    'EUPL-1.2': (STATIC_URL + 'metashare/licences/EUPL-1.2.pdf', MEMBER_TYPES.NON),
+    'LO-OL-v2': (STATIC_URL + 'metashare/licences/LO-OL-v2.pdf', MEMBER_TYPES.NON),
+    'dl-de/by-2-0': (STATIC_URL + 'metashare/licences/dl-de_by-2-0.pdf', MEMBER_TYPES.NON),
+    'dl-de/zero-2-0': (STATIC_URL + 'metashare/licences/dl-de_zero-2-0.pdf', MEMBER_TYPES.NON),
+    'IODL-1.0': (STATIC_URL + 'metashare/licences/IODL-1.0.pdf', MEMBER_TYPES.NON),
+    'NLOD-1.0': (STATIC_URL + 'metashare/licences/NLOD-1.0.pdf', MEMBER_TYPES.NON),
+    'OGL-3.0': (STATIC_URL + 'metashare/licences/OGL-3.0.pdf', MEMBER_TYPES.NON),
+    'NCGL-1.0': (STATIC_URL + 'metashare/licences/NCGL-1.0.pdf', MEMBER_TYPES.GOD),
+    'openUnder-PSI': ('', MEMBER_TYPES.NON),
+    'publicDomain': ('', MEMBER_TYPES.NON),
+    'non-standard/Other_Licence/Terms': ('', MEMBER_TYPES.NON),
+    'underReview': ('', MEMBER_TYPES.GOD),
+}
+
+
+def _get_user_membership(user):
+    """
+    Returns a `MEMBER_TYPES` type based on the permissions of the given
+    authenticated user.
+    """
+    if user.has_perm('accounts.ms_full_member'):
+        return MEMBER_TYPES.FULL
+    elif user.has_perm('accounts.ms_associate_member'):
+        return MEMBER_TYPES.ASSOCIATE
+    return MEMBER_TYPES.NON
+
+
+def _get_licences(resource, user_membership):
+    """
+    Returns the licences under which a download/purchase of the given resource
+    is possible for the given user membership.
+
+    The result is a dictionary mapping from licence names to pairs. Each pair
+    contains the corresponding `licenceInfoType_model`, the download location
+    URLs and a boolean denoting whether the resource may (and can) be directly
+    downloaded or if there need to be further negotiations of some sort.
+    """
+    distribution_infos = tuple(resource.distributioninfotype_model_set.all())
+
+    # licence_infos = tuple([(l_info, d_info.downloadLocation + d_info.executionLocation) \
+    licence_infos = tuple([(l_info, d_info.downloadLocation + d_info.executionLocation) \
+                           for d_info in distribution_infos for l_info in d_info.licenceInfo.all()])
+
+    all_licenses = dict([(l_info.licence, (l_info, access_links)) \
+                         for l_info, access_links in licence_infos])
+    result = {}
+    for name, info in all_licenses.items():
+        l_info, access_links = info
+        access = LICENCEINFOTYPE_URLS_LICENCE_CHOICES.get(name, None)
+        if access == None:
+            LOGGER.warn("Unknown license name discovered in the database for " \
+                        "object #{}: {}".format(resource.id, name))
+            del all_licenses[name]
+        elif user_membership >= access[1] \
+                and (len(access_links) or resource.storage_object.get_download()):
+            # the resource can be downloaded somewhere under the current license
+            # terms and the user's membership allows her to immediately download
+            # the resource
+            result[name] = (l_info, access_links, True)
+        else:
+            # further negotiations are required with the current license
+            result[name] = (l_info, access_links, False)
+    return result
+
+
 def download(request, object_id, **kwargs):
     """
     Renders the resource download/purchase view including license selection,
@@ -133,7 +236,7 @@ def download(request, object_id, **kwargs):
             or request.user.groups.filter(name="ecmembers").exists() \
             or request.user.groups.filter(name="reviewers").exists()\
             or api_auth:
-#            or kwargs['api_auth']:
+#           or kwargs['api_auth']:
         bypass_licence = True
 
     # here we are only interested in licenses (or their names) of the specified
@@ -174,16 +277,12 @@ def download(request, object_id, **kwargs):
                 _dict = {'form': la_form,
                          'resource': resource,
                          'licence_name': licence_choice,
-                         'licence_path': STATIC_URL+LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
+
+                         'licence_path': LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
                          'download_available': access,
                          'l_name': l_info.otherLicenceName,
                          'l_url': l_info.otherLicence_TermsURL,
                          'l_text': l_info.otherLicence_TermsText.values()}
-                if licence_choice == 'non-standard/Other_Licence/Terms':
-                    res_name=resource.identificationInfo.get_default_resourceName()
-                    _dict['licence_path']=STATIC_URL + 'metashare/licences/'+u'_'.join(res_name.split())+'_licence.pdf'
-                if licence_choice == 'publicDomain' or licence_choice == "openUnder-PSI":
-                    _dict['licence_path']=''
                 return render_to_response('repository/licence_agreement.html',
                                           _dict, context_instance=RequestContext(request))
         elif licence_choice and not licence_choice in licences:
@@ -192,22 +291,17 @@ def download(request, object_id, **kwargs):
     if len(licences) == 1:
         # no need to manually choose amongst 1 license ...
         licence_choice = licences.iterkeys().next()
-    
+
     if licence_choice:
         l_info, access_links, access = licences[licence_choice]
         _dict = {'form': LicenseAgreementForm(licence_choice),
                  'resource': resource, 'licence_name': licence_choice,
-                 'licence_path': STATIC_URL+LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
+                 'licence_path': LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
                  'download_available': access,
                  'l_name': l_info.otherLicenceName,
                  'l_url': l_info.otherLicence_TermsURL,
                  'l_text': l_info.otherLicence_TermsText.values(),
                  'l_conditions': l_info.restrictionsOfUse}
-        if licence_choice == 'non-standard/Other_Licence/Terms':
-            res_name=resource.identificationInfo.get_default_resourceName()
-            _dict['licence_path']=STATIC_URL + 'metashare/licences/'+u'_'.join(res_name.split())+'_licence.pdf'
-        if licence_choice == 'publicDomain' or licence_choice == "openUnder-PSI":
-            _dict['licence_path']=''
         return render_to_response('repository/licence_agreement.html',
                                   _dict, context_instance=RequestContext(request))
     elif len(licences) > 1:
@@ -224,10 +318,9 @@ def download(request, object_id, **kwargs):
 
 def _provide_download(request, resource, access_links, bypass_stats):
     """
-    Returns an HTTP response with a download of the given resource. AFTER ACCEPTING THE LICENSE IF THERE IS ANY...
+    Returns an HTTP response with a download of the given resource.
     """
     dl_path = resource.storage_object.get_download()
-    
     if dl_path:
         try:
             def dl_stream_generator():
@@ -245,7 +338,7 @@ def _provide_download(request, resource, access_links, bypass_stats):
             response['Content-Length'] = getsize(dl_path)
             response['Content-Disposition'] = 'attachment; filename={0}' \
                 .format(split(dl_path)[1])
-            
+
             if not bypass_stats:
                 _update_download_stats(resource, request)
             LOGGER.info("Offering a local download of resource #{0}." \
@@ -257,7 +350,6 @@ def _provide_download(request, resource, access_links, bypass_stats):
                         .format(resource.id))
     # redirect to a download location, if available
     elif access_links:
-
         for url in access_links:
             try:
                 req = requests.request('GET', url)
@@ -308,8 +400,8 @@ def download_contact(request, object_id):
                                  storage_object__identifier=object_id,
                                  storage_object__publication_status=PUBLISHED)
 
-    default_message = ""
-    """_("We are interested in using the above mentioned " \
+
+    default_message = "We are interested in using the above mentioned " \
                       "resource. Please provide us with all the relevant information (e.g.," \
                       " licensing provisions and restrictions, any fees required etc.) " \
                       "which is necessary for concluding a deal for getting a license. We " \
@@ -318,8 +410,8 @@ def download_contact(request, object_id):
                       "[Please include here any other request you may have regarding this " \
                       "resource or change this message altogether]\n\n" \
                       "Please kindly use the above mentioned e-mail address for any " \
-                      "further communication.")
-"""
+                      "further communication."
+
     # Find out the relevant resource contact emails and names
     resource_emails = []
     resource_contacts = []
@@ -348,9 +440,9 @@ def download_contact(request, object_id):
                     'user_email': user_email, 'node_url': DJANGO_URL}
             try:
                 # Send out email to the resource contacts
-                send_mail(_('Request for information regarding a resource'),
+                send_mail('Request for information regarding a resource',
                           render_to_string('repository/' \
-                                           'resource_download_information_email.html', data),
+                                           'resource_download_information.email', data),
                           user_email, resource_emails, fail_silently=False)
             except:  # SMTPException:
                 # If the email could not be sent successfully, tell the user
@@ -416,10 +508,6 @@ def view(request, resource_name=None, object_id=None):
     """
     Render browse or detail view for the repository application.
     """
-    #translation.activate(LANGUAGE_CODE)
-    #request.session['django_language'] = LANGUAGE_CODE
-    #request.LANGUAGE_CODE = LANGUAGE_CODE
-
     # only published resources may be viewed. Ingested LRs can be viewed only
     # by EC members and technical reviewers
     resource = get_object_or_404(resourceInfoType_model,
@@ -1090,17 +1178,6 @@ def contribute(request):
                 "%s argument is not a basetring format, type `file` or subclass of \
                 `django.core.files.base.File`." % filename)
 
-        def filename_zips(files):
-            nzips=0
-            for f in files :
-                if filename_ext(f.name) == '.zip':
-                    nzips = nzips+1
-            return nzips
-        def filename_zipandothers(files):
-            if filename_zips(files)==1 and len(files)>1:
-                return True
-            return False
-
         if 'languages[]' in request.POST:
             data['resourceInfo']['languages'] = decode_csv_to_list(request.POST.getlist('languages[]'))
             #LOGGER.info(data['resourceInfo']['languages'])
@@ -1120,20 +1197,15 @@ def contribute(request):
         if not files_extensions_are_valid(file_objects):
             response['status'] = "failed"
             response['message'] = _("""
-                Only files of type DOC(X), ODT, RTF, PDF, TMX, SDLTM, XML,
+                Only files of type DOC(X), ODT, PDF, TMX, SDLTM, XML,
                 TBX , XLS(X), TXT and ZIP files are allowed.
                 The zip files can only contain files of the
                 specified types. Please consider removing the files
                 that do not belong to one of these types.""")
             return HttpResponse(json.dumps(response),
                                 content_type="application/json")
-        if filename_zips(file_objects)>1 or filename_zipandothers(file_objects):
-            response['status'] = "failed"
-            response['message'] = _("""Please upload a single <strong>.zip</strong> file or any number of files of the following type: <strong>.doc(x), .odt, .rtf, .pdf, .tmx, .sdltm, .xml, .tbx, .xls(x), or .txt file</strong> up to 100MB.""")
-#                _("""Please upload a single .zip file or any number of files of the following type: .doc(x), .odt, .rtf, .pdf, .tmx, .sdltm, .xml, .tbx, .xls(x), or .txt file up to 100MB.""")
-            return HttpResponse(json.dumps(response),
-                                content_type="application/json")
-        if sum(fobj.size for fobj in file_objects) <= MAXIMUM_UPLOAD_SIZE_CONTRIBUTE :
+
+        if sum(fobj.size for fobj in file_objects) <= MAXIMUM_UPLOAD_SIZE:
             try:
                 if not os.path.isdir(unprocessed_dir):
                     os.makedirs(unprocessed_dir)
@@ -1143,12 +1215,9 @@ def contribute(request):
             licence_file_object = request.FILES.get('licenceFile')
             if licence_file_object:
                 # a licence file has been uploaded
-                lfilename = u'_'.join(request.POST['resourceTitle'].split())
-                licence_filename = lfilename + "_licence.pdf"
-                licences_folder= STATIC_ROOT + '/metashare/licences'
-                licence_filepath = os.path.sep.join((licences_folder,
+                licence_filename = filename + "_licence.pdf"
+                licence_filepath = os.path.sep.join((unprocessed_dir,
                                                      licence_filename))
-                #TODO: what if the file exists already? what if there are two resources with the same name that add an adhoc license?
                 with open(licence_filepath, 'wb+') as licence_destination:
                     for chunk in licence_file_object.chunks():
                         licence_destination.write(chunk)
@@ -1170,13 +1239,14 @@ def contribute(request):
                             Your request could not be completed."
                             The file you tried to upload is corrupted or it is
                             not a valid '.zip' file.""")
-                    if not (filename_extension_is_valid(fn) or fn.endswith(os.path.sep) for fn in zfile.namelist()):
+                    if not (filename_extension_is_valid(fn) or fn.endswith(os.sep)
+                        for fn in zfile.namelist()):
                         # the archive contains at least an entry which neither has
                         # an accepted extension, nor is a directory:
                         os.remove(ofile_path)
                         response['status'] = "failed"
-                        response['message'] =  _("""
-                            Only files of type DOC(X), ODT, RTF, PDF, TMX, SDLTM, XML,
+                        response['message'] = _("""
+                            Only files of type DOC(X), ODT, PDF, TMX, SDLTM, XML,
                             TBX , XLS(X), TXT and ZIP files are allowed.
                             The zip files can only contain files of the
                             specified types. Please consider removing the files
@@ -1196,9 +1266,10 @@ def contribute(request):
                 xml_file = File(f)
                 xml_file.write(xml)
             # add the relevant entry to the DB
-            #Left this for compatibility with the db, but contribute template DO NOT allow to choose the resource Type
-            #ToDo: do not show the resource Type info in the lr_view
+            #LOGGER.info(request.POST)
+            ##resource_type = request.POST["resourceType"] or "corpus"
             resource_type = request.POST.get("resourceType",False) or "corpus"
+            #LOGGER.info(resource_type)
             d = create_description(os.path.basename(xml_file.name),
                                    resource_type, unprocessed_dir,
                                    request.user)
@@ -1219,33 +1290,31 @@ def contribute(request):
             try:
                 mail_data={'resourcename':data['resourceInfo']['resourceTitle']}
                 send_mail(_("New submitted contributions"),
-                            render_to_string('repository/resource_new_contributions_email.html', mail_data),
-                          EMAIL_ADDRESSES['elri-no-reply'], group_reviewers,  fail_silently=False)
+                            render_to_string('repository/resource_new_contributions.email', mail_data),
+                          'no-reply@elri.eu', group_reviewers,  fail_silently=False)
             except:
                 LOGGER.error("An error has occurred while trying to send email to contributions"
                              "alert recipients.")
 
             response['status'] = "succeded"
             response['message'] = _("""
-                Thank you for sharing, your data have been successfully submitted. They will now be processed by our automated engines and reviewed by the ELRI team. You will be notified by email when the resulting resource is available for download.""")
+                Thank you for sharing! Your data have been successfully submitted.
+                You can now go on and contribute more data.""")
             return HttpResponse(json.dumps(response), content_type="application/json")
-            #return render_to_response('repository/editor/contributions/contribute.html',  response, context_instance=RequestContext(request))
-            #messages.info(request,_("Thank you for sharing! Your data have been successfully submitted."))
-            #return HttpResponseRedirect('metashare.repository.contribute')
-            
         else:
             response['status'] = "failed"
-            response['message'] = _("The file(s) you are trying to upload exceeds the size limit. If the file(s) you "
-                                    "would like to contribute exceed(s) {:.10} MB please contact us to provide an "
-                                    "SFTP link for direct download or consider uploading smaller files.").format(float(MAXIMUM_UPLOAD_SIZE_CONTRIBUTE)/(1024 * 1024))
+            response['message'] = _("""
+                The file you are trying to upload exceeds the size limit. If the file(s) you
+                would like to contribute exceed(s) {:.10} MB please contact us to provide an SFTP link for direct
+                download or consider uploading smaller files.""".format(
+                float(MAXIMUM_UPLOAD_SIZE) / (1024 * 1024)))
             return HttpResponse(json.dumps(response), content_type="application/json")
 
     # In ELRI, LR contributions can only be shared within the groups to which a user belongs.
     languages=SUPPORTED_LANGUAGES
 
     return render_to_response('repository/editor/contributions/contribute.html', \
-                              {'groups':Organization.objects.values_list("name","id").filter(id__in = request.user.groups.values_list("id")), 'languages':languages,
-                               'country':COUNTRY},
+                              {'groups':Organization.objects.values_list("name","id").filter(id__in = request.user.groups.values_list("id")), 'languages':languages},
                               context_instance=RequestContext(request))
 
 
@@ -1298,26 +1367,14 @@ def create_description(xml_file, type, base, user):
         "resource_file": ''.join(doc.xpath("//resource/administration/resource_file/text()")),
         "dataset": doc.xpath("//resource/administration/dataset/uploaded_files/item/text()")
     }
-    
     # Create a new Identification object
     identification = identificationInfoType_model.objects.create( \
-        resourceName={'en': unicode(info['title'])}, #.encode('utf-8')},
-        description={'en': unicode(info['description'])},#.encode('utf-8')},
+        resourceName={'en': info['title'].encode('utf-8')},
+        description={'en': info['description'].encode('utf-8')},
         appropriatenessForDSI=info['domains'])
-
-
     resource_creation = resourceCreationInfoType_model.objects.create(
-        createdUsingELRCServices=False,
-        anonymized=False)
-    elri_project=projectInfoType_model.objects.create()
-    elri_project.projectName["en"]= u"European Language Resource Infrastructure"
-    elri_project.projectShortName["en"]=u"ELRI"
-    elri_project.url=[u'http://www.elri-project.eu',]
-    elri_project.fundingType=[u'euFunds',]
-    elri_project.funder = [u'European Comission',]
-    elri_project.fundingCountry = [u'European Union',]
-    elri_project.save()
-    resource_creation.fundingProject.add(elri_project)
+        createdUsingELRCServices=False
+    )
 
     # CONTACT PERSON:
 
@@ -1462,44 +1519,15 @@ def create_description(xml_file, type, base, user):
                                                              (metadataCreationDate=datetime.date.today(),
                                                               metadataLastDateUpdated=datetime.date.today()))
     # create distributionInfo object
-    '''distribution = distributionInfoType_model.objects.create(
+    distribution = distributionInfoType_model.objects.create(
         availability=u"underReview",
         PSI=False)
-    #licence_obj, _ = licenceInfoType_model.objects.get_or_create( licence=info['licence'])
-    #LOGGER.info(licence_obj)
-    licence_obj=licenceInfoType_model.objects.filter(licence=info['licence'])
-    LOGGER.info(licence_obj)
-    if len(licence_obj)>0:
-        LOGGER.info(licence_obj[0])
-        distribution.licenceInfo.add(licence_obj[0])
-    else:
-        licence_obj=licenceInfoType_model.objects.create(licence=info['licence'])
-        LOGGER.info(licence_obj)
-        distribution.licenceInfo.add(licence_obj)
-        
-    resource.distributioninfotype_model_set.add(distribution)
-    #LOGGER.info(len(resource.distributioninfotype_model_set.all()))
-    resource.save()'''
-    
-    # create distributionInfo object
-    availability = u"underReview"
-    psi = False
-    licence = u"underReview"
-    if info['licence']:
-        #by default: our availability is always underReview
-        #availability = u'available'
-        licence = info['licence']
-        if info['licence'] == u'openUnder-PSI':
-            psi = True
-    distribution = distributionInfoType_model.objects.create(
-        availability=availability,
-        PSI=psi)
-    licence_obj = licenceInfoType_model.objects.create(licence=licence)
+    licence_obj, _ = licenceInfoType_model.objects.get_or_create(
+        licence=info['licence'])
     distribution.licenceInfo.add(licence_obj)
     resource.distributioninfotype_model_set.add(distribution)
+    #LOGGER.info(len(resource.distributioninfotype_model_set.all()))
     resource.save()
-    
-    
 
     # also add the designated maintainer, based on the country of the country of the donor
     resource.owners.add(user.id)
@@ -1566,10 +1594,8 @@ def repo_report(request):
             {'font_size': 11, 'font_color': 'white', 'bold': True, 'bg_color': "#058DBE", 'border': 1})
         bold = workbook.add_format({'bold': True})
         date_format = workbook.add_format({'num_format': 'yyyy, mmmm d'})
-        title = "ELRI_OVERVIEW_{}".format(
+        title = "ELRC-SHARE_OVERVIEW_{}".format(
             datetime.datetime.now().strftime("%Y-%m-%d"))
-#        title = "ELRC-SHARE_OVERVIEW_{}".format(
-#            datetime.datetime.now().strftime("%Y-%m-%d"))
         worksheet = workbook.add_worksheet(name=title)
 
         worksheet.write('A1', 'Resource ID', heading)
@@ -1783,14 +1809,12 @@ def repo_report(request):
             rp = open('{}/report_recipients.dat'.format(TMP)).read().splitlines()
 
             msg_body = "Dear all,\n" \
-                       "Please find attached an overview of the resources available in the ELRI " \
+                       "Please find attached an overview of the resources available in the ELRC-SHARE " \
                        "repository and their status today, {}.\n" \
                        "Best regards,\n\n" \
-                       "The ELRI group".format(datetime.datetime.now().strftime("%d, %b %Y"))
-
-            msg = EmailMessage("[ELRI] ELRI weekly report", msg_body,
-                               from_email='elri-ilsp@email.com', bcc=rp)
-
+                       "The ELRC-SHARE group".format(datetime.datetime.now().strftime("%d, %b %Y"))
+            msg = EmailMessage("[ELRC] ERLC-SHARE weekly report", msg_body,
+                               from_email='elrc-share@ilsp.gr', bcc=rp)
             msg.attach("{}.xlsx".format(title), output.getvalue(),
                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
             msg.send()

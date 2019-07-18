@@ -1,0 +1,63 @@
+#statistics button:hover {
+    cursor: pointer;
+}
+
+#statistics {
+    padding: 0 20px;
+}
+
+#statistics form input,
+#statistics form select {
+    margin-bottom: 5px;
+}
+
+#statistics form input {
+    border-radius: 10px;
+}
+
+#statistics #statistics-header form select {
+    border: 1px solid #ffaa2c;
+}
+
+#statistics #statistics-aside, #statistics-body #chart-container {
+    display: inline-block;
+}
+
+#statistics #statistics-aside {
+    height: 600px;
+    width: 20%;
+}
+
+#statistics #statistics-aside #chart-filters {
+    padding-top: 30px;
+}
+
+#statistics #statistics-aside #chart-filters form input {
+    border: 1px solid #ffaa2c;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+#statistics #statistics-aside #chart-filters form button {
+    background: #37a3cb;
+    border: 1px solid #37a3cb;
+    border-radius: 5px;
+    color: #fff;
+    display: block;
+    font-weight: 500;
+    margin-top: 5px;
+    padding: 5px 10px;
+    transition: all .3s ease-in-out;
+}
+
+#statistics #statistics-aside #chart-filters form button:hover {
+    background: #fff;
+    border: 1px solid #ffaa2c;
+    color: #ffaa2c;
+}
+
+#statistics #statistics-body #chart-container {
+    height: 600px;
+    float: right;
+    width: 80%;
+}
