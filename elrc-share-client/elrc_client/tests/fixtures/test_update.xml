@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resourceInfo xmlns="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/ http://www.elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/ELRC-SHARE-Resource.xsd">
+	<identificationInfo>
+		<resourceName lang="en">Belgian parallel corpus about Belgium and the justice system</resourceName>
+		<description lang="en">An automatically aligned parallel corpus of well-translated Belgian texts in Dutch and French. The corpus contains texts about Belgium and the Belgian justice system, with over 100.000 tokens.</description>
+	</identificationInfo>
+	<distributionInfo>
+		<availability>available</availability>
+		<PSI>true</PSI>
+		<allowsUsesBesidesDGT>false</allowsUsesBesidesDGT>
+		<licenceInfo>
+			<licence>openUnder-PSI</licence>
+			<otherLicenceName>Terms</otherLicenceName>
+			<otherLicence_TermsText lang="en">Used for resources that fall under the scope of PSI (Public Sector Information) regulations, and for which no further information is required or available. For more information on the EU legislation on the reuse of Public Sector Information, see here: https://ec.europa.eu/digital-single-market/en/european-legislation-reuse-public-sector-information.</otherLicence_TermsText>
+		</licenceInfo>
+		<attributionText lang="en">Ghent University</attributionText>
+		<personalDataIncluded>false</personalDataIncluded>
+		<sensitiveDataIncluded>false</sensitiveDataIncluded>
+		<iprHolder>
+			<personInfo>
+				<surname lang="en">Pouli</surname>
+				<givenName lang="en">Kanella</givenName>
+				<communicationInfo>
+					<email>kanella@ilsp.gr</email>
+				</communicationInfo>
+			</personInfo>
+		</iprHolder>
+		<iprHolder>
+		<organizationInfo>
+			<organizationName lang="en">MY ORGANIZATION UPDATED DOWN UNDER 123</organizationName>
+			<communicationInfo>
+				<email>nlp@myorg.com</email>
+			</communicationInfo>
+		</organizationInfo>
+		</iprHolder>
+	</distributionInfo>
+	<contactPerson>
+		<surname lang="en">Rigouts Terryn</surname>
+		<givenName lang="en">Ayla</givenName>
+		<communicationInfo>
+			<email>ayla.rigoutsterryn@ugent.be</email>
+			<country>Belgium</country>
+			<telephoneNumber/>
+		</communicationInfo>
+		<affiliation>
+			<organizationName lang="en">Ghent University</organizationName>
+			<communicationInfo>
+				<email>ayla.rigoutsterryn@ugent.be</email>
+				<country>Belgium</country>
+				<telephoneNumber/>
+			</communicationInfo>
+		</affiliation>
+	</contactPerson>
+	<metadataInfo>
+		<metadataCreationDate>2017-02-14</metadataCreationDate>
+		<metadataCreator>
+			<surname lang="en">Pouli</surname>
+			<communicationInfo>
+				<email>kanella@ilsp.gr</email>
+			</communicationInfo>
+		</metadataCreator>
+		<metadataLanguageName>English</metadataLanguageName>
+		<metadataLanguageId>en</metadataLanguageId>
+		<metadataLastDateUpdated>2017-02-14</metadataLastDateUpdated>
+	</metadataInfo>
+	<versionInfo>
+		<version>1.0</version>
+	</versionInfo>
+	<resourceCreationInfo>
+		<createdUsingELRCServices>false</createdUsingELRCServices>
+		<anonymized>false</anonymized>
+		<fundingProject>
+			<projectName lang="en">Connecting Europe Facility - European Language Resource Coordination</projectName>
+			<projectShortName lang="en">CEF-ELRC</projectShortName>
+			<projectID>LANGUAGE RESOURCE COORDINATION - SMART 2014/1074 - 30-CE-0696785/00-64</projectID>
+			<url>http://www.lr-coordination.eu</url>
+			<fundingType>serviceContract</fundingType>
+			<funder>European Commission</funder>
+			<fundingCountry>European Union</fundingCountry>
+			<fundingCountryId>EU</fundingCountryId>
+			<projectStartDate>2015-03-29</projectStartDate>
+			<projectEndDate>2017-04-16</projectEndDate>
+		</fundingProject>
+	</resourceCreationInfo>
+	<relationInfo>
+		<relationType>hasAlignedVersion</relationType>
+		<relatedResource>
+			<targetResourceNameURI>395</targetResourceNameURI>
+		</relatedResource>
+	</relationInfo>
+	<resourceComponentType>
+		<corpusInfo>
+			<resourceType>corpus</resourceType>
+			<corpusMediaType>
+				<corpusTextInfo>
+					<mediaType>text</mediaType>
+					<lingualityInfo>
+						<lingualityType>bilingual</lingualityType>
+					</lingualityInfo>
+					<languageInfo>
+						<languageId>nl</languageId>
+						<languageName>Dutch; Flemish</languageName>
+						<languageScript>Latin</languageScript>
+					</languageInfo>
+					<languageInfo>
+						<languageId>fr</languageId>
+						<languageName>French</languageName>
+						<languageScript>Latin</languageScript>
+					</languageInfo>
+					<sizeInfo>
+						<size>6198</size>
+						<sizeUnit>translationUnits</sizeUnit>
+					</sizeInfo>
+					<textFormatInfo>
+						<dataFormat>application/x-SDL-TM</dataFormat>
+					</textFormatInfo>
+					<textFormatInfo>
+						<dataFormat>application/x-tmx+xml</dataFormat>
+					</textFormatInfo>
+					<characterEncodingInfo>
+						<characterEncoding>UTF-8</characterEncoding>
+					</characterEncodingInfo>
+				</corpusTextInfo>
+			</corpusMediaType>
+		</corpusInfo>
+	</resourceComponentType>
+</resourceInfo>

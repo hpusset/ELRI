@@ -1,0 +1,4 @@
+# virtualenv
+venv/
+local_settings.py
+elrc_client/tests/test_settings.py
