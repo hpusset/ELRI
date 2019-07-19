@@ -52,7 +52,7 @@ XML_UPLOAD_URL = '%s/repository/api/create/' % REPO_URL
 XML_SCHEMA = 'https://elrc-share.eu/ELRC-SHARE_SCHEMA/v2.0/ELRC-SHARE-Resource.xsd'
 
 # Set default directory for downloads
-DOWNLOAD_DIR=os.environ['ELRC_DOWNLOAD_DIR']
+DOWNLOAD_DIR=os.environ.get('ELRC_DOWNLOAD_DIR')
 #if os.name == 'posix':
 #    DOWNLOAD_DIR = '/home/{}/ELRC-Downloads'.format(os.getlogin())
 #    if not os.path.exists(DOWNLOAD_DIR):
