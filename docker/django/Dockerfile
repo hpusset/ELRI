@@ -6,8 +6,8 @@ RUN tar xvfz /tmp/dockerize-alpine-linux-amd64-v0.5.0.tar.gz -C /tmp/
 FROM python:2.7.15-stretch
 
 #ARG RELEASE="trunk"
-ARG RELEASE="tags/R3.3.9"
-#ARG RELEASE="branches/VIC"
+#ARG RELEASE="tags/R3.3.9"
+ARG RELEASE="branches/VIC+ELDA"
 ENV DB_HOST="postgres-server" \
     DB_PORT="5432" \
     SOLR_HOST="solr" \
@@ -24,9 +24,10 @@ ENV DB_HOST="postgres-server" \
     ELRI_ALERT_MAILS="noreply@elri.com" \
     GIT_URL="https://github.com/ELDAELRA/ELRI/${RELEASE}"\
     ELRI_EMAIL_ADDRESSES="elri-nrs-support:elri-nrs-support@vicomtech.org,elri-no-reply:no-reply-elri@email.com,elri-ilsp:elri-ilsp@email.com,elri-edelivery:elri-edelivery@email.com"\
+    ELRC_DOWNLOAD_DIR="/elri/elri_resources/elrc_download"\
     ELRI_WORKERS=2 \
     ELRI_THREADS=4
-
+    
 
 COPY --from=base /tmp/dockerize /usr/local/bin/
 COPY resources/env_secrets_expand.sh \
@@ -45,6 +46,7 @@ RUN svn export ${GIT_URL}/metashare /elri/metashare \
              /elri/metashare/processed \
     && patch /usr/local/lib/python2.7/gettext.py < /elri/gettext.patch \
     && pip install -r /elri/requirements.txt \
+    && pip install git+https://github.com/ELDAELRA/ELRI.git@VIC+ELDA#subdirectory=elrc-share-client \
     && chmod +x /elri/startup.sh \
                 /elri/env_secrets_expand.sh \
                 /elri/create_super_user.sh
@@ -64,7 +66,8 @@ RUN useradd django \
     && groupmod --gid 8283 django \
     && mkdir -p /elri/static \
     && chown -R 8283:8283 /elri \
-    && chmod -R 774 /elri/elri_resources
+    && chmod -R 774 /elri/elri_resources \
+    && mkdir -p /elri/elri_resources/elrc_download 
 
 VOLUME [ "/certificates", "/elri/elri_resources", "/elri/static" ]
 
