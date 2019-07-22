@@ -309,5 +309,3 @@ TASTYPIE_DEFAULT_FORMATS = ['json']
 
 
 
-ELRC_API_USERNAME = os.environ.get('ELRC_API_USERNAME', None)
-ELRC_API_PASSWORD = os.environ.get('ELRC_API_PASSWORD', None)
