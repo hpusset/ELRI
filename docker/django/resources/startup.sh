@@ -26,6 +26,8 @@ python /elri/manage.py migrate
 python /elri/manage.py rebuild_index --noinput
 python /elri/manage.py collectstatic --noinput
 
+ 
+
 if [ "${DEVELOPMENT}" != "" ]; then
     cmd="$cmd python /elri/manage.py runserver 0.0.0.0:8000 --insecure"
 else

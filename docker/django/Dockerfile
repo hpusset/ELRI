@@ -25,6 +25,8 @@ ENV DB_HOST="postgres-server" \
     GIT_URL="https://github.com/ELDAELRA/ELRI/${RELEASE}"\
     ELRI_EMAIL_ADDRESSES="elri-nrs-support:elri-nrs-support@vicomtech.org,elri-no-reply:no-reply-elri@email.com,elri-ilsp:elri-ilsp@email.com,elri-edelivery:elri-edelivery@email.com"\
     ELRC_DOWNLOAD_DIR="/elri/elri_resources/elrc_download"\
+    ELRC_API_USERNAME=""\
+    ELRC_API_PASSWOD=""\
     ELRI_WORKERS=2 \
     ELRI_THREADS=4
     
@@ -36,7 +38,7 @@ COPY resources/env_secrets_expand.sh \
      resources/gettext.patch \ 
      resources/manage.py /elri/
 
-RUN svn export ${GIT_URL}/metashare /elri/metashare \
+RUN svn export ${GIT_URL}/metashare /elri/metashare \ 
     && svn export ${GIT_URL}/project_management /elri/project_management \
     && svn export ${GIT_URL}/elri_resources/config /elri/elri_resources/config \
     && svn export ${GIT_URL}/elri_resources/toolchain_resources /elri/toolchain_resources \
@@ -53,9 +55,10 @@ RUN svn export ${GIT_URL}/metashare /elri/metashare \
 # Workaround to allow elri_resources persistence without overriding shared volume with toolchains image
 RUN svn export ${GIT_URL}/elri_resources/config/web_service.cfg /elri/web_service.cfg
 
+
 COPY resources/local_settings.py \
      resources/maintainers.dat \
-     resources/wsgi.py /elri/metashare/
+     resources/wsgi.py /elri/metashare 
 
 EXPOSE 8000
 
@@ -66,8 +69,8 @@ RUN useradd django \
     && groupmod --gid 8283 django \
     && mkdir -p /elri/static \
     && chown -R 8283:8283 /elri \
-    && chmod -R 774 /elri/elri_resources \
-    && mkdir -p /elri/elri_resources/elrc_download 
+    && mkdir -p /elri/elri_resources/elrc_download \ 
+    && chmod -R 774 /elri/elri_resources 
 
 VOLUME [ "/certificates", "/elri/elri_resources", "/elri/static" ]
 
