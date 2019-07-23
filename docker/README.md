@@ -274,7 +274,7 @@ Tables:
 
 Volume Name   | Location                             | Description
 ------------- | -------------                        | -------------
-elri-storage  | /var/lib/docker/volumes/elri_storage | Local storage layer path used for persistent object storage
+elri-static   | /var/lib/docker/volumes/elri-static  | Local storage layer path used for persistent object storage shared by nginx webserver and metashare app
 elri-certs    | /var/lib/docker/volumes/elri-certs   | Used when AP configuration exists
 web-certs     | /var/lib/docker/volumes/web-certs    | Certificates used by the webserver
 web-keys      | /var/lib/docker/volumes/web-keys     | Keys used by the webserver
@@ -285,13 +285,13 @@ elri-db       | /var/lib/docker/volumes/elri-db      | Postgres database data
 
 ### Docker Image Table
 
-Service name   | Image Name                   | Default value | Description
--------------  | -------------                | ------------- | -------------
-elri-node1     | elrinrs/nationalrelaystation | MASTER		  | Replace `MASTER` for the desired release
-toolchain      | elrinrs/toolchain | MASTER					| Replace `MASTER` for the desired release
-postgres-server | elrinrs/postgres-server | MASTER			| Replace `MASTER` for the desired release
-nginx			| elrinrs/nginx			  | MASTER			| Replace `MASTER` for the desired release
-solr			| elrinrs/solr			  | MASTER			| Replace `MASTER` for the desired release
+Service name    | Image Name                   | Default value  | Description
+-------------   | -------------                | -------------  | -------------
+elri-node1      | elrinrs/nationalrelaystation | MASTER		    | Replace `MASTER` for the desired release
+toolchain       | elrinrs/toolchain            | MASTER		    | Replace `MASTER` for the desired release
+postgres-server | elrinrs/postgres-server      | MASTER			| Replace `MASTER` for the desired release
+nginx			| elrinrs/nginx			       | MASTER			| Replace `MASTER` for the desired release
+solr			| elrinrs/solr			       | MASTER			| Replace `MASTER` for the desired release
 
 <a name="SecretFilesTable"></a>
 
