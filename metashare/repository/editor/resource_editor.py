@@ -540,11 +540,11 @@ class ResourceModelAdmin(SchemaModelAdmin):
     actions = (
         'process_action', 'publish_action',
         'suspend_action', 'ingest_action',
-        'publish_elrc_action', 'set_elrc_uploaded',
-        'export_xml_action', 'delete',
-        'add_group', 'remove_group',
-        'add_owner', 'remove_owner',
-        'process_resource')
+        'publish_elrc_action', 'mark_elrc_uploaded',
+        'unmark_elrc_uploaded','export_xml_action',
+        'delete', 'add_group',
+        'remove_group', 'add_owner',
+        'remove_owner', 'process_resource')
     hidden_fields = ('storage_object', 'owners', 'editor_groups',)
     search_fields = (
         "identificationInfo__resourceName", "identificationInfo__resourceShortName",
@@ -1266,9 +1266,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
 
     publish_elrc_action.short_description = _("Publish selected resources on ELRC-Share")
 
-    def set_elrc_uploaded(self, request, queryset):
+    def mark_elrc_uploaded(self, request, queryset):
         """ Define all resources of queryset has ELRC uploaded.
-    """
+        """
         if has_edit_permission(request, queryset):
             for obj in queryset:
                 if not obj.ELRCUploaded:
@@ -1280,8 +1280,23 @@ class ResourceModelAdmin(SchemaModelAdmin):
             messages.error(request, _('You dont have the permission to run this action.'))
         return
 
-    set_elrc_uploaded.short_description = _('Set resources has ELRC uploaded')
+    mark_elrc_uploaded.short_description = _('Mark resources has ELRC uploaded.')
 
+    def unmark_elrc_uploaded(self, request, queryset):
+        """ Define all resources of queryset has not ELRC uploaded.
+        """
+        if has_edit_permission(request, queryset):
+            for obj in queryset:
+                if obj.ELRCUploaded:
+                    obj.ELRCUploaded = None
+                    obj.save()
+                else:
+                    messages.warning(request, 'Resource is not defined has ELRC uploaded: %s' % obj.pk)
+        else:
+            messages.error(request, _('You dont have the permission to run this action.'))
+        return
+
+    unmark_elrc_uploaded.short_description = _('Unmark resources has ELRC uploaded.')
 
     def export_xml_action(self, request, queryset):
         from StringIO import StringIO
