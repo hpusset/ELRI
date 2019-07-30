@@ -467,14 +467,18 @@ def getstats(request):
     return HttpResponse("[" + json.dumps(data) + "]", content_type="application/json")
 
 
-@user_passes_test(lambda u: u.groups.filter(name='reviewers').exists())
+def chart_statistics_allowed_user(user):
+    return user.groups.filter(name='reviewers').exists() or user.is_superuser
+
+
+@user_passes_test(chart_statistics_allowed_user)
 def chartstats(request):
     return render(request, 'stats/chartstats.html', {
         'countries': iana.get_eu_regions(),
         'myres': isOwner(request.user.username)})
 
 
-@user_passes_test(lambda u: u.groups.filter(name='reviewers').exists())
+@user_passes_test(chart_statistics_allowed_user)
 def tustats(request):
     """ Return resources size unit and size value.
     """
@@ -488,7 +492,7 @@ def tustats(request):
     return HttpResponseNotFound()
 
 
-@user_passes_test(lambda u: u.groups.filter(name='reviewers').exists())
+@user_passes_test(chart_statistics_allowed_user)
 def groupsstats(request):
     """ Return resources count per groups.
     """
@@ -501,7 +505,7 @@ def groupsstats(request):
     return HttpResponseNotFound()
 
 
-@user_passes_test(lambda u: u.groups.filter(name='reviewers').exists())
+@user_passes_test(chart_statistics_allowed_user)
 def domainsstats(request):
     """ Return resources count per domains.
     """
@@ -513,7 +517,7 @@ def domainsstats(request):
     return HttpResponseNotFound()
 
 
-@user_passes_test(lambda u: u.groups.filter(name='reviewers').exists())
+@user_passes_test(chart_statistics_allowed_user)
 def creationstats(request):
     """ Return resources count per creation date.
     """
