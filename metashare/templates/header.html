@@ -93,7 +93,7 @@
                         </ul>
                     </li>
                 {% endif %}
-                {% if user|is_member:"reviewers" %}
+                {% if user.is_superuser or user|is_member:"reviewers" %}
                 <li title="{% trans 'View various statistics for this META-SHARE Node' %}"><a
                         href="{% url 'metashare.views.frontpage' %}stats/top/">
                     <i class="fa fa-bar-chart menu_fontawesome" aria-hidden="true"></i> {% trans 'Statistics' %}</a></li>
